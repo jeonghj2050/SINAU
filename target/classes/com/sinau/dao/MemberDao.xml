@@ -1,1 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinau.dao.MemberDao">
+	<select id="getGroup" parameterType="String" resultType="String">
+		<!-- email에 해당하는 회원의 구분을 반환한다. -->
+		select m_group from m where m_email=#{email}
+	</select>
+	
+</mapper>
