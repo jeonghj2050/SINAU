@@ -1,6 +1,21 @@
 @charset "UTF-8";
 
-*{
-	margin:0;
-	padding:0;
+* {
+	margin: 0;
+	font-family: 'NanumSquare', sans-serif;
+	padding: 0;
+}
+
+header {
+	background-color: blueviolet;
+	margin: 0 auto;
+	width: 1300px;
+	height: 160px;
+}
+
+header>div {
+	margin: 0 auto;
+	width: 1300px;
+	height: 70px;
+	background-color: rgb(255, 98, 98);
 }
