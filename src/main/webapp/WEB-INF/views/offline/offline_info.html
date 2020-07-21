@@ -1,0 +1,154 @@
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>오프라인 메인</title>
+        <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html{
+            background-color: beige;
+        }
+        section{
+            align-content: center;
+            margin: 0px auto;
+            height: 3000px;
+        }
+        header{
+            background-color: blueviolet;
+            margin: 0 auto;
+            width: 1300px;
+            height: 130px;
+        }
+        footer{
+            background-color: pink;
+            margin: 0 auto;
+            width: 1300px;
+            height: 100px;
+        }
+        div.nav{
+            float: left;
+            width: 210px;
+        }
+        div.nav>button {
+            background-color: wheat;
+            color: black;
+            padding: 10px;
+            width: 200px;
+            margin: 5px;
+            text-align: center;
+            float: left;
+        }
+    
+        .childart{
+            background-color: salmon;
+            width: 1060px;
+            float: left;
+            margin: 5px;
+        }
+
+        .main-image{
+            background-color: slategrey;
+            margin: 5px 0px;
+            height: 350px;
+            display: block;
+        }
+
+        .content{
+            width: 1300px;
+            margin: 0px auto;
+        }
+
+        .childart>article>div{
+            float: left;
+            margin: 20px 26px;
+            width: 300px;
+            height: 400px;
+            background-color: powderblue;
+            color: black;
+        }
+        div>img{
+            width: 270px;
+            height: 270px;
+            margin: 15px;
+        }
+
+        .childart>article>div>article{
+            margin: 3px 10px;
+            float: left;
+            height: 3px;
+        }
+        li{
+	        list-style: none;
+            float: left;
+            margin: 3px;
+        }
+        </style>
+    </head>
+    <body>
+        <header>
+        </header>
+        <section>
+            <div class="main-image">
+                <img src="resources\images\main-image.png">
+            </div>
+            <article class="content">
+            <div class="nav">
+                <button id="on-all">전체보기</button>
+                <button id="on1">공예</button>
+                <button id="on2">미술</button>
+                <button id="on3">온라인드로잉</button>
+                <button id="on4">요리</button>
+                <button id="on5">운동</button>
+                <!-- <div id="on-all">전체보기</div>
+                <div id="on1">공예</div>
+                <div id="on2">미술</div>
+                <div id="on3">온라인드로잉</div>
+                <div id="on4">요리</div>
+                <div id="on5">운동</div> -->
+            </div>
+            <article class="childart">
+                <article class="child1">
+                <h1>인기 클래스</h1>
+                        <div>
+                             <img src="SINAU_logo.png" alt="">
+                             <article class="on-info1">
+                                <li id="sub-cate">카테고리명</li>
+                                <li> ㆍ </li>
+                                <li id="creator-name">강사명</li>
+                                <div id="online-name">강좌명</div>
+                                <div id="online-price">가격</div>
+                             </article>
+                        </div>
+                        <div>d2</div>
+                        <div>d3</div>
+                        <div>d4</div>
+                        <div>d5</div>
+                        <div>d6</div>
+                    </article>
+
+                    <article class="child2">
+                        <h1>최근 업데이트된 클래스</h2>
+                        <div>
+                            <img src="SINAU_logo.png" alt="">
+                            <article class="on-info1">
+                                <li id="sub-cate">카테고리명</li>
+                                <li> ㆍ </li>
+                                <li id="creator-name">강사명</li>
+                                <div id="online-name">강좌명</div>
+                                <div id="online-price">가격</div>
+                            </article>
+                        </div>
+                        <div>d2</div>
+                        <div>d3</div>
+                        <div>d4</div>
+                        <div>d5</div>
+                        <div>d6</div>
+                    </article>
+            </article>
+            </article>
+        </section>
+        <footer></footer>
+    </body>
+</html>
