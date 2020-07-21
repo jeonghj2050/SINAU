@@ -18,17 +18,28 @@ public class MemberController {
 	ModelAndView mv;
 	@Autowired
 	MemberService mServ=new MemberService();
-	
+
 	@GetMapping("/mypage")
 	public ModelAndView mypage() {
 		//임의의 로그인 회원 아이디
 		String email="kc@naver.com";
 		//로그인 회원의 구분에 따라 다른 view를 넘긴다.
 		String m_group=mServ.getLoginMemberGroup(email);
-		
+
 		//로그인 회원이 주문한 내역 중 온라인 강의 목록을 가져온다.
 		mv=mServ.getMyOnlineList(email,m_group);
-		
+
+		return mv;
+	}
+
+	@GetMapping("mypageOffline")
+	public ModelAndView mypageOffline() {
+		//임의의 로그인 회원 아이디
+		String email="kc@naver.com";
+
+		//로그인 회원이 주문한 내역 중 오프라인 강의 목록을 가져온다.
+		mv=mServ.getMyOfflineList(email);
+
 		return mv;
 	}
 }

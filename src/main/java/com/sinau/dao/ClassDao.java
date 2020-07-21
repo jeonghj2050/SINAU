@@ -2,13 +2,18 @@ package com.sinau.dao;
 
 import java.util.List;
 
-import com.sinau.dto.MyClassInfoDto;
+import org.apache.ibatis.annotations.Param;
+
+import com.sinau.dto.MyOffInfoDto;
+import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OrderDto;
 
 public interface ClassDao {
 	//email에 해당하는 회원의 주문 내역을 가져온다.
-	List<OrderDto> getOrderList(String email);
-	//ord_pcode에 해당하는 강좌의 상세 정보를 가져온다.
-	MyClassInfoDto getMyClassInfoOne(String ord_pcode);
+	List<OrderDto> getOrderList(@Param("email")String email,@Param("precode")String precode);
+	//ord_pcode에 해당하는 온라인강좌의 상세 정보를 가져온다.
+	MyOnlineInfoDto getMyOnlineInfoOne(String ord_pcode);
+	//ord_pcode에 해당하는 오프라인강좌의 상세 정보를 가져온다.
+	MyOffInfoDto getMyOffInfoOne(String ord_pcode);
 
 }

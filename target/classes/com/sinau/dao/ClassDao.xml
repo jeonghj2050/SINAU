@@ -7,12 +7,17 @@
 	<select id="getOrderList" parameterType="String" resultType="com.sinau.dto.OrderDto">
 		<!-- email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다. -->
 		<![CDATA[ 
-		 	select * from ord where ord_m_email=#{email} and ord_pcode like 'onc_%'
+		 	select * from ord where ord_m_email=#{email} and ord_pcode like #{precode}||'%'
 		]]>
 	</select>
-	<select id="getMyClassInfoOne" parameterType="String" resultType="com.sinau.dto.MyClassInfoDto">
+	<select id="getMyOnlineInfoOne" parameterType="String" resultType="com.sinau.dto.MyOnlineInfoDto">
 		<![CDATA[ 
-			 select * from myclassinfo where mcl_ord_code=#{ord_pcode}
+			 select * from myonlineinfo where mcl_ord_code=#{ord_pcode}
+		]]>
+	</select>
+	<select id="getMyOffInfoOne" parameterType="String" resultType="com.sinau.dto.MyOffInfoDto">
+		<![CDATA[ 
+			 select * from myoffinfo where mcl_ord_code=#{ord_pcode}
 		]]>
 	</select>
 	
