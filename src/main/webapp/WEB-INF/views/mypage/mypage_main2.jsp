@@ -39,16 +39,6 @@ $(document).ready(function(){
 	$('#mname').html(name + '님');
 	$('.suc').css('display','block');
 	$('.bef').css('display','none');
-	
-	$(function(){
-		$(".mp_classInfo").hide();
-		$(".mp_classInfo:first").show();
-		$("#mytab li").click(function(){
-			var tabName=$(this).attr('name');
-			$(".mp_classInfo").hide();
-			$("#"+tabName).show();
-		});
-	});
 });
 </script>
 </head>
@@ -64,21 +54,12 @@ $(document).ready(function(){
 			<div>
                 <span>온라인 강의</span>
            </div>
-           <div role="tabpanel">
-
-			  <!-- Nav tabs -->
-			  <ul class="nav nav-tabs" role="tablist" id="mytab">
-			   	<c:forEach var="onlineClass" items="${onlineList}">	
-				    <li role="presentation" name="${onlineClass.onc_code}"><a href="#'${onlineClass.onc_code}'" aria-controls="home" role="tab" data-toggle="tab">${onlineClass.onc_code}</a></li>
-			  	</c:forEach>
-			  </ul> 
-           </div>
 			<c:forEach var="onlineClass" items="${onlineList}">
-				<div class="mp_classInfo" id="${onlineClass.onc_code}">
+				<div class="mp_classInfo" >
 					<img src="resources/images/test/thumbnail1.PNG" alt="" width="300px"
 						height="300px" id="mp_class_img">
 					<div>
-						<div class="class_info_contents" id="${onlineClass.onc_code}">
+						<div class="class_info_contents">
 							<p>${onlineClass.cts_name} | ${onlineClass.m_name}</p>
 							<p class="info_title">${onlineClass.onc_title}</p>
 							<div>

@@ -114,42 +114,42 @@ article>div .nav.nav-tabs>li {
 	width: 760px;
 	height: 300px;
 	margin-left: 10px;
-	background-color: rgb(230, 253, 165);
+	border: black 0.1px solid;
+	padding: 10px;
 }
 
 .mp_classInfo>div>div:first-child {
 	width: 500px;
-	height: 150px;
+	height: 250px;
 	margin-bottom: 10px;
-	background-color: salmon;
-}
-
-.mp_classInfo>div>div:last-child {
-	width: 760px;
-	height: 60px;
-	margin-bottom: 10px;
-	background-color: rgb(101, 243, 112);
 }
 
 .mp_classInfo>div>div:last-child>div:first-child {
-	width: 500px;
+	width: 480px;
 	float: left;
-	height: 60px;
+	height: 50px;
 	margin-bottom: 10px;
-	background-color: rgb(101, 167, 243);
 }
 
 .mp_classInfo>div>div:last-child>div:last-child {
-	width: 260px;
+	width: 240px;
 	float: left;
-	height: 60px;
+	height: 50px;
 	margin-bottom: 10px;
-	background-color: rgb(255, 189, 244);
 }
 
-.mp_classInfo>div>div {
-	width: 500px;
-	height: 60px;
-	margin-bottom: 10px;
-	background-color: salmon;
+.class_info_contents>p:first-child {
+	font-weight: bold;
+}
+
+.class_info_contents>p:last-child {
+	font-size: 90pt;
+}
+
+.info_title {
+	font-size: 18pt;
+}
+
+.class_info_contents>div {
+	color: rgb(63, 63, 63);
 }
