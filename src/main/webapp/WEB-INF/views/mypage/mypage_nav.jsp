@@ -4,7 +4,7 @@
 <nav>
 	<div>
 		<div>
-			<button class="btn btn-default">수정</button>
+			<button class="btn btn-default" onclick="location.href='./mypageUpdate'">수정</button>
 		</div>
 		<div>
 			<button class="btn btn-default">쿠폰</button>

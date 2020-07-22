@@ -1,154 +1,214 @@
 @charset "UTF-8";
 
 .mp_section {
-	width: 1300px;
-	margin: 20px auto;
-	background-color: aquamarine;
-}
+            width: 1300px;
+            margin: 20px auto;
 
-.mp_section a:link {
-	text-decoration: none;
-	color: black;
-}
+        }
 
-.mp_section a:visited {
-	text-decoration: none;
-	color: black;
-}
+        .mp_section a:link {
+            text-decoration: none;
+            color: black;
 
-.mp_section a:hover {
-	text-decoration: none;
-	color: black;
-}
+        }
 
-.mp_section>nav {
-	display: block;
-	float: left;
-	width: 200px;
-}
+        .mp_section a:visited {
+            text-decoration: none;
+            color: black;
 
-.mp_section>nav>div {
-	width: 200px;
-	padding: 10px;
-}
+        }
 
-.mp_section>nav>div>div:first-child {
-	width: 180px;
-	height: 100px;
-	border: 0.3px solid black;
-}
+        .mp_section a:hover {
+            text-decoration: none;
+            color: black;
 
-.mp_section>nav>div>div:first-child>button {
-	float: right;
-}
+        }
 
-.mp_section>nav>div>div:last-child {
-	width: 180px;
-	height: 30px;
-	margin-top: 10px;
-}
+        .mp_section>nav {
+            display: block;
+            float: left;
+            width: 200px;
+        }
 
-.mp_section>nav>div>div>button {
-	clear: both;
-}
+        .mp_section>nav>div {
+            width: 200px;
+            padding: 10px;
+        }
 
-nav .item-selected {
-	background-color: rgb(95, 95, 95);
-	color: white;
-}
+        .mp_section>nav>div>div:first-child {
+            width: 180px;
+            height: 100px;
+            border: 0.3px solid black;
+        }
 
-.list-group {
-	padding: 10px;
-}
+        .mp_section>nav>div>div:first-child>button {
+            float: right;
+        }
 
-.list-group-item {
-	margin-top: 10px;
-}
+        .mp_section>nav>div>div:last-child {
+            width: 180px;
+            height: 30px;
+            margin-top: 10px;
+        }
 
-.btn-default {
-	width: 60px;
-}
+        .mp_section>nav>div>div>button {
+            clear: both;
+        }
 
-.mp_section>article {
-	float: left;
-	width: 1070px;
-	height: 600px;
-	margin-left: 30px;
-}
+        nav .item-selected {
+            background-color: rgb(95, 95, 95);
+            color: white;
+        }
 
-article>div>span {
-	font-size: 25px;
-	float: left;
-	font-weight: bold;
-	display: block;
-	width: 170px;
-	height: 80px;
-	line-height: 80px;
-}
+        .list-group {
+            padding: 10px;
 
-article>div .nav.nav-tabs {
-	float: left;
-	height: 40px;
-	margin-top: 20px;
-	margin-bottom: 50px;
-	margin-left: 200px;
-}
+        }
 
-article>div .nav.nav-tabs>li {
-	width: 100px;
-}
+        .list-group-item {
+            margin-top: 10px;
+        }
 
-.mp_classInfo {
-	clear: both;
-	width: 1070px;
-	height: 500px;
-}
+        .btn-default {
+            width: 60px;
+        }
 
-.mp_classInfo>img {
-	float: left;
-}
+        .mp_section>article {
+            float: left;
+            width: 1070px;
+            margin-left: 30px;
 
-.mp_classInfo>div {
-	float: left;
-	width: 760px;
-	height: 300px;
-	margin-left: 10px;
-	border: black 0.1px solid;
-	padding: 10px;
-}
+        }
 
-.mp_classInfo>div>div:first-child {
-	width: 500px;
-	height: 250px;
-	margin-bottom: 10px;
-}
+        article>div>span {
+            font-size: 25px;
+            float: left;
+            font-weight: bold;
+            display: block;
+            width: 170px;
+            height: 80px;
+            line-height: 80px;
+        }
 
-.mp_classInfo>div>div:last-child>div:first-child {
-	width: 480px;
-	float: left;
-	height: 50px;
-	margin-bottom: 10px;
-}
+        article>div .nav.nav-tabs {
+            width: 200px;
+            float: left;
+            height: 40px;
+            margin-top: 20px;
+            margin-bottom: 50px;
+            margin-left: 200px;
+        }
 
-.mp_classInfo>div>div:last-child>div:last-child {
-	width: 240px;
-	float: left;
-	height: 50px;
-	margin-bottom: 10px;
-}
+        article>div .nav.nav-tabs>li {
+            width: 100px;
+        }
 
-.class_info_contents>p:first-child {
-	font-weight: bold;
-}
+        .mp_classInfo {
+            clear: both;
+            width: 1070px;
+            height: 500px;
 
-.class_info_contents>p:last-child {
-	font-size: 90pt;
-}
 
-.info_title {
-	font-size: 18pt;
-}
+        }
 
-.class_info_contents>div {
-	color: rgb(63, 63, 63);
-}
+        .mp_classInfo>img {
+            float: left;
+        }
+
+        .mp_classInfo>div {
+            float: left;
+            width: 760px;
+            height: 300px;
+            margin-left: 10px;
+            border: black 0.1px solid;
+            padding: 10px;
+        }
+
+        .mp_classInfo>div>div:first-child {
+            width: 500px;
+            height: 250px;
+            margin-bottom: 10px;
+        }
+
+        .mp_classInfo>div>div:last-child>div:first-child {
+            width: 480px;
+            float: left;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .mp_classInfo>div>div:last-child>div:last-child {
+            width: 240px;
+            float: left;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .class_info_contents>p:first-child {
+            font-weight: bold;
+        }
+
+        .class_info_contents>p:last-child {
+            font-size: 90pt;
+        }
+
+        .info_title {
+            font-size: 18pt;
+
+        }
+        .class_info_contents>div {
+            color: rgb(63, 63, 63);
+        }
+        .profile_image {
+            width: 400px;
+            height: 250px;
+            margin: 0 auto;
+            text-align: center;
+
+            float: left;
+        }
+        #member_profile{
+            width: 400px;
+            text-align: center;
+            margin: 0;
+            background-color: white;
+            border: 0.3px solid black;
+        }
+        .profile_update_box{
+  
+            width: 650px;
+            height: 250px;
+            margin: 0 auto;
+            margin-left: 10px;
+            float: left;
+        }
+        .profile_update_box> div >span{
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            display: inline-block;
+
+        }
+        .profile_update_box> div >input{
+            padding: 5px;
+            width: 500px;
+            height: 25px;
+            line-height: 50px;
+            color: black;
+        }
+        .profile_update_box> div >input:read-only{
+           background-color: rgb(241, 241, 241);
+        }
+        .update-btn-box {
+            clear: both;
+            width: 1010px;
+            height: 30px;
+        }
+        .update-btn-box > input[type="submit"]{ 
+            width: 80px;
+            height: 30px;
+            background: black;
+            color: white;
+            border: none;
+            float: right;
+        }

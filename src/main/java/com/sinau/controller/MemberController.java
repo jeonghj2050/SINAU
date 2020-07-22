@@ -42,4 +42,9 @@ public class MemberController {
 
 		return mv;
 	}
+	
+	@GetMapping("mypageUpdate")
+	public String mypageUpdate() {
+		return "mypage/mypage_update";
+	}
 }
