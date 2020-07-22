@@ -33,13 +33,13 @@
 	
 <script>
 function gohome(){
-	var id = '${mb.m_id}';
+	var id = '${mb.m_email}';
 	
 	if(id == ''){
 		location.href='./';
 	}	
 	else if(id != ''){
-		location.href='./list';
+		location.href='./';
 	}
 }
 </script>

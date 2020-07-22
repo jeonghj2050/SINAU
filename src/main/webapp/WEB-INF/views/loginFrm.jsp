@@ -6,6 +6,17 @@
 <meta charset="UTF-8">
 <title>login</title>
 <link rel="stylesheet" href="resources/css/style.css?a">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var msg = "${msg}";
+	console.log(msg);
+	if(msg != ""){
+		alert(msg);
+		location.reload(true);
+	}
+});
+</script>
 <style>
 section {
 	width : 1300px;
@@ -25,7 +36,7 @@ section {
 				<br>
 				<h4>E-MAIL</h4>
 				<input type="text" class="login_input"
-					name="m_id"></input><br>
+					name="m_email"></input><br>
 				<h4>PASSWORD</h4>
 				<input type="password" class="login-input" 
 				name="m_pwd"><br>

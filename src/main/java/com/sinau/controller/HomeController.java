@@ -1,31 +1,29 @@
 package com.sinau.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sinau.dao.MemberDao;
 import com.sinau.dto.Member;
 import com.sinau.service.MemberService;
 
 @Controller
 public class HomeController {
-
+	
 	@Autowired
 	private MemberService mServ;
 	
 	private ModelAndView mv;
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	
 	@GetMapping("/")
 	public String home() {
-		logger.info("home()");
 		
 		return "home";
 	}
@@ -42,16 +40,27 @@ public class HomeController {
 		return "joinFrm";
 	}
 	
-	@PostMapping("memInsert")
-	public ModelAndView memInsert(Member member,
+	@GetMapping(value = "idCheck",
+			produces = "application/text; charset=utf-8")
+	@ResponseBody
+	public String idCheck(String memail) {
+		
+		String result = mServ.idCheck(memail);
+		
+		return result;
+	}
+
+	@PostMapping("memberInsert")
+	public ModelAndView memberInsert(Member member,
 			RedirectAttributes rttr) {
-		logger.info("memInsert()");
 		
 		//서비스에서 처리
-		mv = mServ.MemberInsert(member, rttr);
+		mv = mServ.memberInsert(member, rttr);
 		
 		return mv;
 	}
+
+
 	
 	
 }
