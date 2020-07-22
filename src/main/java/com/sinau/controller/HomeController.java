@@ -1,31 +1,31 @@
 package com.sinau.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-/**
- * Handles requests for the application home page.
- */
+import com.sinau.dto.Member;
+import com.sinau.service.MemberService;
+
 @Controller
 public class HomeController {
+
+	@Autowired
+	private MemberService mServ;
+	
+	private ModelAndView mv;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	
 	@GetMapping("/")
 	public String home() {
-		//logger.info("home()");
+		logger.info("home()");
 		
 		return "home";
 	}
@@ -41,5 +41,17 @@ public class HomeController {
 		
 		return "joinFrm";
 	}
+	
+	@PostMapping("memInsert")
+	public ModelAndView memInsert(Member member,
+			RedirectAttributes rttr) {
+		logger.info("memInsert()");
+		
+		//서비스에서 처리
+		mv = mServ.MemberInsert(member, rttr);
+		
+		return mv;
+	}
+	
 	
 }

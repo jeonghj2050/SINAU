@@ -6,6 +6,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style.css?a">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var msg = "${msg}";
+	console.log(msg);
+	if(msg != ""){
+		alert(msg);
+		location.reload(true);
+	}
+});
+</script>
 </head>
 <body>
 	<div class="wrap">
@@ -58,28 +69,28 @@
 	//인터셉터 대상에서 제외해야 함.
 	//servlet-context.xml에 exclude-mapping을 처리.
 	function idcheck() {
-		var id = $('#mid').val();
-		if (id == "") {
+		var email = $('#memail').val();
+		if (email == "") {
 			alert("아이디를 입력하세요.");
-			$('#mid').focus();
+			$('#memail').focus();
 			return;
 		}
 		var ckObj = {
-			"mid" : id
+			"memail" : email
 		};
 		console.log(ckObj);
 
 		$.ajax({
-			url : "idCheck",
+			url : "emailCheck",
 			type : "get",
 			data : ckObj,
 			success : function(data) {
 				if (data == "success") {
-					alert('ID 사용 가능');
+					alert('E-mail 사용 가능');
 				} else {
 					alert('사용할 수 없는 ID');
-					$('#mid').val('');//입력 초기화
-					$('#mid').focus();//ID 부분에 포커스 주기
+					$('#memail').val('');//입력 초기화
+					$('#memail').focus();//ID 부분에 포커스 주기
 				}
 			},
 			error : function(error) {
