@@ -25,7 +25,7 @@ $(document).ready(function(){
 		</header>
 		<section>
 			<div class="content">
-				<form name="joinFrm" class="login-form" action="memInsert" method="post" onsubmit="return check()">
+				<form name="joinFrm" class="login-form" action="memberInsert" method="post" onsubmit="return check()">
 					<h2 class="login-header">회원 가입</h2>
 					<input type="text" class="login-input" id="memail" title="이메일" name="m_email" autofocus placeholder="이메일"> 
 					<input type="button" class="idcheck-btn" value="중복확인" onclick="idcheck()">
