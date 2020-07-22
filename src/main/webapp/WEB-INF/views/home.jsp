@@ -9,5 +9,6 @@
 <body>
 
 <a href="./mypage">마이페이지</a>
+
 </body>
 </html>
