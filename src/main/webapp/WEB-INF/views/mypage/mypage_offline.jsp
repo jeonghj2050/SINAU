@@ -62,38 +62,38 @@ $(document).ready(function(){
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
 		<article>
 			<div>
-                <span>온라인 강의</span>
+                <span>오프라인 강의</span>
            </div>
            <div role="tabpanel">
 
 			  <!-- Nav tabs -->
 			  <ul class="nav nav-tabs" role="tablist" id="mytab">
-			   	<c:forEach var="onlineClass" items="${onlineList}">	
-				    <li role="presentation" name="${onlineClass.onc_code}"><a href="#'${onlineClass.onc_code}'" aria-controls="home" role="tab" data-toggle="tab">${onlineClass.onc_code}</a></li>
+			   	<c:forEach var="offlineClass" items="${offlineList}">	
+				    <li role="presentation" name="${offlineClass.ofc_code}"><a href="#'${offlineClass.ofc_code}'" aria-controls="home" role="tab" data-toggle="tab">${offlineClass.ofc_code}</a></li>
 			  	</c:forEach>
 			  </ul> 
            </div>
-			<c:forEach var="onlineClass" items="${onlineList}">
-				<div class="mp_classInfo" id="${onlineClass.onc_code}">
+			<c:forEach var="offlineClass" items="${offlineList}">
+				<div class="mp_classInfo" id="${offlineClass.ofc_code}">
 					<img src="resources/images/test/thumbnail1.PNG" alt="" width="300px"
 						height="300px" id="mp_class_img">
 					<div>
-						<div class="class_info_contents" id="${onlineClass.onc_code}">
-							<p>${onlineClass.cts_name} | ${onlineClass.m_name}</p>
-							<p class="info_title">${onlineClass.onc_title}</p>
+						<div class="class_info_contents" id="${offlineClass.ofc_code}">
+							<p>${offlineClass.cts_name} | ${offlineClass.m_name}</p>
+							<p class="info_title">${offlineClass.ofc_title}</p>
 							<div>
-								${onlineClass.onc_content}
+								${offlineClass.ofc_content}
 							</div>
 						</div>
 						<div>
-							<div>${onlineClass.onc_sdate}/${onlineClass.onc_edate}</div>
+							<div>수업일 : ${offlineClass.ofc_ofdate}</div>
 							<div>
 								<c:choose>
-									<c:when test="${onlineClass.mcl_state == 1}">
+									<c:when test="${offlineClass.mcl_state == 1}">
 										<button>환불</button>
 									</c:when>
 								</c:choose>
-								<c:if test="${onlineClass.mcl_state == 2}">
+								<c:if test="${offlineClass.mcl_state == 2}">
 									<span>환불진행중</span>
 								</c:if>
 							</div>
