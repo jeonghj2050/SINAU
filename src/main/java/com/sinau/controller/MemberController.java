@@ -44,7 +44,13 @@ public class MemberController {
 	}
 	
 	@GetMapping("mypageUpdate")
-	public String mypageUpdate() {
-		return "mypage/mypage_update";
+	public ModelAndView mypageUpdate() {
+		//임의의 로그인 회원 아이디
+		String email="kc@naver.com";
+		
+		//수정 페이지에 보여질 기존 회원 정보를 가져온다.
+		mv=mServ.getMemberInfo(email);
+		
+		return mv;
 	}
 }

@@ -8,5 +8,7 @@
 		<!-- email에 해당하는 회원의 구분을 반환한다. -->
 		select m_group from m where m_email=#{email}
 	</select>
-	
+	<select id="getMemberInfo" parameterType="String" resultType="com.sinau.dto.MyMemberInfoDto">
+		select * from mymemberinfo where m_email=#{email}
+	</select>
 </mapper>

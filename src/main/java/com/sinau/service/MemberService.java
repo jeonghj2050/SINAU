@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.dao.ClassDao;
 import com.sinau.dao.MemberDao;
+import com.sinau.dto.MyMemberInfoDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OnlineClassDto;
@@ -80,6 +81,17 @@ public class MemberService {
 		mv.setViewName("mypage/mypage_offline");
 		mv.addObject("offlineList",offlineList);
 
+		return mv;
+	}
+
+	public ModelAndView getMemberInfo(String email) {
+		mv=new ModelAndView();
+		
+		//마이페이지에 보여질 회원 정보를 가져온다.
+		MyMemberInfoDto myInfo=mDao.getMemberInfo(email);
+		mv.addObject("myInfo",myInfo);
+		
+		mv.setViewName("mypage/mypage_update");
 		return mv;
 	}
 
