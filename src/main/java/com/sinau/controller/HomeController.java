@@ -34,6 +34,12 @@ public class HomeController {
 		return "loginFrm";
 	}
 	
+	@GetMapping("group")
+	public String group() {
+		
+		return "group";
+	}
+	
 	@GetMapping("joinFrm")
 	public String joinFrm() {
 		
@@ -50,17 +56,15 @@ public class HomeController {
 		return result;
 	}
 
-	@PostMapping("memberInsert")
-	public ModelAndView memberInsert(Member member,
-			RedirectAttributes rttr) {
-		
-		//서비스에서 처리
-		mv = mServ.memberInsert(member, rttr);
-		
-		return mv;
+	
+	@PostMapping("memberInsert") 
+	public ModelAndView memInsert(Member member,
+			 RedirectAttributes rttr) { 
+	mv = mServ.memberInsert(member, rttr);
+	 
+	return mv;
 	}
-
-
+	 
 	
 	
 }

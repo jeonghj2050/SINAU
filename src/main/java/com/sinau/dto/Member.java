@@ -1,6 +1,6 @@
 package com.sinau.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Member {
 	private String m_email;
@@ -26,7 +26,7 @@ public class Member {
 		this.m_name = m_name;
 	}
 	public String getM_pwd() {
-		return m_pwd;
+		return m_pwd;	
 	}
 	public void setM_pwd(String m_pwd) {
 		this.m_pwd = m_pwd;

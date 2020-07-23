@@ -1,5 +1,6 @@
 package com.sinau.dao;
 
+
 import com.sinau.dto.Member;
 
 public interface MemberDao {
@@ -8,4 +9,6 @@ public interface MemberDao {
 
 	public void memberInsert(Member member);
 
+
+	
 }
