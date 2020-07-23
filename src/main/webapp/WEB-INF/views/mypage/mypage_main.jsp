@@ -62,9 +62,7 @@ $(document).ready(function(){
 	<section class="mp_section">
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
 		<article>
-			<div>
-                <span>온라인 강의</span>
-           </div>
+			<div class="page-title">온라인 강의 </div>
            <div role="tabpanel">
 			  <!-- Nav tabs -->
 			  <ul class="nav nav-tabs" role="tablist" id="mytab">

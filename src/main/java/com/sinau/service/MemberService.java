@@ -16,10 +16,13 @@ import com.sinau.dao.StoreDao;
 import com.sinau.dto.MyMemberInfoDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
+import com.sinau.dto.OffLikeDto;
 import com.sinau.dto.OffOrdersDto;
 import com.sinau.dto.OnlineClassDto;
+import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
+import com.sinau.dto.ProdLikeDto;
 import com.sinau.dto.ProdOrdersDto;
 import com.sun.prism.paint.Stop;
 
@@ -137,6 +140,26 @@ public class MemberService {
 		mv.addObject("offOrder",offOrdList);
 		
 		mv.setViewName("mypage/mypage_order");
+		
+		return mv;
+	}
+
+	//상품,온라인, 오프라인 좋아요 내역을 검색한다.
+	public ModelAndView getAllLikes(String email) {
+		mv=new ModelAndView();
+		
+		//온라인 강의의 좋아요 목록을 가져온다.
+		List<OnlineLikeDto> onLike=cDao.getOnLikeList(email);
+		//오프라인 강의의 좋아요 목록을 가져온다.
+		List<OffLikeDto> offLike=cDao.getOffLikeList(email);
+		//상품의 좋아요 목록을 가져온다.
+		List<ProdLikeDto> prodLike=sDao.getProdLikeList(email);
+		
+		mv.addObject("onLikeList",onLike);
+		mv.addObject("offLikeList",offLike);
+		mv.addObject("prodLikeList",prodLike);
+		
+		mv.setViewName("mypage/mypage_like");
 		
 		return mv;
 	}

@@ -10,4 +10,10 @@
 		 	select * from prodorders where ord_m_email=#{email}
 		]]>
 	</select>
+	<select id="getProdLikeList" parameterType="String" resultType="com.sinau.dto.ProdLikeDto">
+		<!-- email에 해당하는 회원 상품 주문 내역을 가져온다. -->
+		<![CDATA[ 
+		 	select * from prodlikes where m_email=#{email}
+		]]>
+	</select>
 </mapper>

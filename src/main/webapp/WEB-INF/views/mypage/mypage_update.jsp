@@ -85,9 +85,7 @@ $(function(){
 	<section class="mp_section">
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
 		<article>
-			<div style="width: 1070px; height: 80px;">
-				<span>회원정보 수정</span>
-			</div>
+			<div class="page-title">회원정보 수정</div>
 			<form action="/mypageUpdate" method="post">
 				<div>
 					<div class="profile_image">

@@ -125,19 +125,18 @@ article>div .nav.nav-tabs>li {
 }
 
 .mp_classInfo>div>div:first-child {
-	width: 500px;
 	height: 250px;
 }
 
 .mp_classInfo>div>div:last-child>div:first-child {
-	width: 480px;
+	width: 580px;
 	height: 40px;
 	line-height: 80px;
 	float: left;
 }
 
 .mp_classInfo>div>div:last-child>div:last-child {
-	width: 240px;
+	width: 180px;
 	float: left;
 	height: 50px;
 	margin-top: 10px;
@@ -230,3 +229,15 @@ article>div .nav.nav-tabs>li {
 	color:white;
 	border:none; 
 }
+
+.page-title{
+		font-size: 25pt;
+		width: 1070px;
+		height: 60px;
+		line-height:60px;
+		text-align: center;
+		background-color : black;
+		color:white;
+		font-weight:bold;
+		margin-bottom:20px; 
+	}

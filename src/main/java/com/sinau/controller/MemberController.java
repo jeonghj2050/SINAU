@@ -74,4 +74,14 @@ public class MemberController {
 		mv=mServ.getAllOrders(email);
 		return mv;
 	}
+	
+	@GetMapping("like")
+	public ModelAndView like() {
+		//임의의 로그인 회원 아이디
+		String email="kc@naver.com";
+		
+		//상품,온라인, 오프라인 좋아요 내역을 검색한다.
+		mv=mServ.getAllLikes(email);
+		return mv;
+	}
 }

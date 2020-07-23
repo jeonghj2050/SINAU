@@ -38,9 +38,7 @@ $(function(){
 	<section class="mp_section">
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
 		<article>
-            <div>
-                <span>내 주문내역</span>
-            </div>
+           <div class="page-title">내 주문내역</div>
             <div role="tabpanel">
                 <ul class="nav nav-tabs" role="tablist" id="mytab">
                     <li role="presentation" name="tableprod"><a href="#" aria-controls="home" role="tab" data-toggle="tab" >상품주문내역</a></li>

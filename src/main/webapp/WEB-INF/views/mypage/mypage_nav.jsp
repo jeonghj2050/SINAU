@@ -18,6 +18,6 @@
 		<li class="list-group-item"><a href="./mypage">온라인 강의</a></li>
 		<li class="list-group-item"><a href="./mypageOffline">오프라인 강의</a></li>
 		<li class="list-group-item"><a href="./mypageOrder">내 주문내역</a></li>
-		<li class="list-group-item"><a href="">좋아요</a></li>
+		<li class="list-group-item"><a href="./like">좋아요</a></li>
 	</ul>
 </nav>

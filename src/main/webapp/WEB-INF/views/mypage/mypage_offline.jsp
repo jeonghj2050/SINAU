@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,33 +62,33 @@ $(document).ready(function(){
 	<section class="mp_section">
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
 		<article>
-			<div>
-                <span>오프라인 강의</span>
-           </div>
-           <div role="tabpanel">
+			<div class="page-title">오프라인 강의</div>
+			<div role="tabpanel">
 
-			  <!-- Nav tabs -->
-			  <ul class="nav nav-tabs" role="tablist" id="mytab">
-			   	<c:forEach var="offlineClass" items="${offlineList}">	
-				    <li role="presentation" name="${offlineClass.ofc_code}"><a href="#'${offlineClass.ofc_code}'" aria-controls="home" role="tab" data-toggle="tab">${offlineClass.ofc_code}</a></li>
-			  	</c:forEach>
-			  </ul> 
-           </div>
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist" id="mytab">
+					<c:forEach var="offlineClass" items="${offlineList}">
+						<li role="presentation" name="${offlineClass.ofc_code}"><a
+							href="#'${offlineClass.ofc_code}'" aria-controls="home"
+							role="tab" data-toggle="tab">${offlineClass.ofc_code}</a></li>
+					</c:forEach>
+				</ul>
+			</div>
 			<c:forEach var="offlineClass" items="${offlineList}">
 				<div class="mp_classInfo" id="${offlineClass.ofc_code}">
-					<img src="resources/images/test/${offlineClass.f_oriname }" alt="" width="300px"
-						height="300px" id="mp_class_img">
+					<img src="resources/images/test/${offlineClass.f_oriname }" alt=""
+						width="300px" height="300px" id="mp_class_img">
 					<div>
 						<div class="class_info_contents" id="${offlineClass.ofc_code}">
-							<p>${offlineClass.cts_name} | ${offlineClass.m_name}</p>
+							<p>${offlineClass.cts_name}| ${offlineClass.m_name}</p>
 							<p class="info_title">${offlineClass.ofc_title}</p>
-							<div>
-								${offlineClass.ofc_content}
-							</div>
+							<div>${offlineClass.ofc_content}</div>
 						</div>
 						<div>
-							<div>수업일 : 
-								<fmt:formatDate pattern="yyyy-MM-dd" value="${offlineClass.ofc_ofdate}"/>
+							<div>
+								수업일 :
+								<fmt:formatDate pattern="yyyy-MM-dd"
+									value="${offlineClass.ofc_ofdate}" />
 							</div>
 							<div>
 								<c:choose>
