@@ -28,16 +28,32 @@
 		<beans:property name="maxInMemorySize" value="10000000"/>
 	</beans:bean>
 	
-	<!-- 무분별한 인터셉트(로그인정보 확인)를 막기 위해 예외적으로 처리 -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="defaultEncoding"
+			value="UTF-8"/>
+		<beans:property name="maxUploadSize"
+			value="10000000"/><!-- byte 단위 -->
+		<beans:property name="maxInMemorySize"
+			value="10000000"/>
+	</beans:bean>
+	
 	<interceptors>
 		<interceptor>
 			<!-- 인터셉터가 적용될 전체 범위 : mapping -->
 			<mapping path="/*"/>
-			<!-- 가로채기에서 제외할 uri  지정 -->
+			<!-- 가로채기에서 제외할 uri를 지정 -->
 			<exclude-mapping path="/"/>
-			<beans:bean class="com.sinau.util.SessionInterceptor"></beans:bean>			
+			<exclude-mapping path="/loginFrm"/>
+			<exclude-mapping path="/joinFrm"/>
+			<exclude-mapping path="/access"/>
+			<exclude-mapping path="/memInsert"/>
+			<exclude-mapping path="/idCheck"/>
+			<beans:bean 
+				class="com.sinau.util.SessionInterceptor"/>
 		</interceptor>
 	</interceptors>
+	
 	<context:component-scan base-package="com.sinau.controller" />
 
 </beans:beans>
