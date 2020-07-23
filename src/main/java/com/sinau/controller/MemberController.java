@@ -1,13 +1,16 @@
 package com.sinau.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.media.dto.ReplyDto;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.service.MemberService;
 
@@ -69,19 +72,41 @@ public class MemberController {
 	public ModelAndView mypageOrder() {
 		//임의의 로그인 회원 아이디
 		String email="kc@naver.com";
-		
+
 		//상품,온라인,오프라인 주문 내역을 검색한다.
 		mv=mServ.getAllOrders(email);
 		return mv;
 	}
-	
+
 	@GetMapping("like")
 	public ModelAndView like() {
 		//임의의 로그인 회원 아이디
 		String email="kc@naver.com";
-		
+
 		//상품,온라인, 오프라인 좋아요 내역을 검색한다.
 		mv=mServ.getAllLikes(email);
 		return mv;
+	}
+
+	@GetMapping("mypageCoupon")
+	public ModelAndView mypageCoupon() {
+		//임의의 로그인 회원 아이디
+		String email="kc@naver.com";
+		
+		//회원의 쿠폰 목록을 가져온다.
+		mv=mServ.getCouponList(email);
+		
+		return mv;
+	}
+	
+	//댓글 등록을 위한 비동기 처리 메소드
+	@PostMapping(value = "mypageCoupon",produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String mypageCoupon(String email,String cp_code){
+		//쿠폰 등록 후 쿠폰 목록을 다시 반환
+		//댓글 등록 후 댓글 리스트를 반환하기 위한 메소드
+		Map<String, List<ReplyDto>> rMap=bServ.replyInsert(reply);
+	
+		return rMap;
 	}
 }

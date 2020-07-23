@@ -10,7 +10,7 @@
 			</a>
 		</div>
 		<div>
-			<button class="my_default_btn">쿠폰</button>
+			<button class="my_default_btn" onclick="location.href='./mypageCoupon'">쿠폰</button>
 			<span>경고누적횟수 : 0</span>
 		</div>
 	</div>

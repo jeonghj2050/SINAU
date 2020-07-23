@@ -9,9 +9,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SINAU 오프라인 강의</title>
-
-<link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/mypage.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -55,9 +54,7 @@ $(document).ready(function(){
 </head>
 <body>
 	<header>
-		<img src="resources/images/SINAU_logo.png" alt="" width="150px"
-			height="50px" style="margin: 20px;">
-		<div></div>
+		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 	<section class="mp_section">
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
@@ -107,6 +104,8 @@ $(document).ready(function(){
 
 		</article>
 	</section>
-	<footer></footer>
+	<footer>
+		<jsp:include page="../footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

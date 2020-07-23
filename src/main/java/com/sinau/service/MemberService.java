@@ -12,10 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dao.MemberDao;
+import com.sinau.dto.CpListDto;
 import com.sinau.dto.Member;
 
 
 import com.sinau.dao.ClassDao;
+import com.sinau.dao.CommonDao;
 import com.sinau.dao.MemberDao;
 import com.sinau.dao.StoreDao;
 import com.sinau.dto.MyMemberInfoDto;
@@ -45,6 +47,8 @@ public class MemberService {
 	ClassDao cDao;
 	@Autowired
 	StoreDao sDao;
+	@Autowired
+	CommonDao cmDao;
 	
 	BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
 
@@ -211,6 +215,21 @@ public class MemberService {
 		mv.addObject("prodLikeList",prodLike);
 		
 		mv.setViewName("mypage/mypage_like");
+		
+		return mv;
+	}
+
+
+
+	public ModelAndView getCouponList(String email) {
+		mv=new ModelAndView();
+		
+		//회원의 쿠폰 목록을 가져온다.
+		List<CpListDto> couponList=cmDao.getCouponList(email);
+		
+		mv.addObject("cpList",couponList);
+		
+		mv.setViewName("mypage/mypage_coupon");
 		
 		return mv;
 	}
