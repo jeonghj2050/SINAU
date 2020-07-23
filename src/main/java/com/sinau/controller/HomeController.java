@@ -51,6 +51,7 @@ public class HomeController {
 		return result;
 	}
 
+
 	
 	@PostMapping("memberInsert") 
 	public ModelAndView memInsert(Member member,
@@ -62,4 +63,9 @@ public class HomeController {
 
 	
 	
+	@GetMapping("store")
+	public String store() {
+		
+		return "store/store";
+	}
 }

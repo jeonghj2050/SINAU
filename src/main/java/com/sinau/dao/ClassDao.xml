@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinau.dao.ClassDao">
+	<select id="getOrderList" parameterType="String" resultType="com.sinau.dto.OrderDto">
+		<!-- email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다. -->
+		<![CDATA[ 
+		 	select * from ord where ord_m_email=#{email} and ord_pcode like #{precode}||'%'
+		]]>
+	</select>
+	<select id="getMyOnlineInfoOne" parameterType="String" resultType="com.sinau.dto.MyOnlineInfoDto">
+		<![CDATA[ 
+			 select * from myonlineinfo where mcl_ord_code=#{ord_pcode}
+		]]>
+	</select>
+	<select id="getMyOffInfoOne" parameterType="String" resultType="com.sinau.dto.MyOffInfoDto">
+		<![CDATA[ 
+			 select * from myoffinfo where mcl_ord_code=#{ord_pcode}
+		]]>
+	</select>
+	
+	<!-- 회원의 강좌 주문 내역을 가져온다. -->
+	<select id="getOnlineOrderList" parameterType="String" resultType="com.sinau.dto.OnlineOrdersDto">
+		<![CDATA[ 
+		 	select * from onlineorders where ord_m_email=#{email}
+		]]>
+	</select>
+	<select id="getOffOrderList" parameterType="String" resultType="com.sinau.dto.OffOrdersDto">
+		<![CDATA[ 
+		 	select * from offorders where ord_m_email=#{email}
+		]]>
+	</select>
+	
+</mapper>
