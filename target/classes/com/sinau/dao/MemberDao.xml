@@ -13,4 +13,5 @@
 		values(#{m_email},#{m_name},#{m_pwd},#{m_phone},#{m_birth},#{m_license},#{m_group},#{m_state})
 	</insert>
 	
+	
 </mapper>

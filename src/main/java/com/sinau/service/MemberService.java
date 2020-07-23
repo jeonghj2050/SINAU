@@ -1,5 +1,7 @@
 package com.sinau.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ public class MemberService {
 	
 	@Autowired
 	private MemberDao mDao;
+	
+	@Autowired
+	private HttpSession session;
 	
 	private ModelAndView mv;
 	
@@ -57,15 +62,12 @@ public class MemberService {
 			rttr.addFlashAttribute("msg", "가입 성공");
 		} catch (Exception e) {
 			view="redirect:joinFrm";
-			rttr.addFlashAttribute("msg", "아이디 중복");
+			rttr.addFlashAttribute("msg", "가입 실패");
 		}
 		
 		mv.setViewName(view);
 		return mv;
 	}
-
-
-
 
 
 

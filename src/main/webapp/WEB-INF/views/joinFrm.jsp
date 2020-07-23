@@ -37,7 +37,10 @@ $(document).ready(function() {
 			<input type="text" class="login-input" id="memail" title="이메일"	name="m_email" placeholder="이메일"> 
 			<input type="button" class="idcheck-btn" value="중복확인" onclick="idcheck()">
 			<input type="text" name="m_name" class="login-input" title="이름" 	placeholder="이름"> 
-			<input type="password"	class="login-input" title="비밀번호" name="m_pwd" placeholder="비밀번호">
+			<input type="password"	id="password1" class="login-input" title="비밀번호" name="m_pwd" placeholder="비밀번호">
+			<input type="password"	id="password2" class="login-input" title="비밀번호" name="m_pwd" placeholder="비밀번호확인"><br>
+			<span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span><br>
+    <span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span><br>
 			<input type="text" name="m_phone" class="login-input" title="연락처"	placeholder="연락처"> 
 			<input type="text" name="m_birth" class="login-input" title="생년월일" placeholder="생년월일"> 
 			<input type="text" name="m_license" class="login-input" title="사업자번호"	placeholder="사업자번호">
@@ -118,6 +121,45 @@ $(document).ready(function() {
 		        }
 	    });
 	});
+	 function validate() {
+	       var re = /^[a-zA-Z0-9]{4,20}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+	       var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	       // 이메일이 적합한지 검사할 정규식
+
+	       var email = document.getElementById("memail");
+	       var pw = document.getElementById("password1");
+
+	       // ------------ 이메일 까지 -----------
+
+	       if(!check(re2,memail,"아이디는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+	           return false;
+	       }
+
+	       if(!check(re,password1,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+	           return false;
+	       }
+
+	       if(join.password1.value != join.password2.value) {
+	           alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
+	           join.password2.value = "";
+	           join.password2.focus();
+	           return false;
+	       }
+
+
+	       
+	       alert("회원가입이 완료되었습니다.");
+	   }
+
+	   function check(re, what, message) {
+	       if(re.test(what.value)) {
+	           return true;
+	       }
+	       alert(message);
+	       what.value = "";
+	       what.focus();
+	       //return false;
+	   }
 	
 </script>
 </html>

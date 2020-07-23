@@ -7,10 +7,11 @@ public class Member {
 	private String m_name;
 	private String m_pwd;
 	private int m_phone;
-	private Date m_birth;
+	private String m_birth;
 	private int m_license;
 	private String m_group;
 	private int m_state;
+	
 	
 	
 	public String getM_email() {
@@ -26,7 +27,7 @@ public class Member {
 		this.m_name = m_name;
 	}
 	public String getM_pwd() {
-		return m_pwd;	
+		return m_pwd;
 	}
 	public void setM_pwd(String m_pwd) {
 		this.m_pwd = m_pwd;
@@ -37,10 +38,10 @@ public class Member {
 	public void setM_phone(int m_phone) {
 		this.m_phone = m_phone;
 	}
-	public Date getM_birth() {
+	public String getM_birth() {
 		return m_birth;
 	}
-	public void setM_birth(Date m_birth) {
+	public void setM_birth(String m_birth) {
 		this.m_birth = m_birth;
 	}
 	public int getM_license() {
@@ -61,6 +62,9 @@ public class Member {
 	public void setM_state(int m_state) {
 		this.m_state = m_state;
 	}
+	
+	
+	
 	
 	
 }

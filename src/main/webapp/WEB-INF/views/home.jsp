@@ -5,32 +5,13 @@
 <html>
 <head>
 <title>Home</title>
-<link rel="stylesheet" href="resources/css/style.css?a">
+<link rel="stylesheet" href="resources/css/style.css?a">          
 </head>
 <body>
 	<header>
 		<jsp:include page="header.jsp"></jsp:include>
 	</header>
 
-	<div class="slideshow-container">
-		<div class="mySlides fade">
-			<div class="numbertext">1 / 3</div>
-			<img src="resources/images/event1.jpg" width="1300" height="300">
-		</div>
-		<div class="mySlides fade">
-			<div class="numbertext">2 / 3</div>
-			<img src="resources/images/event2.jpg" width="1300" height="300">
-		</div>
-		<div class="mySlides fade">
-			<div class="numbertext">3 / 3</div>
-			<img src="resources/images/event3.jpg" width="1300" height="300">
-		</div>
-	</div>
-	<br>
-
-	<div style="text-align: center">
-		<span class="dot"></span> <span class="dot"></span> <span class="dot"></span>
-	</div>
 	<section>
 		<article class="childart">
 			<h1>TOP10</h1>
@@ -154,111 +135,8 @@
 				<h5>기초를 빙자한 야매는 이제 끝, 그림 공부의 원리부터 배워봅시다</h5>
 				<h5>25000원</h5>
 			</div>
-			<div>
-				<img src=resources/images/product3.jpg>
-				<h5>헬스</h5>
-				<br>
-				<h5>재봉틀로 만드는 사랑스런 아이옷, 소미솜씨와 함께 시작해 볼까요?</h5>
-				<h5>60000원</h5>
-			</div>
-			<div>
-				<img src=resources/images/product2.jpg>
-				<h5>그림</h5>
-				<br>
-				<h5>사랑을 담아 그리는 순정 일러스트, 이야기를 말하는 캐릭터 드로잉</h5>
-				<h5>50000원</h5>
-			</div>
-			<div>
-				<img src=resources/images/product1.jpg>
-				<h5>디자인</h5>
-				<br>
-				<h5>규멩과 함께, 캐릭터 애니메이팅 1DAY CLASS LIVE!</h5>
-				<h5>23000원</h5>
-			</div>
-			<div>
-				<img src=resources/images/product1.jpg>
-				<h5>공예</h5>
-				<br>
-				<h5>기초를 빙자한 야매는 이제 끝, 그림 공부의 원리부터 배워봅시다</h5>
-				<h5>25000원</h5>
-			</div>
-			<div>
-				<img src=resources/images/product3.jpg>
-				<h5>헬스</h5>
-				<br>
-				<h5>재봉틀로 만드는 사랑스런 아이옷, 소미솜씨와 함께 시작해 볼까요?</h5>
-				<h5>60000원</h5>
-			</div>
-			<div>
-				<img src=resources/images/product2.jpg>
-				<h5>그림</h5>
-				<br>
-				<h5>사랑을 담아 그리는 순정 일러스트, 이야기를 말하는 캐릭터 드로잉</h5>
-				<h5>50000원</h5>
-			</div>
-			<div>
-				<img src=resources/images/product1.jpg>
-				<h5>디자인</h5>
-				<br>
-				<h5>규멩과 함께, 캐릭터 애니메이팅 1DAY CLASS LIVE!</h5>
-				<h5>23000원</h5>
-			</div>
-			<div>
-				<img src=resources/images/product1.jpg>
-				<h5>공예</h5>
-				<br>
-				<h5>기초를 빙자한 야매는 이제 끝, 그림 공부의 원리부터 배워봅시다</h5>
-				<h5>25000원</h5>
-			</div>
-			<div>
-				<img src=resources/images/product3.jpg>
-				<h5>헬스</h5>
-				<br>
-				<h5>재봉틀로 만드는 사랑스런 아이옷, 소미솜씨와 함께 시작해 볼까요?</h5>
-				<h5>60000원</h5>
-			</div>
-			<div>
-				<img src=resources/images/product2.jpg>
-				<h5>그림</h5>
-				<br>
-				<h5>사랑을 담아 그리는 순정 일러스트, 이야기를 말하는 캐릭터 드로잉</h5>
-				<h5>50000원</h5>
-			</div>
-			<div>
-				<img src=resources/images/product1.jpg>
-				<h5>디자인</h5>
-				<br>
-				<h5>규멩과 함께, 캐릭터 애니메이팅 1DAY CLASS LIVE!</h5>
-				<h5>23000원</h5>
-			</div>
-			<div>
-				<img src=resources/images/product1.jpg>
-				<h5>공예</h5>
-				<br>
-				<h5>기초를 빙자한 야매는 이제 끝, 그림 공부의 원리부터 배워봅시다</h5>
-				<h5>25000원</h5>
-			</div>
-			<div>
-				<img src=resources/images/product3.jpg>
-				<h5>헬스</h5>
-				<br>
-				<h5>재봉틀로 만드는 사랑스런 아이옷, 소미솜씨와 함께 시작해 볼까요?</h5>
-				<h5>60000원</h5>
-			</div>
-			<div>
-				<img src=resources/images/product2.jpg>
-				<h5>그림</h5>
-				<br>
-				<h5>사랑을 담아 그리는 순정 일러스트, 이야기를 말하는 캐릭터 드로잉</h5>
-				<h5>50000원</h5>
-			</div>
-			<div>
-				<img src=resources/images/product1.jpg>
-				<h5>디자인</h5>
-				<br>
-				<h5>규멩과 함께, 캐릭터 애니메이팅 1DAY CLASS LIVE!</h5>
-				<h5>23000원</h5>
-			</div>
+		
+			
 		</article>
 	</section>
 	<footer>
@@ -266,27 +144,6 @@
 	</footer>
 </body>
 <script type="text/javascript">
-	var slideIndex = 0;
-	showSlides();
-
-	function showSlides() {
-		var i;
-		var slides = document.getElementsByClassName("mySlides");
-		var dots = document.getElementsByClassName("dot");
-		for (i = 0; i < slides.length; i++) {
-			slides[i].style.display = "none";
-		}
-		slideIndex++;
-		if (slideIndex > slides.length) {
-			slideIndex = 1
-		}
-		for (i = 0; i < dots.length; i++) {
-			dots[i].className = dots[i].className.replace(" active", "");
-		}
-		slides[slideIndex - 1].style.display = "block";
-		dots[slideIndex - 1].className += " active";
-		setTimeout(showSlides, 2000); // Change image every 2 seconds
-	}
 
 </script>
 </html>

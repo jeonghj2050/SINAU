@@ -34,11 +34,6 @@ public class HomeController {
 		return "loginFrm";
 	}
 	
-	@GetMapping("group")
-	public String group() {
-		
-		return "group";
-	}
 	
 	@GetMapping("joinFrm")
 	public String joinFrm() {
@@ -64,7 +59,7 @@ public class HomeController {
 	 
 	return mv;
 	}
-	 
+
 	
 	
 }

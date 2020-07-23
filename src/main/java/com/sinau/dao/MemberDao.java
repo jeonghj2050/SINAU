@@ -9,6 +9,6 @@ public interface MemberDao {
 
 	public void memberInsert(Member member);
 
-
+	
 	
 }
