@@ -48,13 +48,6 @@ public class MemberService {
 	
 	BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
 
-	@Autowired
-	private HttpSession session;
-	
-	private ModelAndView mv;
-	
-	
-	
 	public String idCheck(String memail) {
 		String result = null;
 
