@@ -3,8 +3,11 @@ package com.sinau.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,21 +15,17 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dao.MemberDao;
-import com.sinau.dto.Member;
-
-
+import com.sinau.dto.MemberDto;
+import com.sinau.controller.HomeController;
 import com.sinau.dao.ClassDao;
-import com.sinau.dao.MemberDao;
 import com.sinau.dao.StoreDao;
 import com.sinau.dto.MyMemberInfoDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffOrdersDto;
-import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.ProdOrdersDto;
-import com.sun.prism.paint.Stop;
 
 import lombok.extern.java.Log;
 
@@ -45,11 +44,8 @@ public class MemberService {
 	
 	BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
 
-	@Autowired
-	private HttpSession session;
-	
-	private ModelAndView mv;
-	
+
+	private static final Logger log = LoggerFactory.getLogger(HomeController.class);
 	
 	
 	public String idCheck(String memail) {
@@ -73,7 +69,7 @@ public class MemberService {
 
 
 
-	public ModelAndView memberInsert(Member member, RedirectAttributes rttr) {
+	public ModelAndView memberInsert(MemberDto member, RedirectAttributes rttr) {
 		mv = new ModelAndView();
 		String view = null;
 		

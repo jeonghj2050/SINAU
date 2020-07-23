@@ -92,7 +92,7 @@ $(document).ready(function() {
 				} else {
 					alert('중복된 이메일입니다.');
 					$('#memail').val('');//입력 초기화
-					$('#	ㅂmemail').focus();//ID 부분에 포커스 주기
+					$('#memail').focus();//ID 부분에 포커스 주기
 				}
 			},
 			error : function(error) {
@@ -146,8 +146,6 @@ $(document).ready(function() {
 	           return false;
 	       }
 
-
-	       
 	       alert("회원가입이 완료되었습니다.");
 	   }
 
