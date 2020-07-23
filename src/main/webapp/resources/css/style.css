@@ -36,6 +36,8 @@ footer {
 
 .bx-wrapper {
 	margin: 0px auto;
+	border : 5px black;
+	-webkit-box-shadow : none;
 }
 /* ���� */
 a {
