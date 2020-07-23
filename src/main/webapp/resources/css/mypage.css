@@ -3,7 +3,7 @@
 .my_default_btn {
 	width: 180px;
 	height: 40px;
-	margin-bottom:5px;
+	margin-bottom: 5px;
 	background-color: black;
 	color: white;
 }
@@ -40,7 +40,8 @@
 }
 
 .mp_section>nav>div>div:first-child {
-	text-align: center; width : 180px;
+	text-align: center;
+	width: 180px;
 	height: 130px;
 	margin-bottom: 10px;
 	width: 180px;
@@ -64,10 +65,6 @@
 	clear: both;
 }
 
-nav .item-selected {
-	background-color: rgb(95, 95, 95);
-	color: white;
-}
 
 .list-group {
 	padding: 10px;
@@ -77,9 +74,9 @@ nav .item-selected {
 .list-group-item {
 	margin-top: 10px;
 }
-
-.btn-default {
-	width: 60px;
+.list-group-item:hover{
+	background-color:rgb(150,150,150);
+	color : white;
 }
 
 .mp_section>article {
@@ -89,13 +86,13 @@ nav .item-selected {
 }
 
 article>div>span {
+	width:1070px;
 	font-size: 25px;
 	float: left;
 	font-weight: bold;
 	display: block;
-	width: 170px;
-	height: 80px;
-	line-height: 80px;
+	height: 50px;
+	line-height: 50px;
 }
 
 article>div .nav.nav-tabs {
@@ -103,11 +100,11 @@ article>div .nav.nav-tabs {
 	height: 40px;
 	margin-top: 20px;
 	margin-bottom: 50px;
-	margin-left: 200px;
 }
 
 article>div .nav.nav-tabs>li {
-	width: 100px;
+	width: 150px;
+	text-align: center;
 }
 
 .mp_classInfo {
@@ -125,40 +122,34 @@ article>div .nav.nav-tabs>li {
 	width: 760px;
 	height: 300px;
 	margin-left: 10px;
-	border: black 0.1px solid;
-	padding: 10px;
 }
 
 .mp_classInfo>div>div:first-child {
 	width: 500px;
 	height: 250px;
-	margin-bottom: 10px;
 }
 
 .mp_classInfo>div>div:last-child>div:first-child {
 	width: 480px;
+	height: 40px;
+	line-height: 80px;
 	float: left;
-	height: 50px;
-	margin-bottom: 10px;
 }
 
 .mp_classInfo>div>div:last-child>div:last-child {
 	width: 240px;
 	float: left;
 	height: 50px;
-	margin-bottom: 10px;
+	margin-top: 10px;
 }
 
 .class_info_contents>p:first-child {
 	font-weight: bold;
 }
 
-.class_info_contents>p:last-child {
-	font-size: 90pt;
-}
-
 .info_title {
 	font-size: 18pt;
+	font-weight: bold;
 }
 
 .class_info_contents>div {
@@ -221,4 +212,21 @@ article>div .nav.nav-tabs>li {
 .update-btn-box>input[type="submit"] {
 	float: right;
 	margin-top: 20px;
+}
+.table{
+	text-align: center;
+}
+.table>tbody>tr>th {
+	background-color: rgb(0, 0, 0);
+	color: white;
+	text-align: center;
+}
+.table>tbody>tr>td {
+	vertical-align: middle;
+}
+.table-btn{
+	background-color: black;
+	padding:5px;
+	color:white;
+	border:none; 
 }

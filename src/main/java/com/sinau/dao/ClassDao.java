@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
+import com.sinau.dto.OffOrdersDto;
+import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
 
 public interface ClassDao {
@@ -15,5 +17,9 @@ public interface ClassDao {
 	MyOnlineInfoDto getMyOnlineInfoOne(String ord_pcode);
 	//ord_pcode에 해당하는 오프라인강좌의 상세 정보를 가져온다.
 	MyOffInfoDto getMyOffInfoOne(String ord_pcode);
+	
+	//회원의 강좌(온라인/오프라인) 주문 정보를 가져온다.
+	List<OnlineOrdersDto> getOnlineOrderList(String email);
+	List<OffOrdersDto> getOffOrderList(String email);
 
 }

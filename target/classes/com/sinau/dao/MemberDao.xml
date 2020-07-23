@@ -11,4 +11,7 @@
 	<select id="getMemberInfo" parameterType="String" resultType="com.sinau.dto.MyMemberInfoDto">
 		select * from mymemberinfo where m_email=#{email}
 	</select>
+	<update id="updateMemberPwd" parameterType="String">
+		update member set m_pwd=#{encodePwd} where m_email=#{email}
+	</update>
 </mapper>

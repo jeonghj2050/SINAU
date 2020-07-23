@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>마이페이지 - 회원정보수정</title>
+<title>SINAU 회원정보수정</title>
 
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -108,7 +108,7 @@ $(function(){
 						</div>
 						<div>
 							<span>새 비밀번호 확인</span> 
-							<input type="password" name="newPwd2" id="newPwd2">
+							<input type="password" id="newPwd2">
 						</div>
 						<div>
 							<span style="height: 25px;"></span>

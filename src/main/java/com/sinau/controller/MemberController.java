@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.dto.OnlineClassDto;
@@ -42,15 +43,35 @@ public class MemberController {
 
 		return mv;
 	}
-	
+
 	@GetMapping("mypageUpdate")
 	public ModelAndView mypageUpdate() {
 		//임의의 로그인 회원 아이디
 		String email="kc@naver.com";
-		
+
 		//수정 페이지에 보여질 기존 회원 정보를 가져온다.
 		mv=mServ.getMemberInfo(email);
+
+		return mv;
+	}
+	@PostMapping("mypageUpdate")
+	public ModelAndView mypageUpdate(String newPwd) {
+		//임의의 로그인 회원 아이디
+		String email="kc@naver.com";
+
+		//넘어온 새 비밀번호로 회원의 비밀번호를 수정한다.
+		mv=mServ.updateMemberPwd(email,newPwd);
+
+		return mv;
+	}
+
+	@GetMapping("mypageOrder")
+	public ModelAndView mypageOrder() {
+		//임의의 로그인 회원 아이디
+		String email="kc@naver.com";
 		
+		//상품,온라인,오프라인 주문 내역을 검색한다.
+		mv=mServ.getAllOrders(email);
 		return mv;
 	}
 }

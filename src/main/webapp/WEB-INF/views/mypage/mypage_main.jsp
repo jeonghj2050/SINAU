@@ -2,12 +2,13 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>마이페이지 - 일반회원</title>
+<title>SINAU 온라인 강의</title>
 
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -65,7 +66,6 @@ $(document).ready(function(){
                 <span>온라인 강의</span>
            </div>
            <div role="tabpanel">
-
 			  <!-- Nav tabs -->
 			  <ul class="nav nav-tabs" role="tablist" id="mytab">
 			   	<c:forEach var="onlineClass" items="${onlineList}">	
@@ -75,7 +75,7 @@ $(document).ready(function(){
            </div>
 			<c:forEach var="onlineClass" items="${onlineList}">
 				<div class="mp_classInfo" id="${onlineClass.onc_code}">
-					<img src="resources/images/test/thumbnail1.PNG" alt="" width="300px"
+					<img src="resources/images/test/${onlineClass.f_oriname }" alt="" width="300px"
 						height="300px" id="mp_class_img">
 					<div>
 						<div class="class_info_contents" id="${onlineClass.onc_code}">
@@ -86,11 +86,14 @@ $(document).ready(function(){
 							</div>
 						</div>
 						<div>
-							<div>${onlineClass.onc_sdate}/${onlineClass.onc_edate}</div>
+							<div>
+								수업일 : 
+								<fmt:formatDate pattern="yyyy-MM-dd" value="${onlineClass.onc_sdate}"/> / <fmt:formatDate pattern="yyyy-MM-dd" value="${onlineClass.onc_edate}"/>
+							</div>
 							<div>
 								<c:choose>
 									<c:when test="${onlineClass.mcl_state == 1}">
-										<button>환불</button>
+										<button class="my_default_btn">환불</button>
 									</c:when>
 								</c:choose>
 								<c:if test="${onlineClass.mcl_state == 2}">

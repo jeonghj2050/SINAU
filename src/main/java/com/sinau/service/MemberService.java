@@ -6,16 +6,22 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.dao.ClassDao;
 import com.sinau.dao.MemberDao;
+import com.sinau.dao.StoreDao;
 import com.sinau.dto.MyMemberInfoDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
+import com.sinau.dto.OffOrdersDto;
 import com.sinau.dto.OnlineClassDto;
+import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
+import com.sinau.dto.ProdOrdersDto;
+import com.sun.prism.paint.Stop;
 
 import lombok.extern.java.Log;
 
@@ -29,6 +35,10 @@ public class MemberService {
 	MemberDao mDao;
 	@Autowired
 	ClassDao cDao;
+	@Autowired
+	StoreDao sDao;
+	
+	BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
 
 	//로그인 회원의 그룹을 반환한다.
 	public String getLoginMemberGroup(String email) {
@@ -84,6 +94,7 @@ public class MemberService {
 		return mv;
 	}
 
+	//회원의 정보(회원+이미지)를 가져온다.
 	public ModelAndView getMemberInfo(String email) {
 		mv=new ModelAndView();
 		
@@ -92,6 +103,41 @@ public class MemberService {
 		mv.addObject("myInfo",myInfo);
 		
 		mv.setViewName("mypage/mypage_update");
+		return mv;
+	}
+
+	public ModelAndView updateMemberPwd(String email,String newPwd) {
+		mv=new ModelAndView();
+		//변경할 비밀번호를 암호화한다.
+		String encodePwd=pwdEncode.encode(newPwd);
+		
+		int result=mDao.updateMemberPwd(email,encodePwd);
+		
+		if(result>0) {
+			mv.setViewName("redirect:/mypage");
+		}
+		
+		
+		return mv;
+	}
+
+	//회원의 이메일로 각 (상품,온라인, 오프라인) 주문 내역을 가져온다.
+	public ModelAndView getAllOrders(String email) {
+		mv=new ModelAndView();
+		
+		//상품 주문내역 목록을 가져온다.
+		List<ProdOrdersDto> prodOrdList=sDao.getProdOrderList(email);
+		//온라인 주문내역 목록을 가져온다.
+		List<OnlineOrdersDto> onOrdList=cDao.getOnlineOrderList(email);
+		//오프라인 주문내역 목록을 가져온다.
+		List<OffOrdersDto> offOrdList=cDao.getOffOrderList(email);
+		
+		mv.addObject("prodOrder",prodOrdList);
+		mv.addObject("onlineOrder",onOrdList);
+		mv.addObject("offOrder",offOrdList);
+		
+		mv.setViewName("mypage/mypage_order");
+		
 		return mv;
 	}
 

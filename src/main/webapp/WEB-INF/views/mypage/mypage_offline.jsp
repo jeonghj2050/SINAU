@@ -2,12 +2,13 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>마이페이지 - 일반회원</title>
+<title>SINAU 오프라인 강의</title>
 
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -75,7 +76,7 @@ $(document).ready(function(){
            </div>
 			<c:forEach var="offlineClass" items="${offlineList}">
 				<div class="mp_classInfo" id="${offlineClass.ofc_code}">
-					<img src="resources/images/test/thumbnail1.PNG" alt="" width="300px"
+					<img src="resources/images/test/${offlineClass.f_oriname }" alt="" width="300px"
 						height="300px" id="mp_class_img">
 					<div>
 						<div class="class_info_contents" id="${offlineClass.ofc_code}">
@@ -86,11 +87,13 @@ $(document).ready(function(){
 							</div>
 						</div>
 						<div>
-							<div>수업일 : ${offlineClass.ofc_ofdate}</div>
+							<div>수업일 : 
+								<fmt:formatDate pattern="yyyy-MM-dd" value="${offlineClass.ofc_ofdate}"/>
+							</div>
 							<div>
 								<c:choose>
 									<c:when test="${offlineClass.mcl_state == 1}">
-										<button>환불</button>
+										<button class="my_default_btn">환불</button>
 									</c:when>
 								</c:choose>
 								<c:if test="${offlineClass.mcl_state == 2}">
