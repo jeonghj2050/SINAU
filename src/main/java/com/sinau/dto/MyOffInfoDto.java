@@ -15,4 +15,5 @@ public class MyOffInfoDto {
 	private String ofc_title;
 	private String cts_name;
 	private Timestamp ofc_ofdate;
+	private String f_oriname;
 }

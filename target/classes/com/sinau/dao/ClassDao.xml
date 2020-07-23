@@ -21,4 +21,16 @@
 		]]>
 	</select>
 	
+	<!-- 회원의 강좌 주문 내역을 가져온다. -->
+	<select id="getOnlineOrderList" parameterType="String" resultType="com.sinau.dto.OnlineOrdersDto">
+		<![CDATA[ 
+		 	select * from onlineorders where ord_m_email=#{email}
+		]]>
+	</select>
+	<select id="getOffOrderList" parameterType="String" resultType="com.sinau.dto.OffOrdersDto">
+		<![CDATA[ 
+		 	select * from offorders where ord_m_email=#{email}
+		]]>
+	</select>
+	
 </mapper>
