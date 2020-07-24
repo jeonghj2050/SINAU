@@ -2,7 +2,10 @@ package com.sinau.service;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dao.MemberDao;
-import com.sinau.dto.CpListDto;
-import com.sinau.dto.Member;
-
-
+import com.sinau.dto.MyCouponDto;
+import com.sinau.dto.MemberDto;
 import com.sinau.dao.ClassDao;
 import com.sinau.dao.CommonDao;
 import com.sinau.dao.MemberDao;
@@ -73,7 +74,7 @@ public class MemberService {
 
 
 
-	public ModelAndView memberInsert(Member member, RedirectAttributes rttr) {
+	public ModelAndView memberInsert(MemberDto member, RedirectAttributes rttr) {
 		mv = new ModelAndView();
 		String view = null;
 		
@@ -225,13 +226,36 @@ public class MemberService {
 		mv=new ModelAndView();
 		
 		//회원의 쿠폰 목록을 가져온다.
-		List<CpListDto> couponList=cmDao.getCouponList(email);
+		List<MyCouponDto> couponList=cmDao.getCouponList(email);
 		
 		mv.addObject("cpList",couponList);
 		
 		mv.setViewName("mypage/mypage_coupon");
 		
 		return mv;
+	}
+
+	
+	public Map<String, List<MyCouponDto>> inputCoupon(String email, String cp_code) {
+		Map<String, List<MyCouponDto>> cMap=new HashMap<String, List<MyCouponDto>>();
+		
+		try {
+			//입력한 쿠폰 번호가 존재하는지 검사
+			int result=cmDao.selectCoupon(cp_code);
+			
+			//쿠폰이 존재한다면
+			if(result==1) {
+				//쿠폰 목록에 쿠폰을 추가한다.
+				cmDao.inputMyCoupon(email,cp_code,"cpl_");
+				
+				//추가 된 쿠폰을 포함한 쿠폰 목록을 가져온다.
+				List<MyCouponDto> cList=cmDao.getCouponList(email);
+				cMap.put("cpList",cList);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return cMap;
 	}
 
 }

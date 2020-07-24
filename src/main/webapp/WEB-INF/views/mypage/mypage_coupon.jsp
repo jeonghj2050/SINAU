@@ -37,7 +37,7 @@
             </div><br>
            <div class="coupon_input_box">
                 <input type="text" name="cp_code" id="cp_input">
-                <button class="my_default_btn">등록하기</button>
+                <button class="my_default_btn" onclick="addCoupon()">등록하기</button>
            </div>
            <div class="coupon_list">
            		<c:forEach var="cpinfo" items="${cpList }">
@@ -58,8 +58,8 @@
 <script type="text/javascript">
 	function addCoupon(){
 		var email='kc@naver.com';
-		var code=$('cp_code').val();
-		
+		var code=$('#cp_input').val();
+		console.log(code);
 		if(code==""){
 			alert("쿠폰 코드를 입력하세요!");
 			$('cp_code').focus();
@@ -71,9 +71,22 @@
 			url : "mypageCoupon",
 			type:"post",
 			data : objData,
+			dataType:"json",
 			success:function(data){
-				if(data=="success"){
+				if(data.cpList.length>0){
 					alert("쿠폰 등록 완료!");
+					var cList='';
+					var dList=data.cpList;
+					
+					for(var i=0;i<dList.length;i++){
+						cList+='<div class="coupon_box">'
+		                    +'<div>['+dList[i].cp_title+']</div>'
+		                    +'<div>'+dList[i].cp_discount+'% 할인</div>'
+		                    +'<div>'+dList[i].cp_date+'일 까지</div>'
+		                    +'<div>'+dList[i].cp_content+'</div>'
+		                +'</div>'
+					}
+					$('.coupon_list').html(cList);
 				}else{
 					alert("사용 할 수 없는 쿠폰입니다!");
 					$('cp_code').val('');
@@ -85,7 +98,7 @@
 				console.log(error);
 			}
 		});
-		
+		$('#cp_input').val('');
 	}
 </script>
 </html>

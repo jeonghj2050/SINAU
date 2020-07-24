@@ -4,7 +4,13 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sinau.dao.CommonDao">
-	<select id="getCouponList" parameterType="String" resultType="com.sinau.dto.CpListDto">
+	<select id="getCouponList" parameterType="String" resultType="com.sinau.dto.MyCouponDto">
 		select * from cplist where m_email=#{email}
 	</select>
+	<select id="selectCoupon" parameterType="String" resultType="Integer">
+		select count(*) from cp where cp_code=#{cp_code}
+	</select>
+	<insert id="inputMyCoupon" parameterType="String">
+		insert into cpl values(#{sort}||SEQ_CPL.NEXTVAL,#{cp_code},#{email})
+	</insert>
 </mapper>

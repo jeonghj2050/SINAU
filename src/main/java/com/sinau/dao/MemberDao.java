@@ -1,8 +1,7 @@
 package com.sinau.dao;
 
+import com.sinau.dto.MemberDto;
 
-import com.sinau.dto.Member;
-	
 import org.apache.ibatis.annotations.Param;
 
 import com.sinau.dto.MyMemberInfoDto;
@@ -11,7 +10,7 @@ public interface MemberDao {
 
 	public int idCheck(String memail);
 
-	public void memberInsert(Member member);
+	public void memberInsert(MemberDto member);
 
 	//email에 해당하는 회원의 구분을 반환한다.
 	String getGroup(String email);
