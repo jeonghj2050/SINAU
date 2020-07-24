@@ -55,12 +55,6 @@ public class MemberService {
 	@Autowired
 	CommonDao cmDao;
 	
-	BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
-
-
-	private static final Logger log = LoggerFactory.getLogger(HomeController.class);
-	
-	
 	public String idCheck(String memail) {
 		String result = null;
 
@@ -86,6 +80,8 @@ public class MemberService {
 		mv = new ModelAndView();
 		String view = null;
 
+		BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
+		
 		String encPwd= pwdEncode.encode(member.getM_pwd());
 		
 		member.setM_pwd(encPwd);
@@ -174,6 +170,8 @@ public class MemberService {
 	public ModelAndView updateMemberPwd(String email,String newPwd) {
 		mv=new ModelAndView();
 		//변경할 비밀번호를 암호화한다.
+		BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
+		
 		String encodePwd=pwdEncode.encode(newPwd);
 		
 		int result=mDao.updateMemberPwd(email,encodePwd);
@@ -181,8 +179,7 @@ public class MemberService {
 		if(result>0) {
 			mv.setViewName("redirect:/mypage");
 		}
-		
-		
+
 		return mv;
 	}
 
@@ -212,6 +209,7 @@ public class MemberService {
 		String view = null;//이동할 jsp 이름 저장 변수.
 		String msg = null;//화면에 출력할 메시지
 		
+		BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
 		//DB에서 해당 id의 password 가져오기.
 		String get_pw = mDao.getPwd(member.getM_email());
 		

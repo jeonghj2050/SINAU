@@ -39,16 +39,6 @@ public class HomeController {
 		
 		return "joinFrm";
 	}
-
-	
-	@PostMapping("memberInsert") 
-	public ModelAndView memInsert(MemberDto member,
-			 RedirectAttributes rttr) { 
-	mv = mServ.memberInsert(member, rttr);
-	 
-	return mv;
-	}
-	
 	
 	@GetMapping("store")
 	public String store() {

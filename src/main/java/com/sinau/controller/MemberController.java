@@ -22,6 +22,8 @@ import lombok.extern.java.Log;
 @Controller
 @Log
 public class MemberController {
+	//임의의 로그인 회원 아이디
+	String email="kc@naver.com";
 	ModelAndView mv;
 	@Autowired
 	MemberService mServ=new MemberService();
@@ -47,8 +49,7 @@ public class MemberController {
 	
 	@GetMapping("/mypage")
 	public ModelAndView mypage() {
-		//임의의 로그인 회원 아이디
-		String email="kc@naver.com";
+		
 		//로그인 회원의 구분에 따라 다른 view를 넘긴다.
 		String m_group=mServ.getLoginMemberGroup(email);
 
@@ -71,14 +72,13 @@ public class MemberController {
 
 	@GetMapping("mypageUpdate")
 	public ModelAndView mypageUpdate() {
-		//임의의 로그인 회원 아이디
-		String email="kc@naver.com";
 
 		//수정 페이지에 보여질 기존 회원 정보를 가져온다.
 		mv=mServ.getMemberInfo(email);
 
 		return mv;
 	}
+	
 	@PostMapping("mypageUpdate")
 	public ModelAndView mypageUpdate(String newPwd) {
 		//임의의 로그인 회원 아이디
@@ -92,9 +92,6 @@ public class MemberController {
 
 	@GetMapping("mypageOrder")
 	public ModelAndView mypageOrder() {
-		//임의의 로그인 회원 아이디
-		String email="kc@naver.com";
-
 		//상품,온라인,오프라인 주문 내역을 검색한다.
 		mv=mServ.getAllOrders(email);
 		return mv;
@@ -112,9 +109,6 @@ public class MemberController {
 
 	@GetMapping("mypageCoupon")
 	public ModelAndView mypageCoupon() {
-		//임의의 로그인 회원 아이디
-		String email="kc@naver.com";
-		
 		//회원의 쿠폰 목록을 가져온다.
 		mv=mServ.getCouponList(email);
 		
