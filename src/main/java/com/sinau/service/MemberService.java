@@ -201,7 +201,7 @@ public class MemberService {
 		
 		//DB에서 해당 id의 password 가져오기.
 		String get_pw = mDao.getPwd(member.getM_email());
-		System.out.println("");
+		
 		//로그인 처리
 		if(get_pw != null) {
 			//아이디 있음.
