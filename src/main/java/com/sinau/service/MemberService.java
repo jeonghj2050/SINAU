@@ -2,7 +2,9 @@ package com.sinau.service;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dao.MemberDao;
+import com.sinau.dto.MyCouponDto;
+import com.sinau.dto.MemberDto;
+import com.sinau.dao.ClassDao;
+import com.sinau.dao.CommonDao;
+import com.sinau.dao.MemberDao;
 import com.sinau.dto.MemberDto;
 import com.sinau.controller.HomeController;
 import com.sinau.dao.ClassDao;
@@ -22,9 +29,13 @@ import com.sinau.dao.StoreDao;
 import com.sinau.dto.MyMemberInfoDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
+import com.sinau.dto.OffLikeDto;
 import com.sinau.dto.OffOrdersDto;
+import com.sinau.dto.OnlineClassDto;
+import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
+import com.sinau.dto.ProdLikeDto;
 import com.sinau.dto.ProdOrdersDto;
 
 import lombok.extern.java.Log;
@@ -41,12 +52,8 @@ public class MemberService {
 	ClassDao cDao;
 	@Autowired
 	StoreDao sDao;
-	
-	BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
-
-
-	private static final Logger log = LoggerFactory.getLogger(HomeController.class);
-	
+	@Autowired
+	CommonDao cmDao;
 	
 	public String idCheck(String memail) {
 		String result = null;
@@ -73,6 +80,8 @@ public class MemberService {
 		mv = new ModelAndView();
 		String view = null;
 
+		BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
+		
 		String encPwd= pwdEncode.encode(member.getM_pwd());
 		
 		member.setM_pwd(encPwd);
@@ -161,6 +170,8 @@ public class MemberService {
 	public ModelAndView updateMemberPwd(String email,String newPwd) {
 		mv=new ModelAndView();
 		//변경할 비밀번호를 암호화한다.
+		BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
+		
 		String encodePwd=pwdEncode.encode(newPwd);
 		
 		int result=mDao.updateMemberPwd(email,encodePwd);
@@ -168,8 +179,7 @@ public class MemberService {
 		if(result>0) {
 			mv.setViewName("redirect:/mypage");
 		}
-		
-		
+
 		return mv;
 	}
 
@@ -199,6 +209,7 @@ public class MemberService {
 		String view = null;//이동할 jsp 이름 저장 변수.
 		String msg = null;//화면에 출력할 메시지
 		
+		BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
 		//DB에서 해당 id의 password 가져오기.
 		String get_pw = mDao.getPwd(member.getM_email());
 		
@@ -234,5 +245,63 @@ public class MemberService {
 
 
 
+
+	//상품,온라인, 오프라인 좋아요 내역을 검색한다.
+	public ModelAndView getAllLikes(String email) {
+		mv=new ModelAndView();
+		
+		//온라인 강의의 좋아요 목록을 가져온다.
+		List<OnlineLikeDto> onLike=cDao.getOnLikeList(email);
+		//오프라인 강의의 좋아요 목록을 가져온다.
+		List<OffLikeDto> offLike=cDao.getOffLikeList(email);
+		//상품의 좋아요 목록을 가져온다.
+		List<ProdLikeDto> prodLike=sDao.getProdLikeList(email);
+		
+		mv.addObject("onLikeList",onLike);
+		mv.addObject("offLikeList",offLike);
+		mv.addObject("prodLikeList",prodLike);
+		
+		mv.setViewName("mypage/mypage_like");
+		
+		return mv;
+	}
+
+
+
+	public ModelAndView getCouponList(String email) {
+		mv=new ModelAndView();
+		
+		//회원의 쿠폰 목록을 가져온다.
+		List<MyCouponDto> couponList=cmDao.getCouponList(email);
+		
+		mv.addObject("cpList",couponList);
+		
+		mv.setViewName("mypage/mypage_coupon");
+		
+		return mv;
+	}
+
+	
+	public Map<String, List<MyCouponDto>> inputCoupon(String email, String cp_code) {
+		Map<String, List<MyCouponDto>> cMap=new HashMap<String, List<MyCouponDto>>();
+		
+		try {
+			//입력한 쿠폰 번호가 존재하는지 검사
+			int result=cmDao.selectCoupon(cp_code);
+			
+			//쿠폰이 존재한다면
+			if(result==1) {
+				//쿠폰 목록에 쿠폰을 추가한다.
+				cmDao.inputMyCoupon(email,cp_code,"cpl_");
+				
+				//추가 된 쿠폰을 포함한 쿠폰 목록을 가져온다.
+				List<MyCouponDto> cList=cmDao.getCouponList(email);
+				cMap.put("cpList",cList);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return cMap;
+	}
 
 }

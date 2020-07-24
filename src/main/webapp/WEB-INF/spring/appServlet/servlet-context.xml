@@ -27,7 +27,6 @@
 		<beans:property name="maxUploadSize" value="10000000"/><!-- byte 단위 -->
 		<beans:property name="maxInMemorySize" value="10000000"/>
 	</beans:bean>
-
 	
 	<interceptors>
 		<interceptor>

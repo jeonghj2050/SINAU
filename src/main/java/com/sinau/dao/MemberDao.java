@@ -1,5 +1,6 @@
 package com.sinau.dao;
 
+import com.sinau.dto.MemberDto;
 
 import com.sinau.dto.MemberDto;
 	

@@ -38,7 +38,7 @@ $(document).ready(function() {
 			<input type="button" class="idcheck-btn" value="중복확인" onclick="idcheck()">
 			<input type="text" name="m_name" class="login-input" title="이름" 	placeholder="이름"> 
 			<input type="password"	id="password1" class="login-input" title="비밀번호" name="m_pwd" placeholder="비밀번호">
-			<input type="password"	id="password2" class="login-input" title="비밀번호" name="m_pwd" placeholder="비밀번호확인"><br>
+			<input type="password"	id="password2" class="login-input" title="비밀번호" placeholder="비밀번호확인"><br>
 			<input type="text" id="phone" name="m_phone" class="login-input" title="연락처"	placeholder="연락처"> 
 			<input type="text" id="birth" name="m_birth" class="login-input" title="생년월일" placeholder="생년월일 ">
 			<input type="text" id="license" name="m_license" class="login-input" title="사업자번호"	placeholder="사업자번호">

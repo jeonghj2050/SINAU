@@ -9,12 +9,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SINAU 온라인 강의</title>
-
-<link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/mypage.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
         $(function(){
             $('li').click(function(){
@@ -55,16 +53,12 @@ $(document).ready(function(){
 </head>
 <body>
 	<header>
-		<img src="resources/images/SINAU_logo.png" alt="" width="150px"
-			height="50px" style="margin: 20px;">
-		<div></div>
+		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 	<section class="mp_section">
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
 		<article>
-			<div>
-                <span>온라인 강의</span>
-           </div>
+			<div class="page-title">온라인 강의 </div>
            <div role="tabpanel">
 			  <!-- Nav tabs -->
 			  <ul class="nav nav-tabs" role="tablist" id="mytab">
@@ -107,6 +101,8 @@ $(document).ready(function(){
 
 		</article>
 	</section>
-	<footer></footer>
+	<footer>
+		<jsp:include page="../footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

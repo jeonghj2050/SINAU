@@ -1,48 +1,4 @@
 @charset "UTF-8";
-       * {
-	box-sizing: border-box;
-	margin : 0px;
-    padding : 0px;
-    padding: 0;
-            list-style: none;
-            }
-
-    header {
-	width : 1300px;
-	height : 150px;
-	margin : auto;
-    }
-    
-
-    section {
-	width : 1300px;
-    margin : auto;
-    /* background-color: rgba(255, 68, 0, 0.349); */
-    }
-
-    footer {
-	width : 1300px;
-	height : 100px;
-	margin : auto;
-    }
-        /* 공통 */
-a {
-	color: black;
-	text-decoration:none
-}
-
-span {
-	text-align: right;
-	font-size: 10px;
-}
-
-li{
- 	list-style:none;
- }
- 
-li a:hover {
-	color: #8a8e8b;
-}
 
 
 /* 카테고리 메뉴 부분 */
@@ -104,7 +60,7 @@ article.childart1>div {
 	margin-top: 20px;
 }
 
-h1 {
+.childart1 > h1 {
 	margin: 10px 5px;
 }
 /* 슬라이더 */

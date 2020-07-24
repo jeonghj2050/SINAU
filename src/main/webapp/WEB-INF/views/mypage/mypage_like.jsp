@@ -8,14 +8,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SINAU 회원정보수정</title>
-
+<title>SINAU 좋아요 목록</title>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-<link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/mypage.css">
+
+<style type="text/css">
+	.swiper-container {
+		width: 1070px;
+		margin-bottom:50px; 
+	}
+</style>
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
@@ -29,9 +35,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
   var swiper1 = new Swiper('.swc1', {
-        slidesPerView: 3,
+        slidesPerView: 4,
         spaceBetween: 5,
-        slidesPerGroup: 3,
+        slidesPerGroup: 4,
         loop: false,
         loopFillGroupWithBlank: true,
         pagination: {
@@ -50,83 +56,85 @@ $(document).ready(function(){
 </head>
 <body>
 	<header>
-		<img src="resources/images/SINAU_logo.png" alt="" width="150px"
-			height="50px" style="margin: 20px;">
-		<div></div>
+		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 	<section class="mp_section">
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
 		<article class="childart1">
-			<h1>상품</h1>
-			<!-- Swiper -->
-			<div class="swiper-container swc1" style="width: 1070px;">
+			<div class="page-title"> 좋아요 </div>
+			<div>
+				<span>온라인</span>
+			</div>
+			<div class="swiper-container swc1">
 				<div class="swiper-wrapper">
-					<c:forEach var="offlineClass" items="${offlineList}">
+					<c:forEach var="onLike" items="${onLikeList }">
 						<div class="swiper-slide">
-						<img src="resources/images/storeimg/1.PNG" width="250px"
+						<img src="resources/images/test/${onLike.f_oriname }" width="250px"
 							height="300px">
 						<div class="swiper-text">
-							공예
-							<div class="text_title">센티멘탈 감성이 짙게 묻은 굿즈</div>
+							${onLike.cts_name }
+							<div class="text_title">${onLike.onc_title }</div>
 							<div class="like_view">
 								<span class="like_icon"><svg width="8px" height="8px"
 										viewBox="0 0 16 16" class="bi bi-heart-fill"
 										fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
+                                            <path fill-rule="evenodd"
 											d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-          </svg></span> 246
+                                        </svg></span> ${onLike.l_count }
 							</div>
-							<div class="price">10,450원</div>
+							<div class="price">${onLike.onc_sale }원</div>
 						</div>
 					</div>
 					</c:forEach>
 				</div>
 			</div>
-			<h1>오프라인</h1>
-			<!-- Swiper -->
-			<div class="swiper-container swc1" style="width: 1100px;">
+			<div>
+				<span>오프라인</span>
+			</div>
+			<div class="swiper-container swc1">
 				<div class="swiper-wrapper">
-					<c:forEach var="offlineClass" items="${offlineList}">
+					<c:forEach var="offLike" items="${offLikeList }">
 						<div class="swiper-slide">
-						<img src="resources/images/storeimg/1.PNG" width="250px"
+						<img src="resources/images/test/${offLike.f_oriname }" width="250px"
 							height="300px">
 						<div class="swiper-text">
-							공예
-							<div class="text_title">센티멘탈 감성이 짙게 묻은 굿즈</div>
+							${offLike.cts_name }
+							<div class="text_title">${offLike.ofc_title }</div>
 							<div class="like_view">
 								<span class="like_icon"><svg width="8px" height="8px"
 										viewBox="0 0 16 16" class="bi bi-heart-fill"
 										fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
+                                            <path fill-rule="evenodd"
 											d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-          </svg></span> 246
+                                        </svg></span> ${offLike.l_count }
 							</div>
-							<div class="price">10,450원</div>
+							<div class="price">${offLike.ofc_sale }원</div>
 						</div>
 					</div>
 					</c:forEach>
 				</div>
 			</div>
-			<h1>상품</h1>
-			<!-- Swiper -->
-			<div class="swiper-container swc1" style="width: 1100px;">
+			<div>
+				<span>상품</span>
+			</div>
+			<div class="swiper-container swc1">
 				<div class="swiper-wrapper">
-					<c:forEach var="offlineClass" items="${offlineList}">
+					<c:forEach var="prodLike" items="${prodLikeList }">
 						<div class="swiper-slide">
-						<img src="resources/images/storeimg/1.PNG" width="250px"
+						<img src="resources/images/test/${prodLike.f_oriname }" width="250px"
 							height="300px">
 						<div class="swiper-text">
-							공예
-							<div class="text_title">센티멘탈 감성이 짙게 묻은 굿즈</div>
+							${prodLike.cts_name }
+							<div class="text_title">${prodLike.p_title }</div>
 							<div class="like_view">
 								<span class="like_icon"><svg width="8px" height="8px"
 										viewBox="0 0 16 16" class="bi bi-heart-fill"
 										fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
+                                            <path fill-rule="evenodd"
 											d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-          </svg></span> 246
+                                        </svg></span> ${prodLike.l_count }
 							</div>
-							<div class="price">10,450원</div>
+							<div class="price">${prodLike.p_price }원</div>
 						</div>
 					</div>
 					</c:forEach>
@@ -134,7 +142,9 @@ $(document).ready(function(){
 			</div>
 		</article>
 	</section>
-	<footer></footer>
+	<footer>
+		<jsp:include page="../footer.jsp"></jsp:include>
+	</footer>
 </body>
 
 </html>

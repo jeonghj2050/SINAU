@@ -15,7 +15,7 @@
 		resultType="String">
 		SELECT m_pwd FROM member WHERE m_email=#{email}
 	</select>
-	<select id="getMemInfo" parameterType="String" resultType="com.sinau.dto.MyMemberInfoDto">
+	<select id="getMemInfo" parameterType="String" resultType="com.sinau.dto.MemberDto">
 		select * from member where m_email=#{email}
 	</select>
 
