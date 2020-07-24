@@ -25,9 +25,26 @@ footer {
 	margin-top: 30px;
 }
 
+.content-home {
+	background-color : black;
+    margin: auto;
+    
+}
+
+.bx-wrapper {
+	margin: 0px auto;
+	border : 5px black;
+	-webkit-box-shadow : none;
+}
+
 a {
 	color: black;
 	text-decoration: none
+}
+
+.footertext {
+	text-align: right;
+	font-size: 10px;
 }
 
 li {
@@ -143,14 +160,19 @@ li a:hover {
 
 
 /*join*/
+.content {
+    width: 1300px;
+    margin : auto;
+}
 
 .join-form {
 	width : 600px;
 	height : 937px;
-	margin : auto;
 	text-align: center;
 	background-color: white;
+	margin :auto;
 }
+
 .join-header {
 	padding-top: 30px;
 }
@@ -181,7 +203,7 @@ li a:hover {
 	background-color: white;
 }
 
-.login-form>img {
+.loginsub>img {
 	width:  350px;
 	height: 300px;
 	margin-top: 20px;
@@ -254,3 +276,5 @@ article.childart>div>h5 {
 	width : 200px;
 	height: 200px;
 }
+
+

@@ -34,23 +34,11 @@ public class HomeController {
 		return "loginFrm";
 	}
 	
-	
 	@GetMapping("joinFrm")
 	public String joinFrm() {
 		
 		return "joinFrm";
 	}
-	
-	@GetMapping(value = "idCheck",
-			produces = "application/text; charset=utf-8")
-	@ResponseBody
-	public String idCheck(String memail) {
-		
-		String result = mServ.idCheck(memail);
-		
-		return result;
-	}
-
 
 	
 	@PostMapping("memberInsert") 
@@ -60,7 +48,6 @@ public class HomeController {
 	 
 	return mv;
 	}
-
 	
 	
 	@GetMapping("store")

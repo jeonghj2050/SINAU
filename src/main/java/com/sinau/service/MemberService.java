@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,9 @@ import com.sinau.dto.MemberDto;
 import com.sinau.dao.ClassDao;
 import com.sinau.dao.CommonDao;
 import com.sinau.dao.MemberDao;
+import com.sinau.dto.MemberDto;
+import com.sinau.controller.HomeController;
+import com.sinau.dao.ClassDao;
 import com.sinau.dao.StoreDao;
 import com.sinau.dto.MyMemberInfoDto;
 import com.sinau.dto.MyOffInfoDto;
@@ -32,7 +37,6 @@ import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.ProdLikeDto;
 import com.sinau.dto.ProdOrdersDto;
-import com.sun.prism.paint.Stop;
 
 import lombok.extern.java.Log;
 
@@ -53,12 +57,16 @@ public class MemberService {
 	
 	BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
 
+
+	private static final Logger log = LoggerFactory.getLogger(HomeController.class);
+	
+	
 	public String idCheck(String memail) {
 		String result = null;
 
 		try {
 			
-			//cnt : �ߺ� id�� ���� ��� 1, ���� ��� 0
+			//1=아이디 있음 0=아이디 없음
 			int cnt = mDao.idCheck(memail);
 			if(cnt == 1) {
 				result = "fail";
@@ -77,10 +85,8 @@ public class MemberService {
 	public ModelAndView memberInsert(MemberDto member, RedirectAttributes rttr) {
 		mv = new ModelAndView();
 		String view = null;
-		
-		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
-		
-		String encPwd= pwdEncoder.encode(member.getM_pwd());
+
+		String encPwd= pwdEncode.encode(member.getM_pwd());
 		
 		member.setM_pwd(encPwd);
 		
@@ -88,10 +94,10 @@ public class MemberService {
 			mDao.memberInsert(member);
 			
 			view="redirect:/";
-			rttr.addFlashAttribute("msg", "���� ����");
+			rttr.addFlashAttribute("msg", "가입 성공");
 		} catch (Exception e) {
 			view="redirect:joinFrm";
-			rttr.addFlashAttribute("msg", "���� ����");
+			rttr.addFlashAttribute("msg", "가입 실패");
 		}
 		
 		mv.setViewName(view);
@@ -199,6 +205,48 @@ public class MemberService {
 		
 		return mv;
 	}
+	public ModelAndView loginProc(MemberDto member, 
+			RedirectAttributes rttr) {
+		mv = new ModelAndView();//화면으로 데이터 전송.
+		
+		String view = null;//이동할 jsp 이름 저장 변수.
+		String msg = null;//화면에 출력할 메시지
+		
+		//DB에서 해당 id의 password 가져오기.
+		String get_pw = mDao.getPwd(member.getM_email());
+		
+		//로그인 처리
+		if(get_pw != null) {
+			//아이디 있음.
+			if(pwdEncode.matches(member.getM_pwd(), get_pw)) {
+				//패스워드 맞음. 로그인 성공.
+				//세션에 로그인 성공한 회원 정보 저장
+				//로그인 한 회원의 정보를 가져오기.
+				member = mDao.getMemInfo(member.getM_email());
+				session.setAttribute("mb", member);
+				
+				//리다이렉트로 화면을 전환.
+				view = "redirect:/";
+			}
+			else {
+				//패스워드 틀림.
+				view = "redirect:loginFrm";
+				msg = "패스워드 틀림.";
+			}
+		}
+		else {
+			//아이디 없음.
+			view = "redirect:loginFrm";
+			msg = "아이디 없음.";
+		}
+		
+		mv.setViewName(view);
+		rttr.addFlashAttribute("msg", msg);
+		return mv;
+	}
+
+
+
 
 	//상품,온라인, 오프라인 좋아요 내역을 검색한다.
 	public ModelAndView getAllLikes(String email) {
