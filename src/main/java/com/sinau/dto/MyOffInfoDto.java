@@ -2,9 +2,7 @@ package com.sinau.dto;
 
 import java.sql.Timestamp;
 
-import lombok.Data;
 
-@Data
 public class MyOffInfoDto {
 	private String mcl_code;
 	private String mcl_ord_code;

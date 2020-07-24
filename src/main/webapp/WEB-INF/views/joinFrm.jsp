@@ -26,7 +26,7 @@ $(document).ready(function() {
 </head>
 <body>
 	<div class="content">
-		<form name="joinFrm" class="join-form" action="memberInsert" method="post" onsubmit="return check()">
+		<form name="joinFrm" id="join" class="join-form" action="memberInsert" method="post" onsubmit="return check()">
 			<h1 class="join-header">SINAU</h1>
 			<h3 class="join-header1">회원 가입</h3>
 		<div class="reaiobutton">
@@ -39,11 +39,9 @@ $(document).ready(function() {
 			<input type="text" name="m_name" class="login-input" title="이름" 	placeholder="이름"> 
 			<input type="password"	id="password1" class="login-input" title="비밀번호" name="m_pwd" placeholder="비밀번호">
 			<input type="password"	id="password2" class="login-input" title="비밀번호" name="m_pwd" placeholder="비밀번호확인"><br>
-			<span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span><br>
-    <span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span><br>
-			<input type="text" name="m_phone" class="login-input" title="연락처"	placeholder="연락처"> 
-			<input type="text" name="m_birth" class="login-input" title="생년월일" placeholder="생년월일"> 
-			<input type="text" name="m_license" class="login-input" title="사업자번호"	placeholder="사업자번호">
+			<input type="text" id="phone" name="m_phone" class="login-input" title="연락처"	placeholder="연락처"> 
+			<input type="text" id="birth" name="m_birth" class="login-input" title="생년월일" placeholder="생년월일 ">
+			<input type="text" id="license" name="m_license" class="login-input" title="사업자번호"	placeholder="사업자번호">
 			<input type="submit" class="login-btn" value="회원 가입">
 			<input type="text" name="m_group" class="group" value="">
 			<input type="hidden" name="m_state" class="state" value="1">
@@ -51,26 +49,7 @@ $(document).ready(function() {
 	</div>
 </body>
 <script type="text/javascript">
-	function check() {
-		//form 태그의 내용을 전부 가져오기
-		var frm = document.joinFrm;
-
-		//submit 버튼을 뺀 나머지 input태그의 개수
-		var length = frm.length - 1;
-
-		//input 태그 중에 입력이 안된 요소를 확인
-		for (var i = 0; i < 9; i++) {
-			if (frm[i].value == "" || frm[i].value == null) {
-				alert(frm[i].title + " 입력!");
-				frm[i].focus();
-				return false;//action이 실행 안됨.
-			} 
-		}
-		//모든 input에 입력이 다 되었을 경우.
-		return true;//action이 실행됨.
-	}
-
-	function idcheck() {
+function idcheck() {
 		var id = $('#memail').val();
 		if (id == "") {
 			alert("이메일을 입력하세요.");
@@ -100,6 +79,7 @@ $(document).ready(function() {
 			}
 		});
 	}
+	
 	$(document).ready(function(){
 		 
 	    // 라디오버튼 클릭시 이벤트 발생
@@ -121,43 +101,132 @@ $(document).ready(function() {
 		        }
 	    });
 	});
-	 function validate() {
-	       var re = /^[a-zA-Z0-9]{4,20}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
-	       var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	       // 이메일이 적합한지 검사할 정규식
+	function validate() {
+        var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+        var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        // 이메일이 적합한지 검사할 정규식
 
-	       var email = document.getElementById("memail");
-	       var pw = document.getElementById("password1");
+        var id = document.getElementById("uid");
+        var pw = document.getElementById("upw");
+        var email = document.getElementById("uemail");
+        var num1 = document.getElementById("unum1");
+        var num2 = document.getElementById("unum2");
 
-	       // ------------ 이메일 까지 -----------
+        var arrNum1 = new Array(); // 주민번호 앞자리숫자 6개를 담을 배열
+        var arrNum2 = new Array(); // 주민번호 뒷자리숫자 7개를 담을 배열
 
-	       if(!check(re2,memail,"아이디는 4~12자의 영문 대소문자와 숫자로만 입력")) {
-	           return false;
-	       }
+        // ------------ 이메일 까지 -----------
 
-	       if(!check(re,password1,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) {
-	           return false;
-	       }
+        if(!check(re,id,"아이디는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+            return false;
+        }
 
-	       if(join.password1.value != join.password2.value) {
-	           alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
-	           join.password2.value = "";
-	           join.password2.focus();
-	           return false;
-	       }
+        if(!check(re,pw,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+            return false;
+        }
 
-	       alert("회원가입이 완료되었습니다.");
-	   }
+        if(join.upw.value != join.checkupw.value) {
+            alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
+            join.checkupw.value = "";
+            join.checkupw.focus();
+            return false;
+        }
 
-	   function check(re, what, message) {
-	       if(re.test(what.value)) {
-	           return true;
-	       }
-	       alert(message);
-	       what.value = "";
-	       what.focus();
-	       //return false;
-	   }
+        if(email.value=="") {
+            alert("이메일을 입력해 주세요");
+            email.focus();
+            return false;
+        }
+
+        if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) {
+            return false;
+        }
+
+        if(join.uname.value=="") {
+            alert("이름을 입력해 주세요");
+            join.uname.focus();
+            return false;
+        }
+
+        // -------------- 주민번호 -------------
+
+        for (var i=0; i<num1.value.length; i++) {
+            arrNum1[i] = num1.value.charAt(i);
+        } // 주민번호 앞자리를 배열에 순서대로 담는다.
+
+        for (var i=0; i<num2.value.length; i++) {
+            arrNum2[i] = num2.value.charAt(i);
+        } // 주민번호 뒷자리를 배열에 순서대로 담는다.
+
+        var tempSum=0;
+
+        for (var i=0; i<num1.value.length; i++) {
+            tempSum += arrNum1[i] * (2+i);
+        } // 주민번호 검사방법을 적용하여 앞 번호를 모두 계산하여 더함
+
+        for (var i=0; i<num2.value.length-1; i++) {
+            if(i>=2) {
+                tempSum += arrNum2[i] * i;
+            }
+            else {
+                tempSum += arrNum2[i] * (8+i);
+            }
+        } // 같은방식으로 앞 번호 계산한것의 합에 뒷번호 계산한것을 모두 더함
+
+        if((11-(tempSum%11))%10!=arrNum2[6]) {
+            alert("올바른 주민번호가 아닙니다.");
+            num1.value = "";
+            num2.value = "";
+            num1.focus();
+            return false;
+        }
+
+        // ------------ 생일 자동 등록 -----------
+
+        if(arrNum2[0]==1 || arrNum2[0]==2) {
+            var y = parseInt(num1.value.substring(0,2));
+            var m = parseInt(num1.value.substring(2,4));
+            var d = parseInt(num1.value.substring(4,6));
+            join.year.value = 1900 + y;
+            join.month.value = m;
+            join.day.value = d;
+        }
+        else if(arrNum2[0]==3 || arrNum2[0]==4) {
+            var y = parseInt(num1.value.substring(0,2));
+            var m = parseInt(num1.value.substring(2,4));
+            var d = parseInt(num1.value.substring(4,6));
+            join.year.value == 2000 + y;
+            join.month.value = m;
+            join.day.value = d;
+        }
+
+        // 관심분야, 자기소개 미입력시 하라는 메시지 출력
+        if(join.inter[0].checked==false &&
+            join.inter[1].checked==false &&
+            join.inter[2].checked==false &&
+            join.inter[3].checked==false &&
+            join.inter[4].checked==false) {
+            alert("관심분야를 골라주세요");
+            return false;
+        }
+
+        if(join.self.value=="") {
+            alert("조성규씨 자기소개를 먼저 적어주세요");
+            join.self.focus();
+            return false;
+        }
+
+    }
+
+    function check(re, what, message) {
+        if(re.test(what.value)) {
+            return true;
+        }
+        alert(message);
+        what.value = "";
+        what.focus();
+        //return false;
+    }
 	
 </script>
 </html>

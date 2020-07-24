@@ -172,6 +172,9 @@ $(document).ready(function(){
     		slider.reloadSlider();
     	}
     });
-});
+});  
+
+
+
 </script>
 </html>

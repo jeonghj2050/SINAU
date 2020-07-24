@@ -1,8 +1,6 @@
 package com.sinau.dto;
 
-import lombok.Data;
 
-@Data
 public class MyClassDto {
 	private String mcl_code; //기본키 구분 코드
 	private int mcl_state; //수강 상태 

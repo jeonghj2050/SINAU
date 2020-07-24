@@ -22,4 +22,9 @@ public interface MemberDao {
 	//변경 된 비밀번호로 회원 정보를 수정한다.
 	int updateMemberPwd(@Param("email")String email,@Param("encodePwd")String encodePwd);
 
+	public String getPwd(String m_email);
+
+	public MemberDto getMemInfo(String m_email);
+
+
 }

@@ -2,9 +2,7 @@ package com.sinau.dto;
 
 import java.sql.Timestamp;
 
-import lombok.Data;
 
-@Data
 public class OnlineOrdersDto {
 	private String onc_code;
 	private String ord_code;

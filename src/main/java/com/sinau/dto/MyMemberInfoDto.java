@@ -4,9 +4,7 @@ import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import lombok.Data;
 
-@Data
 public class MyMemberInfoDto {
 	private String m_email;
 	private String m_name;
