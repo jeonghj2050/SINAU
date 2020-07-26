@@ -39,10 +39,11 @@ public class HomeController {
 		return "joinFrm";
 	}
 
-	
-	
-
-	
+	@GetMapping("productlist")
+	public String productlist() {
+		
+		return "productlist";
+	}
 	
 	@GetMapping("store")
 	public String store() {
