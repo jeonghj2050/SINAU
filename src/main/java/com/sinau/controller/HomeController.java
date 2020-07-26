@@ -26,6 +26,6 @@ public class HomeController {
 	@GetMapping("/")
 	public String store() {
 		
-		return "store/store";
+		return "store/store_cts";
 	}
 }
