@@ -27,5 +27,7 @@ public interface ClassDao {
 	//회원의 강좌(온라인/오프라인) 좋아요 정보를 가져온다.
 	List<OnlineLikeDto> getOnLikeList(String email);
 	List<OffLikeDto> getOffLikeList(String email);
+	
+	void mclUpdateState(OrderDto order);
 
 }

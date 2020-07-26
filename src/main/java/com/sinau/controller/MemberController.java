@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dto.MyCouponDto;
 import com.sinau.dto.OnlineClassDto;
+import com.sinau.dto.RefundDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.service.MemberService;
 
@@ -45,10 +46,19 @@ public class MemberController {
 	 
 	return mv;
 	}
-	
-	
+
+	@PostMapping("access")
+	public ModelAndView accessProc(MemberDto member, 
+			RedirectAttributes rttr) {
+		
+		mv = mServ.loginProc(member, rttr);
+		
+		return mv;
+	}
+//	/////////////////////////////////////////////////////////////////////마이페이지 관련
 	@GetMapping("/mypage")
 	public ModelAndView mypage() {
+		System.out.println("fsdjflewjfhvfdaldfjdldfjf");
 		
 		//로그인 회원의 구분에 따라 다른 view를 넘긴다.
 		String m_group=mServ.getLoginMemberGroup(email);
@@ -99,9 +109,6 @@ public class MemberController {
 
 	@GetMapping("like")
 	public ModelAndView like() {
-		//임의의 로그인 회원 아이디
-		String email="kc@naver.com";
-
 		//상품,온라인, 오프라인 좋아요 내역을 검색한다.
 		mv=mServ.getAllLikes(email);
 		return mv;
@@ -128,14 +135,21 @@ public class MemberController {
 	}
 	
 	//주문 취소하는 메소드
-//	@GetMapping('/resetOrder')
+	@GetMapping("cancleOrder")
+	public ModelAndView resetOrder(String sort,String ord_code) {
+		//ord_code에 해당하는 주문 내역의 ord_state값을 주문취소 상태로 변경한다.
+		mv=mServ.cancleOrder(ord_code);
+		
+		return mv;
+	}
 	
-	@PostMapping("access")
-	public ModelAndView accessProc(MemberDto member, 
-			RedirectAttributes rttr) {
-		
-		mv = mServ.loginProc(member, rttr);
-		
+	@GetMapping("refund")
+	public ModelAndView refund(String sort,RefundDto refund) {
+		log.info("refund - ()");
+		//ord_code에 해당하는 주문 내역의 ord_state값을 환불 중 상태로 변경
+		//ord_code로 환불 목록을 추가한다.
+		mv=mServ.refundOrder(sort,refund);
+
 		return mv;
 	}
 }

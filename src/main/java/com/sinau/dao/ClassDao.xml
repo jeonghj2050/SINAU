@@ -44,5 +44,7 @@
 		 	select * from offlikes where m_email=#{email}
 		]]>
 	</select>
-	
+	<update id="mclUpdateState" parameterType="com.sinau.dto.OrderDto">
+		update mcl set mcl_state=#{ord_state} where mcl_ord_code=#{ord_code}
+	</update>
 </mapper>

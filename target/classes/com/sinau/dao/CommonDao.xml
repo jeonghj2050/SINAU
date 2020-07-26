@@ -11,6 +11,13 @@
 		select count(*) from cp where cp_code=#{cp_code}
 	</select>
 	<insert id="inputMyCoupon" parameterType="String">
-		insert into cpl values(#{sort}||SEQ_CPL.NEXTVAL,#{cp_code},#{email})
+		<![CDATA[ 
+			insert into cpl values('cpl_'||SEQ_CPL.NEXTVAL,#{cp_code},#{email})
+		]]>
+	</insert>
+	<insert id="refundOrder" parameterType="com.sinau.dto.RefundDto">
+		<![CDATA[ 
+			insert into refund values('ref_'||SEQ_REF.NEXTVAL,sysdate,#{ref_banknum},#{ref_bank},#{ref_bankname},#{ref_reson},1,#{ref_ord_code})
+		]]>
 	</insert>
 </mapper>

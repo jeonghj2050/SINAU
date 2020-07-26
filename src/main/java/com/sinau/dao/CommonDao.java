@@ -12,6 +12,7 @@ import com.sinau.dto.OffOrdersDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
+import com.sinau.dto.RefundDto;
 
 public interface CommonDao {
 	//회원의 쿠폰 목록을 가져온다.
@@ -21,5 +22,10 @@ public interface CommonDao {
 	int selectCoupon(String cp_code);
 
 	//회원 쿠폰 목록에 새로운 쿠폰을 추가
-	void inputMyCoupon(@Param("email")String email, @Param("cp_code")String cp_code,@Param("sort")String sort);
+	void inputMyCoupon(@Param("email")String email, @Param("cp_code")String cp_code);
+
+	//환불 내역을 추가한다.
+	void refundOrder(RefundDto refund);
+	
+	
 }

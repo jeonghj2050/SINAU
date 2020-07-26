@@ -37,6 +37,7 @@ import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.ProdLikeDto;
 import com.sinau.dto.ProdOrdersDto;
+import com.sinau.dto.RefundDto;
 
 import lombok.extern.java.Log;
 
@@ -292,7 +293,7 @@ public class MemberService {
 			//쿠폰이 존재한다면
 			if(result==1) {
 				//쿠폰 목록에 쿠폰을 추가한다.
-				cmDao.inputMyCoupon(email,cp_code,"cpl_");
+				cmDao.inputMyCoupon(email,cp_code);
 				
 				//추가 된 쿠폰을 포함한 쿠폰 목록을 가져온다.
 				List<MyCouponDto> cList=cmDao.getCouponList(email);
@@ -302,6 +303,56 @@ public class MemberService {
 			// TODO: handle exception
 		}
 		return cMap;
+	}
+	
+	//ord_code에 해당하는 주문 내역의 상태를 변경하는 메소드
+	public ModelAndView cancleOrder(String ord_code) {
+		mv=new ModelAndView();
+		OrderDto order=new OrderDto();
+		
+		order.setOrd_code(ord_code);
+		order.setOrd_state(2);
+		
+		System.out.println("ord_code"+order.getOrd_code());
+		System.out.println("ord_sate"+order.getOrd_state());
+		
+		sDao.updateOrderState(order);
+		
+
+		
+		mv.setViewName("redirect:/mypageOrder");
+		
+		return mv;
+	}
+
+	//주문 상태를 환불 중으로 변경하고 환불 내역을 등록하는 메소드
+	public ModelAndView refundOrder(String sort,RefundDto refund) {
+		mv=new ModelAndView();
+		OrderDto order=new OrderDto();
+		refund.setRef_ord_code(refund.getRef_ord_code().trim());
+		//주문 상태를 환불중으로 변경
+		System.out.println("refund - refund"+refund.toString());
+		
+		order.setOrd_code(refund.getRef_ord_code());
+		order.setOrd_state(3);
+		sDao.updateOrderState(order);
+		
+		//상품인지 온라인, 오프라인인지 비교한다.
+		if(sort.equals("prod")) {
+			//환불 목록에 ord_code를 추가한다.
+			cmDao.refundOrder(refund);
+			
+			mv.setViewName("redirect:./mypageOrder");
+		}
+		else if(sort.equals("online")) {
+			//내 클래스 상태에서 환불중으로 변경
+			cDao.mclUpdateState(order);
+			
+			mv.setViewName("redirect:./mypage");
+		}
+		
+		
+		return mv;
 	}
 
 }

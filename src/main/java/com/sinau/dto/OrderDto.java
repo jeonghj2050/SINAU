@@ -2,6 +2,9 @@ package com.sinau.dto;
 
 import java.sql.Timestamp;
 
+import lombok.Data;
+
+@Data
 public class OrderDto {
 	private String ord_code;
 	private String ord_name;
