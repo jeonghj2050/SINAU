@@ -14,7 +14,7 @@ header {
 
 section {
 	width: 1300px;
-	overflow:auto;
+	/*overflow:auto;*/
 	margin: auto;
 }
 

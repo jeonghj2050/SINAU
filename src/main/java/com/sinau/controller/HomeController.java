@@ -43,6 +43,6 @@ public class HomeController {
 	@GetMapping("store")
 	public String store() {
 		
-		return "store/store_cts";
+		return "store/store_info";
 	}
 }
