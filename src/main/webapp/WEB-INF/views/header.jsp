@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="top-bar">
 	<div class="content">
 		<img class="logo" src="resources/images/SINAU_logo.png"
@@ -10,7 +11,17 @@
 				<li class="suc"><a href="./logout">로그아웃</a></li>
 				<li class="bef"><a href="./loginFrm">로그인</a></li>
 				<li class="bef"><a href="./joinFrm">회원가입</a></li>
-				<li class="suc"><a href="./mypage">마이페이지</a></li>
+				<c:choose>
+					<c:when test="${mb.m_group eq'cm'}">
+						<li class="suc"><a href="./cMypage">마이페이지</a></li>
+					</c:when>
+				</c:choose>
+				<c:if test="${mb.m_group eq 'nm'}">
+					<li class="suc"><a href="./mypage">마이페이지</a></li>
+				</c:if>
+				<c:if test="${mb.m_group eq 'dm'}">
+					<li class="suc"><a href="./dMypage">마이페이지</a></li>
+				</c:if>
 			</ul>
 		</nav>
 	</div>

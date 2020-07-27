@@ -58,6 +58,8 @@ public class MemberService {
 	@Autowired
 	CommonDao cmDao;
 	
+	MemberDto loginMember;
+	
 	public String idCheck(String memail) {
 		String result = null;
 
@@ -107,19 +109,20 @@ public class MemberService {
 
 
 	//로그인 회원의 그룹을 반환한다.
-	public String getLoginMemberGroup(String email) {
-		log.info("email : "+email);
-		String group=mDao.getGroup(email);
+	public String getLoginMemberGroup() {
+		String group=mDao.getGroup(loginMember.getM_email());
 
+		System.out.println(group);
+		
 		return group;
 	}
 
 	//로그인 회원의 온라인 강좌 목록과 view를 ModelAndView로 반환 , m_group > 회원마다 다른 메인 마이페이지를 띄워야 하므로
-	public ModelAndView getMyOnlineList(String email, String m_group) {
+	public ModelAndView getMyOnlineList(String m_group) {
 		mv=new ModelAndView();
 
 		//email에 해당하는 회원의 온라인 주문 내역을 가져온다.
-		List<OrderDto> orderList=cDao.getOrderList(email,"onc_");	
+		List<OrderDto> orderList=cDao.getOrderList(loginMember.getM_email(),"onc_");	
 
 		//주문 객체에 저장된 강의 코드로 내 수강 강의정보 목록을 저장한다.
 		List<MyOnlineInfoDto> onlineList=new ArrayList<MyOnlineInfoDto>();
@@ -130,22 +133,17 @@ public class MemberService {
 
 		mv.addObject("onlineList",onlineList);
 
-		if(m_group.equals("nm")) {
-			mv.setViewName("mypage/mypage_main");
-		}else if(m_group.equals("cm")) {
-			mv.setViewName("mypage/cmypage_main");
-		}else if(m_group.equals("dm")) {
-			mv.setViewName("mypage/dmypage_main");
-		}
+		mv.setViewName("mypage/mypage_main");
+		
 		return mv;
 	}
 
 	//로그인 회원의 아이디로 수강 신청한 오프라인 강의의 목록을 가져온다.
-	public ModelAndView getMyOfflineList(String email) {
+	public ModelAndView getMyOfflineList() {
 		mv=new ModelAndView();
 
 		//email에 해당하는 회원의 오프라인 주문 내역을 가져온다.
-		List<OrderDto> orderList=cDao.getOrderList(email,"ofc_");	
+		List<OrderDto> orderList=cDao.getOrderList(loginMember.getM_email(),"ofc_");	
 
 		//주문 객체에 저장된 강의 코드로 내 수강 강의정보 목록을 저장한다.
 		List<MyOffInfoDto> offlineList=new ArrayList<MyOffInfoDto>();
@@ -161,25 +159,25 @@ public class MemberService {
 	}
 
 	//회원의 정보(회원+이미지)를 가져온다.
-	public ModelAndView getMemberInfo(String email) {
+	public ModelAndView getMemberInfo() {
 		mv=new ModelAndView();
 		
 		//마이페이지에 보여질 회원 정보를 가져온다.
-		MyMemberInfoDto myInfo=mDao.getMemberInfo(email);
+		MyMemberInfoDto myInfo=mDao.getMemberInfo(loginMember.getM_email());
 		mv.addObject("myInfo",myInfo);
 		
 		mv.setViewName("mypage/mypage_update");
 		return mv;
 	}
 
-	public ModelAndView updateMemberPwd(String email,String newPwd) {
+	public ModelAndView updateMemberPwd(String newPwd) {
 		mv=new ModelAndView();
 		//변경할 비밀번호를 암호화한다.
 		BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
 		
 		String encodePwd=pwdEncode.encode(newPwd);
 		
-		int result=mDao.updateMemberPwd(email,encodePwd);
+		int result=mDao.updateMemberPwd(loginMember.getM_email(),encodePwd);
 		
 		if(result>0) {
 			mv.setViewName("redirect:/mypage");
@@ -189,15 +187,15 @@ public class MemberService {
 	}
 
 	//회원의 이메일로 각 (상품,온라인, 오프라인) 주문 내역을 가져온다.
-	public ModelAndView getAllOrders(String email) {
+	public ModelAndView getAllOrders() {
 		mv=new ModelAndView();
 		
 		//상품 주문내역 목록을 가져온다.
-		List<ProdOrdersDto> prodOrdList=sDao.getProdOrderList(email);
+		List<ProdOrdersDto> prodOrdList=sDao.getProdOrderList(loginMember.getM_email());
 		//온라인 주문내역 목록을 가져온다.
-		List<OnlineOrdersDto> onOrdList=cDao.getOnlineOrderList(email);
+		List<OnlineOrdersDto> onOrdList=cDao.getOnlineOrderList(loginMember.getM_email());
 		//오프라인 주문내역 목록을 가져온다.
-		List<OffOrdersDto> offOrdList=cDao.getOffOrderList(email);
+		List<OffOrdersDto> offOrdList=cDao.getOffOrderList(loginMember.getM_email());
 		
 		mv.addObject("prodOrder",prodOrdList);
 		mv.addObject("onlineOrder",onOrdList);
@@ -227,6 +225,7 @@ public class MemberService {
 				//로그인 한 회원의 정보를 가져오기.
 				member = mDao.getMemInfo(member.getM_email());
 				session.setAttribute("mb", member);
+				loginMember=member;
 				System.out.println(session);
 				
 				//리다이렉트로 화면을 전환.
@@ -262,15 +261,15 @@ public class MemberService {
 
 
 	//상품,온라인, 오프라인 좋아요 내역을 검색한다.
-	public ModelAndView getAllLikes(String email) {
+	public ModelAndView getAllLikes() {
 		mv=new ModelAndView();
 		
 		//온라인 강의의 좋아요 목록을 가져온다.
-		List<OnlineLikeDto> onLike=cDao.getOnLikeList(email);
+		List<OnlineLikeDto> onLike=cDao.getOnLikeList(loginMember.getM_email());
 		//오프라인 강의의 좋아요 목록을 가져온다.
-		List<OffLikeDto> offLike=cDao.getOffLikeList(email);
+		List<OffLikeDto> offLike=cDao.getOffLikeList(loginMember.getM_email());
 		//상품의 좋아요 목록을 가져온다.
-		List<ProdLikeDto> prodLike=sDao.getProdLikeList(email);
+		List<ProdLikeDto> prodLike=sDao.getProdLikeList(loginMember.getM_email());
 		
 		mv.addObject("onLikeList",onLike);
 		mv.addObject("offLikeList",offLike);
@@ -283,11 +282,11 @@ public class MemberService {
 
 
 
-	public ModelAndView getCouponList(String email) {
+	public ModelAndView getCouponList() {
 		mv=new ModelAndView();
 		
 		//회원의 쿠폰 목록을 가져온다.
-		List<MyCouponDto> couponList=cmDao.getCouponList(email);
+		List<MyCouponDto> couponList=cmDao.getCouponList(loginMember.getM_email());
 		
 		mv.addObject("cpList",couponList);
 		
@@ -297,7 +296,7 @@ public class MemberService {
 	}
 
 	
-	public Map<String, List<MyCouponDto>> inputCoupon(String email, String cp_code) {
+	public Map<String, List<MyCouponDto>> inputCoupon(String cp_code) {
 		Map<String, List<MyCouponDto>> cMap=new HashMap<String, List<MyCouponDto>>();
 		
 		try {
@@ -307,10 +306,10 @@ public class MemberService {
 			//쿠폰이 존재한다면
 			if(result==1) {
 				//쿠폰 목록에 쿠폰을 추가한다.
-				cmDao.inputMyCoupon(email,cp_code);
+				cmDao.inputMyCoupon(loginMember.getM_email(),cp_code);
 				
 				//추가 된 쿠폰을 포함한 쿠폰 목록을 가져온다.
-				List<MyCouponDto> cList=cmDao.getCouponList(email);
+				List<MyCouponDto> cList=cmDao.getCouponList(loginMember.getM_email());
 				cMap.put("cpList",cList);
 			}
 		} catch (Exception e) {
@@ -368,5 +367,7 @@ public class MemberService {
 		
 		return mv;
 	}
+//	크리에이터용 기능
+
 
 }

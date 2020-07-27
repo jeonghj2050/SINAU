@@ -1,6 +1,7 @@
 package com.sinau.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -26,6 +27,10 @@ public interface CommonDao {
 
 	//환불 내역을 추가한다.
 	void refundOrder(RefundDto refund);
+
+	void fileInsert(Map<String, String> fmap);
+
+	void updateFile(Map<String, String> fmap);
 	
 	
 }
