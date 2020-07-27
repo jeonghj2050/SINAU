@@ -5,9 +5,10 @@
 <html>
 <head>
 	<title>Home</title>
+	<link rel="stylesheet" href="resources/css/bootstrap.min.css">
 </head>
 <body>
 
-<a href="./mypage">마이페이지</a>
+<a href="./offline" class="btn btn-success">오프라인메인</a>
 </body>
 </html>
