@@ -34,6 +34,7 @@
 			<mapping path="/*"/>
 			<!-- 가로채기에서 제외할 uri를 지정 -->
 			<exclude-mapping path="/"/>
+			<exclude-mapping path="/servicecenter_main"/>
 			<exclude-mapping path="/loginFrm"/>
 			<exclude-mapping path="/joinFrm"/>
 			<exclude-mapping path="/access"/>

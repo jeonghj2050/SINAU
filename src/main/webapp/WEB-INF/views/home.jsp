@@ -74,12 +74,7 @@
 				slider.reloadSlider();
 			}
 		});
-		if ("${mb.m_email}" != '') {
-			var name = "${mb.m_name}";
-			$('#mname').html(name + '님');
-			$('.suc').css('display', 'block');
-			$('.bef').css('display', 'none');
-		}
+		
 	});
 </script>
 </html>

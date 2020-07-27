@@ -314,15 +314,41 @@ article.childart>div>h5 {
 }
 
 
-
-/* product list */
-#slideitem {width:1050px; height:285px; border-top:1px solid #e1e1e1; border-bottom:1px solid #e1e1e1}
-#slideitem #title_slideitem {padding:30px 0 20px; width:1050px; text-align:center}
-#slideitem #slide_btn_prev {float:left; margin-top:80px; margin-left:13px; _margin-left:8px}   /* 좌측버튼 */
-#slideitem #slide_btn_next {float:right; margin-top:80px; margin-right:13px; _margin-right:18px}  /* 우측버튼 */
-#slideitem #viewArea {position:relative; _position:absolute; margin-left:40px; width:960px; height:190px; overflow:hidden}
-#slideitem #viewArea #imgList {position:absolute; width:2000px; left:0; top:0}
-#slideitem #viewArea #imgList div {float:left; margin:0px; padding:0}
-#slideitem #viewArea #imgList div img {padding:0 8px; width:180px; height:190px; overflow:hidden}  /* 상품 이미지 크기 180*190 */
-
-
+a.button{display:inline-block; padding: 10px 20px; text-decoration:none; color:#fff; background:#000; margin:20px;}
+#modal{
+  display:none;
+  position:fixed; 
+  width:100%; height:100%;
+  top:0; left:0; 
+  background:rgba(0,0,0,0.3);
+}
+.modal-con{
+  display:none;
+  position:fixed;
+  top:50%; left:50%;
+  transform: translate(-50%,-50%);
+  max-width: 60%;
+  min-height: 30%;
+  background:#fff;
+}
+.modal-con .title{
+  font-size:20px; 
+  padding: 20px; 
+  background : gold;
+}
+.modal-con .con{
+  font-size:15px; line-height:1.3;
+  padding: 30px;
+}
+.modal-con .close{
+  display:block;
+  position:absolute;
+  width:30px; height:30px;
+  border-radius:50%; 
+  border: 3px solid #000;
+  text-align:center; line-height: 30px;
+  text-decoration:none;
+  color:#000; font-size:20px; font-weight: bold;
+  right:10px; top:10px;
+}
+ 

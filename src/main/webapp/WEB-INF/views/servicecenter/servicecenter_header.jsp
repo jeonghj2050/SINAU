@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <div class="top-bar">
 	<div class="content">
 		<img class="logo" src="resources/images/SINAU_logo.png"
@@ -14,35 +14,16 @@
 			</ul>
 		</nav>
 	</div>
-	<div class="menu">
+		<div class="menu">
 		<nav class="menu-bar">
 			<ul>
-				<li class="menu"><a href="./online">온라인</a></li>
-				<li class="menu"><a href="./offline">오프라인</a></li>
-				<li class="menu"><a href="./store">스토어</a></li>
-			</ul>
-		</nav>
-		<nav class="menu-bar1">
-			<ul class="sub">
-				<li class="menusub"><a href="./youtube">유투버</a></li>
+				<li class="menu"><a href="./online">회원 관리</a></li>
+				<li class="menu"><a href="./offline">게시글 관리</a></li>
+				<li class="menu"><a href="./store">고객센터</a></li>
 			</ul>
 		</nav>
 	</div>
 </div>
-
-
-<script type="text/javascript">-
-function gohome(){
-	var id = '${mb.m_email}';
-	
-	if(id == ''){
-		location.href='./123';
-	}	
-	else if(id != ''){
-		location.href='./';
-	}
-} 
-</script>
 <script type="text/javascript">
 $(document).ready(function(){
 	
@@ -55,5 +36,4 @@ $(document).ready(function(){
 			$('.bef').css('display','none');
 			}
 });
-
 </script>

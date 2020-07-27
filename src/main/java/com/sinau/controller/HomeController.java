@@ -12,6 +12,7 @@ import com.sinau.dao.MemberDao;
 import com.sinau.dto.MemberDto;
 import com.sinau.service.CommonService;
 import com.sinau.service.MemberService;
+import com.sinau.service.ServiceCenterService;
 
 @Controller
 public class HomeController {
@@ -21,7 +22,10 @@ public class HomeController {
 	
 	private ModelAndView mv;
 	
+	@Autowired
 	private CommonService cServ;
+	@Autowired
+	private ServiceCenterService scServ;
 	
 
 	
@@ -45,7 +49,14 @@ public class HomeController {
 		return "joinFrm";
 	}
 
-	
+	@GetMapping("servicecenter_main")//list?pageNum=3
+	public ModelAndView servicecenter(Integer pageNum) {
+		System.out.println("dfsdnfafdfljfhdljcjc;jkdfl");
+
+		mv = scServ.getQnaList(pageNum);		
+
+		return mv;
+	}
 	
 	@GetMapping("store")
 	public String store() {
