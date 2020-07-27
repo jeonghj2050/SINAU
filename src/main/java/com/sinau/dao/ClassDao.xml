@@ -37,4 +37,16 @@
 	</select> -->
 	
 	
+	<!-- 회원의 강좌 좋아요 내역을 가져온다. -->
+	<select id="getOnLikeList" parameterType="String" resultType="com.sinau.dto.OnlineLikeDto">
+		<![CDATA[ 
+		 	select * from onlinelikes where m_email=#{email}
+		]]>
+	</select>
+	<select id="getOffLikeList" parameterType="String" resultType="com.sinau.dto.OffLikeDto">
+		<![CDATA[ 
+		 	select * from offlikes where m_email=#{email}
+		]]>
+	</select>
+	
 </mapper>

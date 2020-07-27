@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sinau.dao.MemberDao;
 import com.sinau.dto.MemberDto;
 import com.sinau.service.CommonService;
 import com.sinau.service.MemberService;
