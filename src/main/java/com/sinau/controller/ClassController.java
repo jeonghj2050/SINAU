@@ -18,11 +18,12 @@ public class ClassController {
 	ModelAndView mv;
 	
 	@GetMapping("list")
-	public ModelAndView classList(Integer cateNum);
+	public ModelAndView classList(Integer cateNum) {
 	log.info("classList()");
 	
-	mv = cServ.getClassList(cateNum);
+//	mv = cServ.getClassList(cateNum);
 	
 	return mv;
-	
+	}
+
 }

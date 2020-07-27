@@ -1,0 +1,155 @@
+@charset "UTF-8";
+
+.mp_section {
+	width: 1300px;
+	margin: 20px auto;
+	background-color: aquamarine;
+}
+
+.mp_section a:link {
+	text-decoration: none;
+	color: black;
+}
+
+.mp_section a:visited {
+	text-decoration: none;
+	color: black;
+}
+
+.mp_section a:hover {
+	text-decoration: none;
+	color: black;
+}
+
+.mp_section>nav {
+	display: block;
+	float: left;
+	width: 200px;
+}
+
+.mp_section>nav>div {
+	width: 200px;
+	padding: 10px;
+}
+
+.mp_section>nav>div>div:first-child {
+	width: 180px;
+	height: 100px;
+	border: 0.3px solid black;
+}
+
+.mp_section>nav>div>div:first-child>button {
+	float: right;
+}
+
+.mp_section>nav>div>div:last-child {
+	width: 180px;
+	height: 30px;
+	margin-top: 10px;
+}
+
+.mp_section>nav>div>div>button {
+	clear: both;
+}
+
+nav .item-selected {
+	background-color: rgb(95, 95, 95);
+	color: white;
+}
+
+.list-group {
+	padding: 10px;
+}
+
+.list-group-item {
+	margin-top: 10px;
+}
+
+.btn-default {
+	width: 60px;
+}
+
+.mp_section>article {
+	float: left;
+	width: 1070px;
+	height: 600px;
+	margin-left: 30px;
+}
+
+article>div>span {
+	font-size: 25px;
+	float: left;
+	font-weight: bold;
+	display: block;
+	width: 170px;
+	height: 80px;
+	line-height: 80px;
+}
+
+article>div .nav.nav-tabs {
+	width: 200px;
+	float: left;
+	height: 40px;
+	margin-top: 20px;
+	margin-bottom: 50px;
+	margin-left: 200px;
+}
+
+article>div .nav.nav-tabs>li {
+	width: 100px;
+}
+
+.mp_classInfo {
+	clear: both;
+	width: 1070px;
+	height: 500px;
+}
+
+.mp_classInfo>img {
+	float: left;
+}
+
+.mp_classInfo>div {
+	float: left;
+	width: 760px;
+	height: 300px;
+	margin-left: 10px;
+	background-color: rgb(230, 253, 165);
+}
+
+.mp_classInfo>div>div:first-child {
+	width: 500px;
+	height: 150px;
+	margin-bottom: 10px;
+	background-color: salmon;
+}
+
+.mp_classInfo>div>div:last-child {
+	width: 760px;
+	height: 60px;
+	margin-bottom: 10px;
+	background-color: rgb(101, 243, 112);
+}
+
+.mp_classInfo>div>div:last-child>div:first-child {
+	width: 500px;
+	float: left;
+	height: 60px;
+	margin-bottom: 10px;
+	background-color: rgb(101, 167, 243);
+}
+
+.mp_classInfo>div>div:last-child>div:last-child {
+	width: 260px;
+	float: left;
+	height: 60px;
+	margin-bottom: 10px;
+	background-color: rgb(255, 189, 244);
+}
+
+.mp_classInfo>div>div {
+	width: 500px;
+	height: 60px;
+	margin-bottom: 10px;
+	background-color: salmon;
+}
