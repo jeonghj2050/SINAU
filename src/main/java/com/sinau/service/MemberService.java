@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,6 +24,7 @@ import com.sinau.dao.ClassDao;
 import com.sinau.dao.CommonDao;
 import com.sinau.dao.MemberDao;
 import com.sinau.dto.MemberDto;
+import com.sinau.dto.MemberImg;
 import com.sinau.controller.HomeController;
 import com.sinau.dao.ClassDao;
 import com.sinau.dao.StoreDao;
@@ -77,18 +79,20 @@ public class MemberService {
 
 
 
-	public ModelAndView memberInsert(MemberDto member, RedirectAttributes rttr) {
+	public ModelAndView memberInsert(MemberDto member,//MultipartHttpServletRequest multi, 
+			RedirectAttributes rttr) {
 		mv = new ModelAndView();
 		String view = null;
 
 		BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
 		
 		String encPwd= pwdEncode.encode(member.getM_pwd());
-		
+				
 		member.setM_pwd(encPwd);
 		
 		try {
 			mDao.memberInsert(member);
+			/* mDao.memberImgInsert(multi); */
 			
 			view="redirect:/";
 			rttr.addFlashAttribute("msg", "가입 성공");
@@ -223,6 +227,7 @@ public class MemberService {
 				//로그인 한 회원의 정보를 가져오기.
 				member = mDao.getMemInfo(member.getM_email());
 				session.setAttribute("mb", member);
+				System.out.println(session);
 				
 				//리다이렉트로 화면을 전환.
 				view = "redirect:/";
@@ -242,6 +247,15 @@ public class MemberService {
 		mv.setViewName(view);
 		rttr.addFlashAttribute("msg", msg);
 		return mv;
+	}
+
+
+
+	public String logout() {
+		//세션 정보 지우기
+		session.invalidate();
+		
+		return "home";
 	}
 
 
