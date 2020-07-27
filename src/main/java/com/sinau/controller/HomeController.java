@@ -16,6 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.service.ClassService;
 
+import com.sinau.dao.MemberDao;
+import com.sinau.dto.MemberDto;
+import com.sinau.service.MemberService;
 
 @Controller
 public class HomeController {
