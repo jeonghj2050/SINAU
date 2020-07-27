@@ -62,18 +62,6 @@ $(document).ready(function(){
 	});
 });
 </script>
-
-<script>
-	var ord_code="";
-	var ref_ord_code="";
-	$(document).ready(function() {     
-	    $('#refund').on('show.bs.modal', function(event) {          
-	    	ref_ord_code = $(event.relatedTarget).data('notifyid');
-	    	$('#ref_ord_code').val(ref_ord_code);
-	    });
-	});
-
-</script> 
 </head>
 <body>
 	<header>
@@ -88,7 +76,7 @@ $(document).ready(function(){
 				<ul class="nav nav-tabs" role="tablist" id="mytab">
 					<c:forEach var="onlineClass" items="${onlineList}">
 						<li role="presentation" name="${onlineClass.onc_code}"><a
-							href="#${onlineClass.onc_code}" aria-controls="home" role="tab"
+							href="#'${onlineClass.onc_code}'" aria-controls="home" role="tab"
 							data-toggle="tab">${onlineClass.onc_code}</a></li>
 					</c:forEach>
 				</ul>
@@ -108,8 +96,10 @@ $(document).ready(function(){
 								<!-- body -->
 								<div class="modal-body" style="text-align: left;">
 									<input type="hidden" name="sort" value="online"> 
-									<input type="hidden" name="ref_ord_code" id="ref_ord_code"/>
 									<input
+										type="hidden" name="ref_ord_code"
+										value="${onlineClass.mcl_ord_code}"/>
+										<input
 										type="radio" name="ref_reson" value="더 이상 구매를 원하지 않습니다.">1.더
 									이상 구매를 원하지 않습니다.<br> <input type="radio" name="ref_reson"
 										value="실수로 구매하였습니다.">2.실수로 구매하였습니다.<br> <input
@@ -136,7 +126,7 @@ $(document).ready(function(){
 						width="300px" height="300px" id="mp_class_img">
 					<div>
 						<div class="class_info_contents" id="${onlineClass.onc_code}">
-							<p>${onlineClass.cts_name} | ${onlineClass.m_name}</p>
+							<p>${onlineClass.cts_name}| ${onlineClass.m_name}</p>
 							<p class="info_title">${onlineClass.onc_title}</p>
 							<div>${onlineClass.onc_content}</div>
 						</div>
@@ -149,18 +139,15 @@ $(document).ready(function(){
 								<fmt:formatDate pattern="yyyy-MM-dd"
 									value="${onlineClass.onc_edate}" />
 							</div>
-							<div class="class_status">
+							<div>
 								<c:choose>
 									<c:when test="${onlineClass.mcl_state == 1}">
 										<button class="my_default_btn" data-target="#refund"
-											data-toggle="modal" data-notifyid="${onlineClass.mcl_ord_code }">환불</button>
+											data-toggle="modal">환불</button>
 									</c:when>
 								</c:choose>
-								<c:if test="${onlineClass.mcl_state == 2}">
-									<div>환불진행중</div>
-								</c:if>
 								<c:if test="${onlineClass.mcl_state == 3}">
-									<div>환불완료</div>
+									<span>환불진행중</span>
 								</c:if>
 							</div>
 						</div>

@@ -344,8 +344,9 @@ public class MemberService {
 		mv=new ModelAndView();
 		OrderDto order=new OrderDto();
 		refund.setRef_ord_code(refund.getRef_ord_code().trim());
-		
 		//주문 상태를 환불중으로 변경
+		System.out.println("refund - refund"+refund.toString());
+		
 		order.setOrd_code(refund.getRef_ord_code());
 		order.setOrd_state(3);
 		sDao.updateOrderState(order);
@@ -360,8 +361,6 @@ public class MemberService {
 		else if(sort.equals("online")) {
 			//내 클래스 상태에서 환불중으로 변경
 			cDao.mclUpdateState(order);
-			//환불 목록에 ord_code를 추가한다.
-			cmDao.refundOrder(refund);
 			
 			mv.setViewName("redirect:./mypage");
 		}
