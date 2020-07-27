@@ -191,6 +191,14 @@ article>div .nav.nav-tabs>li {
 	color: rgb(63, 63, 63);
 }
 
+.class_status > div{
+	background:rgb(209, 209, 209);
+	color:red;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+
 /* 회원 정보 */
 .profile_image {
 	width: 400px;
@@ -292,3 +300,4 @@ article>div .nav.nav-tabs>li {
 .coupon_box>div:nth-child(4) {
 	font-size: 8pt;
 }
+
