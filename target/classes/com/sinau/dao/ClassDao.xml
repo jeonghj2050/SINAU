@@ -32,6 +32,9 @@
 		 	select * from offorders where ord_m_email=#{email}
 		]]>
 	</select>
+	<!-- <select id="getList" parameterType="String" resultType="com.sinau.dto.MyOnlineInfoDto">
+		select * from ofc
+	</select> -->
 	
 	
 </mapper>

@@ -37,14 +37,14 @@
 	<section>
 		<article class="childart">
 			<h1>TOP10</h1>
-			<c:forEach var="onlineClass" items="${onlineList}">
-				<div class="mp_classInfo" id="${onlineClass.onc_code}">
-					<img src="resources/images/test/${onlineClass.f_oriname }" alt=""
+			<c:forEach var="onlineClass" items="${offList}">
+				<div class="mp_classInfo" id="${offClass.ofc_code}">
+					<img src="resources/images/test/${offClass.f_oriname }" alt=""
 						width="300px" height="300px" id="mp_class_img">
-					<div class="class_info_contents" id="${onlineClass.onc_code}">
-						<p>${onlineClass.cts_name}| ${onlineClass.m_name}</p>
-						<p class="info_title">${onlineClass.onc_title}</p>
-						<div>${onlineClass.onc_content}</div>
+					<div class="class_info_contents" id="${offClass.ofc_code}">
+						<p>${offClass.cts_name}| ${offClass.m_name}</p>
+						<p class="info_title">${offClass.ofc_title}</p>
+						<div>${offClass.ofc_content}</div>
 					</div>
 				</div>
 			</c:forEach>

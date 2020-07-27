@@ -1,12 +1,14 @@
 package com.sinau.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffOrdersDto;
+import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
 
@@ -21,5 +23,7 @@ public interface ClassDao {
 	//회원의 강좌(온라인/오프라인) 주문 정보를 가져온다.
 	List<OnlineOrdersDto> getOnlineOrderList(String email);
 	List<OffOrdersDto> getOffOrderList(String email);
+	
+	List<OnlineClassDto> getList(Map<String, String> lmap);
 
 }

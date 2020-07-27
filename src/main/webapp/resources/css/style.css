@@ -13,8 +13,7 @@ header {
 
 section {
 	width: 1300px;
-	overflow:auto;
-	margin: auto;
+	margin: 0 auto;
 }
 
 footer {

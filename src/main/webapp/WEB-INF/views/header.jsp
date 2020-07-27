@@ -31,7 +31,7 @@
 </div>
 
 
-<script type="text/javascript">
+<script type="text/javascript">-
 function gohome(){
 	var id = '${mb.m_email}';
 	
