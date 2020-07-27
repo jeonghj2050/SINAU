@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -39,7 +40,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberInsert") 
-	public ModelAndView memInsert(MemberDto member,
+	public ModelAndView memInsert(MemberDto member,//MultipartHttpServletRequest multi,
 			 RedirectAttributes rttr) { 
 	mv = mServ.memberInsert(member, rttr);
 	 
@@ -47,7 +48,7 @@ public class MemberController {
 	}
 	
 	
-	@GetMapping("/mypage")
+	@GetMapping("mypage")
 	public ModelAndView mypage() {
 		
 		//로그인 회원의 구분에 따라 다른 view를 넘긴다.
@@ -138,4 +139,15 @@ public class MemberController {
 		
 		return mv;
 	}
+	
+	@GetMapping("logout")
+	public String logout() {
+		//세션에 저장된 로그인 정보(회원 정보) 삭제
+		//첫번째 페이지로 이동.
+		String view = mServ.logout();
+		
+		return view;
+	}
+	
+	
 }

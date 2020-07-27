@@ -32,6 +32,10 @@
 		 	select * from offorders where ord_m_email=#{email}
 		]]>
 	</select>
+	<!-- <select id="getList" parameterType="String" resultType="com.sinau.dto.MyOnlineInfoDto">
+		select * from ofc
+	</select> -->
+	
 	
 	<!-- 회원의 강좌 좋아요 내역을 가져온다. -->
 	<select id="getOnLikeList" parameterType="String" resultType="com.sinau.dto.OnlineLikeDto">

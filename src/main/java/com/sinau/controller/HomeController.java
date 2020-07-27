@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dao.MemberDao;
 import com.sinau.dto.MemberDto;
+import com.sinau.service.CommonService;
 import com.sinau.service.MemberService;
 
 @Controller
@@ -20,10 +21,14 @@ public class HomeController {
 	
 	private ModelAndView mv;
 	
+	private CommonService cServ;
+	
 
 	
 	@GetMapping("/")
 	public String home() {
+		
+		/* mv=cServ.getClassList(); */
 		
 		return "home";
 	}
@@ -39,10 +44,16 @@ public class HomeController {
 		
 		return "joinFrm";
 	}
+
+	
 	
 	@GetMapping("store")
 	public String store() {
 		
 		return "store/store";
 	}
+	
+	/*
+	 * @GetMapping("home") public ModelAndView bo
+	 */
 }
