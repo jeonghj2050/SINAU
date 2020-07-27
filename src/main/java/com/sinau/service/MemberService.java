@@ -215,9 +215,10 @@ public class MemberService {
 				//로그인 한 회원의 정보를 가져오기.
 				member = mDao.getMemInfo(member.getM_email());
 				session.setAttribute("mb", member);
+				System.out.println(session);
 				
 				//리다이렉트로 화면을 전환.
-				view = "redirect:productlist";
+				view = "redirect:/";
 			}
 			else {
 				//패스워드 틀림.

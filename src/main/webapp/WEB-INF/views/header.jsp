@@ -6,6 +6,7 @@
 			onclick="gohome();"> <input type="text" class="search"></input>
 		<nav class="top-right">
 			<ul>
+				<li class="suc" id="mname">테스트님</li>
 				<li class="suc"><a href="./logout">로그아웃</a></li>
 				<li class="bef"><a href="./loginFrm">로그인</a></li>
 				<li class="bef"><a href="./joinFrm">회원가입</a></li>
@@ -30,7 +31,7 @@
 </div>
 
 
-<script>
+<script type="text/javascript">
 function gohome(){
 	var id = '${mb.m_email}';
 	
@@ -40,5 +41,19 @@ function gohome(){
 	else if(id != ''){
 		location.href='./';
 	}
-}
+} 
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	var id = '${mb.m_email}';
+	
+		if("${mb.m_email}" != '') {
+			var name = "${mb.m_name}";
+			$('#mname').html(name + '님');
+			$('.suc').css('display','block');
+			$('.bef').css('display','none');
+			}
+});
+
 </script>
