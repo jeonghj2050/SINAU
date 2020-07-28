@@ -21,19 +21,34 @@ import com.sinau.dto.MemberDto;
 import com.sinau.service.MemberService;
 
 @Controller
-public class HomeController {
-	@Autowired
-	private ClassService cServ;
+public class HomeController {@Autowired
+	private MemberService mServ;
+	
 	private ModelAndView mv;
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
 	
-	//@RequestMapping(value = "/", method = RequestMethod.GET)
-	
-	@GetMapping("offline")
-	public String offline() {
-		logger.info("offline()");
+	@GetMapping("/")
+	public String home() {
 		
-		return "offline";
+		return "home";
+	}
+	
+	@GetMapping("loginFrm")
+	public String loginFrm() {
+		
+		return "loginFrm";
+	}
+	
+	@GetMapping("joinFrm")
+	public String joinFrm() {
+		
+		return "joinFrm";
+	}
+	
+	@GetMapping("store")
+	public String store() {
+		
+		return "store/store";
 	}
 }

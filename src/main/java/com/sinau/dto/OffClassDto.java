@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class OfflineDto {
+public class OffClassDto {
 	private String ofc_code;
 	private String ofc_title;
 	private String ofc_content;

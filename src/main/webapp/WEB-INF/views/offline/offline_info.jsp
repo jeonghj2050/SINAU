@@ -12,11 +12,16 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" media="screen"
 	href="../../../resources/css/offline/offline_info.css" />
+	
+<link rel="stylesheet" type="text/css" media="screen"
+	href="../../../resources/css/style.css" />
 
 <title>오프라인 상세</title>
 </head>
 <body>
-	<header> </header>
+	<header>
+		<jsp:include page="../header.jsp"></jsp:include>
+	</header>
 	<section>
 		<div class="main-image">
 			<div id="info-img1">
@@ -123,8 +128,8 @@
 						</div>
 					</div>
 					<button type="button" class="class_submitbtn" color="orange"
-						fill="true">
-						<span class="sc-fzoyTs jZUSDr"> <span>클래스 신청하기</span></span>
+						fill="true"><a href="/offline_apply">
+						<span class="sc-fzoyTs jZUSDr"> <span>클래스 신청하기</span></span></a>
 					</button>
 					<div>
 						<p class="refund_alert">키트 미개봉 시, 9월 25일까지 전액 환불 보장</p>
@@ -186,7 +191,9 @@
 			</div>
 		</div>
 	</section>
-	<footer></footer>
+	<footer>
+		<jsp:include page="../footer.jsp"></jsp:include>
+	</footer>
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {

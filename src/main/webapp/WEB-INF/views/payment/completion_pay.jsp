@@ -12,10 +12,14 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" media="screen"
 	href="../../../resources/css/payment/completion_pay.css" />
+<link rel="stylesheet" type="text/css" media="screen"
+	href="../../../resources/css/style.css" />
 <title>결제창</title>
 </head>
 <body>
-	<header> </header>
+	<header>
+		<jsp:include page="../header.jsp"></jsp:include>
+	</header>
 	<section>
 		<div class="compay-top">
 			<div class="compay-top-txt">결제완료</div>
@@ -35,11 +39,17 @@
 						<div>Sinau의 4번째 DIY 키트</div>
 					</div>
 				</div>
+				 <a href="/">
+				 <div class="compay">
 				<button class="btn-compay">돌아가기</button>
+				</div>
+				</a>
 			</div>
 		</div>
 	</section>
-	<footer></footer>
+	<footer>
+		<jsp:include page="../footer.jsp"></jsp:include>
+	</footer>
 </body>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js%22%3E%3C/script"></script>

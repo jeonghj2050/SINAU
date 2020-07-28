@@ -44,5 +44,10 @@
 		 	select * from offlikes where m_email=#{email}
 		]]>
 	</select>
+	<select id="getOffList" parameterType="String" resultType="com.sinau.dto.OffListDto">
+		<![CDATA[
+			select * from of3
+		]]>
+	</select>
 	
 </mapper>

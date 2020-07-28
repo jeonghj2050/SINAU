@@ -5,23 +5,19 @@
             font-family: 'Nanum Gothic', sans-serif;
         }
         html{
-            background-color: beige;
         }
         section{
             align-content: center;
             margin: 0px auto;
             height: auto;
             width: 1300px;
-            background-color: rgb(218, 218, 218);
         }
         header{
-            background-color: blueviolet;
             margin: 0 auto;
             width: 1300px;
             height: 130px;
         }
         footer{
-            background-color: pink;
             margin: 0 auto;
             width: 1300px;
             height: 100px;

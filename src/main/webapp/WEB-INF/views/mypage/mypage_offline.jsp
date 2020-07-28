@@ -73,7 +73,7 @@ $(document).ready(function(){
 			</div>
 			<c:forEach var="offlineClass" items="${offlineList}">
 				<div class="mp_classInfo" id="${offlineClass.ofc_code}">
-					<img src="resources/images/test/${offlineClass.f_oriname }" alt=""
+					<img src="resources/images/test/${offlineClass.f_oriname}" alt=""
 						width="300px" height="300px" id="mp_class_img">
 					<div>
 						<div class="class_info_contents" id="${offlineClass.ofc_code}">

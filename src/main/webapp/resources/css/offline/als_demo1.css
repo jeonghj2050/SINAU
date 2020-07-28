@@ -61,7 +61,7 @@
 
 #s_online-price{
 	width: 160px;
-	height: 10px;
+	height: 30px;
 	font-size: 1.3em;
 	margin: 0 0 0 6px;
 	padding: 6px 0 5px 0;
@@ -135,6 +135,9 @@
 .s_sumnail>*{
 	float: left;
 	text-align: left;
+}
+#s_online-price:hover{
+	color:black;
 }
 .s_class_img img{
 	/* width: 300px;

@@ -10,12 +10,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" media="screen"
 	href="../../../resources/css/offline/offline_apply.css" />
+<link rel="stylesheet" type="text/css" media="screen"
+	href="../../../resources/css/style.css" />
 
 <title>오프라인 옵션선택</title>
 
 </head>
 <body>
-	<header> </header>
+	<header>
+		<jsp:include page="../header.jsp"></jsp:include>
+	</header>
 	<section>
 		<div class="wrap-apply">
 			<div class="wrap-applytop">
@@ -56,12 +60,19 @@
 							<div class="time-table-place">강남</div>
 						</div>
 						<hr>
-						<br> <input type="submit" value="완료" id="submit">
+						<br>
+						<a href="/payment">
+							<div class="btn-offapply">
+								<input type="submit" value="완료" id="submit">
+							</div> 
+						</a>
 					</form>
 				</div>
 			</div>
 		</div>
 	</section>
-	<footer></footer>
+	<footer>
+		<jsp:include page="../footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

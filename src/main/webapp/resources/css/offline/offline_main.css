@@ -4,23 +4,21 @@
             font-family: 'Nanum Gothic', sans-serif;
         }
         html{
-            background-color: white;
         }
         section{
             align-content: center;
             margin: 0px auto;
-            height: 2731px;
-            width: 100%;
+            height: auto !important;
+            width: 100% !important;
+            overflow: hidden !important;
             float: left;
         }
         header{
-            background-color: rgb(238, 236, 236);
             margin: 0 auto;
             width: 1300px;
             height: 150px;
         }
         footer{
-            background-color: black;
             margin: 0 auto;
             width: 1300px;
             height: 100px;

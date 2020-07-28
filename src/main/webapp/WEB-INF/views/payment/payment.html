@@ -22,7 +22,7 @@
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 	<section>
-		<div class="show1">
+		<div calss="show1">
 			<div class="payment-top">
 				<div class="payment-top-txt">결제하기</div>
 			</div>
@@ -48,13 +48,13 @@
 					<div class="del-info">
 						<h1>배송 정보</h1>
 						<form class="del-info">
-							받으시는 분<br> <input type="text"><br> 주소<br>
+							받으시는 분<br> 
+							<input type="text"><br> 주소<br>
 							<input type="text" id="sample4_postcode" placeholder="우편번호">
-							<input type="button" onclick="sample4_execDaumPostcode()"
-								value="우편번호 찾기"><br> <input type="text"
-								id="sample4_roadAddress" placeholder="도로명주소"> <span
-								id="guide" style="color: #999; display: none"></span> <input
-								type="text" id="sample4_detailAddress" placeholder="상세주소">
+							<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br> 
+							<input type="text" id="sample4_roadAddress" placeholder="도로명주소"> 
+							<span id="guide" style="color: #999; display: none"></span> 
+							<input type="text" id="sample4_detailAddress" placeholder="상세주소">
 
 							<!-- <input type="text" style="width:100px;">&nbsp;<button>우편번호 찾기</button><br>
                                     <input type="text" style="width:400px;">&nbsp;기본주소<br>
@@ -97,13 +97,15 @@
 							<div class="how-txt">무통장 입금</div>
 						</div>
 					</div>
-						<div class="pay-submit">
-							<a class="btn-pay-submit" href="/completion_pay">결제하기</a>
-						</div>
+					
+						
+					<div class="pay-submit">
+						<a href="/completion_pay">
+							<button class="btn-pay-submit">결제하기</button>
+						</a>
 				</div>
 			</div>
 		</div>
-
 		<div class="modal">
 			<div class="modal-wrap">
 				<div class="coupon-header">쿠폰 할인 적용</div>
@@ -212,18 +214,17 @@
 
 		$('.couponbtn').click(function() {
 			//   $ ('.show1').hide(); //클릭 시 첫 번째 요소 숨김
+			$('.show1').hide();
 			$('.modal').show(); //클릭 시 두 번째 요소 표시
 			return false;
 		});
 
 		$('.coupon-btn').click(function() {
 			$('.modal').hide();
-			$('.show1').show();
 			return false;
 		});
 		$('.coupon-btn').click(function() {
 			$('.modal').hide();
-			$('.show1').show();
 			return false;
 		});
 	});
