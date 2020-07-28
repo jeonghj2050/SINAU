@@ -1,5 +1,6 @@
 package com.sinau.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
+import com.sinau.dto.VideoDto;
 
 public interface ClassDao {
 	//email에 해당하는 회원의 주문 내역을 가져온다.
@@ -32,5 +34,7 @@ public interface ClassDao {
 	List<OffLikeDto> getOffLikeList(String email);
 	
 	void mclUpdateState(OrderDto order);
+	void insertClassInfo(OnlineClassDto online);
+	void insertVideoList(VideoDto vList);
 
 }

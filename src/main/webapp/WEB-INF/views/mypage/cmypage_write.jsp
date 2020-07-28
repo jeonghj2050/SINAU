@@ -90,7 +90,7 @@ $(function(){
 					오프라인<input type="radio" name="class_sort" value="ofc">
 				</div>
 			</div>
-			<form action="./cMyNewClass">
+			<form action="./cMyNewClass" method="post" enctype="multipart/form-data">
 				<div class="class_form" id="onc_form">
 				<div class="class_info_form">
 					<div class="class_profile_image">
@@ -128,7 +128,9 @@ $(function(){
 						<span class="class_info_title">가격</span> <input type="number"
 							name="onc_sale" placeholder="가격" required><br>
 						<p></p>
-
+						<span class="class_info_title">수강 인원</span> <input type="number"
+							name="onc_stnum" placeholder="수강 인원" required><br>
+						<p></p>
 						<span class="class_info_title">시작일</span> <input type="date"
 							name="onc_sdate" required> <span class="class_info_title">종료일</span>
 						<input type="date" name="onc_edate" required>
@@ -146,7 +148,7 @@ $(function(){
 							<tr>
 								<td><input type="text" name="v_title" id="" required></td>
 								<td><input type="text" name="v_content" id="" required></td>
-								<td><input type="file" name="vf_oriname" id="" required></td>
+								<td><input type="file" name="video_files" id="" required></td>
 							</tr>
 						</table>
 						

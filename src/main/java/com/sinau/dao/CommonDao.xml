@@ -20,4 +20,11 @@
 			insert into refund values('ref_'||SEQ_REF.NEXTVAL,sysdate,#{ref_banknum},#{ref_bank},#{ref_bankname},#{ref_reson},1,#{ref_ord_code})
 		]]>
 	</insert>
+	<insert id="videoInsert" parameterType="com.sinau.dto.VideoFileDto">
+		<![CDATA[
+			insert into vf values('vf_'||SEQ_Vf.NEXTVAL,#{v_title},#{v_content},
+					#{vf_oriname},#{vf_sysname},#{vf_v_code})
+		]]>
+	</insert>
+	
 </mapper>

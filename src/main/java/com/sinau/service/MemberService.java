@@ -1,6 +1,9 @@
 package com.sinau.service;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -40,6 +45,8 @@ import com.sinau.dto.OrderDto;
 import com.sinau.dto.ProdLikeDto;
 import com.sinau.dto.ProdOrdersDto;
 import com.sinau.dto.RefundDto;
+import com.sinau.dto.VideoDto;
+import com.sinau.dto.VideoFileDto;
 
 import lombok.extern.java.Log;
 
@@ -49,6 +56,10 @@ public class MemberService {
 	ModelAndView mv;
 	@Autowired
 	HttpSession session;
+	
+	@Autowired
+	CommonService cmServ;
+	
 	@Autowired
 	MemberDao mDao;
 	@Autowired
@@ -368,6 +379,115 @@ public class MemberService {
 		return mv;
 	}
 //	크리에이터용 기능
+	@Transactional
+	public ModelAndView insertNewClass(MultipartHttpServletRequest multi) {
+		mv=new ModelAndView();
+		//파일 정보를 담을 리스트
+		List<VideoFileDto> fileList=new ArrayList<VideoFileDto>();
+		
+		//온라인 강좌 정보를 저장한다.
+		OnlineClassDto online=new OnlineClassDto();
+		online.setOnc_title(multi.getParameter("onc_title"));
+		online.setOnc_content(multi.getParameter("onc_content"));
+		online.setOnc_cts_code(multi.getParameter("onc_cts_code"));
+		online.setOnc_teacher(((MemberDto)session.getAttribute("mb")).getM_name());
+		online.setOnc_m_email(((MemberDto)session.getAttribute("mb")).getM_email());
+		online.setOnc_level(multi.getParameter("onc_level"));
+		online.setOnc_stnum(Integer.parseInt(multi.getParameter("onc_stnum")));
+		online.setOnc_sale(Integer.parseInt(multi.getParameter("onc_sale")));
+		online.setOnc_sdate(multi.getParameter("onc_sdate"));
+		online.setOnc_edate(multi.getParameter("onc_edate"));
+	
+		String[] v_titles=multi.getParameterValues("v_title");
+		String[] v_contents=multi.getParameterValues("v_content");
+		
+		try {
+			//강좌 정보를 db에 저장
+			cDao.insertClassInfo(online);
+			
+			VideoDto vList=new VideoDto();
+			vList.setV_onc_code(online.getOnc_code());
+			
+			//강의에 해당하는 동영상 목록 정보를 등록한다.
+			cDao.insertVideoList(vList);
+			log.info("v_code : " + vList.getV_code());
+			
+			//동영상 파일들을 반복해서 파일을 등록한다.
+			for(int i=0;i<v_titles.length;i++) {
+				VideoFileDto vFile=new VideoFileDto();
+				String v_title=v_titles[i];
+				vFile.setV_title(v_title);
+				String v_content=v_contents[i];
+				vFile.setV_content(v_content);
+				vFile.setVf_v_code(vList.getV_code());
+				
+				videoUp(multi, vFile, "insert");;
+			}
+		
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mv.setViewName("redirect:./cMypage");
+		return mv;
+	}
 
+
+	public void videoUp(MultipartHttpServletRequest multi,VideoFileDto video,String sort) throws IllegalStateException, IOException {
+		//파일을 실제 물리 경로에 저장
+		//upload폴더에 저장
+		//"/src/main/webapp/resources/upload
+		String path=multi.getSession().getServletContext().getRealPath("/")+"resources/upload/";
+		log.info(path);
+
+		//upload 폴더 만들기
+		File folder=new File(path);
+		//folder가 디렉토리가 아니거나 존재하지 않는다면
+		if(folder.isDirectory()==false) {
+			folder.mkdir();
+		}
+		//실제 파일명과 저장 파일명을 저장하기 위한 hashmap
+		Map<String , String> fmap=new HashMap<String, String>();
+		//파일 정보 저장(db)에 필요한 정보
+		//강의 번호,실제파일명,저장파일명
+		
+
+		//multi에서 파일 가져오기(여러개의 파일이 넘어 올 수도 있다.)
+		List<MultipartFile> fList=multi.getFiles("video_files");
+
+		for(int i=0;i<fList.size();i++) {
+			MultipartFile mf=fList.get(i);
+			//실제 파일명 가져오기
+			String oriName=mf.getOriginalFilename();
+			//실제 파일명을 map에 저장
+			fmap.put("vf_oriname",oriName);
+			video.setVf_oriname(oriName);
+
+			//저장 파일명 만들기
+			String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
+			//저장 파일명 map에 저장
+			fmap.put("sysName",sysName);
+			video.setVf_sysname(sysName);
+
+			log.info("fileup() - oriName : "+oriName);
+			log.info("fileup() - sysName : "+sysName);
+
+			//저장 위치로 파일 전송
+			//새로 만든 파일이름으로 지정된 경로에 전송
+			mf.transferTo(new File(path+sysName));
+
+			if(sort.equals("insert")) {
+				//db에 파일 저장
+				cmDao.videoInsert(video);
+			}
+//				else if(sort.equals("update")) {
+//				//db에 내용을 수정한다.
+//				cmDao.updateFile(fmap);
+//			}
+
+		}
+
+	}
 
 }

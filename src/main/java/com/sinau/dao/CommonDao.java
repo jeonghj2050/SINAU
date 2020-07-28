@@ -14,6 +14,7 @@ import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.RefundDto;
+import com.sinau.dto.VideoFileDto;
 
 public interface CommonDao {
 	//회원의 쿠폰 목록을 가져온다.
@@ -28,9 +29,7 @@ public interface CommonDao {
 	//환불 내역을 추가한다.
 	void refundOrder(RefundDto refund);
 
-	void fileInsert(Map<String, String> fmap);
-
-	void updateFile(Map<String, String> fmap);
+	void videoInsert(VideoFileDto video);
 	
 	
 }

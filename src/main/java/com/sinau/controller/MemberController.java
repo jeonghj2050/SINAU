@@ -175,4 +175,12 @@ public class MemberController {
 		return "mypage/cmypage_write";
 	}
 	
+	@PostMapping("cMyNewClass")
+	public ModelAndView cMyNewClass(MultipartHttpServletRequest multi) {
+		log.info("cMyNewClass(post)");
+		
+		mv=mServ.insertNewClass(multi);
+		
+		return mv;
+	}
 }

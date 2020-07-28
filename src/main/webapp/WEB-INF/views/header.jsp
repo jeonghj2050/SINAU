@@ -3,8 +3,8 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="top-bar">
 	<div class="content">
-		<img class="logo" src="resources/images/SINAU_logo.png"
-			onclick="gohome();"> <input type="text" class="search"></input>
+		<a href="./"><img class="logo" src="resources/images/SINAU_logo.png"> </a>
+		<input type="text" class="search"></input>
 		<nav class="top-right">
 			<ul>
 				<li class="suc" id="mname">테스트님</li>
