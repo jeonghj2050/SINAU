@@ -86,9 +86,9 @@ $(document).ready(function() {
 			<input type="text" class="login-input" id="memail" title="이메일"	name="m_email" placeholder="이메일  ex)example@ooooo.com">
 			<br>
 			<font id="chkNotice1" size="2"></font>
-			<input type="button" class="idcheck-btn" value="중복확인" onclick="idcheck()"><br>
-			<input type="text" name="m_name" id="mname" class="login-input" title="이름" 	placeholder="이름"> 
-			<input type="password"	id="password1" class="login-input" title="비밀번호" name="m_pwd" placeholder="비밀번호">
+			<a>이메일 :</a><input type="button" class="idcheck-btn" value="중복확인" onclick="idcheck()"><br>
+			<a>이름 :</a><input type="text" name="m_name" id="mname" class="login-input" title="이름" 	placeholder="이름"> 
+			<a>비밀번호 : </a><input type="password"	id="password1" class="login-input" title="비밀번호" name="m_pwd" placeholder="비밀번호">
 			<input type="password"	id="password2" class="login-input" title="비밀번호 재확인" placeholder="비밀번호확인"><br>
 				<span style="height: 25px;"></span>
 				<font id="chkNotice" size="2"></font><br>

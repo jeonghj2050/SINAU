@@ -51,7 +51,6 @@ public class HomeController {
 
 	@GetMapping("servicecenter_main")//list?pageNum=3
 	public ModelAndView servicecenter(Integer pageNum) {
-		System.out.println("dfsdnfafdfljfhdljcjc;jkdfl");
 
 		mv = scServ.getQnaList(pageNum);		
 

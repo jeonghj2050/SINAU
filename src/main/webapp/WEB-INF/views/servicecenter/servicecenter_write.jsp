@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,20 +13,15 @@
 $(document).ready(function(){
 	var chk = "${check}";
 	
-	if(chk == "2"){
-		alert("글 등록 성공!");
-		location.reload(true);
+	if(chk == "1"){
+		alert("글 등록 실패!");
 	}
-	if(chk == "3"){
-		alert("글 삭제 성공!");
-		location.reload(true);
-	}
+	
 	if("${mb.m_email}" != '') {
 	var name = "${mb.m_name}";
 	$('#mname').html(name + '님');
 	$('.suc').css('display','block');
 	$('.bef').css('display','none');
-	$('.wr-btn').css('display','block');
 	}
 });
 </script>
@@ -42,27 +36,18 @@ $(document).ready(function(){
                 <a class="category" href="">Q & A</a>
                 <a class="category" href="">신고</a>
             </div>
-			<div class="data-area">
-				<div class="title-row">
-					<div class="t-no">번호</div>
-					<div class="t-title">제목</div>
-					<div class="t-name">작성자</div>
-					<div class="t-date">작성일</div>
-				</div><br>
-				<c:forEach var="qitem" items="${qList}">
-				<div class="data-row">
-					<div class="t-no">${qitem.q_code}</div>
-					<div class="t-title"><a href="contents?qcode=${qitem.q_code}">
-						${qitem.q_title}</a></div>
-					<div class="t-name">${qitem.m_name}</div>
-					<div class="t-date">${qitem.q_date}</div>
-				</div>
-				</c:forEach>
-			<div class="btn-area">
-				<div class="paging">${paging}</div>
-				<button class="wr-btn" onclick="location.href='./servicecenter_write'">글쓰기</button>
-			</div>
-				</div>
+			<form name="writeFrm" action="boardWrite" class="write-form"
+			 method="post" enctype="multipart/form-data">
+			 <div class="write">
+			 	<div class="write-top">
+			 		<a>title</a>
+				 	<input type="text" class="q_title">
+				 	<a>email</a>
+			 		<input type="text" class="q_m_email">
+			 	</div>
+			
+			 </div>
+		</form>
 	</section>
 </body>
 </html>

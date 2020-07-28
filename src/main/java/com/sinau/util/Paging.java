@@ -71,7 +71,7 @@ public class Paging {
 		
 		//다음 버튼 처리
 		if(end != totalPage) {
-			sb.append("<a class='pno' href='" + listName
+			sb.append("<a class='pno' href='list?pageNum=10" + listName
 					+ "?pageNum=" + (end + 1) + "'>"
 					);
 			sb.append("&nbsp;다음&nbsp;");

@@ -36,7 +36,7 @@ function gohome(){
 	var id = '${mb.m_email}';
 	
 	if(id == ''){
-		location.href='./123';
+		location.href='./';
 	}	
 	else if(id != ''){
 		location.href='./';

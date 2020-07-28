@@ -4,12 +4,10 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sinau.dao.ServiceCenterDao">
-	<select id="getList" parameterType="HashMap"
+<select id="getList" parameterType="HashMap"
 		resultType="com.sinau.dto.QuestionDto">
 		<![CDATA[
-		SELECT * FROM Questioninfo
-		WHERE q_code >= (${pageNum}*${cnt})-(${cnt}-1)
-			AND q_code <= ${pageNum}*${cnt}
+		select replace(q_code,'q_','') as q_code, q_title, q_date, m_name from questioninfo
 		]]>
 	</select>
 	<select id="getBoardCount" resultType="Integer">

@@ -19,7 +19,7 @@
 			<ul>
 				<li class="menu"><a href="./online">회원 관리</a></li>
 				<li class="menu"><a href="./offline">게시글 관리</a></li>
-				<li class="menu"><a href="./store">고객센터</a></li>
+				<li class="menu"><a href="./servicecenter_main">고객센터</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -28,7 +28,7 @@
 $(document).ready(function(){
 	
 	var id = '${mb.m_email}';
-	
+	 	
 		if("${mb.m_email}" != '') {
 			var name = "${mb.m_name}";
 			$('#mname').html(name + '님');
@@ -36,4 +36,16 @@ $(document).ready(function(){
 			$('.bef').css('display','none');
 			}
 });
+</script>
+<script type="text/javascript">
+function gohome(){
+	var id = '${mb.m_email}';
+	
+	if(id == ''){
+		location.href='./';
+	}	
+	else if(id != ''){
+		location.href='./';
+	}
+} 
 </script>
