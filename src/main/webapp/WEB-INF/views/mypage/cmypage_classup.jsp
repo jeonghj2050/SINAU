@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SINAU 회원정보수정</title>
+<title>SINAU 강의정보수정</title>
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/mypage.css">
@@ -64,16 +64,13 @@
 	<section class="mp_section">
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
 		<article>
-			<div class="page-title">강의 등록</div>
+			<div class="page-title">강의 수정</div>
 			<div class="class_sort">
-				<div>
-					온라인<input type="radio" name="class_sort" value="onc" checked>
-				</div>
-				<div>
-					오프라인<input type="radio" name="class_sort" value="ofc">
+				<div style="background-color: rgb(204, 204, 204); ">
+					온라인
 				</div>
 			</div>
-			<form action="./cMyNewClass" method="post" enctype="multipart/form-data">
+			<form action="./cMyClassUp" method="post" enctype="multipart/form-data">
 				<div class="class_form" id="onc_form">
 				<div class="class_info_form">
 					<div class="class_profile_image">

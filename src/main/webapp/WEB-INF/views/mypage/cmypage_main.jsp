@@ -34,24 +34,30 @@
         });
     </script>
 <script type="text/javascript">
-$(document).ready(function(){
-	var chk = "${msg}";
+	$(document).ready(function () {
+	    $("#onc_form").show();
+	    $("#ofc_form").hide();
+	    // 라디오버튼 클릭시 이벤트 발생
+	    $("input:radio[name=class_sort]").click(function () {
+	        if ($("input[name=class_sort]:checked").val() == "ofc") {
+	            $("#ofc_form").show();
+	            $("#onc_form").hide();
+	        } else if ($("input[name=class_sort]:checked").val() == "onc") {
+	            $("#onc_form").show();
+	            $("#ofc_form").hide();
+	        }
+	    });
+	});
 	
-	if(chk == "2"){
-		alert("글 등록 성공!");
-		location.reload(true);
-	}
-	if(chk == "3"){
-		alert("글 삭제 성공!");
-		location.reload(true);
-	}
-	
-	var name="${loginMember.m_name}";
-	$('#mname').html(name + '님');
-	$('.suc').css('display','block');
-	$('.bef').css('display','none');
-	
-});
+	$(function(){
+		$(".c_myclass_info").hide();
+		$(".c_myclass_info:first").show();
+		$("#mytab li").click(function(){
+			var tabName=$(this).attr('name');
+			$(".c_myclass_info").hide();
+			$("#"+tabName).show();
+		});
+	});
 </script>
 
 </head>
@@ -63,6 +69,48 @@ $(document).ready(function(){
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
 		<article>
 			<div class="page-title">내 클래스</div>
+			<div role="tabpanel">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist" id="mytab">
+					<c:forEach var="ccInfo" items="${ccInfoList}">	
+					<li role="presentation" name="${ccInfo.onc_code}">
+						<a href="#${ccInfo.onc_code}" aria-controls="home" role="tab" data-toggle="tab">${ccInfo.onc_code}</a>
+					</li>
+					</c:forEach>
+				</ul>
+				<c:forEach var="ccInfo" items="${ccInfoList}">
+					<div class="c_myclass_info" id="${ccInfo.onc_code}">
+						<img src="resources/upload/${ccInfo.f_sysname} " alt="">
+						<div class="c_myclass_detail">
+							<div style="font-size: 13pt; font-weight: bold;">${ccInfo.onc_title }</div>
+							<div>${ccInfo.onc_content}</div>
+							<div>${ccInfo.onc_rstnum }명 / ${ccInfo.onc_stnum }명</div>
+						</div>
+						<div style="float:right;">
+							<button class="my_default_btn" onclick="location.href='./cMyClassUp?onc_code=${ccInfo.onc_code}'">강의 수정</button>
+						</div>
+						<p class="mypage_sub_title" style="clear:both;">등록 정보</p>
+						<div class="c_myclass_stuList">
+							<table class="table">
+								<tr>
+									<th>이메일</th>
+									<th>이름</th>
+								</tr>
+								<c:forEach var="cstuInfo" items="${cstuInfoList}">
+									<c:choose>
+										<c:when test="${cstuInfo.onc_code eq ccInfo.onc_code }">
+											<tr>
+												<td>${cstuInfo.m_email}</td>
+												<td>${cstuInfo.m_name}</td>
+											</tr>
+										</c:when>
+									</c:choose>
+								</c:forEach>
+							</table>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
 		</article>
 	</section>
 	<footer>

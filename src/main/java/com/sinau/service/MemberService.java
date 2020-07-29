@@ -24,12 +24,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dao.MemberDao;
 import com.sinau.dto.MyCouponDto;
+import com.sinau.dto.ClassStuInfoDto;
+import com.sinau.dto.CreatorClassInfoDto;
+import com.sinau.dto.FilesDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.dao.ClassDao;
 import com.sinau.dao.CommonDao;
 import com.sinau.dao.MemberDao;
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.MemberImg;
+import com.fasterxml.jackson.databind.type.ClassStack;
 import com.sinau.controller.HomeController;
 import com.sinau.dao.ClassDao;
 import com.sinau.dao.StoreDao;
@@ -378,7 +382,26 @@ public class MemberService {
 		
 		return mv;
 	}
-//	크리에이터용 기능
+	
+///////////////////////////////////////////////////////////////////	크리에이터용 기능
+	//크리에이터 메인 페이지에 보여질 내용을 반환
+	public ModelAndView getCreatorOnlineList() {
+		mv=new ModelAndView();
+		
+		//회원(크리에이터가 등록 한 강의의 정보를 가져온다.
+		List<CreatorClassInfoDto> ccInfoList=cDao.getCreatorClassList(loginMember.getM_email());
+		
+		log.info(ccInfoList.size()+"");
+		
+		List<ClassStuInfoDto> cstuInfoList=mDao.getClassStuList(loginMember.getM_email());
+
+		mv.addObject("ccInfoList",ccInfoList);
+		mv.addObject("cstuInfoList",cstuInfoList);
+		mv.setViewName("mypage/cmypage_main");
+		
+		return mv;
+	}
+
 	@Transactional
 	public ModelAndView insertNewClass(MultipartHttpServletRequest multi) {
 		mv=new ModelAndView();
@@ -405,8 +428,14 @@ public class MemberService {
 			//강좌 정보를 db에 저장
 			cDao.insertClassInfo(online);
 			
+			//강좌에 비디오 저장
 			VideoDto vList=new VideoDto();
 			vList.setV_onc_code(online.getOnc_code());
+			
+			//강좌에 이미지 저장
+			FilesDto file=new FilesDto();
+			file.setF_pcode(online.getOnc_code());
+			file.setF_cts_code("onc");
 			
 			//강의에 해당하는 동영상 목록 정보를 등록한다.
 			cDao.insertVideoList(vList);
@@ -421,7 +450,7 @@ public class MemberService {
 				vFile.setV_content(v_content);
 				vFile.setVf_v_code(vList.getV_code());
 				
-				videoUp(multi, vFile, "insert");;
+				videoUp(multi, vFile,file, "insert");;
 			}
 		
 		
@@ -433,8 +462,9 @@ public class MemberService {
 		return mv;
 	}
 
-
-	public void videoUp(MultipartHttpServletRequest multi,VideoFileDto video,String sort) throws IllegalStateException, IOException {
+	
+	//크리에이터 강의의 동영상을 업로드하는 메소드
+	public void videoUp(MultipartHttpServletRequest multi,VideoFileDto video,FilesDto file,String sort) throws IllegalStateException, IOException {
 		//파일을 실제 물리 경로에 저장
 		//upload폴더에 저장
 		//"/src/main/webapp/resources/upload
@@ -447,34 +477,52 @@ public class MemberService {
 		if(folder.isDirectory()==false) {
 			folder.mkdir();
 		}
-		//실제 파일명과 저장 파일명을 저장하기 위한 hashmap
-		Map<String , String> fmap=new HashMap<String, String>();
-		//파일 정보 저장(db)에 필요한 정보
-		//강의 번호,실제파일명,저장파일명
+
 		
 
-		//multi에서 파일 가져오기(여러개의 파일이 넘어 올 수도 있다.)
+		//multi에서 동영상 파일 가져오기(여러개의 파일이 넘어 올 수도 있다.)
 		List<MultipartFile> fList=multi.getFiles("video_files");
-
-		for(int i=0;i<fList.size();i++) {
-			MultipartFile mf=fList.get(i);
+		List<MultipartFile> images=multi.getFiles("image_files");
+		for(int i=0;i<images.size();i++) {
+			MultipartFile mf=images.get(i);
 			//실제 파일명 가져오기
 			String oriName=mf.getOriginalFilename();
-			//실제 파일명을 map에 저장
-			fmap.put("vf_oriname",oriName);
-			video.setVf_oriname(oriName);
+			file.setF_oriname(oriName);
 
 			//저장 파일명 만들기
 			String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
-			//저장 파일명 map에 저장
-			fmap.put("sysName",sysName);
-			video.setVf_sysname(sysName);
+			file.setF_sysname(sysName);
 
 			log.info("fileup() - oriName : "+oriName);
 			log.info("fileup() - sysName : "+sysName);
 
 			//저장 위치로 파일 전송
 			//새로 만든 파일이름으로 지정된 경로에 전송
+			mf.transferTo(new File(path+sysName));
+
+			if(sort.equals("insert")) {
+				//db에 파일 저장
+				cmDao.imageInsert(file);
+			}
+//				else if(sort.equals("update")) {
+//				//db에 내용을 수정한다.
+//				cmDao.updateFile(fmap);
+//			}
+		}
+
+		for(int i=0;i<fList.size();i++) {
+			MultipartFile mf=fList.get(i);
+			//실제 파일명 가져오기
+			String oriName=mf.getOriginalFilename();
+			video.setVf_oriname(oriName);
+
+			//저장 파일명 만들기
+			String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
+			video.setVf_sysname(sysName);
+
+			log.info("fileup() - oriName : "+oriName);
+			log.info("fileup() - sysName : "+sysName);
+
 			mf.transferTo(new File(path+sysName));
 
 			if(sort.equals("insert")) {
@@ -489,5 +537,6 @@ public class MemberService {
 		}
 
 	}
+
 
 }

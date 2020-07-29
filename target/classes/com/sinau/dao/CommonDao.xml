@@ -26,5 +26,11 @@
 					#{vf_oriname},#{vf_sysname},#{vf_v_code})
 		]]>
 	</insert>
+	<insert id="imageInsert" parameterType="com.sinau.dto.FilesDto">
+		<![CDATA[
+			insert into f values('f_'||SEQ_f.NEXTVAL,#{f_oriname},#{f_sysname},
+					#{f_pcode},#{f_cts_code})
+		]]>
+	</insert>
 	
 </mapper>

@@ -1,6 +1,5 @@
 package com.sinau.controller;
 
-import java.awt.color.CMMException;
 import java.util.List;
 import java.util.Map;
 
@@ -24,8 +23,6 @@ import lombok.extern.java.Log;
 @Controller
 @Log
 public class MemberController {
-	//임의의 로그인 회원 아이디
-	String email="kc@naver.com";
 	ModelAndView mv;
 	@Autowired
 	MemberService mServ=new MemberService();
@@ -76,17 +73,6 @@ public class MemberController {
 		return mv;
 	}
 	
-	@GetMapping("/cMypage")
-	public ModelAndView cMypage() {
-		//로그인 회원의 구분에 따라 다른 view를 넘긴다.
-		String m_group=mServ.getLoginMemberGroup();
-
-		//로그인 회원이 주문한 내역 중 온라인 강의 목록을 가져온다.
-		mv.setViewName("mypage/cmypage_main");
-
-		return mv;
-	}
-
 	@GetMapping("mypageOffline")
 	public ModelAndView mypageOffline() {
 		//로그인 회원이 주문한 내역 중 오프라인 강의 목록을 가져온다.
@@ -168,6 +154,14 @@ public class MemberController {
 		return mv;
 	}
 //////////////////////////////////////////////////////////////크리에이터 마이페이지
+	@GetMapping("/cMypage")
+	public ModelAndView cMypage() {
+		//회원(크리에이터)
+		mv=mServ.getCreatorOnlineList();
+
+		return mv;
+	}
+
 	@GetMapping("cMyNewClass")
 	public String cMyNewClass() {
 		log.info("cMyNewClass()");
@@ -183,4 +177,14 @@ public class MemberController {
 		
 		return mv;
 	}
+	
+	@GetMapping("cMyClassUp")
+	public String cMyClassUp() {
+		log.info("cMyClassUp() 실행");
+		
+		//보여질 내용들을 가져온다.
+		
+		return "mypage/cmypage_classup";
+	}
+	
 }

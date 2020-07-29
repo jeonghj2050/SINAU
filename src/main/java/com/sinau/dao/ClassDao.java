@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.sinau.dto.CreatorClassInfoDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffLikeDto;
@@ -36,5 +37,7 @@ public interface ClassDao {
 	void mclUpdateState(OrderDto order);
 	void insertClassInfo(OnlineClassDto online);
 	void insertVideoList(VideoDto vList);
-
+	
+	//크리에이터가 등록한 강좌의 정보를 가져온다.
+	public List<CreatorClassInfoDto> getCreatorClassList(String m_email);
 }

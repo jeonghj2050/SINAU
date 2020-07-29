@@ -76,4 +76,10 @@
 			insert into v values(#{v_code},#{v_onc_code})
 		]]>
 	</insert>
+	
+	<select id="getCreatorClassList" parameterType="String" resultType="com.sinau.dto.CreatorClassInfoDto">
+		select * from creatorclassinfo where onc_m_email=#{onc_m_email}
+	</select>
+	
+
 </mapper>

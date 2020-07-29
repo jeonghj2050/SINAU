@@ -76,48 +76,57 @@ $(document).ready(function(){
 </script> 
 </head>
 <body>
-	<header>
+<header>
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 	<section class="mp_section">
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
 		<article>
-			<div class="page-title">온라인 강의</div>
-			<div role="tabpanel">
-				<!-- Nav tabs -->
-				<ul class="nav nav-tabs" role="tablist" id="mytab">
-					<c:forEach var="cOnline" items="${cOnlineList}">
-						<li role="presentation" name="${cOnline.onc_code}"><a
-							href="#${cOnline.onc_code}" aria-controls="home" role="tab"
-							data-toggle="tab">${cOnline.onc_code}</a></li>
-					</c:forEach>
-				</ul>
-			</div>
-			<c:forEach var="cOnline" items="${cOnlineList}">
-				 <div class="c_myclass_info" id="${cOnline.onc_code} ">
-                   <img src="person_thumbnail.jpg" alt="">
-                   <div class="c_myclass_detail">
-                       <div style="font-size: 13pt; font-weight: bold;"></div>
-                       <div> 강의 내용</div>
-                       <div> 수강 인원/총 인원</div>
-                   </div>
-                   <p class="mypage_sub_title">등록인원</p>
-                   <div class="c_myclass_stuList">
-                        <table class="table">
-                            <tr>
-                                <th>번호</th>
-                                <th>이메일</th>
-                                <th>이름</th>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>qjrm52@naver.com</td>
-                                <td>정효진</td>
-                            </tr>
-                        </table>
-                   </div>
-                </div>
+			<div class="page-title">온라인 강의 </div>
+           <div role="tabpanel">
+			  <!-- Nav tabs -->
+			  <ul class="nav nav-tabs" role="tablist" id="mytab">
+			   	<c:forEach var="onlineClass" items="${onlineList}">	
+				    <li role="presentation" name="${onlineClass.onc_code}"><a href="#'${onlineClass.onc_code}'" aria-controls="home" role="tab" data-toggle="tab">${onlineClass.onc_code}</a></li>
+			  	</c:forEach>
+			  </ul> 
+           </div>
+			<c:forEach var="onlineClass" items="${onlineList}">
+				<div class="mp_classInfo" id="${onlineClass.onc_code}">
+					<img src="resources/images/test/${onlineClass.f_oriname }" alt="" width="300px"
+						height="300px" id="mp_class_img">
+					<div>
+						<div class="class_info_contents" id="${onlineClass.onc_code}">
+							<p>${onlineClass.cts_name} | ${onlineClass.m_name}</p>
+							<p class="info_title">${onlineClass.onc_title}</p>
+							<div>
+								${onlineClass.onc_content}
+							</div>
+						</div>
+						<div>
+							<div>
+								수업일 : 
+								<fmt:formatDate pattern="yyyy-MM-dd" value="${onlineClass.onc_sdate}"/> / <fmt:formatDate pattern="yyyy-MM-dd" value="${onlineClass.onc_edate}"/>
+							</div>
+							<div class="class_status">
+								<c:choose>
+									<c:when test="${onlineClass.mcl_state == 1}">
+										<button class="my_default_btn" data-target="#refund"
+											data-toggle="modal" data-notifyid="${onlineClass.mcl_ord_code }">환불</button>
+									</c:when>
+								</c:choose>
+								<c:if test="${onlineClass.mcl_state == 2}">
+									<div>환불진행중</div>
+								</c:if>
+								<c:if test="${onlineClass.mcl_state == 3}">
+									<div>환불완료</div>
+								</c:if>
+							</div>
+						</div>
+					</div>
+				</div>
 			</c:forEach>
+
 		</article>
 	</section>
 	<footer>
