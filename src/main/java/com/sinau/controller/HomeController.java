@@ -17,17 +17,6 @@ import com.sinau.service.ServiceCenterService;
 @Controller
 public class HomeController {
 	
-	@Autowired
-	private MemberService mServ;
-	
-	private ModelAndView mv;
-	
-	@Autowired
-	private CommonService cServ;
-	@Autowired
-	private ServiceCenterService scServ;
-	
-
 	
 	@GetMapping("/")
 	public String home() {
@@ -49,13 +38,7 @@ public class HomeController {
 		return "joinFrm";
 	}
 
-	@GetMapping("servicecenter_main")//list?pageNum=3
-	public ModelAndView servicecenter(Integer pageNum) {
-
-		mv = scServ.getQnaList(pageNum);		
-
-		return mv;
-	}
+	
 	
 	@GetMapping("store")
 	public String store() {
@@ -63,7 +46,9 @@ public class HomeController {
 		return "store/store";
 	}
 	
-	/*
-	 * @GetMapping("home") public ModelAndView bo
-	 */
+	@GetMapping("servicecenter_main")
+	public String servicecenter() {
+		
+		return "servicecenter/servicecenter_main";
+	}
 }

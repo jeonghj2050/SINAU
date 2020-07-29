@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <div class="top-bar">
 	<div class="content">
-		<img class="logo" src="resources/images/SINAU_logo.png"
-			onclick="gohome();"> <input type="text" class="search" placeholder="검색"></input>
+		<a href="./"><img class="logo" src="resources/images/SINAU_logo.png"></a>
+		<input type="text" class="search" placeholder="검색"></input>
 		<nav class="top-right">
 			<ul>
 				<li class="suc" id="mname">테스트님</li>
@@ -17,9 +17,14 @@
 		<div class="menu">
 		<nav class="menu-bar">
 			<ul>
-				<li class="menu"><a href="./online">회원 관리</a></li>
-				<li class="menu"><a href="./offline">게시글 관리</a></li>
-				<li class="menu"><a href="./servicecenter_main">고객센터</a></li>
+				<li class="menu"><a href="./online">온라인</a></li>
+				<li class="menu"><a href="./offline">오프라인</a></li>
+				<li class="menu"><a href="./store">스토어</a></li>
+			</ul>
+		</nav>
+		<nav class="menu-bar1">
+			<ul class="sub">
+				<li class="menusub"><a href="./youtube">유투버</a></li>
 			</ul>
 		</nav>
 	</div>

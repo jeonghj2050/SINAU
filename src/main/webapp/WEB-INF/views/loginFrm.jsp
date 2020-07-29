@@ -57,25 +57,6 @@ $(document).ready(function(){
 	}
 });
 </script>
-<script>
-function openModal(modalname){
-	  document.get
-	  $("#modal").fadeIn(300);
-	  $("."+modalname).fadeIn(300);
-	}
-</script>
-<script>
-function openModal(modalname){
-  document.get
-  $("#modal").fadeIn(300);
-  $("."+modalname).fadeIn(300);
-}
-
-$("#modal, .close").on('click',function(){
-  $("#modal").fadeOut(300);
-  $(".modal-con").fadeOut(300);
-});
-</script>
 <style>
 </style>
 </head>
@@ -88,37 +69,14 @@ $("#modal, .close").on('click',function(){
 			<input type="text" class="login_input" name="m_email" placeholder="example@naver.com"></input>
 			<h4>PASSWORD</h4>
 			<input type="password" class="login-input" name="m_pwd" placeholder="********"><br>
-			
-			아이디 찾기&nbsp;|&nbsp;<a href="">비밀번호 찾기</a>&nbsp;|&nbsp;<a href="./joinFrm">SINAU 회원가입</a><br>
+			<a href="">아이디 찾기</a>&nbsp;|&nbsp;<a href="">비밀번호 찾기</a>&nbsp;|&nbsp;<a href="./joinFrm">SINAU 회원가입</a><br>
 			<input type="submit" class="login-btn" value="로그인">
 			<hr width="350">
 		<img src="resources/images/loginbottom.PNG">
 		<p>최초 로그인 시 <br>
 		<a href="">이용약관</a>과 <a href="">개인정보 처리방침</a>에 동의하는 것으로 간주합니다.</p>
-		<a href="javascript:openModal('modal1');" class="button modal-open">모달열기1</a>
 		</form>
-		<div id="wrap">
-  <a href="javascript:openModal('modal1');" class="button modal-open">모달열기1</a>
-  <a href="javascript:openModal('modal2');" class="button modal-open">모달열기2</a>
-</div>
-
-<div id="modal"></div>
-  <div class="modal-con modal1">
-    <a href="javascript:;" class="close">X</a>
-    <p class="title">제목</p>
-    <div class="con">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-    </div>
   </div>
-  
-   <div class="modal-con modal2">
-    <a href="javascript:;" class="close">X</a>
-    <p class="title">제목2</p>
-    <div class="con">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-    </div>
-  </div>
-	</div>
 </body>
 
 </html>

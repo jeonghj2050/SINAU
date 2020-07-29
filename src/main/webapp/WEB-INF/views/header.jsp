@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <div class="top-bar">
 	<div class="content">
-		<img class="logo" src="resources/images/SINAU_logo.png"
-			onclick="gohome();"> <input type="text" class="search" placeholder="검색"></input>
+		<a href="./"><img class="logo" src="resources/images/SINAU_logo.png"></a>
+		<input type="text" class="search" placeholder="검색"></input>
 		<nav class="top-right">
 			<ul>
 				<li class="suc" id="mname">테스트님</li>

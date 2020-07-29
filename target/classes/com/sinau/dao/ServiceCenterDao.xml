@@ -4,14 +4,26 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sinau.dao.ServiceCenterDao">
-<select id="getList" parameterType="HashMap"
-		resultType="com.sinau.dto.QuestionDto">
+	<select id="getList" parameterType="String"
+		resultType="com.sinau.dto.QuestionInfoDto">
 		<![CDATA[
-		select replace(q_code,'q_','') as q_code, q_title, q_date, m_name from questioninfo
+		select replace(q_code,'q_','') as q_code,q_cts_code, q_title, q_date, m_name,q_anfield 
+		from questioninfo
+		where q_m_email = #{email}
 		]]>
 	</select>
 	<select id="getBoardCount" resultType="Integer">
 		SELECT COUNT(*) FROM Questioninfo
 	</select>
-
+	<insert id="boardInsert" 
+		parameterType="com.sinau.dto.QuestionDto"
+		useGeneratedKeys="true"
+		keyProperty="q_code">
+		<selectKey keyProperty="q_code"
+			resultType="int" order="BEFORE">
+			SELECT SEQ_q.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO question
+		VALUES(${q_code},#{q_title},#{q_contents}, DEFAULT, #{q_m_email}, #{q_cts_code})
+	</insert>
 </mapper>

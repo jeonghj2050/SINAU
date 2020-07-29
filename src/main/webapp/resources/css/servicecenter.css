@@ -212,40 +212,55 @@ li a:hover {
 }
 .title-row {
 	width: 1100px;
-	height: 30px;	
+	height: 42px;	
 	float: right;
 	text-align: center;
 	border-bottom: 1px solid black;
 	border-top : 1px solid black;
 }
 .t-no {
-	width : 98px;
-	height: 28px;
+	width : 50px;
+	height: 40px;
+	padding-top: 8px;
 }
+
+.t-category {
+	width : 100px;
+	height: 40px;
+	padding-top: 8px;
+}
+
 .t-title {
-	width : 600px;
-	height: 28px;
+	width : 500px;
+	height: 40px;
+	padding-top: 8px;
 }
 .t-name {
 	width : 100px;
-	height: 28px;
+	height: 40px;
+	padding-top: 8px;
 }
 .t-date {
-	width : 298px;
-	height: 28px;
+	width : 200px;
+	height: 40px;
+	padding-top: 8px;
+}
+.t-anfield {
+	width : 150px;
+	height: 40px;
+	padding-top: 8px;
 }
 .title-row>div {
 	display: block;
 	float: left;
 	font-size: 16px;
 	text-align: center;
-	background-color : #bdbdbd;
+	background-color : #ddd;
 }
 
 .data-row>div {
 	display: block;
 	float: left;
-	height: 40px;
 	font-size: 14px;
 	line-height: 2.5;
 	text-align: center;
@@ -266,13 +281,25 @@ li a:hover {
 	height: 25px;
 	float : right;
 	display: none;
+	color : white;
+	background-color: black;
 }
 
-/* Q&A 글 목록 출력 */
+/* Q&A 글 작성 */
 .write-form {
 	width: 1100px;
 	height: 800px;
 	float: right;
+	padding : 20px;
+	border: 3px solid #ddd;
+	border-radius:  50px;
+	text-align: center;
+	margin-bottom: 50px;
+}
+ 
+.write-form>h3{
+	margin-top: 10px;
+	margin-bottom: 30px;
 }
 
 .write-top>input {
@@ -281,13 +308,86 @@ li a:hover {
 	margin-right: 10px;
 	border : none;
 	border-bottom: 1px solid black;
+	margin-bottom: 15px;
+}
+
+.write-form>.category {
+	width: 150px;
+	height: 30px;
+	border : 1px solid black;
 	margin-bottom: 25px;
+	float : right;
+	margin-right: 77px;
+}
+
+.write-form>.contents {
+	width: 900px;
+	height: 500px;
+	margin : auto;
+	margin-bottom: 25px;
+	font-size: 15px;	
+}
+
+.write-form>.btn-btn{
+	width: 800px;
+	height: 30px;
+	float : right;
+	margin-right: 77px;
+}
+
+.write-form>.btn-btn>input {
+	width: 100px;
+	height: 35px;
+	margin : auto;
+	float : right;
+	margin-left: 25px;
+	color : white;
+	background-color: black;
+	font-size: 15px;
+	border: none;
+}
+
+/* FAQ */
+.FAQ_box {
+	width: 1100px;
+	height: 800px;
+	float : right;
 }
 
 
+.FAQ_box>.FAQ_tab>li {
+	width: 219.8px;
+	height: 35px;
+	float: left;
+    text-align: center;
+    padding-top: 6px;
+    border : 1px solid #ddd;
+}
 
+.tab_container{
+	border: 1px solid #ddd;
+}
 
+.FAQ_title {
+	width: 1100px;
+	height: 35px;
+	float : left;
+	border: 1px solid #ddd;
+}
 
+.FAQ_title>div {
+	float : left;
+	text-align: center;
+}
+
+.FAQ_num {
+	width : 100px;
+	height: 35px;
+}
+.FAQ_content {
+	width : 1000px;
+	height: 35px;
+}
 
 
 

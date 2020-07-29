@@ -36,7 +36,6 @@
 	</div>
 	<section>
 		<article class="childart">
-			<h1>TOP10</h1>
 			<c:forEach var="onlineClass" items="${offList}">
 				<div class="mp_classInfo" id="${offClass.ofc_code}">
 					<img src="resources/images/test/${offClass.f_oriname }" alt=""

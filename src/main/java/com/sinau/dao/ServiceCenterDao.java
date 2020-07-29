@@ -7,8 +7,10 @@ import com.sinau.dto.QuestionDto;
 
 public interface ServiceCenterDao {
 
-	List<QuestionDto> getList(Map<String, String> lmap);
+	List<QuestionDto> getList(String email);
 
 	int getBoardCount();
+
+	void boardInsert(QuestionDto quest);
 
 }
