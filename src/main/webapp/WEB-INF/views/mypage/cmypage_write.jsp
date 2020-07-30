@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SINAU 회원정보수정</title>
+<title>SINAU 강의 등록</title>
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/mypage.css">
@@ -25,11 +25,32 @@
 <script type="text/javascript">
 	var sel_file;
 	$(document).ready(function() {
-		$("#class_profile").on("change", fileSelect);
+		$(".image_file").on("change", fileSelect);
 	});
-
+	$(document).ready(function() {
+		$(".image_file_thumb").on("change", fileSelectThumb);
+	});
 	function fileSelect(e) {
-		if ($("#class_profile").val() == "") {
+		if ($(".image_file").val() == "") {
+			console.log("empty");
+			$("#filecheck").val(0);
+		} else {
+			console.log("not empty");
+			$("#filecheck").val(1);
+		}
+
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+
+		filesArr.forEach(function(f) {
+			if (!f.type.match("image.*")) {
+				alert("이미지 파일만 등록해주세요!!");
+				return;
+			}
+		});
+	}
+	function fileSelectThumb(e) {
+		if ($(".image_file_thumb").val() == "") {
 			console.log("empty");
 			$("#filecheck").val(0);
 		} else {
@@ -80,10 +101,16 @@
 						<img src="resources/images/default.jpg" alt="" class="img-circle"
 							width="200px" height="200px" id="profile_img"><br>
 						<div>
-							<label for="file"></label> 
-							<input type="file" name="image_files" id="class_profile" required> 
-							<input type="hidden" id="filecheck"
-								value="0" name="fileCheck" required>
+							<label for="thumbnail">썸네일</label> 
+							<input type="file" class="image_file_thumb" name="thumbnail" id="thumbnail"  required > 
+						</div>
+						<div>
+							<label for="spec">상세 이미지</label> 
+							<input type="file" class="image_file" name="spec" id="spec" multiple="multiple" required > 
+						</div>
+						<div>
+							<label for="content">내용 이미지</label> 
+							<input type="file" class="image_file" name="content" id="content"  required > 
 						</div>
 					</div>
 					<div>
@@ -96,12 +123,12 @@
 						<span class="class_info_title">카테고리</span> 
 						<select
 							name="onc_cts_code" required>
-							<option value="ca">art</option>
-							<option value="cb">craft</option>
-							<option value="cc">digital drawing</option>
-							<option value="cd">exercise</option>
-							<option value="ce">programming</option>
-							<option value="cf">cooking</option>
+							<option value="ca">미술</option>
+							<option value="cb">공예</option>
+							<option value="cc">디지털 드로잉</option>
+							<option value="cd">운동</option>
+							<option value="ce">요리</option>
+							<option value="cf">프로그래밍</option>
 						</select><br>
 						<p></p>
 						<span class="class_info_title">난이도</span> <input type="radio"

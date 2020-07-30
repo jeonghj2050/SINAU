@@ -179,12 +179,13 @@ public class MemberController {
 	}
 	
 	@GetMapping("cMyClassUp")
-	public String cMyClassUp() {
+	public ModelAndView cMyClassUp(String onc_code) {
 		log.info("cMyClassUp() 실행");
 		
 		//보여질 내용들을 가져온다.
+		mv=mServ.getCreatorOnlineInfo(onc_code);
 		
-		return "mypage/cmypage_classup";
+		return mv;
 	}
 	
 }

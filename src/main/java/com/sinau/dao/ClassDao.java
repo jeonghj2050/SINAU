@@ -16,6 +16,7 @@ import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.VideoDto;
+import com.sinau.dto.VideoFileDto;
 
 public interface ClassDao {
 	//email에 해당하는 회원의 주문 내역을 가져온다.
@@ -40,4 +41,8 @@ public interface ClassDao {
 	
 	//크리에이터가 등록한 강좌의 정보를 가져온다.
 	public List<CreatorClassInfoDto> getCreatorClassList(String m_email);
+	//onc_code에 해당하는 강좌 정보를 가져온다.
+	CreatorClassInfoDto getCreatorClassInfo(String onc_code);
+	//v_code에 저장된 동영상 파일을 모두 가져온다.
+	List<VideoFileDto> getVideoList(String v_code);
 }

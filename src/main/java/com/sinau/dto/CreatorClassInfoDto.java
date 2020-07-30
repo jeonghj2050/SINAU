@@ -1,5 +1,7 @@
 package com.sinau.dto;
 
+import java.sql.Timestamp;
+
 import lombok.Data;
 
 @Data
@@ -10,5 +12,10 @@ public class CreatorClassInfoDto {
 	private String onc_content;
 	private int onc_rstnum;
 	private int onc_stnum;
+	private int onc_sale;
+	private String onc_level;
+	private Timestamp onc_sdate;
+	private Timestamp onc_edate;
 	private String f_sysname;
+	private String onc_cts_code;
 }

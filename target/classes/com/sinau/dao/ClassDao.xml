@@ -81,5 +81,11 @@
 		select * from creatorclassinfo where onc_m_email=#{onc_m_email}
 	</select>
 	
-
+	<select id="getCreatorClassInfo" parameterType="String" resultType="com.sinau.dto.CreatorClassInfoDto">
+		select * from creatorclassinfo where onc_code=#{onc_code}
+	</select>
+	
+	<select id="getVideoList" parameterType="String" resultType="com.sinau.dto.VideoFileDto">
+		select * from vf where vf_v_code=#{v_code}
+	</select>
 </mapper>

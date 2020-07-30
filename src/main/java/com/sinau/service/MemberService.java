@@ -402,6 +402,23 @@ public class MemberService {
 		return mv;
 	}
 
+	public ModelAndView getCreatorOnlineInfo(String onc_code) {
+		mv=new ModelAndView();
+		
+		//onc_code에 해당하는 강의 정보를 가져온다.
+		CreatorClassInfoDto classInfo=cDao.getCreatorClassInfo(onc_code);
+		//onc_code에 해당하는 강의 목록 코드를 가져온다.
+		String v_code=cmDao.getVCode(onc_code);
+		//v_code에 있는 영상을 List로 가져온다.
+		List<VideoFileDto> videoList=cDao.getVideoList(v_code);
+		
+		mv.addObject("classInfo",classInfo);
+		mv.addObject("videoList",videoList);
+		
+		mv.setViewName("mypage/cmypage_classup");
+		return mv;
+	}
+
 	@Transactional
 	public ModelAndView insertNewClass(MultipartHttpServletRequest multi) {
 		mv=new ModelAndView();
@@ -478,13 +495,37 @@ public class MemberService {
 			folder.mkdir();
 		}
 
-		
-
 		//multi에서 동영상 파일 가져오기(여러개의 파일이 넘어 올 수도 있다.)
 		List<MultipartFile> fList=multi.getFiles("video_files");
-		List<MultipartFile> images=multi.getFiles("image_files");
-		for(int i=0;i<images.size();i++) {
-			MultipartFile mf=images.get(i);
+		for(int i=0;i<fList.size();i++) {
+			MultipartFile mf=fList.get(i);
+			//실제 파일명 가져오기
+			String oriName=mf.getOriginalFilename();
+			video.setVf_oriname(oriName);
+
+			//저장 파일명 만들기
+			String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
+			video.setVf_sysname(sysName);
+
+			log.info("fileup() - oriName : "+oriName);
+			log.info("fileup() - sysName : "+sysName);
+
+			mf.transferTo(new File(path+sysName));
+
+			if(sort.equals("insert")) {
+				//db에 파일 저장
+				cmDao.videoInsert(video);
+			}
+//				else if(sort.equals("update")) {
+//				//db에 내용을 수정한다.
+//				cmDao.updateFile(fmap);
+//			}
+		}
+		
+		List<MultipartFile> thumbnail=multi.getFiles("thumbnail");
+		for(int i=0;i<thumbnail.size();i++) {
+			file.setF_code("foth_");
+			MultipartFile mf=thumbnail.get(i);
 			//실제 파일명 가져오기
 			String oriName=mf.getOriginalFilename();
 			file.setF_oriname(oriName);
@@ -510,33 +551,64 @@ public class MemberService {
 //			}
 		}
 
-		for(int i=0;i<fList.size();i++) {
-			MultipartFile mf=fList.get(i);
+		List<MultipartFile> spec=multi.getFiles("spec");
+		for(int i=0;i<spec.size();i++) {
+			file.setF_code("fosp_");
+			MultipartFile mf=spec.get(i);
 			//실제 파일명 가져오기
 			String oriName=mf.getOriginalFilename();
-			video.setVf_oriname(oriName);
+			file.setF_oriname(oriName);
 
 			//저장 파일명 만들기
 			String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
-			video.setVf_sysname(sysName);
+			file.setF_sysname(sysName);
 
 			log.info("fileup() - oriName : "+oriName);
 			log.info("fileup() - sysName : "+sysName);
 
+			//저장 위치로 파일 전송
+			//새로 만든 파일이름으로 지정된 경로에 전송
 			mf.transferTo(new File(path+sysName));
 
 			if(sort.equals("insert")) {
 				//db에 파일 저장
-				cmDao.videoInsert(video);
+				cmDao.imageInsert(file);
 			}
 //				else if(sort.equals("update")) {
 //				//db에 내용을 수정한다.
 //				cmDao.updateFile(fmap);
 //			}
-
 		}
+		
+		List<MultipartFile> content=multi.getFiles("content");
+		log.info(content.size()+"");
+		for(int i=0;i<content.size();i++) {
+			file.setF_code("foco_");
+			MultipartFile mf=content.get(i);
+			//실제 파일명 가져오기
+			String oriName=mf.getOriginalFilename();
+			file.setF_oriname(oriName);
 
+			//저장 파일명 만들기
+			String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
+			file.setF_sysname(sysName);
+
+			log.info("fileup() - oriName : "+oriName);
+			log.info("fileup() - sysName : "+sysName);
+
+			//저장 위치로 파일 전송
+			//새로 만든 파일이름으로 지정된 경로에 전송
+			mf.transferTo(new File(path+sysName));
+
+			if(sort.equals("insert")) {
+				//db에 파일 저장
+				cmDao.imageInsert(file);
+			}
+//				else if(sort.equals("update")) {
+//				//db에 내용을 수정한다.
+//				cmDao.updateFile(fmap);
+//			}
+		}
 	}
-
 
 }

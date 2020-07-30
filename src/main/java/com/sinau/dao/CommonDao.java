@@ -33,6 +33,9 @@ public interface CommonDao {
 	void videoInsert(VideoFileDto video);
 
 	void imageInsert(FilesDto file);
+
+	//onc_code에 해당하는 v_code를 가져온다.
+	String getVCode(String onc_code);
 	
 	
 }

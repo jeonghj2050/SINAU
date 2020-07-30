@@ -439,3 +439,9 @@ article>div .nav.nav-tabs>li {
 #vf_list>tbody>tr>td>input {
 	width: 80%;
 }
+
+/* 강의 수정 */
+.spec_images_wrap img{
+	width : 80px;
+	height:80px;
+}

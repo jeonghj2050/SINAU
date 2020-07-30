@@ -28,9 +28,12 @@
 	</insert>
 	<insert id="imageInsert" parameterType="com.sinau.dto.FilesDto">
 		<![CDATA[
-			insert into f values('f_'||SEQ_f.NEXTVAL,#{f_oriname},#{f_sysname},
+			insert into f values(#{f_code}||SEQ_f.NEXTVAL,#{f_oriname},#{f_sysname},
 					#{f_pcode},#{f_cts_code})
 		]]>
 	</insert>
 	
+	<select id="getVCode" parameterType="String" resultType="String">
+		select v_code from v where v_onc_code=#{onc_code}
+	</select>
 </mapper>
