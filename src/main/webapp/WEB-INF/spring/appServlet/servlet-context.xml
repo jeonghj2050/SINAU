@@ -40,7 +40,7 @@
 			<exclude-mapping path="/memInsert"/>
 			<exclude-mapping path="/idCheck"/>
 			<beans:bean 
-				class="com.sinau.util.SessionInterceptor"/>
+				class="com.sinau.util.SessionInterceptor" />
 		</interceptor>
 	</interceptors>
 	

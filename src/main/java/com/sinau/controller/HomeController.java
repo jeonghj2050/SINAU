@@ -40,9 +40,4 @@ public class HomeController {
 		return "joinFrm";
 	}
 	
-	@GetMapping("store")
-	public String store() {
-		
-		return "store/store_info";
-	}
 }
