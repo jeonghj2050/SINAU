@@ -63,8 +63,8 @@ $(document).ready(function(){
 <body>
 	<div class="loginbox">
 		<form class="login-form" action="access" method="post">
-			<h1 class="join-header">SINAU</h1>
-			<h3 class="join-header1">로그인</h3>
+			<h1 class="join-header"><a href="./">SINAU</a></h1>
+			<h3 class="join-header1"><a href="./">로그인</a></h3>
 			<h4>E-MAIL</h4>
 			<input type="text" class="login_input" name="m_email" placeholder="example@naver.com"></input>
 			<h4>PASSWORD</h4>

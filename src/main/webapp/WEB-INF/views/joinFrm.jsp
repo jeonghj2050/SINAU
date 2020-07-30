@@ -61,14 +61,14 @@ $(document).ready(function() {
 </head>
 <body>
 	<div class="content1">
-		<h1 class="join-header">SINAU</h1>
-			<h3 class="join-header1">회원 가입</h3>
+		<h1 class="join-header"><a href="./">SINAU</a></h1>
+			<h3 class="join-header1"><a href="./">회원 가입</a></h3>
 		<div class="reaiobutton">
 			<input type="radio" name="radio" id="r1" value="0"><label for="r1">일반</label>&nbsp;
 			<input type="radio" name="radio" id="r2" value="1"><label for="r2">크리에이터</label>&nbsp;
   			<input type="radio" name="radio" id="r3" value="2"><label for="r3">판매자</label>
 		</div><br>	
-		<form name="joinFrm" id="join" class="join-form" action="memberInsert" method="post" onsubmit="return check()">
+		<form name="joinFrm" id="join" class="join-form" action="memberInsert" method="post" onsubmit="return check()" enctype="multipart/form-data">
 		
 		<!-- <div class="img-box">
 				<img class="img" id=m_photo name="m_photo" src="resources/images/user.png" width="100" height="100"><br>
@@ -93,7 +93,7 @@ $(document).ready(function() {
 				<span style="height: 25px;"></span>
 				<font id="chkNotice" size="2"></font><br>
 			<input type="text" id="phone" name="m_phone" class="login-input" title="연락처"	placeholder="연락처 ex)01000000000"> 
-			<input type="text" id="birth" name="m_birth" class="login-input" title="생년월일" placeholder="생년월일  ex)00000000">
+			<input type="date" id="birth" name="m_birth" class="login-input" title="생년월일" placeholder="생년월일  ex)00000000">
 			<input type="text" id="license" name="m_license" class="login-input" title="사업자번호"	placeholder="사업자번호"><br>
 			<input type="submit" class="login-btn" value="회원 가입"><input type="reset" class="relgoin-btn" value="다시 작성">
 			<input type="text" name="m_group" class="group" value="">
@@ -203,6 +203,26 @@ $(document).ready(function(){
 		var tmppath=URL.createObjectURL(event.target.files[0]);
 		$('#m_photo').attr('src',tmppath);
 	});
+});
+</script>
+<script type="text/javascript">
+$("#file").on('change',function(){
+	var file = document.getElementById("file");
+	console.log(file);
+	var filelist = file.files;
+	console.log(filelist);
+	
+	var fileName = $("#file").val();
+	$(".upload-name").val(fileName);
+	
+	if(fileName == ""){
+		console.log("empty");
+		$("#filecheck").val(0);
+	}
+	else{
+		console.log("not empty");
+		$("#filecheck").val(1);
+	}
 });
 </script>
 </html>

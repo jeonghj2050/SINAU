@@ -38,7 +38,7 @@
 			<exclude-mapping path="/loginFrm"/>
 			<exclude-mapping path="/joinFrm"/>
 			<exclude-mapping path="/access"/>
-			<exclude-mapping path="/memInsert"/>
+			<exclude-mapping path="/memberInsert"/>
 			<exclude-mapping path="/idCheck"/>
 			<beans:bean 
 				class="com.sinau.util.SessionInterceptor"/>

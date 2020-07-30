@@ -1,5 +1,8 @@
 package com.sinau.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,33 +10,25 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.sinau.dao.MemberDao;
-import com.sinau.dto.MyCouponDto;
-import com.sinau.dto.MemberDto;
 import com.sinau.dao.ClassDao;
 import com.sinau.dao.CommonDao;
 import com.sinau.dao.MemberDao;
-import com.sinau.dto.MemberDto;
-import com.sinau.dto.MemberImg;
-import com.sinau.controller.HomeController;
-import com.sinau.dao.ClassDao;
 import com.sinau.dao.StoreDao;
+import com.sinau.dto.MemberDto;
+import com.sinau.dto.MyCouponDto;
 import com.sinau.dto.MyMemberInfoDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffLikeDto;
 import com.sinau.dto.OffOrdersDto;
-import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
@@ -61,9 +56,10 @@ public class MemberService {
 		String result = null;
 
 		try {
-
+			System.out.println(memail + "11111111111111111111111111111111111111111111111111111111111111111");
 			// 1=아이디 있음 0=아이디 없음
 			int cnt = mDao.idCheck(memail);
+			System.out.println(memail + "2222222222222222222222222222222222222222222222222222222222222222222222");
 			if (cnt == 1) {
 				result = "fail";
 			} else {
@@ -75,23 +71,42 @@ public class MemberService {
 		return result;
 	}
 
-	public ModelAndView memberInsert(MemberDto member, //MultipartHttpServletRequest multi, 
+	public ModelAndView memberInsert( MultipartHttpServletRequest multi, 
 			RedirectAttributes rttr) {
+		MemberDto member = new MemberDto();
 		mv = new ModelAndView();
 		String view = null;
-
+		
 		BCryptPasswordEncoder pwdEncode = new BCryptPasswordEncoder();
 
-		String encPwd = pwdEncode.encode(member.getM_pwd());
-
+		String encPwd = pwdEncode.encode(multi.getParameter("m_pwd"));
+		
+		
+		member.setM_email(multi.getParameter("m_email"));
+		member.setM_name(multi.getParameter("m_name"));
 		member.setM_pwd(encPwd);
-
+		member.setM_phone(Integer.parseInt(multi.getParameter("m_phone")));
+		member.setM_birth(multi.getParameter("m_birth"));
+		if(!(multi.getParameter("m_license")==null)) {
+			member.setM_license(Integer.parseInt(multi.getParameter("m_license")));
+		}
+		
+		member.setM_group(multi.getParameter("m_group"));
+		member.setM_state(Integer.parseInt(multi.getParameter("m_state")));
+		int fcheck  = Integer.parseInt(multi.getParameter("fileCheck"));
+		
+	
 		try {
 			mDao.memberInsert(member);
-
+			
 			view = "redirect:/";
 			rttr.addFlashAttribute("msg", "가입 성공");
+			if(fcheck == 1) {
+				//업로드할 파일이 있음.
+				fileUp(multi, member.getM_email());
+			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			view = "redirect:joinFrm";
 			rttr.addFlashAttribute("msg", "가입 실패");
 		}
@@ -154,6 +169,51 @@ public class MemberService {
 	 * //저장 위치로 파일 전송 //새로 만든 파일이름으로 지정된 경로에 전송 mf.transferTo(new
 	 * File(filePath+sysName)); //DB에 파일 정보 저장(dDao) bDao.fileInsert(fmap); } }
 	 */
+
+	private void fileUp
+		(MultipartHttpServletRequest multi, String m_email) 
+			throws IllegalStateException, IOException{
+		
+		String filePath = multi.getSession()
+				.getServletContext()
+				.getRealPath("/") + "resources/upload/";
+		
+		
+		File folder = new File(filePath);
+		if(folder.isDirectory() == false) {
+			//경로를 설정한 폴더가 없다면
+			folder.mkdir();//upload 폴더 생성
+		}
+		
+		Map<String, String> fmap = 
+				new HashMap<String, String>();
+		
+		fmap.put("m_email", String.valueOf(m_email));
+		
+		List<MultipartFile> fList =
+				multi.getFiles("files");
+		
+		for(int i = 0; i < fList.size(); i++) {
+			MultipartFile mf = fList.get(i);
+			//파일의 실제 이름 가져오기
+			String oriName = mf.getOriginalFilename();
+			//실제 파일명을 맵에 저장
+			fmap.put("oriFileName", oriName);
+			//저장 파일명 작성(밀리초 값을 사용)
+			String sysName = System.currentTimeMillis()
+					+ "."
+					+ oriName.substring
+					(oriName.lastIndexOf(".") + 1);
+			fmap.put("sysFileName", sysName);
+			//로그에 찍어서 확인
+			log.info(sysName);
+			//저장 위치로 파일 전송
+			//새로 만든 파일이름으로 지정된 경로에 전송
+			mf.transferTo(new File(filePath+sysName));
+			//DB에 파일 정보 저장(dDao)
+			mDao.fileInsert(fmap);
+		}
+	}
 
 	// 로그인 회원의 그룹을 반환한다.
 	public String getLoginMemberGroup(String email) {

@@ -40,9 +40,9 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberInsert") 
-	public ModelAndView memInsert(MemberDto member,//MultipartHttpServletRequest multi,
+	public ModelAndView memInsert(MultipartHttpServletRequest multi,
 			 RedirectAttributes rttr) { 
-	mv = mServ.memberInsert(member, rttr);
+	mv = mServ.memberInsert(multi, rttr);
 	 
 	return mv;
 	}

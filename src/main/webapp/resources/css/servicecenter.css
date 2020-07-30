@@ -13,9 +13,9 @@ header {
 	margin: auto;
 }
 
-section {
+.sectionover {
 	width: 1300px;
-	height : 800px;
+	overflow: auto;
 	margin: 0 auto;
 }
 
@@ -349,46 +349,94 @@ li a:hover {
 
 /* FAQ */
 .FAQ_box {
-	width: 1100px;
-	height: 800px;
+	width: 1102px;
+	border: 1px solid #ddd;
 	float : right;
 }
-
-
-.FAQ_box>.FAQ_tab>li {
-	width: 219.8px;
-	height: 35px;
-	float: left;
-    text-align: center;
-    padding-top: 6px;
-    border : 1px solid #ddd;
+.FAQ_tab {
+	width: 1100px;
+	height: 70px;
+	float : right;
+	text-align: center;
 }
 
-.tab_container{
-	border: 1px solid #ddd;
+.FAQ_tab>li {
+	float : left;
+	width: 220px;
+	height: 35px;
+	border : 1px solid #ddd;
+	padding: 4px;
+	color : #ddd;
 }
 
 .FAQ_title {
 	width: 1100px;
-	height: 35px;
-	float : left;
-	border: 1px solid #ddd;
-}
-
-.FAQ_title>div {
-	float : left;
+	height: 40px;
 	text-align: center;
+	float : right;
 }
 
-.FAQ_num {
-	width : 100px;
-	height: 35px;
+.FAQ_title>.FAQ_num {
+	width: 100px;
+	height: 40px;
+	float : left;
+	border : 1px solid #ddd;
+	padding: 5px;
+	border-right: none;
 }
-.FAQ_content {
-	width : 1000px;
-	height: 35px;
+
+.FAQ_title>.FAQ_content {
+	width: 1000px;
+	height: 40px;
+	float : right;
+	border : 1px solid #ddd;
+	padding: 5px;
+	border-left: none;
 }
 
+.tab_container {
+	width: 1100px;
+	text-align: center;
+	float : right;
+}
 
+.tab_container>.tab_content>.contents>.num {
+	width: 100px;
+	height: 40px;
+	border : 1px solid #ddd;
+	padding: 5px;
+	border-right: none;
+	float : left
+}
 
+.tab_container>.tab_content>.contents>.contentsre>.num {
+	width: 100px;
+	height: 40px;
+	border : 1px solid #ddd;
+	padding: 8px;
+	border-right: none;
+	float : left
+}
 
+.tab_container>.tab_content>.contents>button {
+	width: 1000px;
+	height: 40px;
+	float : right;
+	border : 1px solid #ddd;
+	padding: 5px;
+	text-align: left;
+	border-left: none;
+	background-color: white;
+	outline: none;
+	font-size: 16px;
+}
+.tab_container>.tab_content>.contents>div {
+	width: 1101px;
+	float : right;
+	border : 1px solid #ddd;
+	padding: 5px;
+	text-align: left;
+	border-left : 2px solid #ddd;
+	background-color: white;
+	font-size: 15px;	
+}

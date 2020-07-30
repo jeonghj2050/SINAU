@@ -7,7 +7,7 @@
 	<select id="getList" parameterType="String"
 		resultType="com.sinau.dto.QuestionInfoDto">
 		<![CDATA[
-		select replace(q_code,'q_','') as q_code,q_cts_code, q_title, q_date, m_name,q_anfield 
+		select replace(q_code,'q_','') as q_code, cts_name, q_title, q_date, m_name,q_anfield 
 		from questioninfo
 		where q_m_email = #{email}
 		]]>
