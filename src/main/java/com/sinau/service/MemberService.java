@@ -40,6 +40,7 @@ import com.sinau.dao.StoreDao;
 import com.sinau.dto.MyMemberInfoDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
+import com.sinau.dto.OffClassDto;
 import com.sinau.dto.OffLikeDto;
 import com.sinau.dto.OffOrdersDto;
 import com.sinau.dto.OnlineClassDto;
@@ -421,67 +422,154 @@ public class MemberService {
 
 	@Transactional
 	public ModelAndView insertNewClass(MultipartHttpServletRequest multi) {
+		OnlineClassDto online;
+		OffClassDto offine;
 		mv=new ModelAndView();
-		//파일 정보를 담을 리스트
-		List<VideoFileDto> fileList=new ArrayList<VideoFileDto>();
 		
-		//온라인 강좌 정보를 저장한다.
-		OnlineClassDto online=new OnlineClassDto();
-		online.setOnc_title(multi.getParameter("onc_title"));
-		online.setOnc_content(multi.getParameter("onc_content"));
-		online.setOnc_cts_code(multi.getParameter("onc_cts_code"));
-		online.setOnc_teacher(((MemberDto)session.getAttribute("mb")).getM_name());
-		online.setOnc_m_email(((MemberDto)session.getAttribute("mb")).getM_email());
-		online.setOnc_level(multi.getParameter("onc_level"));
-		online.setOnc_stnum(Integer.parseInt(multi.getParameter("onc_stnum")));
-		online.setOnc_sale(Integer.parseInt(multi.getParameter("onc_sale")));
-		online.setOnc_sdate(multi.getParameter("onc_sdate"));
-		online.setOnc_edate(multi.getParameter("onc_edate"));
-	
-		String[] v_titles=multi.getParameterValues("v_title");
-		String[] v_contents=multi.getParameterValues("v_content");
-		
-		try {
-			//강좌 정보를 db에 저장
-			cDao.insertClassInfo(online);
+		String sort=multi.getParameter("class_sort");
+		//sort가 onc이면 온라인 강좌 정보를 저장한다.
+		if(sort.equals("onc")) {
+			online=new OnlineClassDto();
+			online.setOnc_title(multi.getParameter("onc_title"));
+			online.setOnc_content(multi.getParameter("onc_content"));
+			online.setOnc_cts_code(multi.getParameter("onc_cts_code"));
+			online.setOnc_teacher(((MemberDto)session.getAttribute("mb")).getM_name());
+			online.setOnc_m_email(((MemberDto)session.getAttribute("mb")).getM_email());
+			online.setOnc_level(multi.getParameter("onc_level"));
+			online.setOnc_stnum(Integer.parseInt(multi.getParameter("onc_stnum")));
+			online.setOnc_sale(Integer.parseInt(multi.getParameter("onc_sale")));
+			online.setOnc_sdate(multi.getParameter("onc_sdate"));
+			online.setOnc_edate(multi.getParameter("onc_edate"));
 			
-			//강좌에 비디오 저장
-			VideoDto vList=new VideoDto();
-			vList.setV_onc_code(online.getOnc_code());
+			String[] v_titles=multi.getParameterValues("v_title");
+			String[] v_contents=multi.getParameterValues("v_content");
 			
-			//강좌에 이미지 저장
-			FilesDto file=new FilesDto();
-			file.setF_pcode(online.getOnc_code());
-			file.setF_cts_code("onc");
-			
-			//강의에 해당하는 동영상 목록 정보를 등록한다.
-			cDao.insertVideoList(vList);
-			log.info("v_code : " + vList.getV_code());
-			
-			//동영상 파일들을 반복해서 파일을 등록한다.
-			for(int i=0;i<v_titles.length;i++) {
-				VideoFileDto vFile=new VideoFileDto();
-				String v_title=v_titles[i];
-				vFile.setV_title(v_title);
-				String v_content=v_contents[i];
-				vFile.setV_content(v_content);
-				vFile.setVf_v_code(vList.getV_code());
+			try {
+				//강좌 정보를 db에 저장
+				cDao.insertOnClassInfo(online);
 				
-				videoUp(multi, vFile,file, "insert");;
+				//강좌에 비디오 저장
+				VideoDto vList=new VideoDto();
+				vList.setV_onc_code(online.getOnc_code());
+				
+				//강좌에 이미지 저장
+				FilesDto file=new FilesDto();
+				file.setF_pcode(online.getOnc_code());
+				file.setF_cts_code(sort);
+				
+				//강의에 해당하는 동영상 목록 정보를 등록한다.
+				cDao.insertVideoList(vList);
+				log.info("v_code : " + vList.getV_code());
+
+				VideoFileDto vFile=new VideoFileDto();
+				vFile.setVf_v_code(vList.getV_code());
+				videoUp(multi, vFile,file);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		
-		
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mv.setViewName("redirect:./cMypage");
+			
 		}
-		mv.setViewName("redirect:./cMypage");
+		/*
+		 * else if(sort.equals("ofc")) { offine=new OffClassDto();
+		 * 
+		 * String[] v_titles=multi.getParameterValues("v_title"); String[]
+		 * v_contents=multi.getParameterValues("v_content");
+		 * 
+		 * try { //강좌 정보를 db에 저장 cDao.insertOffClassInfo(offine);
+		 * 
+		 * //강좌 일정 목록 을 db에 저장
+		 * 
+
+		 * 
+		 * } catch (Exception e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } mv.setViewName("redirect:./cMypage"); }
+		 */
 		return mv;
 	}
+	//크리에이터가 강좌내용을 수정하기 위한 메소드
+	public ModelAndView updateClassInfo(MultipartHttpServletRequest multi) {
+		mv=new ModelAndView();	
+		OnlineClassDto online;
+		OffClassDto offine;
+		
+		String sort=multi.getParameter("class_sort");
+		//sort가 onc이면 온라인 강좌 정보를 저장한다.
+		if(sort.equals("onc")) {
+			online=new OnlineClassDto();
+			online.setOnc_code(multi.getParameter("onc_code"));
+			online.setOnc_title(multi.getParameter("onc_title"));
+			online.setOnc_content(multi.getParameter("onc_content"));
+			online.setOnc_cts_code(multi.getParameter("onc_cts_code"));
+			online.setOnc_level(multi.getParameter("onc_level"));
+			online.setOnc_stnum(Integer.parseInt(multi.getParameter("onc_stnum")));
+			online.setOnc_sale(Integer.parseInt(multi.getParameter("onc_sale")));
+			online.setOnc_sdate(multi.getParameter("onc_sdate"));
+			online.setOnc_edate(multi.getParameter("onc_edate"));
+			
+			try {
+				//강좌 정보를 수정한다.
+				cDao.updateOnClassInfo(online);
+				
+				//vf_code에 저장 된 파일을 지운다.
+//				String v_code=multi.getParameter("vf_v_code");
+//				cmDao.deleteVideoFile(v_code);
+//				
+//				//onc_code로 저장된 파일을 삭제한다.
+//				
+//				
+//				//강좌에 이미지 저장
+//				FilesDto file=new FilesDto();
+//				file.setF_pcode(online.getOnc_code());
+//				file.setF_cts_code(sort);
+//				
+//
+//				VideoFileDto video=new VideoFileDto();
+//				video.setVf_v_code(v_code);
+//				
+//				videoUp(multi, video, file);
 
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			mv.setViewName("redirect:./cMypage");
+		}
 	
+		return mv;
+	}
+	
+	public String deleteClassVideo(String vf_code) {
+		cmDao.deleteVideoOne(vf_code);
+		return "success";
+	}
+	
+	public VideoFileDto uploadClassVideo(MultipartFile[] updateFiles,String vf_code) {
+		VideoFileDto video=new VideoFileDto();
+		log.info("uploadClassVideoSer()"+updateFiles[0].getOriginalFilename());
+		String path=session.getServletContext().getRealPath("/")+"resources/upload/";
+		for(MultipartFile file:updateFiles) {
+			log.info("1111"+file.getOriginalFilename());
+			String oriName=file.getOriginalFilename();
+			String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
+			
+			try {
+				file.transferTo(new File(path+sysName));
+				cmDao.updateVideoOne(vf_code,oriName,sysName);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		}
+		video=cmDao.getVideoOne(vf_code);
+		return video;
+	}
+
 	//크리에이터 강의의 동영상을 업로드하는 메소드
-	public void videoUp(MultipartHttpServletRequest multi,VideoFileDto video,FilesDto file,String sort) throws IllegalStateException, IOException {
+	public void videoUp(MultipartHttpServletRequest multi,VideoFileDto video,FilesDto file) throws IllegalStateException, IOException {
 		//파일을 실제 물리 경로에 저장
 		//upload폴더에 저장
 		//"/src/main/webapp/resources/upload
@@ -494,11 +582,16 @@ public class MemberService {
 		if(folder.isDirectory()==false) {
 			folder.mkdir();
 		}
-
+		String[] v_titles=multi.getParameterValues("v_title");
+		String[] v_contents=multi.getParameterValues("v_content");
 		//multi에서 동영상 파일 가져오기(여러개의 파일이 넘어 올 수도 있다.)
 		List<MultipartFile> fList=multi.getFiles("video_files");
 		for(int i=0;i<fList.size();i++) {
 			MultipartFile mf=fList.get(i);
+
+			video.setV_title(v_titles[i]);
+			video.setV_content(v_contents[i]);
+
 			//실제 파일명 가져오기
 			String oriName=mf.getOriginalFilename();
 			video.setVf_oriname(oriName);
@@ -512,10 +605,9 @@ public class MemberService {
 
 			mf.transferTo(new File(path+sysName));
 
-			if(sort.equals("insert")) {
-				//db에 파일 저장
-				cmDao.videoInsert(video);
-			}
+		
+			cmDao.videoInsert(video);
+			
 //				else if(sort.equals("update")) {
 //				//db에 내용을 수정한다.
 //				cmDao.updateFile(fmap);
@@ -541,10 +633,9 @@ public class MemberService {
 			//새로 만든 파일이름으로 지정된 경로에 전송
 			mf.transferTo(new File(path+sysName));
 
-			if(sort.equals("insert")) {
-				//db에 파일 저장
+			
 				cmDao.imageInsert(file);
-			}
+			
 //				else if(sort.equals("update")) {
 //				//db에 내용을 수정한다.
 //				cmDao.updateFile(fmap);
@@ -570,10 +661,9 @@ public class MemberService {
 			//새로 만든 파일이름으로 지정된 경로에 전송
 			mf.transferTo(new File(path+sysName));
 
-			if(sort.equals("insert")) {
-				//db에 파일 저장
+			
 				cmDao.imageInsert(file);
-			}
+			
 //				else if(sort.equals("update")) {
 //				//db에 내용을 수정한다.
 //				cmDao.updateFile(fmap);
@@ -600,15 +690,14 @@ public class MemberService {
 			//새로 만든 파일이름으로 지정된 경로에 전송
 			mf.transferTo(new File(path+sysName));
 
-			if(sort.equals("insert")) {
-				//db에 파일 저장
+		
 				cmDao.imageInsert(file);
-			}
+			
 //				else if(sort.equals("update")) {
 //				//db에 내용을 수정한다.
 //				cmDao.updateFile(fmap);
 //			}
 		}
 	}
-
+	
 }

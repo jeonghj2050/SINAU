@@ -36,4 +36,20 @@
 	<select id="getVCode" parameterType="String" resultType="String">
 		select v_code from v where v_onc_code=#{onc_code}
 	</select>
+	
+	<delete id="deleteVideoFile" parameterType="String">
+		delete from vf where vf_v_code=#{v_code}
+	</delete>
+	
+	<delete id="deleteVideoOne" parameterType="String">
+		delete from vf where vf_code=#{vf_code}
+	</delete>
+	
+	<update id="updateVideoOne" parameterType="String">
+		update vf set vf_oriname=#{oriName},vf_sysname=#{sysName} where vf_code=#{vf_code}
+	</update>
+	
+	<select id="getVideoOne" parameterType="String" resultType="com.sinau.dto.VideoFileDto">
+		select * from vf where vf_code=#{vf_code}	
+	</select>
 </mapper>

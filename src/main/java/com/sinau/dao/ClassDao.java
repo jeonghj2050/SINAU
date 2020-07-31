@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import com.sinau.dto.CreatorClassInfoDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
+import com.sinau.dto.OffClassDto;
 import com.sinau.dto.OffLikeDto;
 import com.sinau.dto.OffOrdersDto;
 import com.sinau.dto.OnlineClassDto;
@@ -36,8 +37,13 @@ public interface ClassDao {
 	List<OffLikeDto> getOffLikeList(String email);
 	
 	void mclUpdateState(OrderDto order);
-	void insertClassInfo(OnlineClassDto online);
+	
+	void insertOnClassInfo(OnlineClassDto online);
 	void insertVideoList(VideoDto vList);
+	void updateOnClassInfo(OnlineClassDto online);
+	
+	void insertOffClassInfo(OffClassDto offine);
+
 	
 	//크리에이터가 등록한 강좌의 정보를 가져온다.
 	public List<CreatorClassInfoDto> getCreatorClassList(String m_email);
@@ -45,4 +51,6 @@ public interface ClassDao {
 	CreatorClassInfoDto getCreatorClassInfo(String onc_code);
 	//v_code에 저장된 동영상 파일을 모두 가져온다.
 	List<VideoFileDto> getVideoList(String v_code);
+
+
 }

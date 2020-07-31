@@ -36,6 +36,18 @@ public interface CommonDao {
 
 	//onc_code에 해당하는 v_code를 가져온다.
 	String getVCode(String onc_code);
+
+	//vf에서 v_code에 해당하는 파일 목록 삭제
+	void deleteVideoFile(String v_code);
+
+	//vf에서 vf_code에 해당하는 파일 삭제
+	void deleteVideoOne(String vf_code);
+
+	//vf_code에 해당하는 파일을 변경하다.
+	void updateVideoOne(@Param("vf_code")String vf_code, @Param("oriName")String oriName, @Param("sysName")String sysName);
+
+	//수정 후 다시 데이터를 보내기 위해 vf_code에 해당하는 동영상 정보를 가져온다.
+	VideoFileDto getVideoOne(String vf_code);
 	
 	
 }

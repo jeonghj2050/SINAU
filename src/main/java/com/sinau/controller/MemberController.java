@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sinau.dto.MyCouponDto;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.RefundDto;
+import com.sinau.dto.VideoFileDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.service.MemberService;
 
@@ -186,6 +188,35 @@ public class MemberController {
 		mv=mServ.getCreatorOnlineInfo(onc_code);
 		
 		return mv;
+	}
+	
+	@PostMapping("cMyClassUp")
+	public ModelAndView cMyClassUp(MultipartHttpServletRequest multi) {
+		log.info("cMyClassUp(post)");
+		
+		mv=mServ.updateClassInfo(multi);
+		
+		return mv;
+	}
+
+	//동영상 삭제를 위한 비동기 처리 메소드
+	@PostMapping(value = "deleteClassVideo",produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String deleteClassVideo(String vf_code){
+		System.out.println(vf_code);
+		String msg=mServ.deleteClassVideo(vf_code);
+	
+		return msg;
+	}
+	//동영상 삭제를 위한 비동기 처리 메소드
+	@PostMapping(value = "updateClassVideo")
+	@ResponseBody
+	public VideoFileDto updateClassVideo(MultipartFile[] updateFiles,String vf_code){
+		
+		log.info("updateClassVideo()!!"+updateFiles[0].getOriginalFilename());
+		VideoFileDto video =mServ.uploadClassVideo(updateFiles,vf_code);
+
+		return video;
 	}
 	
 }

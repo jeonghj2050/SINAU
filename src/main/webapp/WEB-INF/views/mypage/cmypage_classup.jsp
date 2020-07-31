@@ -114,7 +114,9 @@
 				<div style="background-color:rgb(204,204,204);">온라인</div>
 			</div>
 			
-			<form action="./cMyNewClass" method="post" enctype="multipart/form-data">
+			<form action="./cMyClassUp" method="post" enctype="multipart/form-data">
+				<input type="hidden" value=${classInfo.onc_code } name="onc_code"/>
+				<input type="hidden" value="onc" name="class_sort"/>
 				<div class="class_form" id="onc_form">
 				<div class="class_info_form">
 					<div class="class_profile_image">
@@ -129,7 +131,9 @@
 							<input type="file" class="image_file" name="spec" id="uspec" multiple="multiple" required > 
 						</div>
 						<div>
-							<div class="spec_images_wrap"></div>
+							<div class="spec_images_wrap">
+				
+							</div>
 						</div>
 						<div>
 							<label for="content">내용 이미지</label> 
@@ -169,23 +173,26 @@
 						<input type="date" name="onc_sdate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${classInfo.onc_sdate}"/>" required> 
 						<span class="class_info_title">종료일</span>
 						<input type="date" name="onc_edate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${classInfo.onc_edate}"/>" required>
-
+						<input type="submit"  class="my_default_btn" value="강의 수정" style="float:right;">
 					</div>
 					<button class="my_default_btn" style="float: right;margin-top:20px;"
-							id="addClassVideoFile" type="button" >강의 추가</button>
+							id="addClassVideoFile" type="button" >동영상 폼 추가</button>
 					<div class="class_video_list">
 						<table id="vf_list">
 							<tr>
-								<th>강의제목</th>
-								<th>강의내용</th>
+								<th>동영상제목</th>
+								<th>동영상내용</th>
 								<th>동영상</th>
-							</tr>
+							</tr>			
 							<c:forEach var="video" items="${videoList }">
-								
-								<tr>
+								<tr class=${video.vf_code }>
+									<input type="hidden"name="vf_v_code" value ="${videoList[0].vf_v_code }"></input>
 									<td><input type="text" name="v_title" value="${video.v_title }" required></td>
 									<td><input type="text" name="v_content"  value="${video.v_content }" required></td>
-									<td><input type="file" name="video_files"  required></td>
+									<td>${video.vf_oriname }<button type="button" onclick="deleteFile(this)">삭제</button>
+									<button type="button" onclick="updateFile(this)">수정</button>
+									<input type="file" name="video_files"  required>
+									</td>
 								</tr>
 							</c:forEach>
 							
@@ -194,7 +201,8 @@
 					</div>
 				</div>
 			</div>
-			<input type="submit" class="my_default_btn" style="float: right;" name="강의 등록"></input>
+			<button type="submit" class="my_default_btn" style="float: right;">동영상 등록</button>
+			
 			</form>
 		</article>
 	</section>
@@ -202,12 +210,88 @@
 		<jsp:include page="../footer.jsp"></jsp:include>
 	</footer>
 </body>
-<script>
+<script type="text/javascript">
     $("#addClassVideoFile").click(function(){
-        $('#vf_list > tbody:last').append('<tr> <td><input type="text" name="v_title" id="" required>  </td>'+
-                                '<td>  <input type="text" name="v_content" id="" required> </td>'+
-                                '<td> <input type="file" name="vf_oriname" id="" required> </td> </tr>');
+        $('#vf_list > tbody:last').append('<tr> <td><input type="text" name="v_title" required>  </td>'+
+                                '<td>  <input type="text" name="v_content" required> </td>'+
+                                '<td> <input type="file" name="upvideo_files" required> </td> </tr>');
 
     });
+    
+    /* 특정 파일을 db에서 삭제하고 해당 컬럼을 제거 */
+    function deleteFile(obj){
+		var tr=$(obj).parent();
+	    tr.remove();
+	    
+    	/* 삭제 할 파일 코드 */
+    	var vf_code=$(obj).parent().parent().attr('class');
+    
+    	var objData={"vf_code":vf_code};
+    	
+    	$.ajax({
+    		url:"deleteClassVideo",
+    		type:"post",
+    		data:objData,
+    		dataType:"json",
+    		success:function(data){
+    			if(data.equals('success')){
+    				alert('동영상 삭제 완료');
+    			}else{
+    				alert('동영상 삭제 실패');
+    			}
+    		},
+    		error : function(error){
+				console.log(error);
+			}
+    	});
+    }
+    /* 특정 파일을 db에서 수정*/
+    function updateFile(obj){
+    	/* 수정 할 파일 코드 */
+    	var vf_code=$(obj).parent().parent().attr('class');
+    	
+		
+    
+    	/* var objData={"vf_code":vf_code}; */
+    	
+    	var formData=new FormData();
+    	var inputFile=$('input[name="video_files"]');
+    	
+    	var files=inputFile[0].files;
+    	
+    	for(var i=0;i<files.length;i++){
+    		formData.append('updateFiles',files[i]);
+    		console.log(files[i]);
+    	}
+    	formData.append('vf_code',vf_code);
+		
+    	var tr=$(obj).parent().parent(); 	
+		tr.remove();
+    	$.ajax({
+    		contentType:false,
+    		processData:false,
+    		url:"updateClassVideo",
+    		type:"post",
+    		data:formData,
+    		success:function(data){
+    			var video=data;
+    			
+    			var videoInfo='<tr class="'+video.vf_code+'>'+
+					'<input type="hidden" name="'+video.vf_v_code+'" value ="'+video.vf_v_code+'"></input>'+
+					'<td><input type="text" name="v_title" value="'+video.v_title+'" required></td>'+
+					'<td><input type="text" name="v_content"  value="'+video.v_content +'" required></td>'+
+					'<td>'+video.vf_oriname+'<button type="button" onclick="deleteFile(this)">삭제</button>'+
+					'<button type="button" onclick="updateFile(this)">수정</button>'+
+					'<input type="file" name="video_files"  required>'+
+					'</td></tr>'
+				
+    			
+    			$("."+vf_code).html(videoInfo)
+    		},
+    		error : function(error){
+				console.log(error);
+			}
+    	});
+    }
 </script>
 </html>

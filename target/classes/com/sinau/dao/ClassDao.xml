@@ -55,7 +55,7 @@
 	</update>
 	
 	<!-- 새로운 온라인 강좌를 등록한다. -->
-	<insert id="insertClassInfo" parameterType="com.sinau.dto.OnlineClassDto"
+	<insert id="insertOnClassInfo" parameterType="com.sinau.dto.OnlineClassDto"
 		useGeneratedKeys="true" keyProperty="onc_code">
 		<selectKey keyProperty="onc_code" resultType="String" order="BEFORE">
 			select 'onc_'||SEQ_ONC.NEXTVAL from dual
@@ -76,6 +76,14 @@
 			insert into v values(#{v_code},#{v_onc_code})
 		]]>
 	</insert>
+	
+	<update id="updateOnClassInfo" parameterType="com.sinau.dto.OnlineClassDto">
+		<![CDATA[
+			update onc 
+			set onc_title=#{onc_title},onc_content=#{onc_content},onc_sale=#{onc_sale}, onc_update=sysdate,onc_level=#{onc_level},onc_stnum=#{onc_stnum},onc_sdate=#{onc_sdate}, onc_edate=#{onc_edate}, onc_cts_code=#{onc_cts_code} 
+			where onc_code=#{onc_code}
+		]]>
+	</update>
 	
 	<select id="getCreatorClassList" parameterType="String" resultType="com.sinau.dto.CreatorClassInfoDto">
 		select * from creatorclassinfo where onc_m_email=#{onc_m_email}

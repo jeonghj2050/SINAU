@@ -86,15 +86,16 @@
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
 		<article>
 			<div class="page-title">강의 등록</div>
-			<div class="class_sort">
-				<div>
-					온라인<input type="radio" name="class_sort" value="onc" checked>
-				</div>
-				<div>
-					오프라인<input type="radio" name="class_sort" value="ofc">
-				</div>
-			</div>
+			
 			<form action="./cMyNewClass" method="post" enctype="multipart/form-data">
+				<div class="class_sort">
+					<div>
+						온라인<input type="radio" name="class_sort" value="onc" checked>
+					</div>
+					<div>
+						오프라인<input type="radio" name="class_sort" value="ofc">
+					</div>
+				</div>
 				<div class="class_form" id="onc_form">
 				<div class="class_info_form">
 					<div class="class_profile_image">
@@ -148,7 +149,7 @@
 
 					</div>
 					<button class="my_default_btn" style="float: right;margin-top:20px;"
-							id="addClassVideoFile" type="button" >강의 추가</button>
+							id="addClassVideoFile" type="button">강의 추가</button>
 					<div class="class_video_list">
 						<table id="vf_list">
 							<tr>
@@ -157,9 +158,13 @@
 								<th>동영상</th>
 							</tr>
 							<tr>
-								<td><input type="text" name="v_title" id="" required></td>
-								<td><input type="text" name="v_content" id="" required></td>
-								<td><input type="file" name="video_files" id="" required></td>
+								<td><input type="text" name="v_title" required></td>
+								<td><input type="text" name="v_content" required></td>
+								<td>
+									<input type="file" name="video_files"  required>
+									   <button type="button" class="glyphicon glyphicon-remove"
+									    	 onclick="deleteClassForm(this)"></button>
+								</td>
 							</tr>
 						</table>
 						
@@ -176,10 +181,16 @@
 </body>
 <script>
     $("#addClassVideoFile").click(function(){
-        $('#vf_list > tbody:last').append('<tr> <td><input type="text" name="v_title" id="" required>  </td>'+
-                                '<td>  <input type="text" name="v_content" id="" required> </td>'+
-                                '<td> <input type="file" name="vf_oriname" id="" required> </td> </tr>');
+        $('#vf_list > tbody:last').append('<tr> <td><input type="text" name="v_title" required>  </td>'+
+                                '<td>  <input type="text" name="v_content" required> </td>'+
+                                '<td> <input type="file" name="video_files"  required> '+
+                                '<button type="button" class="glyphicon glyphicon-remove" onclick="deleteClassForm(this)"></button></td> </tr>');
 
     });
+    function deleteClassForm(obj){
+    	var tr=$(obj).parent().parent();
+    	
+    	tr.remove();
+    }
 </script>
 </html>
