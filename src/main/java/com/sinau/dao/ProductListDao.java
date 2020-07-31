@@ -22,4 +22,6 @@ public interface ProductListDao {
 
 	public String getPspec(String p_code);
 
+	public String getPcont(String p_code);
+
 }

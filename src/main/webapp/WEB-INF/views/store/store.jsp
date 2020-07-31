@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -16,7 +17,7 @@
 <script>
 	$(document).ready(function() {
 		function gohome() {
-			var id = '${mb.m_id}';
+			var id = '${mb.m_email}';
 
 			if (id == '') {
 				location.href = './';
@@ -94,7 +95,7 @@
 												d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                   </svg></span>${pitem.l_count}
 								</div>
-								<div class="price">${pitem.p_price}원</div>
+								<div class="price"><fmt:formatNumber pattern="###,###,###" value="${pitem.p_price}" />원</div>
 							</div>
 						</div>
 					</c:forEach>
@@ -128,7 +129,7 @@
 													d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                     </svg></span> ${paitem.l_count}
 									</div>
-									<div class="price">${paitem.p_price }</div>
+									<div class="price"><fmt:formatNumber pattern="###,###,###" value="${paitem.p_price}" />원</div>
 								</div>
 							</div>
 						</c:forEach>
@@ -160,7 +161,7 @@
 													d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                     </svg></span> ${pbitem.l_count}
 									</div>
-									<div class="price">${pbitem.p_price }</div>
+									<div class="price"><fmt:formatNumber pattern="###,###,###" value="${pbitem.p_price }" />원</div>
 								</div>
 							</div>
 						</c:forEach>
@@ -192,7 +193,7 @@
 													d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                     </svg></span> ${pcitem.l_count}
 									</div>
-									<div class="price">${pcitem.p_price }</div>
+									<div class="price"><fmt:formatNumber pattern="###,###,###" value="${pcitem.p_price }" />원</div>
 								</div>
 							</div>
 						</c:forEach>
@@ -224,7 +225,7 @@
 													d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                     </svg></span> ${pditem.l_count}
 									</div>
-									<div class="price">${pditem.p_price }</div>
+									<div class="price"><fmt:formatNumber pattern="###,###,###" value="${pditem.p_price }" />원</div>
 								</div>
 							</div>
 						</c:forEach>
@@ -255,7 +256,7 @@
 													d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                     </svg></span> ${peitem.l_count}
 									</div>
-									<div class="price">${peitem.p_price }</div>
+									<div class="price"><fmt:formatNumber pattern="###,###,###" value="${peitem.p_price }" />원</div>
 								</div>
 							</div>
 						</c:forEach>

@@ -1,11 +1,17 @@
 package com.sinau.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sinau.dto.ProductListDto;
+import com.sinau.dto.PReviewDto;
+//import com.sinau.dto.ProductListDto;
 import com.sinau.service.MemberService;
 import com.sinau.service.StoreService;
 
@@ -53,4 +59,18 @@ public class StoreController {
 		
 		return mv;
 	}
+	//댓글 추가 및 댓글 목록 처리 메소드
+		@PostMapping(value = "reviewInsert",
+				produces = "application/json; charset=utf-8")
+		@ResponseBody
+		public Map<String, List<PReviewDto>> 
+		replyInsert(PReviewDto review){
+			log.info("reviewInsert - bnum : " 
+					+ review.getPrv_p_code());	
+
+			Map<String, List<PReviewDto>> rMap = 
+					sServ.rInsert(review);
+
+			return rMap;
+		}
 }

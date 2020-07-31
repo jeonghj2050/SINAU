@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +28,7 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <title>Document</title>
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 	<header><jsp:include page="../header.jsp"></jsp:include>
@@ -40,15 +43,16 @@
 			</div>
 			<!-- 결제부분 -->
 			<div class="paymentSection">
-				<div class="teacher_name">by.셀레네</div>
-				<div class="class_explain">DIY 유칼립투스 시나몬 가랜드 키트</div>
+				<div class="teacher_name">${pInfoPay.p_dealer}</div>
+				<div class="class_explain">${pInfoPay.p_title}</div>
 				<div class="lable_container">
 					<div class="categories">
-						<div class="cate_lable">아트/공예</div>
+						<div class="cate_lable">${pInfoPay.cts_name}</div>
 					</div>
 				</div>
 				<div class="class_price">
-					<strong>11,900원</strong>
+					<strong><fmt:formatNumber pattern="###,###,###"
+							value="${pInfoPay.p_price}" />원</strong>
 				</div>
 				<div class="hr"></div>
 				<div class="like_container">
@@ -64,7 +68,7 @@
 										fill="#1b1c1d"></path>
                                 </svg>
 							</div>
-							<span class="like_num"><span>267</span></span>
+							<span class="like_num"><span>${pInfoPay.l_count}</span></span>
 						</button>
 						<button type="button" class="likebtn full_heart" color="default"
 							fill="false">
@@ -76,7 +80,7 @@
 										fill="#1b1c1d"></path>
                                 </svg>
 							</div>
-							<span class="like_num"><span>535</span></span>
+							<span class="like_num"><span>${pInfoPay.l_count}</span></span>
 						</button>
 					</div>
 					<div class="btn_div">
@@ -99,7 +103,7 @@
 					<span class="sc-fzoyTs jZUSDr"> <span>구매하기</span></span>
 				</button>
 				<div>
-					<p class="refund_alert">키트 미개봉 시, 9월 25일까지 전액 환불 보장</p>
+					<p class="refund_alert"></p>
 				</div>
 			</div>
 			<hr width="950px" style="float: left;">
@@ -107,198 +111,128 @@
 			<!-- 상품소개 -->
 			<div class="sinfo_detail">
 				<div class="sp_title1">상품 소개</div>
-				<img src=resources/images/storeimg/content/artD.png width="950px">
+				<img src="resources/images/storeimg/content/${pcont}" width="950px">
 			</div>
 
 			<!-- 상품리뷰 -->
 			<hr width="950px" style="float: left;">
+			<div class="sp_title1">상품 리뷰</div>
 			<div class=sinfo_rvall>
-				<div class="sinfo_rvbox">
-					<form style="width: 950px; height: 200px;">
-						<fieldset style="width: 950x; height: 200px;">
-							<legend"u_vc">
-								<div class="sp_title" style="margin-top: 10px;">상품 리뷰</div>
-								<div class="rvbox_box_name">
-									<span class=rvbox_write_mail>작성자: email</span>
-								</div>
-								<div class="sinfo_write_area">
-									<div>
-										<textarea id="rvbox_write_textarea" class="rvbox_textarea"
-											rows="5" cols="130" data-log="RPC.input"></textarea>
-									</div>
-								</div>
-								<div class="rvbox_upload">
-									<div class="rvbox_addition">
-										<a href="#" class=rvbox_link><button type="button"
-												class="rvbox_btn">등록</button> </a>
-									</div>
-								</div>
-							</legend>
-						</fieldset>
-					</form>
-				</div>
-				<div class="sc-pDbHj jvrfBM sc-pZCuu fVtWky show2">
-					<div class="sc-oTaid fgxYOw" style="min-height: 0px;">
-						<div class="sc-paWVw gzcrzB">
-							<h3 class="sc-fzplWN rzudF sc-pjTqr jJFvBj">공유하기</h3>
-							<button type="button"
-								class="sc-fzqNqU fsyYOM sc-fzqPZZ bDLHXT closer"
-								color="transparent">
-								<span class="sc-fzoyTs jZUSDr"><svg width="24"
-										height="24" fill="none" viewBox="0 0 24 24">
-                                        <path
-											d="M18.5 4L12 10.5 5.5 4 4 5.5l6.5 6.5L4 18.5 5.5 20l6.5-6.5 6.5 6.5 1.5-1.5-6.5-6.5L20 5.5 18.5 4z"
-											fill="#1b1c1d"></path>
-                                    </svg></span>
-							</button>
+				<div id="reply">
+					<c:if test="${mb == null }">
+						<p class="rp_p">
+							소감을 남기시려면 <a href="loginFrm">로그인</a>해주세요
+						</p>
+					</c:if>
+					
+					 <c:if test="${mb != null}">
+					<div class="replyForm">
+						<div class="userInfo">
+							<span class="userName">${mb.m_email}</span>
 						</div>
-						<div class="sc-qQlgh bJEPkb">
-							<div class="ShareModalBottomSheet__Container-kk26a5-0 cSqgOv">
-								<div class="ShareButton__Container-f3i5k7-0 llVJRo">
-									<div class="ShareButton__Button-f3i5k7-1 ipUSgi">
-										<svg width="24" height="24" viewBox="0 0 24 24">
-                                            <path fill="#1B1C1D"
-												fill-rule="evenodd"
-												d="M12 4c-4.97 0-9 3.185-9 7.115 0 2.557 1.707 4.8 4.27 6.054-.188.702-.682 2.545-.78 2.94-.123.49.178.483.376.351.155-.103 2.466-1.675 3.464-2.353.541.08 1.1.123 1.67.123 4.97 0 9-3.186 9-7.115C21 7.185 16.97 4 12 4">
-                                            </path>
-                                        </svg>
-									</div>
-								</div>
-								<div class="ShareButton__Container-f3i5k7-0 llVJRo">
-									<div class="ShareButton__Button-f3i5k7-1 gFdtJW">
-										<svg viewBox="0 0 64 64" width="36" height="36">
-                                            <g>
-                                                <path fill="#FFF"
-												d="M48,22.1c-1.2,0.5-2.4,0.9-3.8,1c1.4-0.8,2.4-2.1,2.9-3.6c-1.3,0.8-2.7,1.3-4.2,1.6 C41.7,19.8,40,19,38.2,19c-3.6,0-6.6,2.9-6.6,6.6c0,0.5,0.1,1,0.2,1.5c-5.5-0.3-10.3-2.9-13.5-6.9c-0.6,1-0.9,2.1-0.9,3.3 c0,2.3,1.2,4.3,2.9,5.5c-1.1,0-2.1-0.3-3-0.8c0,0,0,0.1,0,0.1c0,3.2,2.3,5.8,5.3,6.4c-0.6,0.1-1.1,0.2-1.7,0.2c-0.4,0-0.8,0-1.2-0.1 c0.8,2.6,3.3,4.5,6.1,4.6c-2.2,1.8-5.1,2.8-8.2,2.8c-0.5,0-1.1,0-1.6-0.1c2.9,1.9,6.4,2.9,10.1,2.9c12.1,0,18.7-10,18.7-18.7 c0-0.3,0-0.6,0-0.8C46,24.5,47.1,23.4,48,22.1z">
-                                                </path>
-                                            </g>
-                                        </svg>
-									</div>
-								</div>
-								<div class="ShareButton__Container-f3i5k7-0 llVJRo">
-									<div class="ShareButton__Button-f3i5k7-1 jdAwxw">
-										<svg width="24" height="24" viewBox="0 0 24 24">
-                                            <path fill="#FFF"
-												fill-rule="evenodd"
-												d="M20.007 3H3.993A.993.993 0 003 3.993v16.014c0 .549.444.993.993.993h8.621v-6.97h-2.347v-2.716h2.347V9.308c0-2.324 1.42-3.589 3.494-3.589.994 0 1.848.072 2.096.106v2.43h-1.44c-1.125 0-1.344.54-1.344 1.327v1.733h2.689l-.349 2.722h-2.34V21h4.587a.993.993 0 00.993-.993V3.993A.993.993 0 0020.007 3">
-                                            </path>
-                                        </svg>
-									</div>
-								</div>
-								<div class="ShareButton__Container-f3i5k7-0 llVJRo">
-									<div class="ShareButton__LinkButton-f3i5k7-2 dYmVXl">
-										<svg width="20" height="20" fill="none" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd"
-												clip-rule="evenodd"
-												d="M14 8a1 1 0 011-1h3a5 5 0 010 10h-3a1 1 0 110-2h3a3 3 0 100-6h-3a1 1 0 01-1-1zm-4 8a1 1 0 01-1 1H6A5 5 0 016 7h3a1 1 0 010 2H6a3 3 0 100 6h3a1 1 0 011 1zm-3-4a1 1 0 011-1h8a1 1 0 110 2H8a1 1 0 01-1-1z"
-												fill="#1B1C1D"></path>
-                                        </svg>
-										<span class="ShareButton__LinkText-f3i5k7-3 gcriev">링크
-											복사하기</span>
-									</div>
-								</div>
+						<form role="form" method="post" autocomplete="off" name="rFrm" id="rFrm" class="write-form">
+							<input type="hidden" name="prv_p_code" value="${p_code}"><!-- 로그인처리하고 바꾸기 -->
+							<div class="input_text">
+								<textarea name="prv_content" id="repCon"></textarea>
 							</div>
-						</div>
-						<div class="sc-pAYXY fmggLq"></div>
+
+							<div class="input_area">
+								<button type="button" id="reply_btn"
+									onclick="reviewInsert()">등록</button>
+							</div>
+						</form>
+					</div>
+					</c:if>
+
+					<div class="replyList">
+						<ol>
+							<c:forEach var="r" items="${rList}" >
+								<li>
+									<div class="userInfo">
+										<span class="userName">${r.prv_m_email}</span> <span
+											class="date"> <fmt:formatDate value="${r.prv_date}"
+												pattern="yyyy-MM-dd" />
+										</span> 
+										<a class="sinfo_rvbtn_worning" data-toggle="modal"
+											data-target="#exampleModal"> <span class="warning_ico"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-exclamation-triangle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M7.938 2.016a.146.146 0 0 0-.054.057L1.027 13.74a.176.176 0 0 0-.002.183c.016.03.037.05.054.06.015.01.034.017.066.017h13.713a.12.12 0 0 0 .066-.017.163.163 0 0 0 .055-.06.176.176 0 0 0-.003-.183L8.12 2.073a.146.146 0 0 0-.054-.057A.13.13 0 0 0 8.002 2a.13.13 0 0 0-.064.016zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
+  <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
+</svg></span>
+										</a>
+										<a class="sinfo_rvbtn_worning" data-toggle="modal"
+											data-target="#exampleModal"> <span class="delite_ico"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+  <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+</svg></span>
+										</a>
+									</div>
+									<div class="replyContent">${r.prv_content }</div>
+								</li>
+							</c:forEach>
+						</ol>
 					</div>
 				</div>
-				<div class="sinfo_rv_wrap">
-					<ul class="sinfo_rv_list">
-						<li>
-							<div class="sinfo_rv_comment_box">
-								<div class="sinfo_rv_area">
-									<div class="sinfo_rv_info">
-										<span class="sinfo_rv_main">e-mail</span> <span
-											class="sinfo_rv_sub"> <span class=sinfo_rvc_work_sub>
-												<span class="sinfo_rvwork_box"> <span
-													class="sinfo_rvwork_inner"> <a
-														class="sinfo_rvbtn_worning" data-toggle="modal"
-														data-target="#exampleModal"> <span
-															class="sinfo_ico_block"><svg width="2em"
-																	height="2em" viewBox="0 0 16 16"
-																	class="bi bi-x-octagon-fill" fill="currentColor"
-																	xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-																		fill-rule="evenodd"
-																		d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zm.394 4.708a.5.5 0 0 0-.708-.708L8 7.293 4.854 4.146a.5.5 0 1 0-.708.708L7.293 8l-3.147 3.146a.5.5 0 0 0 .708.708L8 8.707l3.146 3.147a.5.5 0 0 0 .708-.708L8.707 8l3.147-3.146z" />
-                                                                </svg></span>
-													</a>
-												</span>
-											</span>
-										</span>
-										</span>
-									</div>
-									<div class="sinfo_rvcontent_text_wrap">
-										<span class="sinfo_rv_contents" style data-lang="ko">너무
-											재밋었습니다</span>
-									</div>
-									<div class="sinfo_rv_base">
-										<span class="sinfo_date"> 2020.07.23.18:17:10</span>
-									</div>
-								</div>
+
+				<!-- 신고내역 모달  -->
+				<div class="modal fade" id="exampleModal" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">신고</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
 							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<!-- 신고내역 모달  -->
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">신고</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							내용 해당 글/댓글 내용
-							<hr>
-							작성자 email
-							<hr>
-							사유<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"
-								name="chk_info" value="HTML">비방 및 욕설<br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="chk_info"
-								value="CSS" checked="checked">부적절한 홍보 게시물<br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="chk_info"
-								value="웹디자인">음란성 또는 청소년에게 부적합한 내용<br>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">취소</button>
-							<button type="button" class="btn btn-primary">확인</button>
+							<div class="modal-body">
+								내용 해당 글/댓글 내용
+								<hr>
+								작성자 email
+								<hr>
+								사유<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"
+									name="chk_info" value="HTML">비방 및 욕설<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"
+									name="chk_info" value="CSS" checked="checked">부적절한 홍보
+								게시물<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"
+									name="chk_info" value="웹디자인">음란성 또는 청소년에게 부적합한 내용<br>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">취소</button>
+								<button type="button" class="btn btn-primary">확인</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<!-- 배송일정 -->
-			<hr width="950px" style="float: left;">
+			<hr width="950px" style="float: left; border: rgba(255, 255, 255, 0)">
+			<div class="sp_title">배송 일정</div>
 			<div class="sinfo_ddate">
-				<div class="sp_title">배송 일정</div>
 				<div class="ddate">
 					<div class="ddate_info1">
 						<svg width="1em" height="1em" viewBox="0 0 16 16"
 							class="bi bi-patch-exclamation" fill="currentColor"
 							xmlns="http://www.w3.org/2000/svg"
 							style="background-color: gainsboro; margin: 0px 5px;">
-                            <path
+								<path
 								d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
-                            <path fill-rule="evenodd"
+								<path fill-rule="evenodd"
 								d="M10.273 2.513l-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z" />
-                        </svg>
+							</svg>
 						알려드려요
 						<div class="ddate_info2">배송 업체의 사정에 따라 2~7 영업일이 소요됩니다.</div>
 					</div>
 				</div>
 			</div>
-
-			<!-- 환불일정 -->
 			<hr width="950px" style="float: left;">
+			<div class="sp_title">환불 신청</div>
 			<div class="sinfo_refund">
-				<div class="sp_title">환불 신청</div>
+
 				<div class="refund">
 					<div class="refund_info">
 						<div class="refund_img">
@@ -311,7 +245,7 @@
 					</div>
 				</div>
 			</div>
-
+			
 			<!-- F&Q -->
 			<hr width="950px" style="float: left;">
 			<div class="sp_title">FAQ</div>
@@ -355,12 +289,51 @@
 					</div>
 				</div>
 			</div>
-		</div>
 	</section>
 	<footer><jsp:include page="../footer.jsp"></jsp:include>
 	</footer>
 </body>
+<script src="resources/javascript/jquery.serializeObject.js"></script>
 <script type="text/javascript">
+function reviewInsert(p_code){
+	//form의 데이터를 가져와서 json으로 변환
+	var replyFrm = $('#rFrm').serializeObject();
+	//추가 데이터 : 게시글번호, 작성자(로그인) id
+	
+	//세션에 저장한 로그인 회원 정보에서 id 추출
+	replyFrm.prv_m_email = '${mb.m_email}';
+	console.log(replyFrm);
+	
+	$.ajax({
+		url: "reviewInsert",//요청 url(uri)
+		type: "post",//전송 방식(get, post)
+		data: replyFrm,//전송할 데이터
+		dataType: "json",//데이터의 형식
+		success: function(data){
+			//목록 전체를 하나의 문자열로 만들어서
+			//한꺼번에 id가 rTable인 태그(요소)의
+			//innerHTML에 출력.
+			var rlist = '';
+			var dlist = data.rList;
+			for(var i = 0; i < dlist.length; i++){
+				rlist += "<li data-prv_p_code='" + dlist[i].prv_p_code + "'>"
+			     + "<div class='userInfo'>"
+			     + "<span class='userName'>" + dlist[i].prv_m_email + "</span>"
+			     + "<span class='date'>" + dlist[i].prv_date+ "</span>"
+			     + "</div>"
+			     + "<div class='replyContent'>" + dlist[i].prv_content + "</div>"
+			     + "</li>"; 
+			}
+			$('.replyList').html(rlist);
+		},
+		error: function(error){
+			alert("댓글 입력 실패");
+		}
+	});
+	
+	$('#comment').val('');//댓글창 지우기
+}
+
 	$(document).ready(function() {
 		//  $('.show1').show(); //페이지를 로드할 때 표시할 요소
 		$('.show2').hide(); //페이지를 로드할 때 숨길 요소

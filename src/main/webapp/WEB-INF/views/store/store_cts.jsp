@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +50,7 @@
 										d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                   </svg></span>${paitem.l_count}
 						</div>
-						<div class="price">${paitem.p_price }</div>
+						<div class="price"><fmt:formatNumber pattern="###,###,###" value="${paitem.p_price }" />원</div>
 					</div>
 				</div>
 				</a>
