@@ -12,8 +12,8 @@
 		values(#{m_email},#{m_name},#{m_pwd},#{m_phone},#{m_birth},#{m_license},#{m_group},#{m_state})
 	</insert>
 	<insert id="fileInsert" parameterType="HashMap">
-		INSERT INTO mimg
-		VALUES(MIMG_SEQ_IMAG.NEXTVAL,#{oriFileName},#{sysFileName},${m_email})
+		INSERT INTO memberimg
+		VALUES('MIMG_'||SEQ_MIMG.NEXTVAL, #{oriFileName}, #{sysFileName}, #{m_email})
 	</insert>
 	<select id="getPwd" parameterType="String"
 		resultType="String">

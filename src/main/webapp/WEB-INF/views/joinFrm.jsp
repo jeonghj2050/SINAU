@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link rel="stylesheet" href="resources/css/style.css?a">
+<link rel="stylesheet" href="resources/css/home.css?a">
 <style type="text/css">
 html {
 	background-color: #f1f1f1 
@@ -23,15 +23,14 @@ $(document).ready(function() {
 });
 
 </script>
-
 <script type="text/javascript">
 	var sel_file;
 	$(document).ready(function() {
-		$("#member_profile").on("change", fileSelect);
+		$("#file").on("change", fileSelect);
 	});
 
 	function fileSelect(e) {
-		if ($("#member_profile").val() == "") {
+		if ($("#file").val() == "") {
 			console.log("empty");
 			$("#filecheck").val(0);
 		} else {
@@ -58,6 +57,15 @@ $(document).ready(function() {
 		});
 	}
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var chk = "${check}";
+	
+	if(chk == "1"){
+		alert("회원가입 실패!");
+	}
+});
+</script>
 </head>
 <body>
 	<div class="content1">
@@ -68,21 +76,16 @@ $(document).ready(function() {
 			<input type="radio" name="radio" id="r2" value="1"><label for="r2">크리에이터</label>&nbsp;
   			<input type="radio" name="radio" id="r3" value="2"><label for="r3">판매자</label>
 		</div><br>	
-		<form name="joinFrm" id="join" class="join-form" action="memberInsert" method="post" onsubmit="return check()" enctype="multipart/form-data">
-		
-		<!-- <div class="img-box">
-				<img class="img" id=m_photo name="m_photo" src="resources/images/user.png" width="100" height="100"><br>
-				<input type="file" name="filename1" size=40>
-		</div> -->
-		<div class="profile_image">
-						<img src="resources/images/user.png" alt=""
-							class="img-circle" width="100px" height="100px" id="profile_img"><br>
-						<div>
-							<label for="file"></label> <input type="file" name="files"
-								id="member_profile"> <input type="hidden" id="filecheck"
-								value="0" name="fileCheck">
-						</div>
-						</div>
+		<form name="joinFrm" id="join" class="join-form" action="memberInsert" method="post" onsubmit="return validate()"
+				 enctype="multipart/form-data">
+			<div class="filebox"> 
+				<img src="resources/images/user.png" alt="기본이미지"
+					class="img-circle" width="100px" height="100px" id="profile_img"><br>
+				<label for="file">업로드</label> 
+				<input type="file" name="files" id="file"> 
+				<input type="hidden" id="filecheck"	value="0" name="fileCheck">
+			</div>
+					
 			<input type="text" class="login-input" id="memail" title="이메일"	name="m_email" placeholder="이메일 ">
 			<br>
 			<font id="chkNotice1" size="2"></font>
@@ -92,12 +95,12 @@ $(document).ready(function() {
 			<input type="password"	id="password2" class="login-input" title="비밀번호 재확인" placeholder="비밀번호확인"><br>
 				<span style="height: 25px;"></span>
 				<font id="chkNotice" size="2"></font><br>
-			<input type="text" id="phone" name="m_phone" class="login-input" title="연락처"	placeholder="연락처 ex)01000000000"> 
-			<input type="date" id="birth" name="m_birth" class="login-input" title="생년월일" placeholder="생년월일  ex)00000000">
+			<input type="text" id="phone" name="m_phone" class="login-input" title="연락처"	placeholder="연락처 "> 
+			<input type="date" id="birth" name="m_birth" class="login-input" title="생년월일" placeholder="생년월일 ">
 			<input type="text" id="license" name="m_license" class="login-input" title="사업자번호"	placeholder="사업자번호"><br>
 			<input type="submit" class="login-btn" value="회원 가입"><input type="reset" class="relgoin-btn" value="다시 작성">
 			<input type="text" name="m_group" class="group" value="">
-			<input type="hidden" name="m_state" class="state" value="1">
+			<input type="text" name="m_state" class="state" value="">
 		</form>
 	</div>
 </body>
@@ -143,38 +146,24 @@ function idcheck() {
 	        if($("input[name=radio]:checked").val() == "2"){
 	            $("input:text[name=m_license]").attr("disabled",false);
 	              $("input:text[name=m_group]").attr("value", "dm");
+	              $("input:text[name=m_state]").attr("value", "0");
 	            // radio 버튼의 value 값이 1이라면 활성화
 	 
 	        }else if($("input[name=radio]:checked").val() == "1"){
 	              $("input:text[name=m_license]").attr("disabled",true);
 	              $("input:text[name=m_group]").attr("value", "cm");
+	              $("input:text[name=m_state]").attr("value", "0");
 	            // radio 버튼의 value 값이 0이라면 비활성화
 	        }else if($("input[name=radio]:checked").val() == "0"){
 	              $("input:text[name=m_license]").attr("disabled",true);
 	              $("input:text[name=m_group]").attr("value", "nm");
+	              $("input:text[name=m_state]").attr("value", "1");
 		            // radio 버튼의 value 값이 0이라면 비활성화
 		        }
 	    });
 	});
 </script>
-<script  type="text/javascript">
-	$(function(){
-	    $('#password1').keyup(function(){
-	      $('#chkNotice').html('');
-	      $('#password2').val('');
-	    });
 
-	    $('#password2').keyup(function(){
-	        if($('#password1').val() != $('#password2').val()){
-	          $('#chkNotice').html('비밀번호 일치하지 않음');
-	          $('#chkNotice').attr('color', '#f82a2aa3');
-	        } else{
-	          $('#chkNotice').html('비밀번호 일치함');
-	          $('#chkNotice').attr('color', '#199894b3');
-	        }
-	    });
-	});
-</script>
 
 <script  type="text/javascript">
 	function mgcheck(){
@@ -224,5 +213,82 @@ $("#file").on('change',function(){
 		$("#filecheck").val(1);
 	}
 });
+</script>
+<script type="text/javascript">
+function validate() {
+	
+	var objEmail = document.getElementById("memail");
+	var objName = document.getElementById("mname");
+	var objPwd1 = document.getElementById("password1");
+	var objPwd2 = document.getElementById("password2");
+	var objPhone = document.getElementById("phone");
+	var objBirth = document.getElementById("birth");
+	
+	var regul1 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+	
+	var regul2 = /^[a-zA-Z0-9]{5,20}$/;
+	
+	var regul3 = /^[가-힝a-zA-Z]{2,}$/;
+	
+	var regul4 = /^[0-9]{11}$/;
+	
+	if (!check(regul1,objEmail,"이메일을 잘못 입력 했습니다.ex)ooooooo@ooooo.ooo")) {
+		$('#memail').val('');//입력 초기화
+		return false;
+	}
+	
+	if ((objEmail.value)== "") {
+		alert("이메일을 입력해 주세요.")
+		objEmail.focus();
+		return false;
+	}
+	
+	if (!check(regul3,objName,"이름이 잘못 되었습니다. 다시입력해주세요.")) {
+		$('#mname').val('');//입력 초기화
+		return false;
+	} 
+	
+	if ((objName.value)=="") {
+		alert("이름을 입력해 주세요.");
+		objName.focus();
+		return false;
+	}
+	
+	if((objPwd1.value)== "") {
+		alert("비밀번호를 입력해 주세요.");
+		objPwd1.focus();
+		return false;
+	}
+	
+	if((objPwd2.value)== "") {
+		alert("비밀번호를 다시 한번 입력해 주세요.");
+		objPwd2.focus();
+		return false;
+	}
+	
+	if (!check(regul2,objPwd1,"비밀번호는 4~12자의 대소문자와 숫자로만 입력 가능합니다.")) {
+        return false;
+    }
+	
+	if ((objPwd1.value)!=(objPwd2.value)) {
+		$('#chkNotice').html('비밀번호 일치하지 않음');
+        $('#chkNotice').attr('color', '#f82a2aa3');
+        objPwd1.focus();
+        objPwd2.focus();
+        return false;
+    }
+	
+	if (!check(regul4,objPhone,"숫자로만 입력바랍니다 11자로 입력바랍니다 -빼고 010OOOOOOOO")) {
+		alert("숫자로만 다시 한번 입력해 주세요.");
+		return false;
+	}
+	function check(re,what,message){//정규화데이터,아이템 id,메세지
+        if (re.test(what.value)) {//what의 문자열에 re의 패턴이 있는지 나타내는 함수 test
+        //만약 내가 입력한 곳의 값이 정규화 데이터를 썼다면 true를 반환해서 호출 된 곳으로 리턴됨
+            return true;
+        }
+        return true;
+    }
+}
 </script>
 </html>

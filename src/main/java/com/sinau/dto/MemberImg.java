@@ -5,7 +5,8 @@ import lombok.Data;
 @Data
 public class MemberImg {
 	private String mimg_code;
-	private String ming_oriname;
-	private String ming_sysname;
+	private String mimg_oriname;
+	private String mimg_sysname;
+	private String mimg_m_email;
 	
 }
