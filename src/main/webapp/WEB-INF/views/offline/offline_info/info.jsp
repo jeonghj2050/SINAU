@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false"%>
 <html lang="en">
 <head>
@@ -20,26 +21,26 @@
 </head>
 <body>
 	<header>
-		<jsp:include page="../header.jsp"></jsp:include>
+		<jsp:include page="../../header.jsp"></jsp:include>
 	</header>
 	<section>
 		<div class="main-image">
 			<div id="info-img1">
-				<img id="img1" src="../../../resources/images/offline/1-3.jpg">
+				<img id="img1" src="resources/images/offline/spec/${spec1}">
 			</div>
 			<div id="info-img2">
-				<img id="img2" src="../../../resources/images/offline/1-2.jpg">
+				<img id="img2" src="resources/images/offline/spec/${spec2}">
 			</div>
 			<div id="info-img3">
-				<img id="img3" src="../../../resources/images/offline/1.jpg">
+				<img id="img3" src="resources/images/offline/spec/${spec3}">
 			</div>
 		</div>
-
 		<div class="info-wrap">
+		<c:forEach var="offInfo" items="${offInfo}">
 			<div class="all-info">
 				<div class="info-l">
 					<div class="text-info">
-						<img src="../../../resources/images/offline/info-1.png">
+						<img src="/resources/images/offline/content/${offInfo.f_oriname}">
 						<div class="sinfo_ddate">
 							<div class="sp_title">배송 일정</div>
 							<div class="ddate">
@@ -74,17 +75,17 @@
 					</div>
 				</div>
 				<div class="paymentSection">
-					<div class="teacher_name">by.윤지</div>
-					<div class="class_explain">기초를 빙자한 야매는 이제끝, 그림 공부의 원리부터
-						배워봅시다.</div>
+					<div class="teacher_name">by.${offInfo.ofc_teacher}</div>
+					<div class="class_explain">${offInfo.ofc_title}</div>
 					<div class="lable_container">
 						<div class="categories">
-							<div class="cate_lable">미술</div>
+							<div class="cate_lable">${offInfo.ofc_cts_name}</div>
 						</div>
-						<div class="class_startdate">9.23(수)부터 수강 가능</div>
+						<div class="class_startdate">${offInfo.ofc_ofdate}</div>
 					</div>
 					<div class="class_price">
-						<strong>45,000원</strong>
+						<strong><fmt:formatNumber type="currency"
+															value="${offInfo.ofc_sale}" /></strong>
 					</div>
 					<div class="hr"></div>
 					<div class="like_container">
@@ -99,7 +100,7 @@
 											d="M20.5 9c0-2-1.5-3.9-3.7-3.9-2.3 0-3.8 1.63-4.8 3.33-1-1.7-2.5-3.33-4.8-3.33C5 5.1 3.5 6.867 3.5 9c0 4.62 4.949 7.667 8.5 9.623 3.551-1.956 8.5-5.003 8.5-9.623zm-19-.176C1.5 5.607 3.962 3 7 3c2.7 0 4 1 5 2.2C13 4 14.3 3 17 3c3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
 											fill="#1b1c1d"></path></svg>
 								</div>
-								<span class="like_num"><span>267</span></span>
+								<span class="like_num"><span>${offInfo.l_count}</span></span>
 							</button>
 							<button type="button" class="likebtn full_heart" color="default"
 								fill="false">
@@ -110,7 +111,7 @@
 											d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
 											fill="#1b1c1d"></path></svg>
 								</div>
-								<span class="like_num"><span>535</span></span>
+								<span class="like_num"><span>${offInfo.l_count +1}</span></span>
 							</button>
 						</div>
 						<div class="btn_div">
@@ -189,32 +190,29 @@
 					</div>
 				</div>
 			</div>
+		</c:forEach>
 		</div>
 	</section>
 	<footer>
-		<jsp:include page="../footer.jsp"></jsp:include>
+		<jsp:include page="../../footer.jsp"></jsp:include>
 	</footer>
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.show2').hide(); //페이지를 로드할 때 숨길 요소
 		$('.full_heart').hide();
-
 		$('.sharebtn').click(function() {
 			$('.show2').show(); //클릭 시 두 번째 요소 표시
 			return false;
 		});
-
 		$('.unfilled_heart').click(function() {
 			$('.unfilled_heart').hide();
 			$('.full_heart').show();
 		});
-
 		$('.full_heart').click(function() {
 			$('.full_heart').hide();
 			$('.unfilled_heart').show();
 		});
-
 		$('.closer').click(function() {
 			$('.show2').hide();
 			return false;

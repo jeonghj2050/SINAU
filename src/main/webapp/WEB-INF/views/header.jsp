@@ -17,14 +17,14 @@
 		<div class="menu">
 			<nav class="menu-bar">
 				<ul>
-					<li class="menu"><a href="./online">온라인</a></li>
-					<li class="menu"><a href="./offline">오프라인</a></li>
-					<li class="menu"><a href="./store">스토어</a></li>
+					<li class="menu"><a href="/online">온라인</a></li>
+					<li class="menu"><a href="/offline">오프라인</a></li>
+					<li class="menu"><a href="/store">스토어</a></li>
 				</ul>
 			</nav>
 			<nav class="menu-bar1">
 				<ul class="sub">
-					<li class="menusub"><a href="./youtube">유투버</a></li>
+					<li class="menusub"><a href="/youtube">유투버</a></li>
 				</ul>
 			</nav>
 		</div>

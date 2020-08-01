@@ -4,50 +4,113 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sinau.dao.ClassDao">
-	<select id="getOrderList" parameterType="String" resultType="com.sinau.dto.OrderDto">
+	<select id="getOrderList" parameterType="String"
+		resultType="com.sinau.dto.OrderDto">
 		<!-- email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다. -->
 		<![CDATA[ 
 		 	select * from ord where ord_m_email=#{email} and ord_pcode like #{precode}||'%'
 		]]>
 	</select>
-	<select id="getMyOnlineInfoOne" parameterType="String" resultType="com.sinau.dto.MyOnlineInfoDto">
+	<select id="getMyOnlineInfoOne" parameterType="String"
+		resultType="com.sinau.dto.MyOnlineInfoDto">
 		<![CDATA[ 
 			 select * from myonlineinfo where mcl_ord_code=#{ord_pcode}
 		]]>
 	</select>
-	<select id="getMyOffInfoOne" parameterType="String" resultType="com.sinau.dto.MyOffInfoDto">
+	<select id="getMyOffInfoOne" parameterType="String"
+		resultType="com.sinau.dto.MyOffInfoDto">
 		<![CDATA[ 
 			 select * from myoffinfo where mcl_ord_code=#{ord_pcode}
 		]]>
 	</select>
-	
+
 	<!-- 회원의 강좌 주문 내역을 가져온다. -->
-	<select id="getOnlineOrderList" parameterType="String" resultType="com.sinau.dto.OnlineOrdersDto">
+	<select id="getOnlineOrderList" parameterType="String"
+		resultType="com.sinau.dto.OnlineOrdersDto">
 		<![CDATA[ 
 		 	select * from onlineorders where ord_m_email=#{email}
 		]]>
 	</select>
-	<select id="getOffOrderList" parameterType="String" resultType="com.sinau.dto.OffOrdersDto">
+	<select id="getOffOrderList" parameterType="String"
+		resultType="com.sinau.dto.OffOrdersDto">
 		<![CDATA[ 
 		 	select * from offorders where ord_m_email=#{email}
 		]]>
 	</select>
-	
+
 	<!-- 회원의 강좌 좋아요 내역을 가져온다. -->
-	<select id="getOnLikeList" parameterType="String" resultType="com.sinau.dto.OnlineLikeDto">
+	<select id="getOnLikeList" parameterType="String"
+		resultType="com.sinau.dto.OnlineLikeDto">
 		<![CDATA[ 
 		 	select * from onlinelikes where m_email=#{email}
 		]]>
 	</select>
-	<select id="getOffLikeList" parameterType="String" resultType="com.sinau.dto.OffLikeDto">
+	<select id="getOffLikeList" parameterType="String"
+		resultType="com.sinau.dto.OffLikeDto">
 		<![CDATA[ 
 		 	select * from offlikes where m_email=#{email}
 		]]>
 	</select>
-	<select id="getOffList" parameterType="String" resultType="com.sinau.dto.OffListDto">
+	<select id="getOffList" parameterType="String"
+		resultType="com.sinau.dto.OffListDto">
 		<![CDATA[
-			select * from of3
+			select * from of3 order by l_count desc
 		]]>
 	</select>
+	<select id="getOffCateList" parameterType="String"
+		resultType="com.sinau.dto.OffListDto">
+		<![CDATA[
+			select * from of3 where ofc_cts_code=#{cts_code}
+		]]>
+	</select>
+	<select id="getOffCate" parameterType="String"
+		resultType="com.sinau.dto.OffCtsDto">
+		<![CDATA[
+			select * from of_cts 
+		]]>
+	</select>
+	<update id="viewUpdate" parameterType="Integer">
+		<![CDATA[
+		UPDATE OFC SET OFC_VIEWS =
+		OFC_VIEWS + 1
+		WHERE OFC_CODE = #{ofc_code}
+		]]>
+	</update>
+	<select id="getOffInfo" parameterType="String"
+	resultType="com.sinau.dto.OffInfoDto">
+		<![CDATA[
+			SELECT * FROM OF3
+			WHERE (OFC_CODE = #{ofc_code}) AND (F_ORINAME LIKE '%D%')
+		]]>		
+	</select>
+	<select id="getInfoSpec1" parameterType="String"
+	resultType="String">
+		<![CDATA[
+			SELECT f_oriname FROM F_SPEC1
+			WHERE ofc_code = #{ofc_code}
+		]]>		
+	</select>
+	<select id="getInfoSpec2" parameterType="String"
+	resultType="String">
+		<![CDATA[
+			SELECT f_oriname FROM F_SPEC2
+			WHERE ofc_code = #{ofc_code}
+		]]>		
+	</select>
+	<select id="getInfoSpec3" parameterType="String"
+	resultType="String">
+		<![CDATA[
+			SELECT f_oriname FROM F_SPEC3
+			WHERE ofc_code = #{ofc_code}
+		]]>		
+	</select>
+	<select id="getCateName" parameterType="String"
+	resultType="String">
+		<![CDATA[
+			SELECT cts_name FROM of_cts
+			WHERE cts_code = #{cts_code}
+		]]>		
+	</select>
 	
+
 </mapper>

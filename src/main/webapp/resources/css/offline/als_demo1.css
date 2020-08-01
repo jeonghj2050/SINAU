@@ -163,12 +163,19 @@
 .s_sumnail-txt-top{
 	float: left;
 }
-#s_sub-cate, #s_creator-name{
+#s_sub-cate{
 	width: 40px;
 	height: auto;
 	float: left;
 	margin: 0px 3px;	
 	text-align: center;
+}
+#s_creator-name{
+	width: 100px;
+	height: auto;
+	float: left;
+	margin: 0px 3px;	
+	text-align: center;	
 }
 #s_not{
 	width: 10px;

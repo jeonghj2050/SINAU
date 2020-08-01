@@ -448,9 +448,6 @@
             margin: 0px auto;
             background-color: white;
         }
-        .text-info>img{
-            width: 990px;
-        }
         .all-info>div{
             float: left;
         }
@@ -459,7 +456,6 @@
             height: auto;
             margin: 5px;
             margin-right: 0px;
-            background-color: burlywood;
         }
         .text-info>img{
             width: 1000px;

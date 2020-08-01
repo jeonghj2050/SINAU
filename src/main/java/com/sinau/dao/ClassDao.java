@@ -8,6 +8,9 @@ import org.apache.ibatis.annotations.Param;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
+import com.sinau.dto.OffCtsDto;
+import com.sinau.dto.OffImgDto;
+import com.sinau.dto.OffInfoDto;
 import com.sinau.dto.OffLikeDto;
 import com.sinau.dto.OffListDto;
 import com.sinau.dto.OffOrdersDto;
@@ -31,10 +34,31 @@ public interface ClassDao {
 	List<OnlineLikeDto> getOnLikeList(String email);
 	List<OffLikeDto> getOffLikeList(String email);
 
-	//오프라인 강좌 서브 카테고리에 해당하는 강좌 리스트 정보를 가져온다.
+	
+	////////////////////////////////////////////////////
+	//오프라인 강좌 전체 카테고리에 해당하는 강좌 리스트 정보를 가져온다.
 	List<OffListDto> getOffList();
 	
-	//offcode에 해당하는 오프라인 강좌의 썸네일 정보를 가져온다.
-	OffClassDto getClass(String offcode);
+	//List<OffListDto> getOffCateList(String cts_code);
+	
+	//조회수 증가 메소드
+	//void viewUpdate(String ofc_code);
+	
+	//강좌 상세 가져오는 메소드
+	List<OffInfoDto> getOffInfo(String ofc_code);
+	
+	//서브 카테고리 가져오는 메소드
+	List<OffCtsDto> getOffCate();
+	
+	//디테일 사진 가져오는 메소드
+	String getInfoSpec1(String ofc_code);
+	String getInfoSpec2(String ofc_code);
+	String getInfoSpec3(String ofc_code);
+	
+	//서브 카테고리에 해당하는 강좌 가져오는 메소드
+	List<OffListDto> getOffCateList(String cts_code);
+	
+	//현제 카테고리 명 가져오는 메소드
+	String getCateName(String cts_code);
 
 }
