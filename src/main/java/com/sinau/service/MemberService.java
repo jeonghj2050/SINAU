@@ -69,95 +69,80 @@ public class MemberService {
 		return result;
 	}
 
-	public ModelAndView memberInsert( MultipartHttpServletRequest multi, 
-			RedirectAttributes rttr) {
+	public ModelAndView memberInsert(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
 		MemberDto member = new MemberDto();
 		mv = new ModelAndView();
 		String view = null;
-		
+
 		BCryptPasswordEncoder pwdEncode = new BCryptPasswordEncoder();
 
 		String encPwd = pwdEncode.encode(multi.getParameter("m_pwd"));
-		
-		
+
 		member.setM_email(multi.getParameter("m_email"));
 		member.setM_name(multi.getParameter("m_name"));
 		member.setM_pwd(encPwd);
 		member.setM_phone(Integer.parseInt(multi.getParameter("m_phone")));
 		member.setM_birth(multi.getParameter("m_birth"));
-		if(!(multi.getParameter("m_license")==null)) {
+		if (!(multi.getParameter("m_license") == null)) {
 			member.setM_license(Integer.parseInt(multi.getParameter("m_license")));
 		}
-		
+
 		member.setM_group(multi.getParameter("m_group"));
 		member.setM_state(Integer.parseInt(multi.getParameter("m_state")));
-		int fcheck  = Integer.parseInt(multi.getParameter("fileCheck"));
-		
-	
+		int fcheck = Integer.parseInt(multi.getParameter("fileCheck"));
+
 		try {
-			
+
 			mDao.memberInsert(member);
-			
+
 			view = "redirect:/";
-			if(fcheck == 1) {
-				//업로드할 파일이 있음.
+			if (fcheck == 1) {
+				// 업로드할 파일이 있음.
 				fileUp(multi, member.getM_email());
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			view = "redirect:joinFrm";
 			rttr.addFlashAttribute("check", 1);
 		}
-		
+
 		rttr.addFlashAttribute("check", 2);
 		mv.setViewName(view);
 		return mv;
 	}
 
-	
+	private void fileUp(MultipartHttpServletRequest multi, String m_email) throws IllegalStateException, IOException {
 
-	private void fileUp
-		(MultipartHttpServletRequest multi, String m_email) 
-			throws IllegalStateException, IOException{
-		
-		String filePath = multi.getSession()
-				.getServletContext()
-				.getRealPath("/") + "resources/upload/";
-		
-		
+		String filePath = multi.getSession().getServletContext().getRealPath("/") + "resources/upload/";
+
 		File folder = new File(filePath);
-		if(folder.isDirectory() == false) {
-			//경로를 설정한 폴더가 없다면
-			folder.mkdir();//upload 폴더 생성
+		if (folder.isDirectory() == false) {
+			// 경로를 설정한 폴더가 없다면
+			folder.mkdir();// upload 폴더 생성
 		}
-		
-		Map<String, String> fmap = 
-				new HashMap<String, String>();
-		
+
+		Map<String, String> fmap = new HashMap<String, String>();
+
 		fmap.put("m_email", m_email);
-		
-		List<MultipartFile> fList =
-				multi.getFiles("files");
-		
-		for(int i = 0; i < fList.size(); i++) {
+
+		List<MultipartFile> fList = multi.getFiles("files");
+
+		for (int i = 0; i < fList.size(); i++) {
 			MultipartFile mf = fList.get(i);
-			//파일의 실제 이름 가져오기
+			// 파일의 실제 이름 가져오기
 			String oriName = mf.getOriginalFilename();
-			//실제 파일명을 맵에 저장
+			// 실제 파일명을 맵에 저장
 			fmap.put("oriFileName", oriName);
-			//저장 파일명 작성(밀리초 값을 사용)
-			String sysName = System.currentTimeMillis()
-					+ "."
-					+ oriName.substring
-					(oriName.lastIndexOf(".") + 1);
+			// 저장 파일명 작성(밀리초 값을 사용)
+			String sysName = System.currentTimeMillis() + "." + oriName.substring(oriName.lastIndexOf(".") + 1);
 			fmap.put("sysFileName", sysName);
-			//로그에 찍어서 확인
+			// 로그에 찍어서 확인
 			log.info(sysName);
-			//저장 위치로 파일 전송
-			//새로 만든 파일이름으로 지정된 경로에 전송
-			mf.transferTo(new File(filePath+sysName));
-			//DB에 파일 정보 저장(dDao)
+			// 저장 위치로 파일 전송
+			// 새로 만든 파일이름으로 지정된 경로에 전송
+			mf.transferTo(new File(filePath + sysName));
+			// DB에 파일 정보 저장(dDao)
 			mDao.fileInsert(fmap);
 		}
 	}
@@ -363,6 +348,24 @@ public class MemberService {
 			// TODO: handle exception
 		}
 		return cMap;
+	}
+
+	public ModelAndView newpwd(String email, String pwd) {
+		mv = new ModelAndView();
+		
+		//변경할 비밀번호를 암호화한다.
+		 
+		BCryptPasswordEncoder pwdEncode = new BCryptPasswordEncoder();
+		 
+	  	String encodePwd = pwdEncode.encode(pwd);
+		
+		int result = mDao.newPwd(email, encodePwd);
+		if (result > 0) {
+			mv.setViewName("redirect:/");
+		}
+		mv.setViewName("redirect:loginFrm");
+		return mv;
+
 	}
 
 }

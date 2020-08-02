@@ -163,7 +163,8 @@ li a:hover {
 
 /*join*/
 .content1 {
-    width: 600px;
+    width: 500px;
+	height : 937px;
     margin : auto;
 	background-color: white;
 	text-align: center;
@@ -233,7 +234,7 @@ li a:hover {
 
 /* login */
 .login-form {
-	width : 600px;
+	width : 500px;
 	height : 937px;
 	margin : auto;
 	text-align: center;
@@ -264,7 +265,7 @@ li a:hover {
 
 .login-form>h4 {
 	text-align: left;
-	margin-left : 130px;
+	margin-left : 80px;
 }
 
 .login-form>.login-btn {
@@ -284,6 +285,68 @@ li a:hover {
 
 .login-form>p {
 	font-size: 10px;
+}
+
+/* 이메일 / 비밀번호 찾기 */
+.ibbox {
+	width : 500px;
+	height : 937px;
+	margin : auto;
+	background-color: white;
+	padding: 50px;
+	padding-top: 100px;
+}
+
+.memberinfo-header {
+	width: 500px;
+	height: 70px;
+	margin: auto;
+	margin-bottom: 20px;
+}
+
+.member_box>.member_tab {
+	width : 400px;
+	height : 50px;
+	text-align: center;
+}
+
+.member_box>.member_tab>a {
+	float : left;
+	width: 200px;
+	height: 50px;
+	padding: 15px;
+	border: 1px solid #ddd;
+	border-bottom: none;
+	color : #aaaaaa;	
+	text-decoration: none
+}
+
+.member_box>.member_tab>.tab2 {
+	border-left: none;
+}
+
+.member_content>.contents>.memberinfo-form {
+	width: 400px;
+	height: 400px;
+	padding-top: 40px;
+}
+
+.member_box>.member_content>.contents>.memberinfo-form>input {
+	width: 400px;
+	height: 50px;
+	margin: auto;
+	margin-bottom : 30px;
+	padding: 10px;
+	color : #aaaaaa;
+	border: 1px solid #ddd;
+}
+
+.member_box>.member_content>.contents>.memberinfo-form>.id-btn {
+	margin-top: 100px;
+}
+
+.member_box>.member_content>.contents>.memberinfo-form>.pw-btn {
+	margin-top: 20px;
 }
 
 

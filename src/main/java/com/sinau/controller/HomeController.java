@@ -51,4 +51,16 @@ public class HomeController {
 		
 		return "servicecenter/servicecenter_main";
 	}
+	
+	@GetMapping("id")
+	public String id() {
+		
+		return "id";
+	}
+	
+	@GetMapping("pwd")
+	public String pwd() {
+		
+		return "pwd";
+	}
 }

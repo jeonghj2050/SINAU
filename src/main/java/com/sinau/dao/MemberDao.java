@@ -5,6 +5,7 @@ import com.sinau.dto.MemberDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.MemberImg;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
@@ -34,6 +35,10 @@ public interface MemberDao {
 
 	void fileInsert(Map<String, String> fmap);
 
+	int newPwd(@Param("email")String email,@Param("encodePwd")String encodePwd);
+
+	
+	
 	/*
 	 * public void memberImgInsert(MultipartHttpServletRequest multi);
 	 */
