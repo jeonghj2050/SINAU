@@ -105,7 +105,7 @@ $(document).ready(function(){
 								</div>
 								<!-- body -->
 								<div class="modal-body" style="text-align: left;">
-									<input type="hidden" name="sort" value="online"> 
+									<input type="hidden" name="sort" value="offline"> 
 									<input type="hidden" name="ref_ord_code" id="ref_ord_code"/>
 									<input
 										type="radio" name="ref_reson" value="더 이상 구매를 원하지 않습니다.">1.더
@@ -130,7 +130,7 @@ $(document).ready(function(){
 					</div>
 				</form>
 				<div class="mp_classInfo" id="${offlineClass.ofc_code}">
-					<img src="resources/images/test/${offlineClass.f_oriname }" alt=""
+					<img src="resources/upload/${offlineClass.f_sysname }" alt=""
 						width="300px" height="300px" id="mp_class_img">
 					<div>
 						<div class="class_info_contents" id="${offlineClass.ofc_code}">
@@ -151,10 +151,10 @@ $(document).ready(function(){
 											data-toggle="modal" data-notifyid="${offlineClass.mcl_ord_code }">환불</button>
 									</c:when>
 								</c:choose>
-								<c:if test="${offlineClass.mcl_state == 2}">
+								<c:if test="${offlineClass.mcl_state == 3}">
 									<div>환불진행중</div>
 								</c:if>
-								<c:if test="${offlineClass.mcl_state == 3}">
+								<c:if test="${offlineClass.mcl_state == 4}">
 									<div>환불완료</div>
 								</c:if>
 							</div>

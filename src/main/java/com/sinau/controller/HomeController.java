@@ -15,20 +15,8 @@ import com.sinau.service.MemberService;
 
 @Controller
 public class HomeController {
-	
-	@Autowired
-	private MemberService mServ;
-	
-	private ModelAndView mv;
-	
-	private CommonService cServ;
-	
-
-	
 	@GetMapping("/")
 	public String home() {
-		
-		/* mv=cServ.getClassList(); */
 		
 		return "home";
 	}
@@ -53,7 +41,4 @@ public class HomeController {
 		return "store/store";
 	}
 	
-	/*
-	 * @GetMapping("home") public ModelAndView bo
-	 */
 }

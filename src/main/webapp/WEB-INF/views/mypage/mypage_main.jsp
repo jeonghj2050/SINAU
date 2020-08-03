@@ -92,8 +92,45 @@ $(document).ready(function(){
 			  </ul> 
            </div>
 			<c:forEach var="onlineClass" items="${onlineList}">
+			<form action="./refund" method="get">
+					<div class="modal fade" id="refund">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!-- header -->
+								<div class="modal-header">
+									<!-- 닫기(x) 버튼 -->
+									<button type="button" class="close" data-dismiss="modal">×</button>
+									<!-- header title -->
+									<h4 class="modal-title">환불</h4>
+								</div>
+								<!-- body -->
+								<div class="modal-body" style="text-align: left;">
+									<input type="hidden" name="sort" value="online"> 
+									<input type="hidden" name="ref_ord_code" id="ref_ord_code"/>
+									<input
+										type="radio" name="ref_reson" value="더 이상 구매를 원하지 않습니다.">1.더
+									이상 구매를 원하지 않습니다.<br> <input type="radio" name="ref_reson"
+										value="실수로 구매하였습니다.">2.실수로 구매하였습니다.<br> <input
+										type="radio" name="ref_reson" value="제품에 결함이 있습니다.">3.제품에
+									결함이 있습니다.<br> <select name="ref_bank">
+										<option value="신한">신한</option>
+										<option value="국민">국민</option>
+										<option value="우리">우리</option>
+									</select><br> 계좌번호<input type="text" name="ref_banknum">
+									예금주 <input type="text" name="ref_bankname">
+								</div>
+								<!-- Footer -->
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-default">환불</button>
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">닫기</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
 				<div class="mp_classInfo" id="${onlineClass.onc_code}">
-					<img src="resources/images/test/${onlineClass.f_oriname }" alt="" width="300px"
+					<img src="resources/upload/${onlineClass.f_sysname }" alt="" width="300px"
 						height="300px" id="mp_class_img">
 					<div>
 						<div class="class_info_contents" id="${onlineClass.onc_code}">
@@ -115,10 +152,10 @@ $(document).ready(function(){
 											data-toggle="modal" data-notifyid="${onlineClass.mcl_ord_code }">환불</button>
 									</c:when>
 								</c:choose>
-								<c:if test="${onlineClass.mcl_state == 2}">
+								<c:if test="${onlineClass.mcl_state == 3}">
 									<div>환불진행중</div>
 								</c:if>
-								<c:if test="${onlineClass.mcl_state == 3}">
+								<c:if test="${onlineClass.mcl_state == 4}">
 									<div>환불완료</div>
 								</c:if>
 							</div>

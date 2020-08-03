@@ -371,10 +371,11 @@ public class MemberService {
 
 			mv.setViewName("redirect:./mypageOrder");
 		}
-		else if(sort.equals("online")) {
+		else if(sort.equals("online")||sort.equals("offline")) {
 			//내 클래스 상태에서 환불중으로 변경
 			cDao.mclUpdateState(order);
-
+			//환불 목록에 ord_code를 추가한다.
+			cmDao.refundOrder(refund);
 			mv.setViewName("redirect:./mypage");
 		}
 
