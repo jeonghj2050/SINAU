@@ -358,12 +358,13 @@ public class MemberService {
 		BCryptPasswordEncoder pwdEncode = new BCryptPasswordEncoder();
 		 
 	  	String encodePwd = pwdEncode.encode(pwd);
-		
+
 		int result = mDao.newPwd(email, encodePwd);
 		if (result > 0) {
+			mv.setViewName("redirect:loginFrm");
+		} else {
 			mv.setViewName("redirect:/");
 		}
-		mv.setViewName("redirect:loginFrm");
 		return mv;
 
 	}

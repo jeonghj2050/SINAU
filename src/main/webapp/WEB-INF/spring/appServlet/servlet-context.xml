@@ -39,12 +39,15 @@
 			<exclude-mapping path="/"/>
 			<exclude-mapping path="/id"/>
 			<exclude-mapping path="/pwd"/>
+			<exclude-mapping path="/pwdreset"/>
 			<exclude-mapping path="/servicecenter_main"/>
 			<exclude-mapping path="/loginFrm"/>
 			<exclude-mapping path="/joinFrm"/>
 			<exclude-mapping path="/access"/>
 			<exclude-mapping path="/memberInsert"/>
 			<exclude-mapping path="/idCheck"/>
+			<exclude-mapping path="/boardWrite"/>
+			<exclude-mapping path="/servicecenter_question"/>
 			<beans:bean 
 				class="com.sinau.util.SessionInterceptor"/>
 		</interceptor>

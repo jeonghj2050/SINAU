@@ -35,7 +35,7 @@ public interface MemberDao {
 
 	void fileInsert(Map<String, String> fmap);
 
-	int newPwd(@Param("email")String email,@Param("encodePwd")String encodePwd);
+	int newPwd(@Param("email")String email,@Param("encPwd")String encPwd);
 
 	
 	

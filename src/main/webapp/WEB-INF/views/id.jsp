@@ -25,12 +25,12 @@ html {
 				<a href="./">SINAU</a>
 			</h1>
 			<h2>
-				<a>이메일/비밀번호 찾기</a>
+				<a>이메일 찾기/비밀번호 변경</a>
 			</h2>
 		</div>
 		<div class="member_box">
 			<div class="member_tab">
-				<a href="id">이메일 찾기</a> <a href="pwd" class="pwd">비밀번호 찾기</a>
+				<a href="id">이메일 찾기</a> <a href="pwd" class="pwd">비밀번호 변경</a>
 			</div>
 			<div class="member_content">
 				<div class="contents">

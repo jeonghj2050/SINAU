@@ -21,9 +21,9 @@
 		keyProperty="q_code">
 		<selectKey keyProperty="q_code"
 			resultType="int" order="BEFORE">
-			SELECT SEQ_q.NEXTVAL FROM DUAL
+			SELECT SEQ_Q.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO question
-		VALUES(${q_code},#{q_title},#{q_contents}, DEFAULT, #{q_m_email}, #{q_cts_code})
+		VALUES(${q_code},#{q_title},#{q_contents}, sysdate, null, null, #{q_cts_code}, #{q_m_email})
 	</insert>
 </mapper>

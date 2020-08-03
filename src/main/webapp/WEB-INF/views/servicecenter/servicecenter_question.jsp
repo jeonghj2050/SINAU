@@ -14,6 +14,10 @@
 $(document).ready(function(){
 	var chk = "${check}";
 	
+	if(chk == "1"){
+		alert("글 등록  실패!");
+		location.reload(true);
+	}
 	if(chk == "2"){
 		alert("글 등록 성공!");
 		location.reload(true);
@@ -33,7 +37,7 @@ $(document).ready(function(){
 	<header>
 		<jsp:include page="servicecenter_header.jsp"></jsp:include>
 	</header>
-	<section>
+	<section class="sectionover">
 	<h2 class="login-header">고객 센터</h2>
             <div class="cate_container">
                 <a class="category" href="./servicecenter_main">FAQ</a>
@@ -59,11 +63,10 @@ $(document).ready(function(){
 					<div class="t-anfield">${qitem.q_anfield}</div>
 				</div>
 				</c:forEach>
+				</div>
 			<div class="btn-area">
-				<div class="paging">${paging}</div>
 				<button class="wr-btn" onclick="location.href='./servicecenter_write'">글쓰기</button>
 			</div>
-				</div>
 	</section>
 	<footer>
 		<jsp:include page="servicecenter_footer.jsp"></jsp:include>

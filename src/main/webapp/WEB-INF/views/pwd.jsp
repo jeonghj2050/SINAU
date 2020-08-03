@@ -26,17 +26,17 @@ html {
 				<a href="./">SINAU</a>
 			</h1>
 			<h2>
-				<a>이메일/비밀번호 찾기</a>
+				<a>이메일 찾기/비밀번호 변경 </a>
 			</h2>
 		</div>
 		<div class="member_box">
 			<div class="member_tab">
 				<a href="id" class="id">이메일 찾기</a> 
-				<a href="pwd">비밀번호 찾기</a>
+				<a href="pwd">비밀번호 변경</a>
 			</div>
 			<div class="member_content">
 				<div class="contents">
-					<form class="memberinfo-form" action="pwdfind" method="post">
+					<form class="memberinfo-form" action="pwdreset" method="post">
 						<input type="text" class="idfind" id="memail" name="email" placeholder="이메일">
 						<input type="password" class="idfind" id="password1" name="pwd" placeholder="새 비밀번호">
 						<input type="password" class="idfind" id="password2" name="pwd2" placeholder="새 비밀번호 재확인">
