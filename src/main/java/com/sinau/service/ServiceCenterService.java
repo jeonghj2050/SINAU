@@ -58,7 +58,7 @@ public class ServiceCenterService {
 	}
 
 	@Transactional	
-	public String boardInsert(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
+	public String questionInsert(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
 		String view = null;
 
 		String title = multi.getParameter("q_title");
@@ -82,7 +82,7 @@ public class ServiceCenterService {
 		//웬만하면....... try/catch로 처리해 주세요...
 		try {
 			System.out.println(question + " 11111111111111111111111111111111111111111111111111111111111111111111111");
-			scDao.boardInsert(question);
+			scDao.questionInsert(question);
 			System.out.println(question + "222222222222222222222222222222222222222222222222222222222");
 			view = "redirect:servicecenter_question";
 			rttr.addFlashAttribute("check", 2);

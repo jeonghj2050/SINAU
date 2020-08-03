@@ -40,14 +40,24 @@ public class ServiceCenterController {
 	}
 	//writeFrm에서 들어온 데이터 처리 메소드
 	//action uri는 "boardWrite"
-	@PostMapping("boardInsert")
-	public String boardInsert
+	@PostMapping("questionInsert")
+	public String questionInsert
 	(MultipartHttpServletRequest multi, 
 			RedirectAttributes rttr) {
-		String view = scServ.boardInsert(multi, rttr);
+		String view = scServ.questionInsert(multi, rttr);
 		
 		
 		return view;
+	}
+	
+	@GetMapping("contents")
+	public String questionContents(Integer bnum) {
+
+		//DB에서 bnum(게시글 번호)에 해당하는 게시글
+		//정보를 가져와서 model에 추가.
+		/* mv = scServ.getContents(bnum); */
+
+		return "servicecenter/servicecenter_info";
 	}
 	
 	

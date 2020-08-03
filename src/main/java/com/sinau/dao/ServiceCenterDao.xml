@@ -15,7 +15,7 @@
 	<select id="getBoardCount" resultType="Integer">
 		SELECT COUNT(*) FROM Questioninfo
 	</select>
-	<insert id="boardInsert" 
+	<insert id="questionInsert" 
 		parameterType="com.sinau.dto.QuestionDto"
 		useGeneratedKeys="true"
 		keyProperty="q_code">

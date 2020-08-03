@@ -15,7 +15,6 @@ public interface ServiceCenterDao {
 
 	void questionInsert(QuestionDto question);
 
-	void boardInsert(QuestionDto question);
 
 
 
