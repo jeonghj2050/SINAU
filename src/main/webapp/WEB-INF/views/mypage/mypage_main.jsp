@@ -35,6 +35,7 @@
     </script>
 <script type="text/javascript">
 $(document).ready(function(){
+ 
 	var chk = "${msg}";
 	
 	if(chk == "2"){

@@ -64,15 +64,7 @@
 	<delete id="deleteClassImages" parameterType="String">
 		delete from f where f_pcode=#{f_pcode}
 	</delete>
-	<insert id="insertScl" parameterType="com.sinau.dto.ScheduleListDto"
-		 useGeneratedKeys="true" keyProperty="scl_code">
-		<selectKey keyProperty="scl_code" resultType="String" order="BEFORE">
-			select 'scl_'||SEQ_scl.NEXTVAL from dual
-		</selectKey>
-		<![CDATA[
-			insert into scl values(#{scl_code},#{scl_ofc_code})
-		]]>
-	</insert>
+	 
 	<insert id="insertSchedule" parameterType="com.sinau.dto.ScheduleDto">
 		<![CDATA[
 			insert into sc values('sc_'||seq_sc.nextval,#{sc_time},#{sc_place},#{sc_scl_code})

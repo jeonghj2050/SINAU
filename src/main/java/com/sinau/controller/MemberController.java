@@ -248,4 +248,13 @@ public class MemberController {
 		
 		return mv;
 	}
+	///////////////////////////////////////////////////////////////////판매자 마이페이지
+	@GetMapping("dMypage")
+	public ModelAndView dMypage() {
+		log.info("dMypage()");
+		
+		mv=mServ.getProductList();
+		
+		return mv;
+	}
 }

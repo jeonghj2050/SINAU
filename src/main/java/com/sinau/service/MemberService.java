@@ -482,7 +482,7 @@ public class MemberService {
 			offine.setOfc_level(multi.getParameter("ofc_level"));
 			offine.setOfc_stnum(Integer.parseInt(multi.getParameter("ofc_stnum")));
 			offine.setOfc_sale(Integer.parseInt(multi.getParameter("ofc_sale")));
-			
+
 			String[] sc_times=multi.getParameterValues("sc_time"); 
 			for(int i = 0; i < sc_times.length; i++) {
 				sc_times[i] = sc_times[i].replace("T", " ");
@@ -498,19 +498,19 @@ public class MemberService {
 				ScheduleListDto scList=new ScheduleListDto();
 				scList.setScl_ofc_code(offine.getOfc_code());
 				cmDao.insertScl(scList);
-				
+
 				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-				
+
 				log.info(scList.getScl_code());
 				for(int i=0;i<sc_times.length;i++) {
 					ScheduleDto schedule=new ScheduleDto();
 					schedule.setSc_scl_code(scList.getScl_code());
 					schedule.setSc_time(sf.parse(sc_times[i]));
 					schedule.setSc_place(sc_places[i]);
-					
+
 					cmDao.insertSchedule(schedule);
 				}
-				
+
 				//강좌에 이미지 저장
 				FilesDto file=new FilesDto();
 				file.setF_pcode(offine.getOfc_code());
@@ -639,7 +639,7 @@ public class MemberService {
 		String path=session.getServletContext().getRealPath("/")+"resources/upload/";
 		mv=new ModelAndView();
 		String v_code=cmDao.getVCode(onc_code);
-		
+
 		//강의에 등록된 동영상들을 삭제한다.
 		//v_code에 저장된 파일들을 모두 가져온다.
 		List<VideoFileDto> fileList=cmDao.getVideoList(v_code);
@@ -648,17 +648,17 @@ public class MemberService {
 			//실제 업로드 폴더에서 해당 파일을 삭제한다.
 			String saveFileName=file.getVf_sysname();
 			File deleteFile=new File(path+saveFileName);
-	
+
 			if(deleteFile.exists()) {
 				deleteFile.delete();
 				log.info("삭제 완료!");
 			}else {
 				log.info("해당 파일이 존재하지 않습니다.");
 			}
-	
+
 			cmDao.deleteVideoOne(vf_code);
 		}
-		
+
 
 		//강의에 등록된 동영상 목록을 삭제한다.
 		cmDao.deleteVideo(v_code);
@@ -691,93 +691,101 @@ public class MemberService {
 		return mv;
 	}
 	
+	public ModelAndView getProductList() {
+		mv=new ModelAndView();
+		
+		
+		mv.setViewName("mypage/dmypage_main");
+		return mv;
+	}
+
 	//이미지 업로드
 	public void imageUp(MultipartHttpServletRequest multi,FilesDto file) throws IllegalStateException, IOException {
-			//파일을 실제 물리 경로에 저장
-			//upload폴더에 저장
-			//"/src/main/webapp/resources/upload
-			String path=multi.getSession().getServletContext().getRealPath("/")+"resources/upload/";
-			log.info(path);
+		//파일을 실제 물리 경로에 저장
+		//upload폴더에 저장
+		//"/src/main/webapp/resources/upload
+		String path=multi.getSession().getServletContext().getRealPath("/")+"resources/upload/";
+		log.info(path);
 
-			//upload 폴더 만들기
-			File folder=new File(path);
-			//folder가 디렉토리가 아니거나 존재하지 않는다면
-			if(folder.isDirectory()==false) {
-				folder.mkdir();
-			}
-
-		
-			List<MultipartFile> thumbnail=multi.getFiles("ofthumbnail");
-			for(int i=0;i<thumbnail.size();i++) {
-				file.setF_code("fofth_");
-				MultipartFile mf=thumbnail.get(i);
-				//실제 파일명 가져오기
-				String oriName=mf.getOriginalFilename();
-				file.setF_oriname(oriName);
-
-				//저장 파일명 만들기
-				String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
-				file.setF_sysname(sysName);
-
-				log.info("fileup() - oriName : "+oriName);
-				log.info("fileup() - sysName : "+sysName);
-
-				//저장 위치로 파일 전송
-				//새로 만든 파일이름으로 지정된 경로에 전송
-				mf.transferTo(new File(path+sysName));
-
-
-				cmDao.imageInsert(file);
-			}
-
-			List<MultipartFile> spec=multi.getFiles("ofspec");
-			for(int i=0;i<spec.size();i++) {
-				file.setF_code("fofsp_");
-				MultipartFile mf=spec.get(i);
-				//실제 파일명 가져오기
-				String oriName=mf.getOriginalFilename();
-				file.setF_oriname(oriName);
-
-				//저장 파일명 만들기
-				String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
-				file.setF_sysname(sysName);
-
-				log.info("fileup() - oriName : "+oriName);
-				log.info("fileup() - sysName : "+sysName);
-
-				//저장 위치로 파일 전송
-				//새로 만든 파일이름으로 지정된 경로에 전송
-				mf.transferTo(new File(path+sysName));
-
-
-				cmDao.imageInsert(file);
-
-			}
-
-			List<MultipartFile> content=multi.getFiles("ofcontent");
-			log.info(content.size()+"");
-			for(int i=0;i<content.size();i++) {
-				file.setF_code("fofco_");
-				MultipartFile mf=content.get(i);
-				//실제 파일명 가져오기
-				String oriName=mf.getOriginalFilename();
-				file.setF_oriname(oriName);
-
-				//저장 파일명 만들기
-				String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
-				file.setF_sysname(sysName);
-
-				log.info("fileup() - oriName : "+oriName);
-				log.info("fileup() - sysName : "+sysName);
-
-				//저장 위치로 파일 전송
-				//새로 만든 파일이름으로 지정된 경로에 전송
-				mf.transferTo(new File(path+sysName));
-
-
-				cmDao.imageInsert(file);
-			}
+		//upload 폴더 만들기
+		File folder=new File(path);
+		//folder가 디렉토리가 아니거나 존재하지 않는다면
+		if(folder.isDirectory()==false) {
+			folder.mkdir();
 		}
+
+
+		List<MultipartFile> thumbnail=multi.getFiles("ofthumbnail");
+		for(int i=0;i<thumbnail.size();i++) {
+			file.setF_code("fofth_");
+			MultipartFile mf=thumbnail.get(i);
+			//실제 파일명 가져오기
+			String oriName=mf.getOriginalFilename();
+			file.setF_oriname(oriName);
+
+			//저장 파일명 만들기
+			String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
+			file.setF_sysname(sysName);
+
+			log.info("fileup() - oriName : "+oriName);
+			log.info("fileup() - sysName : "+sysName);
+
+			//저장 위치로 파일 전송
+			//새로 만든 파일이름으로 지정된 경로에 전송
+			mf.transferTo(new File(path+sysName));
+
+
+			cmDao.imageInsert(file);
+		}
+
+		List<MultipartFile> spec=multi.getFiles("ofspec");
+		for(int i=0;i<spec.size();i++) {
+			file.setF_code("fofsp_");
+			MultipartFile mf=spec.get(i);
+			//실제 파일명 가져오기
+			String oriName=mf.getOriginalFilename();
+			file.setF_oriname(oriName);
+
+			//저장 파일명 만들기
+			String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
+			file.setF_sysname(sysName);
+
+			log.info("fileup() - oriName : "+oriName);
+			log.info("fileup() - sysName : "+sysName);
+
+			//저장 위치로 파일 전송
+			//새로 만든 파일이름으로 지정된 경로에 전송
+			mf.transferTo(new File(path+sysName));
+
+
+			cmDao.imageInsert(file);
+
+		}
+
+		List<MultipartFile> content=multi.getFiles("ofcontent");
+		log.info(content.size()+"");
+		for(int i=0;i<content.size();i++) {
+			file.setF_code("fofco_");
+			MultipartFile mf=content.get(i);
+			//실제 파일명 가져오기
+			String oriName=mf.getOriginalFilename();
+			file.setF_oriname(oriName);
+
+			//저장 파일명 만들기
+			String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
+			file.setF_sysname(sysName);
+
+			log.info("fileup() - oriName : "+oriName);
+			log.info("fileup() - sysName : "+sysName);
+
+			//저장 위치로 파일 전송
+			//새로 만든 파일이름으로 지정된 경로에 전송
+			mf.transferTo(new File(path+sysName));
+
+
+			cmDao.imageInsert(file);
+		}
+	}
 
 	//크리에이터 강의의 동영상을 업로드하는 메소드
 	public void videoUp(MultipartHttpServletRequest multi,VideoFileDto video,FilesDto file) throws IllegalStateException, IOException {
