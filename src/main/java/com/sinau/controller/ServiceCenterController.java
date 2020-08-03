@@ -38,18 +38,7 @@ public class ServiceCenterController {
 
 		return mv;
 	}
-	//writeFrm에서 들어온 데이터 처리 메소드
-	//action uri는 "boardWrite"
-	@PostMapping("questionInsert")
-	public String questionInsert
-	(MultipartHttpServletRequest multi, 
-			RedirectAttributes rttr) {
-		String view = scServ.questionInsert(multi, rttr);
-		
-		
-		return view;
-	}
-	
+
 	@GetMapping("contents")
 	public String questionContents(Integer bnum) {
 
@@ -60,7 +49,15 @@ public class ServiceCenterController {
 		return "servicecenter/servicecenter_info";
 	}
 	
-	
+	@PostMapping("boardWrite")
+	public String boardWrite
+	(MultipartHttpServletRequest multi, 
+			RedirectAttributes rttr) {
+		String view = scServ.boardInsert(multi, rttr);
+		
+		
+		return view;
+	}
 	
 	
 	

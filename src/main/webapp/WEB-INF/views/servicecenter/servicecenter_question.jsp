@@ -54,7 +54,7 @@ $(document).ready(function(){
 				</div><br>
 				<c:forEach var="qitem" items="${qList}">
 				<div class="data-row">
-					<div class="t-no">${qitem.q_code}</div>
+					<div class="t-no">${qitem.rownum}</div>
 					<div class="t-category">${qitem.cts_name}</div>
 					<div class="t-title"><a href="contents?qcode=${qitem.q_code}">
 						${qitem.q_title}</a></div>

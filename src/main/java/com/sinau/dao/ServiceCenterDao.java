@@ -13,7 +13,9 @@ public interface ServiceCenterDao {
 
 	int getBoardCount();
 
-	void questionInsert(QuestionDto question);
+	void boardInsert(QuestionDto question);
+
+	void fileInsert(Map<String, String> fmap);
 
 
 

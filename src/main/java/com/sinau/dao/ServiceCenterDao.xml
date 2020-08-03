@@ -7,15 +7,16 @@
 	<select id="getList" parameterType="String"
 		resultType="com.sinau.dto.QuestionInfoDto">
 		<![CDATA[
-		select replace(q_code,'q_','') as q_code, cts_name, q_title, q_date, m_name,q_anfield 
+		select rownum, cts_name, q_title, q_date, m_name,q_anfield 
 		from questioninfo
 		where q_m_email = #{email}
+		order by rownum desc
 		]]>
 	</select>
 	<select id="getBoardCount" resultType="Integer">
 		SELECT COUNT(*) FROM Questioninfo
 	</select>
-	<insert id="questionInsert" 
+	<insert id="boardInsert" 
 		parameterType="com.sinau.dto.QuestionDto"
 		useGeneratedKeys="true"
 		keyProperty="q_code">
@@ -24,6 +25,11 @@
 			SELECT SEQ_Q.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO question
-		VALUES(${q_code},#{q_title},#{q_contents}, sysdate, null, null, #{q_cts_code}, #{q_m_email})
+		VALUES(${q_code},#{q_title},#{q_content},sysdate, null, null,#{q_cts_code},#{q_m_email})
+	</insert>
+	<insert id="fileInsert" parameterType="HashMap">
+		INSERT INTO files
+		VALUES('F_'||SEQ_F.NEXTVAL,
+			#{oriFileName},#{sysFileName},#{cts_code})
 	</insert>
 </mapper>

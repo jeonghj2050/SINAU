@@ -9,7 +9,68 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript">
+	var sel_file;
+	$(document).ready(function() {
+		$("#file").on("change", fileSelect);
+	});
 
+	function fileSelect(e) {
+		if ($("#file").val() == "") {
+			console.log("empty");
+			$("#filecheck").val(0);
+		} else {
+			console.log("not empty");
+			$("#filecheck").val(1);
+		}
+
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+
+		filesArr.forEach(function(f) {
+			if (!f.type.match("image.*")) {
+				alert("이미지 파일만 등록해주세요!!");
+				return;
+			}
+			sel_file = f;
+
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$("#profile_img").attr("src", e.target.result);
+			}
+			reader.readAsDataURL(f);
+
+		});
+	}
+</script>
+<script  type="text/javascript">
+$(document).ready(function(){
+	$('#photo').change(function(event){
+		var tmppath=URL.createObjectURL(event.target.files[0]);
+		$('#m_photo').attr('src',tmppath);
+	});
+});
+</script>
+<script type="text/javascript">
+$("#file").on('change',function(){
+	var file = document.getElementById("file");
+	console.log(file);
+	var filelist = file.files;
+	console.log(filelist);
+	
+	var fileName = $("#file").val();
+	$(".upload-name").val(fileName);
+	
+	if(fileName == ""){
+		console.log("empty");
+		$("#filecheck").val(0);
+	}
+	else{
+		console.log("not empty");
+		$("#filecheck").val(1);
+	}
+});
+</script>
 </head>
 <body>
 	<header>
@@ -21,12 +82,11 @@
 			<a class="category" href="./servicecenter_main">FAQ</a>
 			<a class="category" href="./servicecenter_question">1 : 1문의</a> 
 		</div>
-		<form name="writeFrm" action="boardInsert" class="write-form"
+		<form name="writeFrm" action="boardWrite" class="write-form"
 			method="post" enctype="multipart/form-data">
 			<h3>문의글 작성</h3>
 			<div class="write-top">
-			<a class="t">title : </a><input type="text" class="write-input" name="q_title" autofocus
-				placeholder="제목" required>
+			<a class="t">title : </a> <input type="text" class="write-input" name="q_title" autofocus placeholder="제목" required>
 			<a>meail : </a><input type="text" class="memail" name="q_m_email" value="${mb.m_email}" >
 			</div>
 			<a style="margin-left:740px;">카테고리 :</a>
@@ -42,9 +102,9 @@
 			<textarea name="q_content" class="contents"
 				placeholder="내용을 적어주세요..."></textarea>
 			<div class="filebox"> 
-				<label for="file">업로드</label> 
+				<img src="resources/images/user.png" alt="기본이미지"
+					class="img-circle" width="50px" height="50px" id="profile_img"><br>
 				<input type="file" name="files" id="file"> 
-				<input class="upload-name" value="파일선택" readonly>
 				<input type="hidden" id="filecheck"	value="0" name="fileCheck">
 			</div>
 			<div class="btn-btn">
