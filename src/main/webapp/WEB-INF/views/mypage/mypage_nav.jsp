@@ -24,7 +24,7 @@
 		<c:choose>
 			<c:when test="${mb.m_group eq'cm'}">
 				<li class="list-group-item"><a href="./cMypage">내 클래스</a></li>
-				<li class="list-group-item"><a href="./mypage">질문게시판</a></li>
+				<li class="list-group-item"><a href="./cMypageQnA">질문게시판</a></li>
 				<li class="list-group-item"><a href="./cMyNewClass">내 강의 등록/수정</a></li>
 				<hr>
 			</c:when>

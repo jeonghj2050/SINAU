@@ -15,6 +15,8 @@ import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.RefundDto;
+import com.sinau.dto.ScheduleDto;
+import com.sinau.dto.ScheduleListDto;
 import com.sinau.dto.VideoFileDto;
 
 public interface CommonDao {
@@ -44,10 +46,23 @@ public interface CommonDao {
 	void deleteVideoOne(String vf_code);
 
 	//vf_code에 해당하는 파일을 변경하다.
-	void updateVideoOne(@Param("vf_code")String vf_code, @Param("oriName")String oriName, @Param("sysName")String sysName);
+	void updateVideoOne(VideoFileDto video);
 
 	//수정 후 다시 데이터를 보내기 위해 vf_code에 해당하는 동영상 정보를 가져온다.
 	VideoFileDto getVideoOne(String vf_code);
-	
-	
+
+	//v_code에 해당하는 모든 파일을 가져온다.
+	List<VideoFileDto> getVideoList(String v_code);
+
+	//v_code에 해당하는 목록을 삭제한다.
+	void deleteVideo(String v_code);
+
+	//onc_code에 해당하는 이미지들을 모두 삭제한다.
+	void deleteClassImages(String f_pcode);
+
+	void insertScl(ScheduleListDto scList);
+
+	void insertSchedule(ScheduleDto schedule);
+
+
 }

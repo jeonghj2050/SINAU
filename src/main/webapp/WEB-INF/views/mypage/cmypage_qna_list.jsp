@@ -77,11 +77,6 @@
 						<a href="#${ccInfo.onc_code}" aria-controls="home" role="tab" data-toggle="tab">${ccInfo.onc_code}</a>
 					</li>
 					</c:forEach>
-					<c:forEach var="cofInfo" items="${cofInfoList}">	
-					<li role="presentation" name="${cofInfo.ofc_code}">
-						<a href="#${cofInfo.ofc_code}" aria-controls="home" role="tab" data-toggle="tab">${cofInfo.ofc_code}</a>
-					</li>
-					</c:forEach>
 				</ul>
 				<c:forEach var="ccInfo" items="${ccInfoList}">
 					<div class="c_myclass_info" id="${ccInfo.onc_code}">
@@ -89,66 +84,33 @@
 						<div class="c_myclass_detail">
 							<div style="font-size: 13pt; font-weight: bold;">${ccInfo.onc_title }</div>
 							<div>${ccInfo.onc_content}</div>
-							<div>${ccInfo.onc_rstnum }명 / ${ccInfo.onc_stnum }명</div>
-						</div>
-						<div style="float:right;">
-							<c:if test="${ccInfo.onc_rstnum le 0 }">
-								<button class="my_default_btn" onclick="location.href='./cMyClassDel?onc_code=${ccInfo.onc_code}'">강의 삭제</button>
-							</c:if>
-							<button class="my_default_btn" onclick="location.href='./cMyClassUp?onc_code=${ccInfo.onc_code}'">강의 수정</button>
 						</div>
 						<p class="mypage_sub_title" style="clear:both;">등록 정보</p>
-						<div class="c_myclass_stuList">
+						<div class="c_myclass_questionlist">
 							<table class="table">
 								<tr>
-									<th>이메일</th>
-									<th>이름</th>
+	                                <th>질문내용</th>
+	                                <th>등록날짜</th>
+	                                <th>등록아이디</th>
+	                                <th>답변상태</th>
 								</tr>
-								<c:forEach var="cstuInfo" items="${cstuInfoList}">
-									<c:choose>
-										<c:when test="${cstuInfo.onc_code eq ccInfo.onc_code }">
-											<tr>
-												<td>${cstuInfo.m_email}</td>
-												<td>${cstuInfo.m_name}</td>
-											</tr>
-										</c:when>
-									</c:choose>
+								
+								<c:forEach var="feed" items="${feedList}">
+									<c:if test="${feed.v_code eq ccInfo.v_code }">
+										<input type="hidden" name="fb_code" value="${feed.fb_code }" />
+										<tr>
+											<td>${feed.fb_content}</td>
+											<td>${feed.fb_date}</td>
+											<td>${feed.fb_m_email}</td>
+											<c:if test="${feed.fb_reply eq null }">
+												<td style="color:red;">미답변</td>
+											</c:if>
+											<c:if test="${feed.fb_reply ne null }">
+												<td style="color:blue;">답변완료</td>
+											</c:if>
+										</tr>
+									</c:if>					
 								</c:forEach>
-							</table>
-						</div>
-					</div>
-				</c:forEach>
-				<c:forEach var="cofInfo" items="${cofInfoList}">
-					<div class="c_myclass_info" id="${cofInfo.ofc_code}">
-						<img src="resources/upload/${cofInfo.f_sysname} " alt="">
-						<div class="c_myclass_detail">
-							<div style="font-size: 13pt; font-weight: bold;">${cofInfo.ofc_title }</div>
-							<div>${cofInfo.ofc_content}</div>
-							<div>${cofInfo.ofc_rstnum }명 / ${cofInfo.ofc_stnum }명</div>
-						</div>
-						<div style="float:right;">
-							<c:if test="${cofInfo.ofc_rstnum le 0 }">
-								<button class="my_default_btn" onclick="location.href='./cMyClassDel?p_code=${cofInfo.ofc_code}'">강의 삭제</button>
-							</c:if>
-							<button class="my_default_btn" onclick="location.href='./cMyClassUp?up_p_code=${cofInfo.ofc_code}'">강의 수정</button>
-						</div>
-						<p class="mypage_sub_title" style="clear:both;">등록 정보</p>
-						<div class="c_myclass_stuList">
-							<table class="table">
-								<tr>
-									<th>이메일</th>
-									<th>이름</th>
-								</tr>
-								<%-- <c:forEach var="cstuInfo" items="${cstuInfoList}">
-									<c:choose>
-										<c:when test="${cstuInfo.onc_code eq ccInfo.onc_code }">
-											<tr>
-												<td>${cstuInfo.m_email}</td>
-												<td>${cstuInfo.m_name}</td>
-											</tr>
-										</c:when>
-									</c:choose>
-								</c:forEach> --%>
 							</table>
 						</div>
 					</div>

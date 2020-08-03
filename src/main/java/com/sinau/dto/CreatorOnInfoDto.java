@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class CreatorClassInfoDto {
+public class CreatorOnInfoDto {
 	private String onc_code;
 	private String onc_m_email;
 	private String onc_title;
@@ -18,4 +18,5 @@ public class CreatorClassInfoDto {
 	private Timestamp onc_edate;
 	private String f_sysname;
 	private String onc_cts_code;
+	private String v_code;
 }

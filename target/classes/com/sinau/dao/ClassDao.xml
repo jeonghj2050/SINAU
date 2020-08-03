@@ -66,6 +66,13 @@
 					1,#{onc_sdate},#{onc_edate},#{onc_m_email},#{onc_cts_code})
 		]]>
 	</insert>
+	<insert id="insertOffClassInfo" parameterType="com.sinau.dto.OffClassDto" useGeneratedKeys="true" keyProperty="ofc_code">
+		<selectKey keyProperty="ofc_code" resultType="String" order="BEFORE">
+			select 'ofc_'||seq_ofc.nextval from dual
+		</selectKey>
+		insert into ofc values(#{ofc_code},#{ofc_title},#{ofc_content},#{ofc_teacher},#{ofc_sale},default,#{ofc_level},0,
+				#{ofc_stnum},1,#{ofc_m_email},#{ofc_cts_code})
+	</insert>
 	<!-- 온라인 강의에 해당하는 비디오 목록을 생성 -->
 	<insert id="insertVideoList" parameterType="com.sinau.dto.VideoDto"
 		 useGeneratedKeys="true" keyProperty="v_code">
@@ -85,15 +92,26 @@
 		]]>
 	</update>
 	
-	<select id="getCreatorClassList" parameterType="String" resultType="com.sinau.dto.CreatorClassInfoDto">
-		select * from creatorclassinfo where onc_m_email=#{onc_m_email}
+	<select id="getCreatorOnList" parameterType="String" resultType="com.sinau.dto.CreatorOnInfoDto">
+		select * from creatoroninfo where onc_m_email=#{onc_m_email}
+	</select>
+	<select id="getCreatorOffList" parameterType="String" resultType="com.sinau.dto.CreatorOffInfoDto">
+		select * from creatoroffinfo where ofc_m_email=#{ofc_m_email}
 	</select>
 	
-	<select id="getCreatorClassInfo" parameterType="String" resultType="com.sinau.dto.CreatorClassInfoDto">
-		select * from creatorclassinfo where onc_code=#{onc_code}
+	<select id="getClassInfo" parameterType="String" resultType="com.sinau.dto.CreatorOnInfoDto">
+		select * from creatoroninfo where onc_code=#{onc_code}
 	</select>
 	
 	<select id="getVideoList" parameterType="String" resultType="com.sinau.dto.VideoFileDto">
 		select * from vf where vf_v_code=#{v_code}
+	</select>
+	
+	<delete id="deleteClass" parameterType="String">
+		delete from onc where onc_code=#{onc_code}
+	</delete>
+	
+	<select id="getFeedListAll" parameterType="String" resultType="com.sinau.dto.VideoFeedDto">
+		select * from videofeed where m_email=#{m_email}
 	</select>
 </mapper>

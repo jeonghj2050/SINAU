@@ -6,7 +6,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.sinau.dto.CreatorClassInfoDto;
+import com.sinau.dto.CreatorOffInfoDto;
+import com.sinau.dto.CreatorOnInfoDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
@@ -17,6 +18,7 @@ import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.VideoDto;
+import com.sinau.dto.VideoFeedDto;
 import com.sinau.dto.VideoFileDto;
 
 public interface ClassDao {
@@ -46,11 +48,20 @@ public interface ClassDao {
 
 	
 	//크리에이터가 등록한 강좌의 정보를 가져온다.
-	public List<CreatorClassInfoDto> getCreatorClassList(String m_email);
+	List<CreatorOnInfoDto> getCreatorOnList(String m_email);
+	List<CreatorOffInfoDto> getCreatorOffList(String m_email);
+
+	
 	//onc_code에 해당하는 강좌 정보를 가져온다.
-	CreatorClassInfoDto getCreatorClassInfo(String onc_code);
+	CreatorOnInfoDto getClassInfo(String onc_code);
 	//v_code에 저장된 동영상 파일을 모두 가져온다.
 	List<VideoFileDto> getVideoList(String v_code);
+	
+	//onc_code의 강좌를 삭제한다.
+	void deleteClass(String onc_code);
+	
+	//크리에이터의 모든 강좌의 피드백 목록을 가져온다.
+	List<VideoFeedDto> getFeedListAll(String m_email);
 
 
 }

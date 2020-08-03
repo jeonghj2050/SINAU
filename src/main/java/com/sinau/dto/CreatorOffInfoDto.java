@@ -5,17 +5,16 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class OffClassDto {
+public class CreatorOffInfoDto {
 	private String ofc_code;
+	private String ofc_m_email;
 	private String ofc_title;
 	private String ofc_content;
-	private String ofc_teacher;
-	private int ofc_sale;
-	private Timestamp ofc_update;
-	private String ofc_level;
-	private int ofc_view;
+	private int ofc_rstnum;
 	private int ofc_stnum;
-	private int ofc_state;
-	private String ofc_m_email;
+	private int ofc_sale;
+	private String ofc_level;
+	private String f_sysname;
 	private String ofc_cts_code;
+	private String scl_code;
 }

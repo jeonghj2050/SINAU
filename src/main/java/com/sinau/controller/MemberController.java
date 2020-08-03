@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -159,7 +160,7 @@ public class MemberController {
 	@GetMapping("/cMypage")
 	public ModelAndView cMypage() {
 		//회원(크리에이터)
-		mv=mServ.getCreatorOnlineList();
+		mv=mServ.getCreatorClassList();
 
 		return mv;
 	}
@@ -190,11 +191,22 @@ public class MemberController {
 		return mv;
 	}
 	
-	@PostMapping("cMyClassUp")
-	public ModelAndView cMyClassUp(MultipartHttpServletRequest multi) {
-		log.info("cMyClassUp(post)");
+	//강의 정보를 수정하기위한 메소드
+	@PostMapping("cMyClassOnInfo")
+	public ModelAndView cMyClassInfo(OnlineClassDto online) {
+		log.info("cMyClassOnInfo(post) : "+online.toString());
+		Object obj=online;
+		mv=mServ.updateClassInfo(obj);
 		
-		mv=mServ.updateClassInfo(multi);
+		return mv;
+	}
+	
+	//동영상 추가를 위한 메소드
+	@PostMapping("cMyClassVideo")
+	public ModelAndView cMyClassVideo(MultipartHttpServletRequest multi) {
+		log.info("cMyClassVideo(post) : "+multi.getParameter("uv_title"));
+		
+		mv=mServ.updateClassVideo(multi);
 		
 		return mv;
 	}
@@ -208,15 +220,32 @@ public class MemberController {
 	
 		return msg;
 	}
-	//동영상 삭제를 위한 비동기 처리 메소드
+	//동영상 정보수정을 위한 비동기 처리 메소드
 	@PostMapping(value = "updateClassVideo")
 	@ResponseBody
-	public VideoFileDto updateClassVideo(MultipartFile[] updateFiles,String vf_code){
+	public VideoFileDto updateClassVideo(MultipartFile[] updateFiles,@ModelAttribute VideoFileDto upFile){
 		
-		log.info("updateClassVideo()!!"+updateFiles[0].getOriginalFilename());
-		VideoFileDto video =mServ.uploadClassVideo(updateFiles,vf_code);
+		log.info("updateClassVideo()!!"+upFile.getV_title()+updateFiles.length);
+		VideoFileDto video =mServ.uploadClassVideo(updateFiles,upFile);
 
 		return video;
 	}
 	
+	@GetMapping("cMyClassDel")
+	public ModelAndView cMyClassDel(String onc_code) {
+		log.info("cMyClassDel() : "+onc_code);
+		
+		mv=mServ.deleteClass(onc_code);
+		
+		return mv;
+	}
+	
+	@GetMapping("cMypageQnA")
+	public ModelAndView cMypageQnA() {
+		log.info("cMypageQnA()");
+		
+		mv=mServ.getClassQuestionList();
+		
+		return mv;
+	}
 }

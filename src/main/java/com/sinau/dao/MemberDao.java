@@ -1,7 +1,7 @@
 package com.sinau.dao;
 
 import com.sinau.dto.ClassStuInfoDto;
-import com.sinau.dto.CreatorClassInfoDto;
+import com.sinau.dto.CreatorOnInfoDto;
 import com.sinau.dto.MemberDto;
 
 import com.sinau.dto.MemberDto;
