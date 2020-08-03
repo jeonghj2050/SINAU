@@ -2,17 +2,35 @@
 <!DOCTYPE mapper 
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 <mapper namespace="com.sinau.dao.pInfoDao">
-	
-	<select id="getReviewList" parameterType="String" resultType="com.sinau.dto.PReviewDto">
-	SELECT * FROM PRV
+
+	<select id="getReviewList" parameterType="String"
+		resultType="com.sinau.dto.PReviewDto">
+		SELECT * FROM PRV
 		WHERE PRV_P_CODE=#{prv_p_code}
 	</select>
-	
-		<insert id="reviewInsert" parameterType="com.sinau.dto.PReviewDto">
-		insert into PRV VALUES('prv_'||SEQ_PRV.NEXTVAL,DEFAULT,#{prv_content},#{prv_m_email},#{prv_p_code})
-		
+
+	<insert id="reviewInsert"
+		parameterType="com.sinau.dto.PReviewDto">
+		insert into PRV
+		VALUES('prv_'||SEQ_PRV.NEXTVAL,DEFAULT,#{prv_content},#{prv_m_email},#{prv_p_code})
+
 	</insert>
+
+	<select id="replyUserIdCheck" parameterType="String" resultType="String">
+		SELECT PRV_M_EMAIL
+		FROM PRV
+		WHERE PRV_CODE = #{prv_code}
+		</select>
+
+
+	<delete id="deleteReply" parameterType="String">
+		DELETE FROM PRV
+		WHERE PRV_CODE = #{PRV_CODE}
+
+	</delete>
+
+
 
 </mapper>

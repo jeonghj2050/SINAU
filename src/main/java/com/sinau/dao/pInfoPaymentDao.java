@@ -6,6 +6,9 @@ import com.sinau.dto.PInfoPaymentsDto;
 
 public interface pInfoPaymentDao {
 
-	PInfoPaymentsDto getpInfoPay(String p_code);
+	public PInfoPaymentsDto getpInfoPay(String p_code);
+	
+	
+	
 
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -41,7 +42,7 @@ public class StoreService {
 	pInfoPaymentDao piDao;
 	@Autowired
 	pInfoDao pInfoDao;
-	
+
 
 	//상품 탑10
 	public ModelAndView getProductList(String cts_code) {
@@ -90,32 +91,32 @@ public class StoreService {
 
 	public ModelAndView getpInfo(String p_code) {
 		// TODO Auto-generated method stub
-			mv=new ModelAndView();
-		
+		mv=new ModelAndView();
+
 		String pspec = plDao.getPspec(p_code);
 		mv.addObject("pspec",pspec);
-		
+
 		PInfoPaymentsDto pInfoPay= piDao.getpInfoPay(p_code);
 		mv.addObject("pInfoPay",pInfoPay);
-		
+
 		String pcont = plDao.getPcont(p_code);
 		mv.addObject("pcont",pcont);
-		
+
 		//게시글 번호에 해당하는 댓글 목록/내용(DB)
 		List<PReviewDto> reviewList = pInfoDao.getReviewList(p_code);
 		mv.addObject("rList", reviewList);
-		
+
 		mv.addObject("p_code",p_code);
-		
+
 		mv.setViewName("store/store_info");
 
 		return mv;
-		
+
 	}
 
 	public Map<String, List<PReviewDto>> rInsert(PReviewDto review) {
 		Map<String, List<PReviewDto>>rMap=null;
-		
+
 		try {
 			//1.넘어온 댓글-> DB에 insert 처리
 			pInfoDao.reviewInsert(review);
@@ -124,15 +125,41 @@ public class StoreService {
 			//3. 전체 댓글 목록을 rMap에 추가하여 반환
 			rMap=new HashMap<String, List<PReviewDto>>();
 			rMap.put("rList", rList);
-			
+
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			rMap=null;
 		}
-		
+
 		return rMap;
 	}
+
+
+	public  Map<String, List<PReviewDto>>  rvidCheck(String prv_code) { // TODO Auto-generated method stub
+		Map<String, List<PReviewDto>> rMap= new HashMap<String, List<PReviewDto>>();
+		PReviewDto review = new PReviewDto();
+
+
+		MemberDto member = ((MemberDto)session.getAttribute("mb"));
+		String m_email =  pInfoDao.replyUserIdCheck(prv_code);
+
+		if(member.getM_email().equals(m_email)) {
+
+
+			pInfoDao.deleteReply(prv_code);
+
+			List<PReviewDto> rList=pInfoDao.getReviewList(prv_code);
+
+			rMap.put("rList", rList);
+
+
+		}
+
+		return rMap; 
+
+	}
+
 
 
 }
