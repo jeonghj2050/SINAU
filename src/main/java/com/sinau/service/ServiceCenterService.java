@@ -42,6 +42,8 @@ public class ServiceCenterService {
 
 
 	public ModelAndView getQnaList() {
+		
+		
 		mv = new ModelAndView();
 		MemberDto member = (MemberDto)session.getAttribute("mb");
 		
@@ -64,7 +66,7 @@ public class ServiceCenterService {
 	public String boardInsert(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
 		String view = null;
 
-		System.out.println("666666666666666666666666666666666666666666666666666666666666666666666666666666");
+		
 		//Multipart request에서 데이터 추출
 		String title = multi.getParameter("q_title");
 		String ctscode = multi.getParameter("q_cts_code");
@@ -91,15 +93,12 @@ public class ServiceCenterService {
 		//insert, update, delete를 할 경우
 		//웬만하면....... try/catch로 처리해 주세요...
 		try {
-			System.out.println(question + "11111111111111111111111111111111111111111111");
 			scDao.boardInsert(question);
 			view = "redirect:servicecenter_question";
 			rttr.addFlashAttribute("check", 2);
-
 			if(fcheck == 1) {
 				//업로드할 파일이 있음.
-				System.out.println("122222222222222222222222222222222222222222222222222222222222222222222");
-				fileUp(multi, question.getQ_cts_code());
+				fileUp(multi, question.getQ_code());
 			}
 		}catch (Exception e) {
 			//DB 삽입 오류 시 글쓰기폼으로 돌아감.
@@ -110,7 +109,7 @@ public class ServiceCenterService {
 		return view;
 	}
 
-	private void fileUp(MultipartHttpServletRequest multi, String Q_cts_code) 
+	private void fileUp(MultipartHttpServletRequest multi, String q_code) 
 			throws IllegalStateException, IOException {
 		//파일은 실제 물리 경로를 사용하여 저장해야 함.
 		// upload 폴더에 저장하도록 지정.
@@ -131,7 +130,7 @@ public class ServiceCenterService {
 				new HashMap<String, String>();
 		//파일 정보 저장(DB)에 필요한 정보
 		//1.게시글 번호, 2.실제파일명, 3.저장파일명
-		fmap.put("Q_cts_code", String.valueOf(Q_cts_code));
+		fmap.put("q_code", q_code);
 
 		//multipart에서 파일 꺼내오기
 		//멀티파트는 파일을 배열형태로 저장.

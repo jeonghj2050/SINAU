@@ -14,6 +14,8 @@ public class QuestionDto {
 	private Timestamp q_andate;
 	private String q_cts_code;
 	private String q_m_email;
+		
+	}
 	
 	
-}
+

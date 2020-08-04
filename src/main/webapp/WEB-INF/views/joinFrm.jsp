@@ -212,7 +212,7 @@ function validate() {
 	
 	var regul3 = /^[가-힝a-zA-Z]{2,}$/;
 	
-	var regul4 = /^[0-9]{8,11}$/;
+	var regul4 = /^[0-9]{4,20}$/;
 	
 	if (!check(regul1,objEmail,"이메일을 잘못 입력 했습니다.ex)ooooooo@ooooo.ooo")) {
 		$('#memail').val('');//입력 초기화

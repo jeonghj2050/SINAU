@@ -30,6 +30,6 @@
 	<insert id="fileInsert" parameterType="HashMap">
 		INSERT INTO files
 		VALUES('F_'||SEQ_F.NEXTVAL,
-			#{oriFileName},#{sysFileName},#{cts_code})
+			#{oriFileName}, #{sysFileName}, #{q_code}, #{q_cts_code})
 	</insert>
 </mapper>
