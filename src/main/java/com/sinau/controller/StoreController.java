@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.PReviewDto;
+import com.sinau.dto.WarningDto;
 //import com.sinau.dto.ProductListDto;
 import com.sinau.service.MemberService;
 import com.sinau.service.StoreService;
@@ -27,7 +28,6 @@ import lombok.extern.java.Log;
 @Controller
 @Log
 public class StoreController {
-	
 	@Autowired
 	private MemberService mServ;
 	@Autowired
@@ -66,6 +66,7 @@ public class StoreController {
 		
 		return mv;
 	}
+	
 	//댓글 추가 및 댓글 목록 처리 메소드
 		@PostMapping(value = "reviewInsert",
 				produces = "application/json; charset=utf-8")
@@ -100,17 +101,19 @@ public class StoreController {
 		
 		}
 		
-//		@PostMapping("boardWrite")
-//		public String boardWrite
-//		(MultipartHttpServletRequest multi, 
-//				RedirectAttributes rttr) {
-//			log.info("boardWrite()");
-//
-//			String view = sServ.warningInsert(multi, rttr);
-//
-//			return view;
-//		}
 		
+		@PostMapping("warningInsert")
+		public ModelAndView WarningInsert
+		(MultipartHttpServletRequest multi, 
+				RedirectAttributes rttr) {
+			log.info("warningInsert()");
+
+			mv = sServ.wInsert(multi, rttr);
+			
+			
+			return mv;
+		}
+	
 		
 
 }

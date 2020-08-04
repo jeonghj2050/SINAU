@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -18,11 +19,13 @@ import com.sinau.dao.pInfoPaymentDao;
 import com.sinau.dao.MemberDao;
 import com.sinau.dao.ProductListDao;
 import com.sinau.dao.StoreDao;
+import com.sinau.dao.WarningDao;
 import com.sinau.dao.pInfoDao;
 import com.sinau.dto.PInfoPaymentsDto;
 import com.sinau.dto.PReviewDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.ProductListDto;
+import com.sinau.dto.WarningDto;
 
 import lombok.extern.java.Log;
 
@@ -42,6 +45,9 @@ public class StoreService {
 	pInfoPaymentDao piDao;
 	@Autowired
 	pInfoDao pInfoDao;
+
+	@Autowired
+	WarningDao wDao;
 
 
 	//상품 탑10
@@ -120,8 +126,10 @@ public class StoreService {
 		try {
 			//1.넘어온 댓글-> DB에 insert 처리
 			pInfoDao.reviewInsert(review);
+			
 			//2.새로 추가된 댓글 포함 전체 댓글 목록 가져오기
 			List<PReviewDto> rList = pInfoDao.getReviewList(review.getPrv_p_code());
+			
 			//3. 전체 댓글 목록을 rMap에 추가하여 반환
 			rMap=new HashMap<String, List<PReviewDto>>();
 			rMap.put("rList", rList);
@@ -157,6 +165,83 @@ public class StoreService {
 		}
 
 		return rMap; 
+
+	}
+
+//	public Map<String, List<WarningDto>> wInsert(WarningDto warning) {
+//		// TODO Auto-generated method stub
+//		Map<String, List<WarningDto>>wMap=null;
+//
+//		try {
+//			//1.넘어온 댓글-> DB에 insert 처리
+//			wDao.warningInsert(warning);
+//			//2.새로 추가된 댓글 포함 전체 댓글 목록 가져오기
+//			List<WarningDto> wList = wDao.getWaningList(warning.getW_code());
+//			//3. 전체 댓글 목록을 rMap에 추가하여 반환
+//			wMap=new HashMap<String, List<WarningDto>>();
+//			wMap.put("wList", wList);
+//
+//		}catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//			wMap=null;
+//		}
+//
+//		return wMap;
+//	}
+
+	public ModelAndView wInsert(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
+		mv=new ModelAndView();
+		String view = null;
+
+		//Multipart request에서 데이터 추출
+		String w_code=  multi.getParameter("w_code");
+		int w_num = Integer.parseInt
+				(multi.getParameter("w_contnenNum"));
+		String content= null;
+		if(w_num==1) {
+			content = "비방 및 욕설" ;
+		}else if(w_num==2) {
+			content ="부적절한 홍보";
+		}else {
+			content="음란성 또는 청소년에게 부적합한 내용";
+		}
+		String w_m_email = ((MemberDto)session.getAttribute("mb")).getM_email();
+		String w_prv_code= multi.getParameter("w_prv_code");
+		String p_code =multi.getParameter("p_code");
+
+		/*//다음과 같이 세션에서 id값을 꺼내올 수도 있음.
+		MemberDto mem = (MemberDto)session.getAttribute("mb");
+		String id = mem.getM_id();
+		 */
+
+		//일반적으로 textarea에서 들어오는 데이터는
+		//본 내용 앞 뒤에 쓸데없는 공백이 포함됨.
+		//공백 제거 처리. trim()
+
+		WarningDto warning = new WarningDto();
+		warning.setW_contentNum(w_num);
+		warning.setW_content(content);
+		warning.setW_m_email(w_m_email);
+		warning.setW_prv_code(w_prv_code);
+
+		try {
+			wDao.warningInsert(warning);
+
+			view = "redirect:/store_info?p_code="+p_code;
+			rttr.addFlashAttribute("check", 2);
+
+			log.info(w_code);
+		}
+		catch(Exception e) {
+			//DB 삽입 오류 시 글쓰기폼으로 돌아감.
+			view = "redirect:/store_info?p_code="+p_code;
+			rttr.addFlashAttribute("check", 1);
+		}
+		
+		mv.setViewName(view);
+
+		return mv;
 
 	}
 
