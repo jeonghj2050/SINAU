@@ -12,7 +12,7 @@
 	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="resources/css/home.css?a">
 </head>
 <body>
 	<header>
@@ -34,9 +34,8 @@
 			</div>
 		</div>
 	</div>
-	<section>
+	<section class="section-home">
 		<article class="childart">
-			<h1>TOP10</h1>
 			<c:forEach var="onlineClass" items="${offList}">
 				<div class="mp_classInfo" id="${offClass.ofc_code}">
 					<img src="resources/images/test/${offClass.f_oriname }" alt=""
@@ -74,12 +73,8 @@
 				slider.reloadSlider();
 			}
 		});
-		if ("${mb.m_email}" != '') {
-			var name = "${mb.m_name}";
-			$('#mname').html(name + '님');
-			$('.suc').css('display', 'block');
-			$('.bef').css('display', 'none');
-		}
+		
 	});
 </script>
+
 </html>

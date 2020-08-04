@@ -20,4 +20,7 @@ public class OnlineClassDto {
 	private String onc_edate;
 	private String onc_m_email;
 	private String onc_cts_code;
+
+	
+	
 }

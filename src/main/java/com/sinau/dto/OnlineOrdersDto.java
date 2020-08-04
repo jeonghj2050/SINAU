@@ -15,4 +15,6 @@ public class OnlineOrdersDto {
 	private int ord_amount;
 	private int ord_state;
 	
+	
+	
 }

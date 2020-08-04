@@ -3,6 +3,7 @@ package com.sinau.controller;
 import java.util.List;
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +22,8 @@ import com.sinau.dto.VideoFileDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.service.MemberService;
 
-import lombok.extern.java.Log;
 
 @Controller
-@Log
 public class MemberController {
 	ModelAndView mv;
 	@Autowired
@@ -41,9 +40,9 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberInsert") 
-	public ModelAndView memInsert(MemberDto member,//MultipartHttpServletRequest multi,
+	public ModelAndView memInsert(MultipartHttpServletRequest multi,
 			 RedirectAttributes rttr) { 
-	mv = mServ.memberInsert(member, rttr);
+	mv = mServ.memberInsert(multi, rttr);
 	 
 	return mv;
 	}
@@ -239,6 +238,13 @@ public class MemberController {
 		
 		return mv;
 	}
+	@PostMapping("pwdreset")
+	public ModelAndView pwdfind(String email,String pwd) {
+		mv = mServ.newpwd(email, pwd);
+		
+		return mv;
+	}
+	
 	
 	@GetMapping("cMypageQnA")
 	public ModelAndView cMypageQnA() {
