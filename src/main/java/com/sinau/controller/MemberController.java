@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -279,6 +280,15 @@ public class MemberController {
 		log.info("dMyNewProd()");
 		
 		mv=mServ.insertNewProduct(multi);
+		
+		return mv;
+	}
+	
+	@PostMapping("dMyUpProd")
+	public ModelAndView dMyUpProd(String p_code,String up_amount) {
+		log.info("dMyUpProd()");
+		
+		mv=mServ.updateProduct(p_code,up_amount);
 		
 		return mv;
 	}

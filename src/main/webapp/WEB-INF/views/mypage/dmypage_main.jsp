@@ -25,9 +25,18 @@
 
 <link rel="stylesheet" type="text/css" href="resources/css/style.css">
 <link rel="stylesheet" type="text/css" href="resources/css/mypage.css">
+<script type="text/javascript">
+	var p_code="";
+	$(document).ready(function() {     
+	    $('#updateProd').on('show.bs.modal', function(event) {          
+	    	p_code = $(event.relatedTarget).data('pcode');
+	    	$('#p_code').val(p_code);
+	    });
+	});
 
 
-</head>
+</script>
+</head> 
 <body>
 	<header>
 		<jsp:include page="../header.jsp"></jsp:include>
@@ -48,15 +57,43 @@
 							<div class="myproduct_sale_amt">
 								판매 수량 : ${prod.p_salamount }
 								<div>
-									<button class="my_default_btn">삭제 요청</button>
-									<button class="my_default_btn">재고/내용 수정</button>
+									<c:if test="${prod.p_amount eq 0 }">
+										<button class="my_default_btn">삭제 요청</button>
+									</c:if>
+									<button class="my_default_btn"data-target="#updateProd"
+											data-toggle="modal" data-pcode="${prod.p_code}">재고 수정</button>
 								</div>
 							</div>
-
 						</div>
 					</div>
 
 				</c:forEach>
+				<form action="./dMyUpProd" method="post">
+					<div class="modal fade" id="updateProd">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!-- header -->
+								<div class="modal-header">
+									<!-- 닫기(x) 버튼 -->
+									<button type="button" class="close" data-dismiss="modal">×</button>
+									<!-- header title -->
+									<h4 class="modal-title">재고 수정</h4>
+								</div>
+								<!-- body -->
+								<div class="modal-body" style="text-align: left;">
+									<input type="hidden" name="p_code" id="p_code"/>
+									<input type="number" name="up_amount" placeholder="추가 수량 입력" />
+								</div>
+								<!-- Footer -->
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-default">수정</button>
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">닫기</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</article>
 	</section>

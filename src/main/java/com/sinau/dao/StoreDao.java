@@ -18,4 +18,7 @@ public interface StoreDao {
 	void insertNewProd(ProductDto prod);
 	
 	List<DealerProductInfoDto> getMyProdList(String m_email);
+	
+	//상품의 재고를 수정하는 메소드
+	void updateProd(ProductDto prod);
 }

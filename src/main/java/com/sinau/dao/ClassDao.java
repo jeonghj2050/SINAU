@@ -17,6 +17,7 @@ import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
+import com.sinau.dto.ProductDto;
 import com.sinau.dto.VideoDto;
 import com.sinau.dto.VideoFeedDto;
 import com.sinau.dto.VideoFileDto;
@@ -62,4 +63,5 @@ public interface ClassDao {
 	
 	//크리에이터의 모든 강좌의 피드백 목록을 가져온다.
 	List<VideoFeedDto> getFeedListAll(String m_email);
+
 }

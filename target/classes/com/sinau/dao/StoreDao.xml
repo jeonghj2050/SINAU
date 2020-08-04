@@ -33,4 +33,8 @@
 	<select id="getMyProdList" parameterType="String" resultType="com.sinau.dto.DealerProductInfoDto">
 		select * from dealerproductInfo where m_email=#{m_email}
 	</select>
+	
+		<update id="updateProd" parameterType="com.sinau.dto.ProductDto">
+		update p set p_amount=${p_amount}  where p_code=#{p_code}
+	</update>
 </mapper>

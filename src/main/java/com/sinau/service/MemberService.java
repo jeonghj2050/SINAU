@@ -1037,4 +1037,18 @@ public class MemberService {
 
 	}
 
+	public ModelAndView updateProduct(String p_code, String up_amount) {
+		mv=new ModelAndView();
+		ProductDto prod=new ProductDto();
+		prod.setP_code(p_code);
+		int p_amount=Integer.parseInt(up_amount);
+		prod.setP_amount(p_amount);
+		
+		sDao.updateProd(prod);
+		
+		mv.setViewName("redirect:./dMypage");
+		
+		return mv;
+	}
+
 }

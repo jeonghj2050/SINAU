@@ -114,4 +114,5 @@
 	<select id="getFeedListAll" parameterType="String" resultType="com.sinau.dto.VideoFeedDto">
 		select * from videofeed where m_email=#{m_email}
 	</select>
+
 </mapper>
