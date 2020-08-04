@@ -59,4 +59,10 @@ public class HomeController {
 		
 		return "pwd";
 	}
+	
+	@GetMapping("youtube") 
+	public String youtube() {
+		
+		return "youtube/youtube_main";
+	}
 }

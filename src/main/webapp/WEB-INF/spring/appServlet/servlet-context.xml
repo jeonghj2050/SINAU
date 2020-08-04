@@ -41,9 +41,10 @@
 			<exclude-mapping path="/loginFrm"/>
 			<exclude-mapping path="/joinFrm"/>
 			<exclude-mapping path="/access"/>
-			
+			<exclude-mapping path="/youtube"/>
 			<exclude-mapping path="/contents"/>
 			<exclude-mapping path="/memberInsert"/>
+			<exclude-mapping path="/store"/>
 			<exclude-mapping path="/idCheck"/>
 			<exclude-mapping path="/boardWrite"/>
 			<exclude-mapping path="/servicecenter_question"/>

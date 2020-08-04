@@ -19,7 +19,7 @@ $(document).ready(function(){
 </head>
 <body>
 	<header>
-		<jsp:include page="servicecenter_header.jsp"></jsp:include>
+		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 	<section class="sectionover">
 		<h2 class="login-header">고객 센터</h2>
@@ -77,7 +77,7 @@ $(document).ready(function(){
 		</div>
 	</section>
 	<footer>
-		<jsp:include page="servicecenter_footer.jsp"></jsp:include>
+		<jsp:include page="../footer.jsp"></jsp:include>
 	</footer>
 </body>
 <script type="text/javascript">

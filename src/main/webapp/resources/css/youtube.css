@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.youtube_img {
+	height : 300px;
+	background-color: yellow;
+}
+
+.img {
+	width : 1300px; 
+	height :300px;
+	margin : auto;
+	background-color: red;
+}
+
+.section-home>.top10menu {
+	width: 78.2%;
+	margin : auto;
+	background: blue;
+	padding-bottom: 50px;
+	padding: 20px;
+}
+
+.section-home>.top10menu>.top10 {
+	float : left;
+	background-color: red;
+}
