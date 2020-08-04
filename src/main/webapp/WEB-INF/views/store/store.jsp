@@ -12,18 +12,7 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <title>storemain</title>
 <script>
-  $(document).ready(function(){
-    function gohome() {
-      var id = '${mb.m_id}';
-
-      if (id == '') {
-        location.href = './';
-      }
-      else if (id != '') {
-        location.href = './list';
-      }
-    }
-
+    $(document).ready(function(){
     var swiper1 = new Swiper('.swc1', {
           slidesPerView: 3,
           spaceBetween: 5,
@@ -54,6 +43,32 @@
     
       
   </script>
+  <script type="text/javascript">-
+function gohome(){
+	var id = '${mb.m_email}';
+	
+	if(id == ''){
+		location.href='./';
+	}	
+	else if(id != ''){
+		location.href='./';
+	}
+} 
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	var id = '${mb.m_email}';
+	
+		if("${mb.m_email}" != '') {
+			var name = "${mb.m_name}";
+			$('#mname').html(name + '님');
+			$('.suc').css('display','block');
+			$('.bef').css('display','none');
+			}
+});
+
+</script>
 </head>
 <body>
 	<header> </header>

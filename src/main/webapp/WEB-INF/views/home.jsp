@@ -76,5 +76,16 @@
 		
 	});
 </script>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	var chk = "${check}";
+	
+	if(chk == "1"){
+		alert("회원가입 실패!");
+	}
+	else  if(chk == "2"){
+		alert("회원가입 성공!");
+	}
+});
+</script>
 </html>

@@ -57,15 +57,7 @@ $(document).ready(function() {
 		});
 	}
 </script>
-<script type="text/javascript">
-$(document).ready(function(){
-	var chk = "${check}";
-	
-	if(chk == "1"){
-		alert("회원가입 실패!");
-	}
-});
-</script>
+
 </head>
 <body>
 	<div class="content1">
@@ -273,12 +265,6 @@ function validate() {
         objLicense.focus();
         return false;
 	} 
-	
-	if (!check(regul4,objLicense, "사업자번호를 잘못입력했습니다.(숫자로만 입력바랍니다.)")) {
-		$('#license').val('');//입력 초기화
-		$('#license').focus();//입력 초기화
-		return false;
-	}
 
 	function check(re,what,message){//정규화데이터,아이템 id,메세지
         if (re.test(what.value)) {//what의 문자열에 re의 패턴이 있는지 나타내는 함수 test

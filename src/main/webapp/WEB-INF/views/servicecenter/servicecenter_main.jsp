@@ -30,20 +30,6 @@
 
 	});
 </script>
-<script type="text/javascript">
-$(document).ready(function(){
-	
-	var id = '${mb.m_email}';
-	 	
-		if("${mb.m_email}" != '') {
-			var name = "${mb.m_name}";
-			$('.category1').css('display','block');
-			}else {
-				$('.category1').css('display','none');
-			}
-		
-});
-</script>
 </head>
 <body>
 	<header>
@@ -52,8 +38,8 @@ $(document).ready(function(){
 	<section class="sectionover">
 		<h2 class="login-header">고객 센터</h2>
 		<div class="cate_container">
-			<a class="category" href="./servicecenter_main">FAQ</a> <a
-				class="category1" href="./servicecenter_question">1 : 1문의</a>
+			<a class="category" href="./servicecenter_main">FAQ</a>
+			<a class="category" href="./servicecenter_question">1 : 1문의</a>
 		</div>
 		<div class="FAQ_box">
 			<ul class="FAQ_tab">
