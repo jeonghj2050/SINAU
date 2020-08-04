@@ -76,16 +76,19 @@ $(function(){
 							<td>${prod.ord_amount * prod.p_price}</td>
 							<td><c:choose>
 									<c:when test="${prod.ord_state == 1}">
-										<button class="table-btn" data-target="#resetOrder"
-											data-toggle="modal">주문취소</button>
-										<button class="table-btn">환불</button>
+										<button class="table-btn" data-target="#cancleOrder"
+											data-toggle="modal" data-notifyid="${prod.ord_code }">주문취소</button>
+										<button class="table-btn" data-target="#refund"
+											data-toggle="modal" data-notifyid="${prod.ord_code }">환불</button>
 									</c:when>
 								</c:choose> <c:if test="${prod.ord_state == 2}">
-									<button class="table-btn">환불</button>
+									<span>주문취소</span>
 								</c:if> <c:if test="${prod.ord_state == 3}">
 									<span>환불진행중</span>
+								</c:if> <c:if test="${prod.ord_state == 4}">
+									<span>환불완료</span>
 								</c:if>
-								<div class="modal fade" id="resetOrder">
+								<div class="modal fade" id="cancleOrder">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<!-- header -->
@@ -96,7 +99,7 @@ $(function(){
 												<h4 class="modal-title">주문 취소</h4>
 											</div>
 											<!-- body -->
-											<div class="modal-body">
+											<div class="modal-body" style="text-align: left;">
 												<input type="radio" name="reson" value="1">1.다른 제품
 												구매<br> <input type="radio" name="reson" value="2">2.단순
 												변심<br> <input type="radio" name="reson" value="3">3.상품
@@ -105,13 +108,51 @@ $(function(){
 											<!-- Footer -->
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default"
-													onclick="resetOrder()">주문취소</button>
+													onclick="cancleOrder('prod')">주문취소</button>
 												<button type="button" class="btn btn-default"
 													data-dismiss="modal">닫기</button>
 											</div>
 										</div>
 									</div>
-								</div></td>
+								</div>
+								<form action="./refund" method="get">
+								<div class="modal fade" id="refund">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<!-- header -->
+											<div class="modal-header">
+												<!-- 닫기(x) 버튼 -->
+												<button type="button" class="close" data-dismiss="modal">×</button>
+												<!-- header title -->
+												<h4 class="modal-title">환불</h4>
+											</div>
+											<!-- body -->
+											<div class="modal-body" style="text-align: left;">
+												<input type="hidden" name="sort" value="prod">
+												<input type="hidden" name="ref_ord_code" id="ref_ord_code"> 
+												<input type="radio" name="ref_reson" value="더 이상 구매를 원하지 않습니다.">1.더
+												이상 구매를 원하지 않습니다.<br> <input type="radio" name="ref_reson" 
+													value="실수로 구매하였습니다.">2.실수로 구매하였습니다.<br> <input
+													type="radio" name="ref_reson"  value="제품에 결함이 있습니다.">3.제품에
+												결함이 있습니다.<br>
+												 <select name="ref_bank"> 
+					                                <option value="신한">신한</option>
+					                                <option value="국민">국민</option>
+					                                <option value="우리">우리</option>
+					                            </select><br>
+					                            계좌번호<input type="text" name="ref_banknum">
+					                            예금주 <input type="text" name="ref_bankname">
+											</div>
+											<!-- Footer -->
+											<div class="modal-footer">
+												<button type="submit" class="btn btn-default"
+													>환불</button>
+												<button type="button" class="btn btn-default"
+													data-dismiss="modal">닫기</button>
+											</div>
+										</div>
+									</div>
+								</div></form></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -136,42 +177,12 @@ $(function(){
 							<td>${onclass.ord_amount * onclass.onc_sale}</td>
 							<td><c:choose>
 									<c:when test="${onclass.ord_state == 1}">
-										<button class="table-btn" data-target="#resetOrder"
-											data-toggle="modal">주문취소</button>
-										<button class="table-btn">환불</button>
 									</c:when>
 								</c:choose> <c:if test="${onclass.ord_state == 2}">
 									<button class="table-btn">환불</button>
 								</c:if> <c:if test="${onclass.ord_state == 3}">
 									<span>환불진행중</span>
-								</c:if>
-								<div class="modal fade" id="resetOrder">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<!-- header -->
-											<div class="modal-header">
-												<!-- 닫기(x) 버튼 -->
-												<button type="button" class="close" data-dismiss="modal">×</button>
-												<!-- header title -->
-												<h4 class="modal-title">주문 취소</h4>
-											</div>
-											<!-- body -->
-											<div class="modal-body">
-												<input type="radio" name="reson" value="1">1.다른 제품
-												구매<br> <input type="radio" name="reson" value="2">2.단순
-												변심<br> <input type="radio" name="reson" value="3">3.상품
-												재주문
-											</div>
-											<!-- Footer -->
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													onclick="resetOrder()">주문취소</button>
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">닫기</button>
-											</div>
-										</div>
-									</div>
-								</div></td>
+								</c:if></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -196,42 +207,13 @@ $(function(){
 							<td>${offclass.ord_amount * offclass.ofc_sale}</td>
 							<td><c:choose>
 									<c:when test="${offclass.ord_state == 1}">
-										<button class="table-btn" data-target="#resetOrder"
-											data-toggle="modal">주문취소</button>
-										<button class="table-btn">환불</button>
+
 									</c:when>
 								</c:choose> <c:if test="${offclass.ord_state == 2}">
 									<button class="table-btn">환불</button>
 								</c:if> <c:if test="${offclass.ord_state == 3}">
 									<span>환불진행중</span>
-								</c:if>
-								<div class="modal fade" id="resetOrder">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<!-- header -->
-											<div class="modal-header">
-												<!-- 닫기(x) 버튼 -->
-												<button type="button" class="close" data-dismiss="modal">×</button>
-												<!-- header title -->
-												<h4 class="modal-title">주문 취소</h4>
-											</div>
-											<!-- body -->
-											<div class="modal-body">
-												<input type="radio" name="reson" value="1">1.다른 제품
-												구매<br> <input type="radio" name="reson" value="2">2.단순
-												변심<br> <input type="radio" name="reson" value="3">3.상품
-												재주문
-											</div>
-											<!-- Footer -->
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													onclick="resetOrder()">주문취소</button>
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">닫기</button>
-											</div>
-										</div>
-									</div>
-								</div></td>
+								</c:if></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -243,16 +225,39 @@ $(function(){
 	</footer>
 </body>
 <script>
-   function resetOrder(){
-       var select;
-
-       for(var i=0;i<document.getElementsByName('reson').length;i++){
-           if(document.getElementsByName('reson')[i].checked==true){
-               select=document.getElementsByName('reson')[i].value;
-           }
-       }
-
-       location.href='./resetOrder';
-   }
+	var ord_code="";
+	var ref_ord_code="";
+	$(document).ready(function() {     
+	    $('#cancleOrder1').on('show.bs.modal', function(event) {          
+	    	ord_code = $(event.relatedTarget).data('notifyid');
+	    });
+	    $('#refund').on('show.bs.modal', function(event) {          
+	    	ref_ord_code = $(event.relatedTarget).data('notifyid');
+	    	$('#ref_ord_code').val(ref_ord_code);
+	    });
+	});
+	function cancleOrder(sort){
+		var select;
+		var sort=sort;
+		for(var i=0;i<document.getElementsByName('reson').length;i++){
+			if(document.getElementsByName('reson')[i].checked==true){
+				select=document.getElementsByName('reson')[i].value;
+			}
+		}
+		location.href='./cancleOrder?sort='+sort+"&ord_code="+ord_code;
+	}
+	
+	function refundOrder(sort){
+		var select;
+		var sort=sort;
+		for(var i=0;i<document.getElementsByName('reson').length;i++){
+			if(document.getElementsByName('reson')[i].checked==true){
+				select=document.getElementsByName('reson')[i].value;
+			}
+		}
+		console.log(sort);
+		console.log(select);
+		location.href='./refund?sort='+sort+"&ord_code="+ord_code; 
+	}
 </script>
 </html>

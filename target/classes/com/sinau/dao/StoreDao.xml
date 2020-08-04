@@ -16,4 +16,7 @@
 		 	select * from prodlikes where m_email=#{email}
 		]]>
 	</select>
+	<update id="updateOrderState" parameterType="com.sinau.dto.OrderDto">
+		update ord set ord_state=#{ord_state} where ord_code=#{ord_code}
+	</update>
 </mapper>
