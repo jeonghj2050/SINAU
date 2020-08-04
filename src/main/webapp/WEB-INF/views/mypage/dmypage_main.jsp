@@ -23,8 +23,8 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="resources/css/style.css">
-<link rel="stylesheet" href="resources/css/mypage.css">
+<link rel="stylesheet" type="text/css" href="resources/css/style.css">
+<link rel="stylesheet" type="text/css" href="resources/css/mypage.css">
 
 
 </head>
@@ -35,8 +35,29 @@
 	<section class="mp_section">
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
 		<article>
-			<div class="page-title">등록 상품</div>
-			
+			<div class="page-title">등록된 상품</div>
+			<button type="button" class="my_default_btn" style="float: right;" onclick="location.href='./dMyNewProd'">상품 등록</button>
+			<div class="my_product_list">
+				<c:forEach var="prod" items="${myprodList}">
+					<div class="myproduct_info_box">
+						<img src="resources/upload/${prod.f_sysname }" width="300px" height="300px"
+							alt="" style="float: left;">
+						<div class="myproduct_info">
+							<div class="myproduct_content">${prod.p_title }</div>
+							<div class="myproduct_amt">재고 수량 : ${prod.p_amount }</div>
+							<div class="myproduct_sale_amt">
+								판매 수량 : ${prod.p_salamount }
+								<div>
+									<button class="my_default_btn">삭제 요청</button>
+									<button class="my_default_btn">재고/내용 수정</button>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</c:forEach>
+			</div>
 		</article>
 	</section>
 	<footer>

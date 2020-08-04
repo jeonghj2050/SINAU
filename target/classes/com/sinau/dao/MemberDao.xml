@@ -37,6 +37,11 @@
 		<select id="getClassStuList" parameterType="String" resultType="com.sinau.dto.ClassStuInfoDto">
 		select * from classstuinfo where onc_m_email=#{m_email}
 	</select>
+	
+	<select id="getMemImgSysname" parameterType="String" resultType="String">
+		select mimg_sysname from mimg where mimg_m_email=#{email}
+	</select>
+	
 	<update id="newPwd" parameterType="String">
 		update member set m_pwd=#{encPwd} where m_email=#{email}
 	</update>

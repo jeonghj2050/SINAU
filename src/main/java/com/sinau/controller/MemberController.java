@@ -266,4 +266,20 @@ public class MemberController {
 		
 		return mv;
 	}
+	
+	@GetMapping("dMyNewProd")
+	public String dMyNewProd() {
+		log.info("dMyNewProd()");
+		
+		return "mypage/dmypage_newprod";
+	}
+	
+	@PostMapping("dMyNewProd")
+	public ModelAndView dMyNewProd(MultipartHttpServletRequest multi) {
+		log.info("dMyNewProd()");
+		
+		mv=mServ.insertNewProduct(multi);
+		
+		return mv;
+	}
 }

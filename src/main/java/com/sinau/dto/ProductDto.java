@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class Product {
+public class ProductDto {
 	private String p_code;
 	private String p_title;
 	private int p_amount;
@@ -14,10 +14,6 @@ public class Product {
 	private int p_salmount;
 	private String p_dealer;
 	private int p_view;
-	
-	
-	
-	
-	
-	
+	private String p_m_email;
+	private String p_cts_code;
 }

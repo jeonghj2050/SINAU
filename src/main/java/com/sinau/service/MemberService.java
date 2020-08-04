@@ -32,6 +32,7 @@ import com.sinau.dao.StoreDao;
 import com.sinau.dto.ClassStuInfoDto;
 import com.sinau.dto.CreatorOffInfoDto;
 import com.sinau.dto.CreatorOnInfoDto;
+import com.sinau.dto.DealerProductInfoDto;
 import com.sinau.dto.FilesDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.MyCouponDto;
@@ -47,6 +48,7 @@ import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.ProdLikeDto;
 import com.sinau.dto.ProdOrdersDto;
+import com.sinau.dto.ProductDto;
 import com.sinau.dto.RefundDto;
 import com.sinau.dto.ScheduleDto;
 import com.sinau.dto.ScheduleListDto;
@@ -287,6 +289,8 @@ public class MemberService {
 				//세션에 로그인 성공한 회원 정보 저장
 				//로그인 한 회원의 정보를 가져오기.
 				member = mDao.getMemInfo(member.getM_email());
+				String sysName=mDao.getMemImgSysname(member.getM_email());
+				session.setAttribute("memImg", sysName);
 				session.setAttribute("mb", member);
 				loginMember=member;
 				System.out.println(session);
@@ -752,8 +756,48 @@ public class MemberService {
 	public ModelAndView getProductList() {
 		mv=new ModelAndView();
 		
+		//회원의 상품 목록을 가져온다.
+		List<DealerProductInfoDto> myprodList=sDao.getMyProdList(loginMember.getM_email());
+		
+		mv.addObject("myprodList",myprodList);
 		
 		mv.setViewName("mypage/dmypage_main");
+		return mv;
+	}
+	
+	public ModelAndView insertNewProduct(MultipartHttpServletRequest multi) {
+		mv=new ModelAndView();
+		/*
+		 * private int p_price; 
+
+		 */
+		ProductDto prod=new ProductDto();
+		prod.setP_title(multi.getParameter("p_title"));
+		prod.setP_amount(Integer.parseInt(multi.getParameter("p_amount")));
+		prod.setP_dealer(loginMember.getM_name());
+		prod.setP_m_email(loginMember.getM_email());
+		prod.setP_cts_code(multi.getParameter("p_cts_code"));
+		prod.setP_price(Integer.parseInt(multi.getParameter("p_price")));
+		
+		try {
+			sDao.insertNewProd(prod);
+			//강좌에 이미지 저장
+			FilesDto file=new FilesDto();
+			file.setF_pcode(prod.getP_code());
+			file.setF_cts_code(prod.getP_cts_code());
+
+			imageUp(multi, file);
+			
+			mv.setViewName("redirect:./dMypage");
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			mv.setViewName("redirect:./dMyNewProd");
+		}
+		
+		mv.setViewName("redirect:./dMypage");
 		return mv;
 	}
 
@@ -772,10 +816,16 @@ public class MemberService {
 			folder.mkdir();
 		}
 
-
-		List<MultipartFile> thumbnail=multi.getFiles("ofthumbnail");
-		for(int i=0;i<thumbnail.size();i++) {
+		List<MultipartFile> thumbnail=null;
+		if(file.getF_pcode().contains("p_")) {
+			thumbnail=multi.getFiles("pthumbnail");
+			file.setF_code("fpth_");
+		}else if(file.getF_pcode().contains("ofc_")) {
+			thumbnail=multi.getFiles("ofthumbnail");
 			file.setF_code("fofth_");
+		}
+		
+		for(int i=0;i<thumbnail.size();i++) {
 			MultipartFile mf=thumbnail.get(i);
 			//실제 파일명 가져오기
 			String oriName=mf.getOriginalFilename();
@@ -796,9 +846,16 @@ public class MemberService {
 			cmDao.imageInsert(file);
 		}
 
-		List<MultipartFile> spec=multi.getFiles("ofspec");
-		for(int i=0;i<spec.size();i++) {
+		List<MultipartFile> spec=null;
+		if(file.getF_pcode().contains("p_")) {
+			spec=multi.getFiles("pspec");
+			file.setF_code("fpsp_");
+		}else if(file.getF_pcode().contains("ofc_")) {
+			spec=multi.getFiles("ofspec");
 			file.setF_code("fofsp_");
+		}
+
+		for(int i=0;i<spec.size();i++) {
 			MultipartFile mf=spec.get(i);
 			//실제 파일명 가져오기
 			String oriName=mf.getOriginalFilename();
@@ -820,10 +877,15 @@ public class MemberService {
 
 		}
 
-		List<MultipartFile> content=multi.getFiles("ofcontent");
-		log.info(content.size()+"");
-		for(int i=0;i<content.size();i++) {
+		List<MultipartFile> content=null;
+		if(file.getF_pcode().contains("p_")) {
+			content=multi.getFiles("pcontent");
+			file.setF_code("fpco_");
+		}else if(file.getF_pcode().contains("ofc_")) {
+			content=multi.getFiles("ofcontent");
 			file.setF_code("fofco_");
+		}
+		for(int i=0;i<content.size();i++) {  
 			MultipartFile mf=content.get(i);
 			//실제 파일명 가져오기
 			String oriName=mf.getOriginalFilename();

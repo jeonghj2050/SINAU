@@ -10,7 +10,7 @@
 	<div>
 		<div>
 			<a href="./mypageUpdate"> <img
-				src="resources/upload/${ myInfo.mimg_sysname }" alt=""
+				src="resources/upload/${ memImg }" alt=""
 				width="140px" height="110px" class="img-circle">
 			</a>
 		</div>
@@ -30,7 +30,7 @@
 			</c:when>
 		</c:choose>
 		<c:if test="${mb.m_group eq 'dm'}">
-			<li class="list-group-item"><a href="./mypage">등록된 상품</a></li>
+			<li class="list-group-item"><a href="./dMypage">등록된 상품</a></li>
 		</c:if>
 		<c:if test="${mb.m_group eq 'cm' || mb.m_group eq 'nm'}">
 			<li class="list-group-item"><a href="./mypage">온라인 강의</a></li>

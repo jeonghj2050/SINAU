@@ -213,9 +213,7 @@
     		data:objData,
     		dataType:"json",
     		success:function(data){
-    			var tr=$(obj).parent().parent();
-    		    tr.remove();
-    		    
+  
     			if(data.equals('success')){
     				alert('동영상 삭제 완료');
     			}else{
@@ -226,6 +224,9 @@
 				console.log(error);
 			}
     	});
+		var tr=$(obj).parent().parent();
+	    tr.remove();
+		    
     }
     /* 특정 파일을 db에서 수정*/
     function updateFile(obj){
