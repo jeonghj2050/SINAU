@@ -16,12 +16,8 @@ import com.sinau.service.ServiceCenterService;
 
 @Controller
 public class HomeController {
-	
-	
 	@GetMapping("/")
 	public String home() {
-		
-		/* mv=cServ.getClassList(); */
 		
 		return "home";
 	}

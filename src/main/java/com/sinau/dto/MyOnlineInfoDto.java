@@ -16,7 +16,7 @@ public class MyOnlineInfoDto {
 	private String cts_name;
 	private Timestamp onc_sdate;
 	private Timestamp onc_edate;
-	private String f_oriname;
+	private String f_sysname;
 	
-	
+
 }

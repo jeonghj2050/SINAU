@@ -33,6 +33,10 @@
 	<update id="updateMemberPwd" parameterType="String">
 		update member set m_pwd=#{encodePwd} where m_email=#{email}
 	</update>
+	
+		<select id="getClassStuList" parameterType="String" resultType="com.sinau.dto.ClassStuInfoDto">
+		select * from classstuinfo where onc_m_email=#{m_email}
+	</select>
 	<update id="newPwd" parameterType="String">
 		update member set m_pwd=#{encPwd} where m_email=#{email}
 	</update>
