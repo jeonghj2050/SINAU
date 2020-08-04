@@ -66,7 +66,14 @@ $(document).ready(function(){
 						${qitem.q_title}</a></div>
 					<div class="t-name">${qitem.m_name}</div>
 					<div class="t-date">${qitem.q_date}</div>
-					<div class="t-anfield">${qitem.q_anfield}</div>
+					<div class="t-anfield">
+					<c:if test="${qitem.q_anfield eq null }">
+						미답변
+					</c:if>
+					<c:if test="${qitem.q_anfield ne null }">
+						답변완료
+					</c:if>
+					</div>
 				</div>
 				</c:forEach>
 				</div>
