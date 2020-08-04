@@ -22,8 +22,11 @@ import com.sinau.dto.VideoFileDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.service.MemberService;
 
+import lombok.extern.java.Log;
+
 
 @Controller
+@Log
 public class MemberController {
 	ModelAndView mv;
 	@Autowired

@@ -62,6 +62,4 @@ public interface ClassDao {
 	
 	//크리에이터의 모든 강좌의 피드백 목록을 가져온다.
 	List<VideoFeedDto> getFeedListAll(String m_email);
-
-
 }

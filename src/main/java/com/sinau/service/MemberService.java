@@ -41,6 +41,7 @@ import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
 import com.sinau.dto.OffLikeDto;
 import com.sinau.dto.OffOrdersDto;
+import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
@@ -173,8 +174,8 @@ public class MemberService {
 	}
 
 	// 로그인 회원의 그룹을 반환한다.
-	public String getLoginMemberGroup(String email) {
-		String group = mDao.getGroup(email);
+	public String getLoginMemberGroup() {
+		String group = mDao.getGroup(loginMember.getM_email());
 
 		return group;
 	}
@@ -329,6 +330,9 @@ public class MemberService {
 		mv.addObject("onLikeList", onLike);
 		mv.addObject("offLikeList", offLike);
 		mv.addObject("prodLikeList", prodLike);
+		
+		return mv;
+	}
 
 	//상품,온라인, 오프라인 좋아요 내역을 검색한다.
 	public ModelAndView getAllLikes() {
@@ -350,11 +354,11 @@ public class MemberService {
 		return mv;
 	}
 
-	public ModelAndView getCouponList(String email) {
+	public ModelAndView getCouponList() {
 		mv = new ModelAndView();
 
 		// 회원의 쿠폰 목록을 가져온다.
-		List<MyCouponDto> couponList = cmDao.getCouponList(email);
+		List<MyCouponDto> couponList = cmDao.getCouponList(loginMember.getM_email());
 
 		mv.addObject("cpList", couponList);
 

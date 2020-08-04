@@ -10,7 +10,7 @@
 	<div>
 		<div>
 			<a href="./mypageUpdate"> <img
-				src="resources/images/test/person_thumbnail.jpg" alt=""
+				src="resources/upload/${ myInfo.mimg_sysname }" alt=""
 				width="140px" height="110px" class="img-circle">
 			</a>
 		</div>
