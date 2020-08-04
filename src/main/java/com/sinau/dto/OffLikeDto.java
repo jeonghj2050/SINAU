@@ -13,4 +13,6 @@ public class OffLikeDto {
 	private int ofc_sale;
 	private String cts_name;
 	private String f_oriname;
+	
+	
 }

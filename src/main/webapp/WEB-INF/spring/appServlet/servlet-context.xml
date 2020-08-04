@@ -28,17 +28,26 @@
 		<beans:property name="maxInMemorySize" value="10000000"/>
 	</beans:bean>
 	
+	
+	
+	
 	<interceptors>
 		<interceptor>
 			<!-- 인터셉터가 적용될 전체 범위 : mapping -->
 			<mapping path="/*"/>
 			<!-- 가로채기에서 제외할 uri를 지정 -->
 			<exclude-mapping path="/"/>
+			<exclude-mapping path="/id"/>
+			<exclude-mapping path="/pwd"/>
+			<exclude-mapping path="/pwdreset"/>
+			<exclude-mapping path="/servicecenter_main"/>
 			<exclude-mapping path="/loginFrm"/>
 			<exclude-mapping path="/joinFrm"/>
 			<exclude-mapping path="/access"/>
-			<exclude-mapping path="/memInsert"/>
+			<exclude-mapping path="/memberInsert"/>
 			<exclude-mapping path="/idCheck"/>
+			<exclude-mapping path="/boardWrite"/>
+			<exclude-mapping path="/servicecenter_question"/>
 			<beans:bean 
 				class="com.sinau.util.SessionInterceptor"/>
 		</interceptor>

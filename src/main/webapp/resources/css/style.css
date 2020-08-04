@@ -54,232 +54,6 @@ li a:hover {
 	color: #8a8e8b;
 }
 
-/* header */
-.logo {
-	width: 150px;
-	height: 50px;
-	margin: 20px;
-	float: left;
-}
-
-.search {
-	width: 350px;
-	height: 30px;
-	margin: 30px;
-	padding-left : 15px;
-	padding-right : 15px;
-	border: 1px solid black;
-	font-size: 15px;
-	border-radius: 50px;
-	outline: none;
-}
-
-.top-right {
-	float: right;
-	display: inline-block;
-	margin: 15px;
-	font-size: 20px;
-}
-
-.top-right>ul>li {
-	float: left;
-	margin: 15px;
-}
-
-.menu-bar {
-	width: 500px;
-	font-size: 20px;
-}
-
-.menu-bar>ul {
-	width: 500px;
-	float: left;
-}
-
-.menu-bar>ul>li {
-	float: left;
-	margin-bottom: 15px;
-	margin-right: 50px;
-	margin-left: 20px;
-}
-
-.menu-bar1 {
-	width: 200px;
-	float: right;
-	font-size: 20px;
-	margin-right : 20px;
-}
-
-.menu-bar1>ul {
-	width: 200px;
-	float: right;
-}
-
-.menu-bar1>ul>li {
-	float: right;
-}
-
-.suc {
-	display: none;
-	font-size: 17px;
-}
-
-.bef {
-	display: block;
-	font-size: 17px;
-}
-
-/* footer */
-.bottom-bar {
-	width: 1300px;
-	height: 100px;
-}
-
-.bottom-sub {
-	text-align: left;
-	float: left;
-	margin-top: 15px;
-	margin-left:10px
-}
-
-.intro {
-	text-align: right;
-	float: right;
-	margin-right:10px
-}
-
-.hub {
-	width: 235px;
-	height: 36px;
-	margin-right:10px
-}
-
-.bottom-sub>a {
-	text-align: left;
-	font-size: 10px;
-}
-
-
-/*join*/
-.content1 {
-    width: 600px;
-    margin : auto;
-	background-color: white;
-	text-align: center;
-}
-
-.join-form {
-	width : 400px;
-	height : 937px;
-	text-align: center;
-	padding-left : 25px;
-	padding-right : 25px;
-	background-color: white;
-	margin :auto;
-}
-
-.join-header {
-	padding-top: 30px;
-}
-
-.join-header1 {
-	padding-bottom: 20px;
-	margin-bottom: 30px;
-}
-
-.join-form>.login-input {
-	width: 350px;
-	height : 40px;
-	padding: 10px;
-	margin : auto;
-	margin-top : 20px;
-	disabled : ture;
-}
-
-.join-form>.idcheck-btn {
-	width: 100px;
-	height : 25px;
-	float : right;
-}
-
-.join-form>.login-btn {
-	width: 150px;
-	height: 25px;
-	margin-top: 20px;
-}
-
-.join-form>.relgoin-btn{
-	width: 150px;
-	height: 25px;
-	margin-top: 20px;
-	margin-left : 50px;
-}
-
-.group {
-	display: none;
-}
-
-.img-box {
-	margin : 20px;
-}
-
-/* login */
-.login-form {
-	width : 600px;
-	height : 937px;
-	margin : auto;
-	text-align: center;
-	background-color: white;
-}
-
-.loginsub>img {
-	width:  350px;
-	height: 300px;
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
-
-
-
-.login-form>input {
-	width: 350px;
-	height : 50px;
-	padding-left: 15px;
-	padding-right : 15px;
-	margin : auto;
-	margin-bottom: 20px;
-}
-
-.login-form>hr {
-	margin : auto;
-}
-
-.login-form>h4 {
-	text-align: left;
-	margin-left : 130px;
-}
-
-.login-form>.login-btn {
-	margin-top : 20px;
-}
-
-.login-form>a {
-	font-size: 10px;
-	color : gray;
-	padding-top: 10px;
-}
-
-.login-form>img{
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
-
-.login-form>p {
-	font-size: 10px;
-}
-
-
-
 article.childart>h1 {
 	margin-top : 30px;
 	margin-left : 15x;
@@ -314,15 +88,41 @@ article.childart>div>h5 {
 }
 
 
-
-/* product list */
-#slideitem {width:1050px; height:285px; border-top:1px solid #e1e1e1; border-bottom:1px solid #e1e1e1}
-#slideitem #title_slideitem {padding:30px 0 20px; width:1050px; text-align:center}
-#slideitem #slide_btn_prev {float:left; margin-top:80px; margin-left:13px; _margin-left:8px}   /* 좌측버튼 */
-#slideitem #slide_btn_next {float:right; margin-top:80px; margin-right:13px; _margin-right:18px}  /* 우측버튼 */
-#slideitem #viewArea {position:relative; _position:absolute; margin-left:40px; width:960px; height:190px; overflow:hidden}
-#slideitem #viewArea #imgList {position:absolute; width:2000px; left:0; top:0}
-#slideitem #viewArea #imgList div {float:left; margin:0px; padding:0}
-#slideitem #viewArea #imgList div img {padding:0 8px; width:180px; height:190px; overflow:hidden}  /* 상품 이미지 크기 180*190 */
-
-
+a.button{display:inline-block; padding: 10px 20px; text-decoration:none; color:#fff; background:#000; margin:20px;}
+#modal{
+  display:none;
+  position:fixed; 
+  width:100%; height:100%;
+  top:0; left:0; 
+  background:rgba(0,0,0,0.3);
+}
+.modal-con{
+  display:none;
+  position:fixed;
+  top:50%; left:50%;
+  transform: translate(-50%,-50%);
+  max-width: 60%;
+  min-height: 30%;
+  background:#fff;
+}
+.modal-con .title{
+  font-size:20px; 
+  padding: 20px; 
+  background : gold;
+}
+.modal-con .con{
+  font-size:15px; line-height:1.3;
+  padding: 30px;
+}
+.modal-con .close{
+  display:block;
+  position:absolute;
+  width:30px; height:30px;
+  border-radius:50%; 
+  border: 3px solid #000;
+  text-align:center; line-height: 30px;
+  text-decoration:none;
+  color:#000; font-size:20px; font-weight: bold;
+  right:10px; top:10px;
+}
+ 

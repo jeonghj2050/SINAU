@@ -1,8 +1,8 @@
 package com.sinau.controller;
 
-import java.awt.color.CMMException;
 import java.util.List;
 import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,14 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dto.MyCouponDto;
-import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.service.MemberService;
 
-import lombok.extern.java.Log;
 
 @Controller
-@Log
 public class MemberController {
 	//임의의 로그인 회원 아이디
 	String email="kc@naver.com";
@@ -40,9 +37,9 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberInsert") 
-	public ModelAndView memInsert(MemberDto member,//MultipartHttpServletRequest multi,
+	public ModelAndView memInsert(MultipartHttpServletRequest multi,
 			 RedirectAttributes rttr) { 
-	mv = mServ.memberInsert(member, rttr);
+	mv = mServ.memberInsert(multi, rttr);
 	 
 	return mv;
 	}
@@ -147,6 +144,13 @@ public class MemberController {
 		String view = mServ.logout();
 		
 		return view;
+	}
+	
+	@PostMapping("pwdreset")
+	public ModelAndView pwdfind(String email,String pwd) {
+		mv = mServ.newpwd(email, pwd);
+		
+		return mv;
 	}
 	
 	
