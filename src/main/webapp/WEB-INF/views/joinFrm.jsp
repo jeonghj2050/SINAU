@@ -94,7 +94,7 @@ $(document).ready(function() {
 				<font id="chkNotice" size="2"></font><br>
 			<input type="text" id="phone" name="m_phone" class="login-input" title="연락처"	placeholder="연락처 ex)01000000000"> 
 			<input type="text" id="birth" name="m_birth" class="login-input" title="생년월일" placeholder="생년월일  ex)00000000">
-			<input type="number" id="license" name="m_license" class="login-input" title="사업자번호"	placeholder="사업자번호" max="9999999999"><br>
+			<input type="text" id="license" name="m_license" class="login-input" title="사업자번호"	placeholder="사업자번호"><br>
 			<input type="submit" class="login-btn" value="회원 가입"><input type="reset" class="relgoin-btn" value="다시 작성">
 			<input type="text" name="m_group" class="group" value="">
 			<input type="hidden" name="m_state" class="state" value="1">
