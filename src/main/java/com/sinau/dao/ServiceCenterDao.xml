@@ -7,7 +7,7 @@
 	<select id="getList" parameterType="String"
 		resultType="com.sinau.dto.QuestionInfoDto">
 		<![CDATA[
-		select rownum, cts_name, q_title, q_date, m_name,q_anfield 
+		select rownum,q_code, cts_name, q_title, q_date, m_name,q_anfield 
 		from questioninfo
 		where q_m_email = #{email}
 		order by rownum desc
@@ -21,15 +21,24 @@
 		useGeneratedKeys="true"
 		keyProperty="q_code">
 		<selectKey keyProperty="q_code"
-			resultType="int" order="BEFORE">
-			SELECT SEQ_Q.NEXTVAL FROM DUAL
+			resultType="String" order="BEFORE">
+				SELECT 'q_'||SEQ_Q.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO question
-		VALUES(${q_code},#{q_title},#{q_content},sysdate, null, null,#{q_cts_code},#{q_m_email})
+		VALUES(#{q_code},#{q_title},#{q_content},sysdate, null, null,#{q_cts_code},#{q_m_email})
 	</insert>
 	<insert id="fileInsert" parameterType="HashMap">
 		INSERT INTO files
 		VALUES('F_'||SEQ_F.NEXTVAL,
 			#{oriFileName}, #{sysFileName}, #{q_code}, #{q_cts_code})
 	</insert>
+	<select id="getContents" parameterType="String"
+		resultType="com.sinau.dto.QuestionInfoDto">
+		SELECT * FROM questioninfo
+		WHERE q_code = #{q_code}
+	</select>
+	<select id="getQuestionList" parameterType="String"
+		resultType="com.sinau.dto.FilesDto">
+		SELECT * FROM files WHERE f_pcode=#{q_code}
+	</select>
 </mapper>

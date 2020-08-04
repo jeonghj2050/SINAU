@@ -19,8 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dao.ServiceCenterDao;
+import com.sinau.dto.FilesDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.QuestionDto;
+import com.sinau.dto.QuestionInfoDto;
 import com.sinau.util.Paging;
 
 import lombok.extern.java.Log;
@@ -43,22 +45,20 @@ public class ServiceCenterService {
 
 	public ModelAndView getQnaList() {
 		
-		
 		mv = new ModelAndView();
 		MemberDto member = (MemberDto)session.getAttribute("mb");
-		
+	
 		String email = member.getM_email();
-
+		
 		List<QuestionDto> qList = scDao.getList(email);
 		//System.out.println(lmap);
 		//System.out.println(qList.get(0).getQ_code()); 
-
+		
 		mv.addObject("qList", qList);
-
 		
 		// view name을 지정!
 		mv.setViewName("servicecenter/servicecenter_question");
-
+		
 		return mv;
 	}
 
@@ -95,21 +95,21 @@ public class ServiceCenterService {
 		try {
 			scDao.boardInsert(question);
 			view = "redirect:servicecenter_question";
-			rttr.addFlashAttribute("check", 2);
+			rttr.addFlashAttribute("check", "2");
 			if(fcheck == 1) {
 				//업로드할 파일이 있음.
-				fileUp(multi, question.getQ_code());
+				fileUp(multi, question);
 			}
 		}catch (Exception e) {
 			//DB 삽입 오류 시 글쓰기폼으로 돌아감.
 			view = "redirect:servicecenter_question";
-			rttr.addFlashAttribute("check", 1);
+			rttr.addFlashAttribute("check","1");
 		}
 
 		return view;
 	}
 
-	private void fileUp(MultipartHttpServletRequest multi, String q_code) 
+	private void fileUp(MultipartHttpServletRequest multi, QuestionDto question) 
 			throws IllegalStateException, IOException {
 		//파일은 실제 물리 경로를 사용하여 저장해야 함.
 		// upload 폴더에 저장하도록 지정.
@@ -130,7 +130,8 @@ public class ServiceCenterService {
 				new HashMap<String, String>();
 		//파일 정보 저장(DB)에 필요한 정보
 		//1.게시글 번호, 2.실제파일명, 3.저장파일명
-		fmap.put("q_code", q_code);
+		fmap.put("q_code", question.getQ_code());
+		fmap.put("q_cts_code", question.getQ_cts_code());
 
 		//multipart에서 파일 꺼내오기
 		//멀티파트는 파일을 배열형태로 저장.
@@ -157,6 +158,22 @@ public class ServiceCenterService {
 			//DB에 파일 정보 저장(dDao)
 			scDao.fileInsert(fmap);
 		}
+	}
+
+	public ModelAndView getContents(String q_code) {
+		mv = new ModelAndView();
+		
+		//게시글 번호로 글 내용 검색 결과 받아오기.(DB) 
+		QuestionInfoDto question = scDao.getContents(q_code);
+		mv.addObject("question", question);
+
+		//게시글 번호에 해당하는 파일 정보 목록(DB)
+		List<FilesDto> bfList = scDao.getQuestionList(q_code);
+		mv.addObject("bfList", bfList);
+		
+		mv.setViewName("servicecenter/servicecenter_info");
+		
+		return mv;
 	}
 
 	 

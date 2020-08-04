@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link rel="stylesheet" href="resources/css/style.css?a">
+<link rel="stylesheet" href="resources/css/home.css?a">
 <style type="text/css">
 html {
 	background-color: #f1f1f1 
@@ -282,7 +282,7 @@ $(document).ready(function(){
 	$('#photo').change(function(event){
 		var tmppath=URL.createObjectURL(event.target.files[0]);
 		$('#m_photo').attr('src',tmppath);
-	});
+	})
 });
 </script>
 </html>

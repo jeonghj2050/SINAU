@@ -41,6 +41,8 @@
 			<exclude-mapping path="/loginFrm"/>
 			<exclude-mapping path="/joinFrm"/>
 			<exclude-mapping path="/access"/>
+			
+			<exclude-mapping path="/contents"/>
 			<exclude-mapping path="/memberInsert"/>
 			<exclude-mapping path="/idCheck"/>
 			<exclude-mapping path="/boardWrite"/>

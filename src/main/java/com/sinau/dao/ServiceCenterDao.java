@@ -5,7 +5,9 @@ import java.util.Map;
 
 import javax.activation.CommandMap;
 
+import com.sinau.dto.FilesDto;
 import com.sinau.dto.QuestionDto;
+import com.sinau.dto.QuestionInfoDto;
 
 public interface ServiceCenterDao {
 
@@ -16,6 +18,10 @@ public interface ServiceCenterDao {
 	void boardInsert(QuestionDto question);
 
 	void fileInsert(Map<String, String> fmap);
+
+	QuestionInfoDto getContents(String q_code);
+
+	List<FilesDto> getQuestionList(String q_code);
 
 
 

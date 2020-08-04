@@ -39,15 +39,6 @@ public class ServiceCenterController {
 		return mv;
 	}
 
-	@GetMapping("contents")
-	public String questionContents(Integer bnum) {
-
-		//DB에서 bnum(게시글 번호)에 해당하는 게시글
-		//정보를 가져와서 model에 추가.
-		/* mv = scServ.getContents(bnum); */
-
-		return "servicecenter/servicecenter_info";
-	}
 	
 	@PostMapping("boardWrite")
 	public String boardWrite
@@ -58,6 +49,20 @@ public class ServiceCenterController {
 		
 		return view;
 	}
+	
+	@GetMapping("contents") 
+	public ModelAndView boardContents(String q_code) {
+	 
+		//DB에서 bnum(게시글 번호)에 해당하는 게시글 //정보를 가져와서 model에 추가. mv =
+		mv=scServ.getContents(q_code);
+	
+		return mv; 
+	}
+	 
+	
+	
+	
+	
 	
 	
 	

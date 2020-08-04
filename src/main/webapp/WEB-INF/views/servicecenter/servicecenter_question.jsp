@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>고객 센터</title>
+<style type="text/css">
+.t-code {
+	display :none;
+}
+</style>
 <link rel="stylesheet" href="resources/css/servicecenter.css?a">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,8 +60,9 @@ $(document).ready(function(){
 				<c:forEach var="qitem" items="${qList}">
 				<div class="data-row">
 					<div class="t-no">${qitem.rownum}</div>
+					<div class="t-code" style="display:none;">${qitem.q_code}</div>
 					<div class="t-category">${qitem.cts_name}</div>
-					<div class="t-title"><a href="contents?qcode=${qitem.q_code}">
+					<div class="t-title"><a href="contents?q_code=${qitem.q_code}">
 						${qitem.q_title}</a></div>
 					<div class="t-name">${qitem.m_name}</div>
 					<div class="t-date">${qitem.q_date}</div>
@@ -72,4 +78,5 @@ $(document).ready(function(){
 		<jsp:include page="servicecenter_footer.jsp"></jsp:include>
 	</footer>
 </body>
+
 </html>

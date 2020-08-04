@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="resources/css/servicecenter.css?a">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script type="text/javascript">
-
+$(document).ready(function(){
+	
+});
 </script>
 </head>
 <body>
@@ -25,40 +27,52 @@
 			<a class="category" href="./servicecenter_main">FAQ</a> <a
 				class="category" href="./servicecenter_question">1 : 1문의</a>
 		</div>
-		<div class="content">
-			<div class="write-form">
+		<div class="question-content">
+			<div class="question-form">
 				<h2 class="login-header">문의글 상세</h2>
 				<table>
-					<tr height="50">
-						<td bgcolor="pink" align="center">제목</td>
-						<td width="200">이건 뭐야 좆같게 시발 존나 하기싫어</td>
-						<td bgcolor="pink" align="center">카테고리</td>
-						<td width="150">강좌 문의</td>
-						<td bgcolor="pink" align="center">등록 날짜</td>
-						<td width="150">0000-00-00-00</td>
+					<tr>
+						<td align="center" class="q_titmenu">제목 : </td>
+						<td class="q_tit">${question.q_title}</td>
+						<td align="center" class="q_ctsmenu">카테고리 : </td>
+						<td class="q_cts">${question.cts_name}</td>
+						<td align="center" class="q_datemenu">등록 날짜 : </td>
+						<td class="q_date">
+						<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${question.q_date}"/></td>
 					</tr>
-					<tr height="200">
-						<td bgcolor="pink">상세내용</td>
-						<td colspan="5">내내내내내낸요요요요요요요요요요요용요요요요요요용</td>
+					<tr>
+						<td class="questioncon">상세내용</td>
+						<td colspan="5">${question.q_content}</td>
 					</tr>
-					<c:if>
-						<tr id="fview">
-							<c:forEach>
-								<c:if>
-									<td colspan="6"><img src="" width="100"></td>
-								</c:if>
-							</c:forEach>
-						</tr>
-					</c:if>
-					<tr height="30">
-						<td bgcolor="pink" align="center">답변 상태</td>
-						<td colspan="5">답변 완료</td>
+					<tr>
+						<th>첨부파일</th>
+						<td colspan="5" id="farea"><c:if test="${empty bfList}">
+							첨부된 파일이 없습니다.
+						</c:if> <c:if test="${!empty bfList}">
+								<c:forEach var="file" items="${bfList}">
+									<c:set var="fsname" value="${file.f_sysname}" />
+									<a href="./download?sysFileName=${file.f_sysname}">${file.f_oriname}</a>
+									<button id="fdelbtn" onclick="fileDel()">삭제</button>
+								</c:forEach>
+							</c:if></td>
 					</tr>
-					<tr height="50">
-						<td bgcolor="pink" align="center">답변 내용</td>
-						<td colspan="5">아 몰라</td>
+					<tr>
+					<td colspan="6">
+						<c:forEach var="f" items="${bfList}">
+								<img src="resources/upload/${f.f_sysname}" width="200px" height="200">
+						</c:forEach>
+					</td>
 					</tr>
-					</table>
+					<tr class="sub12">
+						<td align="center" class="q_andate">날짜</td>
+						<td colspan="5">
+						<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${question.q_andate}"/></td>
+					</tr>
+					<tr>
+						<td align="center"  class="q_anfield">답변 내용</td>
+						<td colspan="5">${question.q_anfield}</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</section>
@@ -111,4 +125,5 @@
 		}
 	}
 </script>
+<script src="resources/js/jquery.serializeObject.js"></script>
 </html>
