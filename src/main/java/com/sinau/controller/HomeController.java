@@ -21,16 +21,18 @@ public class HomeController {
 		
 		return "home";
 	}
-	
+
+
+
 	@GetMapping("loginFrm")
 	public String loginFrm() {
-		
+
 		return "loginFrm";
 	}
-	
+
 	@GetMapping("joinFrm")
 	public String joinFrm() {
-		
+
 		return "joinFrm";
 	}
 
