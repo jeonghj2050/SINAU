@@ -10,6 +10,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <link rel="stylesheet" type="text/css" media="screen"
 	href="../../../resources/css/payment/payment.css" />
@@ -26,82 +28,85 @@
 			<div class="payment-top">
 				<div class="payment-top-txt">결제하기</div>
 			</div>
-			<div class="payment-center-wrap">
-				<div class="payment-center">
-					<div class="order-info">
-						<h1>주문 정보</h1>
-						<div>SINAU의 4번째 DIY 키트</div>
-						<div class="pay-img">
-							<img id="pay-img" src="">
-						</div>
-						<br>
-					</div>
-					<hr>
-					<div class="tel-info">
-						<h1>연락처 정보</h1>
-						<form action="" class="tel-info">
-							받으시는 분<br> <input type="text"><br> 휴대폰 번호<br>
-							<input type="text"><br>
-						</form>
-					</div>
-					<hr>
-					<div class="del-info">
-						<h1>배송 정보</h1>
-						<form class="del-info">
-							받으시는 분<br> <input type="text"><br> 주소<br>
-							<input type="text" id="sample4_postcode" placeholder="우편번호">
-							<input type="button" onclick="sample4_execDaumPostcode()"
-								value="우편번호 찾기"><br> <input type="text"
-								id="sample4_roadAddress" placeholder="도로명주소"> <span
-								id="guide" style="color: #999; display: none"></span> <input
-								type="text" id="sample4_detailAddress" placeholder="상세주소">
+			<form name="payment" action="completion_pay" method="post" id="payForm">
+			
+					<div class="payment-center-wrap">
+						<div class="payment-center">
+							<div class="order-info">
+								<h1>주문 정보</h1>
+								<input type="hidden" name="ord_pcode"
+									value="${offList.ofc_code}">${offList.ofc_title}
+								<div class="pay-img">
+									<img style="height: 200px; width: 200px; border-radius: 5px"
+										id="pay-img"
+										src="/resources/images/offline/sum/${offList.f_oriname}">
+								</div>
+								<br>
+							</div>
+							<hr>
+							<hr>
+							<div class="del-info">
+								<h1>배송 정보</h1>
+								<form class="del-info">
+									받으시는 분<br> <input type="text" name="ord_diposit"><br> 주소<br>
 
-							<!-- <input type="text" style="width:100px;">&nbsp;<button>우편번호 찾기</button><br>
-                                    <input type="text" style="width:400px;">&nbsp;기본주소<br>
-                                    <input type="text" style="width:400px;">&nbsp;상세주소<br> -->
-							<br> 배송 메시지<br> <input type="text"
-								style="width: 485px; height: 100px; text-align: start;"><br>
-						</form>
+									<input type="text" class="addr1" id="sample4_postcode"
+										placeholder="우편번호"> <input type="button"
+										onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+									<input type="text" class="addr2" id="sample4_roadAddress"
+										placeholder="도로명주소">
+									<!-- <span id="guide" style="color: #999; display: none"></span>  -->
+									<input type="text" class="addr3" id="sample4_detailAddress"
+										placeholder="상세주소"> <br> 배송 메시지<br> <input
+										type="text" name="ord_memo"
+										style="width: 485px; height: 100px; text-align: start;"><br>
+									<input type="hidden" name="ord_addr" class="ord_addr">	
+								</form>
+							</div>
+							<hr>
+							<div class="pay-list">
+									<h1>결제 금액</h1>
+									<div class="pay-list_l">
+										<div>총 상품 금액</div>
+										<div>배송비</div>
+										<div>상품 할인 금액</div>
+										<div>쿠폰 적용</div>
+										<div>최종 가격</div>
+									</div>
+									<div class="pay-list_r">
+										<div>${offList.ofc_sale}원</div>
+										<div>무료</div>
+										<div>0원</div>
+										<div>0원</div>
+										<div>${offList.ofc_sale}원</div>
+									</div>
+									<input type="hidden" name="ord_price" value=${offList.ofc_sale}>
+							</div>
+							<div class="coupon">
+								<button class="couponbtn">쿠폰 적용하기</button>
+							</div>
+							<hr>
+							<div class="pay-how">
+								<div class="pay1" tabindex="1">
+									<img class="how-img" src="/resources/images/payment/card.png">
+									<div class="how-txt">카드 결제</div>
+								</div>
+								<div class="pay2" tabindex="2">
+									<img class="how-img"
+										src="/resources/images/payment/passbook.png">
+									<div class="how-txt">무통장 입금</div>
+								</div>
+							</div>
+							<input type="hidden" name="ord_m_email" value="${m_email}">
+							<input type="hidden" name="sc_code" value="${sc_code}">
+
+							<div class="pay-submit">
+							<input type="submit" value="결제하기">
+								
+						</div>
 					</div>
-					<hr>
-					<div class="pay-list">
-						<h1>결제 금액</h1>
-						<div class="pay-list_l">
-							<div>총 상품 금액</div>
-							<div>배송비</div>
-							<div>상품 할인 금액</div>
-							<div>쿠폰 적용</div>
-							<div>최종 가격</div>
-						</div>
-						<div class="pay-list_r">
-							<div>43000원</div>
-							<div>무료</div>
-							<div>0원</div>
-							<div>0원</div>
-							<div>43000원</div>
-						</div>
-					</div>
-					<div class="coupon">
-						<button class="couponbtn">쿠폰 적용하기</button>
-					</div>
-					<hr>
-					<div class="pay-how">
-						<div class="pay1" tabindex="1">
-							<img class="how-img"
-								src="../../../resources/images/payment/card.png">
-							<div class="how-txt">카드 결제</div>
-						</div>
-						<div class="pay2" tabindex="2">
-							<img class="how-img"
-								src="../../../resources/images/payment/passbook.png">
-							<div class="how-txt">무통장 입금</div>
-						</div>
-					</div>
-						<div class="pay-submit">
-							<a class="btn-pay-submit" href="/completion_pay">결제하기</a>
-						</div>
-				</div>
-			</div>
+
+			</form>
 		</div>
 
 		<div class="modal">
@@ -110,33 +115,35 @@
 				<div class="coupon-body">
 					<div>사용 가능한 쿠폰만 보여집니다.</div>
 					<hr>
-					<div class="coupon-apply">
-						쿠폰 적용
-						<div class="buy-list">
-							<div class="buy-list-top">상품 목록</div>
-							<div class="buy-list-body">
-								<div>[202007031234]Sinau의 4번째 DIY 키트</div>
-								<div>43,000원</div>
+						<div class="coupon-apply">
+							쿠폰 적용
+							<div class="buy-list">
+								<div class="buy-list-top">상품 목록</div>
+								<div class="buy-list-body">
+									<div>${offList.ofc_title}</div>
+									<div>${offList.ofc_sale}원</div>
+								</div>
+								<div class="buy-list-bottom">사용 가능한 쿠폰이 없습니다.</div>
 							</div>
-							<div class="buy-list-bottom">사용 가능한 쿠폰이 없습니다.</div>
-						</div>
-						<div class="coupon">
-							<div class="coupon-top">
-								<div class="res-total-txt">총 주문금액(배송비포함)</div>
-								<div class="res-sale-txt">할인금액</div>
-								<div class="res-pay-txt">최종결제금액</div>
+							<div class="coupon">
+								<div class="coupon-top">
+									<div class="res-total-txt">총 주문금액(배송비포함)</div>
+									<div class="res-sale-txt">할인금액</div>
+									<div class="res-pay-txt">최종결제금액</div>
+								</div>
+								<div class="coupon-bottom">
+									<div class="res-total">${offList.ofc_sale}원</div>
+									<div class="res-sale">${offList.ofc_sale * 0.50}원</div>
+									<div class="res-pay">${offList.ofc_sale - offList.ofc_sale * 0.50}
+										원</div>
+								</div>
 							</div>
-							<div class="coupon-bottom">
-								<div class="res-total">43,000원</div>
-								<div class="res-sale">0원</div>
-								<div class="res-pay">43,000원</div>
+							<div class="coupon-btn">
+								<button id="res-submit">완료</button>
+								<button id="res-cancel">취소</button>
 							</div>
 						</div>
-						<div class="coupon-btn">
-							<button id="res-submit">완료</button>
-							<button id="res-cancel">취소</button>
-						</div>
-					</div>
+
 				</div>
 			</div>
 		</div>
@@ -153,6 +160,18 @@
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+$(document).ready(function(){
+    $("#payForm").submit(function(){
+        var addr1 = $(".addr1").val();
+        var addr2 = $(".addr2").val();
+        var addr3 = $(".addr3").val();
+    
+        
+        $(".ord_addr").val(addr1 + " "+ addr2 + " "+ addr3);
+        
+       console.log( $(".ord_addr").val());
+    }); // end submit()
+}); 
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 	function sample4_execDaumPostcode() {
 		new daum.Postcode(
@@ -199,12 +218,9 @@
 						}
 					}
 				}).open();
-		
-		
+
 	}
 </script>
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.show1').show();

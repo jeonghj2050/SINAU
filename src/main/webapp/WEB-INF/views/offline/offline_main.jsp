@@ -85,9 +85,11 @@
 												</div>
 												<div class="s_sumnail-txt">
 													<div class="s_sumnail-txt-top">
-														<div id="s_sub-cate">${offList.ofc_cts_name}</div>
+														<div id="s_sub-cate">${offList.cts_name}</div>
 														<div id="s_not">ㆍ&nbsp;</div>
 														<div id="s_creator-name">${offList.ofc_teacher}</div>
+														<%-- <div id="s_not">ㆍ&nbsp;</div>
+														<div id="s_creator-name">${off.ofc_place}</div> --%>
 													</div>
 													<div id="s_online-name">${offList.ofc_title}</div>
 													<div id="s_class_likes">
@@ -130,9 +132,11 @@
 										alt="">
 								</div>
 								<article class="on-info1">
-									<li id="sub-cate">${off.ofc_cts_name}</li>
+									<li id="sub-cate">${off.cts_name}</li>
 									<li>ㆍ</li>
 									<li id="creator-name">${off.ofc_teacher}</li> 
+									<%-- <li>ㆍ</li>
+									<li id="place">${off.ofc_place}</li>  --%>
 									<div id="online-name">${off.ofc_title}</div>
 									<div id="class_likes">
 										<svg width="15" height="15" fill="none" viewBox="0 0 24 18">

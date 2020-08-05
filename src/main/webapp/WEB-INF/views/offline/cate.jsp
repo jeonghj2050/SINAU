@@ -11,18 +11,18 @@
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css" media="screen"
-	href="../../../resources/css/offline/offline_main.css" />
+	href="/resources/css/offline/offline_main.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" media="screen"
-	href="../../../resources/css/offline/offline_cate_1.css" />
+	href="/resources/css/offline/offline_cate_1.css" />
 <link rel="stylesheet" type="text/css" media="screen"
-	href="../../../resources/css/offline/offline_main.css" />
+	href="/resources/css/offline/offline_main.css" />
 <script type="text/javascript"></script>
 </head>
 <body>
 	<header>
-		<jsp:include page="../../header.jsp"></jsp:include>
+		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 	<section>
 		<div class="main-image">
@@ -41,12 +41,12 @@
 					<h1>${offCateName}</h1>
 					<h5>전체클래스</h5>
 					<div id="filter">
-						<img src="../../../resources/images/offline/sort.png">인기순
+						<img src="/resources/images/offline/sort.png">인기순
 					</div>
 					<div id="new">
 						<c:forEach var="offCateList" items="${offCateList}">
 							<div>
-								<a href="info?ofc_code=${off.ofc_code}">
+								<a href="info?ofc_code=${offCateList.ofc_code}">
 									<div class="class_img">
 										<img
 											src="/resources/images/offline/sum/${offCateList.f_oriname}"
@@ -81,7 +81,7 @@
 		</article>
 	</section>
 	<footer>
-		<jsp:include page="../../footer.jsp"></jsp:include>
+		<jsp:include page="../footer.jsp"></jsp:include>
 	</footer>
 </body>
 </html>

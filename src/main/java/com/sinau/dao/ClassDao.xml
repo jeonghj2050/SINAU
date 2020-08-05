@@ -51,66 +51,120 @@
 		 	select * from offlikes where m_email=#{email}
 		]]>
 	</select>
+
+
+
+	<!-- OFFLINE CLASS 부분 -->
 	<select id="getOffList" parameterType="String"
 		resultType="com.sinau.dto.OffListDto">
 		<![CDATA[
-			select * from of3 order by l_count desc
+			select * from of_INFO order by l_count desc
 		]]>
 	</select>
+	<!-- 서브 카테고리에 해당하는 강좌 가져오는 쿼리문 -->
 	<select id="getOffCateList" parameterType="String"
 		resultType="com.sinau.dto.OffListDto">
 		<![CDATA[
-			select * from of3 where ofc_cts_code=#{cts_code}
+			select * from of_INFO where ofc_cts_code=#{cts_code}
 		]]>
 	</select>
+	<!-- 서브 카테고리 가져오는 쿼리문(nav영역 사용) -->
 	<select id="getOffCate" parameterType="String"
 		resultType="com.sinau.dto.OffCtsDto">
 		<![CDATA[
 			select * from of_cts 
 		]]>
 	</select>
+	<!-- 조회수 업데이트용 쿼리문 -->
 	<update id="viewUpdate" parameterType="Integer">
 		<![CDATA[
-		UPDATE OFC SET OFC_VIEWS =
-		OFC_VIEWS + 1
-		WHERE OFC_CODE = #{ofc_code}
+		UPDATE OFC SET OFC_VIEW =
+		OFC_VIEW + 1
+		WHERE OFC_CODE =#{ofc_code}
 		]]>
 	</update>
 	<select id="getOffInfo" parameterType="String"
-	resultType="com.sinau.dto.OffInfoDto">
+		resultType="com.sinau.dto.OffInfoDto">
 		<![CDATA[
-			SELECT * FROM OF3
-			WHERE (OFC_CODE = #{ofc_code}) AND (F_ORINAME LIKE '%D%')
-		]]>		
+			SELECT * FROM OF_D_SC
+			WHERE (OFC_CODE = #{ofc_code}) AND (rownum = 1)
+		]]>
 	</select>
 	<select id="getInfoSpec1" parameterType="String"
-	resultType="String">
+		resultType="String">
 		<![CDATA[
 			SELECT f_oriname FROM F_SPEC1
 			WHERE ofc_code = #{ofc_code}
-		]]>		
+		]]>
 	</select>
 	<select id="getInfoSpec2" parameterType="String"
-	resultType="String">
+		resultType="String">
 		<![CDATA[
 			SELECT f_oriname FROM F_SPEC2
 			WHERE ofc_code = #{ofc_code}
-		]]>		
+		]]>
 	</select>
 	<select id="getInfoSpec3" parameterType="String"
-	resultType="String">
+		resultType="String">
 		<![CDATA[
 			SELECT f_oriname FROM F_SPEC3
 			WHERE ofc_code = #{ofc_code}
-		]]>		
+		]]>
 	</select>
 	<select id="getCateName" parameterType="String"
-	resultType="String">
+		resultType="String">
 		<![CDATA[
 			SELECT cts_name FROM of_cts
 			WHERE cts_code = #{cts_code}
-		]]>		
+		]]>
 	</select>
+	<select id="getOffScehdule" parameterType="String"
+		resultType="com.sinau.dto.OffScheduleDto">
+		<![CDATA[
+			SELECT * FROM SCL_SC
+			WHERE scl_oFC_CODE = #{ofc_code}
+		]]>
+	</select>
+	<select id="getOffLoc" parameterType="String"
+		resultType="String">
+		<![CDATA[
+			SELECT SC_LOC
+			FROM OF_SC WHERE (ofc_code= #{ofc_code}) AND (rownum = 1)
+		]]>
+	</select>
+	<select id="getOffApplyInfo" parameterType="String"
+		resultType="com.sinau.dto.OffListDto">
+		<![CDATA[
+			select * from of_INFO
+			where ofc_code=#{ofc_code}
+			]]>
+	</select>
+	<select id="getMemPayInfo" parameterType="String"
+		resultType="com.sinau.dto.MemberDto">
+		<![CDATA[
+			select * from member
+			where m_email=#{m_email}
+			]]>
+	</select>
+	<select id="getOffScheduleSel" parameterType="String"
+		resultType="com.sinau.dto.OffScheduleDto">
+		<![CDATA[
+			select * from scl_sc
+			where sc_code=#{sc_code}
+			]]>
+	</select>
+	<insert id="orderInsert" parameterType="com.sinau.dto.OrderDto"
+		useGeneratedKeys="true" keyProperty="ord_code">
+	<selectKey keyProperty="ord_code" resultType="String"
+			order="BEFORE">
+			SELECT 'ord_'||SEQ_ORD.NEXTVAL FROM dual
+		</selectKey>
+		INSERT INTO ord
+		VALUES(#{ord_code}, #{ord_name}, #{ord_addr}, #{ord_phone}, #{ord_memo}, #{ord_price}, #{ord_diposit}, DEFAULT, 1,#{ord_pcode}, 3, 1, #{ord_m_email})
+	</insert>
+	<insert id="mclInsert" parameterType="com.sinau.dto.MyClassDto">
 	
-
+		INSERT INTO mcl
+		VALUES('mcl_'||SEQ_MCL.NEXTVAL, 1, #{mcl_classcode}, #{mcl_m_email}, #{mcl_ord_code}, #{mcl_sc_code})
+	</insert>
 </mapper>

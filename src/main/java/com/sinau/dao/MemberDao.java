@@ -3,7 +3,9 @@ package com.sinau.dao;
 import com.sinau.dto.MemberDto;
 
 import com.sinau.dto.MemberDto;
-	
+
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.sinau.dto.MyMemberInfoDto;
@@ -26,6 +28,9 @@ public interface MemberDao {
 	public String getPwd(String m_email);
 
 	public MemberDto getMemInfo(String m_email);
+
+	//오프라인 수업신청시 가져오는 회원 이메일
+	// public List<MemberDto> getoffMemInfo(String m_email);
 
 
 }

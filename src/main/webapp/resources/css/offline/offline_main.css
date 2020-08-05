@@ -169,7 +169,7 @@
         .class_img:hover img{
             transform: scale(1.1);
         }
-        #sub-cate, #creator-name{            
+        #sub-cate, #creator-name, #place{            
             display: inline;
             font-size: 13px;
             line-height: 16px;
