@@ -46,7 +46,7 @@
 		q.q_content AS content,
 		q.q_m_email AS email,
 		q.q_date AS	dates,
-		q.q_code AS code
+		q.q_code AS code,
 		m.m_name AS name
 		from question q, member m
 		where q_m_email =
