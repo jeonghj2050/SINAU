@@ -65,27 +65,22 @@ public class Paging {
 				sb.append("<font class='pno' style='color:red;'>");
 				sb.append("&nbsp;" + i + "&nbsp;</font>");
 			}
-			//<a class='pno' href="list?pageNum=6'> 6 </a>
+			//<a class='pno' href='list?pageNum=6'> 6 </a>
 			//<font class='pno' style='color:red;'> 7 </font>
-			//<a class='pno' href="list?pageNum=8'> 8 </a>
-			//<a class='pno' href="list?pageNum=9'> 9 </a>
-			
+			//<a class='pno' href='list?pageNum=8'> 8 </a>
+			//<a class='pno' href='list?pageNum=9'> 9 </a>
 		}
+		
 		//다음 버튼 처리
 		if(end != totalPage) {
-			sb.append("<a class='pno' href='"+listName
+			sb.append("<a class='pno' href='list?pageNum=10" + listName
 					+ "?pageNum=" + (end + 1) + "'>"
 					);
-				sb.append("&nbsp;다음&nbsp;");
-				sb.append("</a>");
-		}//<a class='pno' href="list?pageNum=10'> 다음 </a>
-		
+			sb.append("&nbsp;다음&nbsp;");
+			sb.append("</a>");
+		}//<a class='pno' href='list?pageNum=10'> 다음 </a>
 		
 		return sb.toString();
 	}
 }
-
-
-
-
 

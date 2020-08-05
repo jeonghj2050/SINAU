@@ -12,24 +12,13 @@ import com.sinau.dao.MemberDao;
 import com.sinau.dto.MemberDto;
 import com.sinau.service.CommonService;
 import com.sinau.service.MemberService;
+import com.sinau.service.ServiceCenterService;
 
 @Controller
 public class HomeController {
-
-	@Autowired
-	private MemberService mServ;
-
-	private ModelAndView mv;
-
-	private CommonService cServ;
-
-
-
 	@GetMapping("/")
 	public String home() {
-
-		/* mv=cServ.getClassList(); */
-
+		
 		return "home";
 	}
 
@@ -54,8 +43,22 @@ public class HomeController {
 
 		return "store/store";
 	}
-
-	/*
-	 * @GetMapping("home") public ModelAndView bo
-	 */
+	
+	@GetMapping("servicecenter_main")
+	public String servicecenter() {
+		
+		return "servicecenter/servicecenter_main";
+	}
+	
+	@GetMapping("id")
+	public String id() {
+		
+		return "id";
+	}
+	
+	@GetMapping("pwd")
+	public String pwd() {
+		
+		return "pwd";
+	}
 }
