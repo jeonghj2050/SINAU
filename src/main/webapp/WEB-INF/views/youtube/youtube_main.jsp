@@ -24,21 +24,18 @@
 	</header>
 
 	<section class="section-home">
-		<div class="content-home">
-			<img src="resources/images/bbb.jpg">
+		<div class="youtube-home">
+			<div class="image">대표 이미지</div>
 		</div>
 		<div class="top10menu">
-			<div class="top10">
-				<h1>TOP10</h1>
+			<h1>TOP10</h1>
+			<c:forEach var="index" begin="1" end="10">
+			<div class="youtube">
+				<div class="y_img">이미지</div>
+				<div class="y_title">제목</div>
 			</div>
-			<div class=c:foreach>
-				<div class="youtubeinfo">
-					<a>상세정보</a>
-					<div class="youtubeclass_img">이미지</div>
-					<p>타이틀 제목 제목 제목</p>
-				</div>
-			</div>
-		</div>
+		 	</c:forEach>
+		 </div>
 	</section>
 	<footer>
 		<jsp:include page="../footer.jsp"></jsp:include>
