@@ -33,4 +33,6 @@
 	<update id="updateMemberPwd" parameterType="String">
 		update member set m_pwd=#{encodePwd} where m_email=#{email}
 	</update>
+	
+	
 </mapper>

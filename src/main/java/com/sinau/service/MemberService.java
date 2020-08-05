@@ -91,6 +91,7 @@ public class MemberService {
 		
 		try {
 			mDao.memberInsert(member);
+			System.out.println(member.toString());
 			/* mDao.memberImgInsert(multi); */
 			
 			view="redirect:/";
@@ -228,8 +229,15 @@ public class MemberService {
 				session.setAttribute("mb", member);
 				System.out.println(session);
 				
-				//리다이렉트로 화면을 전환.
-				view = "redirect:/";
+				if(member.getM_group().equals("ad")){
+					//회원 구분이 admin일 경우 관리자 페이지로 전환
+					view = "redirect:adMApproval";
+				}
+				else {
+					//리다이렉트로 화면을 전환.
+					view = "redirect:/";
+				}
+				
 			}
 			else {
 				//패스워드 틀림.

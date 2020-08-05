@@ -4,7 +4,9 @@ import com.sinau.dto.MemberDto;
 
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.MemberImg;
-	
+
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -29,9 +31,11 @@ public interface MemberDao {
 	public String getPwd(String m_email);
 
 	public MemberDto getMemInfo(String m_email);
-
+	
+	
 	/*
 	 * public void memberImgInsert(MultipartHttpServletRequest multi);
 	 */
+	
 
 }

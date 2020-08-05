@@ -15,44 +15,46 @@ import com.sinau.service.MemberService;
 
 @Controller
 public class HomeController {
-	
+
 	@Autowired
 	private MemberService mServ;
-	
-	private ModelAndView mv;
-	
-	private CommonService cServ;
-	
 
-	
+	private ModelAndView mv;
+
+	private CommonService cServ;
+
+
+
 	@GetMapping("/")
 	public String home() {
-		
+
 		/* mv=cServ.getClassList(); */
-		
+
 		return "home";
 	}
-	
+
+
+
 	@GetMapping("loginFrm")
 	public String loginFrm() {
-		
+
 		return "loginFrm";
 	}
-	
+
 	@GetMapping("joinFrm")
 	public String joinFrm() {
-		
+
 		return "joinFrm";
 	}
 
-	
-	
+
+
 	@GetMapping("store")
 	public String store() {
-		
+
 		return "store/store";
 	}
-	
+
 	/*
 	 * @GetMapping("home") public ModelAndView bo
 	 */
