@@ -14,24 +14,26 @@ public class HomeController {
 		
 		return "home";
 	}
-	
+
+
+
 	@GetMapping("loginFrm")
 	public String loginFrm() {
-		
+
 		return "loginFrm";
 	}
-	
+
 	@GetMapping("joinFrm")
 	public String joinFrm() {
-		
+
 		return "joinFrm";
 	}
 
-	
-	
+
+
 	@GetMapping("store")
 	public String store() {
-		
+
 		return "store/store";
 	}
 	
