@@ -52,5 +52,6 @@ public interface MemberDao {
 	/*
 	 * public void memberImgInsert(MultipartHttpServletRequest multi);
 	 */
+	
 
 }

@@ -7,6 +7,7 @@ public class Paging {
 	private int pageCount;//페이지 번호 개수
 	private String listName;//목록 페이지 종류
 	
+	//생성자(페이징 객체를 만들 때 필요 값 입력처리)
 	public Paging(int maxNum, int pageNum, 
 			int listCount, int pageCount, 
 			String listName) {
@@ -34,28 +35,29 @@ public class Paging {
 		int start = (currentGroup * pageCount) 
 				- (pageCount - 1);
 		//현재 그룹의 끝 페이지 번호
-		int end = (currentGroup * pageCount >= totalPage)
-				? totalPage : currentGroup * pageCount;
+		int end = (currentGroup * pageCount >= totalPage) ?
+				totalPage : currentGroup * pageCount;
 		
 		//html 코드를 문자열로 작성.
 		StringBuffer sb = new StringBuffer();
 		
 		//이전 버튼 처리(start 번호가 1이 아닐때 생성)
 		if(start != 1) {
-			sb.append("<a class='pno' href='" + listName
+			sb.append("<a class='pno' href='" +listName
 					+ "?pageNum=" + (start - 1) + "'>"
 					);
 			sb.append("&nbsp;이전&nbsp;");
 			sb.append("</a>");
 		}
-		//<a class='pno' href='list?pageNum=8'> 이전 </a>
+		//<<a class='pno' href='list>pageNum=5'> 이전 </a>
 		
 		//페이지 번호 처리(페이지 그룹으로 처리)
 		for(int i = start; i <= end; i++) {
 			if(pageNum != i) {
 				//현재 페이지가 아닌 페이지 번호
-				sb.append("<a class='pno' href='" +
-						listName + "?pageNum=" + i + "'>");
+				sb.append("<a class='pno' href='"+listName
+					+ "?pageNum=" + i + "'>"
+					);
 				sb.append("&nbsp;" + i + "&nbsp;</a>");
 			}
 			else {

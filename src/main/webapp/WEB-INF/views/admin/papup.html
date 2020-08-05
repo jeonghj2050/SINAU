@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="image/style.css">
+<head>
+<meta charset="UTF-8">
+<title>팝업</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.tab-content').hide();
+		$('.current').show();
+		$('ul.tabs li:first-child').addClass('on')
+		$('ul.tabs li').click(function() {
+			$('ul.tabs li').removeClass('on')
+			$(this).addClass('on')
+			var tab_id = $(this).attr('data-tab');
+			$('.tab-content').hide();
+
+			$('ul.tabs li').removeClass('current');
+			$('.tab-content').removeClass('current');
+
+			$(this).addClass('current');
+			$("#" + tab_id).addClass('current');
+			$('.current').show();
+		})
+
+	})
+</script>
+</head>
+<body class="test">
+
+	<div class="popupN">
+		<div class="popNo">
+			<p>거절하시겠습니까?</p>
+			<button>예</button>
+			<button>아니요</button>
+		</div>
+	</div>
+	<div class="popupD">
+		<div class="popDel">
+			<p>삭제하시겠습니까?</p>
+			<button>예</button>
+			<button>아니요</button>
+		</div>
+	</div>
+
+</body>
+</html>
