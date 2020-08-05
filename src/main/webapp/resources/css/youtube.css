@@ -1,15 +1,185 @@
 @charset "UTF-8";
 
-.youtube_img {
-	height : 300px;
-	background-color: yellow;
+
+
+* {
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
 }
 
-.img {
-	width : 1300px; 
-	height :300px;
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+
+header {
+	width: 100%;
+	height: 15%;
+}
+
+.section-home {
+	width: 100%;
+	min-height: 100%;
+}
+
+footer {
+	width: 100%;
+	height: 15%;
+  	margin-top: 100px;
+}
+
+.content-home {
+	height : 35%;
+	background-color: black;
+	margin: auto;
+}
+
+.bx-wrapper {
+	margin: 0px auto;
+	border: 5px black;
+	-webkit-box-shadow: none;
+}
+
+a {
+	color: black;
+	text-decoration: none
+}
+
+.footertext {
+	text-align: right;
+	font-size: 10px;
+}
+
+li {
+	list-style: none;
+}
+
+li a:hover {
+	color: #8a8e8b;
+}
+
+
+/* header */
+
+.content {
+	width : 78.2%;
+	height: 70%;
 	margin : auto;
-	background-color: red;
+}
+
+
+.logo {
+	width: 15%;
+	height: 60%;
+	margin: 20px;
+	margin-bottom : 10px;
+	float: left;
+}
+
+.search {
+	width: 25%;
+	height: 35%;
+	margin: 35px;
+	padding : 5px;
+	padding-left: 20px;
+	border: 1px solid #ddd;
+	font-size: 15px;
+	border-radius: 50px;
+	outline: none;
+}
+
+.top-right {
+	float: right;
+	display: inline-block;
+	margin: 15px;
+	font-size: 20px;
+}
+
+.top-right>ul>li {
+	float: left;
+	margin: 15px;
+}
+.allmenu {
+	width : 78.2%;
+	height: 30%;
+	margin: auto;
+}
+.menu-bar {
+	width : 70%;
+	height : 100%;
+	font-size: 20px;
+	float : left;
+}
+
+.menu-bar>ul>li {
+	float : left;
+	margin: 5px;
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+.menu-bar1 {
+	width: 30%;
+	height : 100%;
+	float: right;
+	font-size: 20px;
+}
+
+.menu-bar1>ul>li {
+	float: right;
+}
+
+.suc {
+	display: none;
+	font-size: 17px;
+}
+
+.bef {
+	display: block;
+	font-size: 17px;
+}
+
+/* footer */
+.bottom-bar {
+	width: 78.2%;
+	height: 100%;
+	margin : auto;
+}
+
+.bottom-sub {
+	width: 30%;
+	height: 100%;
+	padding-top: 75px;
+	float : left;
+}
+.bottom-sub>a {
+	font-size: 12px;
+}
+
+.intro {
+	width: 70%;
+	height: 100%;
+	float : right;
+	text-align: right;
+}
+.intro>a {
+	font-size: 20px;
+}
+.intro>.hub {
+	width: 30%;
+	height: 25%;
+}
+
+/* youtube */
+
+
+.youtube_img>img {
+	 width : 87.8%; 
+	 height : 100%;
+	margin : auto;
 }
 
 .section-home>.top10menu {
