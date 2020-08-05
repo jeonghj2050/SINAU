@@ -35,13 +35,6 @@ public class HomeController {
 	}
 
 	
-	
-	@GetMapping("store")
-	public String store() {
-		
-		return "store/store";
-	}
-	
 	@GetMapping("servicecenter_main")
 	public String servicecenter() {
 		
