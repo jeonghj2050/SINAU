@@ -17,6 +17,7 @@ header {
 	width: 1300px;
 	overflow: auto;
 	margin: 0 auto;
+	margin-bottom: 10%;
 }
 
 footer {
@@ -165,6 +166,7 @@ li a:hover {
 .login-header {
 	width : 150px;
 	height: 30px;
+	margin-bottom: 20px;
 }
 
 .cate_container {
@@ -358,7 +360,7 @@ li a:hover {
 	padding-left: 75px;
 }
 
-/* FAQ */
+/* FAQ 목록 */
 .FAQ_box {
 	width: 1102px;
 	border: 1px solid #ddd;
@@ -453,13 +455,13 @@ li a:hover {
 	font-size: 15px;	
 }
 
-/* question table */
+/* 문의 글 상세정보 */
 .question-form {
 	width: 1100px;
 	height: auto;
 	float : right;
 }
-table {
+.table123 {
 	width: 1000px;
 	height: auto;
 	margin : auto;
@@ -468,19 +470,23 @@ table {
 	width: 100px;
 	height: 40px;
 	background-color : #ddd;
+	border: 1px solid #ddd;
 }
 .q_ctsmenu, .q_datemenu{
 	width: 100px;
 	height: 40px;
 	background-color : #ddd;
+	border: 1px solid #ddd;
 }
 .q_cts {
 	width: 100px;
 	text-align: center;
+	border: 1px solid #ddd;
 }
 .q_date {
 	width: 200px;
 	text-align: center;
+	border: 1px solid #ddd;
 }
 
 .questioncon {
@@ -488,14 +494,100 @@ table {
 	height: 300px;
 	background-color: #ddd;
 	text-align: center;
+	border: 1px solid #ddd;
 }
 .q_andate{
 	height: 40px; 
 	background-color : #ddd;
+	border: 1px solid #ddd;
 }
 
 .q_anfield{
 	height: 200px;
 	background-color : #ddd;
+	border: 1px solid #ddd;
 	
 }
+
+.q_tit, .q_con, .q_file, .q_img, .q_date, .q_field{
+	border: 1px solid #ddd;
+}
+
+.btn-write, .btn-sub{
+	width: 50px;
+	height: 50px;
+	background-color: black;
+	color : white;
+	border: none;
+}
+
+/* 글 수정 페이지 */
+.update-form {
+width: 1100px;
+	height: 1000px;
+	float: right;
+	padding : 20px;
+	border: 3px solid #ddd;
+	border-radius:  50px;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.update-form>.login-header {
+	margin-top: 10px;
+	margin-bottom: 30px;
+	margin-left: 450px;
+}
+
+.update-form>input {
+	width: 400px;
+	height: 30px;
+	margin-right: 10px;
+	border : none;
+	border-bottom: 1px solid black;
+	margin-bottom: 15px;
+}
+.update-form>.category {
+	width: 150px;
+	height: 30px;
+	border : 1px solid black;
+	margin-bottom: 25px;
+	float : right;
+	margin-right: 77px;
+}
+
+.update-form>.contents {
+	width: 900px;
+	height: 500px;
+	margin : auto;
+	margin-bottom: 25px;
+	font-size: 15px;	
+}
+
+.update-form>.btn-btn{
+	width: 500px;
+	height: 30px;
+	float : right;
+	padding-right: 77px;
+}
+
+.update-form>.btn-btn>input {
+	width: 100px;
+	height: 35px;
+	margin : auto;
+	float : right;
+	margin-left: 25px;
+	color : white;
+	background-color: black;
+	font-size: 15px;
+	border: none;
+}
+
+.update-form>.filebox {
+	width: 1000px;
+	height: 200px;
+	float : left;
+	padding-left: 75px;
+}
+
+

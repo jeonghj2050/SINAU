@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 * {
 	box-sizing: border-box;
 	margin: 0px;
@@ -28,7 +30,7 @@ footer {
 }
 
 .content-home {
-	height : 35%;
+	height : 327px;
 	background-color: black;
 	margin: auto;
 }
@@ -61,7 +63,7 @@ li a:hover {
 /* header */
 
 .content {
-	width : 78.2%;
+	width : 1300px;
 	height: 70%;
 	margin : auto;
 }
@@ -99,7 +101,7 @@ li a:hover {
 	margin: 15px;
 }
 .allmenu {
-	width : 78.2%;
+	width : 1300px;
 	height: 30%;
 	margin: auto;
 }
@@ -140,7 +142,7 @@ li a:hover {
 
 /* footer */
 .bottom-bar {
-	width: 78.2%;
+	width: 70%;
 	height: 100%;
 	margin : auto;
 }

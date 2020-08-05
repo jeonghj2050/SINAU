@@ -7,7 +7,7 @@
 	<select id="getList" parameterType="String"
 		resultType="com.sinau.dto.QuestionInfoDto">
 		<![CDATA[
-		select rownum,q_code, cts_name, q_title, q_date, m_name,q_anfield 
+		select rownum, q_code, cts_name, q_title, q_date, m_name,q_anfield 
 		from questioninfo
 		where q_m_email = #{email}
 		order by rownum desc
@@ -41,4 +41,21 @@
 		resultType="com.sinau.dto.FilesDto">
 		SELECT * FROM files WHERE f_pcode=#{q_code}
 	</select>
+	<select id="getBfList" parameterType="String"
+		resultType="com.sinau.dto.FilesDto">
+		SELECT * FROM files WHERE f_pcode=#{q_code}
+	</select>
+	<update id="boardUpdate" 
+		parameterType="com.sinau.dto.QuestionDto">
+		update question set
+			q_title=#{q_title}, 
+			q_content=#{q_content}, 
+			q_cts_code=#{q_cts_code},
+			q_date = sysdate
+ 		where q_code=#{q_code}
+	</update>
+		<update id="fileUpdate" parameterType="HashMap">
+		UPDATE files SET f_oriName=#{oriFileName}, f_sysName=#{sysFileName}
+		WHERE f_pcode=#{q_code}
+	</update>
 </mapper>

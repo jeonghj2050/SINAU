@@ -44,7 +44,9 @@
 			<exclude-mapping path="/youtube"/>
 			<exclude-mapping path="/contents"/>
 			<exclude-mapping path="/memberInsert"/>
+			<exclude-mapping path="/boardUpdate"/>
 			<exclude-mapping path="/store"/>
+			<exclude-mapping path="/updateFrm"/>
 			<exclude-mapping path="/idCheck"/>
 			<exclude-mapping path="/boardWrite"/>
 			<exclude-mapping path="/servicecenter_question"/>

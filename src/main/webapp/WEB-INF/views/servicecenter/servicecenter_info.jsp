@@ -13,7 +13,42 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	$('#upbtn').hide();
+	$('#delbtn').hide();
+	$('#fdelbtn').hide();
 	
+	var memail = '${mb.m_email}';
+	var qemail = '${question.q_m_email}';
+
+	if(memail == qemail){
+		$('#upbtn').show();
+		$('#delbtn').show();
+		$('#fdelbtn').show();
+	}
+	
+	var chk = '${check}';
+	
+	if(chk == '1'){
+		alert("자신의 글이 아니면 수정할 수 없습니다.");
+		location.reload(true);
+	}
+	if(chk == '2'){
+		alert("수정되었습니다.");
+		location.reload(true);
+	}
+	if(chk == '3'){
+		alert("수정을 실패하였습니다.");
+		location.reload(true);
+	}
+	if(chk == '4'){
+		alert("삭제를 실패하였습니다.");
+		location.reload(true);
+	}
+	
+	var name = "${mb.m_name}";
+	$('#mname').html(name + '님');
+	$('.suc').css('display','block');
+	$('.bef').css('display','none');
 });
 </script>
 </head>
@@ -30,7 +65,7 @@ $(document).ready(function(){
 		<div class="question-content">
 			<div class="question-form">
 				<h2 class="login-header">문의글 상세</h2>
-				<table>
+				<table class="table123">
 					<tr>
 						<td align="center" class="q_titmenu">제목 : </td>
 						<td class="q_tit">${question.q_title}</td>
@@ -42,11 +77,11 @@ $(document).ready(function(){
 					</tr>
 					<tr>
 						<td class="questioncon">상세내용</td>
-						<td colspan="5">${question.q_content}</td>
+						<td class="q_con"colspan="5">${question.q_content}</td>
 					</tr>
 					<tr>
 						<th>첨부파일</th>
-						<td colspan="5" id="farea"><c:if test="${empty bfList}">
+						<td colspan="5" id="farea" class="q_file"><c:if test="${empty bfList}">
 							첨부된 파일이 없습니다.
 						</c:if> <c:if test="${!empty bfList}">
 								<c:forEach var="file" items="${bfList}">
@@ -57,21 +92,29 @@ $(document).ready(function(){
 							</c:if></td>
 					</tr>
 					<tr>
-					<td colspan="6">
+					<td colspan="6" class="q_img">
+					
 						<c:forEach var="f" items="${bfList}">
-								<img src="resources/upload/${f.f_sysname}" width="200px" height="200">
+								<img src="resources/upload/${f.f_sysname}" width="200" height="200">
 						</c:forEach>
 					</td>
 					</tr>
 					<tr class="sub12">
 						<td align="center" class="q_andate">날짜</td>
-						<td colspan="5">
+						<td colspan="5" class="q_date">
 						<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${question.q_andate}"/></td>
 					</tr>
 					<tr>
 						<td align="center"  class="q_anfield">답변 내용</td>
-						<td colspan="5">${question.q_anfield}</td>
+						<td colspan="5" class="q_field">${question.q_anfield}</td>
 					</tr>
+					<tr>
+					<td colspan="6" align="right">
+						<button class="btn-write" id="upbtn" onclick="location.href='./updateFrm?q_code=${question.q_code}'">수정</button>
+						<button class="btn-write" id="delbtn" onclick="goDelete(${question.q_code},'${mb.m_email}','${question.q_m_email}')">삭제</button>
+						<button class="btn-sub" onclick="location.href='./servicecenter_question'">취소</button>
+					</td>
+				</tr>
 				</table>
 			</div>
 		</div>

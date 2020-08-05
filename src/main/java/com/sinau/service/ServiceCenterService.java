@@ -176,6 +176,129 @@ public class ServiceCenterService {
 		return mv;
 	}
 
+	
+	public ModelAndView updateFrm(String q_code, RedirectAttributes rttr) { 
+		mv = new ModelAndView(); String view = null;
+
+		QuestionInfoDto question = scDao.getContents(q_code); 
+		MemberDto member = (MemberDto)session. getAttribute("mb"); String email = member.getM_email();
+
+		if(question.getQ_m_email().equals(email)) { 
+			mv.addObject("question", question); 
+			List<FilesDto> bfList = scDao.getBfList(q_code);
+				mv.addObject("bfList", bfList); view = "servicecenter/servicecenter_update";
+				} else { 
+				view = "redirect:contents?q_code=" + q_code;
+				rttr.addFlashAttribute("check", 1); }
+				mv.setViewName(view);
+				return mv; 
+				}
+	
+	
+	@Transactional
+	public String boardUpdate(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
+
+		String qcode = multi.getParameter("q_code");
+		String qtitle = multi.getParameter("q_title");
+		String qctscode = multi.getParameter("q_cts_code");
+		String qcontent = multi.getParameter("q_content");
+		int fcheck = Integer.parseInt(multi.getParameter("fileCheck"));
+
+
+		qcontent = qcontent.trim();
+		//int check = Integer.parseInt(
+		//		multi.getParameter("fileCheck"));
+
+		String memail = multi.getParameter("m_email");
+
+		QuestionDto question = new QuestionDto();
+		question.setQ_code(qcode);
+		question.setQ_title(qtitle);
+		question.setQ_cts_code(qctscode);
+		question.setQ_m_email(memail);	
+		question.setQ_content(qcontent);
+		
+		String view = null;
+		
+		try {
+			scDao.boardUpdate(question);
+		
+			
+			if(fcheck == 1) {
+				String fname = scDao.getFileName(qcode);
+				sysFileDel(fname);
+				
+				fileChange(multi, qcode);
+			}
+
+			rttr.addFlashAttribute("check", 2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			rttr.addFlashAttribute("check", 3);
+		}
+
+		view = "redirect:contents?q_code=" 
+				+ qcode;
+
+		return view;
+	}
+
+	private void fileChange(MultipartHttpServletRequest multi, String q_code) 
+		throws IllegalStateException, IOException {
+			//저장공간의 물리적 경로 구하기
+			String path = multi.getSession()
+					.getServletContext()
+					.getRealPath("/");
+
+			path += "resources/upload/";
+
+			File dir = new File(path);
+			if(dir.isDirectory() == false) {
+				//위에 설정한 경로의 폴더가 없다면
+				dir.mkdir();//upload 폴더 생성.
+			}
+				
+			//실제 파일명과 저장 파일명을 함께 관리
+			Map<String, String> fmap = 
+					new HashMap<String, String>();
+			//map이 문자만 저장하도록 만들었기 때문에
+			//게시글 번호를 문자열로 변환하여 저장.
+			fmap.put("q_code", String.valueOf(q_code));
+
+			boolean fResult = false;
+
+			List<MultipartFile> fList = 
+					multi.getFiles("files");
+
+			for(int i = 0; i < fList.size(); i++) {
+				//파일 메모리에 저장
+				MultipartFile mf = fList.get(i);
+				String oriName = mf.getOriginalFilename();
+				fmap.put("oriFileName", oriName);
+				String sysName = System.currentTimeMillis()
+						+ "."
+						+ oriName.substring
+						(oriName.lastIndexOf(".")+1);
+				fmap.put("sysFileName", sysName);
+
+				mf.transferTo(new File(path+sysName));
+
+				scDao.fileUpdate(fmap);
+			}
+		}
+
+	private void sysFileDel(String fname) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String fileDelete(String fname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	 
 
 }

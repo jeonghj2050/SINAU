@@ -89,14 +89,14 @@ $("#file").on('change',function(){
 			<a class="t">title : </a> <input type="text" class="write-input" name="q_title" autofocus placeholder="제목" required>
 			<a>meail : </a><input type="text" class="memail" name="q_m_email" value="${mb.m_email}" >
 			</div>
-			<a style="margin-left:740px;">카테고리 :</a>
+			<a style="margin-left:720px;">카테고리 :</a>
 			<select class="category" name="q_cts_code">
-  				<option value="qc">qc</option>
-  				<option value="qpro">qpro</option>
-  				<option value="qpay">qpay</option>
-  				<option value="qre">qre</option>
-  				<option value="qde">qde</option>
-  				<option value="qet" selected="selected">qet</option>
+  				<option value="qc">강좌 문의</option>
+  				<option value="qpro">상품 문의</option>
+  				<option value="qpay">결제 문의</option>
+  				<option value="qre">환불 문의</option>
+  				<option value="qde">배송 문의</option>
+  				<option value="qet" selected="selected">기타 문의</option>
 			</select>
 			
 			<textarea name="q_content" class="contents"

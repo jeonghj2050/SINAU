@@ -11,14 +11,12 @@ public class QuestionDto {
 	private String q_code;
 	private String q_title;
 	private String q_content;
-	@JsonFormat(pattern = "YYYY-MM-dd")
 	private Timestamp q_date;
 	private String q_anfield;
 	private Timestamp q_andate;
 	private String q_cts_code;
 	private String q_m_email;
-		
-	}
+}
 	
 	
 
