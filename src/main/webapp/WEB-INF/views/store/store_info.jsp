@@ -264,8 +264,8 @@
 										</span>
 										<!-- 댓글삭제-->
 										<c:if test="${r.prv_m_email == mb.m_email}">
-											<button type="button" class="delelte_dtn"
-												onclick="reviewDelete('${r.prv_code}',this)">
+											<!-- <button type="button" class="delelte_dtn" onclick="reviewDelete('${r.prv_code}',this)"> -->
+											<button type="button" class="delelte_dtn" prv-code="${r.prv_code}">
 												<span class="delite_ico"> <svg width="1em"
 														height="1em" viewBox="0 0 16 16" class="bi bi-x-circle"
 														fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -536,8 +536,7 @@
 		$('.mywarning').hide();
 	});
 
-	function reviewInsert(p_code) {
-		//form의 데이터를 가져와서 json으로 변환
+	$(document).on('click', '#reply_btn', function(){
 		var replyFrm = $('#rFrm').serializeObject();
 		//추가 데이터 : 게시글번호, 작성자(로그인) id
 
@@ -545,70 +544,91 @@
 		replyFrm.prv_m_email = '${mb.m_email}';
 		console.log(replyFrm);
 
-		$
-				.ajax({
-					url : "reviewInsert",//요청 url(uri)
-					type : "post",//전송 방식(get, post)
-					data : replyFrm,//전송할 데이터
-					dataType : "json",//데이터의 형식
-					success : function(data) {
-						//목록 전체를 하나의 문자열로 만들어서
-						//한꺼번에 id가 rTable인 태그(요소)의
-						//innerHTML에 출력.
-						var rlist = '';
-						var dlist = data.rList;
-						var r_code = '';
-						//var r_code=${r.prv_code};
-						for (var i = 0; i < dlist.length; i++) {
-							rlist += "<ol>"
-									+ "<li data-prv_p_code='" + dlist[i].prv_p_code + "'>"
-									+ "<div class='userInfo'>"
-									+ "<span class='userName'>"
-									+ dlist[i].prv_m_email
-									+ "</span>"
-									+ "<span class='date'>"
-									+ dlist[i].prv_date
-									+ "</span>"
-									+ "<button type='button' class='delelte_dtn'	onclick='reviewDelete("
-									+ dlist[i].prv_code
-									+ ",this)'>"
-									+ "<span class='delite_ico'>"
-									+ "<svg width='1em'height='1em' viewBox='0 0 16 16' class='bi bi-x-circle'fill='currentColor' xmlns='http://www.w3.org/2000/svg'>"
-									+ "<path fill-rule='evenodd'	d='M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z' />"
-									+ "<path fill-rule='evenodd'	d='M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z' />"
-									+ "<path fill-rule='evenodd' d='M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z' />"
-									+ "</svg>"
-									+ "</span>"
-									+ "</button>"
-									+ "<button class='worning_dtn' data-toggle='modal'data-target='#warningmodal>"
-									+ "<span class='warning_ico'>"
-									+ "<svg width='1em'height='1em' viewBox='0 0 16 16'class='bi bi-exclamation-triangle' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>"
-									+ "<path fill-rule='evenodd'd='M7.938 2.016a.146.146 0 0 0-.054.057L1.027 13.74a.176.176 0 0 0-.002.183c.016.03.037.05.054.06.015.01.034.017.066.017h13.713a.12.12 0 0 0 .066-.017.163.163 0 0 0 .055-.06.176.176 0 0 0-.003-.183L8.12 2.073a.146.146 0 0 0-.054-.057A.13.13 0 0 0 8.002 2a.13.13 0 0 0-.064.016zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z' />"
-									+ "<path d='M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z'/>"
-									+ "</svg>"
-									+ "</span>"
-									+ "</button>"
-									+ "</div>"
-									+ "<div class='replyContent'>"
-									+ dlist[i].prv_content
-									+ "</div>"
-									+ "</li>"
-									+ "</ol>";
-
-						}
-
-						$('.replyList').html(rlist);
-						location.reload(true);
-					},
-					error : function(error) {
-						alert("댓글 입력 실패");
-					}
-				});
+		$.ajax({
+			url : "reviewInsert",//요청 url(uri)
+			type : "post",//전송 방식(get, post)
+			data : replyFrm,//전송할 데이터
+			dataType : "json",//데이터의 형식
+			success : function(data) {
+				//목록 전체를 하나의 문자열로 만들어서
+				//한꺼번에 id가 rTable인 태그(요소)의
+				//innerHTML에 출력.
+				var rlist = '<ol>';
+				var dlist = data.review;
+				var r_code = '';
+				//var r_code=${r.prv_code};
+				
+					
+					rlist += "<li data-prv_p_code='" + dlist.prv_p_code + "'>"
+						+ "<div class='userInfo'>"
+						+ "<span class='userName'>"
+						+ dlist.prv_m_email
+						+ "</span>"
+						+ "<span class='date'>"
+						+ dlist.prv_date
+						+ "</span>"
+						+ "<button type='button' class='delelte_dtn' prv-code='"
+						+ dlist.prv_code
+						+ "'>"
+						+ "<span class='delite_ico'>"
+						+ "<svg width='1em'height='1em' viewBox='0 0 16 16' class='bi bi-x-circle'fill='currentColor' xmlns='http://www.w3.org/2000/svg'>"
+						+ "<path fill-rule='evenodd'	d='M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z' />"
+						+ "<path fill-rule='evenodd'	d='M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z' />"
+						+ "<path fill-rule='evenodd' d='M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z' />"
+						+ "</svg>"
+						+ "</span>"
+						+ "</button>"
+						+ "</div>"
+						+ "<div class='replyContent'>"
+						+ dlist.prv_content
+						+ "</div>"
+						+ "</li>";
+						
+				
+				rlist += "</ol>";
+				$('#rlist-ol').append(rlist);
+				//location.reload(true);
+			},
+			error : function(error) {
+				alert("댓글 입력 실패");
+			}
+		});
 
 		$('#repCon').val('');//댓글창 지우기
-	}
-
+	});
+	
 	//댓글 삭제
+	
+	$(document).on('click', '.delelte_dtn', function(){
+		var prv_code = $(this).attr('prv-code');
+		var obj = $(this).parent().parent();
+		console.log(obj);
+		
+		var deleteConfirm = confirm("정말 삭제 하시겠습니까")
+		if (deleteConfirm) {
+			var paramData = {
+				"prv_code" : prv_code
+			};
+			console.log(paramData);
+			
+			$.ajax({
+				url : "reviewDelete",
+				type : "post",
+				data : paramData,
+				dataType : "json",//데이터의 형식
+				success : function(result) {
+					//var oli = $(this).parent().parent();
+					//oli.remove();
+					obj.remove();
+				},
+				error : function() {
+					alert("로그인하셔야합니다.")
+				}
+			});
+		}
+	});
+	
+	/*
 	function reviewDelete(prv_code, obj) {
 		console.log(prv_code);
 		var deleteConfirm = confirm("정말 삭제 하시겠습니까")
@@ -633,43 +653,38 @@
 				}
 			});
 		}
-	}
+	}*/
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
 	
 	$('.warning_dtn').click(function(){
-		var email=$(this).data('email');
-		var content=$(this).data('content');
-		var prv_code=$(this).data('prv');
-		var p_code=$(this).data('pcode');
-		
-		$('.md_content').html(content);
-		$('.md_email').html(email);
-		$('.md_prv').val(prv_code);
-		$('.md_pcode').val(p_code);
 		
 		var email="${mb.m_email}";
-		console.log("dfdflwdsjfl");
-		if(email == ""){
-			console.log("gggggggggggggg");
-			alert("로그인하셔야합니다.");
-			return false;
-			console.log("gggadfadfadsfads")
-		}else{
-			var warningConfirm = confirm("정말 신고하겠습니까?")
-			console.log("gggadfadfadsfads")
-			if (warningConfirm) {
-				var paramData = {
-					"prv_code" : prv_code
-				};
-				$('#r_content').parent().parent().hide();
-
-			}
+		console.log(email);
+		
+		if(email == "" || email == null){
+			alert("로그인하셔야합니다.");			
 		}
 		
-	})
-	
+		var warningConfirm = confirm("정말 신고하겠습니까?");
+		console.log(warningConfirm);
+		
+		if(warningConfirm == 'true'){
+			var email=$(this).data('email');
+			var content=$(this).data('content');
+			var prv_code=$(this).data('prv');
+			var p_code=$(this).data('pcode');
+			
+			$('.md_content').html(content);
+			$('.md_email').html(email);
+			$('.md_prv').val(prv_code);
+			$('.md_pcode').val(p_code);
+			
+			var paramData = {"prv_code" : prv_code};
+		}
+		
+	});
 });
 
 /*function warningInsert(prv_code, obj) {

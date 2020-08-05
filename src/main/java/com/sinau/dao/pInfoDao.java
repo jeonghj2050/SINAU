@@ -18,6 +18,10 @@ public interface pInfoDao {
 	//댓글 삭제
 	public void deleteReply(String prv_code);
 //여기까지
+
+	public PReviewDto getReview(String prv_code);
+	
+	
 	
 	
 

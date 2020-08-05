@@ -67,16 +67,17 @@ public class StoreController {
 		return mv;
 	}
 	
+
 	//댓글 추가 및 댓글 목록 처리 메소드
 		@PostMapping(value = "reviewInsert",
 				produces = "application/json; charset=utf-8")
 		@ResponseBody
-		public Map<String, List<PReviewDto>> 
+		public Map<String, PReviewDto> 
 		replyInsert(PReviewDto review){
 			log.info("reviewInsert - bnum : " 
 					+ review.getPrv_p_code());	
 
-			Map<String, List<PReviewDto>> rMap = 
+			Map<String, PReviewDto> rMap = 
 					sServ.rInsert(review);
 
 			return rMap;
