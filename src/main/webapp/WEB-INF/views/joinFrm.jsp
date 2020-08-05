@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link rel="stylesheet" href="resources/css/style.css?a">
+<link rel="stylesheet" href="resources/css/store.css?a">
 <style type="text/css">
 html {
 	background-color: #f1f1f1 

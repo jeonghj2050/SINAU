@@ -114,4 +114,24 @@
 	<select id="getFeedListAll" parameterType="String" resultType="com.sinau.dto.VideoFeedDto">
 		select * from videofeed where m_email=#{m_email}
 	</select>
+	
+<!-- 은경파트 -->
+	<!-- 온라인 강의 섬네일용 정보를 가져옴  파라미터 없음 -->
+	<select id="getOnList" resultType="com.sinau.dto.OnListDto">
+		 	select DISTINCT * from onList
+	</select>
+	
+	<!-- 온라인 강의 섬네일용 정보를 가져옴  파라미터 있음 -->
+	<select id="getOnListCa" parameterType="String" resultType="com.sinau.dto.OnListDto">
+		 	select DISTINCT * from onList
+		 	where cts_code = #{cate}
+	</select>
+	
+	<!-- 온라인 강의  인기강좌 10개 가져오기 -->
+	<select id="getTopOnList" resultType="com.sinau.dto.OnListDto">
+		<![CDATA[ 
+		 	SELECT DISTINCT * FROM oninfolist1
+			order by l_count desc
+		]]>
+	</select>
 </mapper>
