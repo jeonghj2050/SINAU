@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinau.dao.ServiceCenterDao">
+	<select id="getList" parameterType="String"
+		resultType="com.sinau.dto.QuestionInfoDto">
+		<![CDATA[
+		select rownum, cts_name, q_title, q_date, m_name,q_anfield 
+		from questioninfo
+		where q_m_email = #{email}
+		order by rownum desc
+		]]>
+	</select>
+	<select id="getBoardCount" resultType="Integer">
+		SELECT COUNT(*) FROM Questioninfo
+	</select>
+	<insert id="boardInsert" 
+		parameterType="com.sinau.dto.QuestionDto"
+		useGeneratedKeys="true"
+		keyProperty="q_code">
+		<selectKey keyProperty="q_code"
+			resultType="int" order="BEFORE">
+			SELECT SEQ_Q.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO question
+		VALUES(${q_code},#{q_title},#{q_content},sysdate, null, null,#{q_cts_code},#{q_m_email})
+	</insert>
+	<insert id="fileInsert" parameterType="HashMap">
+		INSERT INTO files
+		VALUES('F_'||SEQ_F.NEXTVAL,
+			#{oriFileName}, #{sysFileName}, #{q_code}, #{q_cts_code})
+	</insert>
+</mapper>

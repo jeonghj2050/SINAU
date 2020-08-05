@@ -57,7 +57,7 @@
 </body>
 <script type="text/javascript">
 	function addCoupon(){
-		var email='kc@naver.com';
+		var email={}
 		var code=$('#cp_input').val();
 		console.log(code);
 		if(code==""){

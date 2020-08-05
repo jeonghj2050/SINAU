@@ -12,4 +12,7 @@ public class MyClassDto {
 	private String mcl_ord_code;//수강회원의 주문 내역 코드(내가 신청한)
 	private String mcl_sc_code;//오프라인 강좌 시간.날짜.장소 코드
 	
+
+	
+	
 }

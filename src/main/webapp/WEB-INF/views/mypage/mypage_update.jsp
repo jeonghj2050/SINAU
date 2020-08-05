@@ -85,7 +85,7 @@ $(function(){
 			<form action="/mypageUpdate" method="post">
 				<div>
 					<div class="profile_image">
-						<img src="resources/images/test/${ myInfo.mimg_oriname }" alt=""
+						<img src="resources/upload/${ myInfo.mimg_sysname }" alt=""
 							class="img-circle" width="200px" height="200px" id="profile_img"><br>
 						<div>
 							<label for="file"></label> <input type="file" name="files"
