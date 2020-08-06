@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>문의글 수정</title>
 <link rel="stylesheet" href="resources/css/servicecenter.css?a">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
 	<header>
@@ -38,23 +39,23 @@
 				</select>
 				<textarea name="q_content" rows="10" class="contents">${question.q_content}</textarea>
 				<div class="filebox">
-					<div class="befor-file" style="margin-bottom: 10px;">
-						<c:if test="${empty bfList}">
-							<label style="width: 100%;">파일변경</label>
-						</c:if>
-						<c:if test="${!empty bfList}">
-							<c:forEach var="file" items="${bfList}">
-								<label style="width: 100%;"><a
-									href="./download?sysFileName=${file.f_sysname}">
-										${file.f_oriname}</a></label>
-							</c:forEach>
-						</c:if>
-					</div>
-					<label for="file">파일변경</label> 
-					<input type="file" name="files" class="files" id="file"> 
-						<input class="upload-name" value="파일선택" readonly> 
-						<input type="hidden" id="filecheck" value="0" name="fileCheck">
+				<div class="befor-file" style="margin-bottom: 10px;">
+					<c:if test="${empty bfList}">
+						<label style="width: 100%;">파일변경</label>
+					</c:if>
+					<c:if test="${!empty bfList}">
+						<c:forEach var="file" items="${bfList}">
+						<label style="width: 100%;">
+						<a href="./download?sysFileName=${file.f_sysname}">
+						${file.f_oriname}</a></label>
+						</c:forEach>
+					</c:if>
 				</div>
+				<label for="file">파일변경</label> 
+				<input type="file" name="files" id="file"> 
+				<input class="upload-name" value="파일선택" readonly>
+				<input type="hidden" id="filecheck"	value="0" name="fileCheck">
+			</div>
 				<div class="btn-area">
 					<input class="btn-write" type="submit" value="저장"> 
 					<input class="btn-write" type="button" value="취소"
@@ -67,5 +68,19 @@
 		<jsp:include page="../footer.jsp"></jsp:include>
 	</footer>
 </body>
-
+<script type="text/javascript">
+$("#file").on('change',function(){
+	var fileName = $("#file").val();
+	$(".upload-name").val(fileName);
+	
+	if(fileName == ""){
+		console.log("empty");
+		$("#filecheck").val(0);
+	}
+	else{
+		console.log("not empty");
+		$("#filecheck").val(1);
+	}
+});
+</script>
 </html>

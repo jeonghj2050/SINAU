@@ -45,6 +45,7 @@
 			<exclude-mapping path="/contents"/>
 			<exclude-mapping path="/memberInsert"/>
 			<exclude-mapping path="/boardUpdate"/>
+			<exclude-mapping path="/fdelete"/>
 			<exclude-mapping path="/store"/>
 			<exclude-mapping path="/updateFrm"/>
 			<exclude-mapping path="/idCheck"/>

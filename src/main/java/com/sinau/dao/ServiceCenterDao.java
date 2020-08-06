@@ -29,6 +29,16 @@ public interface ServiceCenterDao {
 
 	void fileUpdate(Map<String, String> fmap);
 
+	void fileDelete(String q_code);
+
+	void boardDelete(String q_code);
+
+	public void fDelByName(String fname);
+
+	String getOriName(String sysFileName);
+
+
+
 
 
 

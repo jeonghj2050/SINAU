@@ -10,7 +10,7 @@
 		select rownum, q_code, cts_name, q_title, q_date, m_name,q_anfield 
 		from questioninfo
 		where q_m_email = #{email}
-		order by rownum desc
+		order by rownum asc
 		]]>
 	</select>
 	<select id="getBoardCount" resultType="Integer">
@@ -54,8 +54,31 @@
 			q_date = sysdate
  		where q_code=#{q_code}
 	</update>
-		<update id="fileUpdate" parameterType="HashMap">
+	<select id="getFileName" 
+		parameterType="String"
+		resultType="String">
+		SELECT f_sysName FROM files
+		WHERE f_pcode=#{q_code}
+	</select>
+	<update id="fileUpdate" parameterType="HashMap">
 		UPDATE files SET f_oriName=#{oriFileName}, f_sysName=#{sysFileName}
 		WHERE f_pcode=#{q_code}
 	</update>
+	<delete id="boardDelete" parameterType="String">
+		DELETE FROM question WHERE
+		q_code=#{q_code}
+	</delete>
+	<delete id="fileDelete" parameterType="String">
+		DELETE FROM files WHERE
+		f_pcode=#{q_code}
+	</delete>
+		<delete id="fDelByName" parameterType="String">
+		DELETE FROM files WHERE
+		f_sysname=#{fname}
+	</delete>
+	<select id="getOriName" parameterType="String"
+		resultType="String">
+		SELECT f_oriname FROM files
+		WHERE f_sysname=#{sysFileName}
+	</select>
 </mapper>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +67,7 @@ $(document).ready(function(){
 					<div class="t-title"><a href="contents?q_code=${qitem.q_code}">
 						${qitem.q_title}</a></div>
 					<div class="t-name">${qitem.m_name}</div>
-					<div class="t-date">${qitem.q_date}</div>
+					<div class="t-date"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${qitem.q_date}"/></div>
 					<div class="t-anfield">
 					<c:if test="${qitem.q_anfield eq null }">
 						미답변

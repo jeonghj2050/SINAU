@@ -102,8 +102,6 @@ $("#file").on('change',function(){
 			<textarea name="q_content" class="contents"
 				placeholder="내용을 적어주세요..."></textarea>
 			<div class="filebox"> 
-				<img src="resources/images/user.png" alt="기본이미지"
-					class="img-circle" width="50px" height="50px" id="profile_img"><br>
 				<input type="file" name="files" id="file"> 
 				<input type="hidden" id="filecheck"	value="0" name="fileCheck">
 			</div>
