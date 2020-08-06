@@ -23,7 +23,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="resources/css/home.css">
 <link rel="stylesheet" href="resources/css/mypage.css">
 <script>
         $(function(){
