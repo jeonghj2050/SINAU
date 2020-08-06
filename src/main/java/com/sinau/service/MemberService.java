@@ -142,6 +142,8 @@ public class MemberService {
 
 		String filePath = multi.getSession().getServletContext().getRealPath("/") + "resources/upload/";
 
+		log.info("dddddddddddddddddddddd"+filePath);
+		
 		File folder = new File(filePath);
 		if (folder.isDirectory() == false) {
 			// 경로를 설정한 폴더가 없다면

@@ -2,6 +2,8 @@ package com.sinau.controller;
 
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.PayCouponDto;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.sinau.dto.LikesDto;
 import com.sinau.service.ClassService;
 
 import lombok.extern.java.Log;
@@ -37,6 +42,22 @@ public class ClassController {
 		//DB에서 offcode(오프라인 강의 코드)에 해당하는 게시글 정보를 가져와서 model에 추가
 		
 		mv = cServ.getOffInfo(ofc_code);
+	ModelAndView mv;
+	@Autowired
+	ClassService cServ = new ClassService();
+	
+//	@GetMapping("online")
+//	public ModelAndView online() {
+//		
+//		mv = cServ.getCategories();
+//		
+//		return mv;
+//	}
+	
+	@GetMapping("online")
+	public ModelAndView online() {
+		
+		mv = cServ.getOnList();
 		
 		return mv;
 	}
@@ -58,6 +79,10 @@ public class ClassController {
 		log.info("offlineInfo()");
 		mv = cServ.getOffList();
 		
+	@GetMapping("onlineInfo")
+	public ModelAndView onlineInfo(String onc_code) {
+		log.info("1111111111111"+onc_code);
+		mv = cServ.getOnlineInfo(onc_code);
 		
 		return mv;
 	}
@@ -107,3 +132,43 @@ public class ClassController {
 
 
 }
+	@PostMapping(value = "likes", produces = "application/json; charset = utf-8")
+	@ResponseBody
+	public LikesDto likeAjax(String onc_code,String l_cts_code){
+		log.info(onc_code + l_cts_code);
+
+		LikesDto likes = cServ.updateLikes(onc_code,l_cts_code);
+	
+		return likes;
+	}
+	     
+	@PostMapping(value = "dislikes", produces = "application/json; charset = utf-8")
+	@ResponseBody
+	public LikesDto dislikeAjax(String onc_code, String l_cts_code){
+		log.info(onc_code+ l_cts_code);
+
+		LikesDto dislikes = cServ.updatedisLikes(onc_code, l_cts_code);
+	
+		return dislikes;
+	}
+	
+	@GetMapping("classroom")
+	public ModelAndView classroom() {
+		
+		mv = cServ.classroom(null, null);
+		
+		return mv;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
