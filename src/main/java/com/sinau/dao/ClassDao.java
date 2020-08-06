@@ -15,7 +15,6 @@ import com.sinau.dto.OffClassDto;
 import com.sinau.dto.OffCtsDto;
 import com.sinau.dto.OffImgDto;
 import com.sinau.dto.OffInfoDto;
-import com.sinau.dto.ClassroomDto;
 import com.sinau.dto.CreatorOffInfoDto;
 import com.sinau.dto.CreatorOnInfoDto;
 import com.sinau.dto.MyOffInfoDto;
@@ -31,7 +30,6 @@ import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.PayCouponDto;
 import com.sinau.dto.ScheduleDto;
-import com.sinau.dto.OnListDto;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
@@ -140,16 +138,4 @@ public interface ClassDao {
 	
 	//결제창에 회원이 가진 쿠폰 목록 가져온다.
 	List<PayCouponDto> getPayCoupon(String email);
-//은경파트	
-	//온라인 강의 섬네일용 정보를 가져옴
-	//전체보기 목록 가져오기
-	List<OnListDto> getOnList();
-	//카테고리별 목록 가져오기
-	List<OnListDto> getOnListCa(String cate);
-	
-	//인기강좌 탑10 목록 가져오기
-	List<OnListDto> getTopOnList();
-	
-	//내 클래스룸 강좌 정보 가져오기
-	ClassroomDto getCR(HashMap<String, Object> hashMap);
 }

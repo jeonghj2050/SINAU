@@ -28,7 +28,7 @@ $(document).ready(function(){
 	$(".res-sale").html(cptitle + " ");
 	console.log($(".ord_price").val());
 	console.log(cptitle); */
-}); */
+
 $("#res-submit").click(function(){
 	var cptitle = $('input:radio[name=coupon-sel]:checked').val();
 	alert(cptitle);

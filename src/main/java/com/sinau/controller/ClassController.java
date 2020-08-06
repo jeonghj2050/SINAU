@@ -42,22 +42,6 @@ public class ClassController {
 		//DB에서 offcode(오프라인 강의 코드)에 해당하는 게시글 정보를 가져와서 model에 추가
 		
 		mv = cServ.getOffInfo(ofc_code);
-	ModelAndView mv;
-	@Autowired
-	ClassService cServ = new ClassService();
-	
-//	@GetMapping("online")
-//	public ModelAndView online() {
-//		
-//		mv = cServ.getCategories();
-//		
-//		return mv;
-//	}
-	
-	@GetMapping("online")
-	public ModelAndView online() {
-		
-		mv = cServ.getOnList();
 		
 		return mv;
 	}
@@ -79,10 +63,6 @@ public class ClassController {
 		log.info("offlineInfo()");
 		mv = cServ.getOffList();
 		
-	@GetMapping("onlineInfo")
-	public ModelAndView onlineInfo(String onc_code) {
-		log.info("1111111111111"+onc_code);
-		mv = cServ.getOnlineInfo(onc_code);
 		
 		return mv;
 	}
@@ -132,43 +112,3 @@ public class ClassController {
 
 
 }
-	@PostMapping(value = "likes", produces = "application/json; charset = utf-8")
-	@ResponseBody
-	public LikesDto likeAjax(String onc_code,String l_cts_code){
-		log.info(onc_code + l_cts_code);
-
-		LikesDto likes = cServ.updateLikes(onc_code,l_cts_code);
-	
-		return likes;
-	}
-	     
-	@PostMapping(value = "dislikes", produces = "application/json; charset = utf-8")
-	@ResponseBody
-	public LikesDto dislikeAjax(String onc_code, String l_cts_code){
-		log.info(onc_code+ l_cts_code);
-
-		LikesDto dislikes = cServ.updatedisLikes(onc_code, l_cts_code);
-	
-		return dislikes;
-	}
-	
-	@GetMapping("classroom")
-	public ModelAndView classroom() {
-		
-		mv = cServ.classroom(null, null);
-		
-		return mv;
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
