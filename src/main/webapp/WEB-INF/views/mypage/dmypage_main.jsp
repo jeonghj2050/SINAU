@@ -57,11 +57,22 @@
 							<div class="myproduct_sale_amt">
 								판매 수량 : ${prod.p_salamount }
 								<div>
-									<c:if test="${prod.p_amount eq 0 }">
-										<button class="my_default_btn">삭제 요청</button>
-									</c:if>
-									<button class="my_default_btn"data-target="#updateProd"
-											data-toggle="modal" data-pcode="${prod.p_code}">재고 수정</button>
+										<c:choose>
+											<c:when test="${prod.p_state eq 0 }">
+												<button class="my_default_btn" onclick="location.href='./dMyDelProd?p_code=${prod.p_code}'">삭제 요청</button>
+											</c:when>
+											
+											<c:when test="${prod.p_state eq 1 }">
+												<div style="color:red; width:150px; text-align: center; font-weight: bold;">삭제 요청중</div>
+											</c:when>
+										</c:choose>
+										
+										<c:if test="${prod.p_amount eq 0 }">
+											<button class="my_default_btn"data-target="#updateProd"
+													data-toggle="modal" data-pcode="${prod.p_code}">재고 수정
+											</button>
+										</c:if>
+									
 								</div>
 							</div>
 						</div>

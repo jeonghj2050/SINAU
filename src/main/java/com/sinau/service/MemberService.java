@@ -35,6 +35,7 @@ import com.sinau.dto.CreatorOnInfoDto;
 import com.sinau.dto.DealerProductInfoDto;
 import com.sinau.dto.FilesDto;
 import com.sinau.dto.MemberDto;
+import com.sinau.dto.MemberImg;
 import com.sinau.dto.MyCouponDto;
 import com.sinau.dto.MyMemberInfoDto;
 import com.sinau.dto.MyOffInfoDto;
@@ -174,6 +175,64 @@ public class MemberService {
 			mDao.fileInsert(fmap);
 		}
 	}
+	public ModelAndView loginProc(MemberDto member, 
+			RedirectAttributes rttr) {
+		mv = new ModelAndView();//화면으로 데이터 전송.
+
+		String view = null;//이동할 jsp 이름 저장 변수.
+		String msg = null;//화면에 출력할 메시지
+
+		BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
+		//DB에서 해당 id의 password 가져오기.
+		String get_pw = mDao.getPwd(member.getM_email());
+
+		//로그인 처리
+		if(get_pw != null) {
+			//아이디 있음.
+			if(pwdEncode.matches(member.getM_pwd(), get_pw)) {
+				//패스워드 맞음. 로그인 성공.
+				//세션에 로그인 성공한 회원 정보 저장
+				//로그인 한 회원의 정보를 가져오기.
+				member = mDao.getMemInfo(member.getM_email());
+				MemberImg memimg=mDao.getMemImg(member.getM_email());
+				session.setAttribute("memImg", memimg);
+				session.setAttribute("mb", member);
+				loginMember=member;
+				System.out.println(session);
+				
+				if(member.getM_group().equals("ad")){
+					//회원 구분이 admin일 경우 관리자 페이지로 전환
+					view = "redirect:adMApproval";
+				}
+				else {
+					//리다이렉트로 화면을 전환.
+					view = "redirect:/";
+				}
+				
+			}
+			else {
+				//패스워드 틀림.
+				view = "redirect:loginFrm";
+				msg = "패스워드 틀림.";
+			}
+		} else {
+			// 아이디 없음.
+			view = "redirect:loginFrm";
+			msg = "아이디 없음.";
+		}
+
+		mv.setViewName(view);
+		rttr.addFlashAttribute("msg", msg);
+		return mv;
+	}
+
+	public String logout() {
+		// 세션 정보 지우기
+		session.invalidate();
+
+		return "home";
+	}
+
 
 	// 로그인 회원의 그룹을 반환한다.
 	public String getLoginMemberGroup() {
@@ -235,17 +294,75 @@ public class MemberService {
 		return mv;
 	}
 
-	public ModelAndView updateMemberPwd(String newPwd) {
+	public ModelAndView updateMemberInfo(MultipartHttpServletRequest multi) {
 		mv=new ModelAndView();
-		//변경할 비밀번호를 암호화한다.
-		BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
+		String path=multi.getSession().getServletContext().getRealPath("/")+"resources/upload/";
 
-		String encodePwd=pwdEncode.encode(newPwd);
+		String mimg_code=multi.getParameter("mimg_code");
 
-		int result=mDao.updateMemberPwd(loginMember.getM_email(),encodePwd);
+		//multi에서 동영상 파일 가져오기(여러개의 파일이 넘어 올 수도 있다.)
+		List<MultipartFile> fList=multi.getFiles("files");
 
-		if(result>0) {
+		for(int i=0;i<fList.size();i++) {
+			MemberImg memImg=new MemberImg();
+			memImg.setMimg_code(mimg_code);
+			
+			MultipartFile mf=fList.get(i);
+			//실제 파일명 가져오기
+			String oriName=mf.getOriginalFilename();
+			memImg.setMimg_oriname(oriName);
+			//저장 파일명 만들기
+			String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
+			memImg.setMimg_sysname(sysName);
+
+			log.info("fileup() - oriName : "+oriName);
+			log.info("fileup() - sysName : "+sysName);
+
+			try {
+				mf.transferTo(new File(path+sysName));
+				
+				//실제 업로드 폴더에서 해당 파일을 삭제한다.
+				String saveFileName=multi.getParameter("mimig_sysname");
+				File deleteFile=new File(path+saveFileName);
+
+				if(deleteFile.exists()) {
+					deleteFile.delete();
+					log.info("삭제 완료!");
+				}else {
+					log.info("해당 파일이 존재하지 않습니다.");
+				}
+				
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//회원의 이미지를 변경한다.
+			cmDao.updateMemImg(memImg);
+			MemberImg memimg=mDao.getMemImg(loginMember.getM_email());
+			session.setAttribute("memImg", memimg);
+			
 			mv.setViewName("redirect:/mypage");
+		}
+	
+		if(multi.getParameter("newPwd")==null||multi.getParameter("newPwd").equals("")) {
+			
+		}else {
+			log.info("1111111111111");
+			//변경할 비밀번호를 암호화한다.
+			BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
+
+			String encodePwd=pwdEncode.encode(multi.getParameter("newPwd"));
+
+			int result=mDao.updateMemberPwd(loginMember.getM_email(),encodePwd);
+
+			if(result>0) {
+				mv.setViewName("redirect:/mypage");
+			}else {
+				mv.setViewName("redirect:/mypageUpdate");
+			}
 		}
 
 		return mv;
@@ -270,64 +387,7 @@ public class MemberService {
 
 		return mv;
 	}
-	public ModelAndView loginProc(MemberDto member, 
-			RedirectAttributes rttr) {
-		mv = new ModelAndView();//화면으로 데이터 전송.
-
-		String view = null;//이동할 jsp 이름 저장 변수.
-		String msg = null;//화면에 출력할 메시지
-
-		BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
-		//DB에서 해당 id의 password 가져오기.
-		String get_pw = mDao.getPwd(member.getM_email());
-
-		//로그인 처리
-		if(get_pw != null) {
-			//아이디 있음.
-			if(pwdEncode.matches(member.getM_pwd(), get_pw)) {
-				//패스워드 맞음. 로그인 성공.
-				//세션에 로그인 성공한 회원 정보 저장
-				//로그인 한 회원의 정보를 가져오기.
-				member = mDao.getMemInfo(member.getM_email());
-				String sysName=mDao.getMemImgSysname(member.getM_email());
-				session.setAttribute("memImg", sysName);
-				session.setAttribute("mb", member);
-				loginMember=member;
-				System.out.println(session);
-				
-				if(member.getM_group().equals("ad")){
-					//회원 구분이 admin일 경우 관리자 페이지로 전환
-					view = "redirect:adMApproval";
-				}
-				else {
-					//리다이렉트로 화면을 전환.
-					view = "redirect:/";
-				}
-				
-			}
-			else {
-				//패스워드 틀림.
-				view = "redirect:loginFrm";
-				msg = "패스워드 틀림.";
-			}
-		} else {
-			// 아이디 없음.
-			view = "redirect:loginFrm";
-			msg = "아이디 없음.";
-		}
-
-		mv.setViewName(view);
-		rttr.addFlashAttribute("msg", msg);
-		return mv;
-	}
-
-	public String logout() {
-		// 세션 정보 지우기
-		session.invalidate();
-
-		return "home";
-	}
-
+	
 	// 상품,온라인, 오프라인 좋아요 내역을 검색한다.
 	public ModelAndView getAllLikes(String email) {
 		mv = new ModelAndView();
@@ -760,7 +820,8 @@ public class MemberService {
 		mv.setViewName("mypage/cmypage_qna_list");
 		return mv;
 	}
-	
+
+///////////////////////////////////////////////////////////////판매자
 	public ModelAndView getProductList() {
 		mv=new ModelAndView();
 		
@@ -806,6 +867,31 @@ public class MemberService {
 		}
 		
 		mv.setViewName("redirect:./dMypage");
+		return mv;
+	}
+	
+	public ModelAndView updateProduct(String p_code, String up_amount) {
+		mv=new ModelAndView();
+		ProductDto prod=new ProductDto();
+		prod.setP_code(p_code);
+		int p_amount=Integer.parseInt(up_amount);
+		prod.setP_amount(p_amount);
+		
+		sDao.updateProd(prod);
+		
+		mv.setViewName("redirect:./dMypage");
+		
+		return mv;
+	}
+
+	public ModelAndView deleteProduct(String p_code) {
+		mv=new ModelAndView();
+			
+		//p_code에 해당하는 상품의 state를 1(삭제 요청)로 변경
+		sDao.delRequestProd(p_code);
+		
+		mv.setViewName("redirect:./dMypage");
+		
 		return mv;
 	}
 
@@ -1044,19 +1130,4 @@ public class MemberService {
 		return mv;
 
 	}
-
-	public ModelAndView updateProduct(String p_code, String up_amount) {
-		mv=new ModelAndView();
-		ProductDto prod=new ProductDto();
-		prod.setP_code(p_code);
-		int p_amount=Integer.parseInt(up_amount);
-		prod.setP_amount(p_amount);
-		
-		sDao.updateProd(prod);
-		
-		mv.setViewName("redirect:./dMypage");
-		
-		return mv;
-	}
-
 }

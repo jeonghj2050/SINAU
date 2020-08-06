@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.sinau.dto.FilesDto;
+import com.sinau.dto.MemberImg;
 import com.sinau.dto.MyCouponDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
@@ -64,5 +65,5 @@ public interface CommonDao {
 
 	void insertSchedule(ScheduleDto schedule);
 
-
+	void updateMemImg(MemberImg memImg);
 }

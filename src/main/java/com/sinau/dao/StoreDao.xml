@@ -26,7 +26,7 @@
 		</selectKey>
 		<![CDATA[ 
 			insert into p values(#{p_code},#{p_title},
-					${p_amount},${p_price},default,0,#{p_dealer},0,#{p_m_email},#{p_cts_code})
+					${p_amount},${p_price},default,0,#{p_dealer},0,#{p_m_email},#{p_cts_code},default)
 		]]>
 	</insert>
 
@@ -36,5 +36,9 @@
 	
 		<update id="updateProd" parameterType="com.sinau.dto.ProductDto">
 		update p set p_amount=${p_amount}  where p_code=#{p_code}
+	</update>
+	
+	<update id="delRequestProd" parameterType="String">
+		update p set p_state=1 where p_code=#{p_code}
 	</update>
 </mapper>

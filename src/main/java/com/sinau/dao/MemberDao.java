@@ -41,17 +41,9 @@ public interface MemberDao {
 	//크리에이터의 강좌를 수강하는 학생의 정보를 가져온다.
 	public List<ClassStuInfoDto> getClassStuList(String m_email);
 
-	String getMemImgSysname(String m_email);
-
+	MemberImg getMemImg(String m_email);
 
 	int newPwd(@Param("email")String email,@Param("encPwd")String encPwd);
 
-	
-	
-	
-	/*
-	 * public void memberImgInsert(MultipartHttpServletRequest multi);
-	 */
-	
 
 }

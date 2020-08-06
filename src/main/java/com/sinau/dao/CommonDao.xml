@@ -70,4 +70,8 @@
 			insert into sc values('sc_'||seq_sc.nextval,#{sc_time},#{sc_place},#{sc_scl_code})
 		]]>
 	</insert>
+	
+	<update id="updateMemImg" parameterType="com.sinau.dto.MemberImg">
+		update mimg set mimg_sysname=#{mimg_sysname}, mimg_oriname=#{mimg_oriname} where mimg_code=#{mimg_code}
+	</update>
 </mapper>

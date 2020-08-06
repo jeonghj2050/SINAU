@@ -21,6 +21,20 @@
 			$(this).addClass('item-selected');
 		})
 	});
+	 $(document).ready(function () {
+         $("#onc_form").show();
+         $("#ofc_form").hide();
+         // 라디오버튼 클릭시 이벤트 발생
+         $("input:radio[name=class_sort]").click(function () {
+             if ($("input[name=class_sort]:checked").val() == "ofc") {
+                 $("#ofc_form").show();
+                 $("#onc_form").hide();
+             } else if ($("input[name=class_sort]:checked").val() == "onc") {
+                 $("#onc_form").show();
+                 $("#ofc_form").hide();
+             }
+         });
+     });
 </script>
 <script type="text/javascript">
 	var sel_file;
@@ -184,7 +198,79 @@
 				</div>
 			</div>
 			<button type="submit" class="my_default_btn" style="float: right;" formaction="./cMyClassVideo">동영상 등록</button>
-			
+			<div class="class_form" id="ofc_form">
+					<div class="class_info_form">
+						<div class="class_profile_image">
+							<img src="resources/images/default.jpg" alt="" class="img-circle"
+								width="200px" height="200px" id="profile_img"><br>
+							<div>
+								<label for="thumbnail">썸네일</label> <input type="file"
+									class="image_file_thumb" name="ofthumbnail" 
+									>
+							</div>
+							<div>
+								<label for="spec">상세 이미지</label> <input type="file"
+									class="image_file" name="ofspec"multiple="multiple"
+									>
+							</div>
+							<div>
+								<div class="spec_images_wrap"></div>
+							</div>
+							<div>
+								<label for="content">내용 이미지</label> <input type="file"
+									class="image_file" name="ofcontent" >
+							</div>
+						</div>
+						<div>
+							<span class="class_info_title">강의 제목</span><br> <input
+								type="text" name="ofc_title" > <br>
+							<p></p>
+							<span class="class_info_title">강의 소개</span>
+							<textarea name="ofc_content" id="" rows="6" ></textarea>
+							<p></p>
+							<span class="class_info_title">카테고리</span> <select
+								name="ofc_cts_code" >
+								<option value="ca">미술</option>
+								<option value="cb">공예</option>
+								<option value="cc">디지털 드로잉</option>
+								<option value="cd">운동</option>
+								<option value="ce">요리</option>
+								<option value="cf">프로그래밍</option>
+							</select><br>
+							<p></p>
+							<span class="class_info_title">난이도</span> <input type="radio"
+								name="ofc_level" value="초급">초급 <input type="radio"
+								name="ofc_level" value="중급">중급 <input type="radio"
+								name="ofc_level" value="고급">고급 <br>
+							<p></p>
+							<span class="class_info_title">가격</span> <input type="number"
+								name="ofc_sale" placeholder="가격" ><br>
+							<p></p>
+							<span class="class_info_title">수강 인원</span> <input type="number"
+								name="ofc_stnum" placeholder="수강 인원" ><br>
+							<p></p>
+						</div>
+						<button class="my_default_btn"
+							style="float: right; margin-top: 20px;" id="addClassSchedule" type="button">일정 추가</button>
+						<div class="class_schedule_list">
+							<table id="sche_list" class="table">
+								<tr>
+									<th>강의일정</th>
+									<th>장소</th>
+
+								</tr>
+								<tr>
+									<td><input type="datetime-local" name="sc_time" ></td>
+									<td><input type="text" name="sc_place" >
+									<button type="button" class="glyphicon glyphicon-remove"
+											onclick="deleteClassForm(this)"></button></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<input type="submit" class="my_default_btn" style="float: right;"
+					name="강의 등록"></input>
 			</form>
 		</article>
 	</section>
@@ -199,6 +285,15 @@
                                 '<td> <input type="file" name="upvideo_files" > </td> </tr>');
 
     });
+    $("#addClassSchedule").click(
+			function() {
+				$('#sche_list > tbody:last')
+						.append(
+								'<tr> <td><input type="datetime-local" name="sc_time" >  </td>'
+										+ '<td>  <input type="text" name="sc_place" > '
+										+ '<button type="button" class="glyphicon glyphicon-remove" onclick="deleteClassForm(this)"></button></td> </tr>');
+
+			});
     
     /* 특정 파일을 db에서 삭제하고 해당 컬럼을 제거 */
     function deleteFile(obj){

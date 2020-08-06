@@ -29,9 +29,11 @@
              if ($("input[name=class_sort]:checked").val() == "ofc") {
                  $("#ofc_form").show();
                  $("#onc_form").hide();
+                 $(".profile_img").attr("src", "resources/images/default.jpg");
              } else if ($("input[name=class_sort]:checked").val() == "onc") {
                  $("#onc_form").show();
                  $("#ofc_form").hide();
+                 $(".profile_img").attr("src", "resources/images/default.jpg");
              }
          });
      });
@@ -87,7 +89,7 @@
 
 			var reader = new FileReader();
 			reader.onload = function(e) {
-				$("#profile_img").attr("src", e.target.result);
+				$(".profile_img").attr("src", e.target.result);
 			}
 			reader.readAsDataURL(f);
 		});
@@ -138,8 +140,8 @@
 				<div class="class_form" id="onc_form">
 					<div class="class_info_form">
 						<div class="class_profile_image">
-							<img src="resources/images/default.jpg" alt="" class="img-circle"
-								width="200px" height="200px" id="profile_img"><br>
+							<img src="resources/images/default.jpg" alt="" class="img-circle profile_img"
+								width="200px" height="200px" ><br>
 							<div>
 								<label for="thumbnail">썸네일</label> <input type="file"
 									class="image_file_thumb" name="thumbnail" id="thumbnail"
@@ -216,8 +218,8 @@
 				<div class="class_form" id="ofc_form">
 					<div class="class_info_form">
 						<div class="class_profile_image">
-							<img src="resources/images/default.jpg" alt="" class="img-circle"
-								width="200px" height="200px" id="profile_img"><br>
+							<img src="resources/images/default.jpg" alt="" class="img-circle profile_img"
+								width="200px" height="200px"><br>
 							<div>
 								<label for="thumbnail">썸네일</label> <input type="file"
 									class="image_file_thumb" name="ofthumbnail" 

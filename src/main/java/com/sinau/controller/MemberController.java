@@ -89,7 +89,6 @@ public class MemberController {
 
 	@GetMapping("mypageUpdate")
 	public ModelAndView mypageUpdate() {
-
 		//수정 페이지에 보여질 기존 회원 정보를 가져온다.
 		mv=mServ.getMemberInfo();
 
@@ -97,12 +96,9 @@ public class MemberController {
 	}
 	
 	@PostMapping("mypageUpdate")
-	public ModelAndView mypageUpdate(String newPwd) {
-		//임의의 로그인 회원 아이디
-		String email="kc@naver.com";
-
+	public ModelAndView mypageUpdate(MultipartHttpServletRequest multi) {
 		//넘어온 새 비밀번호로 회원의 비밀번호를 수정한다.
-		mv=mServ.updateMemberPwd(newPwd);
+		mv=mServ.updateMemberInfo(multi);
 
 		return mv;
 	}
@@ -289,6 +285,15 @@ public class MemberController {
 		log.info("dMyUpProd()");
 		
 		mv=mServ.updateProduct(p_code,up_amount);
+		
+		return mv;
+	}
+	
+	@GetMapping("dMyDelProd")
+	public ModelAndView dMyDelProd(String p_code) {
+		log.info("dMyDelProd()");
+
+		mv=mServ.deleteProduct(p_code);
 		
 		return mv;
 	}

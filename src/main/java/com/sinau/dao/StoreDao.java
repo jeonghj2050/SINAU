@@ -21,4 +21,6 @@ public interface StoreDao {
 	
 	//상품의 재고를 수정하는 메소드
 	void updateProd(ProductDto prod);
+	//상품 삭제 요청하는 메소드
+	void delRequestProd(String p_code);
 }

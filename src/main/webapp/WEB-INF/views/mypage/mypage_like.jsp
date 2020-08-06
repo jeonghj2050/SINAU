@@ -69,7 +69,7 @@ $(document).ready(function(){
 				<div class="swiper-wrapper">
 					<c:forEach var="onLike" items="${onLikeList }">
 						<div class="swiper-slide">
-						<img src="resources/images/test/${onLike.f_oriname }" width="250px"
+						<img src="resources/upload/${onLike.f_sysname }" width="250px"
 							height="300px">
 						<div class="swiper-text">
 							${onLike.cts_name }
@@ -95,7 +95,7 @@ $(document).ready(function(){
 				<div class="swiper-wrapper">
 					<c:forEach var="offLike" items="${offLikeList }">
 						<div class="swiper-slide">
-						<img src="resources/images/test/${offLike.f_oriname }" width="250px"
+						<img src="resources/images/test/${offLike.f_sysname }" width="250px"
 							height="300px">
 						<div class="swiper-text">
 							${offLike.cts_name }
@@ -121,7 +121,7 @@ $(document).ready(function(){
 				<div class="swiper-wrapper">
 					<c:forEach var="prodLike" items="${prodLikeList }">
 						<div class="swiper-slide">
-						<img src="resources/images/test/${prodLike.f_oriname }" width="250px"
+						<img src="resources/images/test/${prodLike.f_sysname }" width="250px"
 							height="300px">
 						<div class="swiper-text">
 							${prodLike.cts_name }
