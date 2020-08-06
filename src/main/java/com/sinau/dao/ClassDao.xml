@@ -172,6 +172,11 @@
 		INSERT INTO mcl
 		VALUES('mcl_'||SEQ_MCL.NEXTVAL, 1, #{mcl_classcode}, #{mcl_m_email}, #{mcl_ord_code}, #{mcl_sc_code})
 	</insert>
+	<select id="getPayCoupon" parameterType="String"
+		resultType="com.sinau.dto.PayCouponDto">
+		SELECT * FROM CPL_CP
+		WHERE CPL_M_EMAIL = #{m_email}
+	</select>
 	<!-- 내 클래스의 상태를 변경한다.  -->
 	<update id="mclUpdateState" parameterType="com.sinau.dto.OrderDto">
 		update mcl set mcl_state=#{ord_state} where mcl_ord_code=#{ord_code}

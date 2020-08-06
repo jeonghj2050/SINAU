@@ -53,7 +53,7 @@
 											alt="">
 									</div>
 									<article class="on-info1">
-										<li id="sub-cate">${offCateList.ofc_cts_name}</li>
+										<li id="sub-cate">${offCateList.cts_name}</li>
 										<li>ㆍ</li>
 										<li id="creator-name">${offCateList.ofc_teacher}</li>
 										<div id="online-name">${offCateList.ofc_title}</div>
