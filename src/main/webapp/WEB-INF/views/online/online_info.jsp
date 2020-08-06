@@ -6,7 +6,8 @@
 <html lang="ko">
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="resources/css/online_info.css?ver=1.5">
+	<link rel="stylesheet" href="resources/css/home.css?a">
+	<link rel="stylesheet" href="resources/css/online_info.css?ver=1.7">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>크리에이터 상세화면</title>
@@ -175,8 +176,7 @@
 
 <body>
     <header>
-        <img src="logo.png" alt="" width="150px" height="40px" style="margin :20px;">
-        <div></div>
+        <jsp:include page="../header.jsp"></jsp:include>
     </header>
     <section>
 		<div class="imgContainer">
@@ -184,7 +184,7 @@
 			<c:forEach var="spec" items="${onSpecList}" begin="0" end="2">
 				<c:set var="imgNum" value="${imgNum + 1}" />
 				<div class="img${imgNum}">
-					<img id="img${imgNum}"src="resources/images/online/spec/${spec.f_oriname}">
+					<img id="img${imgNum}"src="resources/upload/${spec.f_sysname}">
 				</div>
 			</c:forEach>
 		</div>
@@ -194,7 +194,7 @@
                     <h2>클래스 소개</h2>
                 </div>
                 <div class="speci1 content"><img id="speci1 content" 
-                	src="resources/images/online/content/${onInfo.f_content}"></div>
+                	src="resources/upload/${onInfo.f_content}"></div>
                 <div class="drWrap">
                 <div class="sinfo_ddate">
                     <div class="sp_title">배송 일정</div>
@@ -214,7 +214,7 @@
                     <div class="sp_title">환불 신청</div>
                     <div class="refund">
                         <div class="refund_info">
-                            <div class="refund_img"><img src="resources/images/refund.png" width="30px" height="30px"></div>
+                            <div class="refund_img"><img src="resources/upload/refund.png" width="30px" height="30px"></div>
                             <div class="refund_info2">상품 개봉 및 훼손 없이, 배송 완료 후 <span>7일 이내</span>인 경우에만 환불이 가능합니다.</div>
                         </div>
                     </div>
@@ -370,7 +370,9 @@
         </div>
     </section>
     <div class="footer_wrap" style="right: 0;">
-        <footer class="footer"></footer>
+        <footer class="footer">
+        	<jsp:include page="../footer.jsp"></jsp:include>
+        </footer>
     </div>
 </body>
 </html>

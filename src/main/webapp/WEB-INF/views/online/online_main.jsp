@@ -7,7 +7,8 @@
 
 <head>
 	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="resources/css/online.css?ver=1.3">
+	<link rel="stylesheet" href="resources/css/home.css?a">
+	<link rel="stylesheet" href="resources/css/online.css?ver=1.6">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>크리에이터 메인화면</title>
@@ -38,13 +39,11 @@
 <body>
 	<!-- 헤더 상민이꺼 jsp 불러오기 -->
 	<header>
-		<img src="resources/images/online/logo.png" alt="" width="150px"
-			height="40px" style="margin: 20px;">
-		<div></div>
+		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 	<section>
 		<article>
-			<img id="main_img" src="resources/images/online/online_main.PNG"
+			<img id="main_img" src="resources/upload/online_main.PNG"
 				width="100%" height="350px">
 		</article>
 		<div class="wrap">
@@ -70,7 +69,7 @@
 								<div class="sumnail_box">
 									<div class="class_img_div">
 										<img class="class_img"
-											src="resources/upload/${on.f_sysname }">
+											src="resources/upload/${on.f_sysname}">
 									</div>
 									<div>
 										<div class="categories">${on.cts_name}</div>
@@ -344,7 +343,7 @@
 								<div class="sumnail_box">
 									<div class="class_img_div">
 										<img class="class_img"
-											src="resources/upload/${on.f_sysname }">
+											src="resources/upload/${on.f_sysname}">
 									</div>
 									<div>
 										<div class="categories">${on.cts_name}</div>
@@ -385,13 +384,11 @@
 						<h1>프로그래밍</h1>
 						<h3 class="allClass">전체 클래스</h3>
 						<c:forEach var="on" items="${onListCf}">
-							<a class="atag_sum" onclick="javascript:void(0);" onclick="callFunction();
-
-								출처: https://thingsthis.tistory.com/130 [여행과 일상]" href="./onlineInfo?onc_code=${on.onc_code}">
+							<a class="atag_sum" href="./onlineInfo?onc_code=${on.onc_code}">
 								<div class="sumnail_box">
 									<div class="class_img_div">
 										<img class="class_img"
-											src="resources/upload/${on.f_sysname }">
+											src="resources/upload/${on.f_sysname}">
 									</div>
 									<div>
 										<div class="categories">${on.cts_name}</div>
@@ -428,7 +425,9 @@
 		</div>
 	</section>
 	<div class="footer_wrap" style="right: 0;">
-		<footer class="footer"></footer>
+		<footer class="footer">
+			<jsp:include page="../footer.jsp"></jsp:include>
+		</footer>
 	</div>
 </body>
 

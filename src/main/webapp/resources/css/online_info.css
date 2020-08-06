@@ -6,7 +6,7 @@
             font-family: 'Nanum Gothic', sans-serif;
 
         }
-
+/*
         header {
             background-color: rgb(238, 236, 236);
             margin: 0 auto;
@@ -21,7 +21,7 @@
             height: 70px;
             background-color: rgb(226, 226, 226);
         }
-
+*/
         section {
             width: 100%;
             margin: 0 auto;
@@ -31,7 +31,6 @@
         }
 
         footer {
-            background-color: black;
             margin: 0 auto;
             width: 1300px;
             height: 100px;

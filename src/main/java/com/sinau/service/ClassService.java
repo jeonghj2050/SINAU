@@ -187,6 +187,7 @@ public class ClassService {
 	    	likes.setL_pcode(onc_code);
 	    	
 			cInfoDao.like_input(likes);
+			cInfoDao.like_up(onc_code);
 		}
 	    else {
 	    	log.info("updateLikes()22222222222"+onc_code);
