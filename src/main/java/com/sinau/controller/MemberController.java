@@ -17,13 +17,16 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dto.MyCouponDto;
+import com.sinau.dto.OffClassDto;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.RefundDto;
+import com.sinau.dto.ScheduleDto;
 import com.sinau.dto.VideoFileDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.service.MemberService;
 
 import lombok.extern.java.Log;
+import oracle.jdbc.proxy.annotation.Post;
 
 
 @Controller
@@ -181,11 +184,11 @@ public class MemberController {
 	}
 	
 	@GetMapping("cMyClassUp")
-	public ModelAndView cMyClassUp(String onc_code) {
+	public ModelAndView cMyClassUp(String up_p_code) {
 		log.info("cMyClassUp() 실행");
 		
 		//보여질 내용들을 가져온다.
-		mv=mServ.getCreatorOnlineInfo(onc_code);
+		mv=mServ.getCreatorClassInfo(up_p_code);
 		
 		return mv;
 	}
@@ -199,6 +202,15 @@ public class MemberController {
 		
 		return mv;
 	}
+	//강의 정보를 수정하기위한 메소드
+	@PostMapping("cMyClassOffInfo")
+	public ModelAndView cMyClassInfo(OffClassDto offline) {
+		log.info("cMyClassOnInfo(post) : "+offline.toString());
+		Object obj=offline;
+		mv=mServ.updateClassInfo(obj);
+		
+		return mv;
+	}
 	
 	//동영상 추가를 위한 메소드
 	@PostMapping("cMyClassVideo")
@@ -206,6 +218,15 @@ public class MemberController {
 		log.info("cMyClassVideo(post) : "+multi.getParameter("uv_title"));
 		
 		mv=mServ.updateClassVideo(multi);
+		
+		return mv;
+	}
+	//오프라인 일정 추가를 위한 메소드
+	@PostMapping("cMyClassSchedule")
+	public ModelAndView cMyClassSchedule(ScheduleDto schedule) {
+		log.info("cMyClassSchedule() : "+schedule.toString());
+		
+		mv=mServ.updateClassSchedule(schedule);
 		
 		return mv;
 	}
@@ -228,6 +249,17 @@ public class MemberController {
 		VideoFileDto video =mServ.uploadClassVideo(updateFiles,upFile);
 
 		return video;
+	}
+	
+	//일정 정보수정을 위한 비동기 처리 메소드
+	@PostMapping(value = "updateSchedule")
+	@ResponseBody
+	public ScheduleDto updateSchedule(@ModelAttribute ScheduleDto schedule){
+		
+		log.info("updateSchedule()!!"+schedule.toString());
+		ScheduleDto reSchedule =mServ.updateSchedule(schedule);
+
+		return reSchedule;
 	}
 	
 	@GetMapping("cMyClassDel")

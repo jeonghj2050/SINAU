@@ -41,22 +41,28 @@ public interface ClassDao {
 	List<OnlineLikeDto> getOnLikeList(String email);
 	List<OffLikeDto> getOffLikeList(String email);
 	
+	//환불 시 나의 클래스 상태를 변경
 	void mclUpdateState(OrderDto order);
 	
+	//온라인 클래스 등록
 	void insertOnClassInfo(OnlineClassDto online);
+	//등록된 클래스의 비디오 목록을 등록
 	void insertVideoList(VideoDto vList);
 	void updateOnClassInfo(OnlineClassDto online);
 	
+	//오프라인 클래스 등록
 	void insertOffClassInfo(OffClassDto offine);
-
+	void updateOffClassInfo(OffClassDto offline);
 	
 	//크리에이터가 등록한 강좌의 정보를 가져온다.
 	List<CreatorOnInfoDto> getCreatorOnList(String m_email);
 	List<CreatorOffInfoDto> getCreatorOffList(String m_email);
 
 	
-	//onc_code에 해당하는 강좌 정보를 가져온다.
-	CreatorOnInfoDto getClassInfo(String onc_code);
+	//각 코드에 해당하는 강좌 정보를 가져온다.
+	CreatorOnInfoDto getCreatorOnlineInfo(String onc_code);
+	CreatorOffInfoDto getCreatorOffInfo(String ofc_code);
+	
 	//v_code에 저장된 동영상 파일을 모두 가져온다.
 	List<VideoFileDto> getVideoList(String v_code);
 	
@@ -78,4 +84,5 @@ public interface ClassDao {
 	
 	//내 클래스룸 강좌 정보 가져오기
 	ClassroomDto getCR(HashMap<String, Object> hashMap);
+
 }

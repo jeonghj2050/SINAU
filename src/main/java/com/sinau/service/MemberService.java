@@ -535,18 +535,32 @@ public class MemberService {
 		return mv;
 	}
 
-	public ModelAndView getCreatorOnlineInfo(String onc_code) {
+	public ModelAndView getCreatorClassInfo(String up_p_code) {
 		mv=new ModelAndView();
 
-		//onc_code에 해당하는 강의 정보를 가져온다.
-		CreatorOnInfoDto classInfo=cDao.getClassInfo(onc_code);
-		//onc_code에 해당하는 강의 목록 코드를 가져온다.
-		String v_code=cmDao.getVCode(onc_code);
-		//v_code에 있는 영상을 List로 가져온다.
-		List<VideoFileDto> videoList=cDao.getVideoList(v_code);
+		if(up_p_code.contains("onc_")) {
+			//onc_code에 해당하는 강의 정보를 가져온다.
+			CreatorOnInfoDto onInfo=cDao.getCreatorOnlineInfo(up_p_code);
+			//onc_code에 해당하는 강의 목록 코드를 가져온다.
+			String v_code=cmDao.getVCode(up_p_code);
+			//v_code에 있는 영상을 List로 가져온다.
+			List<VideoFileDto> videoList=cDao.getVideoList(v_code);
 
-		mv.addObject("classInfo",classInfo);
-		mv.addObject("videoList",videoList);
+			mv.addObject("classInfo",onInfo);
+			mv.addObject("videoList",videoList);
+			mv.addObject("sort","onc");
+		}else {
+			//up_p_code에 해당하는 오프라인 강의 정보를 가져온다.
+			CreatorOffInfoDto offInfo=cDao.getCreatorOffInfo(up_p_code);
+			//ofc_code에 해당하는 일정 목록 코드를 가져온다.
+			String scl_code=cmDao.getSclCode(up_p_code);
+			//scl_code에 있는 일정들을 List로 가져온다.
+			List<ScheduleDto> scList=cmDao.getScheduleList(scl_code);
+			
+			mv.addObject("classInfo",offInfo);
+			mv.addObject("scList",scList);
+			mv.addObject("sort","ofc");
+		}
 
 		mv.setViewName("mypage/cmypage_classup");
 		return mv;
@@ -666,10 +680,18 @@ public class MemberService {
 
 			log.info(online.toString());
 
-			cDao.updateOnClassInfo(online);      
+			cDao.updateOnClassInfo(online);   
+			
 
+		}if(obj instanceof OffClassDto) {
+			OffClassDto offline=(OffClassDto)obj;
+			
+			log.info(offline.toString());
+			
+			cDao.updateOffClassInfo(offline);
+			mv.addObject("ofp_code",offline.getOfc_code());
 		}
-
+		
 		mv.setViewName("redirect:./cMypage");
 		return mv;
 	}
@@ -765,7 +787,19 @@ public class MemberService {
 
 		return videoFile;
 	}
+	public ModelAndView updateClassSchedule(ScheduleDto schedule) {
+		// TODO Auto-generated method stub
+		return mv;
+	}
 
+
+	public ScheduleDto updateSchedule(ScheduleDto schedule) {
+		//넘어온 schedule 정보로 일정을 수정한다.
+		cmDao.updateSchedule(schedule.getSc_code());
+		
+		return schedule;
+	}
+	
 	//onc_code에 해당하는 강의를 삭제하기위한 메소드
 	public ModelAndView deleteClass(String onc_code) {
 		String path=session.getServletContext().getRealPath("/")+"resources/upload/";
@@ -1132,4 +1166,5 @@ public class MemberService {
 		return mv;
 
 	}
+
 }

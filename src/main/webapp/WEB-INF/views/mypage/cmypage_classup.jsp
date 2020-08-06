@@ -21,20 +21,7 @@
 			$(this).addClass('item-selected');
 		})
 	});
-	 $(document).ready(function () {
-         $("#onc_form").show();
-         $("#ofc_form").hide();
-         // 라디오버튼 클릭시 이벤트 발생
-         $("input:radio[name=class_sort]").click(function () {
-             if ($("input[name=class_sort]:checked").val() == "ofc") {
-                 $("#ofc_form").show();
-                 $("#onc_form").hide();
-             } else if ($("input[name=class_sort]:checked").val() == "onc") {
-                 $("#onc_form").show();
-                 $("#ofc_form").hide();
-             }
-         });
-     });
+
 </script>
 <script type="text/javascript">
 	var sel_file;
@@ -43,9 +30,6 @@
 	});
 	$(document).ready(function() {
 		$(".image_file_thumb").on("change", fileSelectThumb);
-	});
-	$(document).ready(function(){
-		$('#uspec').on("change",handleMultiThumb);
 	});
 	function fileSelect(e) {
 		if ($(".image_file").val() == "") {
@@ -92,27 +76,6 @@
 			reader.readAsDataURL(f);
 		});
 	}
-	
-	function handleMultiThumb(e) {
-		$('.spec_images_wrap').html('');
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-
-		filesArr.forEach(function(f) {
-			if (!f.type.match("image.*")) {
-				alert("이미지 파일만 등록해주세요!!");
-				return;
-			}
-			sel_file = f;
-
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				var img_html="<img src='" +e.target.result + "'/>";
-				$('.spec_images_wrap').append(img_html);
-			}
-			reader.readAsDataURL(f);
-		});
-	}
 </script>
 
 </head>
@@ -124,153 +87,188 @@
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
 		<article>
 			<div class="page-title">강의 수정</div>
-			<div class="class_sort">
-				<div style="background-color:rgb(204,204,204);">온라인</div>
-			</div>
-			
-			<form method="post" enctype="multipart/form-data">
-				<input type="hidden" value=${classInfo.onc_code } name="onc_code"/>
-				<input type="hidden" value="onc" name="class_sort"/>
-				<div class="class_form" id="onc_form">
-				<div class="class_info_form">
-					<div class="class_profile_image">
-						<img src="resources/upload/${classInfo.f_sysname }" alt="" class="img-circle"
-							width="200px" height="200px" id="profile_img"><br>
-					</div>
-					<div>
-						<span class="class_info_title">강의 제목</span><br> 
-						<input type="text" name="onc_title" value="${classInfo.onc_title }" > <br>
-						<p></p>
-						<span class="class_info_title">강의 소개</span>
-						<textarea name="onc_content" id="" rows="6" >${classInfo.onc_content }</textarea>
-						<p></p>
-						<span class="class_info_title">카테고리</span> 
-						<select name="onc_cts_code" >
-							<option value="ca"<c:if test="${classInfo.onc_cts_code eq 'ca'}">selected</c:if>>미술</option>
-							<option value="cb"<c:if test="${classInfo.onc_cts_code eq 'cb'}">selected</c:if>>공예</option>
-							<option value="cc"<c:if test="${classInfo.onc_cts_code eq 'cc'}">selected</c:if>>디지털 드로잉</option>
-							<option value="cd"<c:if test="${classInfo.onc_cts_code eq 'cd'}">selected</c:if>>운동</option>
-							<option value="ce"<c:if test="${classInfo.onc_cts_code eq 'ce'}">selected</c:if>>요리</option>
-							<option value="cf"<c:if test="${classInfo.onc_cts_code eq 'cf'}">selected</c:if>>프로그래밍</option>
-						</select><br>
-						<p></p>
-						<span class="class_info_title">난이도</span> 
-						<input type="radio" name="onc_level" value="초급" <c:if test="${classInfo.onc_level eq '초급'}">checked</c:if>>초급
-						<input type="radio" name="onc_level" value="중급" <c:if test="${classInfo.onc_level eq '중급'}">checked</c:if>>중금 
-						<input type="radio" name="onc_level" value="고급" <c:if test="${classInfo.onc_level eq '고급'}">checked</c:if>>고급 <br>
-						<p></p>
-						<span class="class_info_title">가격</span> <input type="number"
-							name="onc_sale" placeholder="가격" value=${classInfo.onc_sale } ><br>
-						<p></p>
-						<span class="class_info_title">수강 인원</span> <input type="number"
-							name="onc_stnum" placeholder="수강 인원" value="${classInfo.onc_stnum }" ><br>
-						<p></p>
-						<span class="class_info_title">시작일</span> 
-						<input type="date" name="onc_sdate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${classInfo.onc_sdate}"/>" > 
-						<span class="class_info_title">종료일</span>
-						<input type="date" name="onc_edate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${classInfo.onc_edate}"/>" >
-						<button type="submit" class="my_default_btn" style="float:right;" formaction="./cMyClassOnInfo">강의 수정</button>
-					</div>
-					<button class="my_default_btn" style="float: right;margin-top:20px;"
-							id="addClassVideoFile" type="button" >동영상 폼 추가</button>
-					<div class="class_video_list">
-						<table id="vf_list">
-							<tr>
-								<th>동영상제목</th>
-								<th>동영상내용</th>
-								<th>동영상</th>
-							</tr>			
-							<c:forEach var="video" items="${videoList }">
-								<tr class=${video.vf_code }>
-									<input type="hidden" name="vf_v_code" value ="${videoList[0].vf_v_code }"></input>
-									<td><input type="text" name="v_title" class="v_title" value="${video.v_title }" ></td>
-									<td><input type="text" name="v_content" class="v_content"  value="${video.v_content }" ></td>
-									<td><span id="vf_oriname">${video.vf_oriname }</span><button type="button" onclick="deleteFile(this)">삭제</button>
-									<button type="button" onclick="updateFile(this)">수정</button>
-									<input type="file" name="video_files" >
-									</td>
-								</tr>
-							</c:forEach>
-							
-						</table>
-						
-					</div>														
-				</div>
-			</div>
-			<button type="submit" class="my_default_btn" style="float: right;" formaction="./cMyClassVideo">동영상 등록</button>
-			<div class="class_form" id="ofc_form">
-					<div class="class_info_form">
-						<div class="class_profile_image">
-							<img src="resources/images/default.jpg" alt="" class="img-circle"
-								width="200px" height="200px" id="profile_img"><br>
-							<div>
-								<label for="thumbnail">썸네일</label> <input type="file"
-									class="image_file_thumb" name="ofthumbnail" 
-									>
-							</div>
-							<div>
-								<label for="spec">상세 이미지</label> <input type="file"
-									class="image_file" name="ofspec"multiple="multiple"
-									>
-							</div>
-							<div>
-								<div class="spec_images_wrap"></div>
-							</div>
-							<div>
-								<label for="content">내용 이미지</label> <input type="file"
-									class="image_file" name="ofcontent" >
-							</div>
-						</div>
-						<div>
-							<span class="class_info_title">강의 제목</span><br> <input
-								type="text" name="ofc_title" > <br>
-							<p></p>
-							<span class="class_info_title">강의 소개</span>
-							<textarea name="ofc_content" id="" rows="6" ></textarea>
-							<p></p>
-							<span class="class_info_title">카테고리</span> <select
-								name="ofc_cts_code" >
-								<option value="ca">미술</option>
-								<option value="cb">공예</option>
-								<option value="cc">디지털 드로잉</option>
-								<option value="cd">운동</option>
-								<option value="ce">요리</option>
-								<option value="cf">프로그래밍</option>
-							</select><br>
-							<p></p>
-							<span class="class_info_title">난이도</span> <input type="radio"
-								name="ofc_level" value="초급">초급 <input type="radio"
-								name="ofc_level" value="중급">중급 <input type="radio"
-								name="ofc_level" value="고급">고급 <br>
-							<p></p>
-							<span class="class_info_title">가격</span> <input type="number"
-								name="ofc_sale" placeholder="가격" ><br>
-							<p></p>
-							<span class="class_info_title">수강 인원</span> <input type="number"
-								name="ofc_stnum" placeholder="수강 인원" ><br>
-							<p></p>
-						</div>
-						<button class="my_default_btn"
-							style="float: right; margin-top: 20px;" id="addClassSchedule" type="button">일정 추가</button>
-						<div class="class_schedule_list">
-							<table id="sche_list" class="table">
-								<tr>
-									<th>강의일정</th>
-									<th>장소</th>
 
-								</tr>
-								<tr>
-									<td><input type="datetime-local" name="sc_time" ></td>
-									<td><input type="text" name="sc_place" >
-									<button type="button" class="glyphicon glyphicon-remove"
-											onclick="deleteClassForm(this)"></button></td>
-								</tr>
-							</table>
+			<form method="post" enctype="multipart/form-data">
+				<c:if test="${sort eq 'onc' }">
+					<div class="class_sort">
+						<div style="background-color: rgb(204, 204, 204);">온라인</div>
+					</div>
+					<input type="hidden" value=${classInfo.onc_code } name="onc_code" />
+					<input type="hidden" value="onc" name="class_sort" />
+					<div class="class_form" id="onc_form">
+						<div class="class_info_form">
+							<div class="class_profile_image">
+								<img src="resources/upload/${classInfo.f_sysname }" alt=""
+									class="img-circle" width="200px" height="200px"
+									id="profile_img"><br>
+							</div>
+							<div>
+								<span class="class_info_title">강의 제목</span><br> <input
+									type="text" name="onc_title" value="${classInfo.onc_title }">
+								<br>
+								<p></p>
+								<span class="class_info_title">강의 소개</span>
+								<textarea name="onc_content" id="" rows="6">${classInfo.onc_content }</textarea>
+								<p></p>
+								<span class="class_info_title">카테고리</span> <select
+									name="onc_cts_code">
+									<option value="ca"
+										<c:if test="${classInfo.onc_cts_code eq 'ca'}">selected</c:if>>미술</option>
+									<option value="cb"
+										<c:if test="${classInfo.onc_cts_code eq 'cb'}">selected</c:if>>공예</option>
+									<option value="cc"
+										<c:if test="${classInfo.onc_cts_code eq 'cc'}">selected</c:if>>디지털
+										드로잉</option>
+									<option value="cd"
+										<c:if test="${classInfo.onc_cts_code eq 'cd'}">selected</c:if>>운동</option>
+									<option value="ce"
+										<c:if test="${classInfo.onc_cts_code eq 'ce'}">selected</c:if>>요리</option>
+									<option value="cf"
+										<c:if test="${classInfo.onc_cts_code eq 'cf'}">selected</c:if>>프로그래밍</option>
+								</select><br>
+								<p></p>
+								<span class="class_info_title">난이도</span> <input type="radio"
+									name="onc_level" value="초급"
+									<c:if test="${classInfo.onc_level eq '초급'}">checked</c:if>>초급
+								<input type="radio" name="onc_level" value="중급"
+									<c:if test="${classInfo.onc_level eq '중급'}">checked</c:if>>중금
+								<input type="radio" name="onc_level" value="고급"
+									<c:if test="${classInfo.onc_level eq '고급'}">checked</c:if>>고급
+								<br>
+								<p></p>
+								<span class="class_info_title">가격</span> <input type="number"
+									name="onc_sale" placeholder="가격" value=${classInfo.onc_sale }><br>
+								<p></p>
+								<span class="class_info_title">수강 인원</span> <input type="number"
+									name="onc_stnum" placeholder="수강 인원"
+									value="${classInfo.onc_stnum }"><br>
+								<p></p>
+								<span class="class_info_title">시작일</span> <input type="date"
+									name="onc_sdate"
+									value="<fmt:formatDate pattern="yyyy-MM-dd" value="${classInfo.onc_sdate}"/>">
+								<span class="class_info_title">종료일</span> <input type="date"
+									name="onc_edate"
+									value="<fmt:formatDate pattern="yyyy-MM-dd" value="${classInfo.onc_edate}"/>">
+								<button type="submit" class="my_default_btn"
+									style="float: right;" formaction="./cMyClassOnInfo">강의
+									수정</button>
+							</div>
+							<button class="my_default_btn"
+								style="float: right; margin-top: 20px;" id="addClassVideoFile"
+								type="button">동영상 폼 추가</button>
+							<div class="class_video_list">
+								<table id="vf_list">
+									<tr>
+										<th>동영상제목</th>
+										<th>동영상내용</th>
+										<th>동영상</th>
+									</tr>
+									<c:forEach var="video" items="${videoList }">
+										<tr class=${video.vf_code }>
+											<input type="hidden" name="vf_v_code"
+												value="${videoList[0].vf_v_code }">
+											<td><input type="text" name="v_title" class="v_title"
+												value="${video.v_title }"></td>
+											<td><input type="text" name="v_content"
+												class="v_content" value="${video.v_content }"></td>
+											<td><span id="vf_oriname">${video.vf_oriname }</span>
+												<button type="button" onclick="deleteFile(this)">삭제</button>
+												<button type="button" onclick="updateFile(this)">수정</button>
+												<input type="file" name="video_files"></td>
+										</tr>
+									</c:forEach>
+								</table>
+							</div>
 						</div>
 					</div>
-				</div>
-				<input type="submit" class="my_default_btn" style="float: right;"
-					name="강의 등록"></input>
+					<button type="submit" class="my_default_btn" style="float: right;"
+						formaction="./cMyClassVideo">동영상 등록</button>
+				</c:if>
+				<c:if test="${sort eq 'ofc' }">
+					<div class="class_sort">
+						<div style="background-color: rgb(204, 204, 204);">오프라인</div>
+					</div>
+					<div class="class_form" id="ofc_form">
+						<input type="hidden" value=${classInfo.ofc_code } name="ofc_code" />
+						<input type="hidden" value="ofc" name="class_sort" />
+						<div class="class_form" id="ofc_form">
+							<div class="class_info_form">
+								<div class="class_profile_image">
+									<img src="resources/upload/${classInfo.f_sysname }" alt=""
+										class="img-circle" width="200px" height="200px"
+										id="profile_img"><br>
+								</div>
+								<div>
+									<span class="class_info_title">강의 제목</span><br> <input
+										type="text" name="ofc_title" value="${classInfo.ofc_title }">
+									<br>
+									<p></p>
+									<span class="class_info_title">강의 소개</span>
+									<textarea name="ofc_content" id="" rows="6">${classInfo.ofc_content }</textarea>
+									<p></p>
+									<span class="class_info_title">카테고리</span> <select
+										name="ofc_cts_code">
+										<option value="ca"
+											<c:if test="${classInfo.ofc_cts_code eq 'ca'}">selected</c:if>>미술</option>
+										<option value="cb"
+											<c:if test="${classInfo.ofc_cts_code eq 'cb'}">selected</c:if>>공예</option>
+										<option value="cc"
+											<c:if test="${classInfo.ofc_cts_code eq 'cc'}">selected</c:if>>디지털
+											드로잉</option>
+										<option value="cd"
+											<c:if test="${classInfo.ofc_cts_code eq 'cd'}">selected</c:if>>운동</option>
+										<option value="ce"
+											<c:if test="${classInfo.ofc_cts_code eq 'ce'}">selected</c:if>>요리</option>
+										<option value="cf"
+											<c:if test="${classInfo.ofc_cts_code eq 'cf'}">selected</c:if>>프로그래밍</option>
+									</select><br>
+									<p></p>
+									<span class="class_info_title">난이도</span> <input type="radio"
+										name="ofc_level" value="초급"
+										<c:if test="${classInfo.ofc_level eq '초급'}">checked</c:if>>초급
+									<input type="radio" name="ofc_level" value="중급"
+										<c:if test="${classInfo.ofc_level eq '중급'}">checked</c:if>>중금
+									<input type="radio" name="ofc_level" value="고급"
+										<c:if test="${classInfo.ofc_level eq '고급'}">checked</c:if>>고급
+									<br>
+									<p></p>
+									<span class="class_info_title">가격</span> <input type="number"
+										name="ofc_sale" placeholder="가격" value=${classInfo.ofc_sale }><br>
+									<p></p>
+									<span class="class_info_title">수강 인원</span> <input
+										type="number" name="ofc_stnum" placeholder="수강 인원"
+										value="${classInfo.ofc_stnum }"><br>
+									<p></p>
+									<button type="submit" class="my_default_btn"
+										style="float: right;" formaction="./cMyClassOffInfo">강의
+										수정</button>
+								</div>
+								<button class="my_default_btn"
+									style="float: right; margin-top: 20px;" id="addClassSchedule"
+									type="button">일정 추가</button>
+								<div class="class_schedule_list">
+									<table id="sche_list" class="table">
+										<tr>
+											<th>강의일정</th>
+											<th>장소</th>
+										</tr>
+										<c:forEach var="mysche" items="${scList }">
+											<tr class=${mysche.sc_code }>
+												<td><input type="datetime-local" name="sc_time"
+													value="${mysche.sc_time }"></td>
+												<td><input type="text" name="sc_place"
+													value="${mysche.sc_place }">
+													<button type="button" onclick="deleteClassForm(this)"></button></td>
+													<button type="button" onclick="updateShcedule(this)"></button></td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
+							</div>
+						</div>
+						<input type="submit" class="my_default_btn" style="float: right;"
+							formaction="./cMyClassSchedule" value="일정등록">
+				</c:if>
 			</form>
 		</article>
 	</section>
@@ -282,15 +280,16 @@
     $("#addClassVideoFile").click(function(){
         $('#vf_list > tbody:last').append('<tr> <td><input type="text" name="uv_title" >  </td>'+
                                 '<td>  <input type="text" name="uv_content" > </td>'+
-                                '<td> <input type="file" name="upvideo_files" > </td> </tr>');
+                                '<td> <input type="file" name="upvideo_files" > </td> </tr>'+
+                                '<button type="button" class="glyphicon glyphicon-remove" onclick="deleteClassForm(this)"></button></td> </tr>');
 
     });
     $("#addClassSchedule").click(
 			function() {
 				$('#sche_list > tbody:last')
 						.append(
-								'<tr> <td><input type="datetime-local" name="sc_time" >  </td>'
-										+ '<td>  <input type="text" name="sc_place" > '
+								'<tr> <td><input type="datetime-local" name="usc_time" >  </td>'
+										+ '<td>  <input type="text" name="usc_place" > '
 										+ '<button type="button" class="glyphicon glyphicon-remove" onclick="deleteClassForm(this)"></button></td> </tr>');
 
 			});
@@ -371,6 +370,38 @@
 				console.log(error);
 			}
     	});
+    	
+    	/* 특정 파일을 db에서 수정*/
+        function updateSchedule(obj){
+        	/* 수정 할 파일 코드 */
+        	var sc_code=$(obj).parent().parent().attr('class');
+        	var sc_time=$('.'+sc_code+' .sc_time').val();
+        	var sc_place=$('.'+sc_code+' .sc_place').val();
+        	
+        	var formData=new FormData();
+
+        	formData.append("sc_code",sc_code);
+        	formData.append("sc_time",sc_time);
+        	formData.append("sc_place",sc_place);
+        	
+        	$.ajax({
+        		contentType:false,
+        		processData:false,
+        		url:"updateSchedule",
+        		type:"post",
+        		data:formData,
+        		success:function(data){
+        			var schedule=data;
+
+    				
+        			$('.'+sc_code+' .sc_time').val(schedule.sc_time);
+        			$('.'+vf_code+' .sc_place').val(schedule.sc_place);
+
+        		},
+        		error : function(error){
+    				console.log(error);
+    			}
+        	});
     }
 </script>
 </html>

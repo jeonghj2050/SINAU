@@ -30,10 +30,12 @@
                  $("#ofc_form").show();
                  $("#onc_form").hide();
                  $(".profile_img").attr("src", "resources/images/default.jpg");
+                 $('.spec_images_wrap').html("");
              } else if ($("input[name=class_sort]:checked").val() == "onc") {
                  $("#onc_form").show();
                  $("#ofc_form").hide();
                  $(".profile_img").attr("src", "resources/images/default.jpg");
+                 $('.spec_images_wrap')          
              }
          });
      });
@@ -47,7 +49,7 @@
 		$(".image_file_thumb").on("change", fileSelectThumb);
 	});
 	$(document).ready(function(){
-		$('#spec').on("change",handleMultiThumb);
+		$('.spec').on("change",handleMultiThumb);
 	});
 	function fileSelect(e) {
 		if ($(".image_file").val() == "") {
@@ -144,12 +146,12 @@
 								width="200px" height="200px" ><br>
 							<div>
 								<label for="thumbnail">썸네일</label> <input type="file"
-									class="image_file_thumb" name="thumbnail" id="thumbnail"
+									class="image_file_thumb thumbnail" name="thumbnail"
 									>
 							</div>
 							<div>
 								<label for="spec">상세 이미지</label> <input type="file"
-									class="image_file" name="spec" id="spec" multiple="multiple"
+									class="image_file spec" name="spec"  multiple="multiple"
 									>
 							</div>
 							<div>
@@ -157,7 +159,7 @@
 							</div>
 							<div>
 								<label for="content">내용 이미지</label> <input type="file"
-									class="image_file" name="content" id="content" >
+									class="image_file content" name="content"  >
 							</div>
 						</div>
 						<div>
@@ -222,12 +224,12 @@
 								width="200px" height="200px"><br>
 							<div>
 								<label for="thumbnail">썸네일</label> <input type="file"
-									class="image_file_thumb" name="ofthumbnail" 
+									class="image_file_thumb thumbnail" name="ofthumbnail" 
 									>
 							</div>
 							<div>
 								<label for="spec">상세 이미지</label> <input type="file"
-									class="image_file" name="ofspec"multiple="multiple"
+									class="image_file spec" name="ofspec"multiple="multiple"
 									>
 							</div>
 							<div>
@@ -235,7 +237,7 @@
 							</div>
 							<div>
 								<label for="content">내용 이미지</label> <input type="file"
-									class="image_file" name="ofcontent" >
+									class="image_file content" name="ofcontent" >
 							</div>
 						</div>
 						<div>

@@ -66,4 +66,11 @@ public interface CommonDao {
 	void insertSchedule(ScheduleDto schedule);
 
 	void updateMemImg(MemberImg memImg);
+
+	//up_p_code에 해당하는 일정 목록의 코드를 가져온다.
+	String getSclCode(String up_p_code);
+
+	List<ScheduleDto> getScheduleList(String scl_code);
+
+	void updateSchedule(String sc_code);
 }

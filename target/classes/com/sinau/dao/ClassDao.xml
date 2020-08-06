@@ -70,9 +70,9 @@
 		<selectKey keyProperty="ofc_code" resultType="String" order="BEFORE">
 			select 'ofc_'||seq_ofc.nextval from dual
 		</selectKey>
-		insert into ofc values(#{ofc_code},#{ofc_title},#{ofc_content},#{ofc_teacher},#{ofc_sale},default,#{ofc_level},0,
-				#{ofc_stnum},1,#{ofc_m_email},#{ofc_cts_code})
-	</insert>
+		insert into ofc values(#{ofc_code},#{ofc_title},#{ofc_content},#{ofc_teacher},#{ofc_sale},
+						default,0,#{ofc_stnum},1,#{ofc_m_email},#{ofc_cts_code},#{ofc_level})
+	</insert> 
 	<!-- 온라인 강의에 해당하는 비디오 목록을 생성 -->
 	<insert id="insertVideoList" parameterType="com.sinau.dto.VideoDto"
 		 useGeneratedKeys="true" keyProperty="v_code">
@@ -87,8 +87,16 @@
 	<update id="updateOnClassInfo" parameterType="com.sinau.dto.OnlineClassDto">
 		<![CDATA[
 			update onc 
-			set onc_title=#{onc_title},onc_content=#{onc_content},onc_sale=#{onc_sale}, onc_update=sysdate,onc_level=#{onc_level},onc_stnum=#{onc_stnum},onc_sdate=#{onc_sdate}, onc_edate=#{onc_edate}, onc_cts_code=#{onc_cts_code} 
+			set onc_title=#{onc_title},onc_content=#{onc_content},onc_sale=#{onc_sale},onc_update=sysdate,onc_level=#{onc_level},onc_stnum=#{onc_stnum},onc_sdate=#{onc_sdate}, onc_edate=#{onc_edate}, onc_cts_code=#{onc_cts_code} 
 			where onc_code=#{onc_code}
+		]]>
+	</update>
+	
+	<update id="updateOffClassInfo" parameterType="com.sinau.dto.OffClassDto">
+		<![CDATA[
+			update ofc 
+			set ofc_title=#{ofc_title},ofc_content=#{ofc_content},ofc_sale=#{ofc_sale},ofc_update=sysdate,ofc_level=#{ofc_level},ofc_stnum=#{ofc_stnum}, ofc_cts_code=#{ofc_cts_code} 
+			where ofc_code=#{ofc_code}
 		]]>
 	</update>
 	
@@ -99,8 +107,11 @@
 		select * from creatoroffinfo where ofc_m_email=#{ofc_m_email}
 	</select>
 	
-	<select id="getClassInfo" parameterType="String" resultType="com.sinau.dto.CreatorOnInfoDto">
+	<select id="getCreatorOnlineInfo" parameterType="String" resultType="com.sinau.dto.CreatorOnInfoDto">
 		select * from creatoroninfo where onc_code=#{onc_code}
+	</select>
+		<select id="getCreatorOffInfo" parameterType="String" resultType="com.sinau.dto.CreatorOffInfoDto">
+		select * from creatoroffinfo where ofc_code=#{ofc_code}
 	</select>
 	
 	<select id="getVideoList" parameterType="String" resultType="com.sinau.dto.VideoFileDto">
