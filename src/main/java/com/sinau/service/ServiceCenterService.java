@@ -29,6 +29,7 @@ import com.sinau.dto.FilesDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.QuestionDto;
 import com.sinau.dto.QuestionInfoDto;
+import com.sinau.dto.RefundInfoDto;
 import com.sinau.util.Paging;
 
 import lombok.extern.java.Log;
@@ -177,7 +178,7 @@ public class ServiceCenterService {
 		List<FilesDto> bfList = scDao.getQuestionList(q_code);
 		mv.addObject("bfList", bfList);
 		
-		mv.setViewName("admin/ad_serv_qnaan");
+		mv.setViewName("servicecenter/servicecenter_info");
 		
 		return mv;
 	}
@@ -410,6 +411,30 @@ public class ServiceCenterService {
 					}
 				}
 			}
+
+	public ModelAndView getRefundList() {
+		
+		mv = new ModelAndView();
+		MemberDto member = (MemberDto)session.getAttribute("mb");
+	
+		String email = member.getM_email();
+		
+		List<RefundInfoDto> oncList = scDao.getoncRefundList(email); 
+		List<RefundInfoDto> offList = scDao.getoffRefundList(email);
+		List<RefundInfoDto> proList = scDao.getproRefundList(email);
+		//System.out.println(lmap);
+		//System.out.println(qList.get(0).getQ_code()); 
+		
+		mv.addObject("reList", oncList);
+		mv.addObject("reList", offList);
+		mv.addObject("reList", proList);
+		
+		// view name을 지정!
+		mv.setViewName("servicecenter/servicecenter_refund");
+		
+		return mv;
+	}
+
 
 	
 

@@ -41,6 +41,15 @@ public class ServiceCenterController {
 
 		return mv;
 	}
+	
+	@GetMapping("servicecenter_refund")//list?pageNum=3
+	public ModelAndView servicecenterrefund() {	
+
+		mv = scServ.getRefundList();
+		
+		return mv;
+
+	}
 
 
 	@PostMapping("boardWrite")

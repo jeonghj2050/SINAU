@@ -170,6 +170,7 @@ li a:hover {
 }
 
 .cate_container {
+	width : 150px;
 	float:left;
 }
 

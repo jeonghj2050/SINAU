@@ -6,6 +6,7 @@ import java.util.Map;
 import com.sinau.dto.FilesDto;
 import com.sinau.dto.QuestionDto;
 import com.sinau.dto.QuestionInfoDto;
+import com.sinau.dto.RefundInfoDto;
 
 public interface ServiceCenterDao {
 
@@ -36,6 +37,12 @@ public interface ServiceCenterDao {
 	public void fDelByName(String fname);
 
 	String getOriName(String sysFileName);
+
+	List<RefundInfoDto> getoncRefundList(String email);
+
+	List<RefundInfoDto> getoffRefundList(String email);
+
+	List<RefundInfoDto> getproRefundList(String email);
 
 
 

@@ -40,6 +40,7 @@
 		<div class="cate_container">
 			<a class="category" href="./servicecenter_main">FAQ</a>
 			<a class="category" href="./servicecenter_question">1 : 1문의</a>
+			<a class="category" href="./servicecenter_refund">환불내역</a>
 		</div>
 		<div class="FAQ_box">
 			<ul class="FAQ_tab">

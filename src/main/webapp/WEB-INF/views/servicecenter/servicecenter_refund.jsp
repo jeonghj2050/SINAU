@@ -49,34 +49,34 @@ $(document).ready(function(){
             <div class="cate_container">
                 <a class="category" href="./servicecenter_main">FAQ</a>
                 <a class="category" href="./servicecenter_question">1 : 1문의</a>
-			<a class="category" href="./servicecenter_refund">환불내역</a>
+				<a class="category" href="./servicecenter_refund">환불내역</a>
             </div>
 			<div class="data-area">
 				<div class="title-row">
 					<div class="t-no">번호</div>
-					<div class="t-category">분류</div>
-					<div class="t-title">제목</div>
-					<div class="t-name">작성자</div>
-					<div class="t-date">작성일</div>
-					<div class="t-anfield">답변여부</div>
+					<div class="t-code">카테고리</div>
+					<div class="t-retitle">제목</div>
+					<div class="t-orddate">주문날짜</div>
+					<div class="t-amount">수량</div>
+					<div class="t-reason">환불사유</div>
+					<div class="t-price">환불금액</div>
+					<div class="t-redate">신청날짜</div>
+					<div class="t-state">현재 상태</div>
 				</div><br>
-				<c:forEach var="qitem" items="${qList}">
+				<c:forEach var="reitem" items="${reList}">
 				<div class="data-row">
-					<div class="t-no">${qitem.rownum}</div>
-					<div class="t-code" style="display:none;">${qitem.q_code}</div>
-					<div class="t-category">${qitem.cts_name}</div>
-					<div class="t-title"><a href="contents?q_code=${qitem.q_code}">
-						${qitem.q_title}</a></div>
-					<div class="t-name">${qitem.m_name}</div>
-					<div class="t-date"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${qitem.q_date}"/></div>
-					<div class="t-anfield">
-					<c:if test="${qitem.q_anfield eq null }">
-						미답변
-					</c:if>
-					<c:if test="${qitem.q_anfield ne null }">
-						답변완료
-					</c:if>
-					</div>
+					<div class="t-no">${reitem.rownum}</div>
+					<div class="t-code" style="display:none;">${reitem.ord_kind}</div>
+					<div class="t-retitle">${reitem.ofc_title}</div>
+					<div class="t-retitle">${reitem.onc_title}</div>
+					<div class="t-retitle">${reitem.p_title}</div>
+					<div class="t-orddate"><fmt:formatDate pattern="yyyy-MM-dd" value="${reitem.ord_date}"/></div>
+					<div class="t-amount">${reitem.ord_amount}</div>
+					<div class="t-reason">${reitem.ref_reason}</div>
+					<div class="t-price">${reitem.ord_price}</div>
+					<div class="t-redate"><fmt:formatDate pattern="yyyy-MM-dd" value="${reitem.ref_date}"/></div>
+					<div class="t-state">${reitem.ref_state}</div>
+					
 				</div>
 				</c:forEach>
 				</div>
