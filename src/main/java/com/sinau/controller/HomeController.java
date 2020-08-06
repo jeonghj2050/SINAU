@@ -36,6 +36,7 @@ public class HomeController {
 		return "joinFrm";
 	}
 
+
 	
 	@GetMapping("servicecenter_main")
 	public String servicecenter() {
