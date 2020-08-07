@@ -25,6 +25,8 @@ import com.sinau.dto.AdSQnaDto;
 import com.sinau.dto.AdSWDto;
 import com.sinau.dto.AdYouClassDto;
 import com.sinau.dto.AdminDto;
+import com.sinau.dto.FilesDto;
+import com.sinau.dto.QuestionInfoDto;
 
 import lombok.extern.java.Log;
 

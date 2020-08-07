@@ -15,44 +15,62 @@
 <link rel="stylesheet" href="resources/css/store.css">
 <title>Insert title here</title>
 <script>
-	$(document).ready(function() {
-		function gohome() {
-			var id = '${mb.m_email}';
+    $(document).ready(function(){
+    var swiper1 = new Swiper('.swc1', {
+          slidesPerView: 3,
+          spaceBetween: 5,
+          slidesPerGroup: 3,
+          loop: false,
+          loopFillGroupWithBlank: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          }
+        });
 
-			if (id == '') {
-				location.href = './';
-			} else if (id != '') {
-				location.href = './list';
+      var swiper = new Swiper('.swc2', {
+          slidesPerView: 4,
+          spaceBetween: 5,
+          slidesPerGroup: 4,
+          loop: false,
+          loopFillGroupWithBlank: true,
+          pagination: {
+            el: '.swiper-pagination'
+          }
+        });
+  });
+    
+      
+  </script>
+  <script type="text/javascript">-
+function gohome(){
+	var id = '${mb.m_email}';
+	
+	if(id == ''){
+		location.href='./';
+	}	
+	else if(id != ''){
+		location.href='./';
+	}
+} 
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	var id = '${mb.m_email}';
+	
+		if("${mb.m_email}" != '') {
+			var name = "${mb.m_name}";
+			$('#mname').html(name + '님');
+			$('.suc').css('display','block');
+			$('.bef').css('display','none');
 			}
-		}
+});
 
-		var swiper1 = new Swiper('.swc1', {
-			slidesPerView : 3,
-			spaceBetween : 5,
-			slidesPerGroup : 3,
-			loop : false,
-			loopFillGroupWithBlank : true,
-			pagination : {
-				el : '.swiper-pagination',
-				clickable : true,
-			},
-			navigation : {
-				nextEl : '.swiper-button-next',
-				prevEl : '.swiper-button-prev',
-			}
-		});
-
-		var swiper = new Swiper('.swc2', {
-			slidesPerView : 4,
-			spaceBetween : 5,
-			slidesPerGroup : 4,
-			loop : false,
-			loopFillGroupWithBlank : true,
-			pagination : {
-				el : '.swiper-pagination'
-			}
-		});
-	});
 </script>
 </head>
 <body>

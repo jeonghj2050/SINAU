@@ -3,6 +3,8 @@ package com.sinau.dao;
 import java.util.List;
 
 import com.sinau.dto.AdminDto;
+import com.sinau.dto.FilesDto;
+import com.sinau.dto.QuestionInfoDto;
 
 public interface AdminDao {
 	//회원 승인 구분
@@ -24,6 +26,7 @@ public interface AdminDao {
 	public void getOfDel(String code);
 	//유튜브
 	public void getYDel(String code);
+
 	
 	
 //	//전체 회원 가져오는 리스트

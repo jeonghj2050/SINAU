@@ -45,7 +45,7 @@
 					<div class="servList padding10">
 					<c:forEach var="bitem" items="${qna}">
 						<div class="sv-num servQ1">${bitem.q_num}</div>
-						<div class="sv-title servQ2">${bitem.title}</div>
+						<div class="sv-title servQ2"><a href="contents?q_code=${bitem.q_code}">${bitem.title}</a></div>
 						<div class="sv-name servQ3">${bitem.name}</div>
 						<div class="sv-date servQ4">${bitem.dates}</div>
 						<div class="sv-count servQ5">1</div>

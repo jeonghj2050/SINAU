@@ -127,6 +127,7 @@ public class AdminController {
 		return mv;
 	}
 	
+	
 //	//회원 삭제
 //	@PostMapping(value = "memberDelete",produces = "application/json; charset=utf-8")
 //	@ResponseBody
