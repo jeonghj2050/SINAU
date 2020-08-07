@@ -1,18 +1,17 @@
 package com.sinau.dao;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.MyClassDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
-
 import com.sinau.dto.OffCtsDto;
 import com.sinau.dto.OffImgDto;
 import com.sinau.dto.OffInfoDto;
@@ -23,8 +22,15 @@ import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
 import com.sinau.dto.OffLikeDto;
+import com.sinau.dto.OffListDto;
+import com.sinau.dto.OffOrdScDto;
 import com.sinau.dto.OffOrdersDto;
-import com.sinau.dto.OnListDto;
+import com.sinau.dto.OffScheduleDto;
+import com.sinau.dto.OnlineLikeDto;
+import com.sinau.dto.OnlineOrdersDto;
+import com.sinau.dto.OrderDto;
+import com.sinau.dto.PayCouponDto;
+import com.sinau.dto.ScheduleDto;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
@@ -69,6 +75,44 @@ public interface ClassDao {
 	List<CreatorOffInfoDto> getCreatorOffList(String m_email);
 
 	
+	////////////////////////////////////////////////////
+	//오프라인 강좌 전체 카테고리에 해당하는 강좌 리스트 정보를 가져온다. - off
+	List<OffListDto> getOffList();
+	
+	//조회수 증가 메소드 - off
+	void viewUpdate(String ofc_code);
+	
+	//강좌 상세 가져오는 메소드 - off
+	OffInfoDto getOffInfo(String ofc_code);
+
+	//장소 가져오는 메소드 - off
+	String getOffLoc(String ofc_code);
+	
+	//디테일 사진 가져오는 메소드 - off
+	String getInfoSpec1(String ofc_code);
+	String getInfoSpec2(String ofc_code);
+	String getInfoSpec3(String ofc_code);
+	
+	// 오프라인 강좌 시간 장소 가져오는 메소드 - off
+	List<OffInfoDto> getOffInfoDate(String ofc_code);
+	
+	//서브 카테고리 가져오는 메소드
+	List<OffCtsDto> getOffCate();
+	
+	//서브 카테고리에 해당하는 강좌 가져오는 메소드 - off
+	List<OffListDto> getOffCateList(String cts_code);
+	
+	//현제 카테고리 명 가져오는 메소드 - off
+	String getCateName(String cts_code);
+	
+	//오프라인 강좌 날짜 시간 장소 가져오는 메소드 - off
+	List<OffScheduleDto> getOffScehdule(String ofc_code);
+	
+	// 선택한 오프라인 스케줄 가져오는 메소드 - off
+	List<OffScheduleDto> getOffScheduleSel(String sc_code);
+	
+	//onc_code에 해당하는 강좌 정보를 가져온다.
+	CreatorOnInfoDto getClassInfo(String onc_code);
 	//각 코드에 해당하는 강좌 정보를 가져온다.
 	CreatorOnInfoDto getCreatorOnlineInfo(String onc_code);
 	CreatorOffInfoDto getCreatorOffInfo(String ofc_code);
@@ -82,15 +126,9 @@ public interface ClassDao {
 	//크리에이터의 모든 강좌의 피드백 목록을 가져온다.
 	List<VideoFeedDto> getFeedListAll(String m_email);
 	
-//은경파트	
-	//온라인 강의 섬네일용 정보를 가져옴
-	//전체보기 목록 가져오기
-	List<OnListDto> getOnList();
-	//카테고리별 목록 가져오기
-	List<OnListDto> getOnListCa(String cate);
-	
-	//인기강좌 탑10 목록 가져오기
-	List<OnListDto> getTopOnList();
+	//apply.jsp 강좌 목록 가져오는 메소드 - off
+	OffListDto getOffApplyInfo(String ofc_code);
+
 	
 	//내 클래스룸 강좌 정보 가져오기
 	ClassroomDto getCR(HashMap<String, Object> hashMap);
