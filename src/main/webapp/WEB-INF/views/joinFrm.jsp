@@ -68,7 +68,7 @@ $(document).ready(function() {
 			<input type="radio" name="radio" id="r2" value="1"><label for="r2">크리에이터</label>&nbsp;
   			<input type="radio" name="radio" id="r3" value="2"><label for="r3">판매자</label>
 		</div><br>	
-		<form name="joinFrm" id="join" class="join-form" enctype="multipart/form-data" action="memberInsert" method="post" onsubmit="return check()">
+		<form name="joinFrm" id="join" class="join-form" action="memberInsert" method="post" onsubmit="return check()" enctype="multipart/form-data">
 		
 		<!-- <div class="img-box">
 				<img class="img" id=m_photo name="m_photo" src="resources/images/user.png" width="100" height="100"><br>

@@ -64,10 +64,38 @@
 	<delete id="deleteClassImages" parameterType="String">
 		delete from f where f_pcode=#{f_pcode}
 	</delete>
+	<insert id="insertScl" parameterType="com.sinau.dto.ScheduleListDto" useGeneratedKeys="true" keyProperty="scl_code">
+		<selectKey keyProperty="scl_code" resultType="String" order="BEFORE">
+			select 'scl_'||seq_scl.nextval from dual
+		</selectKey>
+		insert into scl values(#{scl_code},#{scl_ofc_code})
+	</insert>
 	 
 	<insert id="insertSchedule" parameterType="com.sinau.dto.ScheduleDto">
 		<![CDATA[
 			insert into sc values('sc_'||seq_sc.nextval,#{sc_time},#{sc_place},#{sc_scl_code})
 		]]>
 	</insert>
+	<select id="getSclCode" parameterType="String" resultType="String">
+		select scl_code from scl where scl_ofc_code=#{up_p_code}
+	</select>
+	<select id="getScheduleList" parameterType="String" resultType="com.sinau.dto.ScheduleDto">
+		select * from sc where sc_scl_code=#{scl_code}
+	</select>
+	
+	<update id="updateMemImg" parameterType="com.sinau.dto.MemberImg">
+		update mimg set mimg_sysname=#{mimg_sysname}, mimg_oriname=#{mimg_oriname} where mimg_code=#{mimg_code}
+	</update>
+	
+	<update id="updateSchedule" parameterType="com.sinau.dto.ScheduleDto">
+		update sc set sc_place=#{sc_place} where sc_code=#{sc_code}
+	</update>
+	
+	<delete id="deleteSchedule" parameterType="String">
+		delete from sc where sc_scl_code=#{scl_code}
+	</delete>
+	
+	<delete id="deleteScList" parameterType="String">
+		delete from scl where scl_code=#{scl_code}
+	</delete>
 </mapper>

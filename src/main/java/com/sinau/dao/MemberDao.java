@@ -5,6 +5,8 @@ import com.sinau.dto.CreatorOnInfoDto;
 import com.sinau.dto.MemberDto;
 
 import com.sinau.dto.MemberDto;
+
+import java.util.List;
 import com.sinau.dto.MemberImg;
 
 import java.util.List;
@@ -41,15 +43,9 @@ public interface MemberDao {
 	//크리에이터의 강좌를 수강하는 학생의 정보를 가져온다.
 	public List<ClassStuInfoDto> getClassStuList(String m_email);
 
-
+	MemberImg getMemImg(String m_email);
 
 	int newPwd(@Param("email")String email,@Param("encPwd")String encPwd);
 
-	
-	
-	/*
-	 * public void memberImgInsert(MultipartHttpServletRequest multi);
-	 */
-	
 
 }
