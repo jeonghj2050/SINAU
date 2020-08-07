@@ -72,5 +72,9 @@ public interface CommonDao {
 
 	List<ScheduleDto> getScheduleList(String scl_code);
 
-	void updateSchedule(String sc_code);
+	void updateSchedule(ScheduleDto schedule);
+
+	void deleteSchedule(String scl_code);
+
+	void deleteScList(String scl_code);
 }

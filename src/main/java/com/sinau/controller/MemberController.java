@@ -240,6 +240,7 @@ public class MemberController {
 	
 		return msg;
 	}
+	
 	//동영상 정보수정을 위한 비동기 처리 메소드
 	@PostMapping(value = "updateClassVideo")
 	@ResponseBody
@@ -263,10 +264,10 @@ public class MemberController {
 	}
 	
 	@GetMapping("cMyClassDel")
-	public ModelAndView cMyClassDel(String onc_code) {
-		log.info("cMyClassDel() : "+onc_code);
+	public ModelAndView cMyClassDel(String p_code) {
+		log.info("cMyClassDel() : "+p_code);
 		
-		mv=mServ.deleteClass(onc_code);
+		mv=mServ.deleteClass(p_code);
 		
 		return mv;
 	}

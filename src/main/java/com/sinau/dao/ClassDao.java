@@ -84,5 +84,7 @@ public interface ClassDao {
 	
 	//내 클래스룸 강좌 정보 가져오기
 	ClassroomDto getCR(HashMap<String, Object> hashMap);
+	
+	void deleteOffClass(String p_code);
 
 }

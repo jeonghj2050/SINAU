@@ -21,7 +21,6 @@
 			$(this).addClass('item-selected');
 		})
 	});
-
 </script>
 <script type="text/javascript">
 	var sel_file;
@@ -254,12 +253,13 @@
 										</tr>
 										<c:forEach var="mysche" items="${scList }">
 											<tr class=${mysche.sc_code }>
-												<td><input type="datetime-local" name="sc_time"
-													value="${mysche.sc_time }"></td>
+												<td><fmt:formatDate pattern="yyyy-MM-dd"
+														value="${mysche.sc_time}" />-<fmt:formatDate pattern="hh"
+														value="${mysche.sc_time}" />시</td>
 												<td><input type="text" name="sc_place"
-													value="${mysche.sc_place }">
-													<button type="button" onclick="deleteClassForm(this)"></button></td>
-													<button type="button" onclick="updateShcedule(this)"></button></td>
+													value="${mysche.sc_place }" class="sc_place">
+													<button type="button" onclick="deleteClassForm(this)">삭제</button>
+													<button type="button" onclick="updateSchedule(this)">수정</button></td>
 											</tr>
 										</c:forEach>
 									</table>
@@ -277,131 +277,139 @@
 	</footer>
 </body>
 <script type="text/javascript">
-    $("#addClassVideoFile").click(function(){
-        $('#vf_list > tbody:last').append('<tr> <td><input type="text" name="uv_title" >  </td>'+
-                                '<td>  <input type="text" name="uv_content" > </td>'+
-                                '<td> <input type="file" name="upvideo_files" > </td> </tr>'+
-                                '<button type="button" class="glyphicon glyphicon-remove" onclick="deleteClassForm(this)"></button></td> </tr>');
+	$("#addClassVideoFile")
+			.click(
+					function() {
+						$('#vf_list > tbody:last')
+								.append(
+										'<tr> <td><input type="text" name="uv_title" >  </td>'
+												+ '<td>  <input type="text" name="uv_content" > </td>'
+												+ '<td> <input type="file" name="upvideo_files" > </td> </tr>'
+												+ '<button type="button" class="glyphicon glyphicon-remove" onclick="deleteClassForm(this)"></button></td> </tr>');
 
-    });
-    $("#addClassSchedule").click(
-			function() {
-				$('#sche_list > tbody:last')
-						.append(
-								'<tr> <td><input type="datetime-local" name="usc_time" >  </td>'
-										+ '<td>  <input type="text" name="usc_place" > '
-										+ '<button type="button" class="glyphicon glyphicon-remove" onclick="deleteClassForm(this)"></button></td> </tr>');
+					});
+	$("#addClassSchedule")
+			.click(
+					function() {
+						$('#sche_list > tbody:last')
+								.append(
+										'<tr> <td><input type="datetime-local" name="usc_time" >  </td>'
+												+ '<td>  <input type="text" name="usc_place" > '
+												+ '<button type="button" class="glyphicon glyphicon-remove" onclick="deleteClassForm(this)"></button></td> </tr>');
 
-			});
-    
-    /* 특정 파일을 db에서 삭제하고 해당 컬럼을 제거 */
-    function deleteFile(obj){
-    	/* 삭제 할 파일 코드 */
-    	var vf_code=$(obj).parent().parent().attr('class');
-    
-    	var objData={"vf_code":vf_code};
-    	
-    	$.ajax({
-    		url:"deleteClassVideo",
-    		type:"post",
-    		data:objData,
-    		dataType:"json",
-    		success:function(data){
-  
-    			if(data.equals('success')){
-    				alert('동영상 삭제 완료');
-    			}else{
-    				alert('동영상 삭제 실패');
-    			}
-    		},
-    		error : function(error){
+					});
+
+	/* 특정 파일을 db에서 삭제하고 해당 컬럼을 제거 */
+	function deleteFile(obj) {
+		/* 삭제 할 파일 코드 */
+		var vf_code = $(obj).parent().parent().attr('class');
+
+		var objData = {
+			"vf_code" : vf_code
+		};
+
+		$.ajax({
+			url : "deleteClassVideo",
+			type : "post",
+			data : objData,
+			dataType : "json",
+			success : function(data) {
+
+				if (data.equals('success')) {
+					alert('동영상 삭제 완료');
+				} else {
+					alert('동영상 삭제 실패');
+				}
+			},
+			error : function(error) {
 				console.log(error);
 			}
-    	});
-		var tr=$(obj).parent().parent();
-	    tr.remove();
-		    
-    }
-    /* 특정 파일을 db에서 수정*/
-    function updateFile(obj){
-    	/* 수정 할 파일 코드 */
-    	var vf_code=$(obj).parent().parent().attr('class');
-    	var v_title=$('.'+vf_code+' .v_title').val();
-    	var v_content=$('.'+vf_code+' .v_content').val();
-    	
-    	var formData=new FormData();
-    	var inputFile=$('.'+vf_code+' input[name="video_files"]');
-    	
-    	var files=inputFile[0].files;
-    	console.log(files)
-    	
-    	for(var i=0;i<files.length;i++){
-    		formData.append('updateFiles',files[i]);
-    	}
+		});
+		var tr = $(obj).parent().parent();
+		tr.remove();
 
-    	formData.append("vf_code",vf_code);
-    	formData.append("v_title",v_title);
-    	formData.append("v_content",v_content);
-    	
-    	$.ajax({
-    		contentType:false,
-    		processData:false,
-    		url:"updateClassVideo",
-    		type:"post",
-    		data:formData,
-    		success:function(data){
-    			var video=data;
-    			
-    			var videoInfo='<tr class="'+video.vf_code+'>'+
-					'<input type="hidden" name="'+video.vf_v_code+'" value ="'+video.vf_v_code+'"></input>'+
-					'<td><input type="text" name="v_title" value="'+video.v_title+'" ></td>'+
-					'<td><input type="text" name="v_content"  value="'+video.v_content +'" ></td>'+
-					'<td>'+video.vf_oriname+'<button type="button" onclick="deleteFile(this)">삭제</button>'+
-					'<button type="button" onclick="updateFile(this)">수정</button>'+
-					'<input type="file" name="video_files"  >'+
-					'</td></tr>'
-				
-    			$('.'+vf_code+' .v_title').val(video.v_title);
-    			$('.'+vf_code+' .v_content').val(video.v_content);
-    			$('.'+vf_code+' #vf_oriname').html(video.vf_oriname);
-				inputFile.val('');
-    		},
-    		error : function(error){
+	}
+	/* 특정 파일을 db에서 수정*/
+	function updateFile(obj) {
+		/* 수정 할 파일 코드 */
+		var vf_code = $(obj).parent().parent().attr('class');
+		var v_title = $('.' + vf_code + ' .v_title').val();
+		var v_content = $('.' + vf_code + ' .v_content').val();
+
+		var formData = new FormData();
+		var inputFile = $('.' + vf_code + ' input[name="video_files"]');
+
+		var files = inputFile[0].files;
+		console.log(files)
+
+		for (var i = 0; i < files.length; i++) {
+			formData.append('updateFiles', files[i]);
+		}
+
+		formData.append("vf_code", vf_code);
+		formData.append("v_title", v_title);
+		formData.append("v_content", v_content);
+
+		$
+				.ajax({
+					contentType : false,
+					processData : false,
+					url : "updateClassVideo",
+					type : "post",
+					data : formData,
+					success : function(data) {
+						var video = data;
+
+						var videoInfo = '<tr class="'+video.vf_code+'>'
+								+ '<input type="hidden" name="'+video.vf_v_code+'" value ="'+video.vf_v_code+'"></input>'
+								+ '<td><input type="text" name="v_title" value="'+video.v_title+'" ></td>'
+								+ '<td><input type="text" name="v_content"  value="'+video.v_content +'" ></td>'
+								+ '<td>'
+								+ video.vf_oriname
+								+ '<button type="button" onclick="deleteFile(this)">삭제</button>'
+								+ '<button type="button" onclick="updateFile(this)">수정</button>'
+								+ '<input type="file" name="video_files"  >'
+								+ '</td></tr>'
+
+						$('.' + vf_code + ' .v_title').val(video.v_title);
+						$('.' + vf_code + ' .v_content').val(video.v_content);
+						$('.' + vf_code + ' #vf_oriname')
+								.html(video.vf_oriname);
+						inputFile.val('');
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+	}
+
+	/* 특정 파일을 db에서 수정*/
+	function updateSchedule(obj) {
+		/* 수정 할 파일 코드 */
+		var sc_code = $(obj).parent().parent().attr('class');
+		var sc_place = $('.' + sc_code + ' .sc_place').val();
+
+		console.log(sc_place);
+		var formData = new FormData();
+
+		formData.append("sc_code", sc_code);
+		formData.append("sc_place", sc_place);
+
+		$.ajax({
+			contentType : false,
+			processData : false,
+			url : "updateSchedule",
+			type : "post",
+			data : formData,
+			success : function(data) {
+				var schedule = data;
+
+				$('.' + sc_code + ' .sc_place').val(schedule.sc_place);
+			},
+			error : function(error) {
 				console.log(error);
 			}
-    	});
-    	
-    	/* 특정 파일을 db에서 수정*/
-        function updateSchedule(obj){
-        	/* 수정 할 파일 코드 */
-        	var sc_code=$(obj).parent().parent().attr('class');
-        	var sc_time=$('.'+sc_code+' .sc_time').val();
-        	var sc_place=$('.'+sc_code+' .sc_place').val();
-        	
-        	var formData=new FormData();
-
-        	formData.append("sc_code",sc_code);
-        	formData.append("sc_time",sc_time);
-        	formData.append("sc_place",sc_place);
-        	
-        	$.ajax({
-        		contentType:false,
-        		processData:false,
-        		url:"updateSchedule",
-        		type:"post",
-        		data:formData,
-        		success:function(data){
-        			var schedule=data;
-
-    				
-        			$('.'+sc_code+' .sc_time').val(schedule.sc_time);
-        			$('.'+vf_code+' .sc_place').val(schedule.sc_place);
-
-        		},
-        		error : function(error){
-    				console.log(error);
-    			}
-        	});
-    }
+		});
+	}
 </script>
 </html>

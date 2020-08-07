@@ -4,6 +4,7 @@ package com.sinau.service;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.io.File;
 import java.io.IOException;
@@ -795,45 +796,58 @@ public class MemberService {
 
 	public ScheduleDto updateSchedule(ScheduleDto schedule) {
 		//넘어온 schedule 정보로 일정을 수정한다.
-		cmDao.updateSchedule(schedule.getSc_code());
+		cmDao.updateSchedule(schedule);
 		
 		return schedule;
 	}
 	
 	//onc_code에 해당하는 강의를 삭제하기위한 메소드
-	public ModelAndView deleteClass(String onc_code) {
+	public ModelAndView deleteClass(String p_code) {
 		String path=session.getServletContext().getRealPath("/")+"resources/upload/";
 		mv=new ModelAndView();
-		String v_code=cmDao.getVCode(onc_code);
+		
+		if(p_code.contains("onc_")) {
+			String v_code=cmDao.getVCode(p_code);
 
-		//강의에 등록된 동영상들을 삭제한다.
-		//v_code에 저장된 파일들을 모두 가져온다.
-		List<VideoFileDto> fileList=cmDao.getVideoList(v_code);
-		for(VideoFileDto file : fileList) {
-			String vf_code=file.getVf_code();
-			//실제 업로드 폴더에서 해당 파일을 삭제한다.
-			String saveFileName=file.getVf_sysname();
-			File deleteFile=new File(path+saveFileName);
+			//강의에 등록된 동영상들을 삭제한다.
+			//v_code에 저장된 파일들을 모두 가져온다.
+			List<VideoFileDto> fileList=cmDao.getVideoList(v_code);
+			for(VideoFileDto file : fileList) {
+				String vf_code=file.getVf_code();
+				//실제 업로드 폴더에서 해당 파일을 삭제한다.
+				String saveFileName=file.getVf_sysname();
+				File deleteFile=new File(path+saveFileName);
 
-			if(deleteFile.exists()) {
-				deleteFile.delete();
-				log.info("삭제 완료!");
-			}else {
-				log.info("해당 파일이 존재하지 않습니다.");
+				if(deleteFile.exists()) {
+					deleteFile.delete();
+					log.info("삭제 완료!");
+				}else {
+					log.info("해당 파일이 존재하지 않습니다.");
+				}
+
+				cmDao.deleteVideoOne(vf_code);
 			}
 
-			cmDao.deleteVideoOne(vf_code);
+
+			//강의에 등록된 동영상 목록을 삭제한다.
+			cmDao.deleteVideo(v_code);
+
+			//강의에 등록된 이미지를 삭제한다.
+			cmDao.deleteClassImages(p_code);
+
+			//강의를 삭제한다.
+			cDao.deleteClass(p_code);
+		}else if(p_code.contains("ofc_")) {
+			String scl_code=cmDao.getSclCode(p_code);
+			//scl_code에 저장된 일정을 삭제한다.
+			cmDao.deleteSchedule(scl_code);
+			
+			//scl_code를 삭제한다.
+			cmDao.deleteScList(scl_code);
+			
+			//p_code에 해당하는 강의를 삭제한다.
+			cDao.deleteOffClass(p_code);
 		}
-
-
-		//강의에 등록된 동영상 목록을 삭제한다.
-		cmDao.deleteVideo(v_code);
-
-		//강의에 등록된 이미지를 삭제한다.
-		cmDao.deleteClassImages(onc_code);
-
-		//강의를 삭제한다.
-		cDao.deleteClass(onc_code);
 
 		mv.setViewName("redirect:./cMypage");
 

@@ -145,4 +145,8 @@
 			order by l_count desc
 		]]>
 	</select>
+	
+	<delete id="deleteOffClass" parameterType="String">
+		delete from ofc where ofc_code=#{p_code}
+	</delete>
 </mapper>
