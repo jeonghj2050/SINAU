@@ -6,17 +6,13 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-<<<<<<< HEAD
+
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.MyClassDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
-import com.sinau.dto.OffCtsDto;
-import com.sinau.dto.OffImgDto;
-import com.sinau.dto.OffInfoDto;
-=======
->>>>>>> parent of 8473481... Merge branch 'master' into hyojin
+
 import com.sinau.dto.ClassroomDto;
 import com.sinau.dto.CreatorOffInfoDto;
 import com.sinau.dto.CreatorOnInfoDto;
