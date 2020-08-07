@@ -50,7 +50,7 @@ function gohome(){
 		location.href='./';
 	}	
 	else if(id != ''){
-		location.href='./';
+		location.href='./loginFrm';
 	}
 } 
 </script>
