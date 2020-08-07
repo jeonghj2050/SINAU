@@ -15,6 +15,7 @@ import com.sinau.dto.OffClassDto;
 import com.sinau.dto.OffCtsDto;
 import com.sinau.dto.OffImgDto;
 import com.sinau.dto.OffInfoDto;
+import com.sinau.dto.ClassroomDto;
 import com.sinau.dto.CreatorOffInfoDto;
 import com.sinau.dto.CreatorOnInfoDto;
 import com.sinau.dto.MyOffInfoDto;
@@ -25,6 +26,7 @@ import com.sinau.dto.OffListDto;
 import com.sinau.dto.OffOrdScDto;
 import com.sinau.dto.OffOrdersDto;
 import com.sinau.dto.OffScheduleDto;
+import com.sinau.dto.OnListDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
@@ -144,5 +146,9 @@ public interface ClassDao {
 	//ClassroomDto getCR(HashMap<String, Object> hashMap);
 	
 	void deleteOffClass(String p_code);
+	List<OnListDto> getTopOnList();
+	List<OnListDto> getOnList();
+	List<OnListDto> getOnListCa(String cate);
+
 
 }
