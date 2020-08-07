@@ -1,3 +1,4 @@
+@charset "UTF-8";
 
 * {
 	box-sizing: border-box;
@@ -249,6 +250,112 @@ article.childart>h1 {
 	margin-left : 15x;
 }
 
+/* header */
+.logo {
+	width: 150px;
+	height: 50px;
+	margin: 20px;
+	float: left;
+}
+
+.search {
+	width: 350px;
+	height: 30px;
+	margin: 30px;
+	padding-left : 15px;
+	padding-right : 15px;
+	border: 1px solid black;
+	font-size: 15px;
+	border-radius: 50px;
+	outline: none;
+}
+
+.top-right {
+	float: right;
+	display: inline-block;
+	margin: 15px;
+	font-size: 20px;
+}
+
+.top-right>ul>li {
+	float: left;
+	margin: 15px;
+}
+
+.menu-bar {
+	width: 500px;
+	font-size: 20px;
+}
+
+.menu-bar>ul {
+	width: 500px;
+	float: left;
+}
+
+.menu-bar>ul>li {
+	float: left;
+	margin-bottom: 15px;
+	margin-right: 50px;
+	margin-left: 20px;
+}
+
+.menu-bar1 {
+	width: 200px;
+	float: right;
+	font-size: 20px;
+	margin-right : 20px;
+}
+
+.menu-bar1>ul {
+	width: 200px;
+	float: right;
+}
+
+.menu-bar1>ul>li {
+	float: right;
+}
+
+.suc {
+	display: none;
+	font-size: 17px;
+}
+
+.bef {
+	display: block;
+	font-size: 17px;
+}
+
+/* footer */
+.bottom-bar {
+	width: 1300px;
+	height: 100px;
+}
+
+.bottom-sub {
+	text-align: left;
+	float: left;
+	margin-top: 15px;
+	margin-left:10px
+}
+
+.intro {
+	text-align: right;
+	float: right;
+	margin-right:10px
+}
+
+.hub {
+	width: 235px;
+	height: 36px;
+	margin-right:10px
+}
+
+.bottom-sub>a {
+	text-align: left;
+	font-size: 10px;
+}
+
+
 
 article.childart>div{
 	float: left;
@@ -260,7 +367,7 @@ article.childart>div{
 }
 
 
-article.childart>div>img{
+article.childart>div>img.logo{
 	float: left;
 	width: 300px;
 	height: 300px;
@@ -374,7 +481,6 @@ article.childart>div>h5 {
 	text-align: left;
 	font-size: 10px;
 }
-
 
 /* member group */
 .group {
