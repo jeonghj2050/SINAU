@@ -67,15 +67,10 @@ public class ClassController {
 	}
 	
 	@GetMapping("classroom")
-<<<<<<< HEAD
-	public ModelAndView classroom() {
-		
-		mv = cServ.classroom(null, null);
-=======
 	public ModelAndView classroom(String onc_code) {
 		
 		mv = cServ.classroom(onc_code);
->>>>>>> parent of f495396... Merge branch 'master' into eunkyung
+
 		
 		return mv;
 	}
