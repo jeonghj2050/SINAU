@@ -134,4 +134,31 @@
 			order by l_count desc
 		]]>
 	</select>
+<<<<<<< HEAD
+=======
+	
+	<!-- 클래스룸 정보 가져오기 -->
+	<select id="getCR" parameterType="String" resultType="com.sinau.dto.ClassroomDto">
+		select * from classroom
+		where onc_code = #{onc_code}
+	</select>
+	
+	<!-- 요청 강의가 목록에 있는지 확인하기 -->
+	<select id="getHerClass" resultType="com.sinau.dto.OnListDto">
+		 	select * from myonlineinfo
+	</select>
+		
+	<!-- email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다. -->
+	<select id="checkOrderList" parameterType="String" resultType="com.sinau.dto.OrderDto">
+	 	select distinct * from ord 
+	 	where ord_m_email=#{email} and ord_pcode = #{onc_code}
+	</select>
+	
+	<!-- email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다. -->
+	<select id="checkOnClass" parameterType="String" resultType="com.sinau.dto.OnlineClassDto">
+	 	select * from onc 
+		where onc_m_email=#{email} and onc_code = #{onc_code}
+	</select>
+	
+>>>>>>> parent of f495396... Merge branch 'master' into eunkyung
 </mapper>
