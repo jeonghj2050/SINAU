@@ -45,6 +45,8 @@
 			<exclude-mapping path="/idCheck"/>
 			<exclude-mapping path="/boardWrite"/>
 			<exclude-mapping path="/servicecenter_question"/>
+			<exclude-mapping path="/online"/>
+			<exclude-mapping path="/onlineInfo"/>
 			<beans:bean 
 				class="com.sinau.util.SessionInterceptor"/>
 		</interceptor>

@@ -76,5 +76,14 @@ public interface ClassDao {
 	List<OnListDto> getTopOnList();
 	
 	//내 클래스룸 강좌 정보 가져오기
-	ClassroomDto getCR(HashMap<String, Object> hashMap);
+	List<ClassroomDto> getCR(@Param("onc_code")String onc_code,@Param("email")String email);
+	
+	//내 온라인 강의목록 뷰에서 요청 강의가 목록에 있는지 확인하기
+	String getHerClass(String name);
+	
+	//내가 결제한 강의 유/무 확인하기
+	OrderDto checkOrderList(@Param("onc_code")String onc_code,@Param("email")String email);
+	
+	//로그인한 크리에이터의 강의인지 확인하기
+	OnlineClassDto checkOnClass(@Param("onc_code")String onc_code,@Param("email")String email);
 }
