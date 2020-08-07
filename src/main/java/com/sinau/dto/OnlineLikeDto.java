@@ -12,5 +12,5 @@ public class OnlineLikeDto {
 	private String onc_title;
 	private int onc_sale;
 	private String cts_name;
-	private String f_sysname;
+	private String f_oriname;
 }
