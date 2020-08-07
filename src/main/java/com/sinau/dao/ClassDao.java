@@ -15,6 +15,7 @@ import com.sinau.dto.OffClassDto;
 import com.sinau.dto.OffCtsDto;
 import com.sinau.dto.OffImgDto;
 import com.sinau.dto.OffInfoDto;
+import com.sinau.dto.ClassroomDto;
 import com.sinau.dto.CreatorOffInfoDto;
 import com.sinau.dto.CreatorOnInfoDto;
 import com.sinau.dto.MyOffInfoDto;
