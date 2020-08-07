@@ -157,7 +157,7 @@
 								<div class="categories">
 									<div class="cate_lable">${offInfo.cts_name}</div>
 								</div>
-								<div class="class_startdate">${offInfo.sc_loc}</div>
+								<div class="class_startdate">${offInfo.sc_place}</div>
 							</div>
 							<div class="class_price">
 								<strong><fmt:formatNumber type="currency"

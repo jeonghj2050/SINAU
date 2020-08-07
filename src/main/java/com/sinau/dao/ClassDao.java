@@ -70,61 +70,41 @@ public interface ClassDao {
 
 	
 	////////////////////////////////////////////////////
-	//오프라인 강좌 전체 카테고리에 해당하는 강좌 리스트 정보를 가져온다.
+	//오프라인 강좌 전체 카테고리에 해당하는 강좌 리스트 정보를 가져온다. - off
 	List<OffListDto> getOffList();
 	
-	//조회수 증가 메소드
+	//조회수 증가 메소드 - off
 	void viewUpdate(String ofc_code);
 	
-	//강좌 상세 가져오는 메소드
+	//강좌 상세 가져오는 메소드 - off
 	OffInfoDto getOffInfo(String ofc_code);
 
-	//장소 가져오는 메소드
+	//장소 가져오는 메소드 - off
 	String getOffLoc(String ofc_code);
 	
-	//디테일 사진 가져오는 메소드
+	//디테일 사진 가져오는 메소드 - off
 	String getInfoSpec1(String ofc_code);
 	String getInfoSpec2(String ofc_code);
 	String getInfoSpec3(String ofc_code);
 	
-	// 오프라인 강좌 시간 장소 가져오는 메소드
+	// 오프라인 강좌 시간 장소 가져오는 메소드 - off
 	List<OffInfoDto> getOffInfoDate(String ofc_code);
 	
 	//서브 카테고리 가져오는 메소드
 	List<OffCtsDto> getOffCate();
 	
-	//서브 카테고리에 해당하는 강좌 가져오는 메소드
+	//서브 카테고리에 해당하는 강좌 가져오는 메소드 - off
 	List<OffListDto> getOffCateList(String cts_code);
 	
-	//현제 카테고리 명 가져오는 메소드
+	//현제 카테고리 명 가져오는 메소드 - off
 	String getCateName(String cts_code);
 	
-	
-	//오프라인 강좌 날짜 시간 장소 가져오는 메소드
+	//오프라인 강좌 날짜 시간 장소 가져오는 메소드 - off
 	List<OffScheduleDto> getOffScehdule(String ofc_code);
 	
-	
-	
-	//apply.jsp 강좌 목록 가져오는 메소드
-	OffListDto getOffApplyInfo(String ofc_code);
-	
-	// 선택한 오프라인 스케줄 가져오는 메소드
+	// 선택한 오프라인 스케줄 가져오는 메소드 - off
 	List<OffScheduleDto> getOffScheduleSel(String sc_code);
 	
-	// payment에서 회원 정보 가져오는 메소드
-	MemberDto getMemPayInfo(String m_email);
-	
-	// 주문 내역 입력하는 메소드
-	void payInsert(OrderDto order);
-	
-	// 마이클래스 강좌 입력하는 메소드
-	void mclInsert(MyClassDto myClass);
-	
-	// 주문 내역 입력하는 메소드
-	void orderInsert(OrderDto order);
-	
-	
-
 	//onc_code에 해당하는 강좌 정보를 가져온다.
 	CreatorOnInfoDto getClassInfo(String onc_code);
 	//v_code에 저장된 동영상 파일을 모두 가져온다.
@@ -136,6 +116,8 @@ public interface ClassDao {
 	//크리에이터의 모든 강좌의 피드백 목록을 가져온다.
 	List<VideoFeedDto> getFeedListAll(String m_email);
 	
-	//결제창에 회원이 가진 쿠폰 목록 가져온다.
-	List<PayCouponDto> getPayCoupon(String email);
+	//apply.jsp 강좌 목록 가져오는 메소드 - off
+	OffListDto getOffApplyInfo(String ofc_code);
+
+	
 }

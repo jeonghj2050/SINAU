@@ -9,5 +9,5 @@ public class OffSceduleListDto {
 	private String sc_scl_code;
 	private String sc_date;
 	private String sc_time;
-	private String sc_loc;
+	private String sc_place;
 }

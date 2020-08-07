@@ -41,7 +41,7 @@
 					<h1>${offCateName}</h1>
 					<h5>전체클래스</h5>
 					<div id="filter">
-						<img src="/resources/images/offline/sort.png">인기순
+						<img src="/resources/images/offline/sort.png">업데이트순
 					</div>
 					<div id="new">
 						<c:forEach var="offCateList" items="${offCateList}">

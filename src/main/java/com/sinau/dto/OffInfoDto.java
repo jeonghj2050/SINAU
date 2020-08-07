@@ -14,5 +14,5 @@ public class OffInfoDto {
 	private int l_count;
 	private int ofc_view;
 	private String f_oriname;
-	private String sc_loc; 
+	private String sc_place; 
 }

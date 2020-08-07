@@ -20,18 +20,34 @@
 <title>결제창</title>
 <script>
 $(document).ready(function(){
-/* $("#cpFrm").submit(function(){
-	var cptitle = $('input:radio[name=coupon-sel]:checked').val();
-	alert(cptitle);
-/* 	var newPri  = $(".ord_price").val(oriPri * disc * 0.001);
-	
-	$(".res-sale").html(cptitle + " ");
-	console.log($(".ord_price").val());
-	console.log(cptitle); */
+	$("#res-submit").click(function(){
+	var cpcode = $('input:radio[name=cpl_cp_code]:checked').val();
+	alert("쿠폰이 적용되었습니다!");
 
-$("#res-submit").click(function(){
-	var cptitle = $('input:radio[name=coupon-sel]:checked').val();
-	alert(cptitle);
+	
+	var data = {"cpcode":cpcode}
+	
+	$.ajax({
+		url : "getCoupon",
+		type : "post",
+		data : data,
+		dataType : "JSON",
+		success : function(data){
+
+			var sale = ${offList.ofc_sale};
+			var discount = (data * sale * 0.01);
+			var price = sale - discount;
+
+			//확인 버튼 누르는 순간  id or class 값 가져와서 값을 data로 채워줘라			
+			$(".pay-list-discount").html(discount + "원");
+			$(".pay-list-disprice").html(price + "원");
+			$(".ord_price").val(price);
+			
+		},
+		error : function(error){
+			alert("쿠폰 적용에 실패했습니다.");
+			}			
+	});
 });
 });
 
@@ -86,18 +102,16 @@ $("#res-submit").click(function(){
 							<div class="pay-list_l">
 								<div>총 상품 금액</div>
 								<div>배송비</div>
-								<div>상품 할인 금액</div>
 								<div>쿠폰 적용</div>
 								<div>최종 가격</div>
 							</div>
 							<div class="pay-list_r">
 								<div>${offList.ofc_sale}원</div>
 								<div>무료</div>
-								<div>${cp_discount}원</div>
-								<div>${cp_title}원</div>
-								<div>${offList.ofc_sale}원</div>
+								<div class="pay-list-discount">${payCoupList.cp_discount}원</div>
+								<div class="pay-list-disprice">${offList.ofc_sale}원</div>
 							</div>
-							<input type="hidden" name="ord_price" value="${offList.ofc_sale}">
+							<input type="hidden" class="ord_price" name="ord_price">
 						</div>
 						<div class="coupon">
 							<button class="couponbtn">쿠폰 적용하기</button>
@@ -151,7 +165,7 @@ $("#res-submit").click(function(){
 													</div>
 												<c:forEach var="payCoupon" items="${payCoupon}" varStatus="status">
 													<div class="coupon-list-bottom">
-															<input type="radio" class="coupon-sel" name="coupon-sel" value="${payCoupon.cpl_cp_code}">
+															<input type="radio" class="coupon-sel" name="cpl_cp_code" value="${payCoupon.cpl_cp_code}">
 															<div class="coupon-title">${payCoupon.cp_title}</div>
 															<div class="disper">${payCoupon.cp_discount}</div>															
 													</div>
@@ -164,7 +178,7 @@ $("#res-submit").click(function(){
 									</c:choose>
 								</div>
 							</div>
-							<div class="coupon">
+							<%-- <div class="coupon">
 								<div class="coupon-top">
 									<div class="res-total-txt">총 주문금액(배송비포함)</div>
 									<div class="res-sale-txt">할인금액</div>
@@ -176,7 +190,7 @@ $("#res-submit").click(function(){
 									<div class="res-pay">원</div>
 										<input type="hidden" name="ord_price" value="${ord_price}">
 								</div>
-							</div>
+							</div> --%>
 							<div class="coupon-btn">
 								<input type="submit" id="res-submit" value="완료">
 								<input type="submit" id="res-cancel" value="취소">

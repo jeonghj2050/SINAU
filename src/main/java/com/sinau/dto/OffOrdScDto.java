@@ -8,5 +8,5 @@ public class OffOrdScDto {
 	private String m_email;
 	private String ofc_cts_code;
 	private String ofc_code;
-	private String sc_code;
+	private String sc_place;
 }

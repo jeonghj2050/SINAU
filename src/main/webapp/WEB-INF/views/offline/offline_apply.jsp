@@ -54,7 +54,7 @@
 								<input type="radio" name="sc_code" value="${offSchedule.sc_code}">
 								<div class="time-table-date">${offSchedule.sc_date}</div>
 								<div class="time-table-time">${offSchedule.sc_time}</div>
-								<div class="time-table-place">${offSchedule.sc_loc}</div>
+								<div class="time-table-place">${offSchedule.sc_place}</div>
 							</div>
 							<hr>
 						</c:forEach>

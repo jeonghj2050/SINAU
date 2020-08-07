@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -80,34 +81,6 @@ public class ClassController {
 	}
 
 	
-	@GetMapping("payment")
-	public ModelAndView payment(String ofc_code, String m_email, String sc_code) {
-		log.info("offlinePayment() : " + ofc_code);		
-		mv = cServ.getOffPay(ofc_code, m_email, sc_code);
-		
-		return mv;
-	}
-	
-	@PostMapping("completion_pay")
-	public ModelAndView completionPay(OrderDto order, String sc_code) {
-		log.info("completion_pay()" + order.getOrd_price());
-		
-		mv = cServ.completionPay(order, sc_code);
-		
-		return mv;
-	}
-	
-	//쿠폰 사용 메소드
-//	@PostMapping(value = "couponInsert",
-//			produces = "application/json; charset=utf-8;")
-//	@ResponseBody
-//	public Map<String, List<PayCouponDto>> couponInsert(PayCouponDto payCoupon){
-//		log.info("couponInsert - cpl_cp_code : " + payCoupon.getCpl_cp_code());
-//		
-//		Map<String, List<PayCouponDto>> pcMap = cServ.payCouponInsert(payCoupon);
-//		
-//		return pcMap;
-//	}
 
 
 
