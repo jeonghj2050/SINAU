@@ -7,10 +7,10 @@
 	<select id="getList" parameterType="String"
 		resultType="com.sinau.dto.QuestionInfoDto">
 		<![CDATA[
-		select rownum, q_code, cts_name, q_title, q_date, m_name,q_anfield 
+		select row_number() over (order by q_date desc) AS
+     		 q_num, q_code, cts_name, q_title, q_date, m_name,q_anfield 
 		from questioninfo
 		where q_m_email = #{email}
-		order by rownum asc
 		]]>
 	</select>
 	<select id="getBoardCount" resultType="Integer">
@@ -81,31 +81,14 @@
 		SELECT f_oriname FROM files
 		WHERE f_sysname=#{sysFileName}
 	</select>
-	<select id="getoncRefundList" parameterType="String"
+	<select id="totalRefundList" parameterType="String"
 		resultType="com.sinau.dto.RefundInfoDto">
 		<![CDATA[
-		select rownum, ord_kind, ord_date, ord_amount, ref_reason, ord_price,ref_date ,ref_state,onc_title
-		from oncrefundinfo
+		select row_number() over (order by ref_state asc) AS
+     		 num, rnum, ord_kind, ord_date, ord_amount, ref_reason, ord_price,ref_date ,ref_state,onc_title
+		from totalinfo
 		where m_email = #{email}
-		order by rownum asc
 		]]>
 	</select>
-	<select id="getoffRefundList" parameterType="String"
-		resultType="com.sinau.dto.RefundInfoDto">
-		<![CDATA[
-		select rownum, ord_kind, ord_date, ord_amount, ref_reason, ord_price,ref_date ,ref_state,ofc_title
-		from offrefundinfo
-		where m_email = #{email}
-		order by rownum asc
-		]]>
-	</select>
-	<select id="getproRefundList" parameterType="String"
-		resultType="com.sinau.dto.RefundInfoDto">
-		<![CDATA[
-		select rownum, ord_kind, ord_date, ord_amount, ref_reason, ord_price,ref_date ,ref_state,p_title
-		from prerefundinfo
-		where m_email = #{email}
-		order by rownum asc
-		]]>
-	</select>
+	
 </mapper>

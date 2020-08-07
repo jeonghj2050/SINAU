@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 public class QuestionInfoDto {
-	private int rownum;
+	private int q_num;
 	private String q_code;
 	private String q_title;
 	private String q_content;

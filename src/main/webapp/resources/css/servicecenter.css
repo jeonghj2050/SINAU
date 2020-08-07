@@ -591,4 +591,46 @@ width: 1100px;
 	padding-left: 75px;
 }
 
+/* 환불 목록 */
+.t-kind {
+	width : 100px;
+	height: 40px;
+	padding: 8px;
+}
+
+.t-retitle {
+	width : 400px;
+	height: 40px;
+	padding: 8px;
+}
+.t-orddate {
+	width : 100px;
+	height: 40px;
+	padding: 8px;
+}
+.t-amount {
+	width : 50px;
+	height: 40px;
+	padding: 8px;
+}
+.t-reason {
+	width : 100px;
+	height: 40px;
+	padding: 8px;
+}
+.t-price {
+	width : 100px;
+	height: 40px;
+	padding: 8px;
+}
+.t-redate {
+	width : 100px;
+	height: 40px;
+	padding: 8px;
+}
+.t-state {
+	width : 100px;
+	height: 40px;
+	padding: 8px;
+}
 

@@ -38,11 +38,7 @@ public interface ServiceCenterDao {
 
 	String getOriName(String sysFileName);
 
-	List<RefundInfoDto> getoncRefundList(String email);
-
-	List<RefundInfoDto> getoffRefundList(String email);
-
-	List<RefundInfoDto> getproRefundList(String email);
+	List<RefundInfoDto> totalRefundList(String email);
 
 
 

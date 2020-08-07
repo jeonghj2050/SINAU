@@ -419,15 +419,11 @@ public class ServiceCenterService {
 	
 		String email = member.getM_email();
 		
-		List<RefundInfoDto> oncList = scDao.getoncRefundList(email); 
-		List<RefundInfoDto> offList = scDao.getoffRefundList(email);
-		List<RefundInfoDto> proList = scDao.getproRefundList(email);
+		List<RefundInfoDto> totalList = scDao.totalRefundList(email); 
 		//System.out.println(lmap);
 		//System.out.println(qList.get(0).getQ_code()); 
 		
-		mv.addObject("reList", oncList);
-		mv.addObject("reList", offList);
-		mv.addObject("reList", proList);
+		mv.addObject("totalList", totalList);
 		
 		// view name을 지정!
 		mv.setViewName("servicecenter/servicecenter_refund");
