@@ -90,7 +90,7 @@ public class ClassService {
 		mv.setViewName("/offline/offline_info");
 
 		return mv;
-	}
+	} 
 
 	// 서브 카테고리에 해당하는 서브 카테고리 이름,
 	public ModelAndView getOffCateList(String cts_code) {
