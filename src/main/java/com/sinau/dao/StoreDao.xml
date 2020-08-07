@@ -19,4 +19,26 @@
 	<update id="updateOrderState" parameterType="com.sinau.dto.OrderDto">
 		update ord set ord_state=#{ord_state} where ord_code=#{ord_code}
 	</update>
+	<insert id="insertNewProd" parameterType="com.sinau.dto.ProductDto"
+		useGeneratedKeys="true" keyProperty="p_code">
+		<selectKey keyProperty="p_code" resultType="String" order="BEFORE">
+			select 'p_'||SEQ_p.NEXTVAL from dual
+		</selectKey>
+		<![CDATA[ 
+			insert into p values(#{p_code},#{p_title},
+					${p_amount},${p_price},default,0,#{p_dealer},0,#{p_m_email},#{p_cts_code},default)
+		]]>
+	</insert>
+
+	<select id="getMyProdList" parameterType="String" resultType="com.sinau.dto.DealerProductInfoDto">
+		select * from dealerproductInfo where m_email=#{m_email}
+	</select>
+	
+		<update id="updateProd" parameterType="com.sinau.dto.ProductDto">
+		update p set p_amount=${p_amount}  where p_code=#{p_code}
+	</update>
+	
+	<update id="delRequestProd" parameterType="String">
+		update p set p_state=1 where p_code=#{p_code}
+	</update>
 </mapper>
