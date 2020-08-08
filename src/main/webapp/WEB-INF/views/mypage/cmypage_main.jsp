@@ -104,15 +104,11 @@
 									<th>이메일</th>
 									<th>이름</th>
 								</tr>
-								<c:forEach var="cstuInfo" items="${cstuInfoList}">
-									<c:choose>
-										<c:when test="${cstuInfo.onc_code eq ccInfo.onc_code }">
-											<tr>
-												<td>${cstuInfo.m_email}</td>
-												<td>${cstuInfo.m_name}</td>
-											</tr>
-										</c:when>
-									</c:choose>
+								<c:forEach var="constuInfo" items="${contuInfoList}">
+									<tr>
+										<td>${constuInfo.m_email}</td>
+										<td>${constuInfo.m_name}</td>
+									</tr>
 								</c:forEach>
 							</table>
 						</div>
@@ -139,16 +135,12 @@
 									<th>이메일</th>
 									<th>이름</th>
 								</tr>
-								<%-- <c:forEach var="cstuInfo" items="${cstuInfoList}">
-									<c:choose>
-										<c:when test="${cstuInfo.onc_code eq ccInfo.onc_code }">
-											<tr>
-												<td>${cstuInfo.m_email}</td>
-												<td>${cstuInfo.m_name}</td>
-											</tr>
-										</c:when>
-									</c:choose>
-								</c:forEach> --%>
+								<c:forEach var="coffstuInfo" items="${cofftuInfoList}">
+									<tr>
+										<td>${coffstuInfo.m_email}</td>
+										<td>${coffstuInfo.m_name}</td>
+									</tr>
+								</c:forEach>
 							</table>
 						</div>
 					</div>

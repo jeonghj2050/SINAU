@@ -30,9 +30,10 @@
 <meta name="geo.placename"
 	content="via Generale Alberico Albricci 1, 24128 Bergamo, Italy">
 <script type="text/javascript"
-	src="../../../resources/js/offline/jquery-1.7.2.min.js"></script>
+	src="../../../resources/javascript/jquery-1.7.2.min.js"></script>
 <script type="text/javascript"
-	src="../../../resources/js/offline/jquery.alsEN-1.0.min.js"></script>
+	src="../../../resources/javascript/jquery.alsEN-1.0.min.js"></script>
+	
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#lista1").als({

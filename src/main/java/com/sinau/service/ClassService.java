@@ -83,6 +83,7 @@ public class ClassService {
 
 		// 게시글 번호로 DB 검색 결과 받아오기.(DB)
 		OffInfoDto offInfo = cDao.getOffInfo(ofc_code);
+		log.info(offInfo.toString());
 		mv.addObject("offInfo", offInfo);
 
 		mv.addObject("m_email", loginMember.getM_email());
