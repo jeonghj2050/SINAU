@@ -35,7 +35,7 @@ $(document).ready(function(){
 			<input type="text" class="login_input" name="m_email" placeholder="example@naver.com"></input>
 			<h4>PASSWORD</h4>
 			<input type="password" class="login-input" name="m_pwd" placeholder="********"><br>
-			<a href="./id">이메일 찾기</a>&nbsp;|&nbsp;<a href="./pwd">비밀번호 찾기</a>&nbsp;|&nbsp;<a href="./joinFrm">SINAU 회원가입</a><br>
+			<a href="./id">이메일 찾기</a>&nbsp;|&nbsp;<a href="./pwd">비밀번호 변경</a>&nbsp;|&nbsp;<a href="./joinFrm">SINAU 회원가입</a><br>
 			<input type="submit" class="login-btn" value="로그인">
 			<hr width="350">
 		<img src="resources/images/loginbottom.PNG">

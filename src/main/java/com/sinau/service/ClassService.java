@@ -169,7 +169,7 @@ public class ClassService {
 		mv.setViewName("online/online_info");
 		
 		return mv;
-	}
+	} 
 
 	public LikesDto updateLikes(String onc_code,String l_cts_code) {
 		String email=((MemberDto)session.getAttribute("mb")).getM_email();

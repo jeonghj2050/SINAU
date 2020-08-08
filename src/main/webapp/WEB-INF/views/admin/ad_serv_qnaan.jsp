@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="resources/css/servicecenter.css?a">
+<link rel="stylesheet" href="resources/css/adstyle.css?a">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="resources/js/jquery.serializeObject.js"></script>
@@ -101,14 +102,19 @@ function fileDel(sysname) {
 </head>
 <body>
 	<header>
-		<jsp:include page="../header.jsp"></jsp:include>
+		<jsp:include page="../adHeader.jsp"></jsp:include>
 	</header>
 	<section class="sectionover">
-		<h2 class="login-header">고객 센터</h2>
-		<div class="cate_container">
-			<a class="category" href="./servicecenter_main">FAQ</a> <a
-				class="category" href="./servicecenter_question">1 : 1문의</a>
-			<a class="category" href="./servicecenter_refund">환불내역</a>
+		<div class="servCate menuCate">
+			<h2 id="adSManagement">
+				<b><ins>고객센터</ins></b>
+			</h2>
+			<div class="adSQna">
+				<a href="./adSQna"><b>Q&A</b></a>
+			</div>
+			<div class="adSWarning">
+				<a href="./adSWarning">신고</a>
+			</div>
 		</div>
 		<div class="question-content">
 			<div class="question-form">
@@ -142,23 +148,17 @@ function fileDel(sysname) {
 						</c:if>	
 						</td>
 					</tr>
-					<tr class="sub12">
-						<td align="center" class="q_andate">날짜</td>
-						<td colspan="5" class="q_date">
-						<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${question.q_andate}"/></td>
-					</tr>
-					<tr>
-						<td align="center"  class="q_anfield">답변 내용</td>
-						<td colspan="5" class="q_field">${question.q_anfield}</td>
-					</tr>
-					<tr>
-					<td colspan="6" align="right">
-						<button class="btn-write" id="upbtn" onclick="location.href='./updateFrm?q_code=${question.q_code}'">수정</button>
+					</table>
+					<div class="admin-an">
+						<input name="text" class="q_andate" style= "display : none">
+						<input name="q_anfield" class="q_anfield" placeholder="답변" >
+						<button class="btn-an" id="anbtn" onclick="anfieldcom">답변 저장</button>
+					</div>
+					<div class="admin-button">
+					<button class="btn-sub" onclick="location.href='./ad_serv_qna'">취소</button>
 						<button class="btn-write" id="delbtn" onclick="goDelete('${question.q_code}','${mb.m_email}','${question.q_m_email}')">삭제</button>
-						<button class="btn-sub" onclick="location.href='./servicecenter_question'">취소</button>
-					</td>
-				</tr>
-				</table>
+						
+					</div>
 			</div>
 		</div>
 	</section>
