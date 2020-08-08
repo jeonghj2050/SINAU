@@ -40,7 +40,7 @@ public class ClassController {
 	
 	@GetMapping("onlineInfo")
 	public ModelAndView onlineInfo(String onc_code) {
-		log.info("1111111111111"+onc_code);
+		
 		mv = cServ.getOnlineInfo(onc_code);
 		
 		return mv;
@@ -70,7 +70,6 @@ public class ClassController {
 	public ModelAndView classroom(String onc_code) {
 		
 		mv = cServ.classroom(onc_code);
-
 		
 		return mv;
 	}

@@ -6,14 +6,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.sinau.dto.MemberDto;
-import com.sinau.dto.MyClassDto;
-import com.sinau.dto.MyOffInfoDto;
-import com.sinau.dto.MyOnlineInfoDto;
-import com.sinau.dto.OffClassDto;
-import com.sinau.dto.OffCtsDto;
-import com.sinau.dto.OffImgDto;
-import com.sinau.dto.OffInfoDto;
 import com.sinau.dto.ClassroomDto;
 import com.sinau.dto.CreatorOffInfoDto;
 import com.sinau.dto.CreatorOnInfoDto;
@@ -22,15 +14,7 @@ import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
 import com.sinau.dto.OffLikeDto;
 import com.sinau.dto.OffOrdersDto;
-
 import com.sinau.dto.OnListDto;
-import com.sinau.dto.OnlineLikeDto;
-import com.sinau.dto.OnlineOrdersDto;
-import com.sinau.dto.OrderDto;
-import com.sinau.dto.ScheduleDto;
-
-import com.sinau.dto.OnListDto;
-
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
@@ -102,13 +86,4 @@ public interface ClassDao {
 	
 	//로그인한 크리에이터의 강의인지 확인하기
 	OnlineClassDto checkOnClass(@Param("onc_code")String onc_code,@Param("email")String email);
-
-	//ClassroomDto getCR(HashMap<String, Object> hashMap);
-	
-	void deleteOffClass(String p_code);
-	ClassroomDto getCR(HashMap<String, Object> hashMap);
-
-
 }
-
-
