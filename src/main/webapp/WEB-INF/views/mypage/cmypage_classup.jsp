@@ -164,17 +164,7 @@
 									</tr>
 									<c:forEach var="video" items="${videoList }">
 										<tr class=${video.vf_code }>
-											<input type="hidden" name="vf_v_code"
-												value="${videoList[0].vf_v_code }">
-											<td><input type="text" name="v_title" class="v_title"
-												value="${video.v_title }"></td>
-											<td><input type="text" name="v_content"
-												class="v_content" value="${video.v_content }"></td>
-											<td><span id="vf_oriname">${video.vf_oriname }</span>
-												<button type="button" onclick="deleteFile(this)">삭제</button>
-												<button type="button" onclick="updateFile(this)">수정</button>
-												<input type="file" name="video_files"></td>
-										</tr>
+										
 									</c:forEach>
 								</table>
 							</div>

@@ -127,9 +127,7 @@ public class AdminController {
 	
 	//유튜브 등록
 	@PostMapping("youtubeWrite")
-	public String boardWrite
-	() {
-
+	public String boardWrite() {
 
 		return "admin/ad_post_lecture";
 	}

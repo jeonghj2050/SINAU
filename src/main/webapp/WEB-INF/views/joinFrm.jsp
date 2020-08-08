@@ -79,9 +79,9 @@ $(document).ready(function() {
 						<img src="resources/images/user.png" alt=""
 							class="img-circle" width="100px" height="100px" id="profile_img"><br>
 						<div>
-							<label for="file"></label> <input type="file" name="files"
-								id="member_profile"> <input type="hidden" id="filecheck"
-								value="0" name="fileCheck">
+							<label for="file"></label> 
+							<input type="file" name="files" id="member_profile"> 
+							<input type="hidden" id="filecheck" value="0" name="fileCheck">
 						</div>
 						</div>
 			<input type="text" class="login-input" id="memail" title="이메일"	name="m_email" placeholder="이메일  ex)example@ooooo.com">
@@ -283,6 +283,6 @@ $(document).ready(function(){
 		var tmppath=URL.createObjectURL(event.target.files[0]);
 		$('#m_photo').attr('src',tmppath);
 	})
-})
+});
 </script>
 </html>

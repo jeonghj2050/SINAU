@@ -1181,8 +1181,97 @@ div.mAprovalCate div :hover {
 
 .insert-form {
 	width: 1050px;
-	height: 1000px;
+	height: 1200px;
 	float : right;
+	text-align: center;
+	padding: 25px;
+	border: 2px solid black;
+	border-radius: 50px;
+}
+
+.insert-form>h2 {
+	margin-bottom : 20px;
+}
+
+.insert-form>.write-top, .write-top2, .write-top3 {
+	width : 950px;
+	height: 40px;
+	margin : auto;
+	margin-bottom: 10px;
+}
+
+.insert-form>.write-top>input {
+	width: 400px;
+	height: 35px;
+	padding: 5px;
+	border : none;
+	border-bottom: 1.5px solid black;
+	outline: none;
+}
+
+.insert-form>.write-top2 {
+	text-align: right;
+}
+
+.insert-form>.write-top2>input {
+	width: 300px;
+	height: 35px;
+	padding : 5px;
+	border : none;
+	border-bottom: 1.5px solid black;
+	margin-right: 18px;
+	outline: none;
 	
 }
 
+.insert-form>.write-top3>input {
+	width: 335px;
+	height: 35px;
+	padding : 5px;
+	border : none;
+	border-bottom: 1.5px solid black;
+	margin-right: 18px;
+	outline: none;
+}
+
+.insert-form>.y_contents {
+	width: 900px;
+	height: 500px;
+	padding: 10px;
+	border: 1px solid black;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.insert-form>.filebox {
+	width: 370px;
+	height: 100px;
+	margin-left: 50px;
+	margin-bottom: 50px;
+}
+
+.insert-form>.filebox>a {
+	margin-right: 60px;
+}
+
+.insert-form>.filebox>img {
+	float :left;
+}
+
+.insert-form>.videobox {
+	width: 500px;
+}
+
+.insert-form>.btn-btn {
+	width: 400px;
+	height: 25px;
+	margin: auto;
+	margin-top: 100px;
+}
+.insert-form>.btn-btn>input {
+	width: 100px;
+	height: 25px;
+	margin: auto;
+	background-color: black;
+	color : white;
+}
