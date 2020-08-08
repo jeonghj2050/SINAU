@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -110,6 +111,28 @@ public class AdminController {
 		
 		return mv;
 	}
+	
+	//유튜브 수정페이지 이동
+	@GetMapping("youtubeupdate")
+	public String youtubeupdate(String code) {
+		return "admin/ad_youtube_list";
+	
+	}
+	
+	//유튜브 등록페이지 이동
+	@GetMapping("youtubeinsert")
+	public String youtubeinsert(String code) {
+		return "admin/ad_youtube_insert";
+	}
+	
+	//유튜브 등록
+	@PostMapping("youtubeWrite")
+	public String boardWrite
+	() {
+
+
+		return "admin/ad_post_lecture";
+	}
 	//판매 삭제
 	@GetMapping("delSale")
 	public ModelAndView delSale(String code) {
@@ -126,7 +149,12 @@ public class AdminController {
 		
 		return mv;
 	}
-	
+	//유튜브 페이지 이동
+	@GetMapping("adyoutube")
+	public String adyoutube() {
+		
+		return "admin/ad_youtube_list";
+	}
 	
 //	//회원 삭제
 //	@PostMapping(value = "memberDelete",produces = "application/json; charset=utf-8")

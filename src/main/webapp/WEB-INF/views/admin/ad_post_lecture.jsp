@@ -190,14 +190,20 @@ var codetemp = '';
 								<div class="yb-title lecture4">${bitem.y_title}</div>
 								<div class="yb-date lecture5">${bitem.y_update}</div>
 								<div class="yb-del lecture6">
-									<p id="del">
+									<p id="del1">
 										<button class="btn-del" onclick="btnclick('${bitem.y_code}')">
 											<b>삭제</b>
+										</button>
+										<button class="btn-write" id="upbtn" onclick="location.href='./youtubeupdate?y_code=${bitem.y_code}'">
+										수정
 										</button>
 									</p>
 								</div>
 							</c:forEach>
 						</div>
+						<button class="btn-insert" onclick="location.href='./youtubeinsert'">
+						등록
+						</button>
 					</div>
 					<div class="btn-area">
 						<div class="paging">${paging}</div>
@@ -215,6 +221,7 @@ var codetemp = '';
 				</div>
 			</div>
 		</div>
+		
 	</section>
 	<footer>
 		<jsp:include page="../footer.jsp"></jsp:include>

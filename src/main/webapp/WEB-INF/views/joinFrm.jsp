@@ -255,7 +255,7 @@ function validate() {
         objLicense.focus();
         return false;
 	} 
-
+</script>
 <script  type="text/javascript">
 	function mgcheck(){
 	//form 태그의 내용을 전부 가져오기
@@ -283,6 +283,6 @@ $(document).ready(function(){
 		var tmppath=URL.createObjectURL(event.target.files[0]);
 		$('#m_photo').attr('src',tmppath);
 	})
-});
+})
 </script>
 </html>
