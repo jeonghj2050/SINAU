@@ -1209,10 +1209,6 @@ div.mAprovalCate div :hover {
 	outline: none;
 }
 
-.insert-form>.write-top2 {
-	text-align: right;
-}
-
 .insert-form>.write-top2>input {
 	width: 300px;
 	height: 35px;
@@ -1222,6 +1218,10 @@ div.mAprovalCate div :hover {
 	margin-right: 18px;
 	outline: none;
 	
+}
+.insert-form>.write-top2>.category11 {
+	width: 300px;
+	float : right;
 }
 
 .insert-form>.write-top3>input {

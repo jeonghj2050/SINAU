@@ -15,8 +15,6 @@ public class HomeController {
 		return "home";
 	}
 
-
-
 	@GetMapping("loginFrm")
 	public String loginFrm() {
 
@@ -28,8 +26,6 @@ public class HomeController {
 
 		return "joinFrm";
 	}
-
-
 	
 	@GetMapping("servicecenter_main")
 	public String servicecenter() {
@@ -49,10 +45,5 @@ public class HomeController {
 		return "pwd";
 	}
 	
-	@GetMapping("youtube") 
-	public String youtube() {
-		
-		return "youtube/youtube_main";
-	}
 	
 }

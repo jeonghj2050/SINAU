@@ -121,16 +121,11 @@ public class AdminController {
 	
 	//유튜브 등록페이지 이동
 	@GetMapping("youtubeinsert")
-	public String youtubeinsert(String code) {
+	public String youtubeinsert() {
+		
 		return "admin/ad_youtube_insert";
 	}
 	
-	//유튜브 등록
-	@PostMapping("youtubeWrite")
-	public String boardWrite() {
-
-		return "admin/ad_post_lecture";
-	}
 	//판매 삭제
 	@GetMapping("delSale")
 	public ModelAndView delSale(String code) {
@@ -154,6 +149,14 @@ public class AdminController {
 		return "admin/ad_youtube_list";
 	}
 	
+	@PostMapping("youtubeWrite")
+	public String youtubeWrite(
+		MultipartHttpServletRequest multi, 
+			RedirectAttributes rttr) {
+		String view = aServ.youtubeWrite(multi, rttr);
+		
+		return view;
+	}
 //	//회원 삭제
 //	@PostMapping(value = "memberDelete",produces = "application/json; charset=utf-8")
 //	@ResponseBody

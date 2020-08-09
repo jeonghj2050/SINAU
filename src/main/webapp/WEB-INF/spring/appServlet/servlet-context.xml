@@ -52,7 +52,10 @@
 			<exclude-mapping path="/idCheck"/>
 			<exclude-mapping path="/boardWrite"/>
 			<exclude-mapping path="/youtubeWrite"/>
+			<exclude-mapping path="/youtube"/>
+			<exclude-mapping path="/adPLecture"/>
 			<exclude-mapping path="/servicecenter_question"/>
+			<exclude-mapping path="/ycontents"/>
 			<beans:bean 
 				class="com.sinau.util.SessionInterceptor" />
 		</interceptor>

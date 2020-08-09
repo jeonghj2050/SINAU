@@ -58,5 +58,22 @@ where m_state=#{state} and m_group='cm'
 		DELETE FROM productreview
 		WHERE PRV_CODE = #{code}
 	</delete>
+		<insert id="youtubeWrite"
+		parameterType="com.sinau.dto.YoutubeClassDto"
+		useGeneratedKeys="true"
+		keyProperty="y_code">
+		<selectKey keyProperty="y_code"
+			resultType="String" order="BEFORE">
+				SELECT 'Y_'||SEQ_Y.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO youtube_class
+		VALUES(#{y_code},#{y_title},#{y_subtitle},#{y_content},#{y_profile},#{y_url}, 
+		#{y_userurl}, sysdate ,#{y_cts_code}, default, #{y_videosoure})
+	</insert>
+	<insert id="fileInsert" parameterType="HashMap">
+		INSERT INTO files
+		VALUES(#{y_code},
+			#{oriFileName}, #{sysFileName}, #{y_cts_code})
+	</insert>
 
 </mapper>

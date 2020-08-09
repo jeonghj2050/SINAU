@@ -1,10 +1,12 @@
 package com.sinau.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.sinau.dto.AdminDto;
 import com.sinau.dto.FilesDto;
 import com.sinau.dto.QuestionInfoDto;
+import com.sinau.dto.YoutubeClassDto;
 
 public interface AdminDao {
 	//회원 승인 구분
@@ -26,6 +28,11 @@ public interface AdminDao {
 	public void getOfDel(String code);
 	//유튜브
 	public void getYDel(String code);
+	//유튜브 이미지 등록
+	public void fileInsert(Map<String, String> fmap);
+	//유튜브 등록
+	public void youtubeWrite(YoutubeClassDto youtube);
+
 
 	
 	

@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>유튜브 등록 페이지</title>
 <link rel="stylesheet" href="resources/css/adstyle.css?ver=1.1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 </head>
 <body>
 <header>
@@ -31,6 +33,16 @@
 			<h2>유튜브 강좌 등록</h2>
 			<div class="write-top2">
 			<a>유튜브채널이름 : </a><input type="text" class="y_profile" name="y_profile" autofocus placeholder="닉네임">
+			<div class="category11">
+			<a>카테고리 :</a>
+			<select class="category" name="y_cts_code">
+  				<option value="ya">미술</option>
+  				<option value="yd">디지털</option>
+  				<option value="yh">건강/헬스</option>
+  				<option value="yp">프로그래밍</option>
+  				<option value="yc">요리</option>
+  			</select>
+  			</div>
 			</div>
 			<div class="write-top">
 			<a class="t">제목 : </a> <input type="text" class="y_title" name="y_title" autofocus placeholder="제목">
@@ -42,20 +54,15 @@
 			</div>
 			<textarea name="y_content" class="y_contents"
 				autofocus placeholder="강좌 소개글"></textarea>
+			<a>동영상 soure : </a><input type="text" class="y_videosoure" name="y_videosoure" autofocus placeholder="동영상 소스">
 			<div class="filebox">
-				
 				<img src="resources/images/user.png" alt=""
 				class="img-circle" width="100px" height="100px" id="profile_img"><br>
 				<a>프로필이미지 등록</a> 
-				<input type="file" name="files" id="file"> 
-				<input type="hidden" id="filecheck"	value="1" name="fileCheck">
-			</div>
-			<div class="videobox">	
-				<a>메인비디오 등록</a>
-				<input type="file" name="files" id="file"> 
+				<input type="file" name="files" id="file"> 				
+				<input class="upload-name" value="파일선택" readonly>
 				<input type="hidden" id="filecheck"	value="0" name="fileCheck">
 			</div>
-			
 			<div class="btn-btn">
 				<input class="btn-update" type="submit" value="등록"> <input
 					class="btn-reset" type="reset" value="다시 작성"> <input
@@ -109,5 +116,56 @@ $(document).ready(function(){
 
 		});
 	}
+</script>
+<script type="text/javascript">
+$("#file1").on('change',function(){
+	var fileName1 = $("#file1").val();
+	$(".upload-name1").val(fileName1);
+	
+	if(fileName1 == ""){
+		console.log("empty");
+		$("#filecheck1").val(0);
+	}
+	else{
+		console.log("not empty");
+		$("#filecheck1").val(1);
+	}
+});
+</script>
+<script type="text/javascript">
+$("#file").on('change',function(){
+	var fileName = $("#file").val();
+	$(".upload-name").val(fileName);
+	
+	if(fileName == ""){
+		console.log("empty");
+		$("#filecheck").val(0);
+	}
+	else{
+		console.log("not empty");
+		$("#filecheck").val(1);
+	}
+});
+</script>
+<script  type="text/javascript">
+	function mgcheck(){
+	//form 태그의 내용을 전부 가져오기
+	var frm = document.writeFrm;
+	
+	//submit 버튼을 뺀 나머지 input태그의 개수
+	var length = frm.length - 1;
+	
+	//input 태그 중에 입력이 안된 요소를 확인
+	for(var i = 0; i < length; i++){
+		if(frm[i].value == "" 
+				|| frm[i].value == null){
+			alert(frm[i].title + " 입력!");
+			frm[i].focus();
+			return false;//action이 실행 안됨.
+		}
+	}
+	//모든 input에 입력이 다 되었을 경우.
+	return true;//action이 실행됨.
+}
 </script>
 </html>

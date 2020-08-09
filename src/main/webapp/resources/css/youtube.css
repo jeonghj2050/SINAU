@@ -57,16 +57,39 @@ article.childart1 {
 	margin-top: 5px;
 }
 
-article.childart2 {
-	background-color: salmon;
+article.childart5 {
 	width: 1300px;
-	float: right;
+}
+
+article.childart5>h1 {
+	margin-bottom: 20px;
+}
+
+article.childart5>.swiper-slide5 {
+	float : left;
+	margin-right: 12.5px;
+	margin-left: 12.5px;
+	margin-bottom: 12.5px;
+}
+
+article.childart5>.swiper-slide5>.swiper-text5 {
+	width: 300px;
+	height: 100px;
+}
+
+article.childart5>.swiper-slide5>.swiper-text5 >.y_name{
+	font-size : 10px;
+	margin-bottom: 5px;
+}
+
+article.childart5>.swiper-slide5>.swiper-text5 >.y_title{
+	font-size : 20px;
 }
 
 article.childart1>div {
 	float: left;
 	width: 250px;
-	height: 400px;
+	height: 400px;s
 	margin: 12.5px;
 	margin-top: 20px;
 }
@@ -157,3 +180,101 @@ article.childart1>div {
     .swc2{
     padding-left: 0px;
     }
+    
+/* 유튜브 상세페이지 */
+.question-content>.question-form>.y_videosoure{
+	width: 1300px;
+	height: 400px;
+	margin : auto;
+}
+    
+.question-content>.question-form>.y_videosoure>iframe {
+	width: 1300px;
+	height: 400px;
+	border: 2px solid black;
+}   
+.question-content>.question-form>.total {
+	width: 1300px;
+	height: 600px;
+	margin: auto;
+	margin-top : 10px;
+}
+.question-content>.question-form>.total>.main_content {
+	
+	width: 1000px;
+	height: 500px;
+	float : left;
+	border: 2px solid black;
+}
+
+
+
+.question-content>.question-form>.total>.sub_content {
+    width: 290px;
+	height: 200px;
+	float : right;
+	border: 2px solid black;
+}
+
+
+
+.question-content>.question-form>.total>.sub_content>img {
+	margin-top : 5px;
+	margin-left : 10px;
+	border : 1px solid #ddd;
+	border-radius: 50px;
+}
+   
+.question-content>.question-form>.total>.sub_content>.y_profile {	
+	width: 150px;
+	height: 100px;
+	font-size: 15px;
+	margin-top: 10px;
+	margin-right: 10px;
+	float : right;
+	text-align: center;
+	padding-top: 20px; 
+}   
+  
+.question-content>.question-form>.total>.sub_content>.cts_name {	
+	width: 200px;
+	height: 15px;
+	font-size: 15px;
+	float : left;
+	margin-top: 10px;
+	margin-left: 5px;
+}   
+    
+.question-content>.question-form>.total>.sub_content>.y_update {	
+	width: 200px;
+	font-size: 15px;
+	float : left;
+	margin-top: 10px;
+	margin-left: 5px;
+}     
+
+.question-content>.question-form>.total>.sub_content>.y_userurl{	
+	width: 200px;
+	font-size: 15px;
+	float : left;
+	margin-top: 10px;
+	margin-left: 5px;
+}
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

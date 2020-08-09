@@ -142,14 +142,13 @@ li a:hover {
 
 /* footer */
 .bottom-bar {
-	width: 70%;
+	width: 1300px;
 	height: 100%;
 	margin : auto;
 }
 
 .bottom-sub {
-	width: 30%;
-	height: 100%;
+	width: 400px;
 	padding-top: 75px;
 	float : left;
 }
@@ -158,7 +157,7 @@ li a:hover {
 }
 
 .intro {
-	width: 70%;
+	width: 800px;
 	height: 100%;
 	float : right;
 	text-align: right;
