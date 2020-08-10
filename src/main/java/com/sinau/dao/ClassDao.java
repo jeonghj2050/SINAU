@@ -24,6 +24,7 @@ import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
 import com.sinau.dto.OffLikeDto;
+import com.sinau.dto.OffListDto;
 import com.sinau.dto.OffOrdersDto;
 import com.sinau.dto.OnListDto;
 import com.sinau.dto.OffScheduleDto;
@@ -161,6 +162,7 @@ public interface ClassDao {
 	
 	//
 	List<OffListDto> getOffCateFilterList(String cts_code);
+	OffListDto getOffApplyInfo(String ofc_code);
 	
 
 	

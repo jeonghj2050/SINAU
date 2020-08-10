@@ -48,11 +48,6 @@
 		 	select * from offlikes where m_email=#{email}
 		]]>
 	</select>
-	
-	<!-- 내 클래스의 상태를 변경한다.  -->
-	<update id="mclUpdateState" parameterType="com.sinau.dto.OrderDto">
-		update mcl set mcl_state=#{ord_state} where mcl_ord_code=#{ord_code}
-
 
 
 	<!-- OFFLINE CLASS 부분 -->
@@ -146,6 +141,13 @@ GROUP BY   OFC_CODE
 		mcl_ord_code=#{ord_code}
 	</update>
 	
+	   <select id="getOffApplyInfo" parameterType="String"
+      resultType="com.sinau.dto.OffListDto">
+      <![CDATA[
+         select * from of_INFO
+         where ofc_code=#{ofc_code}
+         ]]>
+   </select>
 	<!-- 새로운 온라인 강좌를 등록한다. -->
 	<insert id="insertOnClassInfo" parameterType="com.sinau.dto.OnlineClassDto"
 		useGeneratedKeys="true" keyProperty="onc_code">
@@ -282,7 +284,6 @@ GROUP BY   OFC_CODE
 		from videoRInfo
 		where m_email=#{email} and onc_code = #{onc_code} and vf_code = #{vf_code}
 	</select>
-</mapper>
 
 
 	<delete id="deleteOffClass" parameterType="String">
