@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.dto.LikesDto;
+import com.sinau.dto.VideoListDto;
 import com.sinau.service.ClassService;
 
 import lombok.extern.java.Log;

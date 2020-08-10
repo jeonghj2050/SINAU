@@ -1,4 +1,4 @@
-spackage com.sinau.dao;
+package com.sinau.dao;
 
 import java.util.List;
 
