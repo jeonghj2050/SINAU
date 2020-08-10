@@ -5,9 +5,9 @@
 
 <mapper namespace="com.sinau.dao.pInfoDao">
 
-<select id="getReviewList" parameterType="String"
+	<select id="getReviewList" parameterType="String"
 		resultType="com.sinau.dto.PReviewDto">
-		SELECT * FROM PRV
+		SELECT * FROM prv_warning
 		WHERE PRV_P_CODE=#{prv_p_code}
 	</select>
 
@@ -36,7 +36,5 @@
 		WHERE PRV_CODE = #{PRV_CODE}
 
 	</delete>
-
-
-
+	
 </mapper>

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
+
 import com.sinau.dao.AdClassDao;
 import com.sinau.dao.AdminDao;
 import com.sinau.dao.MemberDao;
@@ -25,6 +26,7 @@ import com.sinau.dto.AdSQnaDto;
 import com.sinau.dto.AdSWDto;
 import com.sinau.dto.AdYouClassDto;
 import com.sinau.dto.AdminDto;
+import com.sinau.util.Paging;
 
 import lombok.extern.java.Log;
 
@@ -43,8 +45,58 @@ public class AdminService {
 
 	//페이지당 글 개수 조정 변수
 	private int listCount = 5;
-	private int pageCount = 6;
+	private int pageCount = 2;
 	
+	public ModelAndView getAdminList(Integer pageNum) {
+		// TODO Auto-generated method stub
+		log.info("getAdminList() - pageNum : " + pageNum);
+
+		mv = new ModelAndView();
+
+		int num = (pageNum == null) ? 1 : pageNum;
+
+		//맵을 만들어서 페이지번호와 글목록 개수를 저장
+		Map<String, String> lmap = 
+				new HashMap<String, String>();
+		lmap.put("pageNum", String.valueOf(num));
+		lmap.put("cnt", String.valueOf(listCount));
+
+		List<AdminDto> bList = aDao.getList(lmap);
+
+		mv.addObject("bList", bList);
+
+		String paging = getPaging(num);
+		mv.addObject("paging", paging);
+
+		//세션에 페이지 번호 저장.
+		session.setAttribute("pageNum", num);
+
+		//view name을 지정!
+		mv.setViewName("ad_mem_approval");
+
+		return mv;
+		
+	}	
+	
+	private String getPaging(int num) {
+		//전체 글 개수 구하기
+		int maxNum = aDao.getListCount();
+		String listName = "adMApproval";//게시판 uri
+
+		Paging paging = new Paging(maxNum, num, 
+				listCount, pageCount, listName);
+
+		String pagingHtml = paging.makePaging();
+
+		log.info(pagingHtml);
+		
+		return pagingHtml;
+	}
+
+
+
+
+
 	//가입승인 목록 리스트 (승인구분에 따라 리스트를 가져온다)
 	public ModelAndView adMemList(String tabId) {
 
@@ -264,6 +316,7 @@ public class AdminService {
 		return mv;
 	}
 	
+	
 //	   public  Map<String, List<AdminDto>>  memberCheck(String m_email) { // TODO Auto-generated method stub
 //		      Map<String, List<AdminDto>> rMap= new HashMap<String, List<AdminDto>>();
 //		      AdminDto memDel = new AdminDto();
@@ -293,25 +346,3 @@ public class AdminService {
 //	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

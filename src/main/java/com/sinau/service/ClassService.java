@@ -31,31 +31,31 @@ import lombok.extern.java.Log;
 @Service
 @Log
 public class ClassService {
-	//DAO 객체 선언
-		@Autowired
-		private CategoryDao cateDao;
-		@Autowired
-		private ClassDao cDao;
-		@Autowired
-		private ClassInfoDao cInfoDao;
-		@Autowired
-		MemberDao mDao;
-		
-		@Autowired
-		HttpSession session;
-		
-		ModelAndView mv;
-		
-		MemberDto loginMember;
+   //DAO 객체 선언
+      @Autowired
+      private CategoryDao cateDao;
+      @Autowired
+      private ClassDao cDao;
+      @Autowired
+      private ClassInfoDao cInfoDao;
+      @Autowired
+      MemberDao mDao;
+      
+      @Autowired
+      HttpSession session;
+      
+      ModelAndView mv;
+      
+      MemberDto loginMember;
 
-	// 오프라인 카테고리에 해당하는 강의 목록을 가져온다.
-	public ModelAndView getOffList() {
+   // 오프라인 카테고리에 해당하는 강의 목록을 가져온다.
+   public ModelAndView getOffList() {
 
-		mv = new ModelAndView();
+      mv = new ModelAndView();
 
-		// 강좌 목록 가져오는 메소드
-		List<OffListDto> offList = cDao.getOffList();
-		mv.addObject("offList", offList);
+      // 강좌 목록 가져오는 메소드
+      List<OffListDto> offList = cDao.getOffList();
+      mv.addObject("offList", offList);
 
 		// 서브 카테고리 가져오는 메소드
 		List<OffCtsDto> offCate = cDao.getOffCate();
