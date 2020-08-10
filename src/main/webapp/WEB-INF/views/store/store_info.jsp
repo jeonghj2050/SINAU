@@ -265,7 +265,8 @@
 				</div>
 			</div>
 
-	
+			<hr width="950px" style="float: left;">
+
 			<!-- 상품소개 -->
 			<div class="sinfo_detail">
 				<div class="sp_title1">상품 소개</div>

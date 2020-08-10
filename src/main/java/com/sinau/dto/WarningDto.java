@@ -15,5 +15,4 @@ public class WarningDto {
 	private String w_prv_code;
 	private Date w_update;
 
-
 }

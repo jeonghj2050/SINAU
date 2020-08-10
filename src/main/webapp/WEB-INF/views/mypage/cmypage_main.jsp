@@ -23,7 +23,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="resources/css/style.css?a">
 <link rel="stylesheet" href="resources/css/mypage.css">
 <script>
         $(function(){
@@ -93,9 +93,9 @@
 						</div>
 						<div style="float:right;">
 							<c:if test="${ccInfo.onc_rstnum le 0 }">
-								<button class="my_default_btn" onclick="location.href='./cMyClassDel?onc_code=${ccInfo.onc_code}'">강의 삭제</button>
+								<button class="my_default_btn" onclick="location.href='./cMyClassDel?p_code=${ccInfo.onc_code}'">강의 삭제</button>
 							</c:if>
-							<button class="my_default_btn" onclick="location.href='./cMyClassUp?onc_code=${ccInfo.onc_code}'">강의 수정</button>
+							<button class="my_default_btn" onclick="location.href='./cMyClassUp?up_p_code=${ccInfo.onc_code}'">강의 수정</button>
 						</div>
 						<p class="mypage_sub_title" style="clear:both;">등록 정보</p>
 						<div class="c_myclass_stuList">
@@ -104,15 +104,11 @@
 									<th>이메일</th>
 									<th>이름</th>
 								</tr>
-								<c:forEach var="cstuInfo" items="${cstuInfoList}">
-									<c:choose>
-										<c:when test="${cstuInfo.onc_code eq ccInfo.onc_code }">
-											<tr>
-												<td>${cstuInfo.m_email}</td>
-												<td>${cstuInfo.m_name}</td>
-											</tr>
-										</c:when>
-									</c:choose>
+								<c:forEach var="constuInfo" items="${contuInfoList}">
+									<tr>
+										<td>${constuInfo.m_email}</td>
+										<td>${constuInfo.m_name}</td>
+									</tr>
 								</c:forEach>
 							</table>
 						</div>
@@ -139,16 +135,12 @@
 									<th>이메일</th>
 									<th>이름</th>
 								</tr>
-								<%-- <c:forEach var="cstuInfo" items="${cstuInfoList}">
-									<c:choose>
-										<c:when test="${cstuInfo.onc_code eq ccInfo.onc_code }">
-											<tr>
-												<td>${cstuInfo.m_email}</td>
-												<td>${cstuInfo.m_name}</td>
-											</tr>
-										</c:when>
-									</c:choose>
-								</c:forEach> --%>
+								<c:forEach var="coffstuInfo" items="${cofftuInfoList}">
+									<tr>
+										<td>${coffstuInfo.m_email}</td>
+										<td>${coffstuInfo.m_name}</td>
+									</tr>
+								</c:forEach>
 							</table>
 						</div>
 					</div>

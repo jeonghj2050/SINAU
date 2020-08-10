@@ -1,6 +1,7 @@
 package com.sinau.dao;
 
 import java.util.List;
+
 import com.sinau.dto.PReviewDto;
 
 public interface pInfoDao {
@@ -21,6 +22,9 @@ public interface pInfoDao {
 
 	public PReviewDto getReview(String prv_code);
 
+	
+	
+	
 	
 
 	

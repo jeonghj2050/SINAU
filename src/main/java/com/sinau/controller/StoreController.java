@@ -112,5 +112,86 @@ public class StoreController {
 
 		return rMap;
 	}
+	
+	@GetMapping("store")
+	public ModelAndView store(String cts_code) {
+		log.info("store()");
+		
+		//상품 목록을 가져온다.
+		mv= sServ.getProductList(cts_code);
+		
+		return mv;
+	}
+	
+	
+	@GetMapping("store_cts")
+	public ModelAndView storeCts(String cts_code) {
+		log.info("store_cts()");
+		
+		//상품 목록을 가져온다.
+		mv= sServ.getPList(cts_code);
+		
+		return mv;
+	}
+	
+	@GetMapping("store_info")
+	public ModelAndView storeInfo(String p_code) {
+		log.info("store_info()");
+	
+		//상품 정보를 가져온다.
+		mv=sServ.getpInfo(p_code);
+		
+		return mv;
+	}
+	
+
+	//댓글 추가 및 댓글 목록 처리 메소드
+		@PostMapping(value = "reviewInsert",
+				produces = "application/json; charset=utf-8")
+		@ResponseBody
+		public Map<String, PReviewDto> 
+		replyInsert(PReviewDto review){
+			log.info("reviewInsert - bnum : " 
+					+ review.getPrv_p_code());	
+
+			Map<String, PReviewDto> rMap = 
+					sServ.rInsert(review);
+
+			return rMap;
+		}
+		
+
+		@PostMapping(value = "reviewDelete", produces = "application/json; charset=utf-8")
+		@ResponseBody
+		public Map<String, List<PReviewDto>> 
+		getReviewList(String prv_code){
+		 log.info("post delete reply");
+		 int result =0;
+		 PReviewDto review = new PReviewDto();
+		 
+		 log.info(prv_code);
+		 
+		 Map<String, List<PReviewDto>> rMap =sServ.rvidCheck(prv_code);	
+		 
+		 
+		 return rMap;
+		 
+		
+		}
+		
+		
+		@PostMapping("warningInsert")
+		public ModelAndView WarningInsert
+		(MultipartHttpServletRequest multi, 
+				RedirectAttributes rttr) {
+			log.info("warningInsert()");
+
+			mv = sServ.wInsert(multi, rttr);
+			
+			
+			return mv;
+		}
+	
+		
 
 }

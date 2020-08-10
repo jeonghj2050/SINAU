@@ -12,5 +12,4 @@
 		SELECT * FROM WARNING
 		WHRER W_CODE=#{W_PRV_CODE}
 	</select>
-
 	</mapper>

@@ -14,10 +14,7 @@ public class ProductDto {
 	private int p_salmount;
 	private String p_dealer;
 	private int p_view;
-	
-	
-	
-	
-	
-	
+	private String p_m_email;
+	private String p_cts_code;
+	private int p_state;
 }

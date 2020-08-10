@@ -30,9 +30,6 @@ public interface AdminDao {
 	public void getOfDel(String code);
 	//유튜브
 	public void getYDel(String code);
-
-
-
 	
 	
 //	//전체 회원 가져오는 리스트
