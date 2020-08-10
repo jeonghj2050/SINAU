@@ -154,7 +154,7 @@ article>div .nav.nav-tabs>li {
 	height: 500px;
 }
 
-.mp_classInfo>img {
+.mp_classInfo>a>img {
 	float: left;
 }
 
@@ -171,8 +171,7 @@ article>div .nav.nav-tabs>li {
 
 .mp_classInfo>div>div:last-child>div:first-child {
 	width: 580px;
-	height: 40px;
-	line-height: 80px;
+	line-height: 25px;
 	float: left;
 }
 

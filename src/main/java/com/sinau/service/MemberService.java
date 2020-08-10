@@ -144,10 +144,7 @@ public class MemberService {
 	}
 
 	private void fileUp(MultipartHttpServletRequest multi, String m_email) throws IllegalStateException, IOException {
-
 		String filePath = multi.getSession().getServletContext().getRealPath("/") + "resources/upload/";
-
-		log.info("dddddddddddddddddddddd"+filePath);
 		
 		File folder = new File(filePath);
 		if (folder.isDirectory() == false) {
