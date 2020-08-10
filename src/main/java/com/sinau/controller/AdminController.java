@@ -141,19 +141,18 @@ public class AdminController {
 
 		return mv;
 	}
-	
-	
-//	//회원 삭제
-//	@PostMapping(value = "memberDelete",produces = "application/json; charset=utf-8")
-//	@ResponseBody
-//    public Map<String, List<AdminDto>> 
-//    getMemStateNm(String m_email){
-//     int result =0;
-//     AdminDto memDel = new AdminDto();
-//     
-//     Map<String, List<AdminDto>> rMap =aServ.deleteMember(m_email);   
-//     
-//     
-//     return rMap;
-//	}
+
+	//	//회원 삭제
+	//	@PostMapping(value = "memberDelete",produces = "application/json; charset=utf-8")
+	//	@ResponseBody
+	//    public Map<String, List<AdminDto>> 
+	//    getMemStateNm(String m_email){
+	//     int result =0;
+	//     AdminDto memDel = new AdminDto();
+	//     
+	//     Map<String, List<AdminDto>> rMap =aServ.deleteMember(m_email);   
+	//     
+	//     
+	//     return rMap;
+	//	}
 }

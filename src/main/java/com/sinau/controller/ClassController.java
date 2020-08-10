@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.dto.LikesDto;
-import com.sinau.dto.VideoListDto;
 import com.sinau.service.ClassService;
 
 import lombok.extern.java.Log;
@@ -41,7 +40,7 @@ public class ClassController {
 	
 	@GetMapping("onlineInfo")
 	public ModelAndView onlineInfo(String onc_code) {
-		
+		log.info("1111111111111"+onc_code);
 		mv = cServ.getOnlineInfo(onc_code);
 		
 		return mv;
@@ -68,21 +67,11 @@ public class ClassController {
 	}
 	
 	@GetMapping("classroom")
-	public ModelAndView classroom(String onc_code) {
+	public ModelAndView classroom() {
 		
-		mv = cServ.classroom(onc_code);
+		mv = cServ.classroom(null, null);
 		
 		return mv;
-	}
-	
-	@PostMapping(value = "videoChange", produces = "application/json; charset = utf-8")
-	@ResponseBody
-	public VideoListDto videoChange(String vf_code, String onc_code){
-		log.info(vf_code+ onc_code);
-
-		VideoListDto videoChange = cServ.videoChange(vf_code, onc_code);
-	
-		return videoChange;
 	}
 }
 

@@ -34,6 +34,7 @@
 			<mapping path="/*"/>
 <!-- 			가로채기에서 제외할 uri를 지정 -->
 			<exclude-mapping path="/"/>
+			<exclude-mapping path="/store"/>
 			<exclude-mapping path="/id"/>
 			<exclude-mapping path="/pwd"/>
 			<exclude-mapping path="/pwdreset"/>
@@ -41,18 +42,12 @@
 			<exclude-mapping path="/loginFrm"/>
 			<exclude-mapping path="/joinFrm"/>
 			<exclude-mapping path="/access"/>
-			<exclude-mapping path="/youtube"/>
-			<exclude-mapping path="/contents"/>
 			<exclude-mapping path="/memberInsert"/>
-			<exclude-mapping path="/boardUpdate"/>
-			<exclude-mapping path="/fdelete"/>
-			<exclude-mapping path="/store"/>
-			<exclude-mapping path="/updateFrm"/>
 			<exclude-mapping path="/idCheck"/>
 			<exclude-mapping path="/boardWrite"/>
 			<exclude-mapping path="/servicecenter_question"/>
 			<beans:bean 
-				class="com.sinau.util.SessionInterceptor"/>
+				class="com.sinau.util.SessionInterceptor" />
 		</interceptor>
 	</interceptors> 
 	

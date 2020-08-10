@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.sinau.dto.AdminDto;
-import com.sinau.dto.FilesDto;
-import com.sinau.dto.QuestionInfoDto;
 
 public interface AdminDao {
 	
@@ -34,6 +32,8 @@ public interface AdminDao {
 	public void getYDel(String code);
 
 
+
+	
 	
 //	//전체 회원 가져오는 리스트
 //	public List<AdminDto> getAllMem();

@@ -50,9 +50,6 @@ public interface ClassInfoDao {
 	//아이디에 따른 좋아요 상태 가져오기
 	List<OnInfoDto> onLInfo(HashMap<String, Object> hashMap);
 
-	//상세화면 접속시 조회수 증가 
-	void viewUpdate(String onc_code);
-
 
 	
 }

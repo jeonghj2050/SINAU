@@ -18,24 +18,36 @@
 	<header>
 		<jsp:include page="header.jsp"></jsp:include>
 	</header>
-	
-	<section class="section-home">
 	<div class="content-home">
 		<div class="slider">
 			<div>
-				<img src="resources/images/event.webp" width="100%" height="100%">
+				<img src="resources/images/event.webp" width="1300" height="300">
 			</div>
 			<div>
-				<img src="resources/images/event1.jpg" width="100%" height="100%">
+				<img src="resources/images/event1.jpg" width="1300" height="300">
 			</div>
 			<div>
-				<img src="resources/images/event2.jpg" width="100%" height="100%">
+				<img src="resources/images/event2.jpg" width="1300" height="300">
 			</div>
 			<div>
-				<img src="resources/images/event3.jpg" width="100%" height="100%">
+				<img src="resources/images/event3.jpg" width="1300" height="300">
 			</div>
 		</div>
 	</div>
+	<section class="section-home">
+		<article class="childart">
+			<c:forEach var="onlineClass" items="${offList}">
+				<div class="mp_classInfo" id="${offClass.ofc_code}">
+					<img src="resources/images/test/${offClass.f_oriname }" alt=""
+						width="300px" height="300px" id="mp_class_img">
+					<div class="class_info_contents" id="${offClass.ofc_code}">
+						<p>${offClass.cts_name}| ${offClass.m_name}</p>
+						<p class="info_title">${offClass.ofc_title}</p>
+						<div>${offClass.ofc_content}</div>
+					</div>
+				</div>
+			</c:forEach>
+		</article>
 	</section>
 	<footer>
 		<jsp:include page="footer.jsp"></jsp:include>
@@ -64,16 +76,5 @@
 		
 	});
 </script>
-<script type="text/javascript">
-$(document).ready(function(){
-	var chk = "${check}";
-	
-	if(chk == "1"){
-		alert("회원가입 실패!");
-	}
-	else  if(chk == "2"){
-		alert("회원가입 성공!");
-	}
-});
-</script>
+
 </html>
