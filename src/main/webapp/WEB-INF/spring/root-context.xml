@@ -10,21 +10,21 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- 학원에서 할때 
+	
 		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy"></property>
 		 <property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property> 
 		<property name="username" value="sinau3"></property>
 		<property name="password" value="1234"></property>
 	</bean>	
- -->
+<!-- 학원에서 할때 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy"></property>
 		<property name="url" value="jdbc:log4jdbc:oracle:thin:@192.168.0.212:1521:xe"></property>
 		<property name="username" value="sinau"></property>
 		<property name="password" value="1234"></property>
 	</bean>
-	
+	 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
