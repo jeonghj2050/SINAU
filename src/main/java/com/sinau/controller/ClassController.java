@@ -74,9 +74,7 @@ public class ClassController {
 	public ModelAndView offApply(String ofc_code) {
 		log.info("offlineApply()" + ofc_code);
 		mv = cServ.getOffApply(ofc_code);
-		
-		
-		
+	
 		return mv;
 	}
 
