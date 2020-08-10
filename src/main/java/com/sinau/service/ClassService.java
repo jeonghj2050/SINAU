@@ -25,6 +25,7 @@ import com.sinau.dto.OnListDto;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.SpecListDto;
+import com.sinau.dto.VideoListDto;
 
 import lombok.extern.java.Log;
 
@@ -127,6 +128,9 @@ public class ClassService {
 		//spec 이미지 3개 저장
 		List<SpecListDto> onSpecList = cInfoDao.SpecList(onc_code);
 		mv.addObject("onSpecList", onSpecList);
+		
+		//조회수 증가
+		cInfoDao.viewUpdate(onc_code);
 		
 		//content 이미지 및 내용 저장
 	    if(email == null||email.equals("")) {
@@ -231,18 +235,42 @@ public class ClassService {
 			return mv;
 		}
 		
+//		//myonlineinfo에서 onc_code검색해서 내 강의 목록에 있으면 강의 비디오 정보 가져오기
+//		List<ClassroomDto> classroom = cDao.getCR(onc_code);
+//		System.out.println("classroom>>>"+classroom);
+//		
+//		ClassroomDto classroomSample = classroom.get(0);
+//		mv.addObject("classroomSample",classroomSample);
+//		System.out.println("classroomSample>>>"+classroomSample);
+//	
+//		mv.addObject("classroom", classroom);
+//		mv.addObject("videoList", classroom);
 		
-		//String herclass = cDao.getHerClass(name);	
+		//비디오 리스트 가져오기
+		System.out.println("onc_code>>>>>>"+onc_code+email);
+		List<VideoListDto> videoLists = cDao.getVideoLists(onc_code, email);
+		mv.addObject("videoLists", videoLists);
+		System.out.println("videoLists>>>>>>"+videoLists);
 		
+		//선택된 강좌 배열에서 검색 후 저장
+		VideoListDto  selVideoLists = videoLists.get(0);
+		mv.addObject("selVideoLists", selVideoLists);
 		
-		//myonlineinfo에서 onc_code검색해서 내 강의 목록에 있으면 강의 비디오 정보 가져오기
-		List<ClassroomDto> classroom = cDao.getCR(onc_code, email);
-		
-		
-	  
 	  	mv.setViewName("online/online_classroom");
 	  		
 	  	return mv;
 	}
+
+	public VideoListDto videoChange(String vf_code, String onc_code) {
+		log.info("videoChange()"+vf_code+onc_code);
+		
+		String email=((MemberDto)session.getAttribute("mb")).getM_email();
+		
+		VideoListDto videoChange = cDao.getvideoChange(vf_code, onc_code, email);
+		
+		return videoChange;
+	}
+	
+	
 	
 }
