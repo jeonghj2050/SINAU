@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.dao.CategoryDao;
@@ -300,6 +301,7 @@ public class ClassService {
       }
 
       public ModelAndView classroom(String onc_code) {
+    	  mv=new ModelAndView();
          log.info("classroom()" + onc_code);
          
          String email = ((MemberDto)session.getAttribute("mb")).getM_email();
@@ -309,36 +311,12 @@ public class ClassService {
          OnlineClassDto c_m_check = null;
          c_m_check = cDao.checkOnClass(onc_code, email);
          log.info("c_m_check()"+c_m_check.getOnc_m_email());
-         
-//         //주문 내역에서 내 이메일과 온라인 강의 코드에 해당하는 정보 있는지 확인
-//         OrderDto orderCheck = null;
-//         orderCheck = cDao.checkOrderList(loginMember.getM_email(), onc_code);
-//         log.info("orderCheck()");
-//         
-//         //주문 내역 없는데 url타고 들어가는거 방지 -> 홈화면으로 이동
-//         if (c_m_check == null && orderCheck == null ) {
-//            mv.setViewName("/");
-//            log.info("비회원 홈으로 돌아가기");
-//            return mv;
-//         }
-         
-         if (c_m_check == null) {
+
+         if (ObjectUtils.isEmpty(c_m_check)) {
             mv.setViewName("/");
             log.info("내가 강의 아님 홈으로 돌아가기");
-            return mv;
          }
-         
-//         //myonlineinfo에서 onc_code검색해서 내 강의 목록에 있으면 강의 비디오 정보 가져오기
-//         List<ClassroomDto> classroom = cDao.getCR(onc_code);
-//         System.out.println("classroom>>>"+classroom);
-//         
-//         ClassroomDto classroomSample = classroom.get(0);
-//         mv.addObject("classroomSample",classroomSample);
-//         System.out.println("classroomSample>>>"+classroomSample);
-   //   
-//         mv.addObject("classroom", classroom);
-//         mv.addObject("videoList", classroom);
-         
+ 
          //비디오 리스트 가져오기
          System.out.println("onc_code>>>>>>"+onc_code+email);
          List<VideoListDto> videoLists = cDao.getVideoLists(onc_code, email);

@@ -14,6 +14,4 @@ public class PInfoPaymentsDto {
 	private int l_count;
 	private int l_state;
 	private String l_m_email;
-	
-	
 }

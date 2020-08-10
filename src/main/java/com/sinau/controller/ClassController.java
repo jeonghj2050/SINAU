@@ -107,9 +107,9 @@ public class ClassController {
 	}
 	
 	@GetMapping("classroom")
-	public ModelAndView classroom() {
+	public ModelAndView classroom(String onc_code) {
 		
-		mv = cServ.classroom(null, null);
+		mv = cServ.classroom(onc_code);
 		
 		return mv;
 	}
