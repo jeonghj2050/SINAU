@@ -32,31 +32,31 @@ import lombok.extern.java.Log;
 @Service
 @Log
 public class ClassService {
-	//DAO 객체 선언
-		@Autowired
-		private CategoryDao cateDao;
-		@Autowired
-		private ClassDao cDao;
-		@Autowired
-		private ClassInfoDao cInfoDao;
-		@Autowired
-		MemberDao mDao;
-		
-		@Autowired
-		HttpSession session;
-		
-		ModelAndView mv;
-		
-		MemberDto loginMember;
+   //DAO 객체 선언
+      @Autowired
+      private CategoryDao cateDao;
+      @Autowired
+      private ClassDao cDao;
+      @Autowired
+      private ClassInfoDao cInfoDao;
+      @Autowired
+      MemberDao mDao;
+      
+      @Autowired
+      HttpSession session;
+      
+      ModelAndView mv;
+      
+      MemberDto loginMember;
 
-	// 오프라인 카테고리에 해당하는 강의 목록을 가져온다.
-	public ModelAndView getOffList() {
+   // 오프라인 카테고리에 해당하는 강의 목록을 가져온다.
+   public ModelAndView getOffList() {
 
-		mv = new ModelAndView();
+      mv = new ModelAndView();
 
-		// 강좌 목록 가져오는 메소드
-		List<OffListDto> offList = cDao.getOffList();
-		mv.addObject("offList", offList);
+      // 강좌 목록 가져오는 메소드
+      List<OffListDto> offList = cDao.getOffList();
+      mv.addObject("offList", offList);
 
 		// 서브 카테고리 가져오는 메소드
 		List<OffCtsDto> offCate = cDao.getOffCate();
@@ -308,8 +308,7 @@ public class ClassService {
 			log.info("email()"+email);
 			
 			//크리에이터 이메일로 내 강의 검색해서 클래스룸 접속 권한 추가
-			OnlineClassDto c_m_check = null;
-			c_m_check = cDao.checkOnClass(onc_code, email);
+			OnlineClassDto c_m_check = cDao.checkOnClass(onc_code, email);
 			log.info("c_m_check()"+c_m_check.getOnc_m_email());
 			
 //			//주문 내역에서 내 이메일과 온라인 강의 코드에 해당하는 정보 있는지 확인

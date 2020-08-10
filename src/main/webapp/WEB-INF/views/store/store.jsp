@@ -79,6 +79,7 @@
 			<div class="swiper-container swc1" id="swc1" style="width: 1100px;">
 				<div class="swiper-wrapper">
 					<c:forEach var="pitem" items="${productList}">
+					
 						<div class="swiper-slide">
 							<div class="swiper_img">
 								<img src="resources/images/storeimg/sum/${pitem.f_oriname}"

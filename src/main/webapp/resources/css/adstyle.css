@@ -144,6 +144,8 @@ div.mAprovalCate div :hover {
 	font-size: 24px;
 	color: white;
 }
+
+
 /*게시글 관리 카테고리 */
 .menuCate {
 	float: left;
@@ -196,6 +198,8 @@ div.mAprovalCate div :hover {
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }
+
+
 
 /* 가입승인 탭 */
 .tabs>#t1.on {
@@ -319,7 +323,7 @@ div.mAprovalCate div :hover {
 	margin: 0px 0px 0px 20px;
 	float: left;
 	width: 1076px;
-	height: 1000px;
+/* 	height: 1000px; */
 	padding: 80px 25px;
 	background-color: #e8dcc6;
 }
@@ -341,6 +345,8 @@ div.mAprovalCate div :hover {
 	padding: 80px 25px;
 	background-color: #d9d9ff;
 }
+
+
 
 /* 정보승인 게시판 */
 .information-1 {
