@@ -1,14 +1,27 @@
 package com.sinau.controller;
 
+import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.sinau.dto.OrderDto;
+import com.sinau.dto.PayCouponDto;
+import com.sinau.dto.VideoListDto;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.dto.LikesDto;
-import com.sinau.dto.VideoListDto;
 import com.sinau.service.ClassService;
 
 import lombok.extern.java.Log;
@@ -63,12 +76,9 @@ public class ClassController {
 	public ModelAndView offApply(String ofc_code) {
 		log.info("offlineApply()" + ofc_code);
 		mv = cServ.getOffApply(ofc_code);
-		
-		
-		
+ 	
 		return mv;
 	}
-
 
 /*은경 파트*/
 	
