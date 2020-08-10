@@ -53,65 +53,65 @@
 			return false;
 		});
 	});
-	
+
 	$(document)
-	.on(
-			"click",
-			"#sh-link",
-			function(e) {
-				// 링크복사 시 화면 크기 고정
-				$('html')
-						.find('meta[name=viewport]')
-						.attr(
-								'content',
-								'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no');
-				var html = "<input id='clip_target' type='text' value='' style='position:absolute;top:-9999em;'/>";
-
-				$(this).append(html);
-				var input_clip = document.getElementById("clip_target");
-				//현재 url 가져오기 
-				var _url = $(location).attr('href');
-				$("#clip_target").val(_url);
-				if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
-					var editable = input_clip.contentEditable;
-
-					var readOnly = input_clip.readOnly;
-					input_clip.contentEditable = true;
-					input_clip.readOnly = false;
-
-					var range = document.createRange();
-					range.selectNodeContents(input_clip);
-
-					var selection = window.getSelection();
-					selection.removeAllRanges();
-					selection.addRange(range);
-					input_clip.setSelectionRange(0, 999999);
-
-					input_clip.contentEditable = editable;
-					input_clip.readOnly = readOnly;
-
-				} else {
-					input_clip.select();
-				}
-				try {
-					var successful = document.execCommand('copy');
-					input_clip.blur();
-					if (successful) {
-						alert("URL이 복사 되었습니다. 원하시는 곳에 붙여넣기 해 주세요.");
-						// 링크복사 시 화면 크기 고정 
-
+			.on(
+					"click",
+					"#sh-link",
+					function(e) {
+						// 링크복사 시 화면 크기 고정
 						$('html')
 								.find('meta[name=viewport]')
 								.attr(
 										'content',
-										'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes');
-					} else {
-						alert('이 브라우저는 지원하지 않습니다.');
-					}
-				} catch (err) {
-					alert('이 브라우저는 지원하지 않습니다.');
-				}
-			});
+										'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no');
+						var html = "<input id='clip_target' type='text' value='' style='position:absolute;top:-9999em;'/>";
+
+						$(this).append(html);
+						var input_clip = document.getElementById("clip_target");
+						//현재 url 가져오기 
+						var _url = $(location).attr('href');
+						$("#clip_target").val(_url);
+						if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+							var editable = input_clip.contentEditable;
+
+							var readOnly = input_clip.readOnly;
+							input_clip.contentEditable = true;
+							input_clip.readOnly = false;
+
+							var range = document.createRange();
+							range.selectNodeContents(input_clip);
+
+							var selection = window.getSelection();
+							selection.removeAllRanges();
+							selection.addRange(range);
+							input_clip.setSelectionRange(0, 999999);
+
+							input_clip.contentEditable = editable;
+							input_clip.readOnly = readOnly;
+
+						} else {
+							input_clip.select();
+						}
+						try {
+							var successful = document.execCommand('copy');
+							input_clip.blur();
+							if (successful) {
+								alert("URL이 복사 되었습니다. 원하시는 곳에 붙여넣기 해 주세요.");
+								// 링크복사 시 화면 크기 고정 
+
+								$('html')
+										.find('meta[name=viewport]')
+										.attr(
+												'content',
+												'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes');
+							} else {
+								alert('이 브라우저는 지원하지 않습니다.');
+							}
+						} catch (err) {
+							alert('이 브라우저는 지원하지 않습니다.');
+						}
+					});
 </script>
 </head>
 <body>
@@ -136,34 +136,35 @@
 					<strong><fmt:formatNumber pattern="###,###,###"
 							value="${pInfoPay.p_price}" />원</strong>
 				</div>
+				
 				<div class="hr"></div>
 				<div class="like_container">
 					<div class="btn_div">
-								<button type="button" class="likebtn unfilled_heart"
-									color="default" fill="false" data-test-id="wishlist-button"
-									data-test-group="sales-product-info-table-row">
-									<div class="sc-fzqARJ eozcfK">
-										<svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+						<button type="button" class="likebtn unfilled_heart"
+							color="default" fill="false" data-test-id="wishlist-button"
+							data-test-group="sales-product-info-table-row">
+							<div class="sc-fzqARJ eozcfK">
+								<svg width="18" height="18" fill="none" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
-												clip-rule="evenodd"
-												d="M20.5 9c0-2-1.5-3.9-3.7-3.9-2.3 0-3.8 1.63-4.8 3.33-1-1.7-2.5-3.33-4.8-3.33C5 5.1 3.5 6.867 3.5 9c0 4.62 4.949 7.667 8.5 9.623 3.551-1.956 8.5-5.003 8.5-9.623zm-19-.176C1.5 5.607 3.962 3 7 3c2.7 0 4 1 5 2.2C13 4 14.3 3 17 3c3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
-												fill="#1b1c1d"></path>
+										clip-rule="evenodd"
+										d="M20.5 9c0-2-1.5-3.9-3.7-3.9-2.3 0-3.8 1.63-4.8 3.33-1-1.7-2.5-3.33-4.8-3.33C5 5.1 3.5 6.867 3.5 9c0 4.62 4.949 7.667 8.5 9.623 3.551-1.956 8.5-5.003 8.5-9.623zm-19-.176C1.5 5.607 3.962 3 7 3c2.7 0 4 1 5 2.2C13 4 14.3 3 17 3c3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
+										fill="#1b1c1d"></path>
                                 </svg>
-									</div>
-									<span class="like_num"><span>${pInfoPay.l_count}</span></span>
-								</button>
-								<button type="button" class="likebtn full_heart" color="default"
-									fill="false">
-									<div class="sc-fzqARJ eozcfK">
-										<svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+							</div>
+							<span class="like_num"><span>${pInfoPay.l_count}</span></span>
+						</button>
+						<button type="button" class="likebtn full_heart" color="default"
+							fill="false">
+							<div class="sc-fzqARJ eozcfK">
+								<svg width="18" height="18" fill="none" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
-												clip-rule="evenodd"
-												d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
-												fill="#1b1c1d"></path>
+										clip-rule="evenodd"
+										d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
+										fill="#1b1c1d"></path>
                                 </svg>
-									</div>
-									<span class="like_num"><span>${pInfoPay.l_count+1}</span></span>
-								</button>
+							</div>
+							<span class="like_num"><span>${pInfoPay.l_count+1}</span></span>
+						</button>
 
 					</div>
 					<div class="btn_div">
@@ -260,12 +261,11 @@
 							</div>
 						</div>
 					</div>
-					<div class="sc-pAYXY fmggLq"></div>
+
 				</div>
 			</div>
 
-			<hr width="950px" style="float: left;">
-
+	
 			<!-- 상품소개 -->
 			<div class="sinfo_detail">
 				<div class="sp_title1">상품 소개</div>
@@ -316,7 +316,8 @@
 										<!-- 댓글삭제-->
 										<c:if test="${r.prv_m_email == mb.m_email}">
 											<!-- <button type="button" class="delelte_dtn" onclick="reviewDelete('${r.prv_code}',this)"> -->
-											<button type="button" class="delelte_dtn" prv-code="${r.prv_code}">
+											<button type="button" class="delelte_dtn"
+												prv-code="${r.prv_code}">
 												<span class="delite_ico"> <svg width="1em"
 														height="1em" viewBox="0 0 16 16" class="bi bi-x-circle"
 														fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -348,25 +349,15 @@
 
 										</c:if>
 										<!-- 댓글신고-->
-										<%-- <c:if test="${r.prv_m_email == mb.m_email}">
-											<button class="warning_dtn mywarning" data-toggle="modal"
-												data-target="#exampleModal">
+
+										<c:if
+											test="${(!empty mb.m_email) && (r.prv_m_email != mb.m_email)&&(r.w_state ne '1')&&(r.w_state eq null)}">
+											<button type="button" class="warning_dtn warningInsert"
+												data-toggle="modal" data-target="#warningModal"
+												data-email="${r.prv_m_email}"
+												data-content="${r.prv_content}" data-prv="${r.prv_code}"
+												data-pcode="${p_code}">
 												<span class="warning_ico"> <svg width="1em"
-														height="1em" viewBox="0 0 16 16"
-														class="bi bi-exclamation-triangle" fill="currentColor"
-														xmlns="http://www.w3.org/2000/svg">
- 												 <path fill-rule="evenodd"
-															d="M7.938 2.016a.146.146 0 0 0-.054.057L1.027 13.74a.176.176 0 0 0-.002.183c.016.03.037.05.054.06.015.01.034.017.066.017h13.713a.12.12 0 0 0 .066-.017.163.163 0 0 0 .055-.06.176.176 0 0 0-.003-.183L8.12 2.073a.146.146 0 0 0-.054-.057A.13.13 0 0 0 8.002 2a.13.13 0 0 0-.064.016zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
-  												 <path
-															d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
-													</svg></span>
-											</button>
-										</c:if> --%>
-										<c:if test="${(!empty mb.m_email) && (r.prv_m_email != mb.m_email)}">
-											<button type="button" class="warning_dtn warningInsert" data-toggle="modal" 
-												data-target="#warningModal" data-email="${r.prv_m_email}" data-content="${r.prv_content}" data-prv="${r.prv_code}" data-pcode="${p_code}">
-												<span class="warning_ico"> 
-														<svg width="1em"
 														height="1em" viewBox="0 0 16 16"
 														class="bi bi-exclamation-triangle" fill="currentColor"
 														xmlns="http://www.w3.org/2000/svg">
@@ -379,8 +370,12 @@
 										</c:if>
 
 
-									</div>
-									<div class="replyContent" id="r_content">${r.prv_content }</div>
+									</div>  <c:if test="${r.w_state eq '1'}">
+										<div class="replyContent" id="r_content" style="color: gray">신고된
+											리뷰 입니다.</div>
+									</c:if> <c:if test="${r.w_state ne '1'}">
+										<div class="replyContent" id="r_content">${r.prv_content }</div>
+									</c:if>
 								</li>
 							</c:forEach>
 						</ol>
@@ -401,30 +396,34 @@
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							
+
 							<div class="modal-body">
 								<form name="warningFrm" id="warningFrm">
 									<div class="form-group">
 										<input type="hidden" name="w_prv_code" class="md_prv">
 										<!-- <input type="hidden" name="p_code" class="md_pcode"> -->
 										<input type="hidden" name="w_m_email" class="m_email">
-										내용 : <div class="md_content"></div>
+										내용 :
+										<div class="md_content"></div>
 										<hr>
-										작성자:<div class="md_email"></div>
+										작성자:
+										<div class="md_email"></div>
 									</div>
 									<hr>
-									<div class="form-group">사유<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-										<input type="radio" name="w_contentNum" value="1">비방 및 욕설<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="radio" name="w_contentNum" value="2" checked="checked">부적절한 홍보 게시물<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="radio" name="w_contentNum" value="3">음란성 또는 청소년에게 부적합한 내용<br>
+									<div class="form-group">
+										사유<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio"
+											name="w_contentNum" value="1">비방 및 욕설<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio"
+											name="w_contentNum" value="2" checked="checked">부적절한
+										홍보 게시물<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
+											type="radio" name="w_contentNum" value="3">음란성 또는
+										청소년에게 부적합한 내용<br>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">취소</button>
-										<button id="modalSubmit" type="button" class="btn btn-primary" onclick="warningInsert()">제출</button>
+										<button id="modalSubmit" type="button" class="btn btn-primary"
+											onclick="warningInsert()">제출</button>
 									</div>
 								</form>
 							</div>
@@ -516,9 +515,9 @@
 				</div>
 			</div>
 	</section>
-	
+
 	<footer><jsp:include page="../footer.jsp"></jsp:include>
-	
+
 	</footer>
 </body>
 <script src="resources/javascript/jquery.serializeObject.js"></script>
@@ -528,86 +527,88 @@
 		$('.otherreply').hide();
 		$('.mywarning').hide();
 	});
-	$(document).on('click', '#reply_btn', function(){
-		var replyFrm = $('#rFrm').serializeObject();
-		//추가 데이터 : 게시글번호, 작성자(로그인) id
+	$(document)
+			.on(
+					'click',
+					'#reply_btn',
+					function() {
+						var replyFrm = $('#rFrm').serializeObject();
+						//추가 데이터 : 게시글번호, 작성자(로그인) id
 
-		//세션에 저장한 로그인 회원 정보에서 id 추출
-		replyFrm.prv_m_email = '${mb.m_email}';
-		console.log(replyFrm);
-		
-		jQuery.noConflict();
-		
-		jQuery.ajax({
-			url : "reviewInsert",//요청 url(uri)
-			type : "post",//전송 방식(get, post)
-			data : replyFrm,//전송할 데이터
-			dataType : "json",//데이터의 형식
-			success : function(data) {
-				//목록 전체를 하나의 문자열로 만들어서
-				//한꺼번에 id가 rTable인 태그(요소)의
-				//innerHTML에 출력.
-				var rlist = '<ol>';
-				var dlist = data.review;
-				var r_code = '';
-				//var r_code=${r.prv_code};
-				
-					
-					rlist += "<li data-prv_p_code='" + dlist.prv_p_code + "'>"
-						+ "<div class='userInfo'>"
-						+ "<span class='userName'>"
-						+ dlist.prv_m_email
-						+ "</span>"
-						+ "<span class='date'>"
-						+ dlist.prv_date
-						+ "</span>"
-						+ "<button type='button' class='delelte_dtn' prv-code='"
+						//세션에 저장한 로그인 회원 정보에서 id 추출
+						replyFrm.prv_m_email = '${mb.m_email}';
+						console.log(replyFrm);
+
+						jQuery.noConflict();
+
+						jQuery
+								.ajax({
+									url : "reviewInsert",//요청 url(uri)
+									type : "post",//전송 방식(get, post)
+									data : replyFrm,//전송할 데이터
+									dataType : "json",//데이터의 형식
+									success : function(data) {
+										//목록 전체를 하나의 문자열로 만들어서
+										//한꺼번에 id가 rTable인 태그(요소)의
+										//innerHTML에 출력.
+										var rlist = '<ol>';
+										var dlist = data.review;
+										var r_code = '';
+										//var r_code=${r.prv_code};
+
+										rlist += "<li data-prv_p_code='" + dlist.prv_p_code + "'>"
+												+ "<div class='userInfo'>"
+												+ "<span class='userName'>"
+												+ dlist.prv_m_email
+												+ "</span>"
+												+ "<span class='date'>"
+												+ dlist.prv_date
+												+ "</span>"
+												+ "<button type='button' class='delelte_dtn' prv-code='"
 						+ dlist.prv_code
 						+ "'>"
-						+ "<span class='delite_ico'>"
-						+ "<svg width='1em'height='1em' viewBox='0 0 16 16' class='bi bi-x-circle'fill='currentColor' xmlns='http://www.w3.org/2000/svg'>"
-						+ "<path fill-rule='evenodd'	d='M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z' />"
-						+ "<path fill-rule='evenodd'	d='M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z' />"
-						+ "<path fill-rule='evenodd' d='M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z' />"
-						+ "</svg>"
-						+ "</span>"
-						+ "</button>"
-						+ "</div>"
-						+ "<div class='replyContent'>"
-						+ dlist.prv_content
-						+ "</div>"
-						+ "</li>";
-						
-				
-				rlist += "</ol>";
-				$('#rlist-ol').append(rlist);
-				//location.reload(true);
-			},
-			error : function(error) {
-				alert("댓글 입력 실패");
-			}
-		});
+												+ "<span class='delite_ico'>"
+												+ "<svg width='1em'height='1em' viewBox='0 0 16 16' class='bi bi-x-circle'fill='currentColor' xmlns='http://www.w3.org/2000/svg'>"
+												+ "<path fill-rule='evenodd'	d='M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z' />"
+												+ "<path fill-rule='evenodd'	d='M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z' />"
+												+ "<path fill-rule='evenodd' d='M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z' />"
+												+ "</svg>"
+												+ "</span>"
+												+ "</button>"
+												+ "</div>"
+												+ "<div class='replyContent'>"
+												+ dlist.prv_content
+												+ "</div>"
+												+ "</li>";
 
-		$('#repCon').val('');//댓글창 지우기
-	});
-	
-	
+										rlist += "</ol>";
+										$('#rlist-ol').append(rlist);
+										//location.reload(true);
+									},
+									error : function(error) {
+										alert("댓글 입력 실패");
+									}
+								});
+
+						$('#repCon').val('');//댓글창 지우기
+					});
+
 	//댓글 삭제
-	
-	$(document).on('click', '.delelte_dtn', function(){
+
+	$(document).on('click', '.delelte_dtn', function() {
 		var prv_code = $(this).attr('prv-code');
 		var obj = $(this).parent().parent();
 		console.log(obj);
-		
+
 		jQuery.noConflict();
-		
+
 		var deleteConfirm = confirm("정말 삭제 하시겠습니까")
 		if (deleteConfirm) {
 			var paramData = {
 				"prv_code" : prv_code
 			};
 			console.log(paramData);
-			
+
 			jQuery.ajax({
 				url : "reviewDelete",
 				type : "post",
@@ -624,66 +625,63 @@
 			});
 		}
 	});
-	
-	
 </script>
 
 <script type="text/javascript">
-$(document).ready(function() {
-	$('#warningModal').on('show.bs.modal', function(event){
-		var button = $(event.relatedTarget);
-		var email=button.data('email');
-		var content=button.data('content');
-		var prv_code=button.data('prv');
-		var p_code=button.data('pcode');
-		console.log(email, content, prv_code, p_code);
-		$('.md_content').html(content);
-		$('.md_email').html(email);
-		$('.md_prv').val(prv_code);
-		$('.md_pcode').val(p_code);
-		$('.m_email').val(email);
-	});
-	
-	var modal_hide = function(){
-		$('#warningModal').modal('hide');
-	}
-});
+	$(document).ready(function() {
+		$('#warningModal').on('show.bs.modal', function(event) {
+			var button = $(event.relatedTarget);
+			var email = button.data('email');
+			var content = button.data('content');
+			var prv_code = button.data('prv');
+			var p_code = button.data('pcode');
+			console.log(email, content, prv_code, p_code);
+			$('.md_content').html(content);
+			$('.md_email').html(email);
+			$('.md_prv').val(prv_code);
+			$('.md_pcode').val(p_code);
+			$('.m_email').val(email);
+		});
 
+		var modal_hide = function() {
+			$('#warningModal').modal('hide');
+		}
+	});
 </script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="resources/javascript/jquery.serializeObject.js"></script>
 <script>
-jQuery.noConflict();
-function warningInsert() {
-	var warningFrm = $('#warningFrm').serializeObject();
-	console.log(warningFrm);
-	
-	var prv_code = warningFrm.w_prv_code;
-	console.log(prv_code);
-	var rcont = $('#'+prv_code).next();
-	console.log(rcont);
-	var rbtn = $('#'+prv_code+' .warning_dtn');
-	console.log(rbtn);
-	
-	$('#warningModal').modal('hide');
-	
-	jQuery.ajax({
-		url : "warningInsert",
-		type : "post",
-		data : warningFrm,
-		dataType : "json",//데이터의 형식
-		success : function(result) {
-			console.log(result);
-			rcont.html('신고된 리뷰입니다.');
-			rcont.css('color', 'gray');
-			rbtn.hide();
-		},
-		error : function(error) {
-			console.log(error);
-		}
-	});
-	
-}
+	jQuery.noConflict();
+	function warningInsert() {
+		var warningFrm = $('#warningFrm').serializeObject();
+		console.log(warningFrm);
+
+		var prv_code = warningFrm.w_prv_code;
+		console.log(prv_code);
+		var rcont = $('#' + prv_code).next();
+		console.log(rcont);
+		var rbtn = $('#' + prv_code + ' .warning_dtn');
+		console.log(rbtn);
+
+		$('#warningModal').modal('hide');
+
+		jQuery.ajax({
+			url : "warningInsert",
+			type : "post",
+			data : warningFrm,
+			dataType : "json",//데이터의 형식
+			success : function(result) {
+				console.log(result);
+				rcont.html('신고된 리뷰입니다.');
+				rcont.css('color', 'gray');
+				rbtn.hide();
+			},
+			error : function(error) {
+				console.log(error);
+			}
+		});
+
+	}
 </script>
 </html>

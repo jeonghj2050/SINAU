@@ -1,12 +1,6 @@
 package com.sinau.dao;
 
-import java.util.HashMap;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
-import com.sinau.dto.LikesDto;
-import com.sinau.dto.OnInfoDto;
 import com.sinau.dto.PReviewDto;
 
 public interface pInfoDao {
@@ -26,6 +20,7 @@ public interface pInfoDao {
 //여기까지
 
 	public PReviewDto getReview(String prv_code);
+
 	
 
 	
