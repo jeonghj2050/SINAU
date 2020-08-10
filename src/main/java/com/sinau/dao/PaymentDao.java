@@ -13,6 +13,8 @@ import com.sinau.dto.OnPayInfoDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.PPayInfoComDto;
 import com.sinau.dto.PPayInfoDto;
+import com.sinau.dto.OffListDto;
+import com.sinau.dto.OrderDto;
 import com.sinau.dto.PayCouponDto;
 
 public interface PaymentDao {

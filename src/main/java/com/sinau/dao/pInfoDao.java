@@ -1,7 +1,6 @@
 package com.sinau.dao;
 
 import java.util.List;
-
 import com.sinau.dto.PReviewDto;
 
 public interface pInfoDao {

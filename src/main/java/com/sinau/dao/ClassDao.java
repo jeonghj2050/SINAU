@@ -24,6 +24,8 @@ import com.sinau.dto.FilterCtsDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
+import com.sinau.dto.OffCtsDto;
+import com.sinau.dto.OffInfoDto;
 import com.sinau.dto.OffLikeDto;
 import com.sinau.dto.OffListDto;
 import com.sinau.dto.OffOrdScDto;
@@ -157,7 +159,34 @@ public interface ClassDao {
 	
 	OnListDto getOnInfoPay(String onc_code);
 	
-
+/*은경 파트*/
+   //온라인 강의 섬네일용 정보를 가져옴: online_main
+   //전체보기 목록 가져오기
+   List<OnListDto> getOnList();
+   //카테고리별 목록 가져오기
+   List<OnListDto> getOnListCa(String cate);
+   
+   //인기강좌 탑10 목록 가져오기
+   List<OnListDto> getTopOnList();
+   
+   //내 클래스룸 강좌 정보 가져오기:online_classroom
+   List<ClassroomDto> getCR(@Param("onc_code")String onc_code);
+   
+   //내 온라인 강의목록 뷰에서 요청 강의가 목록에 있는지 확인하기
+//   String getHerClass(String name);
+   
+   //내가 결제한 강의 유/무 확인하기
+//   OrderDto checkOrderList(@Param("onc_code")String onc_code,@Param("email")String email);
+   
+   //로그인한 크리에이터의 강의인지 확인하기
+   OnlineClassDto checkOnClass(@Param("onc_code")String onc_code,@Param("email")String email);
+   
+   //비디오 강의 별로 가져오기
+   List<VideoListDto> getVideoLists(@Param("onc_code")String onc_code,@Param("email")String email);
+   
+   //해당 강의 정보 가져오기
+   VideoListDto getvideoChange(@Param("vf_code")String vf_code,@Param("onc_code")String onc_code,@Param("email")String email);
+/*은경 파트*/
 	
 	
 	

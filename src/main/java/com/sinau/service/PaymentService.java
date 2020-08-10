@@ -86,42 +86,6 @@ public class PaymentService {
 		return mv;
 	}
 
-//	// 결제하기 위해 상품코드(스토어), 회원 정보 가져오는 메소드
-//	public ModelAndView getStorePay(PInfoPaymentsDto pInfoPay, String p_code, int ord_kind) {
-//		mv = new ModelAndView();
-//
-//		loginMember = (MemberDto) session.getAttribute("mb");
-//
-//		log.info("p_code : " + pInfoPay.getP_code());
-//		log.info("m_email : " + loginMember.getM_email());
-//
-//		String ofc_code = pInfoPay.getP_code();
-//		int ofc_sale = pInfoPay.getP_price();
-//		String ofc_title = pInfoPay.getP_title();
-//
-//		log.info("ofc_code : " + ofc_code);
-//		log.info("ofc_sale : " + ofc_sale);
-//		log.info("ofc_title : " + ofc_title);
-//
-//		// ofc_code에 해당하는 강좌 불러오는 메소드
-//		PInfoPaymentsDto prodList = piDao.getpInfoPay(pInfoPay.getP_code());
-//		mv.addObject("prodList", prodList);
-//
-//		// 선택한 멤버 정보 불러오는 메소드
-//		MemberDto getMemPayInfo = pDao.getMemPayInfo(loginMember.getM_email());
-//		mv.addObject("memPayInfo", getMemPayInfo);
-//
-//		// 멤버 m_email에 해당하는 쿠폰 dto list 불러오는 메소드
-//		List<PayCouponDto> payCoupon = pDao.getPayCouponList(loginMember.getM_email());
-//		mv.addObject("payCoupon", payCoupon);
-//
-//		mv.addObject("m_email", loginMember.getM_email());
-//		mv.addObject("ord_kind", ord_kind);
-//
-//		mv.setViewName("payment/payment");
-//
-//		return mv;
-//	}
 
 	// 결제완료시 주문내역, 마이클래스 Insert 메소드
 	@Transactional

@@ -1,7 +1,5 @@
 package com.sinau.controller;
 
-import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,17 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.sinau.dto.OrderDto;
-import com.sinau.dto.PayCouponDto;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.dto.LikesDto;
+import com.sinau.dto.VideoListDto;
 import com.sinau.service.ClassService;
 
 import lombok.extern.java.Log;
@@ -28,15 +20,80 @@ import lombok.extern.java.Log;
 @Controller
 @Log
 public class ClassController {
-
-	@Autowired
-	private ClassService cServ;
 	ModelAndView mv;
+	@Autowired
+	ClassService cServ = new ClassService();
 	
+//	@GetMapping("online")
+//	public ModelAndView online() {
+//		
+//		mv = cServ.getCategories();
+//		
+//		return mv;
+//	}
 	
+	@GetMapping("online")
+	public ModelAndView online() {
+		
+		mv = cServ.getOnList();
+		
+		return mv;
+	}
 	
+	@GetMapping("onlineInfo")
+	public ModelAndView onlineInfo(String onc_code) {
+		
+		mv = cServ.getOnlineInfo(onc_code);
+		
+		return mv;
+	}
 	
-	//코드에 따라 강의 정보를 가져오는 메소드
+	@PostMapping(value = "likes", produces = "application/json; charset = utf-8")
+	@ResponseBody
+	public LikesDto likeAjax(String onc_code,String l_cts_code){
+		log.info(onc_code + l_cts_code);
+
+		LikesDto likes = cServ.updateLikes(onc_code,l_cts_code);
+	
+		return likes;
+	}
+	     
+	@PostMapping(value = "dislikes", produces = "application/json; charset = utf-8")
+	@ResponseBody
+	public LikesDto dislikeAjax(String onc_code, String l_cts_code){
+		log.info(onc_code+ l_cts_code);
+
+		LikesDto dislikes = cServ.updatedisLikes(onc_code, l_cts_code);
+	
+		return dislikes;
+	}
+	
+	@GetMapping("classroom")
+	public ModelAndView classroom(String onc_code) {
+		
+		mv = cServ.classroom(onc_code);
+		
+		return mv;
+	}
+	
+	@PostMapping(value = "videoChange", produces = "application/json; charset = utf-8")
+	@ResponseBody
+	public VideoListDto videoChange(String vf_code, String onc_code){
+		log.info(vf_code+ onc_code);
+
+		VideoListDto videoChange = cServ.videoChange(vf_code, onc_code);
+			return videoChange;
+	}
+	
+	@GetMapping("filter")
+	public ModelAndView offFilter(String cts_code, @Param("filter1") String filter1,@Param("filter2") String filter2,@Param("filter3") String filter3) {
+		log.info("offFilter() : " + cts_code +  filter1 + filter2 + filter3);
+		mv = cServ.getOffFilter(cts_code, filter1, filter2, filter3);
+		
+		return mv;
+	}
+	
+		//코드에 따라 강의 정보를 가져오는 메소드
 	@GetMapping("info")
 	public ModelAndView offClass(String ofc_code) {
 		log.info("ofc_code : " + ofc_code);
@@ -82,28 +139,30 @@ public class ClassController {
 	}
 
 	
-	@GetMapping("filter")
-	public ModelAndView offFilter(String cts_code, @Param("filter1") String filter1,@Param("filter2") String filter2,@Param("filter3") String filter3) {
-		log.info("offFilter() : " + cts_code +  filter1 + filter2 + filter3);
-		mv = cServ.getOffFilter(cts_code, filter1, filter2, filter3);
+	
+	// @PostMapping(value = "getFilter",
+	// 		produces = "application/json; charset=utf-8;")
+	// @ResponseBody
+	// public ModelAndView getFilter(String cts_code) {
+	// 	log.info("getFilter - cts_code : " + cts_code);
 		
-		return mv;
-	}
+		
+	// 	mv = cServ.getFilter1(cts_code);
+		
+	// 	return mv;
+	//}
 	
 	
-//	@PostMapping(value = "getFilter",
-//			produces = "application/json; charset=utf-8;")
-//	@ResponseBody
-//	public ModelAndView getFilter(String cts_code) {
-//		log.info("getFilter - cts_code : " + cts_code);
-//		
-//		
-//		mv = cServ.getFilter1(cts_code);
-//		
-//		return mv;
-//	}
-//	
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+

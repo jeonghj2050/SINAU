@@ -250,7 +250,7 @@
 	                        </button>
 	                        
 			                   <button type="button" class="likebtn full_heart" color="default" fill="false"
-							    	 onclick="like_cancle()">
+							    	 onclick="dislike_func()">
 		                            <div class="sc-fzqARJ eozcfK">
 		                                <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
 		                                    <path fill-rule="evenodd" clip-rule="evenodd"

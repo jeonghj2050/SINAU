@@ -30,7 +30,7 @@ import com.sinau.dao.ClassDao;
 import com.sinau.dao.CommonDao;
 import com.sinau.dao.MemberDao;
 import com.sinau.dao.StoreDao;
-import com.sinau.dto.ClassStuInfoDto;
+import com.sinau.dto.OnStuInfoDto;
 import com.sinau.dto.CreatorOffInfoDto;
 import com.sinau.dto.CreatorOnInfoDto;
 import com.sinau.dto.DealerProductInfoDto;
@@ -44,6 +44,7 @@ import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
 import com.sinau.dto.OffLikeDto;
 import com.sinau.dto.OffOrdersDto;
+import com.sinau.dto.OffStuInfoDto;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
@@ -143,10 +144,7 @@ public class MemberService {
 	}
 
 	private void fileUp(MultipartHttpServletRequest multi, String m_email) throws IllegalStateException, IOException {
-
 		String filePath = multi.getSession().getServletContext().getRealPath("/") + "resources/upload/";
-
-		log.info("dddddddddddddddddddddd"+filePath);
 		
 		File folder = new File(filePath);
 		if (folder.isDirectory() == false) {
@@ -526,11 +524,15 @@ public class MemberService {
 		//회원(크리에이터)이 등록한 오프라인 강의의 정보를 가져온다.
 		List<CreatorOffInfoDto> cofInfoList=cDao.getCreatorOffList(loginMember.getM_email());
 
-		List<ClassStuInfoDto> cstuInfoList=mDao.getClassStuList(loginMember.getM_email());
+		//온라인 강좌 수강 회원 정보
+		List<OnStuInfoDto> contuInfoList=mDao.getOnlineStuList(loginMember.getM_email());
+		//오프라인 강좌 수강 회원 정보
+		List<OffStuInfoDto> cofftuInfoList=mDao.getOffStuList(loginMember.getM_email());
 
 		mv.addObject("ccInfoList",ccInfoList);
 		mv.addObject("cofInfoList",cofInfoList);
-		mv.addObject("cstuInfoList",cstuInfoList);
+		mv.addObject("contuInfoList",contuInfoList);
+		mv.addObject("cofftuInfoList",cofftuInfoList);
 		mv.setViewName("mypage/cmypage_main");
 
 		return mv;

@@ -32,19 +32,6 @@ public class PaymentController {
 		return mv;
 	}
 	
-//	//온라인 -> 페이먼트 이동 메소드
-//	@GetMapping("storePayment")
-//	public ModelAndView payment(PInfoPaymentsDto pInfoPay, String p_code, int ord_kind) {
-//		log.info("offlinePayment() : " + p_code);		
-//		
-//		
-//		
-//		mv =pServ.getStorePay(pInfoPay, p_code, ord_kind);
-//		
-//		return mv;
-//	}
-
-	// 결제완료시 주문내역, 마이클래스 Insert 메소드d
 	@PostMapping("completion_pay")
 	public ModelAndView completionPay(OrderDto order, String sc_code) {
 		log.info("completion_pay()" + order.getOrd_price());

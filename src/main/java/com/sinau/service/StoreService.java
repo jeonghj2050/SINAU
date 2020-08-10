@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -23,7 +25,9 @@ import com.sinau.dao.WarningDao;
 import com.sinau.dao.pInfoDao;
 import com.sinau.dto.PInfoPaymentsDto;
 import com.sinau.dto.PReviewDto;
+import com.sinau.dto.LikesDto;
 import com.sinau.dto.MemberDto;
+import com.sinau.dto.OnInfoDto;
 import com.sinau.dto.ProductListDto;
 import com.sinau.dto.WarningDto;
 
@@ -94,7 +98,6 @@ public class StoreService {
 
 		return mv;
 	}
-
 	public ModelAndView getpInfo(String p_code) {
 		// TODO Auto-generated method stub
 		mv=new ModelAndView();
@@ -126,10 +129,10 @@ public class StoreService {
 		try {
 			//1.넘어온 댓글-> DB에 insert 처리
 			pInfoDao.reviewInsert(review);
-			
+
 			//2.새로 추가된 댓글 포함 전체 댓글 목록 가져오기
 			review = pInfoDao.getReview(review.getPrv_code());
-			
+
 			//3. 전체 댓글 목록을 rMap에 추가하여 반환
 			rMap=new HashMap<String, PReviewDto>();
 			rMap.put("review", review);
@@ -142,7 +145,6 @@ public class StoreService {
 
 		return rMap;
 	}
-
 
 	public  Map<String, List<PReviewDto>>  rvidCheck(String prv_code) { // TODO Auto-generated method stub
 		Map<String, List<PReviewDto>> rMap= new HashMap<String, List<PReviewDto>>();
@@ -168,84 +170,34 @@ public class StoreService {
 
 	}
 
-//	public Map<String, List<WarningDto>> wInsert(WarningDto warning) {
-//		// TODO Auto-generated method stub
-//		Map<String, List<WarningDto>>wMap=null;
-//
-//		try {
-//			//1.넘어온 댓글-> DB에 insert 처리
-//			wDao.warningInsert(warning);
-//			//2.새로 추가된 댓글 포함 전체 댓글 목록 가져오기
-//			List<WarningDto> wList = wDao.getWaningList(warning.getW_code());
-//			//3. 전체 댓글 목록을 rMap에 추가하여 반환
-//			wMap=new HashMap<String, List<WarningDto>>();
-//			wMap.put("wList", wList);
-//
-//		}catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//			wMap=null;
-//		}
-//
-//		return wMap;
-//	}
 
-	public ModelAndView wInsert(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
-		mv=new ModelAndView();
+	public Map<String, String> wInsert(WarningDto wDto) {
+		Map<String, String> rMap = new HashMap<String, String>();
 		String view = null;
 
-		//Multipart request에서 데이터 추출
-		String w_code=  multi.getParameter("w_code");
-		int w_num = Integer.parseInt
-				(multi.getParameter("w_contnenNum"));
 		String content= null;
-		if(w_num==1) {
+		if(wDto.getW_contentNum().equals("1")) {
 			content = "비방 및 욕설" ;
-		}else if(w_num==2) {
+		}else if(wDto.getW_contentNum().equals("2")) {
 			content ="부적절한 홍보";
 		}else {
 			content="음란성 또는 청소년에게 부적합한 내용";
 		}
-		String w_m_email = ((MemberDto)session.getAttribute("mb")).getM_email();
-		String w_prv_code= multi.getParameter("w_prv_code");
-		String p_code =multi.getParameter("p_code");
-
-		/*//다음과 같이 세션에서 id값을 꺼내올 수도 있음.
-		MemberDto mem = (MemberDto)session.getAttribute("mb");
-		String id = mem.getM_id();
-		 */
-
-		//일반적으로 textarea에서 들어오는 데이터는
-		//본 내용 앞 뒤에 쓸데없는 공백이 포함됨.
-		//공백 제거 처리. trim()
-
-		WarningDto warning = new WarningDto();
-		warning.setW_contentNum(w_num);
-		warning.setW_content(content);
-		warning.setW_m_email(w_m_email);
-		warning.setW_prv_code(w_prv_code);
-
+		
+		wDto.setW_content(content);
+			
 		try {
-			wDao.warningInsert(warning);
+			wDao.warningInsert(wDto);
 
-			view = "redirect:/store_info?p_code="+p_code;
-			rttr.addFlashAttribute("check", 2);
-
-			log.info(w_code);
+			rMap.put("result", "SUCE");
 		}
 		catch(Exception e) {
 			//DB 삽입 오류 시 글쓰기폼으로 돌아감.
-			view = "redirect:/store_info?p_code="+p_code;
-			rttr.addFlashAttribute("check", 1);
-		}
-		
-		mv.setViewName(view);
+			rMap.put("result", "FAIL");
+		}		
 
-		return mv;
-
+		return rMap;
 	}
-
-
-
+	
 }
 
