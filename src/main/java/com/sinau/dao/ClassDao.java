@@ -7,38 +7,27 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.sinau.dto.MemberDto;
-import com.sinau.dto.MyClassDto;
-import com.sinau.dto.MyOffInfoDto;
-import com.sinau.dto.MyOnlineInfoDto;
-import com.sinau.dto.OffClassDto;
-import com.sinau.dto.OffCtsDto;
-import com.sinau.dto.OffImgDto;
-import com.sinau.dto.OffInfoDto;
 import com.sinau.dto.ClassroomDto;
 import com.sinau.dto.CreatorOffInfoDto;
 import com.sinau.dto.CreatorOnInfoDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
+import com.sinau.dto.OffCtsDto;
+import com.sinau.dto.OffInfoDto;
 import com.sinau.dto.OffLikeDto;
 import com.sinau.dto.OffListDto;
-import com.sinau.dto.OffOrdScDto;
 import com.sinau.dto.OffOrdersDto;
 import com.sinau.dto.OffScheduleDto;
-import com.sinau.dto.OnlineLikeDto;
-import com.sinau.dto.OnlineOrdersDto;
-import com.sinau.dto.OrderDto;
-import com.sinau.dto.PayCouponDto;
-import com.sinau.dto.ScheduleDto;
+import com.sinau.dto.OnListDto;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
-import com.sinau.dto.ProductDto;
 import com.sinau.dto.VideoDto;
 import com.sinau.dto.VideoFeedDto;
 import com.sinau.dto.VideoFileDto;
+import com.sinau.dto.VideoListDto;
 
 public interface ClassDao {
 	//email에 해당하는 회원의 주문 내역을 가져온다.
@@ -135,4 +124,32 @@ public interface ClassDao {
 	
 	void deleteOffClass(String p_code);
 
+/*은경 파트*/
+	//온라인 강의 섬네일용 정보를 가져옴: online_main
+	//전체보기 목록 가져오기
+	List<OnListDto> getOnList();
+	//카테고리별 목록 가져오기
+	List<OnListDto> getOnListCa(String cate);
+	
+	//인기강좌 탑10 목록 가져오기
+	List<OnListDto> getTopOnList();
+	
+	//내 클래스룸 강좌 정보 가져오기:online_classroom
+	List<ClassroomDto> getCR(@Param("onc_code")String onc_code);
+	
+	//내 온라인 강의목록 뷰에서 요청 강의가 목록에 있는지 확인하기
+//	String getHerClass(String name);
+	
+	//내가 결제한 강의 유/무 확인하기
+//	OrderDto checkOrderList(@Param("onc_code")String onc_code,@Param("email")String email);
+	
+	//로그인한 크리에이터의 강의인지 확인하기
+	OnlineClassDto checkOnClass(@Param("onc_code")String onc_code,@Param("email")String email);
+	
+	//비디오 강의 별로 가져오기
+	List<VideoListDto> getVideoLists(@Param("onc_code")String onc_code,@Param("email")String email);
+	
+	//해당 강의 정보 가져오기
+	VideoListDto getvideoChange(@Param("vf_code")String vf_code,@Param("onc_code")String onc_code,@Param("email")String email);
+/*은경 파트*/
 }
