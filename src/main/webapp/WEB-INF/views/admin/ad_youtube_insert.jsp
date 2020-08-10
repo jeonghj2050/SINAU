@@ -53,7 +53,7 @@
 			<a>유투버 채널 링크 : </a><input type="text" class="y_userurl" name="y_userurl" autofocus placeholder="메인 페이지링크">
 			</div>
 			<textarea name="y_content" class="y_contents"
-				autofocus placeholder="강좌 소개글"></textarea>
+				autofocus placeholder="강좌 소개글  (100자 이내)"></textarea>
 			<a>동영상 soure : </a><input type="text" class="y_videosoure" name="y_videosoure" autofocus placeholder="동영상 소스">
 			<div class="filebox">
 				<img src="resources/images/user.png" alt=""
@@ -67,7 +67,7 @@
 				<input class="btn-update" type="submit" value="등록"> <input
 					class="btn-reset" type="reset" value="다시 작성"> <input
 					class="btn-back" type="button" value="취소"
-					onclick="location.href='./ad_post_lecture'">
+					onclick="location.href='./adPLecture'">
 			</div>
 		</form>
 	</section>

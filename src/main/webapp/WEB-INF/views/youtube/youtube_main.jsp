@@ -50,7 +50,7 @@
 				<!-- Swiper -->
 					<c:forEach var="y" items="${ycList}">
 						<div class="swiper-slide5">
-							<a href="contents?y_code=${y.y_code}">
+							<a href="ycontents?y_code=${y.y_code}">
 							<img src="resources/upload/${y.f_sysname}" width="300px"
 								height="300px"></a>
 							<div class="swiper-text5">

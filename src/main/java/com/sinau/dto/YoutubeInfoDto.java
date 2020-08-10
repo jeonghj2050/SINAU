@@ -15,6 +15,7 @@ public class YoutubeInfoDto {
 	private String y_userurl;
 	private Timestamp y_update;
 	private String cts_name;
-	private String y_videosoure;
+	private String y_viedosoure;
 	private String f_sysname;
+	private int y_view;
 }

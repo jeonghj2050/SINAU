@@ -68,12 +68,12 @@ where m_state=#{state} and m_group='cm'
 		</selectKey>
 		INSERT INTO youtube_class
 		VALUES(#{y_code},#{y_title},#{y_subtitle},#{y_content},#{y_profile},#{y_url}, 
-		#{y_userurl}, sysdate ,#{y_cts_code}, default, #{y_videosoure})
+		#{y_userurl}, sysdate, default, #{y_videosoure}, #{y_cts_code})
 	</insert>
 	<insert id="fileInsert" parameterType="HashMap">
 		INSERT INTO files
-		VALUES(#{y_code},
-			#{oriFileName}, #{sysFileName}, #{y_cts_code})
+		VALUES('F_'||SEQ_F.NEXTVAL,
+			#{oriFileName}, #{sysFileName}, #{y_code}, #{y_cts_code})
 	</insert>
 
 </mapper>

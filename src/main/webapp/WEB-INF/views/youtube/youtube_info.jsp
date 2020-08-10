@@ -17,12 +17,12 @@
 	<section>
 		<div class="question-content">
 			<div class="question-form">
-				<div class="y_videosoure">${youtube.y_videosoure}</div>
+				<div class="y_videosoure">${youtube.y_viedosoure}</div>
 				<div class="total">
 				<div class="main_content">
-				<div class="y_title">${youtube.y_title}</div>
-				<div class="y_content">${youtube.y_content}</div>
-				<div class="y_url">${youtube.y_url}</div>
+				<div class="y_title1">제목 : </div><div class="y_title">${youtube.y_title}</div>
+				<div class="y_content1">상세설명 : </div><div class="y_content">${youtube.y_content}</div>
+				<div class="y_url"><a href="${youtube.y_url}">메인동영상 링크  &lt;-- 클릭</a></div>
 				</div>
 				
 				<div class="sub_content">
@@ -32,7 +32,9 @@
 				<div class="cts_name">카테고리 : ${youtube.cts_name}</div>			
 				<div class="y_update">게시일 : <fmt:formatDate pattern="yyyy-MM-dd" value="${youtube.y_update}"/></div>	
 				<div class="y_userurl"><a href="${youtube.y_userurl}">유튜버 채널 링크  &lt;-- 클릭</a></div>
-				
+				</div>
+				<div class="sub2_content">
+				<div class="y_view">조회수 : ${youtube.y_view}</div>
 				</div>
 				
 				</div>

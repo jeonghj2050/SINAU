@@ -6,8 +6,9 @@
 	<select id="getList" parameterType="String"
 		resultType="com.sinau.dto.YoutubeDto">
 		<![CDATA[
-		select y_code, cts_name, y_title, f_sysname
+		select y_code, cts_name, y_title, f_sysname, y_view
 		from youtube
+		order by y_view desc
 		]]>
 	</select>
 	<select id="getycList" parameterType="String"
