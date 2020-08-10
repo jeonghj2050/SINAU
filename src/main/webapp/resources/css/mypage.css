@@ -441,76 +441,30 @@ article>div .nav.nav-tabs>li {
 }
 
 /* 강의 수정 */
-.spec_images_wrap img {
-	width: 80px;
-	height: 80px;
+.spec_images_wrap img{
+	width : 80px;
+	height:80px;
 }
-
 .file_input_textbox {
-	float: left;
-	height: 29px;
+    float:left;
+    height:29px;
 }
-
 .file_input_div {
-	position: relative;
-	width: 80px;
-	height: 36px;
-	overflow: hidden;
+    position:relative;
+    width:80px;
+    height:36px;
+    overflow:hidden;
 }
-
 .file_input_img_btn {
-	padding: 0 0 0 5px;
+    padding:0 0 0 5px;
 }
-
 .file_input_hidden {
-	font-size: 29px;
-	position: absolute;
-	right: 0px;
-	top: 0px;
-	opacity: 0;
-	filter: alpha(opacity = 0);
-	-ms-filter: alpha(opacity = 0);
-	cursor: pointer;
-}
-
-/* 판매자 마이페이지 */
-.my_product_list {
-	clear: both;
-	width: 1070px;
-	margin-top: 20px;
-}
-
-.myproduct_info_box {
-	width: 1070px;
-	height: 300px;
-	margin-bottom: 20px;
-}
-
-.myproduct_info {
-	float: left;
-	width: 750px;
-	margin-left: 20px;
-	background-color: rgb(230, 230, 230);
-}
-
-.myproduct_content {
-	width: 750px;
-	font-size: 16pt;
-	font-weight: bold;
-	height: 200px;
-}
-
-.myproduct_amt {
-	width: 750px;
-	height: 50px;
-}
-
-.myproduct_sale_amt {
-	width: 750px;
-	height: 50px;
-	line-height: 30px;
-}
-
-.myproduct_sale_amt>div {
-	float: right;
+    font-size:29px;
+    position:absolute;
+    right:0px;
+    top:0px;
+    opacity:0;
+    filter: alpha(opacity=0);
+    -ms-filter: alpha(opacity=0);
+    cursor:pointer;
 }

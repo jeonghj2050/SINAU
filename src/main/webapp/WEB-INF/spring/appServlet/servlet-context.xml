@@ -34,7 +34,6 @@
 			<mapping path="/*"/>
 <!-- 			가로채기에서 제외할 uri를 지정 -->
 			<exclude-mapping path="/"/>
-			<exclude-mapping path="/store"/>
 			<exclude-mapping path="/id"/>
 			<exclude-mapping path="/pwd"/>
 			<exclude-mapping path="/pwdreset"/>
@@ -57,7 +56,7 @@
 			<exclude-mapping path="/servicecenter_question"/>
 			<exclude-mapping path="/ycontents"/>
 			<beans:bean 
-				class="com.sinau.util.SessionInterceptor" />
+				class="com.sinau.util.SessionInterceptor"/>
 		</interceptor>
 	</interceptors> 
 	
