@@ -39,6 +39,6 @@
 	</update>
 	
 	<update id="delRequestProd" parameterType="String">
-		update p set p_state=1 where p_code=#{p_code}
+		update p set p_state=2 where p_code=#{p_code}
 	</update>
 </mapper>
