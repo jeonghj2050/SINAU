@@ -59,4 +59,9 @@
 		INSERT INTO L VALUES('l_'||SEQ_L.NEXTVAL,#{l_count},1,#{l_m_email},#{l_pcode},#{l_cts_code})
 	</insert>
 	 
+	 <update id="viewUpdate" parameterType="String">
+		   UPDATE onc
+		   SET onc_view = onc_view+1
+		   WHERE (onc_code = #{onc_code})
+	 </update>
 </mapper>

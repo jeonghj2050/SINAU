@@ -25,7 +25,7 @@
 			</ul>
 		</nav>
 	</div>
-	<div class="menu">
+	<div class="allmenu">
 		<nav class="menu-bar">
 			<ul>
 				<li class="menu"><a href="./online">온라인</a></li>

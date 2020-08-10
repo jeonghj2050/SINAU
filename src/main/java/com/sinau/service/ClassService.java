@@ -15,13 +15,17 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sinau.dao.CategoryDao;
 import com.sinau.dao.ClassDao;
 import com.sinau.dao.ClassInfoDao;
+import com.sinau.dao.MemberDao;
 import com.sinau.dto.CategoryDto;
 import com.sinau.dto.ClassroomDto;
 import com.sinau.dto.LikesDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.OnInfoDto;
 import com.sinau.dto.OnListDto;
+import com.sinau.dto.OnlineClassDto;
+import com.sinau.dto.OrderDto;
 import com.sinau.dto.SpecListDto;
+import com.sinau.dto.VideoListDto;
 
 import lombok.extern.java.Log;
 
@@ -35,26 +39,15 @@ public class ClassService {
 	private ClassDao cDao;
 	@Autowired
 	private ClassInfoDao cInfoDao;
+	@Autowired
+	MemberDao mDao;
 	
 	@Autowired
 	HttpSession session;
 	
 	ModelAndView mv;
-
-//	public ModelAndView getCategories() {
-//		log.info("getCategories()");
-//		
-//		mv = new ModelAndView();
-//		
-//		List<CategoryDto> cateList = cateDao.getCategories();
-//		
-//		mv.addObject("cateList", cateList);
-//		
-//		//view name 지정
-//		mv.setViewName("online/online_main");
-//		
-//		return mv;
-//	}
+	
+	MemberDto loginMember;
 
 	//온라인 메인화면 전체 및 카테고리별 섬네일 출력 메소드
 	public ModelAndView getOnList() {
@@ -124,17 +117,23 @@ public class ClassService {
 		log.info("getOnlineInfo()------------"+onc_code);
 		
 		mv = new ModelAndView();
-		String email=((MemberDto)session.getAttribute("mb")).getM_email();
+		
+		String email=null;
+		try {
+			email = ((MemberDto)session.getAttribute("mb")).getM_email();
+		} catch (Exception e) {
+			email=null;
+		}
 		
 		//spec 이미지 3개 저장
 		List<SpecListDto> onSpecList = cInfoDao.SpecList(onc_code);
 		mv.addObject("onSpecList", onSpecList);
-		log.info("onSpecList()");		
+		
+		//조회수 증가
+		cInfoDao.viewUpdate(onc_code);
 		
 		//content 이미지 및 내용 저장
-	    log.info("hashMap()");
-	    
-	    if(email.equals("") || email == null) {
+	    if(email == null||email.equals("")) {
 	    	log.info("비회원!!!");
 	    	List<OnInfoDto> onInfol = cInfoDao.onInfo(onc_code);
 	    	
@@ -164,8 +163,6 @@ public class ClassService {
 	    	
 	    }
 		
-//		request.setAttribute("onInforeq", onInfo);
-		
 		mv.setViewName("online/online_info");
 		
 		return mv;
@@ -181,7 +178,6 @@ public class ClassService {
 	    String checkLike = cInfoDao.searchLike(onc_code,email);
 	    
 	    if (checkLike == null) {
-	    	log.info("updateLikes()11111111111"+onc_code);
 	    	likes.setL_cts_code("onc");
 	    	likes.setL_m_email(email);
 	    	likes.setL_pcode(onc_code);
@@ -190,14 +186,10 @@ public class ClassService {
 			cInfoDao.like_up(onc_code);
 		}
 	    else {
-	    	log.info("updateLikes()22222222222"+onc_code);
 		    cInfoDao.like_check(onc_code,email);
-		    log.info("updateLikes()3333333333333"+onc_code);
 		    cInfoDao.like_up(onc_code);
 	    }
-	    log.info("updateLikes()44444444444444444"+onc_code);
 		LikesDto ldto = cInfoDao.getLikes(onc_code,email);
-		log.info("updateLikes()555555555555555555"+onc_code);
 	    return ldto;
 	}
 
@@ -205,9 +197,6 @@ public class ClassService {
 		log.info("updatedisLikes()"+onc_code+l_cts_code);
 		
 		String email=((MemberDto)session.getAttribute("mb")).getM_email();
-
-	    
-	    log.info("hash()2");
 	    
 	    cInfoDao.dislike_check(onc_code,email);
 	    cInfoDao.dislike_down(onc_code);
@@ -217,16 +206,71 @@ public class ClassService {
 	    return ldto;
 	}
 
-	public ModelAndView classroom(String onc_code, String email) {
-		log.info("classroom()");
+	public ModelAndView classroom(String onc_code) {
+		log.info("classroom()" + onc_code);
 		
-		HashMap <String, Object> hashMap = new HashMap<String, Object>();
-	    hashMap.put("onc_code", onc_code);
-	    hashMap.put("email", email);
+		String email = ((MemberDto)session.getAttribute("mb")).getM_email();
+		log.info("email()"+email);
 		
-	    ClassroomDto classroom = cDao.getCR(hashMap);
-	    
-		return mv;
+		//크리에이터 이메일로 내 강의 검색해서 클래스룸 접속 권한 추가
+		OnlineClassDto c_m_check = null;
+		c_m_check = cDao.checkOnClass(onc_code, email);
+		log.info("c_m_check()"+c_m_check.getOnc_m_email());
+		
+//		//주문 내역에서 내 이메일과 온라인 강의 코드에 해당하는 정보 있는지 확인
+//		OrderDto orderCheck = null;
+//		orderCheck = cDao.checkOrderList(loginMember.getM_email(), onc_code);
+//		log.info("orderCheck()");
+//		
+//		//주문 내역 없는데 url타고 들어가는거 방지 -> 홈화면으로 이동
+//		if (c_m_check == null && orderCheck == null ) {
+//			mv.setViewName("/");
+//			log.info("비회원 홈으로 돌아가기");
+//			return mv;
+//		}
+		
+		if (c_m_check == null) {
+			mv.setViewName("/");
+			log.info("내가 강의 아님 홈으로 돌아가기");
+			return mv;
+		}
+		
+//		//myonlineinfo에서 onc_code검색해서 내 강의 목록에 있으면 강의 비디오 정보 가져오기
+//		List<ClassroomDto> classroom = cDao.getCR(onc_code);
+//		System.out.println("classroom>>>"+classroom);
+//		
+//		ClassroomDto classroomSample = classroom.get(0);
+//		mv.addObject("classroomSample",classroomSample);
+//		System.out.println("classroomSample>>>"+classroomSample);
+//	
+//		mv.addObject("classroom", classroom);
+//		mv.addObject("videoList", classroom);
+		
+		//비디오 리스트 가져오기
+		System.out.println("onc_code>>>>>>"+onc_code+email);
+		List<VideoListDto> videoLists = cDao.getVideoLists(onc_code, email);
+		mv.addObject("videoLists", videoLists);
+		System.out.println("videoLists>>>>>>"+videoLists);
+		
+		//선택된 강좌 배열에서 검색 후 저장
+		VideoListDto  selVideoLists = videoLists.get(0);
+		mv.addObject("selVideoLists", selVideoLists);
+		
+	  	mv.setViewName("online/online_classroom");
+	  		
+	  	return mv;
 	}
+
+	public VideoListDto videoChange(String vf_code, String onc_code) {
+		log.info("videoChange()"+vf_code+onc_code);
+		
+		String email=((MemberDto)session.getAttribute("mb")).getM_email();
+		
+		VideoListDto videoChange = cDao.getvideoChange(vf_code, onc_code, email);
+		
+		return videoChange;
+	}
+	
+	
 	
 }

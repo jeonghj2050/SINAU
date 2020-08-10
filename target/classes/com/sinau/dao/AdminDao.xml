@@ -82,4 +82,5 @@
 		DELETE FROM productreview
 		WHERE PRV_CODE = #{code}
 	</delete>
+
 </mapper>

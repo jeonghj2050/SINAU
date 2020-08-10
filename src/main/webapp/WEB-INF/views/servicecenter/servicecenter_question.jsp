@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>고객 센터</title>
+<style type="text/css">
+.t-code {
+	display :none;
+}
+</style>
 <link rel="stylesheet" href="resources/css/servicecenter.css?a">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,13 +42,14 @@ $(document).ready(function(){
 </head>
 <body>
 	<header>
-		<jsp:include page="servicecenter_header.jsp"></jsp:include>
+		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 	<section class="sectionover">
 	<h2 class="login-header">고객 센터</h2>
             <div class="cate_container">
                 <a class="category" href="./servicecenter_main">FAQ</a>
                 <a class="category" href="./servicecenter_question">1 : 1문의</a>
+			<a class="category" href="./servicecenter_refund">환불내역</a>
             </div>
 			<div class="data-area">
 				<div class="title-row">
@@ -54,13 +62,21 @@ $(document).ready(function(){
 				</div><br>
 				<c:forEach var="qitem" items="${qList}">
 				<div class="data-row">
-					<div class="t-no">${qitem.rownum}</div>
+					<div class="t-no">${qitem.q_num}</div>
+					<div class="t-code" style="display:none;">${qitem.q_code}</div>
 					<div class="t-category">${qitem.cts_name}</div>
-					<div class="t-title"><a href="contents?qcode=${qitem.q_code}">
+					<div class="t-title"><a href="contents?q_code=${qitem.q_code}">
 						${qitem.q_title}</a></div>
 					<div class="t-name">${qitem.m_name}</div>
-					<div class="t-date">${qitem.q_date}</div>
-					<div class="t-anfield">${qitem.q_anfield}</div>
+					<div class="t-date"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${qitem.q_date}"/></div>
+					<div class="t-anfield">
+					<c:if test="${qitem.q_anfield eq null }">
+						미답변
+					</c:if>
+					<c:if test="${qitem.q_anfield ne null }">
+						답변완료
+					</c:if>
+					</div>
 				</div>
 				</c:forEach>
 				</div>
@@ -69,7 +85,8 @@ $(document).ready(function(){
 			</div>
 	</section>
 	<footer>
-		<jsp:include page="servicecenter_footer.jsp"></jsp:include>
+		<jsp:include page="../footer.jsp"></jsp:include>
 	</footer>
 </body>
+
 </html>
