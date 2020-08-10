@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.dao.CategoryDao;
@@ -13,6 +14,7 @@ import com.sinau.dao.ClassDao;
 import com.sinau.dao.ClassInfoDao;
 import com.sinau.dao.MemberDao;
 import com.sinau.dto.CategoryDto;
+import com.sinau.dto.ClsrCreatorDto;
 import com.sinau.dto.LikesDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.OffCtsDto;
@@ -322,7 +324,7 @@ public class ClassService {
 //				return mv;
 //			}
 			
-			if (c_m_check == null) {
+			if (ObjectUtils.isEmpty(c_m_check)) {
 				mv.setViewName("/");
 				log.info("내가 강의 아님 홈으로 돌아가기");
 				return mv;
@@ -339,6 +341,7 @@ public class ClassService {
 //			mv.addObject("classroom", classroom);
 //			mv.addObject("videoList", classroom);
 			
+
 			//비디오 리스트 가져오기
 			System.out.println("onc_code>>>>>>"+onc_code+email);
 			List<VideoListDto> videoLists = cDao.getVideoLists(onc_code, email);

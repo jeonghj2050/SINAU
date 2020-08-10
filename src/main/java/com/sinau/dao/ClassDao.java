@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.sinau.dto.ClassroomDto;
+import com.sinau.dto.ClsrCreatorDto;
 import com.sinau.dto.CreatorOffInfoDto;
 import com.sinau.dto.CreatorOnInfoDto;
 import com.sinau.dto.MyOffInfoDto;
@@ -151,5 +152,12 @@ public interface ClassDao {
 	
 	//해당 강의 정보 가져오기
 	VideoListDto getvideoChange(@Param("vf_code")String vf_code,@Param("onc_code")String onc_code,@Param("email")String email);
+
+
+	
+	
+	
+	
+	
 /*은경 파트*/
 }
