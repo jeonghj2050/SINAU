@@ -25,7 +25,9 @@ import com.sinau.dto.OnListDto;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.SpecListDto;
+import com.sinau.dto.TotalInfo;
 import com.sinau.dto.VideoListDto;
+import com.sinau.dto.YoutubeDto;
 
 import lombok.extern.java.Log;
 
@@ -269,6 +271,22 @@ public class ClassService {
 		VideoListDto videoChange = cDao.getvideoChange(vf_code, onc_code, email);
 		
 		return videoChange;
+	}
+
+
+	public ModelAndView onlineList() {
+		mv = new ModelAndView();
+		System.out.println("12222222222222222222222222222222222222222222222222222");
+		List<TotalInfo> TOP10List = cDao.gettotalList();
+		List<TotalInfo> cList = cDao.getcLsit();
+		System.out.println("34444444444444444444444444444444444444444444444444444444444");
+		
+		mv.addObject("TOP10List", TOP10List);
+		mv.addObject("cList", cList);
+		 
+		mv.setViewName("home");
+		 
+		return mv;
 	}
 	
 	

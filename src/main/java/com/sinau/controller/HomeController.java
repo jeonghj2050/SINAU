@@ -1,18 +1,32 @@
 package com.sinau.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.sinau.service.ClassService;
+import com.sinau.service.YoutubeClassService;
 
 import lombok.extern.java.Log;
 
 @Controller
 public class HomeController {
-
+	ModelAndView mv;
+	
+	@Autowired
+	ClassService cServ;
+	
+	@Autowired
+	YoutubeClassService ycServ;
+	
 	@GetMapping("/")
-	public String home() {
+	public ModelAndView home() {
 		
-		return "home";
+		mv= cServ.onlineList();
+		
+		return mv;
 	}
 
 	@GetMapping("loginFrm")

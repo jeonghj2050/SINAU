@@ -16,14 +16,14 @@ public class YoutubeController {
 	@Autowired
 	private YoutubeClassService ycServ;
 	
-	
-	@GetMapping("youtube") 
+	@GetMapping("youtuber") 
 	public ModelAndView youtube() {
 		
 		mv= ycServ.getYcList();
 		
 		return mv;
 	}
+	
 	
 	@GetMapping("ycontents") 
 	public ModelAndView boardContents(String y_code) {

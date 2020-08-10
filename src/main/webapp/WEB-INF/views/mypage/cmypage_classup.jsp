@@ -254,11 +254,9 @@
 							
 						</table>
 						
-					</div>														
-				</div>
-			</div>
+					</div>			
 			<button type="submit" class="my_default_btn" style="float: right;" formaction="./cMyClassVideo">동영상 등록</button>
-			
+			</c:if>
 			</form>
 		</article>
 	</section>
