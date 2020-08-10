@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -80,6 +81,27 @@ public class ClassController {
 		return mv;
 	}
 
+	
+	@GetMapping("filter")
+	public ModelAndView offFilter(String cts_code, @Param("filter1") String filter1,@Param("filter2") String filter2,@Param("filter3") String filter3) {
+		log.info("offFilter() : " + cts_code +  filter1 + filter2 + filter3);
+		mv = cServ.getOffFilter(cts_code, filter1, filter2, filter3);
+		
+		return mv;
+	}
+	
+	
+	@PostMapping(value = "getFilter",
+			produces = "application/json; charset=utf-8;")
+	@ResponseBody
+	public ModelAndView getFilter(String cts_code) {
+		log.info("getFilter - cts_code : " + cts_code);
+		
+		
+		mv = cServ.getFilter1(cts_code);
+		
+		return mv;
+	}
 	
 
 

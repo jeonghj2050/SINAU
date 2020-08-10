@@ -31,7 +31,7 @@
 			
 					<div class="class-apply">
 						<div id="classapply-img">
-							<img src=" resources/images/offline/sum/${offList.f_oriname}"
+							<img src="resources/upload/${offList.f_sysname}"
 								alt="#" width="280px" height="280px">
 						</div>
 						<div id="classapply-info">
@@ -47,7 +47,7 @@
 						선택해주세요.
 					</div>
 					<hr>
-					<form name="scFrm" id="scFrm" action="payment" method="get"
+					<form name="scFrm" id="scFrm" action="offPayment" method="get"
 						enctype="multipart/form-data">
 						<c:forEach var="offSchedule" items="${offSchedule}">
 							<div class="time-table-info">
@@ -61,6 +61,7 @@
 						<br>
 						<input type="hidden" name="m_email" value="${m_email}">
 						<input type="hidden" name="ofc_code" value="${offList.ofc_code}">
+						<input type="hidden" name="ord_kind" value=3>
 						<div class="btn-offapply">
 							<input type="submit" value="완료" id="submit">
 						</div>

@@ -132,10 +132,14 @@
 						</button>
 					</div>
 				</div>
-				<button type="button" class="class_submitbtn" color="orange"
-					fill="true">
+				<form action="storePayment" >
+				<input type="submit" class="class_submitbtn" color="orange"
+					fill="true" value="구매하기">
 					<span class="sc-fzoyTs jZUSDr"> <span>구매하기</span></span>
-				</button>
+					<input type="hidden" name="ord_kind" value=1>
+					<input type="hidden" name="m_email" value="${m_email}">
+					<input type="hidden" name="p_code" value="${pInfoPay.p_code}">
+				</form>
 				<div>
 					<p class="refund_alert"></p>
 				</div>

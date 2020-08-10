@@ -15,9 +15,12 @@ import com.sinau.dto.OffClassDto;
 import com.sinau.dto.OffCtsDto;
 import com.sinau.dto.OffImgDto;
 import com.sinau.dto.OffInfoDto;
+import com.sinau.dto.OffInfoSpecDto;
+import com.sinau.dto.CategoryDto;
 import com.sinau.dto.ClassroomDto;
 import com.sinau.dto.CreatorOffInfoDto;
 import com.sinau.dto.CreatorOnInfoDto;
+import com.sinau.dto.FilterCtsDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
@@ -30,6 +33,7 @@ import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.PayCouponDto;
+import com.sinau.dto.ProdOrdersDto;
 import com.sinau.dto.ScheduleDto;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OnlineLikeDto;
@@ -89,9 +93,11 @@ public interface ClassDao {
 	String getOffLoc(String ofc_code);
 	
 	//디테일 사진 가져오는 메소드 - off
-	String getInfoSpec1(String ofc_code);
-	String getInfoSpec2(String ofc_code);
-	String getInfoSpec3(String ofc_code);
+	OffInfoSpecDto getOffInfoSpec(String ofc_code);
+	
+//	String getInfoSpec1(String ofc_code);
+//	String getInfoSpec2(String ofc_code);
+//	String getInfoSpec3(String ofc_code);
 	
 	// 오프라인 강좌 시간 장소 가져오는 메소드 - off
 	List<OffInfoDto> getOffInfoDate(String ofc_code);
@@ -102,8 +108,8 @@ public interface ClassDao {
 	//서브 카테고리에 해당하는 강좌 가져오는 메소드 - off
 	List<OffListDto> getOffCateList(String cts_code);
 	
-	//현제 카테고리 명 가져오는 메소드 - off
-	String getCateName(String cts_code);
+	//현제 카테고리 코드, 이름 가져오는 메소드 - off
+	CategoryDto getCateInfo(String cts_code);
 	
 	//오프라인 강좌 날짜 시간 장소 가져오는 메소드 - off
 	List<OffScheduleDto> getOffScehdule(String ofc_code);
@@ -134,5 +140,23 @@ public interface ClassDao {
 	ClassroomDto getCR(HashMap<String, Object> hashMap);
 	
 	void deleteOffClass(String p_code);
+	
+	//필터 카테고리 불러오기
+	List<FilterCtsDto> getFilter1List();
+	List<FilterCtsDto> getFilter2List();
+	List<FilterCtsDto> getFilter3List();
+	
+	//필터 값에 따라 정렬 값 불러오기
+	// List<OffListDto> getOffCateFilterList(String cts_code, String filter1, String filter2, String filter3);
+	
+	//
+	List<OffListDto> getOffCateFilterList(String cts_code);
+	
+
+	
+	
+	
+	
+	
 
 }
