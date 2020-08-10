@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.dao.CategoryDao;
@@ -306,8 +307,7 @@ public class ClassService {
 			log.info("email()"+email);
 			
 			//크리에이터 이메일로 내 강의 검색해서 클래스룸 접속 권한 추가
-			OnlineClassDto c_m_check = null;
-			c_m_check = cDao.checkOnClass(onc_code, email);
+			OnlineClassDto c_m_check = cDao.checkOnClass(onc_code, email);
 			log.info("c_m_check()"+c_m_check.getOnc_m_email());
 			
 //			//주문 내역에서 내 이메일과 온라인 강의 코드에 해당하는 정보 있는지 확인
@@ -322,7 +322,7 @@ public class ClassService {
 //				return mv;
 //			}
 			
-			if (c_m_check == null) {
+			if (ObjectUtils.isEmpty(c_m_check)) {
 				mv.setViewName("/");
 				log.info("내가 강의 아님 홈으로 돌아가기");
 				return mv;
