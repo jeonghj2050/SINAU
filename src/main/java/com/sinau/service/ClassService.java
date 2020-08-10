@@ -202,6 +202,7 @@ public class ClassService {
 	    }
 		LikesDto ldto = cInfoDao.getLikes(onc_code,email);
 	    return ldto;
+	}
 	public ModelAndView getOffInfo(String ofc_code) {
 		mv = new ModelAndView();
 
