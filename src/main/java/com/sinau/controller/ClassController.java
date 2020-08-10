@@ -1,25 +1,14 @@
 package com.sinau.controller;
 
-import java.util.List;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.sinau.dto.OrderDto;
-import com.sinau.dto.PayCouponDto;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.dto.LikesDto;
+import com.sinau.dto.VideoListDto;
 import com.sinau.service.ClassService;
 
 import lombok.extern.java.Log;
@@ -81,4 +70,61 @@ public class ClassController {
 	}
 
 
+/*은경 파트*/
+	
+	@GetMapping("online")
+	public ModelAndView online() {
+		
+		mv = cServ.getOnList();
+		
+		return mv;
+	}
+	
+	@GetMapping("onlineInfo")
+	public ModelAndView onlineInfo(String onc_code) {
+		
+		mv = cServ.getOnlineInfo(onc_code);
+		
+		return mv;
+	}
+	
+	@PostMapping(value = "likes", produces = "application/json; charset = utf-8")
+	@ResponseBody
+	public LikesDto likeAjax(String onc_code,String l_cts_code){
+		log.info(onc_code + l_cts_code);
+
+		LikesDto likes = cServ.updateLikes(onc_code,l_cts_code);
+	
+		return likes;
+	}
+	     
+	@PostMapping(value = "dislikes", produces = "application/json; charset = utf-8")
+	@ResponseBody
+	public LikesDto dislikeAjax(String onc_code, String l_cts_code){
+		log.info(onc_code+ l_cts_code);
+
+		LikesDto dislikes = cServ.updatedisLikes(onc_code, l_cts_code);
+	
+		return dislikes;
+	}
+	
+	@GetMapping("classroom")
+	public ModelAndView classroom(String onc_code) {
+		
+		mv = cServ.classroom(onc_code);
+		
+		return mv;
+	}
+	
+	@PostMapping(value = "videoChange", produces = "application/json; charset = utf-8")
+	@ResponseBody
+	public VideoListDto videoChange(String vf_code, String onc_code){
+		log.info(vf_code+ onc_code);
+
+		VideoListDto videoChange = cServ.videoChange(vf_code, onc_code);
+	
+		return videoChange;
+	}
+	
+/*은경 파트*/
 }
