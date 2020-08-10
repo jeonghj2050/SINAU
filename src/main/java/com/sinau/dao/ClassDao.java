@@ -29,6 +29,7 @@ import com.sinau.dto.OffListDto;
 import com.sinau.dto.OffOrdScDto;
 import com.sinau.dto.OffOrdersDto;
 import com.sinau.dto.OffScheduleDto;
+import com.sinau.dto.OnListDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
@@ -117,6 +118,8 @@ public interface ClassDao {
 	// 선택한 오프라인 스케줄 가져오는 메소드 - off
 	List<OffScheduleDto> getOffScheduleSel(String sc_code);
 	
+	OffScheduleDto getOffSchedultPay(String sc_code);
+	
 	//onc_code에 해당하는 강좌 정보를 가져온다.
 	CreatorOnInfoDto getClassInfo(String onc_code);
 	//각 코드에 해당하는 강좌 정보를 가져온다.
@@ -149,8 +152,10 @@ public interface ClassDao {
 	//필터 값에 따라 정렬 값 불러오기
 	// List<OffListDto> getOffCateFilterList(String cts_code, String filter1, String filter2, String filter3);
 	
-	//
-	List<OffListDto> getOffCateFilterList(String cts_code);
+//	//
+//	List<OffListDto> getOffCateFilterList(String cts_code);
+	
+	OnListDto getOnInfoPay(String onc_code);
 	
 
 	

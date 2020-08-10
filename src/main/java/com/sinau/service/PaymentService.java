@@ -17,8 +17,16 @@ import com.sinau.dto.MemberDto;
 import com.sinau.dto.MyClassDto;
 import com.sinau.dto.OffInfoDto;
 import com.sinau.dto.OffListDto;
+import com.sinau.dto.OffPayInfoComDto;
+import com.sinau.dto.OffPayInfoDto;
+import com.sinau.dto.OffScheduleDto;
+import com.sinau.dto.OnListDto;
+import com.sinau.dto.OnPayInfoComDto;
+import com.sinau.dto.OnPayInfoDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.PInfoPaymentsDto;
+import com.sinau.dto.PPayInfoComDto;
+import com.sinau.dto.PPayInfoDto;
 import com.sinau.dto.PayCouponDto;
 import com.sinau.dto.ProdOrdersDto;
 
@@ -41,104 +49,137 @@ public class PaymentService {
 	MemberDto loginMember;
 
 	// 결제하기 위해 상품코드(오프라인), 회원 정보 가져오는 메소드
-	public ModelAndView getOffPay(String ofc_code, String m_email, String sc_code, int ord_kind) {
+	public ModelAndView getPayment(String pay_pcode, String sc_code) {
 		mv = new ModelAndView();
 
-		
 		loginMember = (MemberDto) session.getAttribute("mb");
+
+		mv.addObject("sort", "ofc");
 		
-		log.info("ofc_code : " + ofc_code);
-		log.info("m_email : " + m_email);
+		log.info("pay_pcode : " + pay_pcode);
+		log.info("m_email : " + loginMember.getM_email());
 		log.info("sc_code : " + sc_code);
-		log.info("ord_kind : " + ord_kind);
-		
+
 		// ofc_code에 해당하는 강좌 불러오는 메소드
-		OffListDto offList = cDao.getOffApplyInfo(ofc_code);
+		OffListDto offList = cDao.getOffApplyInfo(pay_pcode);
 		mv.addObject("offList", offList);
 
 		// 선택한 멤버 정보 불러오는 메소드
-		MemberDto getMemPayInfo = pDao.getMemPayInfo(m_email);
+		MemberDto getMemPayInfo = pDao.getMemPayInfo(loginMember.getM_email());
 		mv.addObject("memPayInfo", getMemPayInfo);
 
-		// 멤버 m_email에 해당하는 dto list 불러오는 메소드
-		List<PayCouponDto> payCoupon = pDao.getPayCouponList(m_email);
-		mv.addObject("payCoupon", payCoupon);
+//		OffScheduleDto getOffSceheInfo = cDao.getOffSchedultPay(sc_code);
+//		mv.addObject("off_sche", getOffSceheInfo);
 		
-		PayCouponDto couponCheck = pDao.getCouponCheck(m_email);
-		mv.addObject("couponCheck", couponCheck);
+		// 멤버 m_email에 해당하는 dto list 불러오는 메소드
+		List<PayCouponDto> payCoupon = pDao.getPayCouponList(loginMember.getM_email());
+		mv.addObject("payCoupon", payCoupon);
 
-		mv.addObject("m_email", m_email);
+//		List<PayCouponDto> couponCheck = pDao.getCouponCheck(loginMember.getM_email());
+//		mv.addObject("couponCheck", couponCheck);
+
+		mv.addObject("m_email", loginMember.getM_email());
 		mv.addObject("sc_code", sc_code);
-		mv.addObject("ord_kind", ord_kind);
 
 		mv.setViewName("payment/payment");
 
 		return mv;
 	}
 
+//	// 결제하기 위해 상품코드(스토어), 회원 정보 가져오는 메소드
+//	public ModelAndView getStorePay(PInfoPaymentsDto pInfoPay, String p_code, int ord_kind) {
+//		mv = new ModelAndView();
+//
+//		loginMember = (MemberDto) session.getAttribute("mb");
+//
+//		log.info("p_code : " + pInfoPay.getP_code());
+//		log.info("m_email : " + loginMember.getM_email());
+//
+//		String ofc_code = pInfoPay.getP_code();
+//		int ofc_sale = pInfoPay.getP_price();
+//		String ofc_title = pInfoPay.getP_title();
+//
+//		log.info("ofc_code : " + ofc_code);
+//		log.info("ofc_sale : " + ofc_sale);
+//		log.info("ofc_title : " + ofc_title);
+//
+//		// ofc_code에 해당하는 강좌 불러오는 메소드
+//		PInfoPaymentsDto prodList = piDao.getpInfoPay(pInfoPay.getP_code());
+//		mv.addObject("prodList", prodList);
+//
+//		// 선택한 멤버 정보 불러오는 메소드
+//		MemberDto getMemPayInfo = pDao.getMemPayInfo(loginMember.getM_email());
+//		mv.addObject("memPayInfo", getMemPayInfo);
+//
+//		// 멤버 m_email에 해당하는 쿠폰 dto list 불러오는 메소드
+//		List<PayCouponDto> payCoupon = pDao.getPayCouponList(loginMember.getM_email());
+//		mv.addObject("payCoupon", payCoupon);
+//
+//		mv.addObject("m_email", loginMember.getM_email());
+//		mv.addObject("ord_kind", ord_kind);
+//
+//		mv.setViewName("payment/payment");
+//
+//		return mv;
+//	}
 
-	// 결제하기 위해 상품코드(스토어), 회원 정보 가져오는 메소드
-	public ModelAndView getStorePay(String p_code, String m_email, int ord_kind) {
-		mv = new ModelAndView();
-
-
-		loginMember = (MemberDto) session.getAttribute("mb");
-
-		log.info("p_code : " + p_code);
-		log.info("m_email : " + m_email);
-
-		// ofc_code에 해당하는 강좌 불러오는 메소드
-		PInfoPaymentsDto prodList = piDao.getpInfoPay(p_code);
-		mv.addObject("offList", prodList);
-
-		// 선택한 멤버 정보 불러오는 메소드
-		MemberDto getMemPayInfo = pDao.getMemPayInfo(m_email);
-		mv.addObject("memPayInfo", getMemPayInfo);
-
-		// 멤버 m_email에 해당하는 dto list 불러오는 메소드
-		List<PayCouponDto> payCoupon = pDao.getPayCouponList(m_email);
-		mv.addObject("payCoupon", payCoupon);
-
-		mv.addObject("m_email", m_email);
-		mv.addObject("ord_kind", ord_kind);
-		
-		mv.setViewName("payment/payment");
-
-		return mv;
-	}
-	
 	// 결제완료시 주문내역, 마이클래스 Insert 메소드
 	@Transactional
-	public ModelAndView completionPay(OrderDto order, String sc_code, int ord_kind) {
-		log.info(order.getOrd_kind() + "aaaa" + ord_kind);
+	public ModelAndView completionPay(OrderDto order, String sc_code) {
+		log.info(sc_code + "sc_code dfsdfsg");
 
 		mv = new ModelAndView();
-		
-		MemberDto member = ((MemberDto)session.getAttribute("mb"));
-		
+
+		MemberDto member = ((MemberDto) session.getAttribute("mb"));
+
 		order.setOrd_name(member.getM_name());
 		order.setOrd_phone(member.getM_phone());
-		order.setOrd_kind(ord_kind);
-		
+		order.setOrd_m_email(member.getM_email());
+
 		String view = null;
 
 		try {
 			pDao.orderInsert(order);
 
-			MyClassDto myClass = new MyClassDto();
-			myClass.setMcl_classcode(order.getOrd_pcode());
-			myClass.setMcl_m_email(order.getOrd_m_email());
-			myClass.setMcl_ord_code(order.getOrd_code());
-			myClass.setMcl_sc_code(sc_code);
 
-			pDao.mclInsert(myClass);
-			
 			OrderDto orderCheck = pDao.orderCheck(order.getOrd_code());
 			mv.addObject("orderCheck", orderCheck);
-			OffInfoDto mclCheck = pDao.mclCheck(order.getOrd_pcode());
-			mv.addObject("mclCheck", mclCheck);
 			
-			mv.setViewName("payment/payment_completion");
+			if (order.getOrd_pcode().contains("p")) {
+				log.info(order.getOrd_pcode());
+				PPayInfoComDto ordPCheck = pDao.ordPCheck(order.getOrd_code());
+				mv.addObject("ordPCheck", ordPCheck);
+				
+				mv.addObject("sort", "prod");
+
+				mv.setViewName("payment/payment_completion");
+			} else {
+				MyClassDto myClass = new MyClassDto();
+				myClass.setMcl_classcode(order.getOrd_pcode());
+				myClass.setMcl_m_email(order.getOrd_m_email());
+				myClass.setMcl_ord_code(order.getOrd_code());
+				myClass.setMcl_sc_code(sc_code);
+
+				pDao.mclInsert(myClass);
+
+				if (order.getOrd_pcode().contains("ofc")) {
+					OffPayInfoComDto mclOffCheck = pDao.mclOffCheck(order.getOrd_code());
+					mv.addObject("mclOffCheck", mclOffCheck);
+					mv.addObject("sort", "ofc");
+
+					mv.setViewName("payment/payment_completion");
+				} 
+				else if (order.getOrd_pcode().contains("onc")) {
+					OnPayInfoComDto mclOnCheck = pDao.mclOnCheck(order.getOrd_code());
+					mv.addObject("mclOnCheck", mclOnCheck);
+					mv.addObject("sort", "onc");
+
+				}
+				
+
+				mv.setViewName("payment/payment_completion");
+			}
+			
 		} catch (Exception e) {
 			log.info("payInsertERROR : " + e);
 			mv.setViewName("payment/payment?ofc_code=" + order.getOrd_pcode() + "&m_email=" + order.getOrd_m_email()
@@ -148,14 +189,15 @@ public class PaymentService {
 		return mv;
 	}
 
-	//쿠폰 Dto 정보 가져오는 메소드
+	// 쿠폰 Dto 정보 가져오는 메소드
 	public int getPayCoupon(String cpcode) {
 		String view = null;
 		log.info("cpcode : " + cpcode);
+
 		
 		PayCouponDto payCoupList = pDao.getPayCoupon(cpcode);
 		mv.addObject("payCoupList", payCoupList);
-		
+
 		return payCoupList.getCp_discount();
 	}
 }

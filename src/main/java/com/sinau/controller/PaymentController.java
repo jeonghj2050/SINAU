@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.dto.OrderDto;
+import com.sinau.dto.PInfoPaymentsDto;
 import com.sinau.service.ClassService;
 import com.sinau.service.PaymentService;
 
@@ -24,28 +25,31 @@ public class PaymentController {
 
 	//오프라인 -> 페이먼트 이동 메소드
 	@GetMapping("offPayment")
-	public ModelAndView payment(String ofc_code, String m_email, String sc_code, int ord_kind) {
-		log.info("offlinePayment() : " + ofc_code + "ord_kind :" + ord_kind);		
-		mv =pServ.getOffPay(ofc_code, m_email, sc_code, ord_kind);
+	public ModelAndView payment(String pay_pcode, String sc_code) {
+		log.info("offlinePayment() : " + pay_pcode + "Aaaaa" + sc_code);		
+		mv =pServ.getPayment(pay_pcode, sc_code);
 		
 		return mv;
 	}
 	
-	//온라인 -> 페이먼트 이동 메소드
-	@GetMapping("storePayment")
-	public ModelAndView payment(String p_code, String m_email, int ord_kind) {
-		log.info("offlinePayment() : " + p_code);		
-		mv =pServ.getStorePay(p_code, m_email, ord_kind);
-		
-		return mv;
-	}
+//	//온라인 -> 페이먼트 이동 메소드
+//	@GetMapping("storePayment")
+//	public ModelAndView payment(PInfoPaymentsDto pInfoPay, String p_code, int ord_kind) {
+//		log.info("offlinePayment() : " + p_code);		
+//		
+//		
+//		
+//		mv =pServ.getStorePay(pInfoPay, p_code, ord_kind);
+//		
+//		return mv;
+//	}
 
-	// 결제완료시 주문내역, 마이클래스 Insert 메소드
+	// 결제완료시 주문내역, 마이클래스 Insert 메소드d
 	@PostMapping("completion_pay")
-	public ModelAndView completionPay(OrderDto order, String sc_code, int ord_kind) {
-		log.info("completion_pay()" + order.getOrd_price() + ord_kind);
+	public ModelAndView completionPay(OrderDto order, String sc_code) {
+		log.info("completion_pay()" + order.getOrd_price());
 		
-		mv = pServ.completionPay(order, sc_code, ord_kind);
+		mv = pServ.completionPay(order, sc_code);
 		
 		return mv;
 	}

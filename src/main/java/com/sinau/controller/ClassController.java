@@ -72,9 +72,9 @@ public class ClassController {
 	
 	//강좌 상세 화면에서 회원 m_email를 포함한채 강좌 ofc_code에 해당하는 scList 출력하는 메소드 
 	@GetMapping("apply")
-	public ModelAndView offApply(String ofc_code) {
-		log.info("offlineApply()" + ofc_code);
-		mv = cServ.getOffApply(ofc_code);
+	public ModelAndView offApply(String pay_pcode) {
+		log.info("offlineApply()" + pay_pcode);
+		mv = cServ.getOffApply(pay_pcode);
 		
 		
 		
@@ -91,18 +91,18 @@ public class ClassController {
 	}
 	
 	
-	@PostMapping(value = "getFilter",
-			produces = "application/json; charset=utf-8;")
-	@ResponseBody
-	public ModelAndView getFilter(String cts_code) {
-		log.info("getFilter - cts_code : " + cts_code);
-		
-		
-		mv = cServ.getFilter1(cts_code);
-		
-		return mv;
-	}
-	
+//	@PostMapping(value = "getFilter",
+//			produces = "application/json; charset=utf-8;")
+//	@ResponseBody
+//	public ModelAndView getFilter(String cts_code) {
+//		log.info("getFilter - cts_code : " + cts_code);
+//		
+//		
+//		mv = cServ.getFilter1(cts_code);
+//		
+//		return mv;
+//	}
+//	
 
 
 

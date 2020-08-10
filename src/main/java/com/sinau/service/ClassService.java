@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dao.ClassDao;
 import com.sinau.dao.MemberDao;
+import com.sinau.dao.StoreDao;
 import com.sinau.dto.CategoryDto;
 import com.sinau.dto.FilterCtsDto;
 import com.sinau.dto.MemberDto;
@@ -28,6 +29,7 @@ import com.sinau.dto.OffListDto;
 import com.sinau.dto.OffOrdScDto;
 import com.sinau.dto.OffScheduleDto;
 import com.sinau.dto.OrderDto;
+import com.sinau.dto.PPayInfoDto;
 import com.sinau.dto.PayCouponDto;
 import com.sinau.dto.ScheduleDto;
 
@@ -40,6 +42,8 @@ public class ClassService {
 	private ClassDao cDao;
 	@Autowired
 	private MemberDao mDao;
+	@Autowired
+	private StoreDao sDao;
 	ModelAndView mv;
 
 	@Autowired
@@ -78,13 +82,6 @@ public class ClassService {
 		OffInfoSpecDto offInfoSpec = cDao.getOffInfoSpec(ofc_code);
 		mv.addObject("offInfoSpec", offInfoSpec);
 		
-/*		String spec1 = cDao.getInfoSpec1(ofc_code);
-		mv.addObject("spec1", spec1);
-		String spec2 = cDao.getInfoSpec2(ofc_code);
-		mv.addObject("spec2", spec2);
-		String spec3 = cDao.getInfoSpec3(ofc_code);
-		mv.addObject("spec3", spec3);*/
-
 		// 게시글 번호로 DB 검색 결과 받아오기.(DB)
 		OffInfoDto offInfo = cDao.getOffInfo(ofc_code);
 		mv.addObject("offInfo", offInfo);
@@ -124,22 +121,35 @@ public class ClassService {
 		return mv;
 	}
 
-	public ModelAndView getOffApply(String ofc_code) {
+	public ModelAndView getOffApply(String pay_pcode) {
 		loginMember = (MemberDto) session.getAttribute("mb");
 		mv = new ModelAndView();
 
-		log.info("aaaaaaaaaaaaaaaaaaaaa get ofc_code : " + ofc_code);
-		log.info("m_email : " + ((MemberDto) session.getAttribute("mb")).getM_email());
+		if(pay_pcode.contains("ofc")) {
 
-		OffListDto offList = cDao.getOffApplyInfo(ofc_code);
-		mv.addObject("offList", offList);
+			log.info("aaaaaaaaaaaaaaaaaaaaa get ofc_code : " + pay_pcode);
+			log.info("m_email : " + ((MemberDto) session.getAttribute("mb")).getM_email());
 
-		List<OffScheduleDto> offSchedule = cDao.getOffScehdule(ofc_code);
-		mv.addObject("offSchedule", offSchedule);
+			OffListDto offList = cDao.getOffApplyInfo(pay_pcode);
+			mv.addObject("offList", offList);
 
-		mv.addObject("m_email", loginMember.getM_email());
+			List<OffScheduleDto> offSchedule = cDao.getOffScehdule(pay_pcode);
+			mv.addObject("offSchedule", offSchedule);
 
-		mv.setViewName("offline/offline_apply");
+			mv.addObject("m_email", loginMember.getM_email());
+
+			mv.setViewName("offline/offline_apply");
+		}
+		else if(pay_pcode.contains("onc")) {
+			
+			mv.addObject("sort", "onc");
+			mv.setViewName("payment/payment");
+		}else {
+			PPayInfoDto pPayInfo = sDao.getProdApplyInfo(pay_pcode);
+			mv.addObject("sort", "prod");
+			mv.addObject("prodList", pPayInfo);
+			mv.setViewName("payment/payment");
+		}
 
 		return mv;
 	}
@@ -169,15 +179,14 @@ public class ClassService {
 		return mv;
 	}
 
-	public ModelAndView getFilter1(String cts_code) {
-		mv = new ModelAndView();
-		
-		List<OffListDto> offCateFilterList = cDao.getOffCateFilterList(cts_code);
-		mv.addObject("offCateFilterList", offCateFilterList);
-		
-		return mv;
-	}
-
+	/*
+	 * public ModelAndView getFilter1(String cts_code) { mv = new ModelAndView();
+	 * 
+	 * List<OffListDto> offCateFilterList = cDao.getOffCateFilterList(cts_code);
+	 * mv.addObject("offCateFilterList", offCateFilterList);
+	 * 
+	 * return mv; }
+	 */
 
 
 }

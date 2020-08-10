@@ -77,7 +77,7 @@
 		<![CDATA[ 
 			select * from of_INFO where ofc_cts_code=#{cts_code} order by cts_code = #{filter1} and #{filter2} and #{filter3}
 		]]>
-	</select>	
+	</select>
 	<!-- 서브 카테고리 가져오는 쿼리문(nav영역 사용) -->
 	<select id="getOffCate" parameterType="String"
 		resultType="com.sinau.dto.OffCtsDto">
@@ -265,7 +265,7 @@ GROUP BY   OFC_CODE
 		resultType="com.sinau.dto.OffListDto">
 		<![CDATA[
 			select * from of_INFO
-			where ofc_code=#{ofc_code}
+			where ofc_code=#{pay_pcode}
 			]]>
 	</select>
 
@@ -294,5 +294,18 @@ GROUP BY   OFC_CODE
 			select * from filter3
 			]]>
 	</select>
-	
+	<select id="getOnInfoPay" parameterType="String"
+		resultType="com.sinau.dto.OnListDto">
+		<![CDATA[
+			select DISTINCT * from oninfolist2
+		where onc_code = #{onc_code}
+			]]>
+	</select>
+	<select id="getOffSchedulePay" parameterType="String"
+		resultType="com.sinau.dto.OffScheduleDto">
+		<![CDATA[
+			select sc_code from scl_sc
+			where sc_code=#{sc_code}
+			]]>
+	</select>
 </mapper>

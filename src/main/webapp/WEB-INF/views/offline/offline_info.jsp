@@ -236,10 +236,10 @@
 							<form name="ofcFrm" id="ofcFrm" action="apply" method="get">
 								<input type="hidden" name="m_email" value="${m_email}">
 								<input type="hidden" name="ofc_code" value="${offInfo.ofc_code}">
-								<div class="class_submitbtn" color="orange" idid="apply"
+								<div class="class_submitbtn" color="orange" id="apply"
 									fill="true">
 									<span class="sc-fzoyTs jZUSDr" id="apply"><span>
-												<input type="submit" value="클래스 신청하기"></span> </span>
+									<a href="apply?pay_pcode=${offInfo.ofc_code}">클래스 신청하기</a></span> </span>
 									
 								</div>
 							</form>

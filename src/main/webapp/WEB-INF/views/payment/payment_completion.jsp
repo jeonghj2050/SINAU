@@ -32,11 +32,19 @@
 				<div class="order-info">
 					<div class="order-num">
 						<div>주문번호</div>
-						<div>${orderCheck.ord_code}</div>
+						<div>${orderCheck.ord_code}20200810</div>
 					</div>
 					<div class="order-name">
 						<div>주문명</div>
-						<div>${mclCheck.ofc_title}</div>
+						<c:if test='${sort eq "prod"}'>
+						<div>${ordPCheck.p_title}</div>
+						</c:if>
+						<c:if test='${sort eq "onc"}'>
+						<div>${mclOnCheck.onc_title}</div>
+						</c:if>
+						<c:if test='${sort eq "ofc"}'>
+						<div>${mclOffCheck.ofc_title}</div>
+						</c:if>
 					</div>
 				</div>
 				 <a href="/">
