@@ -144,6 +144,8 @@ div.mAprovalCate div :hover {
 	font-size: 24px;
 	color: white;
 }
+
+
 /*게시글 관리 카테고리 */
 .menuCate {
 	float: left;
@@ -196,6 +198,8 @@ div.mAprovalCate div :hover {
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }
+
+
 
 /* 가입승인 탭 */
 .tabs>#t1.on {
@@ -319,7 +323,7 @@ div.mAprovalCate div :hover {
 	margin: 0px 0px 0px 20px;
 	float: left;
 	width: 1076px;
-	height: 1000px;
+/* 	height: 1000px; */
 	padding: 80px 25px;
 	background-color: #e8dcc6;
 }
@@ -341,6 +345,8 @@ div.mAprovalCate div :hover {
 	padding: 80px 25px;
 	background-color: #d9d9ff;
 }
+
+
 
 /* 정보승인 게시판 */
 .information-1 {
@@ -1094,3 +1100,43 @@ div.mAprovalCate div :hover {
 .login-form>a {
 	font-size: 10px;
 }
+
+
+/* 페이징 css  */
+
+.btn-area .paging {
+	width: 100%;
+	height: 50px;
+	margin: 0px auto;
+	opacity: 0.8;
+	text-align: center;
+	background-color:#cadcfd;
+	float : left;
+	
+}
+
+.paging .pno {
+	background-color: #efefef;
+	margin: 2px;
+	border: 1px solid #6c6c6c;
+	border-radius: 3px;
+	line-height: 1.5;
+	font-size: 15px;
+	height: 20px;
+}
+
+.paging>a {
+	text-decoration: none;
+}
+.paging>a:visited {
+	color: #575757;
+}
+
+.btn-area {
+	margin: 0px auto;
+	width: 300px;
+	text-align: center;
+}
+
+
+/* 여기까지  */

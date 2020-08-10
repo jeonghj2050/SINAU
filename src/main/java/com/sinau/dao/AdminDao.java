@@ -1,10 +1,16 @@
 package com.sinau.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.sinau.dto.AdminDto;
 
 public interface AdminDao {
+	
+	public List<AdminDto> getList(Map<String, String> lmap);
+	
+	public int getListCount();
+	
 	//회원 승인 구분
 	public List<AdminDto> getMemStateNm(int state);
 	public List<AdminDto> getMemStateDm(int state);
@@ -24,6 +30,9 @@ public interface AdminDao {
 	public void getOfDel(String code);
 	//유튜브
 	public void getYDel(String code);
+
+
+
 	
 	
 //	//전체 회원 가져오는 리스트

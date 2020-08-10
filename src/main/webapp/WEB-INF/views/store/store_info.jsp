@@ -22,14 +22,10 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
 	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
 	crossorigin="anonymous"></script>
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="resources/css/store_info.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <title>Document</title>
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		//  $('.show1').show(); //페이지를 로드할 때 표시할 요소
@@ -57,6 +53,65 @@
 			return false;
 		});
 	});
+	
+	$(document)
+	.on(
+			"click",
+			"#sh-link",
+			function(e) {
+				// 링크복사 시 화면 크기 고정
+				$('html')
+						.find('meta[name=viewport]')
+						.attr(
+								'content',
+								'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no');
+				var html = "<input id='clip_target' type='text' value='' style='position:absolute;top:-9999em;'/>";
+
+				$(this).append(html);
+				var input_clip = document.getElementById("clip_target");
+				//현재 url 가져오기 
+				var _url = $(location).attr('href');
+				$("#clip_target").val(_url);
+				if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+					var editable = input_clip.contentEditable;
+
+					var readOnly = input_clip.readOnly;
+					input_clip.contentEditable = true;
+					input_clip.readOnly = false;
+
+					var range = document.createRange();
+					range.selectNodeContents(input_clip);
+
+					var selection = window.getSelection();
+					selection.removeAllRanges();
+					selection.addRange(range);
+					input_clip.setSelectionRange(0, 999999);
+
+					input_clip.contentEditable = editable;
+					input_clip.readOnly = readOnly;
+
+				} else {
+					input_clip.select();
+				}
+				try {
+					var successful = document.execCommand('copy');
+					input_clip.blur();
+					if (successful) {
+						alert("URL이 복사 되었습니다. 원하시는 곳에 붙여넣기 해 주세요.");
+						// 링크복사 시 화면 크기 고정 
+
+						$('html')
+								.find('meta[name=viewport]')
+								.attr(
+										'content',
+										'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes');
+					} else {
+						alert('이 브라우저는 지원하지 않습니다.');
+					}
+				} catch (err) {
+					alert('이 브라우저는 지원하지 않습니다.');
+				}
+			});
 </script>
 </head>
 <body>
@@ -84,8 +139,6 @@
 				<div class="hr"></div>
 				<div class="like_container">
 					<div class="btn_div">
-						<c:choose>
-							<c:when test="${mb.m_email == null}">
 								<button type="button" class="likebtn unfilled_heart"
 									color="default" fill="false" data-test-id="wishlist-button"
 									data-test-group="sales-product-info-table-row">
@@ -99,8 +152,6 @@
 									</div>
 									<span class="like_num"><span>${pInfoPay.l_count}</span></span>
 								</button>
-							</c:when>
-							<c:otherwise>
 								<button type="button" class="likebtn full_heart" color="default"
 									fill="false">
 									<div class="sc-fzqARJ eozcfK">
@@ -111,10 +162,9 @@
 												fill="#1b1c1d"></path>
                                 </svg>
 									</div>
-									<span class="like_num"><span>${pInfoPay.l_count}</span></span>
+									<span class="like_num"><span>${pInfoPay.l_count+1}</span></span>
 								</button>
-							</c:otherwise>
-						</c:choose>
+
 					</div>
 					<div class="btn_div">
 						<button type="button" class="likebtn sharebtn" color="default"
@@ -227,7 +277,7 @@
 			<div class="sp_title1">상품 리뷰</div>
 			<div class=sinfo_rvall>
 				<div id="reply">
-					<c:if test="${mb == null }">
+					<c:if test="${mb == null}">
 						<p class="rp_p">
 							소감을 남기시려면 <a href="loginFrm">로그인</a>해주세요
 						</p>
@@ -247,14 +297,15 @@
 								</div>
 
 								<div class="input_area">
-									<button type="button" id="reply_btn" onclick="reviewInsert()">등록</button>
+									<!-- <button type="button" id="reply_btn" onclick="reviewInsert()">등록</button> -->
+									<button type="button" id="reply_btn">등록</button>
 								</div>
 							</form>
 						</div>
 					</c:if>
 
 					<div class="replyList">
-						<ol>
+						<ol id="rlist-ol">
 							<c:forEach var="r" items="${rList}">
 								<li>
 									<div class="userInfo" id="${r.prv_code}">
@@ -311,10 +362,11 @@
 													</svg></span>
 											</button>
 										</c:if> --%>
-										<c:if test="${r.prv_m_email != mb.m_email}">
-											<button class="warning_dtn" data-toggle="modal" class="warningInsert" 
-												data-target="#warningModal" data-email="${r.prv_m_email }" data-content="${r.prv_content }" data-prv="${r.prv_code }" data-pcode="${p_code }">
-												<span class="warning_ico"> <svg width="1em"
+										<c:if test="${(!empty mb.m_email) && (r.prv_m_email != mb.m_email)}">
+											<button type="button" class="warning_dtn warningInsert" data-toggle="modal" 
+												data-target="#warningModal" data-email="${r.prv_m_email}" data-content="${r.prv_content}" data-prv="${r.prv_code}" data-pcode="${p_code}">
+												<span class="warning_ico"> 
+														<svg width="1em"
 														height="1em" viewBox="0 0 16 16"
 														class="bi bi-exclamation-triangle" fill="currentColor"
 														xmlns="http://www.w3.org/2000/svg">
@@ -338,12 +390,12 @@
 
 				<!-- 신고내역 모달  -->
 				<div class="modal fade" id="warningModal" tabindex="-1"
-					role="dialog" aria-labelledby="exampleModalLabel"
+					role="dialog" aria-labelledby="warningModalLabel"
 					aria-hidden="true">
-					<div class="modal-dialog">
+					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">신고</h5>
+								<h5 class="modal-title" id="warningModalLabel">신고</h5>
 								<button type="button" class="close" data-dismiss="modal"
 									aria-label="Close">
 									<span aria-hidden="true">&times;</span>
@@ -351,27 +403,28 @@
 							</div>
 							
 							<div class="modal-body">
-								<form name="warningFrm" action="warningInsert" method="post" enctype="multipart/form-data">
+								<form name="warningFrm" id="warningFrm">
 									<div class="form-group">
 										<input type="hidden" name="w_prv_code" class="md_prv">
-										<input type="hidden" name="p_code" class="md_pcode">
-										내용 : <div class="md_content">${r.prv_content}</div>
+										<!-- <input type="hidden" name="p_code" class="md_pcode"> -->
+										<input type="hidden" name="w_m_email" class="m_email">
+										내용 : <div class="md_content"></div>
 										<hr>
-										작성자:<div class="md_email">${r.prv_m_email}</div>
+										작성자:<div class="md_email"></div>
 									</div>
 									<hr>
-									<div class="form-group">
-										사유<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"
-											name="w_contnenNum" value="1">비방 및 욕설<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"
-											name="w_contnenNum" value="2" checked="checked">부적절한 홍보
-										게시물<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"
-											name="w_contnenNum" value="3">음란성 또는 청소년에게 부적합한 내용<br>
+									<div class="form-group">사유<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+										<input type="radio" name="w_contentNum" value="1">비방 및 욕설<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="radio" name="w_contentNum" value="2" checked="checked">부적절한 홍보 게시물<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="radio" name="w_contentNum" value="3">음란성 또는 청소년에게 부적합한 내용<br>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">취소</button>
-										<input id="modalSubmit" type="submit" class="btn btn-primary" onclick="warningInsert()">
+										<button id="modalSubmit" type="button" class="btn btn-primary" onclick="warningInsert()">제출</button>
 									</div>
 								</form>
 							</div>
@@ -468,66 +521,6 @@
 	
 	</footer>
 </body>
-<script type=text/javascript>
-	$(document)
-			.on(
-					"click",
-					"#sh-link",
-					function(e) {
-						// 링크복사 시 화면 크기 고정
-						$('html')
-								.find('meta[name=viewport]')
-								.attr(
-										'content',
-										'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no');
-						var html = "<input id='clip_target' type='text' value='' style='position:absolute;top:-9999em;'/>";
-
-						$(this).append(html);
-						var input_clip = document.getElementById("clip_target");
-						//현재 url 가져오기 
-						var _url = $(location).attr('href');
-						$("#clip_target").val(_url);
-						if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
-							var editable = input_clip.contentEditable;
-
-							var readOnly = input_clip.readOnly;
-							input_clip.contentEditable = true;
-							input_clip.readOnly = false;
-
-							var range = document.createRange();
-							range.selectNodeContents(input_clip);
-
-							var selection = window.getSelection();
-							selection.removeAllRanges();
-							selection.addRange(range);
-							input_clip.setSelectionRange(0, 999999);
-
-							input_clip.contentEditable = editable;
-							input_clip.readOnly = readOnly;
-
-						} else {
-							input_clip.select();
-						}
-						try {
-							var successful = document.execCommand('copy');
-							input_clip.blur();
-							if (successful) {
-								alert("URL이 복사 되었습니다. 원하시는 곳에 붙여넣기 해 주세요.");
-								// 링크복사 시 화면 크기 고정 
-
-								$('html')
-										.find('meta[name=viewport]')
-										.attr(
-												'content',
-												'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes');
-							} else {
-								alert('이 브라우저는 지원하지 않습니다.');
-							}
-						} catch (err) {
-							alert('이 브라우저는 지원하지 않습니다.');
-						}
-					});
-</script>
 <script src="resources/javascript/jquery.serializeObject.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -535,7 +528,6 @@
 		$('.otherreply').hide();
 		$('.mywarning').hide();
 	});
-
 	$(document).on('click', '#reply_btn', function(){
 		var replyFrm = $('#rFrm').serializeObject();
 		//추가 데이터 : 게시글번호, 작성자(로그인) id
@@ -543,8 +535,10 @@
 		//세션에 저장한 로그인 회원 정보에서 id 추출
 		replyFrm.prv_m_email = '${mb.m_email}';
 		console.log(replyFrm);
-
-		$.ajax({
+		
+		jQuery.noConflict();
+		
+		jQuery.ajax({
 			url : "reviewInsert",//요청 url(uri)
 			type : "post",//전송 방식(get, post)
 			data : replyFrm,//전송할 데이터
@@ -597,12 +591,15 @@
 		$('#repCon').val('');//댓글창 지우기
 	});
 	
+	
 	//댓글 삭제
 	
 	$(document).on('click', '.delelte_dtn', function(){
 		var prv_code = $(this).attr('prv-code');
 		var obj = $(this).parent().parent();
 		console.log(obj);
+		
+		jQuery.noConflict();
 		
 		var deleteConfirm = confirm("정말 삭제 하시겠습니까")
 		if (deleteConfirm) {
@@ -611,7 +608,7 @@
 			};
 			console.log(paramData);
 			
-			$.ajax({
+			jQuery.ajax({
 				url : "reviewDelete",
 				type : "post",
 				data : paramData,
@@ -628,94 +625,65 @@
 		}
 	});
 	
-	/*
-	function reviewDelete(prv_code, obj) {
-		console.log(prv_code);
-		var deleteConfirm = confirm("정말 삭제 하시겠습니까")
-		if (deleteConfirm) {
-			var paramData = {
-				"prv_code" : prv_code
-			};
-
-			$.ajax({
-				url : "reviewDelete",
-				type : "post",
-				data : paramData,
-				dataType : "json",//데이터의 형식
-				success : function(result) {
-					var oli = $(obj).parent().parent();
-					oli.remove();
-				
-					location.reload(true);
-				},
-				error : function() {
-					alert("로그인하셔야합니다.")
-				}
-			});
-		}
-	}*/
+	
 </script>
+
 <script type="text/javascript">
 $(document).ready(function() {
-	
-	$('.warning_dtn').click(function(){
-		
-		var email="${mb.m_email}";
-		console.log(email);
-		
-		if(email == "" || email == null){
-			alert("로그인하셔야합니다.");			
-		}
-		
-		var warningConfirm = confirm("정말 신고하겠습니까?");
-		console.log(warningConfirm);
-		
-		if(warningConfirm == 'true'){
-			var email=$(this).data('email');
-			var content=$(this).data('content');
-			var prv_code=$(this).data('prv');
-			var p_code=$(this).data('pcode');
-			
-			$('.md_content').html(content);
-			$('.md_email').html(email);
-			$('.md_prv').val(prv_code);
-			$('.md_pcode').val(p_code);
-			
-			var paramData = {"prv_code" : prv_code};
-		}
-		
+	$('#warningModal').on('show.bs.modal', function(event){
+		var button = $(event.relatedTarget);
+		var email=button.data('email');
+		var content=button.data('content');
+		var prv_code=button.data('prv');
+		var p_code=button.data('pcode');
+		console.log(email, content, prv_code, p_code);
+		$('.md_content').html(content);
+		$('.md_email').html(email);
+		$('.md_prv').val(prv_code);
+		$('.md_pcode').val(p_code);
+		$('.m_email').val(email);
 	});
+	
+	var modal_hide = function(){
+		$('#warningModal').modal('hide');
+	}
 });
 
-/*function warningInsert(prv_code, obj) {
+</script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="resources/javascript/jquery.serializeObject.js"></script>
+<script>
+jQuery.noConflict();
+function warningInsert() {
+	var warningFrm = $('#warningFrm').serializeObject();
+	console.log(warningFrm);
+	
+	var prv_code = warningFrm.w_prv_code;
 	console.log(prv_code);
-	var email=${mb.m_email};
-	if(email==null){
-		alert("로그인하셔야합니다.");
-		return;
-	}
-	var warningConfirm = confirm("정말 신고하겠습니까?")
-	if (warningConfirm) {
-		var paramData = {
-			"prv_code" : prv_code
-		};
-
-		$.ajax({
-			url : "warningInsert",
-			type : "post",
-			data : paramData,
-			dataType : "json",//데이터의 형식
-			success : function(result) {
-				var oli = $(obj).parent().parent();
-				oli.hide();
-			
-				location.reload(true);
-			},
-			error : function() {
-				
-			}
-		});
-	}
-}*/
+	var rcont = $('#'+prv_code).next();
+	console.log(rcont);
+	var rbtn = $('#'+prv_code+' .warning_dtn');
+	console.log(rbtn);
+	
+	$('#warningModal').modal('hide');
+	
+	jQuery.ajax({
+		url : "warningInsert",
+		type : "post",
+		data : warningFrm,
+		dataType : "json",//데이터의 형식
+		success : function(result) {
+			console.log(result);
+			rcont.html('신고된 리뷰입니다.');
+			rcont.css('color', 'gray');
+			rbtn.hide();
+		},
+		error : function(error) {
+			console.log(error);
+		}
+	});
+	
+}
 </script>
 </html>

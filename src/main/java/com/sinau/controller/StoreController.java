@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sinau.dto.LikesDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.PReviewDto;
 import com.sinau.dto.WarningDto;
@@ -66,54 +67,53 @@ public class StoreController {
 		
 		return mv;
 	}
-	
+		
 
 	//댓글 추가 및 댓글 목록 처리 메소드
-		@PostMapping(value = "reviewInsert",
-				produces = "application/json; charset=utf-8")
-		@ResponseBody
-		public Map<String, PReviewDto> 
-		replyInsert(PReviewDto review){
-			log.info("reviewInsert - bnum : " 
-					+ review.getPrv_p_code());	
+	@PostMapping(value = "reviewInsert",
+			produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Map<String, PReviewDto> 
+	replyInsert(PReviewDto review){
+		log.info("reviewInsert - bnum : " 
+				+ review.getPrv_p_code());	
 
-			Map<String, PReviewDto> rMap = 
-					sServ.rInsert(review);
+		Map<String, PReviewDto> rMap = 
+				sServ.rInsert(review);
 
-			return rMap;
-		}
-		
+		return rMap;
+	}
+	
 
-		@PostMapping(value = "reviewDelete", produces = "application/json; charset=utf-8")
-		@ResponseBody
-		public Map<String, List<PReviewDto>> 
-		getReviewList(String prv_code){
-		 log.info("post delete reply");
-		 int result =0;
-		 PReviewDto review = new PReviewDto();
-		 
-		 log.info(prv_code);
-		 
-		 Map<String, List<PReviewDto>> rMap =sServ.rvidCheck(prv_code);	
-		 
-		 
-		 return rMap;
-		 
+	@PostMapping(value = "reviewDelete", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Map<String, List<PReviewDto>> 
+	getReviewList(String prv_code){
+	 log.info("post delete reply");
+	 int result =0;
+	 PReviewDto review = new PReviewDto();
+	 
+	 log.info(prv_code);
+	 
+	 Map<String, List<PReviewDto>> rMap =sServ.rvidCheck(prv_code);	
+	 
+	 
+	 return rMap;
+	 
+	
+	}
+	
+	
+	@PostMapping(value = "warningInsert", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Map<String, String> WarningInsert(WarningDto wDto) {
+		log.info("warningInsert() : " + wDto.getW_m_email());
+		Map<String, String> rMap = sServ.wInsert(wDto);
 		
-		}
-		
-		
-		@PostMapping("warningInsert")
-		public ModelAndView WarningInsert
-		(MultipartHttpServletRequest multi, 
-				RedirectAttributes rttr) {
-			log.info("warningInsert()");
+		return rMap;
+	}
 
-			mv = sServ.wInsert(multi, rttr);
-			
-			
-			return mv;
-		}
+
 	
 		
 

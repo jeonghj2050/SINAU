@@ -5,7 +5,7 @@
 	<mapper namespace="com.sinau.dao.WarningDao">
 	<insert id="warningInsert" parameterType="com.sinau.dto.WarningDto">
 		 INSERT INTO WARNING VALUES 
-		 ('w_'||SEQ_W.NEXTVAL,#{w_contentNum},#{w_content},DEFAULT,#{w_m_email},#{w_prv_code},sysdate)
+		 ('w_'||SEQ_W.NEXTVAL,${w_contentNum},#{w_content},DEFAULT,#{w_m_email},#{w_prv_code},sysdate)
 	</insert>
 	
 	<select id="getWarningList" parameterType="String" resultType="com.sinau.dto.WarningDto">
