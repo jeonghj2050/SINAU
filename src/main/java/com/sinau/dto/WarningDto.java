@@ -10,7 +10,7 @@ public class WarningDto {
 	private String w_code;
 	private String w_contentNum;
 	private String w_content;
-	private String w_state;
+	private int w_state;
 	private String w_m_email;
 	private String w_prv_code;
 	private Date w_update;

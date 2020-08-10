@@ -172,6 +172,27 @@ public class StoreService {
 
 	}
 
+	//	public Map<String, List<WarningDto>> wInsert(WarningDto warning) {
+	//		// TODO Auto-generated method stub
+	//		Map<String, List<WarningDto>>wMap=null;
+	//
+	//		try {
+	//			//1.넘어온 댓글-> DB에 insert 처리
+	//			wDao.warningInsert(warning);
+	//			//2.새로 추가된 댓글 포함 전체 댓글 목록 가져오기
+	//			List<WarningDto> wList = wDao.getWaningList(warning.getW_code());
+	//			//3. 전체 댓글 목록을 rMap에 추가하여 반환
+	//			wMap=new HashMap<String, List<WarningDto>>();
+	//			wMap.put("wList", wList);
+	//
+	//		}catch (Exception e) {
+	//			// TODO: handle exception
+	//			e.printStackTrace();
+	//			wMap=null;
+	//		}
+	//
+	//		return wMap;
+	//	}
 
 	public Map<String, String> wInsert(WarningDto wDto) {
 		Map<String, String> rMap = new HashMap<String, String>();
@@ -185,9 +206,13 @@ public class StoreService {
 		}else {
 			content="음란성 또는 청소년에게 부적합한 내용";
 		}
-		
+
+		//일반적으로 textarea에서 들어오는 데이터는
+		//본 내용 앞 뒤에 쓸데없는 공백이 포함됨.
+		//공백 제거 처리. trim()
+
 		wDto.setW_content(content);
-			
+
 		try {
 			wDao.warningInsert(wDto);
 
@@ -200,6 +225,5 @@ public class StoreService {
 
 		return rMap;
 	}
-	
 }
 

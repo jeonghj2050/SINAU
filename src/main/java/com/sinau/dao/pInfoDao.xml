@@ -7,7 +7,7 @@
 
 	<select id="getReviewList" parameterType="String"
 		resultType="com.sinau.dto.PReviewDto">
-		SELECT * FROM prv_warning
+		SELECT * FROM PRV
 		WHERE PRV_P_CODE=#{prv_p_code}
 	</select>
 
@@ -36,8 +36,11 @@
 		WHERE PRV_CODE = #{PRV_CODE}
 
 	</delete>
+<<<<<<< HEAD
 	
 
 
 
+=======
+>>>>>>> parent of 28d43fa... 0810sl2
 </mapper>
