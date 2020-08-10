@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.sinau.dto.FilesDto;
-import com.sinau.dto.MemberImg;
 import com.sinau.dto.MyCouponDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
@@ -65,16 +64,5 @@ public interface CommonDao {
 
 	void insertSchedule(ScheduleDto schedule);
 
-	void updateMemImg(MemberImg memImg);
 
-	//up_p_code에 해당하는 일정 목록의 코드를 가져온다.
-	String getSclCode(String up_p_code);
-
-	List<ScheduleDto> getScheduleList(String scl_code);
-
-	void updateSchedule(ScheduleDto schedule);
-
-	void deleteSchedule(String scl_code);
-
-	void deleteScList(String scl_code);
 }

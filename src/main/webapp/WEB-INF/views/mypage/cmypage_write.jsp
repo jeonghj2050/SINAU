@@ -29,13 +29,9 @@
              if ($("input[name=class_sort]:checked").val() == "ofc") {
                  $("#ofc_form").show();
                  $("#onc_form").hide();
-                 $(".profile_img").attr("src", "resources/images/default.jpg");
-                 $('.spec_images_wrap').html("");
              } else if ($("input[name=class_sort]:checked").val() == "onc") {
                  $("#onc_form").show();
                  $("#ofc_form").hide();
-                 $(".profile_img").attr("src", "resources/images/default.jpg");
-                 $('.spec_images_wrap')          
              }
          });
      });
@@ -49,7 +45,7 @@
 		$(".image_file_thumb").on("change", fileSelectThumb);
 	});
 	$(document).ready(function(){
-		$('.spec').on("change",handleMultiThumb);
+		$('#spec').on("change",handleMultiThumb);
 	});
 	function fileSelect(e) {
 		if ($(".image_file").val() == "") {
@@ -91,7 +87,7 @@
 
 			var reader = new FileReader();
 			reader.onload = function(e) {
-				$(".profile_img").attr("src", e.target.result);
+				$("#profile_img").attr("src", e.target.result);
 			}
 			reader.readAsDataURL(f);
 		});
@@ -142,16 +138,16 @@
 				<div class="class_form" id="onc_form">
 					<div class="class_info_form">
 						<div class="class_profile_image">
-							<img src="resources/images/default.jpg" alt="" class="img-circle profile_img"
-								width="200px" height="200px" ><br>
+							<img src="resources/images/default.jpg" alt="" class="img-circle"
+								width="200px" height="200px" id="profile_img"><br>
 							<div>
 								<label for="thumbnail">썸네일</label> <input type="file"
-									class="image_file_thumb thumbnail" name="thumbnail"
+									class="image_file_thumb" name="thumbnail" id="thumbnail"
 									>
 							</div>
 							<div>
 								<label for="spec">상세 이미지</label> <input type="file"
-									class="image_file spec" name="spec"  multiple="multiple"
+									class="image_file" name="spec" id="spec" multiple="multiple"
 									>
 							</div>
 							<div>
@@ -159,7 +155,7 @@
 							</div>
 							<div>
 								<label for="content">내용 이미지</label> <input type="file"
-									class="image_file content" name="content"  >
+									class="image_file" name="content" id="content" >
 							</div>
 						</div>
 						<div>
@@ -220,16 +216,16 @@
 				<div class="class_form" id="ofc_form">
 					<div class="class_info_form">
 						<div class="class_profile_image">
-							<img src="resources/images/default.jpg" alt="" class="img-circle profile_img"
-								width="200px" height="200px"><br>
+							<img src="resources/images/default.jpg" alt="" class="img-circle"
+								width="200px" height="200px" id="profile_img"><br>
 							<div>
 								<label for="thumbnail">썸네일</label> <input type="file"
-									class="image_file_thumb thumbnail" name="ofthumbnail" 
+									class="image_file_thumb" name="ofthumbnail" 
 									>
 							</div>
 							<div>
 								<label for="spec">상세 이미지</label> <input type="file"
-									class="image_file spec" name="ofspec"multiple="multiple"
+									class="image_file" name="ofspec"multiple="multiple"
 									>
 							</div>
 							<div>
@@ -237,7 +233,7 @@
 							</div>
 							<div>
 								<label for="content">내용 이미지</label> <input type="file"
-									class="image_file content" name="ofcontent" >
+									class="image_file" name="ofcontent" >
 							</div>
 						</div>
 						<div>
