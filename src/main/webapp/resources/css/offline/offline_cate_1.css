@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+#filter {
+	width: 100px;
+	margin: 0px auto;
+	float: right;
+	font-size: 17px;
+	cursor: pointer;
+}
+
+#filter img {
+	width: 15px;
+	height: 15px;
+	margin: 5px 5px 0px 0px;
+	align-content: center;
+}
+
+.nav>li>a:link {
+	text-decoration: none;
+}
+
+/* 필터 */
+.filter_modal {
+display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    z-index: 3000;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba(0, 0, 0, 0.72);
+    opacity: 1;
+    visibility: visible;
+    overflow: hidden;
+    overscroll-behavior: contain;
+}
+
+.filter_modal-wrap {
+	align-content: center;
+	margin: 200px auto;
+	height: 250px;
+	width: 500px;
+	background-color: white;
+}
+
+.filter_text {
+	width: 500px;
+	height: 60px;
+	background-color: black;
+	margin: 0px ;
+	color: white;
+	line-height: 60px;
+	font-size: 20px;
+	font-weight: bold;
+	box-sizing: border-box;
+}
+.filter_modal>* {
+	box-sizing: border-box;
+}
+
+.filter_modal_wrap>form {
+	width: 96%;
+	margin: 0px auto;
+}
+div.filter1, div.filter2, div.filter3 {
+	width: 160px;
+	height: 70px;
+	float: left;
+	margin: 40px 3px;
+}
+.filter_btn{
+	width: auto;
+	cursor: pointer;
+	margin-left: 230px;
+}

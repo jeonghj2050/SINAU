@@ -52,6 +52,98 @@
 	<!-- 내 클래스의 상태를 변경한다.  -->
 	<update id="mclUpdateState" parameterType="com.sinau.dto.OrderDto">
 		update mcl set mcl_state=#{ord_state} where mcl_ord_code=#{ord_code}
+
+
+
+	<!-- OFFLINE CLASS 부분 -->
+	<select id="getOffList" parameterType="String"
+		resultType="com.sinau.dto.OffListDto">
+		<![CDATA[
+			select * from of_INFO 
+		]]>
+	</select>
+	<!-- 서브 카테고리에 해당하는 강좌 가져오는 쿼리문 -->
+	<select id="getOffCateList" parameterType="String"
+		resultType="com.sinau.dto.OffListDto">
+		<![CDATA[
+			select * from of_INFO where ofc_cts_code=#{cts_code}
+		]]>
+	</select>
+	<select id="getOffCateFilterList" parameterType="String"
+		resultType="com.sinau.dto.OffListDto">
+		<![CDATA[ 
+			select * from of_INFO where ofc_cts_code=#{cts_code} order by cts_code = #{filter1} and #{filter2} and #{filter3}
+		]]>
+	</select>	
+	<!-- 서브 카테고리 가져오는 쿼리문(nav영역 사용) -->
+	<select id="getOffCate" parameterType="String"
+		resultType="com.sinau.dto.OffCtsDto">
+		<![CDATA[
+			select * from of_cts 
+		]]>
+	</select>
+	<!-- 조회수 업데이트용 쿼리문 -->
+	<update id="viewUpdate" parameterType="String">
+		<![CDATA[
+		UPDATE OFC SET OFC_VIEW =
+		OFC_VIEW + 1
+		WHERE OFC_CODE =#{ofc_code}
+		]]>
+	</update>
+	<select id="getOffInfo" parameterType="String"
+		resultType="com.sinau.dto.OffInfoDto">
+		<![CDATA[
+			SELECT * FROM OF_D_SC
+			WHERE (OFC_CODE = #{ofc_code}) and (rownum = 1)
+		]]>
+	</select>
+	<select id="getOffInfoSpec" parameterType="String"
+		resultType="com.sinau.dto.OffInfoSpecDto">
+		<![CDATA[
+			select  OFC_CODE
+     , mAX(case when rw = 1 then f_sysname_sp else null end) col1
+     ,  mAX(case when rw = 2 then f_sysname_sp else null end) col2
+     ,  mAX(case when rw = 3 then f_sysname_sp else null end) col3
+from (SELECT a.*, rownum rw FROM F_SPEC a
+       WHERE OFC_CODE = #{ofc_code})
+GROUP BY   OFC_CODE
+		]]>
+	</select>
+	<select id="getCateInfo" parameterType="String"
+		resultType="com.sinau.dto.CategoryDto">
+		<![CDATA[
+			SELECT * FROM of_cts
+			WHERE cts_code = #{cts_code}
+		]]>
+	</select>
+	<select id="getOffScehdule" parameterType="String"
+		resultType="com.sinau.dto.OffScheduleDto">
+		<![CDATA[
+			SELECT * FROM SCL_SC
+			WHERE scl_oFC_CODE = #{ofc_code}
+		]]>
+	</select>
+	<select id="getOffLoc" parameterType="String"
+		resultType="String">
+		<![CDATA[
+			SELECT SC_LOC
+			FROM OF_SC WHERE (ofc_code= #{ofc_code}) AND (rownum = 1)
+		]]>
+	</select>
+
+	<select id="getOffScheduleSel" parameterType="String"
+		resultType="com.sinau.dto.OffScheduleDto">
+		<![CDATA[
+			select * from scl_sc
+			where sc_code=#{sc_code}
+			]]>
+	</select>
+
+	<!-- 내 클래스의 상태를 변경한다. -->
+	<update id="mclUpdateState"
+		parameterType="com.sinau.dto.OrderDto">
+		update mcl set mcl_state=#{ord_state} where
+		mcl_ord_code=#{ord_code}
 	</update>
 	
 	<!-- 새로운 온라인 강좌를 등록한다. -->
@@ -70,8 +162,9 @@
 		<selectKey keyProperty="ofc_code" resultType="String" order="BEFORE">
 			select 'ofc_'||seq_ofc.nextval from dual
 		</selectKey>
-		insert into ofc values(#{ofc_code},#{ofc_title},#{ofc_content},#{ofc_teacher},#{ofc_sale},default,#{ofc_level},0,
-				#{ofc_stnum},1,#{ofc_m_email},#{ofc_cts_code})
+		insert into ofc
+		values(#{ofc_code},#{ofc_title},#{ofc_content},#{ofc_teacher},#{ofc_sale},
+		default,0,#{ofc_stnum},1,#{ofc_m_email},#{ofc_cts_code},#{ofc_level})
 	</insert>
 	<!-- 온라인 강의에 해당하는 비디오 목록을 생성 -->
 	<insert id="insertVideoList" parameterType="com.sinau.dto.VideoDto"
@@ -91,19 +184,36 @@
 			where onc_code=#{onc_code}
 		]]>
 	</update>
-	
-	<select id="getCreatorOnList" parameterType="String" resultType="com.sinau.dto.CreatorOnInfoDto">
-		select * from creatoroninfo where onc_m_email=#{onc_m_email}
+
+	<update id="updateOffClassInfo"
+		parameterType="com.sinau.dto.OffClassDto">
+		<![CDATA[
+			update ofc 
+			set ofc_title=#{ofc_title},ofc_content=#{ofc_content},ofc_sale=#{ofc_sale},ofc_update=sysdate,ofc_level=#{ofc_level},ofc_stnum=#{ofc_stnum}, ofc_cts_code=#{ofc_cts_code} 
+			where ofc_code=#{ofc_code}
+		]]>
+	</update>
+
+	<select id="getCreatorOnList" parameterType="String"
+		resultType="com.sinau.dto.CreatorOnInfoDto">
+		select * from creatoroninfo where
+		onc_m_email=#{onc_m_email}
 	</select>
 	<select id="getCreatorOffList" parameterType="String" resultType="com.sinau.dto.CreatorOffInfoDto">
 		select * from creatoroffinfo where ofc_m_email=#{ofc_m_email}
 	</select>
-	
-	<select id="getClassInfo" parameterType="String" resultType="com.sinau.dto.CreatorOnInfoDto">
+
+	<select id="getCreatorOnlineInfo" parameterType="String"
+		resultType="com.sinau.dto.CreatorOnInfoDto">
 		select * from creatoroninfo where onc_code=#{onc_code}
 	</select>
-	
-	<select id="getVideoList" parameterType="String" resultType="com.sinau.dto.VideoFileDto">
+	<select id="getCreatorOffInfo" parameterType="String"
+		resultType="com.sinau.dto.CreatorOffInfoDto">
+		select * from creatoroffinfo where ofc_code=#{ofc_code}
+	</select>
+
+	<select id="getVideoList" parameterType="String"
+		resultType="com.sinau.dto.VideoFileDto">
 		select * from vf where vf_v_code=#{v_code}
 	</select>
 	
@@ -118,7 +228,8 @@
 <!-- 은경파트 -->
 	<!-- 온라인 강의 섬네일용 정보를 가져옴  파라미터 없음 -->
 	<select id="getOnList" resultType="com.sinau.dto.OnListDto">
-		 	select DISTINCT * from oninfolist2
+		select DISTINCT * from
+		oninfolist2
 	</select>
 	
 	<!-- 온라인 강의 섬네일용 정보를 가져옴  파라미터 있음 -->
@@ -173,3 +284,31 @@
 	</select>
 </mapper>
 
+
+	<delete id="deleteOffClass" parameterType="String">
+		delete from ofc where
+		ofc_code=#{p_code}
+	</delete>
+
+
+
+	<select id="getFilter1List" parameterType="String"
+		resultType="com.sinau.dto.FilterCtsDto">
+		<![CDATA[
+			select * from filter1
+			]]>
+	</select>
+	<select id="getFilter2List" parameterType="String"
+		resultType="com.sinau.dto.FilterCtsDto">
+		<![CDATA[
+			select * from filter2
+			]]>
+	</select>
+	<select id="getFilter3List" parameterType="String"
+		resultType="com.sinau.dto.FilterCtsDto">
+		<![CDATA[
+			select * from filter3
+			]]>
+	</select>
+	
+</mapper>
