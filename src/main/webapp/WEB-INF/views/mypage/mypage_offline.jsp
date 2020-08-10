@@ -22,7 +22,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="resources/css/home.css">
 <link rel="stylesheet" href="resources/css/mypage.css">
 <script>
         $(function(){
@@ -130,8 +130,9 @@ $(document).ready(function(){
 					</div>
 				</form>
 				<div class="mp_classInfo" id="${offlineClass.ofc_code}">
+					<a href="info?ofc_code=${offlineClass.ofc_code}">
 					<img src="resources/upload/${offlineClass.f_sysname }" alt=""
-						width="300px" height="300px" id="mp_class_img">
+						width="300px" height="300px" id="mp_class_img"></a>
 					<div>
 						<div class="class_info_contents" id="${offlineClass.ofc_code}">
 							<p>${offlineClass.cts_name} | ${offlineClass.m_name}</p>
@@ -140,9 +141,10 @@ $(document).ready(function(){
 						</div>
 						<div>
 							<div>
-								수업일 :
-								<fmt:formatDate pattern="yyyy-MM-dd"
-									value="${offlineClass.ofc_ofdate}" />
+							 [ 장소 ] : ${offlineClass.sc_place }<br>
+								[ 수업일 ]
+								<fmt:formatDate pattern="yyyy-MM-dd HH"
+									value="${offlineClass.sc_time}" />시 
 							</div>
 							<div class="class_status">
 								<c:choose>

@@ -82,9 +82,10 @@ $(function(){
 		<jsp:include page="mypage_nav.jsp"></jsp:include>
 		<article>
 			<div class="page-title">회원정보 수정</div>
-			<form action="/mypageUpdate" method="post">
+			<form action="/mypageUpdate" method="post" enctype="multipart/form-data"> 
 				<div>
 					<div class="profile_image">
+						<input type="hidden" name="mimg_code"  value="${memImg.mimg_code }">
 						<img src="resources/upload/${ myInfo.mimg_sysname }" alt=""
 							class="img-circle" width="200px" height="200px" id="profile_img"><br>
 						<div>

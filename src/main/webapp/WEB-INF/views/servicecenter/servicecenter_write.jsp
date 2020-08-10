@@ -74,14 +74,13 @@ $("#file").on('change',function(){
 </head>
 <body>
 	<header>
-		<jsp:include page="../header.jsp"></jsp:include>
+		<jsp:include page="servicecenter_header.jsp"></jsp:include>
 	</header>
 	<section class="sectionover">
 		<h2 class="login-header">고객 센터</h2>
 		<div class="cate_container">
 			<a class="category" href="./servicecenter_main">FAQ</a>
 			<a class="category" href="./servicecenter_question">1 : 1문의</a> 
-			<a class="category" href="./servicecenter_refund">환불내역</a>
 		</div>
 		<form name="writeFrm" action="boardWrite" class="write-form"
 			method="post" enctype="multipart/form-data">
@@ -90,19 +89,21 @@ $("#file").on('change',function(){
 			<a class="t">title : </a> <input type="text" class="write-input" name="q_title" autofocus placeholder="제목" required>
 			<a>meail : </a><input type="text" class="memail" name="q_m_email" value="${mb.m_email}" >
 			</div>
-			<a style="margin-left:720px;">카테고리 :</a>
+			<a style="margin-left:740px;">카테고리 :</a>
 			<select class="category" name="q_cts_code">
-  				<option value="qc">강좌 문의</option>
-  				<option value="qpro">상품 문의</option>
-  				<option value="qpay">결제 문의</option>
-  				<option value="qre">환불 문의</option>
-  				<option value="qde">배송 문의</option>
-  				<option value="qet" selected="selected">기타 문의</option>
+  				<option value="qc">qc</option>
+  				<option value="qpro">qpro</option>
+  				<option value="qpay">qpay</option>
+  				<option value="qre">qre</option>
+  				<option value="qde">qde</option>
+  				<option value="qet" selected="selected">qet</option>
 			</select>
 			
 			<textarea name="q_content" class="contents"
 				placeholder="내용을 적어주세요..."></textarea>
 			<div class="filebox"> 
+				<img src="resources/images/user.png" alt="기본이미지"
+					class="img-circle" width="50px" height="50px" id="profile_img"><br>
 				<input type="file" name="files" id="file"> 
 				<input type="hidden" id="filecheck"	value="0" name="fileCheck">
 			</div>
@@ -115,7 +116,7 @@ $("#file").on('change',function(){
 		</form>
 	</section>
 	<footer>
-		<jsp:include page="../footer.jsp"></jsp:include>
+		<jsp:include page="servicecenter_footer.jsp"></jsp:include>
 	</footer>
 </body>
 </html>

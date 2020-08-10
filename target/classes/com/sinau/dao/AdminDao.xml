@@ -58,5 +58,4 @@ where m_state=#{state} and m_group='cm'
 		DELETE FROM productreview
 		WHERE PRV_CODE = #{code}
 	</delete>
-
 </mapper>
