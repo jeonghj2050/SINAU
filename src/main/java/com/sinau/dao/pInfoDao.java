@@ -5,7 +5,6 @@ import com.sinau.dto.PReviewDto;
 
 public interface pInfoDao {
 	
-		
 	public List<PReviewDto> getReviewList(String prv_p_code);
 	
 	//댓글 저장 메소드
@@ -20,7 +19,9 @@ public interface pInfoDao {
 //여기까지
 
 	public PReviewDto getReview(String prv_code);
-
+	
+	
+	
 	
 
 	

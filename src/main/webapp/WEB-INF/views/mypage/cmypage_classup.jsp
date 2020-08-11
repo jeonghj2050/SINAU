@@ -182,7 +182,7 @@
 					</div>
 					<button type="submit" class="my_default_btn" style="float: right;"
 						formaction="./cMyClassVideo">동영상 등록</button>
-				</ >
+				</c:if>
 				<c:if test="${sort eq 'ofc' }">
 					<div class="class_sort">
 						<div style="background-color: rgb(204, 204, 204);">오프라인</div>
