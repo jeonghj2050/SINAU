@@ -9,6 +9,9 @@ import com.sinau.dto.LikesDto;
 import com.sinau.dto.OnInfoDto;
 import com.sinau.dto.SpecListDto;
 
+import lombok.Data;
+
+
 public interface ClassInfoDao {
 
    //spec 이미지 가져오기

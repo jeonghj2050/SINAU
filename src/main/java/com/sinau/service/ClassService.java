@@ -12,7 +12,9 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sinau.dao.CategoryDao;
 import com.sinau.dao.ClassDao;
+import com.sinau.dao.ClassInfoDao;
 import com.sinau.dao.MemberDao;
 import com.sinau.dao.StoreDao;
 import com.sinau.dto.CategoryDto;
@@ -34,6 +36,7 @@ import com.sinau.dto.ScheduleDto;
 import com.sinau.dto.LikesDto;
 import com.sinau.dto.OnInfoDto;
 import com.sinau.dto.OnListDto;
+import com.sinau.dto.OnPayInfoDto;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.SpecListDto;
 import com.sinau.dto.VideoListDto;
@@ -54,8 +57,6 @@ public class ClassService {
       private ClassDao cDao;
       @Autowired
       private ClassInfoDao cInfoDao;
-      @Autowired
-      MemberDao mDao;
       
       @Autowired
       HttpSession session;
@@ -154,8 +155,10 @@ public class ClassService {
 			mv.setViewName("offline/offline_apply");
 		}
 		else if(pay_pcode.contains("onc")) {
-			
+			OnPayInfoDto onPayInfo = cDao.getOnApplyInfo(pay_pcode);
 			mv.addObject("sort", "onc");
+			mv.addObject("onList", onPayInfo);
+			
 			mv.setViewName("payment/payment");
 		}else {
 			PPayInfoDto pPayInfo = sDao.getProdApplyInfo(pay_pcode);

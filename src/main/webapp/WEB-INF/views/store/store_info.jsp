@@ -181,10 +181,8 @@
 						</button>
 					</div>
 				</div>
-				<button type="button" class="class_submitbtn" color="orange"
-					fill="true">
-					<span class="sc-fzoyTs jZUSDr"> <span>구매하기</span></span>
-				</button>
+				<a href="apply?pay_pcode=${pInfoPay.p_code}" 
+				class="class_submitbtn" color="orange" fill="true">클래스 신청하기</a>
 				<div>
 					<p class="refund_alert"></p>
 				</div>

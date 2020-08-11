@@ -288,8 +288,11 @@
                             <span class="like_num">공유하기</span>
                         </button></div>
                 </div>
-                <button type="button" class="class_submitbtn" color="orange" fill="true"><span class="sc-fzoyTs jZUSDr">
-                        <span>클래스 신청하기</span></span></button>
+                <a href="apply?pay_pcode=${onInfo.onc_code}"  
+                class="class_submitbtn" color="orange" fill="true">클래스 신청하기
+                </a>
+                
+					
                 <div>
                     <p class="refund_alert">키트 미개봉 시, <fmt:formatDate value="${onInfo.onc_sdate}" pattern="yyyy.MM.dd" />까지 전액 환불 보장</p>
                 </div>

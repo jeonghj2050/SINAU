@@ -137,20 +137,6 @@ public class ClassController {
 		
 		return mv;
 	}
-
-	
-	
-	// @PostMapping(value = "getFilter",
-	// 		produces = "application/json; charset=utf-8;")
-	// @ResponseBody
-	// public ModelAndView getFilter(String cts_code) {
-	// 	log.info("getFilter - cts_code : " + cts_code);
-		
-		
-	// 	mv = cServ.getFilter1(cts_code);
-		
-	// 	return mv;
-	//}
 	
 	
 }

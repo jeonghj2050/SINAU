@@ -240,27 +240,6 @@ GROUP BY   OFC_CODE
 		select * from videofeed where m_email=#{m_email}
 	</select>
 
-	<!-- 은경파트 -->
-	<!-- 온라인 강의 섬네일용 정보를 가져옴 파라미터 없음 -->
-	<select id="getOnList" resultType="com.sinau.dto.OnListDto">
-		select DISTINCT * from
-		oninfolist2
-	</select>
-
-	<!-- 온라인 강의 섬네일용 정보를 가져옴 파라미터 있음 -->
-	<select id="getOnListCa" parameterType="String"
-		resultType="com.sinau.dto.OnListDto">
-		select DISTINCT * from oninfolist2
-		where cts_code = #{cate}
-	</select>
-
-	<!-- 온라인 강의 인기강좌 10개 가져오기 -->
-	<select id="getTopOnList" resultType="com.sinau.dto.OnListDto">
-		<![CDATA[ 
-		 	SELECT DISTINCT * FROM oninfolist2
-			order by l_count desc
-		]]>
-	</select>
 	<select id="getOffApplyInfo" parameterType="String"
 		resultType="com.sinau.dto.OffListDto">
 		<![CDATA[
@@ -268,7 +247,13 @@ GROUP BY   OFC_CODE
 			where ofc_code=#{pay_pcode}
 			]]>
 	</select>
-
+	<select id="getOnApplyInfo" parameterType="String"
+		resultType="com.sinau.dto.OnPayInfoDto">
+		<![CDATA[
+			select * from on_pay_info
+			where onc_code=#{pay_pcode}
+			]]>
+	</select>
 	<delete id="deleteOffClass" parameterType="String">
 		delete from ofc where
 		ofc_code=#{p_code}
@@ -308,62 +293,66 @@ GROUP BY   OFC_CODE
 			where sc_code=#{sc_code}
 			]]>
 	</select>
-   <!-- /*은경 파트*/ -->
-      <!-- 온라인 강의 섬네일용 정보를 가져옴  파라미터 없음 -->
-   <select id="getOnList" resultType="com.sinau.dto.OnListDto">
-          select DISTINCT * from oninfolist2
-   </select>
-   
-   <!-- 온라인 강의 섬네일용 정보를 가져옴  파라미터 있음 -->
-   <select id="getOnListCa" parameterType="String" resultType="com.sinau.dto.OnListDto">
-          select DISTINCT * from oninfolist2
-          where cts_code = #{cate}
-   </select>
-   
-   <!-- 온라인 강의  인기강좌 10개 가져오기 -->
-   <select id="getTopOnList" resultType="com.sinau.dto.OnListDto">
+
+
+	<!-- /*은경 파트*/ -->
+	<!-- 온라인 강의 섬네일용 정보를 가져옴 파라미터 없음 -->
+	<select id="getOnList" resultType="com.sinau.dto.OnListDto">
+		select DISTINCT * from oninfolist2
+	</select>
+
+	<!-- 온라인 강의 섬네일용 정보를 가져옴 파라미터 있음 -->
+	<select id="getOnListCa" parameterType="String"
+		resultType="com.sinau.dto.OnListDto">
+		select DISTINCT * from oninfolist2
+		where cts_code = #{cate}
+	</select>
+
+	<!-- 온라인 강의 인기강좌 10개 가져오기 -->
+	<select id="getTopOnList" resultType="com.sinau.dto.OnListDto">
       <![CDATA[ 
           SELECT DISTINCT * FROM oninfolist2
          order by l_count desc
       ]]>
-   </select>
-   
-   <!-- 클래스룸 정보 가져오기 -->
-   <select id="getCR" parameterType="String" resultType="com.sinau.dto.ClassroomDto">
-      select * from videoInfo
-      where onc_code = #{onc_code} 
-   </select>
-   
-   <!-- 요청 강의가 목록에 있는지 확인하기 
-   <select id="getHerClass" resultType="com.sinau.dto.OnListDto">
-          select * from myonlineinfo
-   </select>-->
-      
-   <!-- email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다.
-   <select id="checkOrderList" parameterType="String" resultType="com.sinau.dto.OrderDto">
-       select distinct * from ord 
-       where ord_m_email=#{email} and ord_pcode = #{onc_code}
-   </select> -->
-   
-   <!-- email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다. -->
-   <select id="checkOnClass" parameterType="String" resultType="com.sinau.dto.OnlineClassDto">
-       select * from onc 
-      where onc_m_email=#{email} and onc_code = #{onc_code}
-   </select>
-   
-   <!-- 클래스룸 정보 가져오기 -->
-   <select id="getVideoLists" parameterType="String" resultType="com.sinau.dto.VideoListDto">
-      select *
-      from videoRInfo
-      where m_email=#{email} and onc_code = #{onc_code}
-   </select>
-   
-   <!-- 해당 강의 정보 가져오기 -->
-   <select id="getvideoChange" parameterType="String" resultType="com.sinau.dto.VideoListDto">
-      select *
-      from videoRInfo
-      where m_email=#{email} and onc_code = #{onc_code} and vf_code = #{vf_code}
-   </select>
-   
-<!-- /*은경 파트*/ -->
+	</select>
+
+	<!-- 클래스룸 정보 가져오기 -->
+	<select id="getCR" parameterType="String"
+		resultType="com.sinau.dto.ClassroomDto">
+		select * from videoInfo
+		where onc_code = #{onc_code}
+	</select>
+
+	<!-- 요청 강의가 목록에 있는지 확인하기 <select id="getHerClass" resultType="com.sinau.dto.OnListDto"> 
+		select * from myonlineinfo </select> -->
+
+	<!-- email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다. <select id="checkOrderList" parameterType="String" 
+		resultType="com.sinau.dto.OrderDto"> select distinct * from ord where ord_m_email=#{email} 
+		and ord_pcode = #{onc_code} </select> -->
+
+	<!-- email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다. -->
+	<select id="checkOnClass" parameterType="String"
+		resultType="com.sinau.dto.OnlineClassDto">
+		select * from onc
+		where onc_m_email=#{email} and onc_code = #{onc_code}
+	</select>
+
+	<!-- 클래스룸 정보 가져오기 -->
+	<select id="getVideoLists" parameterType="String"
+		resultType="com.sinau.dto.VideoListDto">
+		select *
+		from videoRInfo
+		where m_email=#{email} and onc_code = #{onc_code}
+	</select>
+
+	<!-- 해당 강의 정보 가져오기 -->
+	<select id="getvideoChange" parameterType="String"
+		resultType="com.sinau.dto.VideoListDto">
+		select *
+		from videoRInfo
+		where m_email=#{email} and onc_code = #{onc_code} and vf_code = #{vf_code}
+	</select>
+
+	<!-- /*은경 파트*/ -->
+
 </mapper>

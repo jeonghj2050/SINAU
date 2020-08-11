@@ -52,7 +52,7 @@
 				data : data,
 				dataType : "JSON",
 				success : function(data) {
-					if (sort == 'p') {
+					if (sort == 'prod') {
 						sale = '${prodList.p_price}';
 					} else if (sort == 'onc') {
 						sale = '${onList.onc_sale}';
@@ -107,10 +107,10 @@
 						<c:if test='${sort eq "onc"}'>
 							<div class="order-info">
 								<h1>주문 정보</h1>
-								<input type="hidden" name="ord_pcode" value="${prodList.p_code}">${prodList.p_title}
+								<input type="hidden" name="ord_pcode" value="${onList.onc_code}">${onList.onc_title}
 								<div class="pay-img">
 									<img style="height: 200px; width: 200px; border-radius: 5px"
-										id="pay-img" src="resources/upload/${prodList.f_sysname}">
+										id="pay-img" src="resources/upload/${onList.f_sysname}">
 								</div>
 								<br>
 							</div>
@@ -167,13 +167,13 @@
 							</c:if>
 							<c:if test='${sort eq "onc"}'>
 								<div class="pay-list_r">
-									<div>${prodList.p_price}원</div>
+									<div>${onList.onc_sale}원</div>
 									<div>무료</div>
 									<div class="pay-list-discount">0원</div>
-									<div class="pay-list-disprice" name="ord_price">${prodList.p_price}원</div>
+									<div class="pay-list-disprice" name="ord_price">${onList.onc_sale}원</div>
 								</div>
 								<input type="hidden" class="ord_price" name="ord_price"
-									value="${prodList.p_price}">
+									value="${onList.onc_sale}">
 							</c:if>
 							<c:if test='${sort eq "ofc"}'>
 								<div class="pay-list_r">
@@ -226,8 +226,8 @@
 								<div>${prodList.p_price}원</div>
 							</c:if>
 							<c:if test='${sort eq "onc"}'>
-								<div>${offList.ofc_title}</div>
-								<div>${offList.ofc_sale}원</div>
+								<div>${onList.onc_title}</div>
+								<div>${onList.onc_sale}원</div>
 							</c:if>
 							<c:if test='${sort eq "ofc"}'>
 								<div>${offList.ofc_title}</div>
