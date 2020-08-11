@@ -13,37 +13,46 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link rel="stylesheet" href="resources/css/home.css?a">
+<link rel="stylesheet" href="resources/css/youtube.css?a">
+<link rel="stylesheet" href="resources/css/online.css?a">
 </head>
 <body>
 	<header>
 		<jsp:include page="header.jsp"></jsp:include>
 	</header>
-	<div class="content-home">
-		<div class="slider">
-			<div>
-				<img src="resources/images/event.webp" width="1300" height="300">
-			</div>
-			<div>
-				<img src="resources/images/event1.jpg" width="1300" height="300">
-			</div>
-			<div>
-				<img src="resources/images/event2.jpg" width="1300" height="300">
-			</div>
-			<div>
-				<img src="resources/images/event3.jpg" width="1300" height="300">
+
+	<section class="section-home">
+		<div class="content-home">
+			<div class="slider">
+				<div>
+					<img src="resources/images/event.webp" width="100%" height="100%">
+				</div>
+				<div>
+					<img src="resources/images/event1.jpg" width="100%" height="100%">
+				</div>
+				<div>
+					<img src="resources/images/event2.jpg" width="100%" height="100%">
+				</div>
+				<div>
+					<img src="resources/images/event3.jpg" width="100%" height="100%">
+				</div>
 			</div>
 		</div>
-	</div>
-	<section class="section-home">
-		<article class="childart">
-			<c:forEach var="onlineClass" items="${offList}">
-				<div class="mp_classInfo" id="${offClass.ofc_code}">
-					<img src="resources/images/test/${offClass.f_oriname }" alt=""
-						width="300px" height="300px" id="mp_class_img">
-					<div class="class_info_contents" id="${offClass.ofc_code}">
-						<p>${offClass.cts_name}| ${offClass.m_name}</p>
-						<p class="info_title">${offClass.ofc_title}</p>
-						<div>${offClass.ofc_content}</div>
+		<article class="childart5">
+			<h1>전체 유투버</h1>
+			<!-- Swiper -->
+			<c:forEach var="total" items="${totalList}">
+				<div class="swiper-slide5">
+					<a href="contents?totalcode=${total.totalcode}"> <img
+						src="resources/upload/${total.totalimg}" width="300px" height="300px"></a>
+					<div class="swiper-text5">
+						<div class="y_name">${total.totalctsname}</div>
+						<div class="y_name">${total.totalsale}</div>
+						<div class="y_name">${total.totallevel}</div>
+						<div class="y_name">${total.totalcount}</div>
+						<div class="y_title">
+							<a href="contents?totalcode=${total.totalcode}">${total.totaltitle}</a>
+						</div>
 					</div>
 				</div>
 			</c:forEach>
@@ -73,7 +82,18 @@
 				slider.reloadSlider();
 			}
 		});
-		
+
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var chk = "${check}";
+
+		if (chk == "1") {
+			alert("회원가입 실패!");
+		} else if (chk == "2") {
+			alert("회원가입 성공!");
+		}
 	});
 </script>
 

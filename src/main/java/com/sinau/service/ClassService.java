@@ -39,7 +39,9 @@ import com.sinau.dto.OnListDto;
 import com.sinau.dto.OnPayInfoDto;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.SpecListDto;
+import com.sinau.dto.TotalInfo;
 import com.sinau.dto.VideoListDto;
+import com.sinau.dto.YoutubeDto;
 
 import lombok.extern.java.Log;
 
@@ -418,5 +420,23 @@ public class ClassService {
 		}
 		
 		
+		return videoChange;
+	}
+
+
+	public ModelAndView onlineList() {
+		mv = new ModelAndView();
+		
+		List<TotalInfo> totalList = cDao.gettotalList();
+		
+		mv.addObject("totalList", totalList);
+		 
+		mv.setViewName("home");
+		 
+		return mv;
+	}
+	
+	
+	
 	/*은경 파트*/
 }

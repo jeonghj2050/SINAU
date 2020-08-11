@@ -78,9 +78,9 @@ $(document).ready(function() {
 						<img src="resources/images/user.png" alt=""
 							class="img-circle" width="100px" height="100px" id="profile_img"><br>
 						<div>
-							<label for="file"></label> <input type="file" name="files"
-								id="member_profile"> <input type="hidden" id="filecheck"
-								value="0" name="fileCheck">
+							<label for="file"></label> 
+							<input type="file" name="files" id="member_profile"> 
+							<input type="hidden" id="filecheck" value="0" name="fileCheck">
 						</div>
 						</div>
 			<input type="text" class="login-input" id="memail" title="이메일"	name="m_email" placeholder="이메일  ex)example@ooooo.com">
@@ -175,7 +175,86 @@ function idcheck() {
 	    });
 	});
 </script>
-
+<script type="text/javascript">
+function validate() {
+	
+	var objEmail = document.getElementById("memail");
+	var objName = document.getElementById("mname");
+	var objPwd1 = document.getElementById("password1");
+	var objPwd2 = document.getElementById("password2");
+	var objPhone = document.getElementById("phone");
+	var objBirth = document.getElementById("birth");
+	var objLicense = document.getElementById("license");
+	var objGroup = document.getElementById("group");
+	
+	var regul1 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+	
+	var regul2 = /^[a-zA-Z0-9]{5,20}$/;
+	
+	var regul3 = /^[가-힝a-zA-Z]{2,}$/;
+	
+	var regul4 = /^[0-9]{4,20}$/;
+	
+	if (!check(regul1,objEmail,"이메일을 잘못 입력 했습니다.ex)ooooooo@ooooo.ooo")) {
+		$('#memail').val('');//입력 초기화
+		$('#memail').focus();//입력 초기화
+		return false;
+	}
+	
+	if ((objEmail.value)== "") {
+		alert("이메일을 입력해주세요.");
+		$('#memail').focus();//ID 부분에 포커스 주기
+		return false;
+	}
+	
+	if (!check(regul3,objName, '이름이 잘못 되었습니다(특수문자 X)')) {
+		$('#mname').val('');//입력 초기화
+		$('#mname').focus();//입력 초기화
+		return false;
+	} 
+	
+	if ((objName.value)=="") {
+		alert("이름을 입력해주세요.");
+		$('#mname').focus();//ID 부분에 포커스 주기
+		return false;
+	}
+	
+	if((objPwd1.value)== "") {
+		alert("비밀번호를 입력해 주세요");
+		$('#password1').focus();//ID 부분에 포커스 주기
+		return false;
+	}
+	
+	if((objPwd2.value)== "") {
+		alert("비밀번호를 재입력해주세요.");
+		$('#password2').focus();//ID 부분에 포커스 주기
+		return false;
+	}
+	
+	if (!check(regul2,objPwd1, '비밀번호는 4~12자의 대소문자와 숫자로만 입력 가능합니다.')) {
+		$('#password1').val('');//입력 초기화
+        return false;
+    }
+	
+	if (!check(regul4,objPhone, "전화번호를 잘못입력했습니다.")) {
+		$('#mphone').val('');//입력 초기화
+		$('#mphone').focus();//입력 초기화
+		return false;
+	}
+	
+	if ((objGroup.value)== "") {
+		$('#chkNotice1').html('회원분류를 선택해 주세요.');
+        $('#chkNotice1').attr('color', '#f82a2aa3');
+        objGroup.focus();
+        return false;
+	}
+	if ((objGroup.value) == "dm" && (objLicense.value)=="") {
+		$('#chkNotice7').html('사업자번호를 입력바랍니다.');
+        $('#chkNotice7').attr('color', '#f82a2aa3');
+        objLicense.focus();
+        return false;
+	} 
+</script>
 <script  type="text/javascript">
 	function mgcheck(){
 	//form 태그의 내용을 전부 가져오기

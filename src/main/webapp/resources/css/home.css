@@ -26,9 +26,9 @@ footer {
 }
 
 .content-home {
-	background-color : black;
-    margin: auto;
-    
+	height : 300px;
+	background-color: black;
+	margin: auto;
 }
 
 .bx-wrapper {
@@ -133,17 +133,23 @@ li a:hover {
 /* footer */
 .bottom-bar {
 	width: 1300px;
-	height: 100px;
+	height: 100%;
+	margin : auto;
 }
 
 .bottom-sub {
-	text-align: left;
-	float: left;
-	margin-top: 15px;
-	margin-left:10px
+	width: 400px;
+	padding-top: 75px;
+	float : left;
+}
+.bottom-sub>a {
+	font-size: 12px;
 }
 
 .intro {
+	width: 800px;
+	height: 100%;
+	float : right;
 	text-align: right;
 	float: right;
 	margin-right:10px
@@ -349,5 +355,6 @@ li a:hover {
 	margin-top: 20px;
 }
 
-
-
+.section-home>.childart1>.homeh1{
+	margin-top: 40px;
+}
