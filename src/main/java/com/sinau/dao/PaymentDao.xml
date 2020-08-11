@@ -17,7 +17,7 @@
 	<insert id="mclInsert" parameterType="com.sinau.dto.MyClassDto">
 	
 		INSERT INTO mcl
-		VALUES('mcl_'||SEQ_MCL.NEXTVAL, 1, #{mcl_classcode}, #{mcl_m_email}, #{mcl_ord_code}, #{mcl_sc_code})
+		VALUES('mcl_'||SEQ_MCL.NEXTVAL, 1, #{mcl_classcode}, #{mcl_m_email}, #{mcl_ord_code}, #{mcl_sc_code, jdbcType=VARCHAR})
 	</insert>
 	<select id="getPayCouponList" parameterType="String"
 		resultType="com.sinau.dto.PayCouponDto">

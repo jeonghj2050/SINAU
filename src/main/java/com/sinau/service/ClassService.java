@@ -16,6 +16,7 @@ import com.sinau.dao.CategoryDao;
 import com.sinau.dao.ClassDao;
 import com.sinau.dao.ClassInfoDao;
 import com.sinau.dao.MemberDao;
+import com.sinau.dao.PaymentDao;
 import com.sinau.dao.StoreDao;
 import com.sinau.dto.CategoryDto;
 import com.sinau.dto.FilterCtsDto;
@@ -59,6 +60,8 @@ public class ClassService {
 	private ClassDao cDao;
 	@Autowired
 	private ClassInfoDao cInfoDao;
+	@Autowired
+	private PaymentDao pDao;
 
 	@Autowired
 	HttpSession session;
@@ -107,11 +110,10 @@ public class ClassService {
 		mv.setViewName("/offline/offline_info");
 
 		return mv;
-	} 
+	}
 
 	// 서브 카테고리에 해당하는 서브 카테고리 이름,
 	public ModelAndView getOffCateList(String cts_code) {
-
 
 		loginMember = (MemberDto) session.getAttribute("mb");
 		mv = new ModelAndView();
@@ -132,7 +134,6 @@ public class ClassService {
 		List<FilterCtsDto> filter3CtsList = cDao.getFilter3List();
 		mv.addObject("filter3", filter3CtsList);
 
-
 		mv.setViewName("/offline/offline_cate");
 		return mv;
 	}
@@ -141,7 +142,7 @@ public class ClassService {
 		loginMember = (MemberDto) session.getAttribute("mb");
 		mv = new ModelAndView();
 
-		if(pay_pcode.contains("ofc")) {
+		if (pay_pcode.contains("ofc")) {
 
 			log.info("aaaaaaaaaaaaaaaaaaaaa get ofc_code : " + pay_pcode);
 			log.info("m_email : " + ((MemberDto) session.getAttribute("mb")).getM_email());
@@ -155,17 +156,24 @@ public class ClassService {
 			mv.addObject("m_email", loginMember.getM_email());
 
 			mv.setViewName("offline/offline_apply");
-		}
-		else if(pay_pcode.contains("onc")) {
-			OnPayInfoDto onPayInfo = cDao.getOnApplyInfo(pay_pcode);
-			mv.addObject("sort", "onc");
-			mv.addObject("onList", onPayInfo);
+		} else {
 
-			mv.setViewName("payment/payment");
-		}else {
-			PPayInfoDto pPayInfo = sDao.getProdApplyInfo(pay_pcode);
-			mv.addObject("sort", "prod");
-			mv.addObject("prodList", pPayInfo);
+			List<PayCouponDto> payCoupon = pDao.getPayCouponList(loginMember.getM_email());
+			mv.addObject("payCoupon", payCoupon);
+
+			if (pay_pcode.contains("onc")) {
+				OnPayInfoDto onPayInfo = cDao.getOnApplyInfo(pay_pcode);
+				mv.addObject("onList", onPayInfo);
+
+				mv.addObject("ord_kind", 2);
+				mv.addObject("sort", "onc");
+			} else {
+				PPayInfoDto pPayInfo = sDao.getProdApplyInfo(pay_pcode);
+				mv.addObject("prodList", pPayInfo);
+
+				mv.addObject("ord_kind", 1);
+				mv.addObject("sort", "prod");
+			}
 			mv.setViewName("payment/payment");
 		}
 
@@ -189,9 +197,9 @@ public class ClassService {
 		List<OffCtsDto> offCate = cDao.getOffCate();
 		mv.addObject("offCate", offCate);
 
-
 		// 필터 1 불러오기
-		// List<OffListDto> offCateFilterList = cDao.getOffCateFilterList(cts_code, filter1, filter2, filter3);
+		// List<OffListDto> offCateFilterList = cDao.getOffCateFilterList(cts_code,
+		// filter1, filter2, filter3);
 		// mv.addObject("offCateFilterList", offCateFilterList);
 
 		return mv;
@@ -409,16 +417,16 @@ public class ClassService {
 		return mv;
 	}
 
+	/* 은경 파트 */
 	public VideoListDto videoChange(String vf_code, String onc_code) {
-		log.info("videoChange()"+vf_code+onc_code);
+		log.info("videoChange()" + vf_code + onc_code);
 
-		String email=((MemberDto)session.getAttribute("mb")).getM_email();
+		String email = ((MemberDto) session.getAttribute("mb")).getM_email();
 
 		VideoListDto videoChange = cDao.getvideoChange(vf_code, onc_code, email);
 
 		return videoChange;
 	}
-
 
 
 	public ModelAndView onlineList() {
