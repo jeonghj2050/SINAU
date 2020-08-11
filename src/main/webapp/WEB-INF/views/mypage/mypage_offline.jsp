@@ -23,7 +23,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="resources/css/home.css">
-<link rel="stylesheet" href="resources/css/mypage.css">
+<link rel="stylesheet" href="resources/css/mypage.css?a">
 <script>
         $(function(){
             $('li').click(function(){
@@ -87,7 +87,7 @@ $(document).ready(function(){
 					<c:forEach var="offlineClass" items="${offlineList}">
 						<li role="presentation" name="${offlineClass.ofc_code}"><a
 							href="#${offlineClass.ofc_code}" aria-controls="home"
-							role="tab" data-toggle="tab">${offlineClass.ofc_code}</a></li>
+							role="tab" data-toggle="tab">${offlineClass.ofc_title}</a></li>
 					</c:forEach>
 				</ul>
 			</div>

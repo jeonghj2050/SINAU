@@ -21,11 +21,11 @@ public class HomeController {
 	YoutubeClassService ycServ;
 	
 	@GetMapping("/")
-	public ModelAndView home() {
+	public String home() {
 		
 		mv = cServ.gettotalList();
 		
-		return mv;
+		return "home";
 	}
 
 	@GetMapping("loginFrm")

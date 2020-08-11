@@ -17,4 +17,5 @@ public class CreatorOffInfoDto {
 	private String f_sysname;
 	private String ofc_cts_code;
 	private String scl_code;
+	private String cts_name;
 }

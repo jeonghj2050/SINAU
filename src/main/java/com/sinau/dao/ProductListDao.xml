@@ -47,11 +47,11 @@
 	</select>
 	
 	<select id="getPspec" parameterType="String" resultType="String">
-		SELECT f_oriname FROM PINFO where p_code=#{p_code}
+		SELECT f_sysname FROM PINFO where p_code=#{p_code}
 		
 	</select>
 	<select id="getPcont" parameterType="String" resultType="String">
-		SELECT f_oriname FROM pdetail where p_code=#{p_code}
+		SELECT f_sysname FROM pdetail where p_code=#{p_code}
 		
 	</select>
 	
