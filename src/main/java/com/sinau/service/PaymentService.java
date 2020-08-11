@@ -68,18 +68,13 @@ public class PaymentService {
 		MemberDto getMemPayInfo = pDao.getMemPayInfo(loginMember.getM_email());
 		mv.addObject("memPayInfo", getMemPayInfo);
 
-//		OffScheduleDto getOffSceheInfo = cDao.getOffSchedultPay(sc_code);
-//		mv.addObject("off_sche", getOffSceheInfo);
-		
 		// 멤버 m_email에 해당하는 dto list 불러오는 메소드
 		List<PayCouponDto> payCoupon = pDao.getPayCouponList(loginMember.getM_email());
 		mv.addObject("payCoupon", payCoupon);
 
-//		List<PayCouponDto> couponCheck = pDao.getCouponCheck(loginMember.getM_email());
-//		mv.addObject("couponCheck", couponCheck);
-
 		mv.addObject("m_email", loginMember.getM_email());
 		mv.addObject("sc_code", sc_code);
+		mv.addObject("ord_kind", 3);
 
 		mv.setViewName("payment/payment");
 
@@ -97,7 +92,7 @@ public class PaymentService {
 		MemberDto member = ((MemberDto) session.getAttribute("mb"));
 
 		order.setOrd_name(member.getM_name());
-		order.setOrd_phone(member.getM_phone());
+		order.setOrd_phone(1012345678);
 		order.setOrd_m_email(member.getM_email());
 
 		String view = null;
@@ -122,11 +117,12 @@ public class PaymentService {
 				myClass.setMcl_classcode(order.getOrd_pcode());
 				myClass.setMcl_m_email(order.getOrd_m_email());
 				myClass.setMcl_ord_code(order.getOrd_code());
-				myClass.setMcl_sc_code(sc_code);
 
 				pDao.mclInsert(myClass);
 
 				if (order.getOrd_pcode().contains("ofc")) {
+					myClass.setMcl_sc_code(sc_code);
+					
 					OffPayInfoComDto mclOffCheck = pDao.mclOffCheck(order.getOrd_code());
 					mv.addObject("mclOffCheck", mclOffCheck);
 					mv.addObject("sort", "ofc");
@@ -134,6 +130,8 @@ public class PaymentService {
 					mv.setViewName("payment/payment_completion");
 				} 
 				else if (order.getOrd_pcode().contains("onc")) {
+					myClass.setMcl_sc_code(null);
+					
 					OnPayInfoComDto mclOnCheck = pDao.mclOnCheck(order.getOrd_code());
 					mv.addObject("mclOnCheck", mclOnCheck);
 					mv.addObject("sort", "onc");
@@ -161,6 +159,8 @@ public class PaymentService {
 		
 		PayCouponDto payCoupList = pDao.getPayCoupon(cpcode);
 		mv.addObject("payCoupList", payCoupList);
+		log.info(payCoupList.getCp_discount() +  "");
+
 
 		return payCoupList.getCp_discount();
 	}
