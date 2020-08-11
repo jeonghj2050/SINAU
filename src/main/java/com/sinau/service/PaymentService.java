@@ -158,7 +158,7 @@ public class PaymentService {
 
 		
 		PayCouponDto payCoupList = pDao.getPayCoupon(cpcode);
-		mv.addObject("payCoupList", payCoupList);
+
 		log.info(payCoupList.getCp_discount() +  "");
 
 

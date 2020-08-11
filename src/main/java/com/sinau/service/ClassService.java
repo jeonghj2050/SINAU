@@ -152,7 +152,7 @@ public class ClassService {
 
 			List<OffScheduleDto> offSchedule = cDao.getOffScehdule(pay_pcode);
 			mv.addObject("offSchedule", offSchedule);
-			
+
 			mv.addObject("m_email", loginMember.getM_email());
 
 			mv.setViewName("offline/offline_apply");
@@ -160,17 +160,17 @@ public class ClassService {
 
 			List<PayCouponDto> payCoupon = pDao.getPayCouponList(loginMember.getM_email());
 			mv.addObject("payCoupon", payCoupon);
-			
+
 			if (pay_pcode.contains("onc")) {
 				OnPayInfoDto onPayInfo = cDao.getOnApplyInfo(pay_pcode);
 				mv.addObject("onList", onPayInfo);
-				
+
 				mv.addObject("ord_kind", 2);
 				mv.addObject("sort", "onc");
 			} else {
 				PPayInfoDto pPayInfo = sDao.getProdApplyInfo(pay_pcode);
 				mv.addObject("prodList", pPayInfo);
-				
+
 				mv.addObject("ord_kind", 1);
 				mv.addObject("sort", "prod");
 			}
@@ -415,20 +415,15 @@ public class ClassService {
 	}
 
 	/* 은경 파트 */
-		public VideoListDto videoChange(String vf_code, String onc_code) {
-			log.info("videoChange()"+vf_code+onc_code);
-			
-			String email=((MemberDto)session.getAttribute("mb")).getM_email();
-			
-			VideoListDto videoChange = cDao.getvideoChange(vf_code, onc_code, email);
-			
-			return videoChange;
-		}
-		
-		
+	public VideoListDto videoChange(String vf_code, String onc_code) {
+		log.info("videoChange()" + vf_code + onc_code);
+
+		String email = ((MemberDto) session.getAttribute("mb")).getM_email();
+
+		VideoListDto videoChange = cDao.getvideoChange(vf_code, onc_code, email);
+
 		return videoChange;
 	}
-
 
 	public ModelAndView onlineList() {
 		mv = new ModelAndView();
@@ -442,7 +437,6 @@ public class ClassService {
 		return mv;
 	}
 	
-	
-	
-	/*은경 파트*/
+
+	/* 은경 파트 */
 }
