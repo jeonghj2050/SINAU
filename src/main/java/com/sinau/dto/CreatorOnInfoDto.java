@@ -19,4 +19,5 @@ public class CreatorOnInfoDto {
 	private String f_sysname;
 	private String onc_cts_code;
 	private String v_code;
+	private String cts_name;
 }
