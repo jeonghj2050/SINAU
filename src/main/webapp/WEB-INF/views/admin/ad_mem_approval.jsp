@@ -4,7 +4,7 @@
 <%@ page session="false"%>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="resources/css/adstyle.css?ver=1.2">
+<link rel="stylesheet" href="resources/css/adstyle.css">
 
 <head>
 <meta charset="UTF-8">
@@ -220,10 +220,18 @@ var ti='tab-1';
 	</footer>
 </body>
 <script type="text/javascript">
+
+
 function btnclick(email){
 	console.log(email);
 	emailtemp = email;
 	$('.popupN').show();
+	
+	var paging = $('.paging')
+	consol.log(paging)
 }
+
+
+
 </script>
 </html>

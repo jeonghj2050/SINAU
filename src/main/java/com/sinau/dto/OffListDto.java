@@ -11,5 +11,5 @@ public class OffListDto {
 		private String ofc_teacher;
 		private int ofc_sale;
 		private int l_count;
-		private String f_oriname;
+		private String f_sysname;
 }

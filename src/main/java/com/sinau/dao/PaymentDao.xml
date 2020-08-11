@@ -12,7 +12,7 @@
 			SELECT 'ord_'||SEQ_ORD.NEXTVAL FROM dual
 		</selectKey>
 		INSERT INTO ord
-		VALUES(#{ord_code}, #{ord_name}, #{ord_addr}, #{ord_phone}, #{ord_memo}, #{ord_price}, #{ord_diposit}, DEFAULT, 1,#{ord_pcode}, 3, 1, #{ord_m_email})
+		VALUES(#{ord_code}, #{ord_name}, #{ord_addr}, #{ord_phone}, #{ord_memo}, #{ord_price}, #{ord_diposit}, DEFAULT, 1,#{ord_pcode}, #{ord_kind}, 1, #{ord_m_email})
 	</insert>
 	<insert id="mclInsert" parameterType="com.sinau.dto.MyClassDto">
 	
@@ -27,7 +27,7 @@
 	<select id="getPayCoupon" parameterType="String"
 		resultType="com.sinau.dto.PayCouponDto">
 		SELECT * FROM CPL_CP
-		WHERE CPL_CP_CODE = #{cpcode}
+		WHERE CPL_CP_CODE = #{cpcode} and rownum = 1
 	</select>	
 	<select id="getMemPayInfo" parameterType="String"
 		resultType="com.sinau.dto.MemberDto">
@@ -36,4 +36,40 @@
 			where m_email=#{m_email}
 			]]>
 	</select>
+	<select id="orderCheck" parameterType="String"
+		resultType="com.sinau.dto.OrderDto">
+		<![CDATA[
+			select * from ord
+			where ord_code=#{ord_code}
+			]]>
+	</select>
+	<select id="getCouponCheck" parameterType="String"
+		resultType="com.sinau.dto.CouponListDto">
+		<![CDATA[
+			SELECT * FROM CPL
+		WHERE CPL_M_EMAIL = #{m_email}
+			]]>
+	</select>
+	<select id="mclOnCheck" parameterType="String"
+		resultType="com.sinau.dto.OnPayInfoComDto">
+		<![CDATA[
+			select * from on_pay_info_com
+			where ord_code=#{ord_code}
+			]]>
+	</select>
+	<select id="mclOffCheck" parameterType="String"
+		resultType="com.sinau.dto.OffPayInfoComDto">
+		<![CDATA[
+			select * from off_pay_info_com
+			where ord_code=#{ord_code}
+			]]>
+	</select>
+	<select id="ordPCheck" parameterType="String"
+		resultType="com.sinau.dto.PPayInfoComDto">
+		<![CDATA[
+			select * from p_pay_info_com
+			where ord_code=#{ord_code}
+			]]>
+	</select>
+	
 </mapper>

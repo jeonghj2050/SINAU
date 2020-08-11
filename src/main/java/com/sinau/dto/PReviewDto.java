@@ -15,5 +15,8 @@ public class PReviewDto {
 	private String prv_content;
 	private String prv_m_email;
 	private String prv_p_code;
+	private String w_code;
+	private String w_state;
+	
 	
 }

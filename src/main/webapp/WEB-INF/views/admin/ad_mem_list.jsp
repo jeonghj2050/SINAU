@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -11,8 +11,8 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-var emailtemp = '';
-var ti='tab-1';
+	var emailtemp = '';
+	var ti = 'tab-1';
 	$(document).ready(function() {
 		$('.tab-content').hide();
 		$('.popupD').hide();
@@ -34,23 +34,23 @@ var ti='tab-1';
 			$('.current').show();
 		})
 		//팝업부분
-		
+
 		//$('.btn-1').click(function(){
 		//	$('.popupD').show();
 		//})
-		$('.fsyYOM').click(function(){
+		$('.fsyYOM').click(function() {
 			$('.popupD').hide();
 		})
-		$('#pn').click(function(){
+		$('#pn').click(function() {
 			$('.popupD').hide();
 		})
-		$('#py').click(function(){
+		$('#py').click(function() {
 			console.log(emailtemp);
 			$('.popupD').hide();
 			$('#del').hide();
 			$('#dComple').show();
-			
-			location.href='./delTemp?email='+emailtemp+'&tabId='+ti;
+
+			location.href = './delTemp?email=' + emailtemp + '&tabId=' + ti;
 			emailtemp = '';
 		})
 		ti = '${tabId}';
@@ -113,14 +113,17 @@ var ti='tab-1';
 											<b>삭제</b>
 										</button>
 									</p>
-									<p id="dComple"><b>삭제완료</b></p>
+									<p id="dComple">
+										<b>삭제완료</b>
+									</p>
 								</div>
 							</c:forEach>
 						</div>
+						<div class="btn-area">
+							<div class="paging">${paging}</div>
+						</div>
 					</div>
-					<div class="btn-area">
-						<div class="paging">${paging}</div>
-					</div>
+
 				</div>
 				<!-- 판매자 회원 정보란 -->
 				<div id="tab-2" class="tab-content">
@@ -173,7 +176,8 @@ var ti='tab-1';
 							</b>
 						</div>
 						<div class="datelist">
-						<c:set var="num" value="${searchVo.totalCount - ((searchVo.curPage+1) * 10) }"/>
+							<c:set var="num"
+								value="${searchVo.totalCount - ((searchVo.curPage+1) * 10) }" />
 							<c:forEach var="mList2" items="${nList2}">
 								<div class="im-no informationNum">${mList2.m_nmnum}</div>
 								<div class="im-email informationEmail">${mList2.m_email}</div>
@@ -199,11 +203,18 @@ var ti='tab-1';
 		</div>
 		<div class="popupD">
 			<div class="popDel">
-			<button type="button" class="sc-fzqNqU fsyYOM sc-fzqPZZ bDLHXT" color="transparent"><span class="sc-fzoyTs jZUSDr"><svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M18.5 4L12 10.5 5.5 4 4 5.5l6.5 6.5L4 18.5 5.5 20l6.5-6.5 6.5 6.5 1.5-1.5-6.5-6.5L20 5.5 18.5 4z" fill="#1b1c1d"></path></svg></span></button>
+				<button type="button" class="sc-fzqNqU fsyYOM sc-fzqPZZ bDLHXT"
+					color="transparent">
+					<span class="sc-fzoyTs jZUSDr"><svg width="24" height="24"
+							fill="none" viewBox="0 0 24 24">
+							<path
+								d="M18.5 4L12 10.5 5.5 4 4 5.5l6.5 6.5L4 18.5 5.5 20l6.5-6.5 6.5 6.5 1.5-1.5-6.5-6.5L20 5.5 18.5 4z"
+								fill="#1b1c1d"></path></svg></span>
+				</button>
 				<p>삭제하시겠습니까?</p>
 				<div class="btnNy">
-				<button id="py" class="pyn">예</button>
-				<button id="pn" class="pyn">아니요</button>
+					<button id="py" class="pyn">예</button>
+					<button id="pn" class="pyn">아니요</button>
 				</div>
 			</div>
 		</div>
@@ -213,10 +224,10 @@ var ti='tab-1';
 	</footer>
 </body>
 <script type="text/javascript">
-function btnclick(email){
-	console.log(email);
-	emailtemp = email;
-	$('.popupD').show();
-}
+	function btnclick(email) {
+		console.log(email);
+		emailtemp = email;
+		$('.popupD').show();
+	}
 </script>
 </html>

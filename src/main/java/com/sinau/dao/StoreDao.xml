@@ -41,4 +41,8 @@
 	<update id="delRequestProd" parameterType="String">
 		update p set p_state=2 where p_code=#{p_code}
 	</update>
+	<select id="getProdApplyInfo" parameterType="String"  resultType="com.sinau.dto.PPayInfoDto">
+		select * from p_pay_info
+		where p_code = #{pay_pcode}
+	</select>
 </mapper>

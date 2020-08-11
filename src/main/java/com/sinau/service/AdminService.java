@@ -1,5 +1,7 @@
 package com.sinau.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,9 +12,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
+
 
 import com.sinau.dao.AdClassDao;
 import com.sinau.dao.AdminDao;
@@ -25,7 +30,13 @@ import com.sinau.dto.AdSQnaDto;
 import com.sinau.dto.AdSWDto;
 import com.sinau.dto.AdYouClassDto;
 import com.sinau.dto.AdminDto;
-
+import com.sinau.dto.FilesDto;
+import com.sinau.dto.QuestionDto;
+import com.sinau.dto.QuestionInfoDto;
+import com.sinau.dto.VideoDto;
+import com.sinau.dto.VideoFileDto;
+import com.sinau.dto.YoutubeClassDto;
+import com.sinau.util.Paging;
 import lombok.extern.java.Log;
 
 @Service
@@ -43,8 +54,58 @@ public class AdminService {
 
 	//페이지당 글 개수 조정 변수
 	private int listCount = 5;
-	private int pageCount = 6;
+	private int pageCount = 2;
 	
+	public ModelAndView getAdminList(Integer pageNum) {
+		// TODO Auto-generated method stub
+		log.info("getAdminList() - pageNum : " + pageNum);
+
+		mv = new ModelAndView();
+
+		int num = (pageNum == null) ? 1 : pageNum;
+
+		//맵을 만들어서 페이지번호와 글목록 개수를 저장
+		Map<String, String> lmap = 
+				new HashMap<String, String>();
+		lmap.put("pageNum", String.valueOf(num));
+		lmap.put("cnt", String.valueOf(listCount));
+
+		List<AdminDto> bList = aDao.getList(lmap);
+
+		mv.addObject("bList", bList);
+
+		String paging = getPaging(num);
+		mv.addObject("paging", paging);
+
+		//세션에 페이지 번호 저장.
+		session.setAttribute("pageNum", num);
+
+		//view name을 지정!
+		mv.setViewName("ad_mem_approval");
+
+		return mv;
+		
+	}	
+	
+	private String getPaging(int num) {
+		//전체 글 개수 구하기
+		int maxNum = aDao.getListCount();
+		String listName = "adMApproval";//게시판 uri
+
+		Paging paging = new Paging(maxNum, num, 
+				listCount, pageCount, listName);
+
+		String pagingHtml = paging.makePaging();
+
+		log.info(pagingHtml);
+		
+		return pagingHtml;
+	}
+
+
+
+
+
 	//가입승인 목록 리스트 (승인구분에 따라 리스트를 가져온다)
 	public ModelAndView adMemList(String tabId) {
 
@@ -264,6 +325,103 @@ public class AdminService {
 		return mv;
 	}
 	
+	@Transactional
+	public String youtubeWrite(MultipartHttpServletRequest multi, 
+			RedirectAttributes rttr) {
+		String view = null;
+		
+		String name = multi.getParameter("y_profile");
+		String ctscode = multi.getParameter("y_cts_code");
+		String title = multi.getParameter("y_title");
+		String subtitle = multi.getParameter("y_subtitle");
+		String videourl = multi.getParameter("y_url");
+		String userurl = multi.getParameter("y_userurl");
+		String content = multi.getParameter("y_content");
+		String videosoure = multi.getParameter("y_videosoure");
+		int fcheck = Integer.parseInt
+				(multi.getParameter("fileCheck"));
+		
+		content = content.trim();
+
+		YoutubeClassDto youtube = new YoutubeClassDto();
+		youtube.setY_profile(name);
+		youtube.setY_cts_code(ctscode);
+		youtube.setY_title(title);
+		youtube.setY_subtitle(subtitle);
+		youtube.setY_url(videourl);
+		youtube.setY_userurl(userurl);
+		youtube.setY_content(content);
+		youtube.setY_videosoure(videosoure);
+	
+		try {
+			aDao.youtubeWrite(youtube);
+			view = "redirect:adPLecture";
+			rttr.addFlashAttribute("check", "2");
+			if(fcheck == 1) {
+				//업로드할 파일이 있음.
+			fileUp(multi, youtube);	
+			}
+		}catch (Exception e) {
+			//DB 삽입 오류 시 글쓰기폼으로 돌아감.
+			view = "redirect:youtubeinsert";
+			rttr.addFlashAttribute("check","1");
+		}
+		
+		return view;
+	}
+	
+	
+	private void fileUp(MultipartHttpServletRequest multi, YoutubeClassDto youtube)
+			throws IllegalStateException, IOException{
+		//파일은 실제 물리 경로를 사용하여 저장해야 함.
+				// upload 폴더에 저장하도록 지정.
+				// 상대 경로 : resources/upload/
+				String filePath = multi.getSession()
+						.getServletContext()
+						.getRealPath("/") + "resources/upload/";
+
+				//upload 폴더 만들기
+				File folder = new File(filePath);
+				if(folder.isDirectory() == false) {
+					//경로를 설정한 폴더가 없다면
+					folder.mkdir();//upload 폴더 생성
+				}
+
+				//실제 파일명과 저장 파일명을 함께 관리
+				Map<String, String> fmap = 
+						new HashMap<String, String>();
+				//파일 정보 저장(DB)에 필요한 정보
+				//1.게시글 번호, 2.실제파일명, 3.저장파일명
+				fmap.put("y_code", youtube.getY_code());
+				fmap.put("y_cts_code", youtube.getY_cts_code());
+
+				//multipart에서 파일 꺼내오기
+				//멀티파트는 파일을 배열형태로 저장.
+				List<MultipartFile> fList =
+						multi.getFiles("files");
+
+				for(int i = 0; i < fList.size(); i++) {
+					MultipartFile mf = fList.get(i);
+					//파일의 실제 이름 가져오기
+					String oriName = mf.getOriginalFilename();
+					//실제 파일명을 맵에 저장
+					fmap.put("oriFileName", oriName);
+					//저장 파일명 작성(밀리초 값을 사용)
+					String sysName = System.currentTimeMillis()
+							+ "."
+							+ oriName.substring
+							(oriName.lastIndexOf(".") + 1);
+					fmap.put("sysFileName", sysName);
+					//로그에 찍어서 확인
+
+					//저장 위치로 파일 전송
+					//새로 만든 파일이름으로 지정된 경로에 전송
+					mf.transferTo(new File(filePath+sysName));
+					//DB에 파일 정보 저장(dDao)
+					aDao.fileInsert(fmap);
+				}
+			}
+	
 //	   public  Map<String, List<AdminDto>>  memberCheck(String m_email) { // TODO Auto-generated method stub
 //		      Map<String, List<AdminDto>> rMap= new HashMap<String, List<AdminDto>>();
 //		      AdminDto memDel = new AdminDto();
@@ -293,25 +451,3 @@ public class AdminService {
 //	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

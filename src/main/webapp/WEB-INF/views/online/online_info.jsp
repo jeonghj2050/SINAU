@@ -135,7 +135,6 @@
 	        },
 	        error: function(request, status, error){
 	          alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	         // location.href="<c:url value='/loginFrm'/>"
 	        }
 	      });
 	    }       
@@ -193,9 +192,6 @@
             <div class="intro">
                 <div class="spec_title">
                     <h2>클래스 소개</h2>
-                    <!-- 나중에 삭제하기!!!-->
-				<a style="background: purple" href="./classroom?onc_code=${onInfo.onc_code}">
-				클래스룸</a> 
                 </div>
                 <div class="speci1 content"><img id="speci1 content" 
                 	src="resources/upload/${onInfo.f_content}"></div>
@@ -238,24 +234,9 @@
                 <div class="hr"> </div>
                 <div class="like_container">
                     <div class="btn_div" id="btn_div">
+                    <c:set var="login_email" value="dg"/>
                     <c:choose>
-					  <c:when test="${mb.m_email eq null}">
-					  	<!-- 비 로그인 상태일 시 <a href='javascript: login_need();'> -->
-					    <button type="button" class="likebtn unfilled_heart" color="default" fill="false"
-	                            data-test-id="wishlist-button" data-test-group="sales-product-info-table-row"  
-	                            onclick="location.href='./loginFrm'" id="like_img">
-	                            <div class="sc-fzqARJ eozcfK">
-	                                <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-	                                    <path fill-rule="evenodd" clip-rule="evenodd"
-	                                        d="M20.5 9c0-2-1.5-3.9-3.7-3.9-2.3 0-3.8 1.63-4.8 3.33-1-1.7-2.5-3.33-4.8-3.33C5 5.1 3.5 6.867 3.5 9c0 4.62 4.949 7.667 8.5 9.623 3.551-1.956 8.5-5.003 8.5-9.623zm-19-.176C1.5 5.607 3.962 3 7 3c2.7 0 4 1 5 2.2C13 4 14.3 3 17 3c3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
-	                                        fill="#1b1c1d"></path>
-	                                </svg></div>
-	                            <span class="like_num"><span id="nlike_prt">${onInfo.l_count}</span></span>
-	                        </button>
-					  
-					  </c:when>
-					  <c:otherwise>
-					  <!-- 로그인 이메일 있을 경우 -->
+					  <c:when test="${login_email ne null}"><!-- 로그인 이메일 있을 경우 -->
 						    <button type="button" class="likebtn unfilled_heart" color="default" fill="false"
 	                            data-test-id="wishlist-button" data-test-group="sales-product-info-table-row"  
 	                            onclick="like_func()" id="like_img">
@@ -269,7 +250,7 @@
 	                        </button>
 	                        
 			                   <button type="button" class="likebtn full_heart" color="default" fill="false"
-							    	 onclick="like_cancle()">
+							    	 onclick="dislike_func()">
 		                            <div class="sc-fzqARJ eozcfK">
 		                                <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
 		                                    <path fill-rule="evenodd" clip-rule="evenodd"
@@ -279,6 +260,20 @@
 		                            <span class="like_num"><span id="like_prt">${onInfo.l_count}</span></span>
 		                        </button>
 	                      
+					  </c:when>
+					  <c:otherwise>
+					    <!-- 비 로그인 상태일 시 <a href='javascript: login_need();'> -->
+					    <button type="button" class="likebtn unfilled_heart" color="default" fill="false"
+	                            data-test-id="wishlist-button" data-test-group="sales-product-info-table-row"  
+	                            onclick="location.href='./loginFrm'" id="like_img">
+	                            <div class="sc-fzqARJ eozcfK">
+	                                <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+	                                    <path fill-rule="evenodd" clip-rule="evenodd"
+	                                        d="M20.5 9c0-2-1.5-3.9-3.7-3.9-2.3 0-3.8 1.63-4.8 3.33-1-1.7-2.5-3.33-4.8-3.33C5 5.1 3.5 6.867 3.5 9c0 4.62 4.949 7.667 8.5 9.623 3.551-1.956 8.5-5.003 8.5-9.623zm-19-.176C1.5 5.607 3.962 3 7 3c2.7 0 4 1 5 2.2C13 4 14.3 3 17 3c3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
+	                                        fill="#1b1c1d"></path>
+	                                </svg></div>
+	                            <span class="like_num"><span id="nlike_prt">${onInfo.l_count}</span></span>
+	                        </button>
 					  </c:otherwise>
 					</c:choose>
                     
@@ -293,8 +288,11 @@
                             <span class="like_num">공유하기</span>
                         </button></div>
                 </div>
-                <button type="button" class="class_submitbtn" color="orange" fill="true"><span class="sc-fzoyTs jZUSDr">
-                        <span>클래스 신청하기</span></span></button>
+                <a href="apply?pay_pcode=${onInfo.onc_code}"  
+                class="class_submitbtn" color="orange" fill="true">클래스 신청하기
+                </a>
+                
+					
                 <div>
                     <p class="refund_alert">키트 미개봉 시, <fmt:formatDate value="${onInfo.onc_sdate}" pattern="yyyy.MM.dd" />까지 전액 환불 보장</p>
                 </div>

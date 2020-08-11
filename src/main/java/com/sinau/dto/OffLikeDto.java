@@ -12,7 +12,7 @@ public class OffLikeDto {
 	private String ofc_title;
 	private int ofc_sale;
 	private String cts_name;
-	private String f_oriname;
+	private String f_sysname;
 	
 	
 }
