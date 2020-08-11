@@ -1,5 +1,6 @@
-
+@charset "UTF-8";
 * {
+	font-family: 'Nanum Gothic', sans-serif;
 	box-sizing: border-box;
 	margin: 0px;
 	padding: 0px;
@@ -14,7 +15,6 @@ header {
 
 .section-home {
 	width : 1300px;
-	overflow : auto;
 	margin: auto;
 }
 
