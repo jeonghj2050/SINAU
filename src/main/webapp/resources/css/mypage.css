@@ -333,6 +333,12 @@ article>div .nav.nav-tabs>li >a{
 	height: 300px;
 	margin-right: 10px;
 }
+.c_myclass_info>img {
+	float: left;
+	width: 360px;
+	height: 300px;
+	margin-right: 10px;
+}
 
 .c_myclass_info>.c_myclass_detail {
 	float: left;

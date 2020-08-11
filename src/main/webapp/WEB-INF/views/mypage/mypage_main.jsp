@@ -94,8 +94,8 @@ $(document).ready(function(){
            </div>
 			<c:forEach var="onlineClass" items="${onlineList}">
 				<div class="mp_classInfo" id="${onlineClass.onc_code}">
-					<img src="resources/upload/${onlineClass.f_sysname }" alt="" width="300px"
-						height="300px" id="mp_class_img">
+					<a href="classroom?onc_code=${onlineClass.onc_code }"><img src="resources/upload/${onlineClass.f_sysname }" alt="" width="300px"
+						height="300px" id="mp_class_img"></a>
 					<div>
 						<div class="class_info_contents" id="${onlineClass.onc_code}">
 							<p>${onlineClass.cts_name} | ${onlineClass.m_name}</p>
