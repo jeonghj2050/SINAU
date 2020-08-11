@@ -9,11 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sinau.service.ClassService;
 import com.sinau.service.YoutubeClassService;
 
-import com.sinau.dao.MemberDao;
-import com.sinau.dto.MemberDto;
-import com.sinau.service.CommonService;
-import com.sinau.service.MemberService;
-import com.sinau.service.ServiceCenterService;
 
 @Controller
 public class HomeController {
@@ -28,7 +23,7 @@ public class HomeController {
 	@GetMapping("/")
 	public ModelAndView home() {
 		
-		mv= cServ.onlineList();
+		mv = cServ.gettotalList();
 		
 		return mv;
 	}
@@ -63,5 +58,18 @@ public class HomeController {
 		return "pwd";
 	}
 	
-	
+	@GetMapping("classcontents")
+	public ModelAndView classcontents(String totalcode) {
+		mv = new ModelAndView();
+		
+		if(totalcode.contains("onc")) {
+			String onc_code = totalcode;
+			mv = cServ.getOnlineInfo(onc_code);
+		}else if (totalcode.contains("ofc")) {
+			String ofc_code = totalcode;
+			mv = cServ.getOffInfo(ofc_code);
+		}
+		
+		return mv;
+	}
 }

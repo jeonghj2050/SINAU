@@ -1,5 +1,6 @@
 package com.sinau.service;
 
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -32,6 +33,7 @@ import com.sinau.dto.OffScheduleDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.PPayInfoDto;
 import com.sinau.dto.PayCouponDto;
+import com.sinau.dto.QuestionDto;
 import com.sinau.dto.ScheduleDto;
 import com.sinau.dto.LikesDto;
 import com.sinau.dto.OnInfoDto;
@@ -419,24 +421,22 @@ public class ClassService {
 			return videoChange;
 		}
 		
-		
-		return videoChange;
-	}
-
-
-	public ModelAndView onlineList() {
+	public ModelAndView gettotalList() {
 		mv = new ModelAndView();
+	
 		
-		List<TotalInfo> totalList = cDao.gettotalList();
+		List<TotalInfo> allList = cDao.getoffontotalList();
+		//System.out.println(lmap);
+		//System.out.println(qList.get(0).getQ_code()); 
 		
-		mv.addObject("totalList", totalList);
-		 
+		mv.addObject("allList", allList);
+		
+		// view name을 지정!
 		mv.setViewName("home");
-		 
+		
 		return mv;
 	}
+
+
 	
-	
-	
-	/*은경 파트*/
 }

@@ -19,6 +19,7 @@ public interface ClassInfoDao {
 
    //상세페이지 내용 가져오기
    List<OnInfoDto> onInfo(String onc_code);
+   List<OnInfoDto> homeonInfo(String totalcode);
 
    //상세페이지 좋아요 정보 수정
 //   void updateLikes(HashMap<String, Object> hashMap);

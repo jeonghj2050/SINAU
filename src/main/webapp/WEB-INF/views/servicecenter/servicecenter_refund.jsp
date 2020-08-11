@@ -49,40 +49,55 @@ $(document).ready(function(){
             <div class="cate_container">
                 <a class="category" href="./servicecenter_main">FAQ</a>
                 <a class="category" href="./servicecenter_question">1 : 1문의</a>
-			<a class="category" href="./servicecenter_refund">환불내역</a>
+				<a class="category" href="./servicecenter_refund">환불내역</a>
             </div>
 			<div class="data-area">
+			<c:set var="cnt" value="0"/>
 				<div class="title-row">
 					<div class="t-no">번호</div>
-					<div class="t-category">분류</div>
-					<div class="t-title">제목</div>
-					<div class="t-name">작성자</div>
-					<div class="t-date">작성일</div>
-					<div class="t-anfield">답변여부</div>
+					<div class="t-kind">카테고리</div>
+					<div class="t-retitle">제목</div>
+					<div class="t-orddate">주문날짜</div>
+					<div class="t-amount">수량</div>
+					<div class="t-reason">환불사유</div>
+					<div class="t-price">환불금액</div>
+					<div class="t-redate">신청날짜</div>
+					<div class="t-state">현재 상태</div>
 				</div><br>
-				<c:forEach var="qitem" items="${qList}">
+				<c:forEach var="total" items="${totalList}">
 				<div class="data-row">
-					<div class="t-no">${qitem.q_num}</div>
-					<div class="t-code" style="display:none;">${qitem.q_code}</div>
-					<div class="t-category">${qitem.cts_name}</div>
-					<div class="t-title"><a href="contents?q_code=${qitem.q_code}">
-						${qitem.q_title}</a></div>
-					<div class="t-name">${qitem.m_name}</div>
-					<div class="t-date"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${qitem.q_date}"/></div>
-					<div class="t-anfield">
-					<c:if test="${qitem.q_anfield eq null }">
-						미답변
-					</c:if>
-					<c:if test="${qitem.q_anfield ne null }">
-						답변완료
-					</c:if>
+				<div class="t-no">${total.num}</div>
+					<div class="t-kind">
+					<c:if test="${total.ord_kind eq 1 }">
+              				    상품
+            		 	  </c:if>
+            		<c:if test="${total.ord_kind eq 2 }">
+              				    온라인
+            		 	  </c:if>
+            		<c:if test="${total.ord_kind eq 3 }">
+              				    오프라인
+            		 	  </c:if>
+            		</div>
+					<div class="t-retitle">${total.onc_title}</div>
+					<div class="t-orddate"><fmt:formatDate pattern="yyyy-MM-dd" value="${total.ord_date}"/></div>
+					<div class="t-amount">${total.ord_amount}</div>
+					<div class="t-reason">${total.ref_reason}</div>
+					<div class="t-price">${total.ord_price}</div>
+					<div class="t-redate"><fmt:formatDate pattern="yyyy-MM-dd" value="${total.ref_date}"/></div>
+					<div class="t-state">
+					<c:if test="${total.ref_state eq 0 }">
+              				  환불 신청 중
+            		 	  </c:if>	
+            		<c:if test="${total.ref_state eq 1 }">
+              				 환불 처리 중
+            		 	  </c:if>
+            		<c:if test="${total.ref_state eq 2 }">
+              				 환불 완료
+            		 	  </c:if> 	  
 					</div>
 				</div>
 				</c:forEach>
 				</div>
-			<div class="btn-area">
-				<button class="wr-btn" onclick="location.href='./servicecenter_write'">글쓰기</button>
-			</div>
 	</section>
 	<footer>
 		<jsp:include page="../footer.jsp"></jsp:include>

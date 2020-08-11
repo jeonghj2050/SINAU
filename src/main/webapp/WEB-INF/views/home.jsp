@@ -13,8 +13,6 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link rel="stylesheet" href="resources/css/home.css?a">
-<link rel="stylesheet" href="resources/css/youtube.css?a">
-<link rel="stylesheet" href="resources/css/online.css?a">
 </head>
 <body>
 	<header>
@@ -38,20 +36,27 @@
 				</div>
 			</div>
 		</div>
-		<article class="childart5">
-			<h1>전체 유투버</h1>
+		<article class="childart10">
+			<h1>전체 강좌</h1>
 			<!-- Swiper -->
-			<c:forEach var="total" items="${totalList}">
+			<c:forEach var="allList" items="${allList}">
 				<div class="swiper-slide5">
-					<a href="contents?totalcode=${total.totalcode}"> <img
-						src="resources/upload/${total.totalimg}" width="300px" height="300px"></a>
+					<a href="classcontents?totalcode=${allList.totalcode}"> <img
+						src="resources/upload/${allList.totalimg}" width="300px" height="300px"></a>
 					<div class="swiper-text5">
-						<div class="y_name">${total.totalctsname}</div>
-						<div class="y_name">${total.totalsale}</div>
-						<div class="y_name">${total.totallevel}</div>
-						<div class="y_name">${total.totalcount}</div>
-						<div class="y_title">
-							<a href="contents?totalcode=${total.totalcode}">${total.totaltitle}</a>
+						<div class="total_ctsname">${allList.totalctsname}</div>
+						<div class="total_level">${allList.totallevel}</div>
+						<div class="total_sale">${allList.totalsale}원</div>						
+						<div class="class_likes">
+										<svg width="15" height="15" fill="none" viewBox="0 0 24 18">
+											<path fill-rule="evenodd" clip-rule="evenodd"
+												d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
+												fill="#bdc2c6"></path>
+										</svg>${allList.totalcount}
+									</div>
+						
+						<div class="total_title">
+							<a href="classcontents?totalcode=${allList.totalcode}">${allList.totaltitle}</a>
 						</div>
 					</div>
 				</div>
@@ -83,17 +88,6 @@
 			}
 		});
 
-	});
-</script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		var chk = "${check}";
-
-		if (chk == "1") {
-			alert("회원가입 실패!");
-		} else if (chk == "2") {
-			alert("회원가입 성공!");
-		}
 	});
 </script>
 

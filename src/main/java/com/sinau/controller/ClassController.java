@@ -24,13 +24,13 @@ public class ClassController {
 	@Autowired
 	ClassService cServ = new ClassService();
 	
-//	@GetMapping("online")
-//	public ModelAndView online() {
-//		
-//		mv = cServ.getCategories();
-//		
-//		return mv;
-//	}
+	/*
+	 * @GetMapping("online") public ModelAndView online() {
+	 * 
+	 * mv = cServ.getCategories();
+	 * 
+	 * return mv; }
+	 */
 	
 	@GetMapping("online")
 	public ModelAndView online() {
