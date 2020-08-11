@@ -40,7 +40,9 @@ import com.sinau.dto.OnListDto;
 import com.sinau.dto.OnPayInfoDto;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.SpecListDto;
+import com.sinau.dto.TotalInfo;
 import com.sinau.dto.VideoListDto;
+import com.sinau.dto.YoutubeDto;
 
 import lombok.extern.java.Log;
 
@@ -412,15 +414,35 @@ public class ClassService {
 		return mv;
 	}
 
-	public VideoListDto videoChange(String vf_code, String onc_code) {
-		log.info("videoChange()" + vf_code + onc_code);
-
-		String email = ((MemberDto) session.getAttribute("mb")).getM_email();
-
-		VideoListDto videoChange = cDao.getvideoChange(vf_code, onc_code, email);
-
+	/* 은경 파트 */
+		public VideoListDto videoChange(String vf_code, String onc_code) {
+			log.info("videoChange()"+vf_code+onc_code);
+			
+			String email=((MemberDto)session.getAttribute("mb")).getM_email();
+			
+			VideoListDto videoChange = cDao.getvideoChange(vf_code, onc_code, email);
+			
+			return videoChange;
+		}
+		
+		
 		return videoChange;
 	}
 
-	/* 은경 파트 */
+
+	public ModelAndView onlineList() {
+		mv = new ModelAndView();
+		
+		List<TotalInfo> totalList = cDao.gettotalList();
+		
+		mv.addObject("totalList", totalList);
+		 
+		mv.setViewName("home");
+		 
+		return mv;
+	}
+	
+	
+	
+	/*은경 파트*/
 }

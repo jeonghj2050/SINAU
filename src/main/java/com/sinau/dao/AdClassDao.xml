@@ -17,9 +17,9 @@
 		from offclass
 	</select>
 	<select id="getYoutube" resultType="com.sinau.dto.AdYouClassDto">
-		select rownum AS y_num,	y_title, y_m_email, y_profile
+		select rownum AS y_num,	y_title, y_profile, cts_name
 		, y_update, y_code 
-		from youtube_class
+		from AdYouClassDto
 	</select>
 	<!-- 게시글관리 판매 -->
 	<select id="getStore" resultType="com.sinau.dto.AdPStoreDto">
@@ -64,4 +64,8 @@
 		from warning w, member m
 		where w_m_email = m.m_email
 	</select>
+	
+
+	
+	
 </mapper>

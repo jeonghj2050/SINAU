@@ -1,12 +1,13 @@
 package com.sinau.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.sinau.service.ClassService;
+import com.sinau.service.YoutubeClassService;
 
 import com.sinau.dao.MemberDao;
 import com.sinau.dto.MemberDto;
@@ -16,13 +17,21 @@ import com.sinau.service.ServiceCenterService;
 
 @Controller
 public class HomeController {
+	ModelAndView mv;
+	
+	@Autowired
+	ClassService cServ;
+	
+	@Autowired
+	YoutubeClassService ycServ;
+	
 	@GetMapping("/")
-	public String home() {
+	public ModelAndView home() {
 		
-		return "home";
+		mv= cServ.onlineList();
+		
+		return mv;
 	}
-
-
 
 	@GetMapping("loginFrm")
 	public String loginFrm() {
@@ -35,8 +44,6 @@ public class HomeController {
 
 		return "joinFrm";
 	}
-
-
 	
 	@GetMapping("servicecenter_main")
 	public String servicecenter() {
@@ -55,4 +62,6 @@ public class HomeController {
 		
 		return "pwd";
 	}
+	
+	
 }

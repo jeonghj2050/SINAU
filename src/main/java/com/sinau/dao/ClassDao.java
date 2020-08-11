@@ -27,11 +27,13 @@ import com.sinau.dto.OnPayInfoDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
+import com.sinau.dto.TotalInfo;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.VideoDto;
 import com.sinau.dto.VideoFeedDto;
 import com.sinau.dto.VideoFileDto;
 import com.sinau.dto.VideoListDto;
+import com.sinau.dto.YoutubeDto;
 
 public interface ClassDao {
 	//email에 해당하는 회원의 주문 내역을 가져온다.
@@ -183,3 +185,24 @@ public interface ClassDao {
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

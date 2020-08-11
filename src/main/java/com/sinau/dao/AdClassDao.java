@@ -27,4 +27,6 @@ public interface AdClassDao {
 	public List<AdSQnaDto>getQna();
 	//신고 게시글
 	public List<AdSWDto> getWarning();
+	
+	
 }
