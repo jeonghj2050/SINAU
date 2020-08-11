@@ -9,7 +9,5 @@ public class MyClassDto {
 	private String mcl_classcode; //강좌 코드
 	private String mcl_m_email; //수강 회원 이메일
 	private String mcl_ord_code;//수강회원의 주문 내역 코드(내가 신청한)
-
-	
-	
+	private String mcl_sc_code;
 }

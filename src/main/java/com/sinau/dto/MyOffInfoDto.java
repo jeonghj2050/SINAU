@@ -16,9 +16,8 @@ public class MyOffInfoDto {
 	private String cts_name;
 	private Timestamp ofc_ofdate;
 	private String f_sysname;
-	
-	
-	
+	private Timestamp sc_time;
+	private String sc_place;
 }
 
 

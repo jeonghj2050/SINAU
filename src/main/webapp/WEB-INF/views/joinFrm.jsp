@@ -58,7 +58,6 @@ $(document).ready(function() {
 		});
 	}
 </script>
-
 </head>
 <body>
 	<div class="content1">
@@ -282,7 +281,7 @@ $(document).ready(function(){
 	$('#photo').change(function(event){
 		var tmppath=URL.createObjectURL(event.target.files[0]);
 		$('#m_photo').attr('src',tmppath);
-	})
+	});
 });
 </script>
 </html>

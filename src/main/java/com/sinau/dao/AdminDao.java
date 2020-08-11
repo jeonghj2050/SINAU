@@ -9,6 +9,11 @@ import com.sinau.dto.QuestionInfoDto;
 import com.sinau.dto.YoutubeClassDto;
 
 public interface AdminDao {
+	
+	public List<AdminDto> getList(Map<String, String> lmap);
+	
+	public int getListCount();
+	
 	//회원 승인 구분
 	public List<AdminDto> getMemStateNm(int state);
 	public List<AdminDto> getMemStateDm(int state);

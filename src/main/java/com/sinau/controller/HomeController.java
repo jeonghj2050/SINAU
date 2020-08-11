@@ -9,7 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sinau.service.ClassService;
 import com.sinau.service.YoutubeClassService;
 
-import lombok.extern.java.Log;
+import com.sinau.dao.MemberDao;
+import com.sinau.dto.MemberDto;
+import com.sinau.service.CommonService;
+import com.sinau.service.MemberService;
+import com.sinau.service.ServiceCenterService;
 
 @Controller
 public class HomeController {

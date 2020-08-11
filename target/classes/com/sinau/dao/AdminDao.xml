@@ -3,55 +3,79 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sinau.dao.AdminDao">
+
+	<select id="getList" parameterType="HashMap"
+		resultType="com.sinau.dto.AdminDto">
+		<![CDATA[
+		SELECT rownum AS m_nmnum,
+		m_email, m_name, m_pwd, m_phone,
+		m_birth, m_license, m_group, m_state FROM MEMBER
+		WHERE RONUM >= (${pageNum}*${cnt})-(${cnt}-1)
+			AND RONUM <= ${pageNum}*${cnt}
+			AND m_state=#{state} and m_group='nm'
+		]]>
+	</select>
+	
+	<select id="getBoardCount" resultType="Integer">
+		SELECT COUNT(*) FROM member;
+	</select>
+
+
 	<select id="getMemStateNm" resultType="com.sinau.dto.AdminDto">
-		select rownum AS m_nmnum, m_email, m_name, m_pwd, m_phone,
-m_birth, m_license, m_group, m_state from member 
-where m_state=#{state} and m_group='nm'
+		select rownum AS m_nmnum,
+		m_email, m_name, m_pwd, m_phone,
+		m_birth, m_license, m_group, m_state from member
+		where m_state=#{state} and m_group='nm'
 	</select>
 	<select id="getMemStateDm" resultType="com.sinau.dto.AdminDto">
-		select rownum AS m_dmnum, m_email, m_name, m_pwd, m_phone,
-m_birth, m_license, m_group, m_state from member 
-where m_state=#{state} and m_group='dm'
+		select rownum AS m_dmnum,
+		m_email, m_name, m_pwd, m_phone,
+		m_birth, m_license, m_group, m_state from member
+		where m_state=#{state} and m_group='dm'
 	</select>
 	<select id="getMemStateCm" resultType="com.sinau.dto.AdminDto">
-		select rownum AS m_cmnum, m_email, m_name, m_pwd, m_phone,
-m_birth, m_license, m_group, m_state from member 
-where m_state=#{state} and m_group='cm'
+		select rownum AS m_cmnum,
+		m_email, m_name, m_pwd, m_phone,
+		m_birth, m_license, m_group, m_state from member
+		where m_state=#{state} and m_group='cm'
 	</select>
-	
+
 	<!-- 전체멤버 -->
 	<select id="getAllMem" resultType="com.sinau.dto.AdminDto">
-	select * from member;
+		select * from member;
 	</select>
-	
+
 	<!-- 메일체크 -->
-	 <select id="memberCheck" parameterType="String" resultType="String">
-      SELECT M_EMAIL
-      FROM MEMBER
-      WHERE M_EMAIL = #{m_email}
-      </select>
+	<select id="memberCheck" parameterType="String"
+		resultType="String">
+		SELECT M_EMAIL
+		FROM MEMBER
+		WHERE M_EMAIL = #{m_email}
+	</select>
 	<!-- 회원 삭제 -->
-	<delete id="getMemDel" parameterType="String" >
-		DELETE FROM member WHERE
+	<delete id="getMemDel" parameterType="String">
+		DELETE FROM member
+		WHERE
 		M_EMAIL=#{email}
 	</delete>
 	<!-- 강의 삭제 -->
 	<delete id="getLecDel" parameterType="String">
-		DELETE FROM ONLINECLASS 
-		WHERE ONC_CODE = #{code} 
+		DELETE FROM ONLINECLASS
+		WHERE ONC_CODE = #{code}
 	</delete>
 	<delete id="getOfDel" parameterType="String">
-		DELETE FROM OFFCLASS 
-		WHERE OFC_CODE = #{code} 
+		DELETE FROM OFFCLASS
+		WHERE OFC_CODE = #{code}
 	</delete>
 	<delete id="getYDel" parameterType="String">
 		DELETE FROM YOUTUBE_CLASS
-		WHERE Y_CODE = #{code} 
+		WHERE Y_CODE = #{code}
 	</delete>
 	<!-- 판매글 삭제 -->
 	<delete id="getSaleDel" parameterType="String">
 		DELETE FROM PRODUCT
-		WHERE P_CODE = #{code}
+		WHERE
+		P_CODE = #{code}
 	</delete>
 	<!-- 리뷰 글 삭제 -->
 	<delete id="getReDel" parameterType="String">

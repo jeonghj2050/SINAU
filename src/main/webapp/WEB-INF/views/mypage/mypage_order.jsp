@@ -209,7 +209,7 @@ $(function(){
 									<c:when test="${offclass.ord_state == 1}">
 
 									</c:when>
-								</c:choose> <c:if test="${offclass.ord_state == 2}">
+								</c:choose> <c:if test="${offclass.ord_state == 4}">
 									<button class="table-btn">환불</button>
 								</c:if> <c:if test="${offclass.ord_state == 3}">
 									<span>환불진행중</span>
