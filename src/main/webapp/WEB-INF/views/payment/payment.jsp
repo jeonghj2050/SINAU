@@ -19,38 +19,64 @@
 	href="../../../resources/css/style.css" />
 <title>결제창</title>
 <script>
-$(document).ready(function(){
-	$("#res-submit").click(function(){
-	var cpcode = $('input:radio[name=cpl_cp_code]:checked').val();
-	alert("쿠폰이 적용되었습니다!");
+	$(document).ready(function() {
+		var sale;
 
-	
-	var data = {"cpcode":cpcode}
-	
-	$.ajax({
-		url : "getCoupon",
-		type : "post",
-		data : data,
-		dataType : "JSON",
-		success : function(data){
+		var cp = '${payCoupon[0].cpl_code}';
+		var sort = '${sort}';
+		
+		console.log("dsfjl");
+		console.log(cp);
+		console.log(sort);
 
-			var sale = ${offList.ofc_sale};
-			var discount = (data * sale * 0.01);
-			var price = sale - discount;
+		if (cp == '') {
+			$('#list1').hide();
+			$('#list2').show();
+		} else if (cp != '') {
+			$('#list1').show();
+			$('#list2').hide();
+		}
 
-			//확인 버튼 누르는 순간  id or class 값 가져와서 값을 data로 채워줘라			
-			$(".pay-list-discount").html(discount + "원");
-			$(".pay-list-disprice").html(price + "원");
-			$(".ord_price").val(price);
-			
-		},
-		error : function(error){
-			alert("쿠폰 적용에 실패했습니다.");
-			}			
+		$("#res-submit").click(function() {
+			var cpcode = $('input:radio[name=cpl_cp_code]:checked').val();
+			console.log(cpcode);
+			alert("쿠폰이 적용되었습니다!");
+
+			var data = {
+				"cpcode" : cpcode
+			}
+
+			$.ajax({
+				url : "getCoupon",
+				type : "post",
+				data : data,
+				dataType : "JSON",
+				success : function(data) {
+					if (sort == 'prod') {
+						sale = '${prodList.p_price}';
+					} else if (sort == 'onc') {
+						sale = '${onList.onc_sale}';
+						
+					} else if (sort == 'ofc') {
+						sale = '${offList.ofc_sale}';
+					}
+					console.log(data);
+					var discount = (data * sale * 0.01);
+					var price = sale - discount;
+					var intPrice = parseInt(price);
+
+					//확인 버튼 누르는 순간  id or class 값 가져와서 값을 data로 채워줘라			
+					$(".pay-list-discount").html(discount + "원");
+					$(".pay-list-disprice").html(price + "원");
+					$(".ord_price").val(intPrice);
+
+				},
+				error : function(error) {
+					alert("쿠폰 적용에 실패했습니다.");
+				}
+			});
+		});
 	});
-});
-});
-
 </script>
 </head>
 <body>
@@ -67,16 +93,40 @@ $(document).ready(function(){
 
 				<div class="payment-center-wrap">
 					<div class="payment-center">
-						<div class="order-info">
-							<h1>주문 정보</h1>
-							<input type="hidden" name="ord_pcode" value="${offList.ofc_code}">${offList.ofc_title}
-							<div class="pay-img">
-								<img style="height: 200px; width: 200px; border-radius: 5px"
-									id="pay-img"
-									src="/resources/images/offline/sum/${offList.f_oriname}">
+						<c:if test='${sort eq "prod"}'>
+							<div class="order-info">
+								<h1>주문 정보</h1>
+								<input type="hidden" name="ord_pcode" value="${prodList.p_code}">${prodList.p_title}
+								<div class="pay-img">
+									<img style="height: 200px; width: 200px; border-radius: 5px"
+										id="pay-img" src="resources/upload/${prodList.f_sysname}">
+								</div>
+								<br>
 							</div>
-							<br>
-						</div>
+						</c:if>
+						<c:if test='${sort eq "onc"}'>
+							<div class="order-info">
+								<h1>주문 정보</h1>
+								<input type="hidden" name="ord_pcode" value="${onList.onc_code}">${onList.onc_title}
+								<div class="pay-img">
+									<img style="height: 200px; width: 200px; border-radius: 5px"
+										id="pay-img" src="resources/upload/${onList.f_sysname}">
+								</div>
+								<br>
+							</div>
+						</c:if>
+						<c:if test='${sort eq "ofc"}'>
+							<div class="order-info">
+								<h1>주문 정보</h1>
+								<input type="hidden" name="ord_pcode" value="${offList.ofc_code}">${offList.ofc_title}
+								<input type="hidden" name="sc_code" value="${sc_code}">
+								<div class="pay-img">
+									<img style="height: 200px; width: 200px; border-radius: 5px"
+										id="pay-img" src="resources/upload/${offList.f_sysname}">
+								</div>
+								<br>
+							</div>
+						</c:if>
 						<hr>
 						<hr>
 						<div class="del-info">
@@ -105,13 +155,36 @@ $(document).ready(function(){
 								<div>쿠폰 적용</div>
 								<div>최종 가격</div>
 							</div>
-							<div class="pay-list_r">
-								<div>${offList.ofc_sale}원</div>
-								<div>무료</div>
-								<div class="pay-list-discount">${payCoupList.cp_discount}원</div>
-								<div class="pay-list-disprice">${offList.ofc_sale}원</div>
-							</div>
-							<input type="hidden" class="ord_price" name="ord_price" value="${offList.ofc_sale}">
+							<c:if test='${sort eq "prod"}'>
+								<div class="pay-list_r">
+									<div>${prodList.p_price}원</div>
+									<div>무료</div>
+									<div class="pay-list-discount">0원</div>
+									<div class="pay-list-disprice" name="ord_price">${prodList.p_price}원</div>
+								</div>
+								<input type="hidden" class="ord_price" name="ord_price"
+									value="${prodList.p_price}">
+							</c:if>
+							<c:if test='${sort eq "onc"}'>
+								<div class="pay-list_r">
+									<div>${onList.onc_sale}원</div>
+									<div>무료</div>
+									<div class="pay-list-discount">0원</div>
+									<div class="pay-list-disprice" name="ord_price">${onList.onc_sale}원</div>
+								</div>
+								<input type="hidden" class="ord_price" name="ord_price"
+									value="${onList.onc_sale}">
+							</c:if>
+							<c:if test='${sort eq "ofc"}'>
+								<div class="pay-list_r">
+									<div>${offList.ofc_sale}원</div>
+									<div>무료</div>
+									<div class="pay-list-discount">0원</div>
+									<div class="pay-list-disprice" name="ord_price">${offList.ofc_sale}원</div>
+								</div>
+								<input type="hidden" class="ord_price" name="ord_price"
+									value="${offList.ofc_sale}">
+							</c:if>
 						</div>
 						<div class="coupon">
 							<button class="couponbtn">쿠폰 적용하기</button>
@@ -128,12 +201,9 @@ $(document).ready(function(){
 								<div class="how-txt">무통장 입금</div>
 							</div>
 						</div>
-						<input type="hidden" name="ord_m_email" value="${m_email}">
-						<input type="hidden" name="sc_code" value="${sc_code}">
-						
+
 						<div class="pay-submit">
 							<input type="submit" value="결제하기">
-
 						</div>
 					</div>
 				</div>
@@ -146,57 +216,49 @@ $(document).ready(function(){
 				<div class="coupon-body">
 					<div>사용 가능한 쿠폰만 보여집니다.</div>
 					<hr>
-						<div class="coupon-apply">
-							쿠폰 적용
-							<div class="buy-list">
-								<div class="buy-list-top">상품 목록</div>
-								<div class="buy-list-body">
-									<div>${offList.ofc_title}</div>
-									<div>${offList.ofc_sale}원</div>
-								</div>
-								<div class="buy-list-bottom">
-									<c:choose>
-										<c:when test="${payCoupon != ''}">
-											<div class="coupon-list" id="list1">
-												<div class="coupon-list-title">쿠폰 목록</div>
-													<div class="coupon-list-top">
-														<div class="coupon-title-txt">쿠폰명</div>
-														<div class="disper">할인</div>
-													</div>
-												<c:forEach var="payCoupon" items="${payCoupon}" varStatus="status">
-													<div class="coupon-list-bottom">
-															<input type="radio" class="coupon-sel" name="cpl_cp_code" value="${payCoupon.cpl_cp_code}">
-															<div class="coupon-title">${payCoupon.cp_title}</div>
-															<div class="disper">${payCoupon.cp_discount}</div>															
-													</div>
-												</c:forEach>
-											</div>
-										</c:when>
-										<c:when test="${payCoupon == ''}">
-											<div class="coupon-list" id="list2">사용 가능한 쿠폰이 없습니다.</div>
-										</c:when>
-									</c:choose>
-								</div>
+					<div class="coupon-apply">
+						쿠폰 적용
+						<div class="buy-list">
+							<div class="buy-list-top">상품 목록</div>
+							<div class="buy-list-body">
+							<c:if test='${sort eq "prod"}'>
+								<div>${prodList.p_title}</div>
+								<div>${prodList.p_price}원</div>
+							</c:if>
+							<c:if test='${sort eq "onc"}'>
+								<div>${onList.onc_title}</div>
+								<div>${onList.onc_sale}원</div>
+							</c:if>
+							<c:if test='${sort eq "ofc"}'>
+								<div>${offList.ofc_title}</div>
+								<div>${offList.ofc_sale}원</div>
+							</c:if>
 							</div>
-							<%-- <div class="coupon">
-								<div class="coupon-top">
-									<div class="res-total-txt">총 주문금액(배송비포함)</div>
-									<div class="res-sale-txt">할인금액</div>
-									<div class="res-pay-txt">최종결제금액</div>
+							<div class="buy-list-bottom">
+								<div class="coupon-list" id="list1">
+									<div class="coupon-list-title">쿠폰 목록</div>
+									<div class="coupon-list-top">
+										<div class="coupon-title-txt">쿠폰명</div>
+										<div class="disper">할인</div>
+									</div>
+									<c:forEach var="payCoupon" items="${payCoupon}"
+										varStatus="status">
+										<div class="coupon-list-bottom">
+											<input type="radio" class="coupon-sel" name="cpl_cp_code"
+												value="${payCoupon.cpl_cp_code}">
+											<div class="coupon-title">${payCoupon.cp_title}</div>
+											<div class="disper">${payCoupon.cp_discount}</div>
+										</div>
+									</c:forEach>
 								</div>
-								<div class="coupon-bottom">
-									<div class="res-total">${offList.ofc_sale}원</div>
-									<div class="res-sale">원</div>
-									<div class="res-pay">원</div>
-										
-								</div>
-							</div> --%>
-							
-							<div class="coupon-btn">
-								<input type="submit" id="res-submit" value="완료">
-								<input type="submit" id="res-cancel" value="취소">
+								<div class="coupon-list" id="list2">사용 가능한 쿠폰이 없습니다.</div>
 							</div>
 						</div>
+						<div class="coupon-btn">
+							<input type="button" id="res-submit" value="완료"> <input
+								type="reset" id="res-cancel" value="취소">
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -224,9 +286,6 @@ $(document).ready(function(){
 			console.log($(".ord_addr").val());
 		}); // end submit()
 	});
-	
-		
-		
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 	function sample4_execDaumPostcode() {
 		new daum.Postcode(
@@ -275,7 +334,6 @@ $(document).ready(function(){
 				}).open();
 
 	}
-
 </script>
 <script type="text/javascript">
 	$(document).ready(function() {

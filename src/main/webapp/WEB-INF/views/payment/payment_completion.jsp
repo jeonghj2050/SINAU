@@ -27,16 +27,24 @@
 		<div class="compay-center-wrap">
 			<div class="compay-center">
 				<div class="order-txt">
-					결제완료<br>주문이 완료되었습니다.<br>
+					결제완료<br>${orderCheck.ord_name}님의 주문이 완료되었습니다.<br>
 				</div>
 				<div class="order-info">
 					<div class="order-num">
 						<div>주문번호</div>
-						<div>202007031234</div>
+						<div>${orderCheck.ord_code}20200810</div>
 					</div>
 					<div class="order-name">
 						<div>주문명</div>
-						<div>Sinau의 4번째 DIY 키트</div>
+						<c:if test='${sort eq "prod"}'>
+						<div>${ordPCheck.p_title}</div>
+						</c:if>
+						<c:if test='${sort eq "onc"}'>
+						<div>${mclOnCheck.onc_title}</div>
+						</c:if>
+						<c:if test='${sort eq "ofc"}'>
+						<div>${mclOffCheck.ofc_title}</div>
+						</c:if>
 					</div>
 				</div>
 				 <a href="/">

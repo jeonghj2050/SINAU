@@ -18,13 +18,46 @@
 	href="/resources/css/offline/offline_cate_1.css" />
 <link rel="stylesheet" type="text/css" media="screen"
 	href="/resources/css/offline/offline_main.css" />
-<script type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" media="screen"
+	href="/resources/css/style.css" />
+<script type="text/javascript">
+/* $(document).ready(function(){
+	$(".filter_btn").click(function(){
+ 	var filter1 = $('input:radio[name=filter1]:checked').val();
+ 	var data1 = {"ft_cts_code":ft_cts_code}
+ 	
+ 	var filter2 = $('input:radio[name=filter2]:checked').val();
+ 	var data2 = {"ft_cts_code":ft_cts_code}
+ 	
+ 	var filter3 = $('input:radio[name=filter3]:checked').val();
+ 	var data3 = {"ft_cts_code":ft_cts_code}
+ 	
+ 	
+ 	log.info(data1 + "" + data2 + "" + data3);
+ 	
+ 	$.ajax({
+ 		url : "getFilter",
+ 		type : "post",
+		data : data,
+		dataType : "JSON",
+		success : function(data){
+			if(filter1  "fa"){
+				
+			}
+				
+		}
+ 	})
+ 	alret(filter1)
+	});
+}); */
+</script>
 </head>
 <body>
 	<header>
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 	<section>
+	<div class="show1">
 		<div class="main-image">
 			<div id="main-image"></div>
 		</div>
@@ -38,19 +71,17 @@
 			<article class="childart">
 				<article class="child2">
 					<div class="blank"></div>
-					<h1>${offCateName}</h1>
+					<h1>${ctsInfo.cts_name}</h1>
 					<h5>전체클래스</h5>
 					<div id="filter">
-						<img src="/resources/images/offline/sort.png">업데이트순
+						<img src="/resources/images/offline/sort.png">검색 필터
 					</div>
 					<div id="new">
 						<c:forEach var="offCateList" items="${offCateList}">
 							<div>
 								<a href="info?ofc_code=${offCateList.ofc_code}">
 									<div class="class_img">
-										<img
-											src="/resources/images/offline/sum/${offCateList.f_oriname}"
-											alt="">
+										<img src="/resources/upload/${offCateList.f_sysname}" alt="">
 									</div>
 									<article class="on-info1">
 										<li id="sub-cate">${offCateList.cts_name}</li>
@@ -79,9 +110,54 @@
 				</article>
 			</article>
 		</article>
+		</div>
+<%-- 		<div class="filter_modal">
+			<div class="filter_modal-wrap">
+				<form name="filter" action="filter" method="get">
+					<div class="filter_text">검색 필터</div>
+					<div class="filter1">
+						<c:forEach var="filter1" items="${filter1}" varStatus="status">
+							<input type="radio" class="filter1" name="filter1"
+								value="${filter1.ft_cts_code}">${filter1.ft_cts_name}<br>
+						</c:forEach>
+					</div>
+					<div class="filter2">
+						<c:forEach var="filter2" items="${filter2}" varStatus="status">
+							<input type="radio" class="filter2" name="filter2"
+								value="${filter2.ft_cts_code}">${filter2.ft_cts_name}<br>
+						</c:forEach>
+					</div>
+					<div class="filter3">
+						<c:forEach var="filter3" items="${filter3}" varStatus="status">
+							<input type="radio" class="filter3" name="filter3"
+								value="${filter3.ft_cts_code}">${filter3.ft_cts_name}<br>
+						</c:forEach>
+					</div>
+					<input type="hidden" name="cts_code" value="${ctsInfo.cts_code}">
+					<input type="submit" class="filter_btn" value="검색">
+				</form>
+			</div>
+		</div> --%>
 	</section>
 	<footer>
 		<jsp:include page="../footer.jsp"></jsp:include>
 	</footer>
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		$('.show1').show();
+		$('.filter_modal').hide();
+
+		$('#filter').click(function() {
+			$('.filter_modal').show(); //클릭 시 두 번째 요소 표시
+			return false;
+		});
+
+		$('.filter_btn').click(function() {
+			$('.filter_modal').hide();
+			return false;
+		});
+	});
+</script>
 </html>

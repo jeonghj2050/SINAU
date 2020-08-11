@@ -28,42 +28,40 @@
 			</div>
 
 			<div class="wrap-applycenter">
-			
-					<div class="class-apply">
-						<div id="classapply-img">
-							<img src=" resources/images/offline/sum/${offList.f_oriname}"
-								alt="#" width="280px" height="280px">
-						</div>
-						<div id="classapply-info">
-							<li id="sub-cate">${offList.cts_name}</li>
-							<li id="creator-name">${offList.ofc_teacher}</li>
-							<li id="on-name">${offList.ofc_title}</li>
-						</div>
+
+				<div class="class-apply">
+					<div id="classapply-img">
+						<img src="resources/upload/${offList.f_sysname}" alt="#"
+							width="280px" height="280px">
 					</div>
-		
+					<div id="classapply-info">
+						<li id="sub-cate">${offList.cts_name}</li>
+						<li id="creator-name">${offList.ofc_teacher}</li>
+						<li id="on-name">${offList.ofc_title}</li>
+					</div>
+				</div>
+
 				<div class="time-table">
 					<div class="time-table-txt">
 						<img src="/resources/images/offline/time2.png"> 원하는 수업 일정을
 						선택해주세요.
 					</div>
 					<hr>
-					<form name="scFrm" id="scFrm" action="payment" method="get"
+					<form name="scFrm" id="scFrm" action="offPayment" method="get"
 						enctype="multipart/form-data">
 						<c:forEach var="offSchedule" items="${offSchedule}">
 							<div class="time-table-info">
-								<input type="radio" name="sc_code" value="${offSchedule.sc_code}">
+								<input type="radio" name="sc_code"
+									value="${offSchedule.sc_code}">
 								<div class="time-table-date">${offSchedule.sc_date}</div>
 								<div class="time-table-time">${offSchedule.sc_time}</div>
 								<div class="time-table-place">${offSchedule.sc_place}</div>
 							</div>
 							<hr>
 						</c:forEach>
-						<br>
-						<input type="hidden" name="m_email" value="${m_email}">
-						<input type="hidden" name="ofc_code" value="${offList.ofc_code}">
-						<div class="btn-offapply">
-							<input type="submit" value="완료" id="submit">
-						</div>
+						<input type="hidden" name="ord_kind" value=3> 
+						<input type="hidden" name="pay_pcode" value=${offList.ofc_code }>
+							<input type="submit" value="결제하기">
 					</form>
 				</div>
 			</div>
