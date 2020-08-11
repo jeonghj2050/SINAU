@@ -6,9 +6,12 @@
 <head>
 <title>Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link rel="stylesheet" href="resources/css/home.css?a">
 <link rel="stylesheet" href="resources/css/youtube.css?a">
 <link rel="stylesheet" href="resources/css/online.css?a">
@@ -17,49 +20,43 @@
 	<header>
 		<jsp:include page="header.jsp"></jsp:include>
 	</header>
-	
+
 	<section class="section-home">
-	<div class="content-home">
-		<div class="slider">
-			<div>
-				<img src="resources/images/event.webp" width="100%" height="100%">
-			</div>
-			<div>
-				<img src="resources/images/event1.jpg" width="100%" height="100%">
-			</div>
-			<div>
-				<img src="resources/images/event2.jpg" width="100%" height="100%">
-			</div>
-			<div>
-				<img src="resources/images/event3.jpg" width="100%" height="100%">
+		<div class="content-home">
+			<div class="slider">
+				<div>
+					<img src="resources/images/event.webp" width="100%" height="100%">
+				</div>
+				<div>
+					<img src="resources/images/event1.jpg" width="100%" height="100%">
+				</div>
+				<div>
+					<img src="resources/images/event2.jpg" width="100%" height="100%">
+				</div>
+				<div>
+					<img src="resources/images/event3.jpg" width="100%" height="100%">
+				</div>
 			</div>
 		</div>
-	</div>
-
-				
-	<article class="childart1">
-				<h1>유튜브 TOP10</h1>
-				<!-- Swiper -->
-				<div class="swiper-container swc1" style="width: 1300px;">
-					<div class="swiper-wrapper">
-					<c:forEach var="TOP10List" items="${TOP10List}" begin="0" end="9">
-						<div class="swiper-slide">
-							<a href="contents?totalcode=${TOP10List.totalcode}">
-							<img src="resources/upload/${TOP10List.totalimg}" width="300px"
-								height="300px"></a>
-							<div class="swiper-text">
-								<div class="y_name">${TOP10List.totalctsname}</div>
-								<div class="y_title"><a href="ycontents?y_code=${TOP10List.totalcode}">${TOP10List.totaltitle}</a></div>
-							</div>
+		<article class="childart5">
+			<h1>전체 유투버</h1>
+			<!-- Swiper -->
+			<c:forEach var="total" items="${totalList}">
+				<div class="swiper-slide5">
+					<a href="contents?totalcode=${total.totalcode}"> <img
+						src="resources/upload/${total.totalimg}" width="300px" height="300px"></a>
+					<div class="swiper-text5">
+						<div class="y_name">${total.totalctsname}</div>
+						<div class="y_name">${total.totalsale}</div>
+						<div class="y_name">${total.totallevel}</div>
+						<div class="y_name">${total.totalcount}</div>
+						<div class="y_title">
+							<a href="contents?totalcode=${total.totalcode}">${total.totaltitle}</a>
 						</div>
-						</c:forEach>
 					</div>
-					<!-- Add Arrows -->
-					<div class="swiper-button-next"></div>
-					<div class="swiper-button-prev"></div>
 				</div>
-			</article>
-
+			</c:forEach>
+		</article>
 	</section>
 	<footer>
 		<jsp:include page="footer.jsp"></jsp:include>
@@ -85,19 +82,18 @@
 				slider.reloadSlider();
 			}
 		});
-		
+
 	});
 </script>
 <script type="text/javascript">
-$(document).ready(function(){
-	var chk = "${check}";
-	
-	if(chk == "1"){
-		alert("회원가입 실패!");
-	}
-	else  if(chk == "2"){
-		alert("회원가입 성공!");
-	}
-});
+	$(document).ready(function() {
+		var chk = "${check}";
+
+		if (chk == "1") {
+			alert("회원가입 실패!");
+		} else if (chk == "2") {
+			alert("회원가입 성공!");
+		}
+	});
 </script>
 </html>

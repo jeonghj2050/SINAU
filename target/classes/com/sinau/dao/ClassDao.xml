@@ -173,14 +173,10 @@
 	</select>
 	<select id="gettotalList" resultType="com.sinau.dto.TotalInfo">
 		select *
-		from totalinfo
-		order by totalcount desc
+		from TotalInfo
 	</select>
 	
-	<select id="getcLsit" resultType="com.sinau.dto.TotalInfo">
-		select *
-		from totalinfo
-	</select>
+	
 	
 	
 </mapper>

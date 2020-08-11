@@ -276,13 +276,10 @@ public class ClassService {
 
 	public ModelAndView onlineList() {
 		mv = new ModelAndView();
-		System.out.println("12222222222222222222222222222222222222222222222222222");
-		List<TotalInfo> TOP10List = cDao.gettotalList();
-		List<TotalInfo> cList = cDao.getcLsit();
-		System.out.println("34444444444444444444444444444444444444444444444444444444444");
 		
-		mv.addObject("TOP10List", TOP10List);
-		mv.addObject("cList", cList);
+		List<TotalInfo> totalList = cDao.gettotalList();
+		
+		mv.addObject("totalList", totalList);
 		 
 		mv.setViewName("home");
 		 
