@@ -118,11 +118,11 @@ public class PaymentService {
 				myClass.setMcl_m_email(order.getOrd_m_email());
 				myClass.setMcl_ord_code(order.getOrd_code());
 
-				pDao.mclInsert(myClass);
+				
 
 				if (order.getOrd_pcode().contains("ofc")) {
 					myClass.setMcl_sc_code(sc_code);
-					
+					pDao.mclInsert(myClass);
 					OffPayInfoComDto mclOffCheck = pDao.mclOffCheck(order.getOrd_code());
 					mv.addObject("mclOffCheck", mclOffCheck);
 					mv.addObject("sort", "ofc");
@@ -131,7 +131,7 @@ public class PaymentService {
 				} 
 				else if (order.getOrd_pcode().contains("onc")) {
 					myClass.setMcl_sc_code(null);
-					
+					pDao.mclInsert(myClass);
 					OnPayInfoComDto mclOnCheck = pDao.mclOnCheck(order.getOrd_code());
 					mv.addObject("mclOnCheck", mclOnCheck);
 					mv.addObject("sort", "onc");
