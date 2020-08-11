@@ -74,7 +74,7 @@ $(document).ready(function(){
 							height="300px"></a>
 						<div class="swiper-text">
 							${onLike.cts_name }
-							<div class="text_title">${onLike.onc_title }</div>
+							<div class="text_title" class="text_title" style="text-overflow: ellipsis;overflow: hidden;white-space:nowrap;">${onLike.onc_title }</div>
 							<div class="like_view">
 								<span class="like_icon"><svg width="8px" height="8px"
 										viewBox="0 0 16 16" class="bi bi-heart-fill"
@@ -101,7 +101,7 @@ $(document).ready(function(){
 							height="300px">
 						<div class="swiper-text">
 							${offLike.cts_name }
-							<div class="text_title">${offLike.ofc_title }</div>
+							<div class="text_title" style="text-overflow: ellipsis;overflow: hidden;white-space:nowrap;">${offLike.ofc_title }</div>
 							<div class="like_view">
 								<span class="like_icon"><svg width="8px" height="8px"
 										viewBox="0 0 16 16" class="bi bi-heart-fill"

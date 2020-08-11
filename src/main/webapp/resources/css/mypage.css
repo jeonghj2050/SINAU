@@ -144,6 +144,15 @@ article>div .nav.nav-tabs {
 
 article>div .nav.nav-tabs>li {
 	width: 150px;
+	height: 40px;
+	text-align: center;
+	text-overflow: ellipsis;
+	 overflow: hidden;
+	 white-space:nowrap;
+}
+article>div .nav.nav-tabs>li >a{
+	width: 150px;
+	height: 40px;
 	text-align: center;
 }
 
@@ -318,6 +327,12 @@ article>div .nav.nav-tabs>li {
 	width: 1070px;
 }
 
+.c_myclass_info>a>img {
+	float: left;
+	width: 360px;
+	height: 300px;
+	margin-right: 10px;
+}
 .c_myclass_info>img {
 	float: left;
 	width: 360px;
@@ -348,7 +363,6 @@ article>div .nav.nav-tabs>li {
 .c_myclass_stuList {
 	clear: both;
 	width: 1070px;
-	height: 200px;
 }
 
 /* 강의 등록 */
