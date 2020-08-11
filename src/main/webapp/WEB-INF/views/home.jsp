@@ -39,24 +39,24 @@
 		<article class="childart10">
 			<h1>전체 강좌</h1>
 			<!-- Swiper -->
-			<c:forEach var="allList" items="${allList}">
+			<c:forEach var="t" items="${totalList}">
 				<div class="swiper-slide5">
-					<a href="classcontents?totalcode=${allList.totalcode}"> <img
-						src="resources/upload/${allList.totalimg}" width="300px" height="300px"></a>
+					<a href="classcontents?totalcode=${t.totalcode}"> <img
+						src="resources/upload/${t.totalimg}" width="300px" height="300px"></a>
 					<div class="swiper-text5">
-						<div class="total_ctsname">${allList.totalctsname}</div>
-						<div class="total_level">${allList.totallevel}</div>
-						<div class="total_sale">${allList.totalsale}원</div>						
+						<div class="total_ctsname">${t.totalctsname}</div>
+						<div class="total_level">${t.totallevel}</div>
+						<div class="total_sale">${t.totalsale}원</div>						
 						<div class="class_likes">
 										<svg width="15" height="15" fill="none" viewBox="0 0 24 18">
 											<path fill-rule="evenodd" clip-rule="evenodd"
 												d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
 												fill="#bdc2c6"></path>
-										</svg>${allList.totalcount}
+										</svg>${t.totalcount}
 									</div>
 						
 						<div class="total_title">
-							<a href="classcontents?totalcode=${allList.totalcode}">${allList.totaltitle}</a>
+							<a href="classcontents?totalcode=${t.totalcode}">${t.totaltitle}</a>
 						</div>
 					</div>
 				</div>

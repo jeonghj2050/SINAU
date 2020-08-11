@@ -21,7 +21,6 @@ header {
 .section-home {
 	width: 100%;
 	min-height: 100%;
-	overflow : auto;
 }
 
 footer {

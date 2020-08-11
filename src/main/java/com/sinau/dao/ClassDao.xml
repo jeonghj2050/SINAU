@@ -114,10 +114,6 @@
 		from videoRInfo
 		where m_email=#{email} and onc_code = #{onc_code} and vf_code = #{vf_code}
 	</select>
-	<select id="gettotalList" resultType="com.sinau.dto.TotalInfo">
-		select *
-		from TotalInfo
-	</select>
 
 
 
@@ -418,7 +414,7 @@ GROUP BY   OFC_CODE
 	</select> -->
 
 	<!-- /*은경 파트*/ -->
-	<select id="getoffontotalList"
+	<select id="gettotalList"
 		resultType="com.sinau.dto.TotalInfo">
 		select *
 		from totalinfo

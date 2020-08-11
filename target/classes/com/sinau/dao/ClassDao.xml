@@ -41,16 +41,7 @@
 	
 	
 	<!-- 회원의 강좌 좋아요 내역을 가져온다. -->
-	<select id="getOnLikeList" parameterType="String" resultType="com.sinau.dto.OnlineLikeDto">
-		<![CDATA[ 
-		 	select * from onlinelikes where m_email=#{email}
-		]]>
-	</select>
-	<select id="getOffLikeList" parameterType="String" resultType="com.sinau.dto.OffLikeDto">
-		<![CDATA[ 
-		 	select * from offlikes where m_email=#{email}
-		]]>
-	</select>
+
 	<select id="getClassInfo" parameterType="String" resultType="com.sinau.dto.CreatorOnInfoDto">
 		select * from creatoroninfo where onc_code=#{onc_code}
 	</select>
@@ -122,10 +113,6 @@
 		select *
 		from videoRInfo
 		where m_email=#{email} and onc_code = #{onc_code} and vf_code = #{vf_code}
-	</select>
-	<select id="gettotalList" resultType="com.sinau.dto.TotalInfo">
-		select *
-		from TotalInfo
 	</select>
 
 
@@ -427,7 +414,7 @@ GROUP BY   OFC_CODE
 	</select> -->
 
 	<!-- /*은경 파트*/ -->
-	<select id="getoffontotalList"
+	<select id="gettotalList"
 		resultType="com.sinau.dto.TotalInfo">
 		select *
 		from totalinfo

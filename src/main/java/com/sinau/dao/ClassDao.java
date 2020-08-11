@@ -170,7 +170,7 @@ public interface ClassDao {
 	
 	   
 	   
-	List<TotalInfo> getoffontotalList();
+	/* List<TotalInfo> getoffontotalList(); */
 	
 
 	//로그인한 크리에이터의 강의인지 확인하기
@@ -182,6 +182,8 @@ public interface ClassDao {
 	//해당 강의 정보 가져오기
 	VideoListDto getvideoChange(@Param("vf_code")String vf_code,@Param("onc_code")String onc_code,@Param("email")String email);
 	/*은경 파트*/
+	
+	List<TotalInfo> gettotalList();
 
 	
 
