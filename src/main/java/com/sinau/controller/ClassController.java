@@ -24,14 +24,6 @@ public class ClassController {
 	@Autowired
 	ClassService cServ = new ClassService();
 	
-//	@GetMapping("online")
-//	public ModelAndView online() {
-//		
-//		mv = cServ.getCategories();
-//		
-//		return mv;
-//	}
-	
 	@GetMapping("online")
 	public ModelAndView online() {
 		
@@ -126,19 +118,14 @@ public class ClassController {
 		return mv;
 	}
 	
-	
 	//강좌 상세 화면에서 회원 m_email를 포함한채 강좌 ofc_code에 해당하는 scList 출력하는 메소드 
 	@GetMapping("apply")
 	public ModelAndView offApply(String pay_pcode) {
 		log.info("offlineApply()" + pay_pcode);
 		mv = cServ.getOffApply(pay_pcode);
 		
-		
-		
 		return mv;
 	}
-	
-	
 }
 
 

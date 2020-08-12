@@ -88,7 +88,7 @@ $(document).ready(function(){
 			  <!-- Nav tabs -->
 			  <ul class="nav nav-tabs" role="tablist" id="mytab">
 			   	<c:forEach var="onlineClass" items="${onlineList}">	
-				    <li role="presentation" name="${onlineClass.onc_code}"><a href="#'${onlineClass.onc_code}'" aria-controls="home" role="tab" data-toggle="tab">${onlineClass.onc_code}</a></li>
+				    <li role="presentation" name="${onlineClass.onc_code}"><a href="#'${onlineClass.onc_code}'" aria-controls="home" role="tab" data-toggle="tab">${onlineClass.onc_title}</a></li>
 			  	</c:forEach>
 			  </ul> 
            </div>

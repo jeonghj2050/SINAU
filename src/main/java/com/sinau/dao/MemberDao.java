@@ -47,6 +47,8 @@ public interface MemberDao {
 
 	int newPwd(@Param("email")String email,@Param("encPwd")String encPwd);
 
+	String idFind(@Param("mname")String mname,@Param("mphone")String mphone);
+	
 
 
 
