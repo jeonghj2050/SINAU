@@ -85,7 +85,7 @@ public class PaymentService {
 	// 결제완료시 주문내역, 마이클래스 Insert 메소드
 	@Transactional
 	public ModelAndView completionPay(OrderDto order, String sc_code) {
-		log.info(sc_code + "sc_code dfsdfsg");
+		log.info(sc_code + "sc_code dfsdfsg"+order.toString());
 
 		mv = new ModelAndView();
 
