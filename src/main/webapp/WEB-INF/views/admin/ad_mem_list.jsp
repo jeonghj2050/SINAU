@@ -71,7 +71,7 @@ var ti='tab-1';
 				<a href="./adMApproval">가입승인</a>
 			</div>
 			<div class="information">
-				<a href="./adMList">정보수정</a>
+				<a href="./adMList"><b>정보수정</b></a>
 			</div>
 		</div>
 
@@ -95,7 +95,7 @@ var ti='tab-1';
 								<div class="ic-name informationName">이름</div>
 								<div class="ic-phone informationPhone">연락처</div>
 								<div class="ic-joindate informationBirth">생년월일</div>
-								<div class="ic-joinstatus informationStatus">신고횟수</div>
+								<div class="ic-joinstatus informationStatus"></div>
 								<div class="ic-delete informationDel">삭제</div>
 							</b>
 						</div>
@@ -106,21 +106,21 @@ var ti='tab-1';
 								<div class="ic-name informationName">${mList2.m_name}</div>
 								<div class="ic-phone informationPhone">${mList2.m_phone}</div>
 								<div class="ic-joindate informationBirth">${mList2.m_birth}</div>
-								<div class="ic-joinstatus informationStatus">1</div>
+								<div class="ic-joinstatus informationStatus"></div>
 								<div class="ic-delete informationDel">
 									<p id="del">
 										<button class="btn-1" onclick="btnclick('${mList2.m_email}')">
 											<b>삭제</b>
 										</button>
 									</p>
-									<p id="dComple"><b>삭제완료</b></p>
+									<!-- <p id="dComple"><b>삭제완료</b></p> -->
 								</div>
 							</c:forEach>
 						</div>
 					</div>
-					<div class="btn-area">
+					<%-- <div class="btn-area">
 						<div class="paging">${paging}</div>
-					</div>
+					</div> --%>
 				</div>
 				<!-- 판매자 회원 정보란 -->
 				<div id="tab-2" class="tab-content">
@@ -132,7 +132,7 @@ var ti='tab-1';
 								<div class="id-name informationName">이름</div>
 								<div class="id-phone informationPhone">연락처</div>
 								<div class="id-joindate informationBirth">생년월일</div>
-								<div class="id-joinstatus informationStatus">신고횟수</div>
+								<div class="id-joinstatus informationStatus"></div>
 								<div class="id-delete informationDel">삭제</div>
 							</b>
 						</div>
@@ -143,7 +143,7 @@ var ti='tab-1';
 								<div class="id-name informationName">${mList2.m_name}</div>
 								<div class="id-phone informationPhone">${mList2.m_phone}</div>
 								<div class="id-joindate informationBirth">${mList2.m_birth}</div>
-								<div class="id-joinstatus informationStatus">3</div>
+								<div class="id-joinstatus informationStatus"></div>
 								<div class="id-delete informationDel">
 									<p id="del">
 										<button class="btn-1" onclick="btnclick('${mList2.m_email}')">
@@ -154,9 +154,9 @@ var ti='tab-1';
 							</c:forEach>
 						</div>
 					</div>
-					<div class="btn-area">
+					<%-- <div class="btn-area">
 						<div class="paging">${paging}</div>
-					</div>
+					</div> --%>
 				</div>
 				<!-- 일반회원 정보란 -->
 				<div id="tab-3" class="tab-content">
@@ -168,19 +168,19 @@ var ti='tab-1';
 								<div class="im-name informationName">이름</div>
 								<div class="im-phone informationPhone">연락처</div>
 								<div class="im-joindate informationBirth">생년월일</div>
-								<div class="im-joinstatus informationStatus">신고횟수</div>
+								<div class="im-joinstatus informationStatus"></div>
 								<div class="im-delete informationDel">삭제</div>
 							</b>
 						</div>
 						<div class="datelist">
-						<c:set var="num" value="${searchVo.totalCount - ((searchVo.curPage+1) * 10) }"/>
+						<%-- <c:set var="num" value="${searchVo.totalCount - ((searchVo.curPage+1) * 10) }"/> --%>
 							<c:forEach var="mList2" items="${nList2}">
 								<div class="im-no informationNum">${mList2.m_nmnum}</div>
 								<div class="im-email informationEmail">${mList2.m_email}</div>
 								<div class="im-name informationName">${mList2.m_name}</div>
 								<div class="im-phone informationPhone">${mList2.m_phone}</div>
 								<div class="im-joindate informationBirth">${mList2.m_birth}</div>
-								<div class="im-joinstatus informationStatus">2</div>
+								<div class="im-joinstatus informationStatus"></div>
 								<div class="im-delete informationDel">
 									<p id="del">
 										<button class="btn-1" onclick="btnclick('${mList2.m_email}')">
@@ -191,9 +191,9 @@ var ti='tab-1';
 							</c:forEach>
 						</div>
 					</div>
-					<div class="btn-area">
+					<%-- <div class="btn-area">
 						<div class="paging">${paging}</div>
-					</div>
+					</div> --%>
 				</div>
 			</div>
 		</div>

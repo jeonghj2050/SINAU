@@ -12,4 +12,5 @@ public class AdOfflineClassDto {
 	private String ofc_teacher;
 	private Date ofc_update;
 	private String ofc_m_email;
+	private String ofc_cts_code;
 }

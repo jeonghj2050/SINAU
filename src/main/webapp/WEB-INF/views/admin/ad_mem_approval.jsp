@@ -13,6 +13,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 var emailtemp = '';
+var emailtemp2 = '';
 var ti='tab-1';
 	$(document).ready(function() {
 		$('.tab-content').hide();
@@ -39,10 +40,10 @@ var ti='tab-1';
 		//	$('.popupN').show();
 		//})
 		
-		$('.btn-1').click(function(){
-			$('#yn').hide();
-			$('#Atrue').show();
-		})
+		//$('.btn-1').click(function(){
+		//	$('#yn').hide();
+		//	$('#Atrue').show();
+		//})
 		$('.fsyYOM').click(function(){
 			$('.popupN').hide();
 		})
@@ -71,7 +72,7 @@ var ti='tab-1';
 				<b><ins>회원관리</ins></b>
 			</h2>
 			<div class="joinApproval">
-				<a href="./adMApproval">가입승인</a>
+				<a href="./adMApproval"><b>가입승인</b></a>
 			</div>
 			<div class="information">
 				<a href="./adMList">정보수정</a>
@@ -85,7 +86,7 @@ var ti='tab-1';
 			<ul class="tabs">
 				<li class="tab-link current" data-tab="tab-1" id="t1">크리에이터</li>
 				<li class="tab-link" data-tab="tab-2" id="t2">판매자</li>
-				<li class="tab-link" data-tab="tab-3" id="t3">유튜버</li>
+				<!-- <li class="tab-link" data-tab="tab-3" id="t3">유튜버</li> -->
 			</ul>
 			<div class="approval">
 				<!-- 크리에이터 회원 승인란 -->
@@ -110,21 +111,20 @@ var ti='tab-1';
 								<div class="c-joindate approvalBirth">${mlist.m_birth}</div>
 								<div class="c-joinstatus approvalState">
 									<p id="yn">
-										<button class="btn-1">
+										<button class="btn-1" onclick="approval('${mlist.m_email}')">
 											<b>승인</b>
 										</button>
 										<button class="btn-2" onclick="btnclick('${mlist.m_email}')">
 											<b>거절</b>
 										</button>
 									</p>
-									<p id="Atrue"><b>승인완료</b></p>
 								</div>
 							</c:forEach>
 						</div>
 					</div>
-					<div class="btn-area">
+					<%-- <div class="btn-area">
 						<div class="paging">${paging}</div>
-					</div>
+					</div> --%>
 				</div>
 				<!-- 판매자 회원 승인란 -->
 				<div id="tab-2" class="tab-content">
@@ -148,24 +148,23 @@ var ti='tab-1';
 								<div class="d-joindate approvalBirth">${mlist.m_birth}</div>
 								<div class="d-joinstatus approvalState">
 								<p id="yn">
-										<button class="btn-1">
+										<button class="btn-1" onclick="approval('${mlist.m_email}')">
 											<b>승인</b>
 										</button>
 										<button class="btn-2" onclick="btnclick('${mlist.m_email}')">
 											<b>거절</b>
 										</button>
 									</p>
-									<p id="Atrue"><b>승인완료</b></p>
 								</div>
 							</c:forEach>
 						</div>
 					</div>
-					<div class="btn-area">
+					<%-- <div class="btn-area">
 						<div class="paging">${paging}</div>
-					</div>
+					</div> --%>
 				</div>
 				<!-- 유튜버 회원 승인란 -->
-				<div id="tab-3" class="tab-content">
+				<%-- <div id="tab-3" class="tab-content">
 					<div class="approval-3">
 						<div class="adyoutube">
 							<b>
@@ -193,7 +192,6 @@ var ti='tab-1';
 											<b>거절</b>
 										</button>
 									</p>
-									<p id="Atrue"><b>승인완료</b></p>
 								</div>
 							</c:forEach>
 						</div>
@@ -201,13 +199,17 @@ var ti='tab-1';
 					<div class="btn-area">
 						<div class="paging">${paging}</div>
 					</div>
-				</div>
+				</div> --%>
 			</div>
 		</div>
 		<div class="popupN">
 			<div class="popNo">
-				<button type="button" class="sc-fzqNqU fsyYOM sc-fzqPZZ bDLHXT" color="transparent"><span class="sc-fzoyTs jZUSDr"><svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M18.5 4L12 10.5 5.5 4 4 5.5l6.5 6.5L4 18.5 5.5 20l6.5-6.5 6.5 6.5 1.5-1.5-6.5-6.5L20 5.5 18.5 4z" fill="#1b1c1d"></path></svg></span></button>
-				<p id="refuse">거절하시겠습니까?</p>
+				<button type="button" class="sc-fzqNqU fsyYOM sc-fzqPZZ bDLHXT" 
+				color="transparent"><span class="sc-fzoyTs jZUSDr">
+				<svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+				<path d="M18.5 4L12 10.5 5.5 4 4 5.5l6.5 6.5L4 18.5 5.5 20l6.5-6.5 6.5 6.5 1.5-1.5-6.5-6.5L20 
+				5.5 18.5 4z" fill="#1b1c1d"></path></svg></span></button>
+				<p id="refuse">크리에이터/판매자에 적합하지않아 삭제합니다.</p>
 				<div class="btnNy">
 				<button id="py" class="pyn">예</button>
 				<button id="pn" class="pyn">아니요</button>
@@ -225,5 +227,13 @@ function btnclick(email){
 	emailtemp = email;
 	$('.popupN').show();
 }
+function approval(email){
+	console.log(email);
+	emailtemp2 = email;
+	
+	location.href='./memApproval?email='+emailtemp2+'&tabId='+ti;
+	emailtemp2 = '';
+}
+ti = '${tabId}';
 </script>
 </html>
