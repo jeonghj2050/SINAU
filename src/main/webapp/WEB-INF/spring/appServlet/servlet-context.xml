@@ -54,7 +54,10 @@
 			<exclude-mapping path="/youtuber"/>
 			<exclude-mapping path="/adPLecture"/>
 			<exclude-mapping path="/servicecenter_question"/>
+			<exclude-mapping path="/onlineInfo"/>
+			<exclude-mapping path="/classcontents"/>
 			<exclude-mapping path="/ycontents"/>
+			<exclude-mapping path="/idfind"/>
 			<beans:bean 
 				class="com.sinau.util.SessionInterceptor" />
 		</interceptor>
