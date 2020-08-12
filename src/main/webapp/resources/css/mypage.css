@@ -191,7 +191,8 @@ article>div .nav.nav-tabs>li >a{
 
 .mp_classInfo>div>div:last-child>div:first-child {
 	width: 580px;
-	line-height: 25px;
+	height:50px;
+	line-height: 50px;
 	float: left;
 }
 

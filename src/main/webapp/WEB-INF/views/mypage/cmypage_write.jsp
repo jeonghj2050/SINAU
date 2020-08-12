@@ -212,8 +212,8 @@
 								<tr>
 									<td><input type="text" name="v_title" ></td>
 									<td><input type="text" name="v_content" ></td>
-									<td><input type="file" name="video_files" class="files_ip">
-										<button type="button" class="del_btn"
+									<td><input type="file" name="video_files" >
+										<button type="button"
 											onclick="deleteClassForm(this)">삭제</button></td>
 								</tr>
 							</table>
