@@ -112,20 +112,7 @@ $(document).ready(function(){
 								수업일 : 
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${onlineClass.onc_sdate}"/> / <fmt:formatDate pattern="yyyy-MM-dd" value="${onlineClass.onc_edate}"/>
 							</div>
-							 <div class="class_status">
-								<c:choose>
-									<c:when test="${onlineClass.mcl_state == 1}">
-										<button class="my_default_btn" data-target="#refund"
-											data-toggle="modal" data-notifyid="${onlineClass.mcl_ord_code }">환불</button>
-									</c:when>
-								</c:choose>
-								<c:if test="${onlineClass.mcl_state == 3}">
-									<div>환불진행중</div>
-								</c:if>
-								<c:if test="${onlineClass.mcl_state == 4}">
-									<div>환불완료</div>
-								</c:if>
-							</div>
+						</div>
 					</div>
 				</div>
 			</c:forEach>

@@ -125,7 +125,7 @@ public class MemberService {
 		try {
 
 			mDao.memberInsert(member);
-			rttr.addFlashAttribute("check", 2);
+			rttr.addFlashAttribute("check", 1);
 			view = "redirect:/";
 			
 			if (fcheck == 1) {
@@ -136,7 +136,7 @@ public class MemberService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			view = "redirect:joinFrm";
-			rttr.addFlashAttribute("check", 1);
+			rttr.addFlashAttribute("check", 0);
 		}
 
 		mv.setViewName(view);
@@ -205,8 +205,21 @@ public class MemberService {
 					//회원 구분이 admin일 경우 관리자 페이지로 전환
 					view = "redirect:adMApproval";
 				}
-				else {
+				else if(member.getM_state() == 2) {
 					//리다이렉트로 화면을 전환.
+					rttr.addFlashAttribute("check", 2);
+					view = "redirect:/";
+				}
+				else if(member.getM_state() == 1) {
+					//리다이렉트로 화면을 전환.
+					session.invalidate();
+					rttr.addFlashAttribute("check", 5);
+					view = "redirect:/";
+				}
+				else if(member.getM_state() == 3) {
+					//리다이렉트로 화면을 전환.
+					session.invalidate();
+					rttr.addFlashAttribute("check", 4);
 					view = "redirect:/";
 				}
 				
@@ -231,7 +244,7 @@ public class MemberService {
 		// 세션 정보 지우기
 		session.invalidate();
 
-		return "home";
+		return "redirect:/";
 	}
 
 
