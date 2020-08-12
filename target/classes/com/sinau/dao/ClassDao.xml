@@ -4,6 +4,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sinau.dao.ClassDao">
+	<!-- 효진 파트 -->
 	<select id="getOrderList" parameterType="String"
 		resultType="com.sinau.dto.OrderDto">
 		<!-- email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다. -->
@@ -35,13 +36,18 @@
 		 	select * from offorders where ord_m_email=#{email}
 		]]>
 	</select>
-	<!-- <select id="getList" parameterType="String" resultType="com.sinau.dto.MyOnlineInfoDto">
-		select * from ofc
-	</select> -->
-	
 	
 	<!-- 회원의 강좌 좋아요 내역을 가져온다. -->
-
+	<select id="getOnLikeList" parameterType="String" resultType="com.sinau.dto.OnlineLikeDto">
+		<![CDATA[ 
+		 	select * from onlinelikes where m_email=#{email}
+		]]>
+	</select>
+	<select id="getOffLikeList" parameterType="String" resultType="com.sinau.dto.OffLikeDto">
+		<![CDATA[ 
+		 	select * from offlikes where m_email=#{email}
+		]]>
+	</select>
 	<select id="getClassInfo" parameterType="String" resultType="com.sinau.dto.CreatorOnInfoDto">
 		select * from creatoroninfo where onc_code=#{onc_code}
 	</select>
@@ -58,150 +64,6 @@
 		select * from videofeed where m_email=#{m_email}
 	</select>
 	
-<!-- 은경파트 -->
-	<!-- 온라인 강의 섬네일용 정보를 가져옴  파라미터 없음 -->
-	<select id="getOnList" resultType="com.sinau.dto.OnListDto">
-		 	select DISTINCT * from oninfolist2
-	</select>
-	
-	<!-- 온라인 강의 섬네일용 정보를 가져옴  파라미터 있음 -->
-	<select id="getOnListCa" parameterType="String" resultType="com.sinau.dto.OnListDto">
-		 	select DISTINCT * from oninfolist2
-		 	where cts_code = #{cate}
-	</select>
-	
-	<!-- 온라인 강의  인기강좌 10개 가져오기 -->
-	<select id="getTopOnList" resultType="com.sinau.dto.OnListDto">
-		<![CDATA[ 
-		 	SELECT DISTINCT * FROM oninfolist2
-			order by l_count desc
-		]]>
-	</select>
-	
-	<!-- 클래스룸 정보 가져오기 -->
-	<select id="getCR" parameterType="String" resultType="com.sinau.dto.ClassroomDto">
-		select * from videoInfo
-		where onc_code = #{onc_code} 
-	</select>
-	
-	<!-- 요청 강의가 목록에 있는지 확인하기 
-	<select id="getHerClass" resultType="com.sinau.dto.OnListDto">
-		 	select * from myonlineinfo
-	</select>-->
-		
-	<!-- email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다.
-	<select id="checkOrderList" parameterType="String" resultType="com.sinau.dto.OrderDto">
-	 	select distinct * from ord 
-	 	where ord_m_email=#{email} and ord_pcode = #{onc_code}
-	</select> -->
-	
-	<!-- email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다. -->
-	<select id="checkOnClass" parameterType="String" resultType="com.sinau.dto.OnlineClassDto">
-	 	select * from onc 
-		where onc_m_email=#{email} and onc_code = #{onc_code}
-	</select>
-	
-	<!-- 클래스룸 정보 가져오기 -->
-	<!-- <select id="getVideoLists" parameterType="String" resultType="com.sinau.dto.VideoListDto">
-		select *
-		from videoRInfo
-		where m_email=#{email} and onc_code = #{onc_code}
-	</select> -->
-	
-	<!-- 해당 강의 정보 가져오기 -->
-	<select id="getvideoChange" parameterType="String" resultType="com.sinau.dto.VideoListDto">
-		select *
-		from videoRInfo
-		where m_email=#{email} and onc_code = #{onc_code} and vf_code = #{vf_code}
-	</select>
-
-
-
-
-	<!-- OFFLINE CLASS 부분 -->
-	<select id="getOffList" parameterType="String"
-		resultType="com.sinau.dto.OffListDto">
-		<![CDATA[
-			select * from of_INFO 
-		]]>
-	</select>
-	<!-- 서브 카테고리에 해당하는 강좌 가져오는 쿼리문 -->
-	<select id="getOffCateList" parameterType="String"
-		resultType="com.sinau.dto.OffListDto">
-		<![CDATA[
-			select * from of_INFO where ofc_cts_code=#{cts_code}
-		]]>
-	</select>
-	<select id="getOffCateFilterList" parameterType="String"
-		resultType="com.sinau.dto.OffListDto">
-		<![CDATA[ 
-			select * from of_INFO where ofc_cts_code=#{cts_code} order by cts_code = #{filter1} and #{filter2} and #{filter3}
-		]]>
-	</select>
-	<!-- 서브 카테고리 가져오는 쿼리문(nav영역 사용) -->
-	<select id="getOffCate" parameterType="String"
-		resultType="com.sinau.dto.OffCtsDto">
-		<![CDATA[
-			select * from of_cts 
-		]]>
-	</select>
-	<!-- 조회수 업데이트용 쿼리문 -->
-	<update id="viewUpdate" parameterType="String">
-		<![CDATA[
-		UPDATE OFC SET OFC_VIEW =
-		OFC_VIEW + 1
-		WHERE OFC_CODE =#{ofc_code}
-		]]>
-	</update>
-	<select id="getOffInfo" parameterType="String"
-		resultType="com.sinau.dto.OffInfoDto">
-		<![CDATA[
-			SELECT * FROM OF_D_SC
-			WHERE (OFC_CODE = #{ofc_code}) and (rownum = 1)
-		]]>
-	</select>
-	<select id="getOffInfoSpec" parameterType="String"
-		resultType="com.sinau.dto.OffInfoSpecDto">
-		<![CDATA[
-			select  OFC_CODE
-     , mAX(case when rw = 1 then f_sysname_sp else null end) col1
-     ,  mAX(case when rw = 2 then f_sysname_sp else null end) col2
-     ,  mAX(case when rw = 3 then f_sysname_sp else null end) col3
-from (SELECT a.*, rownum rw FROM F_SPEC a
-       WHERE OFC_CODE = #{ofc_code})
-GROUP BY   OFC_CODE
-		]]>
-	</select>
-	<select id="getCateInfo" parameterType="String"
-		resultType="com.sinau.dto.CategoryDto">
-		<![CDATA[
-			SELECT * FROM of_cts
-			WHERE cts_code = #{cts_code}
-		]]>
-	</select>
-	<select id="getOffScehdule" parameterType="String"
-		resultType="com.sinau.dto.OffScheduleDto">
-		<![CDATA[
-			SELECT * FROM SCL_SC
-			WHERE scl_oFC_CODE = #{ofc_code}
-		]]>
-	</select>
-	<select id="getOffLoc" parameterType="String"
-		resultType="String">
-		<![CDATA[
-			SELECT SC_LOC
-			FROM OF_SC WHERE (ofc_code= #{ofc_code}) AND (rownum = 1)
-		]]>
-	</select>
-
-	<select id="getOffScheduleSel" parameterType="String"
-		resultType="com.sinau.dto.OffScheduleDto">
-		<![CDATA[
-			select * from scl_sc
-			where sc_code=#{sc_code}
-			]]>
-	</select>
-
 	<!-- 내 클래스의 상태를 변경한다. -->
 	<update id="mclUpdateState"
 		parameterType="com.sinau.dto.OrderDto">
@@ -284,22 +146,134 @@ GROUP BY   OFC_CODE
 		resultType="com.sinau.dto.CreatorOffInfoDto">
 		select * from creatoroffinfo where ofc_code=#{ofc_code}
 	</select>
+	
+	<!-- 효진 파트 -->
+	
+	<!-- 은경파트 -->
+	<!-- 온라인 강의 섬네일용 정보를 가져옴  파라미터 없음 -->
+	<select id="getOnList" resultType="com.sinau.dto.OnListDto">
+		 	select DISTINCT * from oninfolist2
+	</select>
+	
+	<!-- 온라인 강의 섬네일용 정보를 가져옴  파라미터 있음 -->
+	<select id="getOnListCa" parameterType="String" resultType="com.sinau.dto.OnListDto">
+		 	select DISTINCT * from oninfolist2
+		 	where cts_code = #{cate}
+	</select>
+	
+	<!-- 온라인 강의  인기강좌 10개 가져오기 -->
+	<select id="getTopOnList" resultType="com.sinau.dto.OnListDto">
+		<![CDATA[ 
+		 	SELECT DISTINCT * FROM oninfolist2
+			order by l_count desc
+		]]>
+	</select>
+	
+	<!-- 클래스룸 정보 가져오기 -->
+	<select id="getCR" parameterType="String" resultType="com.sinau.dto.ClassroomDto">
+		select * from videoInfo
+		where onc_code = #{onc_code} 
+	</select>
+	
+	
+	<!-- email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다. -->
+	<select id="checkOnClass" parameterType="String" resultType="com.sinau.dto.OnlineClassDto">
+	 	select * from onc 
+		where onc_m_email=#{email} and onc_code = #{onc_code}
+	</select>
+	
+	<!-- 해당 강의 정보 가져오기 -->
+	<select id="getvideoChange" parameterType="String" resultType="com.sinau.dto.VideoListDto">
+		select *
+		from videoRInfo
+		where m_email=#{email} and onc_code = #{onc_code} and vf_code = #{vf_code}
+	</select>
+	
+	<!-- 은경 파트 -->
 
-	<!-- <select id="getVideoList" parameterType="String"
-		resultType="com.sinau.dto.VideoFileDto">
-		select * from vf where vf_v_code=#{v_code}
-	</select> -->
+	<!-- 지원 파트 -->
+	<select id="getOffList" parameterType="String"
+		resultType="com.sinau.dto.OffListDto">
+		<![CDATA[
+			select * from of_INFO 
+		]]>
+	</select>
+	<!-- 서브 카테고리에 해당하는 강좌 가져오는 쿼리문 -->
+	<select id="getOffCateList" parameterType="String"
+		resultType="com.sinau.dto.OffListDto">
+		<![CDATA[
+			select * from of_INFO where ofc_cts_code=#{cts_code}
+		]]>
+	</select>
+	<select id="getOffCateFilterList" parameterType="String"
+		resultType="com.sinau.dto.OffListDto">
+		<![CDATA[ 
+			select * from of_INFO where ofc_cts_code=#{cts_code} order by cts_code = #{filter1} and #{filter2} and #{filter3}
+		]]>
+	</select>
+	<!-- 서브 카테고리 가져오는 쿼리문(nav영역 사용) -->
+	<select id="getOffCate" parameterType="String"
+		resultType="com.sinau.dto.OffCtsDto">
+		<![CDATA[
+			select * from of_cts 
+		]]>
+	</select>
+	<!-- 조회수 업데이트용 쿼리문 -->
+	<update id="viewUpdate" parameterType="String">
+		<![CDATA[
+		UPDATE OFC SET OFC_VIEW =
+		OFC_VIEW + 1
+		WHERE OFC_CODE =#{ofc_code}
+		]]>
+	</update>
+	<select id="getOffInfo" parameterType="String"
+		resultType="com.sinau.dto.OffInfoDto">
+		<![CDATA[
+			SELECT * FROM OF_D_SC
+			WHERE (OFC_CODE = #{ofc_code}) and (rownum = 1)
+		]]>
+	</select>
+	<select id="getOffInfoSpec" parameterType="String"
+		resultType="com.sinau.dto.OffInfoSpecDto">
+		<![CDATA[
+			select  OFC_CODE
+     , mAX(case when rw = 1 then f_sysname_sp else null end) col1
+     ,  mAX(case when rw = 2 then f_sysname_sp else null end) col2
+     ,  mAX(case when rw = 3 then f_sysname_sp else null end) col3
+from (SELECT a.*, rownum rw FROM F_SPEC a
+       WHERE OFC_CODE = #{ofc_code})
+GROUP BY   OFC_CODE
+		]]>
+	</select>
+	<select id="getCateInfo" parameterType="String"
+		resultType="com.sinau.dto.CategoryDto">
+		<![CDATA[
+			SELECT * FROM of_cts
+			WHERE cts_code = #{cts_code}
+		]]>
+	</select>
+	<select id="getOffScehdule" parameterType="String"
+		resultType="com.sinau.dto.OffScheduleDto">
+		<![CDATA[
+			SELECT * FROM SCL_SC
+			WHERE scl_oFC_CODE = #{ofc_code}
+		]]>
+	</select>
+	<select id="getOffLoc" parameterType="String"
+		resultType="String">
+		<![CDATA[
+			SELECT SC_LOC
+			FROM OF_SC WHERE (ofc_code= #{ofc_code}) AND (rownum = 1)
+		]]>
+	</select>
 
-	<!-- <delete id="deleteClass" parameterType="String">
-		delete from onc where
-		onc_code=#{onc_code}
-	</delete> -->
-
-	<!-- <select id="getFeedListAll" parameterType="String"
-		resultType="com.sinau.dto.VideoFeedDto">
-		select * from videofeed where m_email=#{m_email}
-	</select> -->
-
+	<select id="getOffScheduleSel" parameterType="String"
+		resultType="com.sinau.dto.OffScheduleDto">
+		<![CDATA[
+			select * from scl_sc
+			where sc_code=#{sc_code}
+			]]>
+	</select>
 	<select id="getOffApplyInfo" parameterType="String"
 		resultType="com.sinau.dto.OffListDto">
 		<![CDATA[
@@ -318,8 +292,6 @@ GROUP BY   OFC_CODE
 		delete from ofc where
 		ofc_code=#{p_code}
 	</delete>
-
-
 
 	<select id="getFilter1List" parameterType="String"
 		resultType="com.sinau.dto.FilterCtsDto">
@@ -353,71 +325,11 @@ GROUP BY   OFC_CODE
 			where sc_code=#{sc_code}
 			]]>
 	</select>
-
-
-	<!-- /*은경 파트*/ -->
-	<!-- 온라인 강의 섬네일용 정보를 가져옴 파라미터 없음 -->
-<!-- 	<select id="getOnList" resultType="com.sinau.dto.OnListDto">
-		select DISTINCT * from oninfolist2
-	</select>
-
-	온라인 강의 섬네일용 정보를 가져옴 파라미터 있음
-	<select id="getOnListCa" parameterType="String"
-		resultType="com.sinau.dto.OnListDto">
-		select DISTINCT * from oninfolist2
-		where cts_code = #{cate}
-	</select> -->
-
-	<!-- 온라인 강의 인기강좌 10개 가져오기 -->
-<!-- 	<select id="getTopOnList" resultType="com.sinau.dto.OnListDto">
-      <![CDATA[ 
-          SELECT DISTINCT * FROM oninfolist2
-         order by l_count desc
-      ]]>
-	</select>
-
-	클래스룸 정보 가져오기
-	<select id="getCR" parameterType="String"
-		resultType="com.sinau.dto.ClassroomDto">
-		select * from videoInfo
-		where onc_code = #{onc_code}
-	</select>
-
-	요청 강의가 목록에 있는지 확인하기 <select id="getHerClass" resultType="com.sinau.dto.OnListDto"> 
-		select * from myonlineinfo </select>
-
-	email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다. <select id="checkOrderList" parameterType="String" 
-		resultType="com.sinau.dto.OrderDto"> select distinct * from ord where ord_m_email=#{email} 
-		and ord_pcode = #{onc_code} </select>
-
-	email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다.
-	<select id="checkOnClass" parameterType="String"
-		resultType="com.sinau.dto.OnlineClassDto">
-		select * from onc
-		where onc_m_email=#{email} and onc_code = #{onc_code}
-	</select>
-
-	클래스룸 정보 가져오기
-	<select id="getVideoLists" parameterType="String"
-		resultType="com.sinau.dto.VideoListDto">
-		select *
-		from videoRInfo
-		where m_email=#{email} and onc_code = #{onc_code}
-	</select>
-
-	해당 강의 정보 가져오기
-	<select id="getvideoChange" parameterType="String"
-		resultType="com.sinau.dto.VideoListDto">
-		select *
-		from videoRInfo
-		where m_email=#{email} and onc_code = #{onc_code} and vf_code = #{vf_code}
-	</select> -->
-
-	<!-- /*은경 파트*/ -->
-	<select id="gettotalList"
-		resultType="com.sinau.dto.TotalInfo">
-		select *
-		from totalinfo
-		order by Totalupdate desc
-	</select>
+	<!-- 지원 파트 -->
+	
+	<select id="gettotalList" resultType="com.sinau.dto.TotalInfo">
+      select *
+      from totalinfo
+      order by Totalupdate desc
+   </select>
 </mapper>

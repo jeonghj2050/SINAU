@@ -15,10 +15,10 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" media="screen"
-	href="/resources/css/offline/offline_info.css" />
+	href="/resources/css/offline/offline_info.css?a" />
 
 <link rel="stylesheet" type="text/css" media="screen"
-	href="/resources/css/offline/style2.css" />
+	href="/resources/css/offline/style2.css?a" />
 
 <title>오프라인 상세</title>
 </head>
