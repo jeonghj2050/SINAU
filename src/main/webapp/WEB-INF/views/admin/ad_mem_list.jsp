@@ -96,7 +96,7 @@
 								<div class="ic-phone informationPhone">연락처</div>
 								<div class="ic-joindate informationBirth">생년월일</div>
 								<div class="ic-joinstatus informationStatus"></div>
-								<div class="ic-delete informationDel">삭제</div>
+								<div class="ic-delete informationDel">탈퇴</div>
 							</b>
 						</div>
 						<div class="datelist">
@@ -110,7 +110,7 @@
 								<div class="ic-delete informationDel">
 									<p id="del">
 										<button class="btn-1" onclick="btnclick('${mList2.m_email}')">
-											<b>삭제</b>
+											<b>탈퇴</b>
 										</button>
 									</p>
 									<!-- <p id="dComple"><b>삭제완료</b></p> -->
@@ -136,7 +136,7 @@
 								<div class="id-phone informationPhone">연락처</div>
 								<div class="id-joindate informationBirth">생년월일</div>
 								<div class="id-joinstatus informationStatus"></div>
-								<div class="id-delete informationDel">삭제</div>
+								<div class="id-delete informationDel">탈퇴</div>
 							</b>
 						</div>
 						<div class="datelist">
@@ -150,7 +150,7 @@
 								<div class="id-delete informationDel">
 									<p id="del">
 										<button class="btn-1" onclick="btnclick('${mList2.m_email}')">
-											<b>삭제</b>
+											<b>탈퇴</b>
 										</button>
 									</p>
 								</div>
@@ -172,7 +172,7 @@
 								<div class="im-phone informationPhone">연락처</div>
 								<div class="im-joindate informationBirth">생년월일</div>
 								<div class="im-joinstatus informationStatus"></div>
-								<div class="im-delete informationDel">삭제</div>
+								<div class="im-delete informationDel">탈퇴</div>
 							</b>
 						</div>
 						<div class="datelist">
@@ -187,7 +187,7 @@
 								<div class="im-delete informationDel">
 									<p id="del">
 										<button class="btn-1" onclick="btnclick('${mList2.m_email}')">
-											<b>삭제</b>
+											<b>탈퇴</b>
 										</button>
 									</p>
 								</div>
@@ -210,7 +210,7 @@
 								d="M18.5 4L12 10.5 5.5 4 4 5.5l6.5 6.5L4 18.5 5.5 20l6.5-6.5 6.5 6.5 1.5-1.5-6.5-6.5L20 5.5 18.5 4z"
 								fill="#1b1c1d"></path></svg></span>
 				</button>
-				<p>삭제하시겠습니까?</p>
+				<p>회원을 탈퇴 합니다.</p>
 				<div class="btnNy">
 					<button id="py" class="pyn">예</button>
 					<button id="pn" class="pyn">아니요</button>

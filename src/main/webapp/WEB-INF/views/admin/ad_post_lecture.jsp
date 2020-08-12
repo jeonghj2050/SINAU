@@ -290,7 +290,7 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>--%>
 		<div class="popupD">
 			<div class="popDel">
 				<button type="button" class="sc-fzqNqU fsyYOM sc-fzqPZZ bDLHXT"
@@ -305,7 +305,7 @@ $(document).ready(function(){
 				<div class="btnNy">
 					<button id="py" class="pyn">예</button>
 					<button id="pn" class="pyn">아니요</button>
-				</div>--%>
+				</div>
 			</div>
 		</div>
 		

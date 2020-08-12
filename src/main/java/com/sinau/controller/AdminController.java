@@ -23,6 +23,8 @@ import com.sinau.service.AdminService;
 import com.sinau.service.CommonService;
 import com.sinau.service.MemberService;
 
+import lombok.extern.java.Log;
+
 
 
 @Controller
@@ -204,15 +206,13 @@ public class AdminController {
 		
 		return mv;
 	}
-	 @GetMapping("download")
-	   public void fileDownload(String sysFileName,
-	         HttpServletRequest req,
-	         HttpServletResponse resp) {
-	      System.out.println("download() - sysFileName : " 
-	            + sysFileName);
-
-	      aServ.fileDown(sysFileName, req, resp);
-	   }
+	/*
+	 * @GetMapping("download") public void fileDownload(String sysFileName,
+	 * HttpServletRequest req, HttpServletResponse resp) {
+	 * System.out.println("download() - sysFileName : " + sysFileName);
+	 * 
+	 * aServ.fileDown(sysFileName, req, resp); }
+	 */
 	    
 	@PostMapping("youtubeWrite")
 	public String youtubeWrite(

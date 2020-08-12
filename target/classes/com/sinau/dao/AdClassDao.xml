@@ -11,6 +11,7 @@
 		onc_teacher, onc_code, onc_update,
 		onc_cts_code
 		from onlineclass
+		where onc_state = 1
 	</select>
 	<select id="getOffline"
 		resultType="com.sinau.dto.AdOfflineClassDto">
@@ -19,6 +20,7 @@
 		ofc_teacher, ofc_code, ofc_update,
 		ofc_cts_code
 		from offclass
+		where ofc_state = 1
 	</select>
 	<!-- <select id="getYoutube" resultType="com.sinau.dto.AdYouClassDto"> select 
 		row_number() over (order by y_update desc) AS y_num, y_title, y_m_email, 

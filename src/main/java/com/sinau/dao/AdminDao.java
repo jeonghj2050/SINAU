@@ -55,6 +55,11 @@ public interface AdminDao {
 	public void getQnaInsert(@Param("content")
 	String content, @Param("code")String code);
 	
+	//회원 이미지파일 검색
+	public String getMImgSel(String email);
+	//회원 이미지파일 삭제
+	public void getMImgDel(String email);
+	
 	//qna info
 	
 

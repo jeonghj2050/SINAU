@@ -244,6 +244,7 @@ public class AdminService {
 	//비승인 회원 삭제
 	public ModelAndView appDelete(String email, String tabId) {
 		aDao.getMemDel(email);
+		
 
 		mv.setViewName("redirect:adMApproval?tabId="+tabId);
 		return mv;
@@ -251,8 +252,16 @@ public class AdminService {
 	//회원삭제
 	public ModelAndView memberDelete(String email, String tabId) {
 		String view = null;
+		
+		//회원이미지검색
+		String fcheck = aDao.getMImgSel(email);
+		//회원이미지가 있을시 회원이미지파일 우선 삭제
+		if(fcheck != null) {
+			System.out.println("파일: "+fcheck);
+			aDao.getMImgDel(email);
+		}
+		//그 후에 회원 정보 삭제
 		aDao.getMemDel(email);
-
 		System.out.println(email+'1');
 		mv.setViewName("redirect:adMList?tabId="+tabId);
 
