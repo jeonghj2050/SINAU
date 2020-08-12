@@ -1,25 +1,29 @@
 @charset "UTF-8";
 
+
 /* 마이페이지  공용 */
 .my_default_btn {
 	width: 180px;
 	height: 40px;
 	margin-bottom: 5px;
-	background-color: black;
-	color: white;
+	color: black;
 	border: none;
+	background-color: rgba(243, 134, 10, 0.253);
+	border-radius: 4px;
+
 }
 
 .page-title {
 	font-size: 25pt;
 	width: 1070px;
 	height: 60px;
-	line-height: 60px;
+	line-height: 50px;
 	text-align: center;
-	background-color: black;
-	color: white;
+	/* background-color: rgb(90, 87, 87); */
+	color: black;
 	font-weight: bold;
 	margin-bottom: 20px;
+	border-bottom: 4px double rgba(90, 87, 87, 0.514);
 }
 
 .table {
@@ -27,21 +31,23 @@
 }
 
 .table>tbody>tr>th {
-	background-color: rgb(0, 0, 0);
+	background-color:rgba(243, 57, 10, 0.466);
 	color: white;
 	text-align: center;
+	border: 1px solid rgba(199, 197, 197, 0.438);
 }
 
 .table>tbody>tr>td {
 	vertical-align: middle;
+	border: 1px solid rgba(199, 197, 197, 0.438);
 }
 
 .table-btn {
-	background-color: black;
+	background-color:  #e1e1e1;
 	padding: 5px;
-	color: white;
+	color: black;
 	border: none;
-	color: white;
+	border-radius: 5px;
 }
 
 .mp_section {
@@ -84,7 +90,7 @@
 }
 
 .mp_section>nav>div>div:first-child>a>img {
-	border: 0.5px solid black;
+	border: 0.5px solid rgba(90, 87, 87, 0.514);
 }
 
 .mp_section>nav>div>div:first-child>button {
@@ -105,13 +111,16 @@
 	padding: 10px;
 	margin-top: 50px;
 }
-
+.list-group>li{
+	border: 1px solid rgba(199, 197, 197, 0.438);
+}
 .list-group-item {
 	margin-top: 10px;
+	
 }
 
 .list-group-item:hover {
-	background-color: rgb(150, 150, 150);
+	background-color: rgb(248, 248, 249);
 	color: white;
 }
 
@@ -124,6 +133,8 @@
 	float: left;
 	width: 1070px;
 	margin-left: 30px;
+/* 	height: 900px; */
+	margin-bottom: 100px;
 }
 
 article>div>span {
@@ -190,6 +201,7 @@ article>div .nav.nav-tabs>li >a{
 	float: left;
 	height: 50px;
 	margin-top: 10px;
+	background-color: rgba(243, 134, 10, 0.253);
 }
 
 .class_info_contents>p:first-child {
@@ -206,7 +218,6 @@ article>div .nav.nav-tabs>li >a{
 }
 
 .class_status>div {
-	background: rgb(209, 209, 209);
 	color: red;
 	height: 40px;
 	line-height: 40px;
@@ -265,11 +276,22 @@ article>div .nav.nav-tabs>li >a{
 	clear: both;
 	width: 1010px;
 	height: 30px;
+	
 }
 
 .update-btn-box>input[type="submit"] {
 	float: right;
 	margin-top: 20px;
+}
+.my_default_btn2 {
+	width: 130px;
+	height: 40px;
+	margin-bottom: 5px;
+	color: black;
+	border: none;
+	background-color: rgba(243, 134, 10, 0.253);
+	border-radius: 4px;
+
 }
 
 /* 쿠폰 */
@@ -318,6 +340,7 @@ article>div .nav.nav-tabs>li >a{
 
 /* ------------------------------ 크리에이터 마이페이지  ------------------------------  */
 /* 메인(온라인 강의) */
+
 .mypage_sub_title {
 	font-size: 14pt;
 	font-weight: bold;
@@ -368,7 +391,7 @@ article>div .nav.nav-tabs>li >a{
 
 /* 강의 등록 */
 .class_sort {
-	width: 200px;
+	width: 210px;
 	height: 50px;
 	margin-bottom: 20px;
 }
@@ -378,8 +401,9 @@ article>div .nav.nav-tabs>li >a{
 	float: left;
 	height: 50px;
 	line-height: 50px;
-	border: 0.5px solid black;
+	border: 1px solid rgba(199, 197, 197, 0.5);
 	text-align: center;
+	margin-right: 2px;
 }
 
 .class_info_form {
@@ -388,7 +412,7 @@ article>div .nav.nav-tabs>li >a{
 }
 
 .class_info_form>div:nth-child(2) {
-	border: black solid 0.5px;
+	/* border: black solid 0.5px; */
 	width: 680px;
 	float: left;
 	height: 450px;
@@ -401,13 +425,23 @@ article>div .nav.nav-tabs>li >a{
 }
 
 .class_info_form>div:nth-child(2)>input[type="text"] {
-	width: 660px;
+	 width: 660px;
+    height: 40px;
 }
 
 .class_info_form>div:nth-child(2)>textarea {
 	width: 660px;
 }
 
+.class_info_form>div:nth-child(2)>input[type="radio"]{
+	margin: 4px 4px 2px;
+    line-height: normal;
+	
+}
+
+.class_info_form>div>span{
+	margin-right: 10px;
+}
 .class_profile_image {
 	width: 370px;
 	height: 300px;
@@ -433,12 +467,11 @@ article>div .nav.nav-tabs>li >a{
 
 #vf_list {
 	width: 1070px;
-	border: 0.5px solid rgb(150, 150, 150);
 	margin: 5px 0 20px 0;
 }
 
 #vf_list>tbody>tr>th {
-	background-color: rgb(0, 0, 0);
+	background-color: rgba(243, 57, 10, 0.466);
 	height: 40px;
 	text-align: center;
 	color: white;
@@ -446,13 +479,27 @@ article>div .nav.nav-tabs>li >a{
 
 #vf_list>tbody>tr>td {
 	height: 40px;
-	border: 0.5px solid rgb(150, 150, 150);
-	padding: 5px;
+    border: 1px solid rgba(199, 197, 197, 0.438);
+    padding: 5px;
+    padding-left: 20px;
 }
 
-#vf_list>tbody>tr>td>input {
-	width: 80%;
+#vf_list>tbody>tr>td>input{
+	width: 90%;
 }
+.files_ip{
+	display: block;
+	float:left; 
+}
+
+.del_btn{
+	display: block;
+	float:right;
+	right: 20px;
+}
+
+
+
 
 /* 강의 수정 */
 .spec_images_wrap img {
