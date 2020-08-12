@@ -11,6 +11,7 @@ import com.sinau.dto.ClassroomDto;
 import com.sinau.dto.ClsrCreatorDto;
 import com.sinau.dto.CreatorOffInfoDto;
 import com.sinau.dto.CreatorOnInfoDto;
+import com.sinau.dto.FeedbackDto;
 import com.sinau.dto.MyOffInfoDto;
 import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
@@ -152,5 +153,29 @@ public interface ClassDao {
    
    //해당 강의 정보 가져오기
    VideoListDto getvideoChange(@Param("vf_code")String vf_code,@Param("onc_code")String onc_code,@Param("email")String email);
+
+   //크리에이터 사진 및 강좌 프로필 가져오기
+   ClsrCreatorDto getClsrCreator(String onc_code);
+
+   //클래스룸 피드백 입력
+   void feedbackInsert(FeedbackDto feedback);
+   
+   //클래스룸 피드백 목록 가져오기
+   FeedbackDto getFeedback(String fb_code);
+   
+   //클래스룸 피드백 삭제 권한 주기
+   String feedbackUserIdCheck(String fb_code);
+   
+   //클래스룸 피드백 삭제 메소드
+   void deleteFeedback(String fb_code);
+   
+   //클래스룸 피드백 리스트 가져오기
+   List<FeedbackDto> getFeedbackList(String fb_code);
+
+   //비디오에 해당하는 전체 댓글
+ //  FeedbackDto getvfFeedback(String vf_code);
+	
+	
+	
 /*은경 파트*/
 }

@@ -16,11 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dto.OrderDto;
+import com.sinau.dto.PReviewDto;
 import com.sinau.dto.PayCouponDto;
 import com.sinau.dto.VideoListDto;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sinau.dto.FeedbackDto;
 import com.sinau.dto.LikesDto;
 import com.sinau.service.ClassService;
 
@@ -119,9 +121,9 @@ public class ClassController {
 	}
 	
 	@GetMapping("classroom")
-	public ModelAndView classroom(String onc_code) {
+	public ModelAndView classroom(String onc_code, String vf_code) {
 		
-		mv = cServ.classroom(onc_code);
+		mv = cServ.classroom(onc_code, vf_code);
 		
 		return mv;
 	}
@@ -134,6 +136,40 @@ public class ClassController {
 		VideoListDto videoChange = cServ.videoChange(vf_code, onc_code);
 	
 		return videoChange;
+	}
+	
+	
+	//댓글 추가 및 댓글 목록 처리 메소드
+	@PostMapping(value = "feedbackInsert",
+			produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Map<String, FeedbackDto> 
+	feedbackInsert(FeedbackDto feedback){
+		log.info("feedbackInsert - bnum : " 
+				+ feedback.getFb_vf_code());	
+
+		Map<String, FeedbackDto> fMap = 
+				cServ.fInsert(feedback);
+
+		return fMap;
+	}
+
+	//댓글 삭제 처리 메소드
+	@PostMapping(value = "feedbackDelete", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Map<String, List<FeedbackDto>> 
+	getFeedbackList(String fb_code){
+		log.info("post delete feedback");
+		int result =0;
+		FeedbackDto feedback = new FeedbackDto();
+
+		log.info(fb_code);
+
+		Map<String, List<FeedbackDto>> fMap = cServ.fbidCheck(fb_code);	
+
+
+		return fMap;
+
 	}
 	
 /*은경 파트*/

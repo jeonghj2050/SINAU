@@ -1,7 +1,10 @@
 package com.sinau.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import com.sinau.dao.ClassInfoDao;
 import com.sinau.dao.MemberDao;
 import com.sinau.dto.CategoryDto;
 import com.sinau.dto.ClsrCreatorDto;
+import com.sinau.dto.FeedbackDto;
 import com.sinau.dto.LikesDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.OffCtsDto;
@@ -24,6 +28,7 @@ import com.sinau.dto.OffScheduleDto;
 import com.sinau.dto.OnInfoDto;
 import com.sinau.dto.OnListDto;
 import com.sinau.dto.OnlineClassDto;
+import com.sinau.dto.PReviewDto;
 import com.sinau.dto.SpecListDto;
 import com.sinau.dto.VideoListDto;
 
@@ -328,18 +333,11 @@ public class ClassService {
 				log.info("내가 강의 아님 홈으로 돌아가기");
 				return mv;
 			}
-			
-//			//myonlineinfo에서 onc_code검색해서 내 강의 목록에 있으면 강의 비디오 정보 가져오기
-//			List<ClassroomDto> classroom = cDao.getCR(onc_code);
-//			System.out.println("classroom>>>"+classroom);
-//			
-//			ClassroomDto classroomSample = classroom.get(0);
-//			mv.addObject("classroomSample",classroomSample);
-//			System.out.println("classroomSample>>>"+classroomSample);
-	//	
-//			mv.addObject("classroom", classroom);
-//			mv.addObject("videoList", classroom);
-			
+						
+			//크리에이터 사진 및 강좌 프로필 저장
+			ClsrCreatorDto ClsrCreator = cDao.getClsrCreator(onc_code);
+			System.out.println("ClsrCreator>>>>>>"+ClsrCreator);
+			mv.addObject("ClsrCreator", ClsrCreator);
 
 			//비디오 리스트 가져오기
 			System.out.println("onc_code>>>>>>"+onc_code+email);
@@ -358,14 +356,62 @@ public class ClassService {
 
 		public VideoListDto videoChange(String vf_code, String onc_code) {
 			log.info("videoChange()"+vf_code+onc_code);
-			
+
 			String email=((MemberDto)session.getAttribute("mb")).getM_email();
 			
 			VideoListDto videoChange = cDao.getvideoChange(vf_code, onc_code, email);
 			
+			//비디오에 해당하는 전제 데이터 가져와서 저장
+			//FeedbackDto feedback = cDao.getvfFeedback(vf_code);
+			//session.putValue("feedback", feedback);
+			
 			return videoChange;
 		}
-		
+
+		public Map<String, FeedbackDto> fInsert(FeedbackDto feedback) {
+			Map<String, FeedbackDto> fMap = null;
+
+			try {
+				//1.넘어온 댓글-> DB에 insert 처리
+				cDao.feedbackInsert(feedback);
+
+				//2.새로 추가된 댓글 포함 전체 댓글 목록 가져오기
+				feedback = cDao.getFeedback(feedback.getFb_code());
+
+				//3. 전체 댓글 목록을 rMap에 추가하여 반환
+				fMap = new HashMap<String, FeedbackDto>();
+				fMap.put("feedback", feedback);
+
+			}catch (Exception e) {
+				e.printStackTrace();
+				fMap=null;
+			}
+
+			return fMap;
+		}
+
+		public Map<String, List<FeedbackDto>> fbidCheck(String fb_code) {
+			Map<String, List<FeedbackDto>> fMap= new HashMap<String, List<FeedbackDto>>();
+			FeedbackDto feedback = new FeedbackDto();
+
+
+			MemberDto member = ((MemberDto)session.getAttribute("mb"));
+			String m_email =  cDao.feedbackUserIdCheck(fb_code);
+
+			if(member.getM_email().equals(m_email)) {
+
+
+				cDao.deleteFeedback(fb_code);
+
+				List<FeedbackDto> fList = cDao.getFeedbackList(fb_code);
+
+				fMap.put("fList", fList);
+
+			}
+
+			return fMap; 
+
+		}
 		
 	/*은경 파트*/
 }

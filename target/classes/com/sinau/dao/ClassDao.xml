@@ -294,17 +294,62 @@
    
    <!-- 클래스룸 정보 가져오기 -->
    <select id="getVideoLists" parameterType="String" resultType="com.sinau.dto.VideoListDto">
-      select *
-      from videoRInfo
-      where m_email=#{email} and onc_code = #{onc_code}
+		select *
+		from videoLists
+		where m_email=#{email} and onc_code = #{onc_code}
+		order by v_title
    </select>
    
    <!-- 해당 강의 정보 가져오기 -->
    <select id="getvideoChange" parameterType="String" resultType="com.sinau.dto.VideoListDto">
       select *
-      from videoRInfo
+      from videoLists
       where m_email=#{email} and onc_code = #{onc_code} and vf_code = #{vf_code}
    </select>
    
+   <!-- 크리에이터 사진 및 강좌 프로필 가져오기 -->
+   <select id="getClsrCreator" parameterType="String" resultType="com.sinau.dto.ClsrCreatorDto">
+		select mimg.mimg_sysname, onc.onc_title, onc.onc_content, 
+		TO_DATE(TO_CHAR(onc.onc_edate, 'YYYYMMDD')) - TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) as remaindate 
+		from mimg, onc
+		where onc.onc_m_email=mimg.mimg_m_email
+		and onc.onc_code=#{onc_code}
+   </select>
+   
+   	<insert id="feedbackInsert"
+		parameterType="com.sinau.dto.FeedbackDto" useGeneratedKeys="true" keyProperty="fb_code">
+		<selectKey keyProperty="fb_code" order="BEFORE" resultType="String">
+		SELECT 'fb_'||SEQ_fb.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into fb
+		VALUES(#{fb_code},#{fb_content},sysdate,null,#{fb_m_email},#{fb_vf_code})
+	</insert>
+	
+	<select id="getFeedback" parameterType="String" resultType="com.sinau.dto.FeedbackDto">
+		SELECT * FROM fb WHERE fb_CODE = #{fb_code}
+	</select>
+	<!-- 
+	<select id="getvfFeedback" parameterType="String" resultType="com.sinau.dto.FeedbackDto">
+		SELECT * FROM fb WHERE fb_vf_CODE = #{vf_code}
+	</select>
+	 -->
+	<select id="feedbackUserIdCheck" parameterType="String" resultType="String">
+		SELECT fb_M_EMAIL
+		FROM fb
+		WHERE fb_CODE = #{fb_code}
+	</select>
+		
+	<delete id="deleteFeedback" parameterType="String">
+		DELETE FROM fb
+		WHERE fb_CODE = #{fb_CODE}
+
+	</delete>
+	
+	<select id="getFeedbackList" parameterType="String"
+		resultType="com.sinau.dto.FeedbackDto">
+		SELECT * FROM fb
+		WHERE fb_vf_CODE=#{fb_vf_code}
+	</select>
+	
 <!-- /*은경 파트*/ -->
 </mapper>
