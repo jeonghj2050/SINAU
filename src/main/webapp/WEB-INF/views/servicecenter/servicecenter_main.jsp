@@ -29,31 +29,20 @@
 		});
 
 	});
-</script>
-<script type="text/javascript">
-$(document).ready(function(){
 	
-	var id = '${mb.m_email}';
-	 	
-		if("${mb.m_email}" != '') {
-			var name = "${mb.m_name}";
-			$('.category1').css('display','block');
-			}else {
-				$('.category1').css('display','none');
-			}
-		
-});
+
 </script>
 </head>
 <body>
 	<header>
-		<jsp:include page="servicecenter_header.jsp"></jsp:include>
+		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 	<section class="sectionover">
 		<h2 class="login-header">고객 센터</h2>
 		<div class="cate_container">
-			<a class="category" href="./servicecenter_main">FAQ</a> <a
-				class="category1" href="./servicecenter_question">1 : 1문의</a>
+			<a class="category" href="./servicecenter_main">FAQ</a>
+			<a class="category" href="./servicecenter_question">1 : 1문의</a>
+			<a class="category" href="./servicecenter_refund">환불내역</a>
 		</div>
 		<div class="FAQ_box">
 			<ul class="FAQ_tab">
@@ -78,34 +67,50 @@ $(document).ready(function(){
 					
 					<div class="contents">
 						<a class="num">1</a><button onclick="fn_spread('hiddenContent01');">강좌 수강 도중 환불할수있나요?</button>
-						<div id="hiddenContent01" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;내용222</div>
+						<div id="hiddenContent01" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
+						강좌 수강도중 환불 가능합니다.</div>
 						<a class="num">2</a><button onclick="fn_spread('hiddenContent02');">강좌 담당강사에서 물어보고싶은건 어디서 물어보나요?</button>
-						<div id="hiddenContent02" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;내용222</div>
+						<div id="hiddenContent02" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
+						강좌 페이지에서 1대1로 물어보실수있습니다.</div>
 						<a class="num">3</a><button onclick="fn_spread('hiddenContent03');">강좌키트는 언제 받을수있나요?</button>
-						<div id="hiddenContent03" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;내용222</div>
+						<div id="hiddenContent03" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
+						오전 10시 이전에 수강 신청을 할 경우 당일배송이 되니 1~2일 뒤에 도착예정입니다.</div>
 						<a class="num">4</a><button onclick="fn_spread('hiddenContent04');">수강기간이 끝나면 연장을 못하나요?</button>
-						<div id="hiddenContent04" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;내용222</div>
+						<div id="hiddenContent04" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
+						연장 가능합니다.</div>
 						<a class="num">5</a><button onclick="fn_spread('hiddenContent05');">연장하면 처음듣을때와 같은 가격을 내야하나요?</button>
-						<div id="hiddenContent05" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;내용222</div>
+						<div id="hiddenContent05" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
+						아닙니다. 20%정도 세일된 가격으로 재수강이 가능합니다.</div>
 						<a class="num">6</a><button onclick="fn_spread('hiddenContent06');">키트없이 수강 못하나요?</button>
-						<div id="hiddenContent06" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;내용222</div>
+						<div id="hiddenContent06" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
+						저흰 SINAU는 패키지로만 판매하니 키트없인 수강신청을 할 수 없습니다.</div>
 						<a class="num">7</a><button onclick="fn_spread('hiddenContent07');">키트는 여러가지 구매할수 없나요?</button>
-						<div id="hiddenContent07" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;내용222</div>
+						<div id="hiddenContent07" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
+						대부분의 키트는 스토어에 판매중이니 구입이 가능합니다.</div>
 						<a class="num">8</a><button onclick="fn_spread('hiddenContent08');">수강을 여러개 들을수 있나요?</button>
-						<div id="hiddenContent08" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;내용222</div>
+						<div id="hiddenContent08" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
+						수강 신청은 중복이 가능합니다.</div>
 						<a class="num">9</a><button onclick="fn_spread('hiddenContent09');">수강기간이 끝나고 연장하면 기간만 연장되는건가요?</button>
-						<div id="hiddenContent09" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;내용222</div>
+						<div id="hiddenContent09" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
+						기간만 연장하실수도 있고 키트도 다시 받을수있습니다.</div>
 					</div>
 				</div>
 
 				<div id="tab2" class="tab_content">
 					<div class="contents">
 						<a class="num">1</a><button onclick="fn_spread('hiddenContent10');">재고가 없어요. 언제쯤 구입할 수 있을까요?</button>
-						<div id="hiddenContent10" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;내용222</div>
+						<div id="hiddenContent10" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
+						일반적으로 입점 업체의 품절 상품 재입고 여부 및 일정은 무신사 스토어에서는 <br>
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;정확히 알기 어렵습니다. 재입고 여부는 상품 상세 페이지의 상품문의 게시판을<br>
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;통하여 문의하시는 것이 가장 정확합니다. 재입고 알림을 등록하시면 재입고 알림 문자를<br>
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;받아보실 수 있습니다.</div>
 						<a class="num">2</a><button onclick="fn_spread('hiddenContent11');">가격이 떨어져 예전에 구매했을 때 보다 싸게 팔고 있는 경우 차액 환불이 되나요?</button>
-						<div id="hiddenContent11" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;내용222</div>
+						<div id="hiddenContent11" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
+						판매 가격의 변동에 따른 차액을 보상해드리지 않습니다.</div>
 						<a class="num">3</a><button onclick="fn_spread('hiddenContent12');">사진과 제품의 실제 색상이 다른 것 같아요.</button>
-						<div id="hiddenContent12" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;내용222</div>
+						<div id="hiddenContent12" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
+						온라인의 특성상 상품 이미지는 출력되는 모니터 환경에 따라 조금씩<br>
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; 차이가 있을 수 있으며 이는 판매자 사유에 의한 교환 및 환불 대상이 아닙니다.</div>
 						<a class="num">4</a><button onclick="fn_spread('hiddenContent13');">정식 수입상품과 병행수입상품은 무슨 차이인가요?</button>
 						<div id="hiddenContent13" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;내용222</div>
 						<a class="num">5</a><button onclick="fn_spread('hiddenContent14');">상품 문의는 어떻게 작성하나요?</button>
@@ -298,7 +303,7 @@ $(document).ready(function(){
 		</div>
 	</section>
 	<footer>
-		<jsp:include page="servicecenter_footer.jsp"></jsp:include>
+		<jsp:include page="../footer.jsp"></jsp:include>
 	</footer>
 </body>
 <script type="text/javascript">
@@ -309,6 +314,7 @@ function fn_spread(id) {
 			? 'none' : 'block';
 }
 </script>
+
 </html>
 
 

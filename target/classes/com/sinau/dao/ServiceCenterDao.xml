@@ -7,10 +7,10 @@
 	<select id="getList" parameterType="String"
 		resultType="com.sinau.dto.QuestionInfoDto">
 		<![CDATA[
-		select rownum, cts_name, q_title, q_date, m_name,q_anfield 
+		select row_number() over (order by q_date desc) AS
+     		 q_num, q_code, cts_name, q_title, q_date, m_name,q_anfield 
 		from questioninfo
 		where q_m_email = #{email}
-		order by rownum desc
 		]]>
 	</select>
 	<select id="getBoardCount" resultType="Integer">
@@ -21,15 +21,74 @@
 		useGeneratedKeys="true"
 		keyProperty="q_code">
 		<selectKey keyProperty="q_code"
-			resultType="int" order="BEFORE">
-			SELECT SEQ_Q.NEXTVAL FROM DUAL
+			resultType="String" order="BEFORE">
+				SELECT 'q_'||SEQ_Q.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO question
-		VALUES(${q_code},#{q_title},#{q_content},sysdate, null, null,#{q_cts_code},#{q_m_email})
+		VALUES(#{q_code},#{q_title},#{q_content},sysdate, null, null,#{q_cts_code},#{q_m_email})
 	</insert>
 	<insert id="fileInsert" parameterType="HashMap">
 		INSERT INTO files
 		VALUES('F_'||SEQ_F.NEXTVAL,
 			#{oriFileName}, #{sysFileName}, #{q_code}, #{q_cts_code})
 	</insert>
+	<select id="getContents" parameterType="String"
+		resultType="com.sinau.dto.QuestionInfoDto">
+		SELECT * FROM questioninfo
+		WHERE q_code = #{q_code}
+	</select>
+	<select id="getQuestionList" parameterType="String"
+		resultType="com.sinau.dto.FilesDto">
+		SELECT * FROM files WHERE f_pcode=#{q_code}
+	</select>
+	<select id="getBfList" parameterType="String"
+		resultType="com.sinau.dto.FilesDto">
+		SELECT * FROM files WHERE f_pcode=#{q_code}
+	</select>
+	<update id="boardUpdate" 
+		parameterType="com.sinau.dto.QuestionDto">
+		update question set
+			q_title=#{q_title}, 
+			q_content=#{q_content}, 
+			q_cts_code=#{q_cts_code},
+			q_date = sysdate
+ 		where q_code=#{q_code}
+	</update>
+	<select id="getFileName" 
+		parameterType="String"
+		resultType="String">
+		SELECT f_sysName FROM files
+		WHERE f_pcode=#{q_code}
+	</select>
+	<update id="fileUpdate" parameterType="HashMap">
+		UPDATE files SET f_oriName=#{oriFileName}, f_sysName=#{sysFileName}
+		WHERE f_pcode=#{q_code}
+	</update>
+	<delete id="boardDelete" parameterType="String">
+		DELETE FROM question WHERE
+		q_code=#{q_code}
+	</delete>
+	<delete id="fileDelete" parameterType="String">
+		DELETE FROM files WHERE
+		f_pcode=#{q_code}
+	</delete>
+		<delete id="fDelByName" parameterType="String">
+		DELETE FROM files WHERE
+		f_sysname=#{fname}
+	</delete>
+	<select id="getOriName" parameterType="String"
+		resultType="String">
+		SELECT f_oriname FROM files
+		WHERE f_sysname=#{sysFileName}
+	</select>
+	<select id="totalRefundList" parameterType="String"
+		resultType="com.sinau.dto.RefundInfoDto">
+		<![CDATA[
+		select row_number() over (order by ref_state asc) AS
+     		 num, ord_kind, ord_date, ord_amount, ref_reason, ord_price,ref_date ,ref_state,onc_title
+		from totalinfo_0
+		where m_email = #{email}
+		]]>
+	</select>
+	
 </mapper>

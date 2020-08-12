@@ -125,8 +125,9 @@ public class MemberService {
 		try {
 
 			mDao.memberInsert(member);
-
+			rttr.addFlashAttribute("check", 2);
 			view = "redirect:/";
+			
 			if (fcheck == 1) {
 				// 업로드할 파일이 있음.
 				fileUp(multi, member.getM_email());
@@ -138,7 +139,6 @@ public class MemberService {
 			rttr.addFlashAttribute("check", 1);
 		}
 
-		rttr.addFlashAttribute("check", 2);
 		mv.setViewName(view);
 		return mv;
 	}
@@ -248,7 +248,7 @@ public class MemberService {
 
 		//email에 해당하는 회원의 온라인 주문 내역을 가져온다.
 		List<OrderDto> orderList=cDao.getOrderList(loginMember.getM_email(),"onc_");	
-
+		System.out.println(orderList + "1111111111111111111111111111111111111111111111111111");
 		// 주문 객체에 저장된 강의 코드로 내 수강 강의정보 목록을 저장한다.
 		List<MyOnlineInfoDto> onlineList = new ArrayList<MyOnlineInfoDto>();
 		for (OrderDto order : orderList) {
@@ -266,7 +266,7 @@ public class MemberService {
 	//로그인 회원의 아이디로 수강 신청한 오프라인 강의의 목록을 가져온다.
 	public ModelAndView getMyOfflineList() {
 		mv=new ModelAndView();
-
+		System.out.println("");
 		//email에 해당하는 회원의 오프라인 주문 내역을 가져온다.
 		List<OrderDto> orderList=cDao.getOrderList(loginMember.getM_email(),"ofc_");	
 
@@ -1182,5 +1182,7 @@ public class MemberService {
 		return mv;
 
 	}
+
+
 
 }

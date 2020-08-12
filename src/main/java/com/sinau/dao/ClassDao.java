@@ -166,6 +166,12 @@ public interface ClassDao {
 
 	//내가 결제한 강의 유/무 확인하기
 	//   OrderDto checkOrderList(@Param("onc_code")String onc_code,@Param("email")String email);
+	   
+	
+	   
+	   
+	/* List<TotalInfo> getoffontotalList(); */
+	
 
 	//로그인한 크리에이터의 강의인지 확인하기
 	OnlineClassDto checkOnClass(@Param("onc_code")String onc_code,@Param("email")String email);
@@ -176,6 +182,10 @@ public interface ClassDao {
 	//해당 강의 정보 가져오기
 	VideoListDto getvideoChange(@Param("vf_code")String vf_code,@Param("onc_code")String onc_code,@Param("email")String email);
 	/*은경 파트*/
+	
+	List<TotalInfo> gettotalList();
+
+	
 
 }
 
