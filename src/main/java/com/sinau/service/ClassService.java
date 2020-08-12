@@ -329,7 +329,7 @@ public class ClassService {
 
 		}
 
-		public ModelAndView classroom(String onc_code) {
+		public ModelAndView classroom(String onc_code, String vf_code) {
 			log.info("classroom()" + onc_code);
 			
 			String email = ((MemberDto)session.getAttribute("mb")).getM_email();

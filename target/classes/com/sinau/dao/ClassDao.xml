@@ -242,9 +242,8 @@
 	</select>
 	
 <!-- /*은경 파트*/ -->
-   <!-- 은경 파트 -->
 
-   <!-- 지원 파트 -->
+<!-- 지원 파트 -->
    <select id="getOffList" parameterType="String"
       resultType="com.sinau.dto.OffListDto">
       <![CDATA[
@@ -385,4 +384,5 @@ GROUP BY   OFC_CODE
       from totalinfo
       order by Totalupdate desc
    </select>
+
 </mapper>
