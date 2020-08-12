@@ -6,51 +6,51 @@
 <html lang="ko">
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="resources/css/home.css?a">
-	<link rel="stylesheet" href="resources/css/online_info.css?ver=1.7">
+   <link rel="stylesheet" href="resources/css/home.css?a">
+   <link rel="stylesheet" href="resources/css/online_info.css?ver=1.7">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>크리에이터 상세화면</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
-    	//탭이동
-	    $(document).ready(function () {
-	        //  $('.show1').show(); //페이지를 로드할 때 표시할 요소
-	        $('.show2').hide(); //페이지를 로드할 때 숨길 요소
-	        
-			console.log('${onInfo.l_state}')
-	        if("${onInfo.l_state}" == '0'){
-	        	$('.full_heart').hide();
-	        }
-	        else{
-	        	$('.unfilled_heart').hide();
-	        }
-	        
-	        $('.sharebtn').click(function () {
-	            //   $ ('.show1').hide(); //클릭 시 첫 번째 요소 숨김
-	            $('.show2').show(); //클릭 시 두 번째 요소 표시
-	            return false;
-	        });
-	/*
-	        $('.unfilled_heart').click(function () {
-	            $('.unfilled_heart').hide();
-	            $('.full_heart').show();
-	        });
-	
-	        $('.full_heart').click(function () {
-	            $('.full_heart').hide();
-	            $('.unfilled_heart').show();
-	        });
-	        */
-	        $('.closer').click(function () {
-	            $('.show2').hide();
-	            return false;
-	        });
-	    	
-	    });
-	    
-	    //공유하기 
-	    $(document)
+       //탭이동
+       $(document).ready(function () {
+           //  $('.show1').show(); //페이지를 로드할 때 표시할 요소
+           $('.show2').hide(); //페이지를 로드할 때 숨길 요소
+           
+         console.log('${onInfo.l_state}')
+           if("${onInfo.l_state}" == '0'){
+              $('.full_heart').hide();
+           }
+           else{
+              $('.unfilled_heart').hide();
+           }
+           
+           $('.sharebtn').click(function () {
+               //   $ ('.show1').hide(); //클릭 시 첫 번째 요소 숨김
+               $('.show2').show(); //클릭 시 두 번째 요소 표시
+               return false;
+           });
+   /*
+           $('.unfilled_heart').click(function () {
+               $('.unfilled_heart').hide();
+               $('.full_heart').show();
+           });
+   
+           $('.full_heart').click(function () {
+               $('.full_heart').hide();
+               $('.unfilled_heart').show();
+           });
+           */
+           $('.closer').click(function () {
+               $('.show2').hide();
+               return false;
+           });
+          
+       });
+       
+       //공유하기 
+       $(document)
         .on(
               "click",
               "#sh-link",
@@ -108,69 +108,70 @@
                     alert('이 브라우저는 지원하지 않습니다.');
                  }
               });
-		
-	    /* 좋아요 */
-	    function like_func(){
-	      var objdata = {onc_code: "${onInfo.onc_code}",l_cts_code:"${onInfo.cts_code}"};
-	      
-	      $.ajax({
-	        url: "likes",
-	        type: "POST",
-	        cache: false,
-	        dataType: "json",
-	        data: objdata,
-	        success: function(data) {
-				$('.unfilled_heart').hide();
-				$('.full_heart').hide();
-				$('#btn_div').append('<button type="button" class="likebtn full_heart" color="default" fill="false" onclick="like_cancle()">'+
-						'<div class="sc-fzqARJ eozcfK">'+
-						'<svg width="18" height="18" fill="none" viewBox="0 0 24 24">'+
-						'<path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#1b1c1d">'+
-						'</path>'+
-						'</svg></div>'+
-						'<span class="like_num">'+
-						'<span id="like_prt">'+
-						data.l_count+
-						'</span></span></button>')
-	        },
-	        error: function(request, status, error){
-	          alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	        }
-	      });
-	    }       
-	   
-	    /* 좋아요 취소*/
-	    function like_cancle(){
-	    console.log("${onInfo.onc_code}");
-	      var objdata = {onc_code: "${onInfo.onc_code}", l_cts_code: "${onInfo.cts_code}"};
-	      
-	      $.ajax({
-	        url: "dislikes",
-	        type: "POST",
-	        cache: false,
-	        dataType: "json",
-	        data: objdata,
-	        success: function(data) {
-	        	$('.unfilled_heart').hide();
-				$('.full_heart').hide();
-				$('#btn_div').append('<button type="button" class="likebtn unfilled_heart" color="default" fill="false" data-test-id="wishlist-button" data-test-group="sales-product-info-table-row" onclick="like_func()" id="like_img">'+
-						'<div class="sc-fzqARJ eozcfK">'+
-						'<svg width="18" height="18" fill="none" viewBox="0 0 24 24">'+
-						'<path fill-rule="evenodd" clip-rule="evenodd" d="M20.5 9c0-2-1.5-3.9-3.7-3.9-2.3 0-3.8 1.63-4.8 3.33-1-1.7-2.5-3.33-4.8-3.33C5 5.1 3.5 6.867 3.5 9c0 4.62 4.949 7.667 8.5 9.623 3.551-1.956 8.5-5.003 8.5-9.623zm-19-.176C1.5 5.607 3.962 3 7 3c2.7 0 4 1 5 2.2C13 4 14.3 3 17 3c3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#1b1c1d">'+
-						'</path>'+
-						'</svg></div>'+
-						'<span class="like_num">'+
-						'<span id="nlike_prt">'+
-						data.l_count+
-						'</span></span></button>'
-				)
-	        },
-	        error: function(request, status, error){
-	          alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	        }
-	      });
-	    } 
-	</script>
+      
+       /* 좋아요 */
+       function like_func(){
+         var objdata = {onc_code: "${onInfo.onc_code}",l_cts_code:"${onInfo.cts_code}"};
+         
+         $.ajax({
+           url: "likes",
+           type: "POST",
+           cache: false,
+           dataType: "json",
+           data: objdata,
+           success: function(data) {
+            $('.unfilled_heart').hide();
+            $('.full_heart').hide();
+            $('#btn_div').append('<button type="button" class="likebtn full_heart" color="default" fill="false" onclick="like_cancle()">'+
+                  '<div class="sc-fzqARJ eozcfK">'+
+                  '<svg width="18" height="18" fill="none" viewBox="0 0 24 24">'+
+                  '<path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#1b1c1d">'+
+                  '</path>'+
+                  '</svg></div>'+
+                  '<span class="like_num">'+
+                  '<span id="like_prt">'+
+                  data.l_count+
+                  '</span></span></button>')
+           },
+           error: function(request, status, error){
+             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            // location.href="<c:url value='/loginFrm'/>"
+           }
+         });
+       }       
+      
+       /* 좋아요 취소*/
+       function like_cancle(){
+       console.log("${onInfo.onc_code}");
+         var objdata = {onc_code: "${onInfo.onc_code}", l_cts_code: "${onInfo.cts_code}"};
+         
+         $.ajax({
+           url: "dislikes",
+           type: "POST",
+           cache: false,
+           dataType: "json",
+           data: objdata,
+           success: function(data) {
+              $('.unfilled_heart').hide();
+            $('.full_heart').hide();
+            $('#btn_div').append('<button type="button" class="likebtn unfilled_heart" color="default" fill="false" data-test-id="wishlist-button" data-test-group="sales-product-info-table-row" onclick="like_func()" id="like_img">'+
+                  '<div class="sc-fzqARJ eozcfK">'+
+                  '<svg width="18" height="18" fill="none" viewBox="0 0 24 24">'+
+                  '<path fill-rule="evenodd" clip-rule="evenodd" d="M20.5 9c0-2-1.5-3.9-3.7-3.9-2.3 0-3.8 1.63-4.8 3.33-1-1.7-2.5-3.33-4.8-3.33C5 5.1 3.5 6.867 3.5 9c0 4.62 4.949 7.667 8.5 9.623 3.551-1.956 8.5-5.003 8.5-9.623zm-19-.176C1.5 5.607 3.962 3 7 3c2.7 0 4 1 5 2.2C13 4 14.3 3 17 3c3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#1b1c1d">'+
+                  '</path>'+
+                  '</svg></div>'+
+                  '<span class="like_num">'+
+                  '<span id="nlike_prt">'+
+                  data.l_count+
+                  '</span></span></button>'
+            )
+           },
+           error: function(request, status, error){
+             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+           }
+         });
+       } 
+   </script>
  
 </head>
 
@@ -179,22 +180,25 @@
         <jsp:include page="../header.jsp"></jsp:include>
     </header>
     <section>
-		<div class="imgContainer">
-			<c:set var="imgNum" value="0" />
-			<c:forEach var="spec" items="${onSpecList}" begin="0" end="2">
-				<c:set var="imgNum" value="${imgNum + 1}" />
-				<div class="img${imgNum}">
-					<img id="img${imgNum}"src="resources/upload/${spec.f_sysname}">
-				</div>
-			</c:forEach>
-		</div>
+      <div class="imgContainer">
+         <c:set var="imgNum" value="0" />
+         <c:forEach var="spec" items="${onSpecList}" begin="0" end="2">
+            <c:set var="imgNum" value="${imgNum + 1}" />
+            <div class="img${imgNum}">
+               <img id="img${imgNum}"src="resources/upload/${spec.f_sysname}">
+            </div>
+         </c:forEach>
+      </div>
         <div class="wrap">
             <div class="intro">
                 <div class="spec_title">
                     <h2>클래스 소개</h2>
+                    <!-- 나중에 삭제하기!!!-->
+            <a style="background: purple" href="./classroom?onc_code=${onInfo.onc_code}">
+            클래스룸</a> 
                 </div>
                 <div class="speci1 content"><img id="speci1 content" 
-                	src="resources/upload/${onInfo.f_content}"></div>
+                   src="resources/upload/${onInfo.f_content}"></div>
                 <div class="drWrap">
                 <div class="sinfo_ddate">
                     <div class="sp_title">배송 일정</div>
@@ -234,48 +238,49 @@
                 <div class="hr"> </div>
                 <div class="like_container">
                     <div class="btn_div" id="btn_div">
-                    <c:set var="login_email" value="dg"/>
                     <c:choose>
-					  <c:when test="${login_email ne null}"><!-- 로그인 이메일 있을 경우 -->
-						    <button type="button" class="likebtn unfilled_heart" color="default" fill="false"
-	                            data-test-id="wishlist-button" data-test-group="sales-product-info-table-row"  
-	                            onclick="like_func()" id="like_img">
-	                            <div class="sc-fzqARJ eozcfK">
-	                                <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-	                                    <path fill-rule="evenodd" clip-rule="evenodd"
-	                                        d="M20.5 9c0-2-1.5-3.9-3.7-3.9-2.3 0-3.8 1.63-4.8 3.33-1-1.7-2.5-3.33-4.8-3.33C5 5.1 3.5 6.867 3.5 9c0 4.62 4.949 7.667 8.5 9.623 3.551-1.956 8.5-5.003 8.5-9.623zm-19-.176C1.5 5.607 3.962 3 7 3c2.7 0 4 1 5 2.2C13 4 14.3 3 17 3c3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
-	                                        fill="#1b1c1d"></path>
-	                                </svg></div>
-	                            <span class="like_num"><span id="nlike_prt">${onInfo.l_count}</span></span>
-	                        </button>
-	                        
-			                   <button type="button" class="likebtn full_heart" color="default" fill="false"
-							    	 onclick="dislike_func()">
-		                            <div class="sc-fzqARJ eozcfK">
-		                                <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-		                                    <path fill-rule="evenodd" clip-rule="evenodd"
-		                                        d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
-		                                        fill="#1b1c1d"></path>
-		                                </svg></div>
-		                            <span class="like_num"><span id="like_prt">${onInfo.l_count}</span></span>
-		                        </button>
-	                      
-					  </c:when>
-					  <c:otherwise>
-					    <!-- 비 로그인 상태일 시 <a href='javascript: login_need();'> -->
-					    <button type="button" class="likebtn unfilled_heart" color="default" fill="false"
-	                            data-test-id="wishlist-button" data-test-group="sales-product-info-table-row"  
-	                            onclick="location.href='./loginFrm'" id="like_img">
-	                            <div class="sc-fzqARJ eozcfK">
-	                                <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-	                                    <path fill-rule="evenodd" clip-rule="evenodd"
-	                                        d="M20.5 9c0-2-1.5-3.9-3.7-3.9-2.3 0-3.8 1.63-4.8 3.33-1-1.7-2.5-3.33-4.8-3.33C5 5.1 3.5 6.867 3.5 9c0 4.62 4.949 7.667 8.5 9.623 3.551-1.956 8.5-5.003 8.5-9.623zm-19-.176C1.5 5.607 3.962 3 7 3c2.7 0 4 1 5 2.2C13 4 14.3 3 17 3c3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
-	                                        fill="#1b1c1d"></path>
-	                                </svg></div>
-	                            <span class="like_num"><span id="nlike_prt">${onInfo.l_count}</span></span>
-	                        </button>
-					  </c:otherwise>
-					</c:choose>
+                 <c:when test="${mb.m_email eq null}">
+                    <!-- 비 로그인 상태일 시 <a href='javascript: login_need();'> -->
+                   <button type="button" class="likebtn unfilled_heart" color="default" fill="false"
+                               data-test-id="wishlist-button" data-test-group="sales-product-info-table-row"  
+                               onclick="location.href='./loginFrm'" id="like_img">
+                               <div class="sc-fzqARJ eozcfK">
+                                   <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                                       <path fill-rule="evenodd" clip-rule="evenodd"
+                                           d="M20.5 9c0-2-1.5-3.9-3.7-3.9-2.3 0-3.8 1.63-4.8 3.33-1-1.7-2.5-3.33-4.8-3.33C5 5.1 3.5 6.867 3.5 9c0 4.62 4.949 7.667 8.5 9.623 3.551-1.956 8.5-5.003 8.5-9.623zm-19-.176C1.5 5.607 3.962 3 7 3c2.7 0 4 1 5 2.2C13 4 14.3 3 17 3c3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
+                                           fill="#1b1c1d"></path>
+                                   </svg></div>
+                               <span class="like_num"><span id="nlike_prt">${onInfo.l_count}</span></span>
+                           </button>
+                 
+                 </c:when>
+                 <c:otherwise>
+                 <!-- 로그인 이메일 있을 경우 -->
+                      <button type="button" class="likebtn unfilled_heart" color="default" fill="false"
+                               data-test-id="wishlist-button" data-test-group="sales-product-info-table-row"  
+                               onclick="like_func()" id="like_img">
+                               <div class="sc-fzqARJ eozcfK">
+                                   <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                                       <path fill-rule="evenodd" clip-rule="evenodd"
+                                           d="M20.5 9c0-2-1.5-3.9-3.7-3.9-2.3 0-3.8 1.63-4.8 3.33-1-1.7-2.5-3.33-4.8-3.33C5 5.1 3.5 6.867 3.5 9c0 4.62 4.949 7.667 8.5 9.623 3.551-1.956 8.5-5.003 8.5-9.623zm-19-.176C1.5 5.607 3.962 3 7 3c2.7 0 4 1 5 2.2C13 4 14.3 3 17 3c3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
+                                           fill="#1b1c1d"></path>
+                                   </svg></div>
+                               <span class="like_num"><span id="nlike_prt">${onInfo.l_count}</span></span>
+                           </button>
+                           
+                            <button type="button" class="likebtn full_heart" color="default" fill="false"
+                             onclick="like_cancle()">
+                                  <div class="sc-fzqARJ eozcfK">
+                                      <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                                          <path fill-rule="evenodd" clip-rule="evenodd"
+                                              d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
+                                              fill="#1b1c1d"></path>
+                                      </svg></div>
+                                  <span class="like_num"><span id="like_prt">${onInfo.l_count}</span></span>
+                              </button>
+                         
+                 </c:otherwise>
+               </c:choose>
                     
                     </div>
                     <div class="btn_div">
@@ -288,17 +293,14 @@
                             <span class="like_num">공유하기</span>
                         </button></div>
                 </div>
-                <a href="apply?pay_pcode=${onInfo.onc_code}"  
-                class="class_submitbtn" color="orange" fill="true">클래스 신청하기
-                </a>
-                
-					
+                <button type="button" class="class_submitbtn" color="orange" fill="true"><span class="sc-fzoyTs jZUSDr">
+                        <span>클래스 신청하기</span></span></button>
                 <div>
                     <p class="refund_alert">키트 미개봉 시, <fmt:formatDate value="${onInfo.onc_sdate}" pattern="yyyy.MM.dd" />까지 전액 환불 보장</p>
                 </div>
             </div>
-			
-			<!-- 공유하기 모달 -->
+         
+         <!-- 공유하기 모달 -->
             <div class="sc-pDbHj jvrfBM sc-pZCuu fVtWky show2">
                 <div class="sc-oTaid fgxYOw" style="min-height: 0px;">
                     <div class="sc-paWVw gzcrzB">
@@ -368,13 +370,11 @@
                 </div>
             </div>
 
-
-
         </div>
     </section>
     <div class="footer_wrap" style="right: 0;">
         <footer class="footer">
-        	<jsp:include page="../footer.jsp"></jsp:include>
+           <jsp:include page="../footer.jsp"></jsp:include>
         </footer>
     </div>
 </body>
