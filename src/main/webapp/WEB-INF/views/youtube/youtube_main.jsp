@@ -20,7 +20,7 @@
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 
-	<section class="section-home">
+	<section class="section-home11">
 		<div class="youtube-home">
 			<div class="image"><img src="resources/images/bbb.jpg" width="1300" height="300"></div>
 		</div>

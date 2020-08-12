@@ -145,18 +145,18 @@ function idcheck() {
 	        if($("input[name=radio]:checked").val() == "2"){
 	            $("input:text[name=m_license]").attr("disabled",false);
 	              $("input:text[name=m_group]").attr("value", "dm");
-	              $("input:text[name=m_state]").attr("value", "0");
+	              $("input:text[name=m_state]").attr("value", "1");
 	            // radio 버튼의 value 값이 1이라면 활성화
 	 
 	        }else if($("input[name=radio]:checked").val() == "1"){
 	              $("input:text[name=m_license]").attr("disabled",true);
 	              $("input:text[name=m_group]").attr("value", "cm");
-	              $("input:text[name=m_state]").attr("value", "0");
+	              $("input:text[name=m_state]").attr("value", "1");
 	            // radio 버튼의 value 값이 0이라면 비활성화
 	        }else if($("input[name=radio]:checked").val() == "0"){
 	              $("input:text[name=m_license]").attr("disabled",true);
 	              $("input:text[name=m_group]").attr("value", "nm");
-	              $("input:text[name=m_state]").attr("value", "1");
+	              $("input:text[name=m_state]").attr("value", "2");
 		            // radio 버튼의 value 값이 0이라면 비활성화
 		        }
 	    });
