@@ -11,6 +11,7 @@ public class MyOnlineInfoDto {
 	private String m_name;
 	private int mcl_state;
 	private String onc_code;
+	private int onc_state;
 	private String onc_content;
 	private String onc_title;
 	private String cts_name;
