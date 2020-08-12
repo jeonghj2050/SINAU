@@ -34,11 +34,20 @@
 		update member set m_pwd=#{encodePwd} where m_email=#{email}
 	</update>
 	
-		<select id="getClassStuList" parameterType="String" resultType="com.sinau.dto.ClassStuInfoDto">
-		select * from classstuinfo where onc_m_email=#{m_email}
+		<select id="getOnlineStuList" parameterType="String" resultType="com.sinau.dto.OnStuInfoDto">
+		select * from onstuinfo where onc_m_email=#{m_email}
 	</select>
+	<select id="getOffStuList" parameterType="String" resultType="com.sinau.dto.OffStuInfoDto">
+		select * from offstuinfo where ofc_m_email=#{m_email}
+	</select>
+	
+	<select id="getMemImg" parameterType="String" resultType="com.sinau.dto.MemberImg">
+		select * from mimg where mimg_m_email=#{email}
+	</select>
+	
 	<update id="newPwd" parameterType="String">
 		update member set m_pwd=#{encPwd} where m_email=#{email}
 	</update>
+	
 
 </mapper>

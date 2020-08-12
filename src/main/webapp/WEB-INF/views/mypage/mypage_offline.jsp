@@ -22,8 +22,8 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="resources/css/style.css">
-<link rel="stylesheet" href="resources/css/mypage.css">
+<link rel="stylesheet" href="resources/css/home.css">
+<link rel="stylesheet" href="resources/css/mypage.css?a">
 <script>
         $(function(){
             $('li').click(function(){
@@ -87,51 +87,16 @@ $(document).ready(function(){
 					<c:forEach var="offlineClass" items="${offlineList}">
 						<li role="presentation" name="${offlineClass.ofc_code}"><a
 							href="#${offlineClass.ofc_code}" aria-controls="home"
-							role="tab" data-toggle="tab">${offlineClass.ofc_code}</a></li>
+							role="tab" data-toggle="tab">${offlineClass.ofc_title}</a></li>
 					</c:forEach>
 				</ul>
 			</div>
 			<c:forEach var="offlineClass" items="${offlineList}">
-			<form action="./refund" method="get">
-					<div class="modal fade" id="refund">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<!-- header -->
-								<div class="modal-header">
-									<!-- 닫기(x) 버튼 -->
-									<button type="button" class="close" data-dismiss="modal">×</button>
-									<!-- header title -->
-									<h4 class="modal-title">환불</h4>
-								</div>
-								<!-- body -->
-								<div class="modal-body" style="text-align: left;">
-									<input type="hidden" name="sort" value="offline"> 
-									<input type="hidden" name="ref_ord_code" id="ref_ord_code"/>
-									<input
-										type="radio" name="ref_reson" value="더 이상 구매를 원하지 않습니다.">1.더
-									이상 구매를 원하지 않습니다.<br> <input type="radio" name="ref_reson"
-										value="실수로 구매하였습니다.">2.실수로 구매하였습니다.<br> <input
-										type="radio" name="ref_reson" value="제품에 결함이 있습니다.">3.제품에
-									결함이 있습니다.<br> <select name="ref_bank">
-										<option value="신한">신한</option>
-										<option value="국민">국민</option>
-										<option value="우리">우리</option>
-									</select><br> 계좌번호<input type="text" name="ref_banknum">
-									예금주 <input type="text" name="ref_bankname">
-								</div>
-								<!-- Footer -->
-								<div class="modal-footer">
-									<button type="submit" class="btn btn-default">환불</button>
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">닫기</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
+			
 				<div class="mp_classInfo" id="${offlineClass.ofc_code}">
+					<a href="info?ofc_code=${offlineClass.ofc_code}">
 					<img src="resources/upload/${offlineClass.f_sysname }" alt=""
-						width="300px" height="300px" id="mp_class_img">
+						width="300px" height="300px" id="mp_class_img"></a>
 					<div>
 						<div class="class_info_contents" id="${offlineClass.ofc_code}">
 							<p>${offlineClass.cts_name} | ${offlineClass.m_name}</p>
@@ -140,23 +105,10 @@ $(document).ready(function(){
 						</div>
 						<div>
 							<div>
-								수업일 :
-								<fmt:formatDate pattern="yyyy-MM-dd"
-									value="${offlineClass.ofc_ofdate}" />
-							</div>
-							<div class="class_status">
-								<c:choose>
-									<c:when test="${offlineClass.mcl_state == 1}">
-										<button class="my_default_btn" data-target="#refund"
-											data-toggle="modal" data-notifyid="${offlineClass.mcl_ord_code }">환불</button>
-									</c:when>
-								</c:choose>
-								<c:if test="${offlineClass.mcl_state == 3}">
-									<div>환불진행중</div>
-								</c:if>
-								<c:if test="${offlineClass.mcl_state == 4}">
-									<div>환불완료</div>
-								</c:if>
+							 [ 장소 ] : ${offlineClass.sc_place }<br>
+								[ 수업일 ]
+								<fmt:formatDate pattern="yyyy-MM-dd HH"
+									value="${offlineClass.sc_time}" />시 
 							</div>
 						</div>
 					</div>

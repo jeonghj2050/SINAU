@@ -1,6 +1,6 @@
 package com.sinau.dao;
 
-import com.sinau.dto.ClassStuInfoDto;
+import com.sinau.dto.OnStuInfoDto;
 import com.sinau.dto.CreatorOnInfoDto;
 import com.sinau.dto.MemberDto;
 
@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sinau.dto.MyMemberInfoDto;
+import com.sinau.dto.OffStuInfoDto;
 
 
 public interface MemberDao {
@@ -39,17 +40,16 @@ public interface MemberDao {
 	void fileInsert(Map<String, String> fmap);
 
 	//크리에이터의 강좌를 수강하는 학생의 정보를 가져온다.
-	public List<ClassStuInfoDto> getClassStuList(String m_email);
+	List<OnStuInfoDto> getOnlineStuList(String m_email);	
+	List<OffStuInfoDto> getOffStuList(String m_email);
 
-
+	MemberImg getMemImg(String m_email);
 
 	int newPwd(@Param("email")String email,@Param("encPwd")String encPwd);
 
+	String idFind(@Param("mname")String mname,@Param("mphone")String mphone);
 	
-	
-	/*
-	 * public void memberImgInsert(MultipartHttpServletRequest multi);
-	 */
-	
+
+
 
 }

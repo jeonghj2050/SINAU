@@ -68,12 +68,13 @@ $(document).ready(function(){
 			<div class="swiper-container swc1">
 				<div class="swiper-wrapper">
 					<c:forEach var="onLike" items="${onLikeList }">
+						
 						<div class="swiper-slide">
-						<img src="resources/images/test/${onLike.f_oriname }" width="250px"
-							height="300px">
+						<a href="./onlineInfo?onc_code=${onLike.onc_code }"><img src="resources/upload/${onLike.f_sysname }" width="250px"
+							height="300px"></a>
 						<div class="swiper-text">
 							${onLike.cts_name }
-							<div class="text_title">${onLike.onc_title }</div>
+							<div class="text_title" class="text_title" style="text-overflow: ellipsis;overflow: hidden;white-space:nowrap;">${onLike.onc_title }</div>
 							<div class="like_view">
 								<span class="like_icon"><svg width="8px" height="8px"
 										viewBox="0 0 16 16" class="bi bi-heart-fill"
@@ -85,6 +86,7 @@ $(document).ready(function(){
 							<div class="price">${onLike.onc_sale }원</div>
 						</div>
 					</div>
+	
 					</c:forEach>
 				</div>
 			</div>
@@ -95,11 +97,11 @@ $(document).ready(function(){
 				<div class="swiper-wrapper">
 					<c:forEach var="offLike" items="${offLikeList }">
 						<div class="swiper-slide">
-						<img src="resources/images/test/${offLike.f_oriname }" width="250px"
+						<img src="resources/images/test/${offLike.f_sysname }" width="250px"
 							height="300px">
 						<div class="swiper-text">
 							${offLike.cts_name }
-							<div class="text_title">${offLike.ofc_title }</div>
+							<div class="text_title" style="text-overflow: ellipsis;overflow: hidden;white-space:nowrap;">${offLike.ofc_title }</div>
 							<div class="like_view">
 								<span class="like_icon"><svg width="8px" height="8px"
 										viewBox="0 0 16 16" class="bi bi-heart-fill"
@@ -121,7 +123,7 @@ $(document).ready(function(){
 				<div class="swiper-wrapper">
 					<c:forEach var="prodLike" items="${prodLikeList }">
 						<div class="swiper-slide">
-						<img src="resources/images/test/${prodLike.f_oriname }" width="250px"
+						<img src="resources/images/test/${prodLike.f_sysname }" width="250px"
 							height="300px">
 						<div class="swiper-text">
 							${prodLike.cts_name }

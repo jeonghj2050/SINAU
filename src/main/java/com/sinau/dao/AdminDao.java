@@ -1,13 +1,22 @@
 package com.sinau.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.sinau.dto.AdQnaInfoDto;
 import com.sinau.dto.AdminDto;
+import com.sinau.dto.FilesDto;
+import com.sinau.dto.QuestionInfoDto;
+import com.sinau.dto.YoutubeClassDto;
 
 public interface AdminDao {
+	
+	public List<AdminDto> getList(Map<String, String> lmap);
+	
+	public int getListCount();
+	
 	//회원 승인 구분
 	public List<AdminDto> getMemStateNm(int state);
 	public List<AdminDto> getMemStateDm(int state);
@@ -32,6 +41,12 @@ public interface AdminDao {
 	
 	//회원 승인(상태변경)
 	public void getstate(String email);
+	//유튜브 이미지 등록
+	public void fileInsert(Map<String, String> fmap);
+	//유튜브 등록
+	public void youtubeWrite(YoutubeClassDto youtube);
+
+
 	
 	//신고처리 승인(상태변경)
 	public void getWState(String code);

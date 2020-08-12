@@ -60,6 +60,25 @@
 
 	})
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var chk = "${check}";
+	
+	if(chk == "1"){
+		alert("글 등록  실패!");
+		location.reload(true);
+	}
+	if(chk == "2"){
+		alert("글 등록 성공!");
+		location.reload(true);
+	}
+	if(chk == "3"){
+		alert("글 삭제 성공!");
+		location.reload(true);
+	}
+	
+});
+</script>
 </head>
 <body>
 	<!-- 나중에 헤더는 따로 뺄것 -->
@@ -235,10 +254,10 @@
 					<div class="lecture-3">
 						<div class="lyoutube">
 							<b>
-								<div class="yb-no lecture1">번호</div>
-								<div class="yb-email lecture2">이메일</div>
-								<div class="yb-cname lecture3">크리에이터</div>
+								<div class="yb-no lecture1">번호</div>								
 								<div class="yb-title lecture4">강의명</div>
+								<div class="yb-cname lecture3">크리에이터</div>
+								<div class="yb-email lecture2">카테고리</div>
 								<div class="yb-date lecture5">개시일시</div>
 								<div class="yb-del lecture6">삭제</div>
 							</b>
@@ -246,19 +265,25 @@
 						<div class="datelist">
 							<c:forEach var="bitem" items="${pc}">
 								<div class="yb-no lecture1">${bitem.y_num}</div>
-								<div class="yb-email lecture2">${bitem.y_cts_name}</div>
-								<div class="yb-cname lecture3">${bitem.y_profile}</div>
 								<div class="yb-title lecture4">${bitem.y_title}</div>
+								<div class="yb-cname lecture3">${bitem.y_profile}</div>
+								<div class="yb-email lecture2">${bitem.cts_name}</div>								
 								<div class="yb-date lecture5">${bitem.y_update}</div>
 								<div class="yb-del lecture6">
-									<p id="del">
+									<p id="del1">
 										<button class="btn-del" onclick="btnclick('${bitem.y_code}')">
 											<b>삭제</b>
+										</button>
+										<button class="btn-write" id="upbtn" onclick="location.href='./youtubeupdate?y_code=${bitem.y_code}'">
+										수정
 										</button>
 									</p>
 								</div>
 							</c:forEach>
 						</div>
+						<button class="btn-insert" onclick="location.href='./youtubeinsert'">
+						등록
+						</button>
 					</div>
 					<div class="btn-area">
 						<div class="paging">${paging}</div>
@@ -283,6 +308,7 @@
 				</div>--%>
 			</div>
 		</div>
+		
 	</section>
 	<footer>
 		<jsp:include page="../footer.jsp"></jsp:include>

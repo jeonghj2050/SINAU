@@ -23,8 +23,8 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="resources/css/style.css">
-<link rel="stylesheet" href="resources/css/mypage.css">
+<link rel="stylesheet" href="resources/css/style.css?a">
+<link rel="stylesheet" href="resources/css/mypage.css?a">
 <script>
         $(function(){
             $('li').click(function(){
@@ -74,45 +74,43 @@
 				<ul class="nav nav-tabs" role="tablist" id="mytab">
 					<c:forEach var="ccInfo" items="${ccInfoList}">	
 					<li role="presentation" name="${ccInfo.onc_code}">
-						<a href="#${ccInfo.onc_code}" aria-controls="home" role="tab" data-toggle="tab">${ccInfo.onc_code}</a>
+						<a href="#${ccInfo.onc_code}" aria-controls="home" role="tab" data-toggle="tab">${ccInfo.onc_title}</a>
 					</li>
 					</c:forEach>
 					<c:forEach var="cofInfo" items="${cofInfoList}">	
 					<li role="presentation" name="${cofInfo.ofc_code}">
-						<a href="#${cofInfo.ofc_code}" aria-controls="home" role="tab" data-toggle="tab">${cofInfo.ofc_code}</a>
+						<a href="#${cofInfo.ofc_code}" aria-controls="home" role="tab" data-toggle="tab">${cofInfo.ofc_title}</a>
 					</li>
 					</c:forEach>
 				</ul>
 				<c:forEach var="ccInfo" items="${ccInfoList}">
 					<div class="c_myclass_info" id="${ccInfo.onc_code}">
-						<img src="resources/upload/${ccInfo.f_sysname} " alt="">
+						<a href="classroom?onc_code=${ccInfo.onc_code}"><img src="resources/upload/${ccInfo.f_sysname} " alt=""></a>	
 						<div class="c_myclass_detail">
-							<div style="font-size: 13pt; font-weight: bold;">${ccInfo.onc_title }</div>
+							<div style="font-size: 13pt; font-weight: bold;">${ccInfo.cts_name } | ${ccInfo.onc_title }</div>
 							<div>${ccInfo.onc_content}</div>
 							<div>${ccInfo.onc_rstnum }명 / ${ccInfo.onc_stnum }명</div>
 						</div>
 						<div style="float:right;">
 							<c:if test="${ccInfo.onc_rstnum le 0 }">
-								<button class="my_default_btn" onclick="location.href='./cMyClassDel?onc_code=${ccInfo.onc_code}'">강의 삭제</button>
+								<button class="my_default_btn" onclick="location.href='./cMyClassDel?p_code=${ccInfo.onc_code}'">강의 삭제</button>
 							</c:if>
-							<button class="my_default_btn" onclick="location.href='./cMyClassUp?onc_code=${ccInfo.onc_code}'">강의 수정</button>
+							<button class="my_default_btn" onclick="location.href='./cMyClassUp?up_p_code=${ccInfo.onc_code}'">강의 수정</button>
 						</div>
-						<p class="mypage_sub_title" style="clear:both;">등록 정보</p>
+						<p class="mypage_sub_title" style="clear:both;">수강생 정보</p>
 						<div class="c_myclass_stuList">
 							<table class="table">
 								<tr>
 									<th>이메일</th>
 									<th>이름</th>
 								</tr>
-								<c:forEach var="cstuInfo" items="${cstuInfoList}">
-									<c:choose>
-										<c:when test="${cstuInfo.onc_code eq ccInfo.onc_code }">
-											<tr>
-												<td>${cstuInfo.m_email}</td>
-												<td>${cstuInfo.m_name}</td>
-											</tr>
-										</c:when>
-									</c:choose>
+								<c:forEach var="constuInfo" items="${contuInfoList}">
+								<c:if test="${constuInfo.onc_code eq ccInfo.onc_code}">
+									<tr>
+										<td>${constuInfo.m_email}</td>
+										<td>${constuInfo.m_name}</td>
+									</tr>
+									</c:if>
 								</c:forEach>
 							</table>
 						</div>
@@ -122,7 +120,7 @@
 					<div class="c_myclass_info" id="${cofInfo.ofc_code}">
 						<img src="resources/upload/${cofInfo.f_sysname} " alt="">
 						<div class="c_myclass_detail">
-							<div style="font-size: 13pt; font-weight: bold;">${cofInfo.ofc_title }</div>
+							<div style="font-size: 13pt; font-weight: bold;">${cofInfo.ofc_title } | ${cofInfo.cts_name}</div>
 							<div>${cofInfo.ofc_content}</div>
 							<div>${cofInfo.ofc_rstnum }명 / ${cofInfo.ofc_stnum }명</div>
 						</div>
@@ -132,23 +130,21 @@
 							</c:if>
 							<button class="my_default_btn" onclick="location.href='./cMyClassUp?up_p_code=${cofInfo.ofc_code}'">강의 수정</button>
 						</div>
-						<p class="mypage_sub_title" style="clear:both;">등록 정보</p>
+						<p class="mypage_sub_title" style="clear:both;">수강생 정보</p>
 						<div class="c_myclass_stuList">
 							<table class="table">
 								<tr>
 									<th>이메일</th>
 									<th>이름</th>
 								</tr>
-								<%-- <c:forEach var="cstuInfo" items="${cstuInfoList}">
-									<c:choose>
-										<c:when test="${cstuInfo.onc_code eq ccInfo.onc_code }">
-											<tr>
-												<td>${cstuInfo.m_email}</td>
-												<td>${cstuInfo.m_name}</td>
-											</tr>
-										</c:when>
-									</c:choose>
-								</c:forEach> --%>
+								<c:forEach var="coffstuInfo" items="${cofftuInfoList}">
+									<c:if test="${coffstuInfo.ofc_code eq cofInfo.ofc_code}">
+									<tr>
+										<td>${coffstuInfo.m_email}</td>
+										<td>${coffstuInfo.m_name}</td>
+									</tr>
+									</c:if>
+								</c:forEach>
 							</table>
 						</div>
 					</div>

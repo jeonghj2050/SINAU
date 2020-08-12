@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinau.dao.PaymentDao">
+
+	<insert id="orderInsert" parameterType="com.sinau.dto.OrderDto"
+		useGeneratedKeys="true" keyProperty="ord_code">
+	<selectKey keyProperty="ord_code" resultType="String"
+			order="BEFORE">
+			SELECT 'ord_'||SEQ_ORD.NEXTVAL FROM dual
+		</selectKey>
+		INSERT INTO ord
+		VALUES(#{ord_code}, #{ord_name}, #{ord_addr}, #{ord_phone}, #{ord_memo}, #{ord_price}, #{ord_diposit}, DEFAULT, 1,#{ord_pcode}, #{ord_kind}, 1, #{ord_m_email})
+	</insert>
+	<insert id="mclInsert" parameterType="com.sinau.dto.MyClassDto">
+	
+		INSERT INTO mcl
+		VALUES('mcl_'||SEQ_MCL.NEXTVAL, 1, #{mcl_classcode}, #{mcl_m_email}, #{mcl_ord_code}, #{mcl_sc_code, jdbcType=VARCHAR})
+	</insert>
+	<select id="getPayCouponList" parameterType="String"
+		resultType="com.sinau.dto.PayCouponDto">
+		SELECT * FROM CPL_CP
+		WHERE CPL_M_EMAIL = #{m_email}
+	</select>
+	<select id="getPayCoupon" parameterType="String"
+		resultType="com.sinau.dto.PayCouponDto">
+		SELECT * FROM CPL_CP
+		WHERE CPL_CP_CODE = #{cpcode} and rownum = 1
+	</select>	
+	<select id="getMemPayInfo" parameterType="String"
+		resultType="com.sinau.dto.MemberDto">
+		<![CDATA[
+			select * from member
+			where m_email=#{m_email}
+			]]>
+	</select>
+	<select id="orderCheck" parameterType="String"
+		resultType="com.sinau.dto.OrderDto">
+		<![CDATA[
+			select * from ord
+			where ord_code=#{ord_code}
+			]]>
+	</select>
+	<select id="getCouponCheck" parameterType="String"
+		resultType="com.sinau.dto.CouponListDto">
+		<![CDATA[
+			SELECT * FROM CPL
+		WHERE CPL_M_EMAIL = #{m_email}
+			]]>
+	</select>
+	<select id="mclOnCheck" parameterType="String"
+		resultType="com.sinau.dto.OnPayInfoComDto">
+		<![CDATA[
+			select * from on_pay_info_com
+			where ord_code=#{ord_code}
+			]]>
+	</select>
+	<select id="mclOffCheck" parameterType="String"
+		resultType="com.sinau.dto.OffPayInfoComDto">
+		<![CDATA[
+			select * from off_pay_info_com
+			where ord_code=#{ord_code}
+			]]>
+	</select>
+	<select id="ordPCheck" parameterType="String"
+		resultType="com.sinau.dto.PPayInfoComDto">
+		<![CDATA[
+			select * from p_pay_info_com
+			where ord_code=#{ord_code}
+			]]>
+	</select>
+	
+</mapper>

@@ -23,7 +23,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="resources/css/home.css">
 <link rel="stylesheet" href="resources/css/mypage.css">
 <script>
         $(function(){
@@ -88,51 +88,14 @@ $(document).ready(function(){
 			  <!-- Nav tabs -->
 			  <ul class="nav nav-tabs" role="tablist" id="mytab">
 			   	<c:forEach var="onlineClass" items="${onlineList}">	
-				    <li role="presentation" name="${onlineClass.onc_code}"><a href="#'${onlineClass.onc_code}'" aria-controls="home" role="tab" data-toggle="tab">${onlineClass.onc_code}</a></li>
+				    <li role="presentation" name="${onlineClass.onc_code}"><a href="#'${onlineClass.onc_code}'" aria-controls="home" role="tab" data-toggle="tab">${onlineClass.onc_title}</a></li>
 			  	</c:forEach>
 			  </ul> 
            </div>
 			<c:forEach var="onlineClass" items="${onlineList}">
-			<form action="./refund" method="get">
-					<div class="modal fade" id="refund">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<!-- header -->
-								<div class="modal-header">
-									<!-- 닫기(x) 버튼 -->
-									<button type="button" class="close" data-dismiss="modal">×</button>
-									<!-- header title -->
-									<h4 class="modal-title">환불</h4>
-								</div>
-								<!-- body -->
-								<div class="modal-body" style="text-align: left;">
-									<input type="hidden" name="sort" value="online"> 
-									<input type="hidden" name="ref_ord_code" id="ref_ord_code"/>
-									<input
-										type="radio" name="ref_reson" value="더 이상 구매를 원하지 않습니다.">1.더
-									이상 구매를 원하지 않습니다.<br> <input type="radio" name="ref_reson"
-										value="실수로 구매하였습니다.">2.실수로 구매하였습니다.<br> <input
-										type="radio" name="ref_reson" value="제품에 결함이 있습니다.">3.제품에
-									결함이 있습니다.<br> <select name="ref_bank">
-										<option value="신한">신한</option>
-										<option value="국민">국민</option>
-										<option value="우리">우리</option>
-									</select><br> 계좌번호<input type="text" name="ref_banknum">
-									예금주 <input type="text" name="ref_bankname">
-								</div>
-								<!-- Footer -->
-								<div class="modal-footer">
-									<button type="submit" class="btn btn-default">환불</button>
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">닫기</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
 				<div class="mp_classInfo" id="${onlineClass.onc_code}">
-					<img src="resources/upload/${onlineClass.f_sysname }" alt="" width="300px"
-						height="300px" id="mp_class_img">
+					<a href="classroom?onc_code=${onlineClass.onc_code }"><img src="resources/upload/${onlineClass.f_sysname }" alt="" width="300px"
+						height="300px" id="mp_class_img"></a>
 					<div>
 						<div class="class_info_contents" id="${onlineClass.onc_code}">
 							<p>${onlineClass.cts_name} | ${onlineClass.m_name}</p>
@@ -145,20 +108,6 @@ $(document).ready(function(){
 							<div>
 								수업일 : 
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${onlineClass.onc_sdate}"/> / <fmt:formatDate pattern="yyyy-MM-dd" value="${onlineClass.onc_edate}"/>
-							</div>
-							<div class="class_status">
-								<c:choose>
-									<c:when test="${onlineClass.mcl_state == 1}">
-										<button class="my_default_btn" data-target="#refund"
-											data-toggle="modal" data-notifyid="${onlineClass.mcl_ord_code }">환불</button>
-									</c:when>
-								</c:choose>
-								<c:if test="${onlineClass.mcl_state == 3}">
-									<div>환불진행중</div>
-								</c:if>
-								<c:if test="${onlineClass.mcl_state == 4}">
-									<div>환불완료</div>
-								</c:if>
 							</div>
 						</div>
 					</div>

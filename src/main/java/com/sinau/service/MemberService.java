@@ -4,6 +4,7 @@ package com.sinau.service;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.io.File;
 import java.io.IOException;
@@ -29,11 +30,13 @@ import com.sinau.dao.ClassDao;
 import com.sinau.dao.CommonDao;
 import com.sinau.dao.MemberDao;
 import com.sinau.dao.StoreDao;
-import com.sinau.dto.ClassStuInfoDto;
+import com.sinau.dto.OnStuInfoDto;
 import com.sinau.dto.CreatorOffInfoDto;
 import com.sinau.dto.CreatorOnInfoDto;
+import com.sinau.dto.DealerProductInfoDto;
 import com.sinau.dto.FilesDto;
 import com.sinau.dto.MemberDto;
+import com.sinau.dto.MemberImg;
 import com.sinau.dto.MyCouponDto;
 import com.sinau.dto.MyMemberInfoDto;
 import com.sinau.dto.MyOffInfoDto;
@@ -41,12 +44,14 @@ import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
 import com.sinau.dto.OffLikeDto;
 import com.sinau.dto.OffOrdersDto;
+import com.sinau.dto.OffStuInfoDto;
 import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.ProdLikeDto;
 import com.sinau.dto.ProdOrdersDto;
+import com.sinau.dto.ProductDto;
 import com.sinau.dto.RefundDto;
 import com.sinau.dto.ScheduleDto;
 import com.sinau.dto.ScheduleListDto;
@@ -120,8 +125,9 @@ public class MemberService {
 		try {
 
 			mDao.memberInsert(member);
-
+			rttr.addFlashAttribute("check", 2);
 			view = "redirect:/";
+			
 			if (fcheck == 1) {
 				// 업로드할 파일이 있음.
 				fileUp(multi, member.getM_email());
@@ -133,15 +139,13 @@ public class MemberService {
 			rttr.addFlashAttribute("check", 1);
 		}
 
-		rttr.addFlashAttribute("check", 2);
 		mv.setViewName(view);
 		return mv;
 	}
 
 	private void fileUp(MultipartHttpServletRequest multi, String m_email) throws IllegalStateException, IOException {
-
 		String filePath = multi.getSession().getServletContext().getRealPath("/") + "resources/upload/";
-
+		
 		File folder = new File(filePath);
 		if (folder.isDirectory() == false) {
 			// 경로를 설정한 폴더가 없다면
@@ -172,102 +176,6 @@ public class MemberService {
 			mDao.fileInsert(fmap);
 		}
 	}
-
-	// 로그인 회원의 그룹을 반환한다.
-	public String getLoginMemberGroup() {
-		String group = mDao.getGroup(loginMember.getM_email());
-
-		return group;
-	}
-
-	//로그인 회원의 온라인 강좌 목록과 view를 ModelAndView로 반환 , m_group > 회원마다 다른 메인 마이페이지를 띄워야 하므로
-	public ModelAndView getMyOnlineList(String m_group) {
-		mv=new ModelAndView();
-
-		//email에 해당하는 회원의 온라인 주문 내역을 가져온다.
-		List<OrderDto> orderList=cDao.getOrderList(loginMember.getM_email(),"onc_");	
-
-		// 주문 객체에 저장된 강의 코드로 내 수강 강의정보 목록을 저장한다.
-		List<MyOnlineInfoDto> onlineList = new ArrayList<MyOnlineInfoDto>();
-		for (OrderDto order : orderList) {
-			MyOnlineInfoDto online = cDao.getMyOnlineInfoOne(order.getOrd_code());
-			onlineList.add(online);
-		}
-
-		mv.addObject("onlineList", onlineList);
-
-		mv.setViewName("mypage/mypage_main");
-
-		return mv;
-	}
-
-	//로그인 회원의 아이디로 수강 신청한 오프라인 강의의 목록을 가져온다.
-	public ModelAndView getMyOfflineList() {
-		mv=new ModelAndView();
-
-		//email에 해당하는 회원의 오프라인 주문 내역을 가져온다.
-		List<OrderDto> orderList=cDao.getOrderList(loginMember.getM_email(),"ofc_");	
-
-		// 주문 객체에 저장된 강의 코드로 내 수강 강의정보 목록을 저장한다.
-		List<MyOffInfoDto> offlineList = new ArrayList<MyOffInfoDto>();
-		for (OrderDto order : orderList) {
-			MyOffInfoDto offline = cDao.getMyOffInfoOne(order.getOrd_code());
-			offlineList.add(offline);
-		}
-
-		mv.setViewName("mypage/mypage_offline");
-		mv.addObject("offlineList", offlineList);
-
-		return mv;
-	}
-
-	//회원의 정보(회원+이미지)를 가져온다.
-	public ModelAndView getMemberInfo() {
-		mv=new ModelAndView();
-
-		//마이페이지에 보여질 회원 정보를 가져온다.
-		MyMemberInfoDto myInfo=mDao.getMemberInfo(loginMember.getM_email());
-		mv.addObject("myInfo",myInfo);
-
-		mv.setViewName("mypage/mypage_update");
-		return mv;
-	}
-
-	public ModelAndView updateMemberPwd(String newPwd) {
-		mv=new ModelAndView();
-		//변경할 비밀번호를 암호화한다.
-		BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
-
-		String encodePwd=pwdEncode.encode(newPwd);
-
-		int result=mDao.updateMemberPwd(loginMember.getM_email(),encodePwd);
-
-		if(result>0) {
-			mv.setViewName("redirect:/mypage");
-		}
-
-		return mv;
-	}
-
-	//회원의 이메일로 각 (상품,온라인, 오프라인) 주문 내역을 가져온다.
-	public ModelAndView getAllOrders() {
-		mv=new ModelAndView();
-
-		//상품 주문내역 목록을 가져온다.
-		List<ProdOrdersDto> prodOrdList=sDao.getProdOrderList(loginMember.getM_email());
-		//온라인 주문내역 목록을 가져온다.
-		List<OnlineOrdersDto> onOrdList=cDao.getOnlineOrderList(loginMember.getM_email());
-		//오프라인 주문내역 목록을 가져온다.
-		List<OffOrdersDto> offOrdList=cDao.getOffOrderList(loginMember.getM_email());
-
-		mv.addObject("prodOrder",prodOrdList);
-		mv.addObject("onlineOrder",onOrdList);
-		mv.addObject("offOrder",offOrdList);
-
-		mv.setViewName("mypage/mypage_order");
-
-		return mv;
-	}
 	public ModelAndView loginProc(MemberDto member, 
 			RedirectAttributes rttr) {
 		mv = new ModelAndView();//화면으로 데이터 전송.
@@ -287,6 +195,8 @@ public class MemberService {
 				//세션에 로그인 성공한 회원 정보 저장
 				//로그인 한 회원의 정보를 가져오기.
 				member = mDao.getMemInfo(member.getM_email());
+				MemberImg memimg=mDao.getMemImg(member.getM_email());
+				session.setAttribute("memImg", memimg);
 				session.setAttribute("mb", member);
 				loginMember=member;
 				System.out.println(session);
@@ -324,6 +234,161 @@ public class MemberService {
 		return "home";
 	}
 
+
+	// 로그인 회원의 그룹을 반환한다.
+	public String getLoginMemberGroup() {
+		String group = mDao.getGroup(loginMember.getM_email());
+
+		return group;
+	}
+
+	//로그인 회원의 온라인 강좌 목록과 view를 ModelAndView로 반환 , m_group > 회원마다 다른 메인 마이페이지를 띄워야 하므로
+	public ModelAndView getMyOnlineList(String m_group) {
+		mv=new ModelAndView();
+
+		//email에 해당하는 회원의 온라인 주문 내역을 가져온다.
+		List<OrderDto> orderList=cDao.getOrderList(loginMember.getM_email(),"onc_");	
+		System.out.println(orderList + "1111111111111111111111111111111111111111111111111111");
+		// 주문 객체에 저장된 강의 코드로 내 수강 강의정보 목록을 저장한다.
+		List<MyOnlineInfoDto> onlineList = new ArrayList<MyOnlineInfoDto>();
+		for (OrderDto order : orderList) {
+			MyOnlineInfoDto online = cDao.getMyOnlineInfoOne(order.getOrd_code());
+			onlineList.add(online);
+		}
+
+		mv.addObject("onlineList", onlineList);
+
+		mv.setViewName("mypage/mypage_main");
+
+		return mv;
+	}
+
+	//로그인 회원의 아이디로 수강 신청한 오프라인 강의의 목록을 가져온다.
+	public ModelAndView getMyOfflineList() {
+		mv=new ModelAndView();
+		System.out.println("");
+		//email에 해당하는 회원의 오프라인 주문 내역을 가져온다.
+		List<OrderDto> orderList=cDao.getOrderList(loginMember.getM_email(),"ofc_");	
+
+		// 주문 객체에 저장된 강의 코드로 내 수강 강의정보 목록을 저장한다.
+		List<MyOffInfoDto> offlineList = new ArrayList<MyOffInfoDto>();
+		for (OrderDto order : orderList) {
+			MyOffInfoDto offline = cDao.getMyOffInfoOne(order.getOrd_code());
+			offlineList.add(offline);
+		}
+
+		mv.setViewName("mypage/mypage_offline");
+		mv.addObject("offlineList", offlineList);
+
+		return mv;
+	}
+
+	//회원의 정보(회원+이미지)를 가져온다.
+	public ModelAndView getMemberInfo() {
+		mv=new ModelAndView();
+
+		//마이페이지에 보여질 회원 정보를 가져온다.
+		MyMemberInfoDto myInfo=mDao.getMemberInfo(loginMember.getM_email());
+		mv.addObject("myInfo",myInfo);
+
+		mv.setViewName("mypage/mypage_update");
+		return mv;
+	}
+
+	public ModelAndView updateMemberInfo(MultipartHttpServletRequest multi) {
+		mv=new ModelAndView();
+		String path=multi.getSession().getServletContext().getRealPath("/")+"resources/upload/";
+
+		String mimg_code=multi.getParameter("mimg_code");
+
+		//multi에서 동영상 파일 가져오기(여러개의 파일이 넘어 올 수도 있다.)
+		List<MultipartFile> fList=multi.getFiles("files");
+
+		for(int i=0;i<fList.size();i++) {
+			MemberImg memImg=new MemberImg();
+			memImg.setMimg_code(mimg_code);
+			
+			MultipartFile mf=fList.get(i);
+			//실제 파일명 가져오기
+			String oriName=mf.getOriginalFilename();
+			memImg.setMimg_oriname(oriName);
+			//저장 파일명 만들기
+			String sysName=System.currentTimeMillis()+oriName.substring(oriName.lastIndexOf("."));
+			memImg.setMimg_sysname(sysName);
+
+			log.info("fileup() - oriName : "+oriName);
+			log.info("fileup() - sysName : "+sysName);
+
+			try {
+				mf.transferTo(new File(path+sysName));
+				
+				//실제 업로드 폴더에서 해당 파일을 삭제한다.
+				String saveFileName=multi.getParameter("mimig_sysname");
+				File deleteFile=new File(path+saveFileName);
+
+				if(deleteFile.exists()) {
+					deleteFile.delete();
+					log.info("삭제 완료!");
+				}else {
+					log.info("해당 파일이 존재하지 않습니다.");
+				}
+				
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//회원의 이미지를 변경한다.
+			cmDao.updateMemImg(memImg);
+			MemberImg memimg=mDao.getMemImg(loginMember.getM_email());
+			session.setAttribute("memImg", memimg);
+			
+			mv.setViewName("redirect:/mypage");
+		}
+	
+		if(multi.getParameter("newPwd")==null||multi.getParameter("newPwd").equals("")) {
+			
+		}else {
+			log.info("1111111111111");
+			//변경할 비밀번호를 암호화한다.
+			BCryptPasswordEncoder pwdEncode=new BCryptPasswordEncoder();
+
+			String encodePwd=pwdEncode.encode(multi.getParameter("newPwd"));
+
+			int result=mDao.updateMemberPwd(loginMember.getM_email(),encodePwd);
+
+			if(result>0) {
+				mv.setViewName("redirect:/mypage");
+			}else {
+				mv.setViewName("redirect:/mypageUpdate");
+			}
+		}
+
+		return mv;
+	}
+
+	//회원의 이메일로 각 (상품,온라인, 오프라인) 주문 내역을 가져온다.
+	public ModelAndView getAllOrders() {
+		mv=new ModelAndView();
+
+		//상품 주문내역 목록을 가져온다.
+		List<ProdOrdersDto> prodOrdList=sDao.getProdOrderList(loginMember.getM_email());
+		//온라인 주문내역 목록을 가져온다.
+		List<OnlineOrdersDto> onOrdList=cDao.getOnlineOrderList(loginMember.getM_email());
+		//오프라인 주문내역 목록을 가져온다.
+		List<OffOrdersDto> offOrdList=cDao.getOffOrderList(loginMember.getM_email());
+
+		mv.addObject("prodOrder",prodOrdList);
+		mv.addObject("onlineOrder",onOrdList);
+		mv.addObject("offOrder",offOrdList);
+
+		mv.setViewName("mypage/mypage_order");
+
+		return mv;
+	}
+	
 	// 상품,온라인, 오프라인 좋아요 내역을 검색한다.
 	public ModelAndView getAllLikes(String email) {
 		mv = new ModelAndView();
@@ -459,28 +524,46 @@ public class MemberService {
 		//회원(크리에이터)이 등록한 오프라인 강의의 정보를 가져온다.
 		List<CreatorOffInfoDto> cofInfoList=cDao.getCreatorOffList(loginMember.getM_email());
 
-		List<ClassStuInfoDto> cstuInfoList=mDao.getClassStuList(loginMember.getM_email());
+		//온라인 강좌 수강 회원 정보
+		List<OnStuInfoDto> contuInfoList=mDao.getOnlineStuList(loginMember.getM_email());
+		//오프라인 강좌 수강 회원 정보
+		List<OffStuInfoDto> cofftuInfoList=mDao.getOffStuList(loginMember.getM_email());
 
 		mv.addObject("ccInfoList",ccInfoList);
 		mv.addObject("cofInfoList",cofInfoList);
-		mv.addObject("cstuInfoList",cstuInfoList);
+		mv.addObject("contuInfoList",contuInfoList);
+		mv.addObject("cofftuInfoList",cofftuInfoList);
 		mv.setViewName("mypage/cmypage_main");
 
 		return mv;
 	}
 
-	public ModelAndView getCreatorOnlineInfo(String onc_code) {
+	public ModelAndView getCreatorClassInfo(String up_p_code) {
 		mv=new ModelAndView();
 
-		//onc_code에 해당하는 강의 정보를 가져온다.
-		CreatorOnInfoDto classInfo=cDao.getClassInfo(onc_code);
-		//onc_code에 해당하는 강의 목록 코드를 가져온다.
-		String v_code=cmDao.getVCode(onc_code);
-		//v_code에 있는 영상을 List로 가져온다.
-		List<VideoFileDto> videoList=cDao.getVideoList(v_code);
+		if(up_p_code.contains("onc_")) {
+			//onc_code에 해당하는 강의 정보를 가져온다.
+			CreatorOnInfoDto onInfo=cDao.getCreatorOnlineInfo(up_p_code);
+			//onc_code에 해당하는 강의 목록 코드를 가져온다.
+			String v_code=cmDao.getVCode(up_p_code);
+			//v_code에 있는 영상을 List로 가져온다.
+			List<VideoFileDto> videoList=cDao.getVideoList(v_code);
 
-		mv.addObject("classInfo",classInfo);
-		mv.addObject("videoList",videoList);
+			mv.addObject("classInfo",onInfo);
+			mv.addObject("videoList",videoList);
+			mv.addObject("sort","onc");
+		}else {
+			//up_p_code에 해당하는 오프라인 강의 정보를 가져온다.
+			CreatorOffInfoDto offInfo=cDao.getCreatorOffInfo(up_p_code);
+			//ofc_code에 해당하는 일정 목록 코드를 가져온다.
+			String scl_code=cmDao.getSclCode(up_p_code);
+			//scl_code에 있는 일정들을 List로 가져온다.
+			List<ScheduleDto> scList=cmDao.getScheduleList(scl_code);
+			
+			mv.addObject("classInfo",offInfo);
+			mv.addObject("scList",scList);
+			mv.addObject("sort","ofc");
+		}
 
 		mv.setViewName("mypage/cmypage_classup");
 		return mv;
@@ -600,10 +683,18 @@ public class MemberService {
 
 			log.info(online.toString());
 
-			cDao.updateOnClassInfo(online);      
+			cDao.updateOnClassInfo(online);   
+			
 
+		}if(obj instanceof OffClassDto) {
+			OffClassDto offline=(OffClassDto)obj;
+			
+			log.info(offline.toString());
+			
+			cDao.updateOffClassInfo(offline);
+			mv.addObject("ofp_code",offline.getOfc_code());
 		}
-
+		
 		mv.setViewName("redirect:./cMypage");
 		return mv;
 	}
@@ -699,41 +790,66 @@ public class MemberService {
 
 		return videoFile;
 	}
+	public ModelAndView updateClassSchedule(ScheduleDto schedule) {
+		// TODO Auto-generated method stub
+		return mv;
+	}
 
+
+	public ScheduleDto updateSchedule(ScheduleDto schedule) {
+		//넘어온 schedule 정보로 일정을 수정한다.
+		cmDao.updateSchedule(schedule);
+		
+		return schedule;
+	}
+	
 	//onc_code에 해당하는 강의를 삭제하기위한 메소드
-	public ModelAndView deleteClass(String onc_code) {
+	public ModelAndView deleteClass(String p_code) {
 		String path=session.getServletContext().getRealPath("/")+"resources/upload/";
 		mv=new ModelAndView();
-		String v_code=cmDao.getVCode(onc_code);
+		
+		if(p_code.contains("onc_")) {
+			String v_code=cmDao.getVCode(p_code);
 
-		//강의에 등록된 동영상들을 삭제한다.
-		//v_code에 저장된 파일들을 모두 가져온다.
-		List<VideoFileDto> fileList=cmDao.getVideoList(v_code);
-		for(VideoFileDto file : fileList) {
-			String vf_code=file.getVf_code();
-			//실제 업로드 폴더에서 해당 파일을 삭제한다.
-			String saveFileName=file.getVf_sysname();
-			File deleteFile=new File(path+saveFileName);
+			//강의에 등록된 동영상들을 삭제한다.
+			//v_code에 저장된 파일들을 모두 가져온다.
+			List<VideoFileDto> fileList=cmDao.getVideoList(v_code);
+			for(VideoFileDto file : fileList) {
+				String vf_code=file.getVf_code();
+				//실제 업로드 폴더에서 해당 파일을 삭제한다.
+				String saveFileName=file.getVf_sysname();
+				File deleteFile=new File(path+saveFileName);
 
-			if(deleteFile.exists()) {
-				deleteFile.delete();
-				log.info("삭제 완료!");
-			}else {
-				log.info("해당 파일이 존재하지 않습니다.");
+				if(deleteFile.exists()) {
+					deleteFile.delete();
+					log.info("삭제 완료!");
+				}else {
+					log.info("해당 파일이 존재하지 않습니다.");
+				}
+
+				cmDao.deleteVideoOne(vf_code);
 			}
 
-			cmDao.deleteVideoOne(vf_code);
+
+			//강의에 등록된 동영상 목록을 삭제한다.
+			cmDao.deleteVideo(v_code);
+
+			//강의에 등록된 이미지를 삭제한다.
+			cmDao.deleteClassImages(p_code);
+
+			//강의를 삭제한다.
+			cDao.deleteClass(p_code);
+		}else if(p_code.contains("ofc_")) {
+			String scl_code=cmDao.getSclCode(p_code);
+			//scl_code에 저장된 일정을 삭제한다.
+			cmDao.deleteSchedule(scl_code);
+			
+			//scl_code를 삭제한다.
+			cmDao.deleteScList(scl_code);
+			
+			//p_code에 해당하는 강의를 삭제한다.
+			cDao.deleteOffClass(p_code);
 		}
-
-
-		//강의에 등록된 동영상 목록을 삭제한다.
-		cmDao.deleteVideo(v_code);
-
-		//강의에 등록된 이미지를 삭제한다.
-		cmDao.deleteClassImages(onc_code);
-
-		//강의를 삭제한다.
-		cDao.deleteClass(onc_code);
 
 		mv.setViewName("redirect:./cMypage");
 
@@ -756,12 +872,78 @@ public class MemberService {
 		mv.setViewName("mypage/cmypage_qna_list");
 		return mv;
 	}
-	
+
+///////////////////////////////////////////////////////////////판매자
 	public ModelAndView getProductList() {
 		mv=new ModelAndView();
 		
+		//회원의 상품 목록을 가져온다.
+		List<DealerProductInfoDto> myprodList=sDao.getMyProdList(loginMember.getM_email());
+		
+		mv.addObject("myprodList",myprodList);
 		
 		mv.setViewName("mypage/dmypage_main");
+		return mv;
+	}
+	
+	public ModelAndView insertNewProduct(MultipartHttpServletRequest multi) {
+		mv=new ModelAndView();
+		/*
+		 * private int p_price; 
+
+		 */
+		ProductDto prod=new ProductDto();
+		prod.setP_title(multi.getParameter("p_title"));
+		prod.setP_amount(Integer.parseInt(multi.getParameter("p_amount")));
+		prod.setP_dealer(loginMember.getM_name());
+		prod.setP_m_email(loginMember.getM_email());
+		prod.setP_cts_code(multi.getParameter("p_cts_code"));
+		prod.setP_price(Integer.parseInt(multi.getParameter("p_price")));
+		
+		try {
+			sDao.insertNewProd(prod);
+			//강좌에 이미지 저장
+			FilesDto file=new FilesDto();
+			file.setF_pcode(prod.getP_code());
+			file.setF_cts_code(prod.getP_cts_code());
+
+			imageUp(multi, file);
+			
+			mv.setViewName("redirect:./dMypage");
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			mv.setViewName("redirect:./dMyNewProd");
+		}
+		
+		mv.setViewName("redirect:./dMypage");
+		return mv;
+	}
+	
+	public ModelAndView updateProduct(String p_code, String up_amount) {
+		mv=new ModelAndView();
+		ProductDto prod=new ProductDto();
+		prod.setP_code(p_code);
+		int p_amount=Integer.parseInt(up_amount);
+		prod.setP_amount(p_amount);
+		
+		sDao.updateProd(prod);
+		
+		mv.setViewName("redirect:./dMypage");
+		
+		return mv;
+	}
+
+	public ModelAndView deleteProduct(String p_code) {
+		mv=new ModelAndView();
+			
+		//p_code에 해당하는 상품의 state를 1(삭제 요청)로 변경
+		sDao.delRequestProd(p_code);
+		
+		mv.setViewName("redirect:./dMypage");
+		
 		return mv;
 	}
 
@@ -780,10 +962,16 @@ public class MemberService {
 			folder.mkdir();
 		}
 
-
-		List<MultipartFile> thumbnail=multi.getFiles("ofthumbnail");
-		for(int i=0;i<thumbnail.size();i++) {
+		List<MultipartFile> thumbnail=null;
+		if(file.getF_pcode().contains("p_")) {
+			thumbnail=multi.getFiles("pthumbnail");
+			file.setF_code("fpth_");
+		}else if(file.getF_pcode().contains("ofc_")) {
+			thumbnail=multi.getFiles("ofthumbnail");
 			file.setF_code("fofth_");
+		}
+		
+		for(int i=0;i<thumbnail.size();i++) {
 			MultipartFile mf=thumbnail.get(i);
 			//실제 파일명 가져오기
 			String oriName=mf.getOriginalFilename();
@@ -804,9 +992,16 @@ public class MemberService {
 			cmDao.imageInsert(file);
 		}
 
-		List<MultipartFile> spec=multi.getFiles("ofspec");
-		for(int i=0;i<spec.size();i++) {
+		List<MultipartFile> spec=null;
+		if(file.getF_pcode().contains("p_")) {
+			spec=multi.getFiles("pspec");
+			file.setF_code("fpsp_");
+		}else if(file.getF_pcode().contains("ofc_")) {
+			spec=multi.getFiles("ofspec");
 			file.setF_code("fofsp_");
+		}
+
+		for(int i=0;i<spec.size();i++) {
 			MultipartFile mf=spec.get(i);
 			//실제 파일명 가져오기
 			String oriName=mf.getOriginalFilename();
@@ -828,10 +1023,15 @@ public class MemberService {
 
 		}
 
-		List<MultipartFile> content=multi.getFiles("ofcontent");
-		log.info(content.size()+"");
-		for(int i=0;i<content.size();i++) {
+		List<MultipartFile> content=null;
+		if(file.getF_pcode().contains("p_")) {
+			content=multi.getFiles("pcontent");
+			file.setF_code("fpco_");
+		}else if(file.getF_pcode().contains("ofc_")) {
+			content=multi.getFiles("ofcontent");
 			file.setF_code("fofco_");
+		}
+		for(int i=0;i<content.size();i++) {  
 			MultipartFile mf=content.get(i);
 			//실제 파일명 가져오기
 			String oriName=mf.getOriginalFilename();
@@ -982,5 +1182,7 @@ public class MemberService {
 		return mv;
 
 	}
+
+
 
 }

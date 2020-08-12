@@ -74,7 +74,7 @@
 				<ul class="nav nav-tabs" role="tablist" id="mytab">
 					<c:forEach var="ccInfo" items="${ccInfoList}">	
 					<li role="presentation" name="${ccInfo.onc_code}">
-						<a href="#${ccInfo.onc_code}" aria-controls="home" role="tab" data-toggle="tab">${ccInfo.onc_code}</a>
+						<a href="#${ccInfo.onc_code}" aria-controls="home" role="tab" data-toggle="tab">${ccInfo.onc_title}</a>
 					</li>
 					</c:forEach>
 				</ul>
@@ -82,7 +82,7 @@
 					<div class="c_myclass_info" id="${ccInfo.onc_code}">
 						<img src="resources/upload/${ccInfo.f_sysname} " alt="">
 						<div class="c_myclass_detail">
-							<div style="font-size: 13pt; font-weight: bold;">${ccInfo.onc_title }</div>
+							<div style="font-size: 13pt; font-weight: bold;">${ccInfo.cts_name} | ${ccInfo.onc_title }</div>
 							<div>${ccInfo.onc_content}</div>
 						</div>
 						<p class="mypage_sub_title" style="clear:both;">등록 정보</p>

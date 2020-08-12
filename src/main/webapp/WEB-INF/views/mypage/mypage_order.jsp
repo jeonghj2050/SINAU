@@ -108,7 +108,7 @@ $(function(){
 											<!-- Footer -->
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default"
-													onclick="cancleOrder('prod')">주문취소</button>
+													onclick="cancleOrder()">주문취소</button>
 												<button type="button" class="btn btn-default"
 													data-dismiss="modal">닫기</button>
 											</div>
@@ -129,7 +129,7 @@ $(function(){
 											<!-- body -->
 											<div class="modal-body" style="text-align: left;">
 												<input type="hidden" name="sort" value="prod">
-												<input type="hidden" name="ref_ord_code" id="ref_ord_code"> 
+												<input type="hidden" name="ref_ord_code" class="ref_ord_code"> 
 												<input type="radio" name="ref_reson" value="더 이상 구매를 원하지 않습니다.">1.더
 												이상 구매를 원하지 않습니다.<br> <input type="radio" name="ref_reson" 
 													value="실수로 구매하였습니다.">2.실수로 구매하였습니다.<br> <input
@@ -209,7 +209,7 @@ $(function(){
 									<c:when test="${offclass.ord_state == 1}">
 
 									</c:when>
-								</c:choose> <c:if test="${offclass.ord_state == 2}">
+								</c:choose> <c:if test="${offclass.ord_state == 4}">
 									<button class="table-btn">환불</button>
 								</c:if> <c:if test="${offclass.ord_state == 3}">
 									<span>환불진행중</span>
@@ -228,15 +228,16 @@ $(function(){
 	var ord_code="";
 	var ref_ord_code="";
 	$(document).ready(function() {     
-	    $('#cancleOrder1').on('show.bs.modal', function(event) {          
+	    $('#cancleOrder').on('show.bs.modal', function(event) {          
 	    	ord_code = $(event.relatedTarget).data('notifyid');
+	    	
 	    });
 	    $('#refund').on('show.bs.modal', function(event) {          
 	    	ref_ord_code = $(event.relatedTarget).data('notifyid');
-	    	$('#ref_ord_code').val(ref_ord_code);
+	    	$('.ref_ord_code').val(ref_ord_code);
 	    });
 	});
-	function cancleOrder(sort){
+	function cancleOrder(){
 		var select;
 		var sort=sort;
 		for(var i=0;i<document.getElementsByName('reson').length;i++){
@@ -244,6 +245,7 @@ $(function(){
 				select=document.getElementsByName('reson')[i].value;
 			}
 		}
+		console.log(ord_code)
 		location.href='./cancleOrder?sort='+sort+"&ord_code="+ord_code;
 	}
 	

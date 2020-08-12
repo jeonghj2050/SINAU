@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,9 +36,9 @@ html {
 			<div class="member_content">
 				<div class="contents">
 					<form class="memberinfo-form" action="idfind" method="post">
-						<input type="text" class="idfind" id="mname" name="m_name"
+						<input type="text" class="idfind" id="mname1" name="mname"
 							placeholder="이름"> <input type="text" class="idfind"
-							id="mphone" name="m_phone" placeholder="전화번호"> <input
+							id="mphone1" name="mphone" placeholder="전화번호"> <input
 							type="submit" class="id-btn" value="이메일 찾기">
 					</form>
 				</div>
