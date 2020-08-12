@@ -445,7 +445,7 @@ public class ClassService {
 		mv = new ModelAndView();
 
 		List<TotalInfo> totalList = cDao.gettotalList();
-		System.out.println(totalList);
+		
 		mv.addObject("totalList", totalList);
 
 		mv.setViewName("home");
