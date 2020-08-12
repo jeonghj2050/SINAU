@@ -209,12 +209,9 @@ $(document).ready(function(){
 								<div class="yb-email lecture2">${bitem.cts_name}</div>								
 								<div class="yb-date lecture5">${bitem.y_update}</div>
 								<div class="yb-del lecture6">
-									<p id="del1">
+									<p id="del">
 										<button class="btn-del" onclick="btnclick('${bitem.y_code}')">
 											<b>삭제</b>
-										</button>
-										<button class="btn-write" id="upbtn" onclick="location.href='./youtubeupdate?y_code=${bitem.y_code}'">
-										수정
 										</button>
 									</p>
 								</div>

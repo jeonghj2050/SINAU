@@ -90,5 +90,45 @@
 
 	});
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var msg = "${msg}";
+	console.log(msg);
+	if(msg != ""){
+		alert(msg);
+		location.reload(true);
+	}
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var chk = "${check}";
+	
+	if(chk == "0"){
+		alert("회원가입 실패!");
+		location.reload(true);
+	}
+	if(chk == "1"){
+		alert("회원가입 성공!");
+		location.reload(true);
+	}
+	if(chk == "2"){
+		alert("로그인 성공!");
+		location.reload(true);
+	}
+	if(chk == "3"){
+		alert("로그인 실패!");
+		location.reload(true);
+	}
+	if(chk == "4"){
+		alert("탈퇴한 회원 이메일입니다!");
+		location.reload(true);
+	}
+	if(chk == "5"){
+		alert("아직 승인 받지않은 이메일입니다!");
+		location.reload(true);
+	}
 
+});
+</script>
 </html>
