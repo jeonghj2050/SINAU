@@ -10,5 +10,6 @@ public class AdYouClassDto {
 	private String y_title;
 	private String y_profile;
 	private Date y_update;
-	private String y_m_email;
+	private String y_cts_code;
+	private String cts_name;
 }

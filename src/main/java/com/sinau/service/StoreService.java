@@ -42,7 +42,7 @@ public class StoreService {
 	@Autowired
 	MemberDao mDao;
 	@Autowired
-	StoreDao sDao;
+	StoreDao sDao;  
 	@Autowired
 	ProductListDao plDao;
 	@Autowired
@@ -54,7 +54,7 @@ public class StoreService {
 	WarningDao wDao;
 
 
-	//상품 탑10
+	//상품 탑10 
 	public ModelAndView getProductList(String cts_code) {
 		String view=null;
 		String msg=null;

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.dto.OrderDto;
+import com.sinau.dto.PInfoPaymentsDto;
 import com.sinau.service.ClassService;
 import com.sinau.service.PaymentService;
 
@@ -22,10 +23,11 @@ public class PaymentController {
 	private PaymentService pServ;
 	ModelAndView mv;
 
-	@GetMapping("payment")
-	public ModelAndView payment(String ofc_code,String sc_code) {
-		log.info("offlinePayment() : " + ofc_code);		
-		mv =pServ.getOffPay(ofc_code, sc_code);
+	//오프라인 -> 페이먼트 이동 메소드
+	@GetMapping("offPayment")
+	public ModelAndView payment(String pay_pcode, String sc_code) {
+		log.info("offlinePayment() : " + pay_pcode + "Aaaaa" + sc_code);		
+		mv =pServ.getPayment(pay_pcode, sc_code);
 		
 		return mv;
 	}
@@ -51,5 +53,7 @@ public class PaymentController {
 		
 		return msg;
 	}
+	
+	
 
 }

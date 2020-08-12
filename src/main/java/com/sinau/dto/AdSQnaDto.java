@@ -10,5 +10,5 @@ public class AdSQnaDto {
 	private String email;
 	private String name;
 	private Date dates;
-	private String code;
+	private String q_code;
 }
