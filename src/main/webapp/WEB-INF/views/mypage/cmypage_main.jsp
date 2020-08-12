@@ -9,7 +9,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SINAU 온라인 강의</title>
-
+<link
+	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"
+	rel="stylesheet">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -23,7 +25,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="resources/css/style.css?a">
+<link rel="stylesheet" href="resources/css/home.css">
 <link rel="stylesheet" href="resources/css/mypage.css?a">
 <script>
         $(function(){
@@ -93,9 +95,9 @@
 						</div>
 						<div style="float:right;">
 							<c:if test="${ccInfo.onc_rstnum le 0 }">
-								<button class="my_default_btn" onclick="location.href='./cMyClassDel?p_code=${ccInfo.onc_code}'">강의 삭제</button>
+								<button class="my_default_btn2" onclick="location.href='./cMyClassDel?p_code=${ccInfo.onc_code}'">강의 삭제</button>
 							</c:if>
-							<button class="my_default_btn" onclick="location.href='./cMyClassUp?up_p_code=${ccInfo.onc_code}'">강의 수정</button>
+							<button class="my_default_btn2" onclick="location.href='./cMyClassUp?up_p_code=${ccInfo.onc_code}'">강의 수정</button>
 						</div>
 						<p class="mypage_sub_title" style="clear:both;">수강생 정보</p>
 						<div class="c_myclass_stuList">
@@ -126,9 +128,9 @@
 						</div>
 						<div style="float:right;">
 							<c:if test="${cofInfo.ofc_rstnum le 0 }">
-								<button class="my_default_btn" onclick="location.href='./cMyClassDel?p_code=${cofInfo.ofc_code}'">강의 삭제</button>
+								<button class="my_default_btn2" onclick="location.href='./cMyClassDel?p_code=${cofInfo.ofc_code}'">강의 삭제</button>
 							</c:if>
-							<button class="my_default_btn" onclick="location.href='./cMyClassUp?up_p_code=${cofInfo.ofc_code}'">강의 수정</button>
+							<button class="my_default_btn2" onclick="location.href='./cMyClassUp?up_p_code=${cofInfo.ofc_code}'">강의 수정</button>
 						</div>
 						<p class="mypage_sub_title" style="clear:both;">수강생 정보</p>
 						<div class="c_myclass_stuList">

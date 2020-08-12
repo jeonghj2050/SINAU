@@ -8,8 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SINAU 온라인 강의</title>
 
+<title>SINAU 온라인 강의</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"
+	rel="stylesheet">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -109,7 +112,7 @@ $(document).ready(function(){
 								수업일 : 
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${onlineClass.onc_sdate}"/> / <fmt:formatDate pattern="yyyy-MM-dd" value="${onlineClass.onc_edate}"/>
 							</div>
-							<%-- <div class="class_status">
+							 <div class="class_status">
 								<c:choose>
 									<c:when test="${onlineClass.mcl_state == 1}">
 										<button class="my_default_btn" data-target="#refund"
@@ -122,8 +125,7 @@ $(document).ready(function(){
 								<c:if test="${onlineClass.mcl_state == 4}">
 									<div>환불완료</div>
 								</c:if>
-							</div> --%>
-						</div>
+							</div>
 					</div>
 				</div>
 			</c:forEach>
