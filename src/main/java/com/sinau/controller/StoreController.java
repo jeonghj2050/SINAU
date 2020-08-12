@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sinau.dto.MemberDto;
 import com.sinau.dto.PReviewDto;
 import com.sinau.dto.WarningDto;
 //import com.sinau.dto.ProductListDto;

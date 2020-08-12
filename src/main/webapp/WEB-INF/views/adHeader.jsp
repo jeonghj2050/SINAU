@@ -24,7 +24,6 @@
 		</nav>
 		<nav class="menu-bar1">
 			<ul class="sub">
-				<li class="menusub"><a href="./youtube">유투버</a></li>
 				<li class="adminlogo">관리자모드</li>
 			</ul>
 		</nav>

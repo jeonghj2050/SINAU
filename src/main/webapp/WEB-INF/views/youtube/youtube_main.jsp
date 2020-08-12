@@ -19,36 +19,46 @@
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 
-	<section class="section-home">
+	<section class="section-home11">
 		<div class="youtube-home">
-			<div class="image">대표 이미지</div>
+			<div class="image"><img src="resources/images/bbb.jpg" width="1300" height="300"></div>
 		</div>
 		<article class="childart1">
-				<h1>상품 top10</h1>
+				<h1>유튜브 TOP10</h1>
 				<!-- Swiper -->
 				<div class="swiper-container swc1" style="width: 1300px;">
 					<div class="swiper-wrapper">
+					<c:forEach var="y10" items="${yc10List}" begin="0" end="9">
 						<div class="swiper-slide">
-							<img src="resources/download/${yitem.y_title}" width="300px"
-								height="300px">
+							<a href="ycontents?y_code=${y10.y_code}">
+							<img src="resources/upload/${y10.f_sysname}" width="300px"
+								height="300px"></a>
 							<div class="swiper-text">
-								공예
-								<div class="y_title">${yitem.y_title}</div>
-								<div class="like_view">
-									<span class="like_icon"><svg width="8px" height="8px"
-											viewBox="0 0 16 16" class="bi bi-heart-fill"
-											fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-												d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-          </svg></span> 0
-								</div>
+								<div class="y_name">${y10.cts_name}</div>
+								<div class="y_title"><a href="ycontents?y_code=${y10.y_code}">${y10.y_title}</a></div>
 							</div>
 						</div>
+						</c:forEach>
 					</div>
 					<!-- Add Arrows -->
 					<div class="swiper-button-next"></div>
 					<div class="swiper-button-prev"></div>
 				</div>
+			</article>
+			<article class="childart5">
+				<h1>전체 유투버</h1>
+				<!-- Swiper -->
+					<c:forEach var="y" items="${ycList}">
+						<div class="swiper-slide5">
+							<a href="ycontents?y_code=${y.y_code}">
+							<img src="resources/upload/${y.f_sysname}" width="300px"
+								height="300px"></a>
+							<div class="swiper-text5">
+								<div class="y_name">${y.cts_name}</div>
+								<div class="y_title"><a href="contents?y_code=${y.y_code}">${y.y_title}</a></div>
+							</div>
+						</div>
+					</c:forEach>
 			</article>
 	</section>
 	<footer>

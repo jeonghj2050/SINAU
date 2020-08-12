@@ -25,7 +25,7 @@
 			</ul>
 		</nav>
 	</div>
-	<div class="menu">
+	<div class="menu1">
 		<nav class="menu-bar">
 			<ul>
 				<li class="menu"><a href="./online">온라인</a></li>
@@ -35,7 +35,7 @@
 		</nav>
 		<nav class="menu-bar1">
 			<ul class="sub">
-				<li class="menusub"><a href="./youtube">유투버</a></li>
+				<li class="menusub"><a href="./youtuber">유투버</a></li>
 			</ul>
 		</nav>
 	</div>

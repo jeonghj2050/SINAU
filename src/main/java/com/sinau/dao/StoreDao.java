@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sinau.dto.DealerProductInfoDto;
 import com.sinau.dto.OrderDto;
+import com.sinau.dto.PPayInfoDto;
 import com.sinau.dto.ProdLikeDto;
 import com.sinau.dto.ProdOrdersDto;
 import com.sinau.dto.ProductDto;
@@ -23,4 +24,7 @@ public interface StoreDao {
 	void updateProd(ProductDto prod);
 	//상품 삭제 요청하는 메소드
 	void delRequestProd(String p_code);
+	
+	//
+	PPayInfoDto getProdApplyInfo(String pay_pcode);
 }

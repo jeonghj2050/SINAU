@@ -13,6 +13,6 @@ public class OffInfoDto {
 	private int ofc_sale;
 	private int l_count;
 	private int ofc_view;
-	private String f_oriname;
+	private String f_sysname;
 	private String sc_place; 
 }

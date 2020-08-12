@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 public class RefundInfoDto {
 	private int num;
-	private int rnum;
 	private int ord_kind;
 	private Timestamp ord_date;
 	private int ord_amount;

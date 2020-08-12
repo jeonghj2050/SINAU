@@ -17,19 +17,28 @@ import com.sinau.dto.MyOnlineInfoDto;
 import com.sinau.dto.OffClassDto;
 import com.sinau.dto.OffCtsDto;
 import com.sinau.dto.OffInfoDto;
+import com.sinau.dto.OffInfoSpecDto;
+import com.sinau.dto.CategoryDto;
+import com.sinau.dto.ClassroomDto;
+import com.sinau.dto.CreatorOffInfoDto;
+import com.sinau.dto.CreatorOnInfoDto;
+import com.sinau.dto.FilterCtsDto;
 import com.sinau.dto.OffLikeDto;
 import com.sinau.dto.OffListDto;
 import com.sinau.dto.OffOrdersDto;
 import com.sinau.dto.OffScheduleDto;
 import com.sinau.dto.OnListDto;
-import com.sinau.dto.OnlineClassDto;
+import com.sinau.dto.OnPayInfoDto;
 import com.sinau.dto.OnlineLikeDto;
 import com.sinau.dto.OnlineOrdersDto;
 import com.sinau.dto.OrderDto;
+import com.sinau.dto.TotalInfo;
+import com.sinau.dto.OnlineClassDto;
 import com.sinau.dto.VideoDto;
 import com.sinau.dto.VideoFeedDto;
 import com.sinau.dto.VideoFileDto;
 import com.sinau.dto.VideoListDto;
+import com.sinau.dto.YoutubeDto;
 
 public interface ClassDao {
    //email에 해당하는 회원의 주문 내역을 가져온다.
@@ -80,9 +89,7 @@ public interface ClassDao {
    String getOffLoc(String ofc_code);
    
    //디테일 사진 가져오는 메소드 - off
-   String getInfoSpec1(String ofc_code);
-   String getInfoSpec2(String ofc_code);
-   String getInfoSpec3(String ofc_code);
+	OffInfoSpecDto getOffInfoSpec(String ofc_code);
    
    // 오프라인 강좌 시간 장소 가져오는 메소드 - off
    List<OffInfoDto> getOffInfoDate(String ofc_code);
@@ -94,13 +101,15 @@ public interface ClassDao {
    List<OffListDto> getOffCateList(String cts_code);
    
    //현제 카테고리 명 가져오는 메소드 - off
-   String getCateName(String cts_code);
+  	CategoryDto getCateInfo(String cts_code);
    
    //오프라인 강좌 날짜 시간 장소 가져오는 메소드 - off
    List<OffScheduleDto> getOffScehdule(String ofc_code);
    
    // 선택한 오프라인 스케줄 가져오는 메소드 - off
    List<OffScheduleDto> getOffScheduleSel(String sc_code);
+
+	OffScheduleDto getOffSchedultPay(String sc_code);
    
    //onc_code에 해당하는 강좌 정보를 가져온다.
    CreatorOnInfoDto getClassInfo(String onc_code);
@@ -125,6 +134,23 @@ public interface ClassDao {
    ClassroomDto getCR(HashMap<String, Object> hashMap);
    
    void deleteOffClass(String p_code);
+
+//필터 카테고리 불러오기
+	List<FilterCtsDto> getFilter1List();
+	List<FilterCtsDto> getFilter2List();
+	List<FilterCtsDto> getFilter3List();
+
+	//필터 값에 따라 정렬 값 불러오기
+	// List<OffListDto> getOffCateFilterList(String cts_code, String filter1, String filter2, String filter3);
+
+	//	//
+	//	List<OffListDto> getOffCateFilterList(String cts_code);
+
+	OnListDto getOnInfoPay(String onc_code);
+
+	// payment로 넘어가는 online 클래스 정보 가져오기
+	OnPayInfoDto getOnApplyInfo(String pay_pcode);
+
 
 /*은경 파트*/
    //온라인 강의 섬네일용 정보를 가져옴: online_main
@@ -178,4 +204,7 @@ public interface ClassDao {
 	
 	
 /*은경 파트*/
+
+	List<TotalInfo> gettotalList();
+
 }

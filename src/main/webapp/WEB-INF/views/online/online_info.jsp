@@ -6,51 +6,51 @@
 <html lang="ko">
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="resources/css/home.css?a">
-	<link rel="stylesheet" href="resources/css/online_info.css?ver=1.7">
+   <link rel="stylesheet" href="resources/css/home.css?a">
+   <link rel="stylesheet" href="resources/css/online_info.css?ver=1.7">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>크리에이터 상세화면</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
-    	//탭이동
-	    $(document).ready(function () {
-	        //  $('.show1').show(); //페이지를 로드할 때 표시할 요소
-	        $('.show2').hide(); //페이지를 로드할 때 숨길 요소
-	        
-			console.log('${onInfo.l_state}')
-	        if("${onInfo.l_state}" == '0'){
-	        	$('.full_heart').hide();
-	        }
-	        else{
-	        	$('.unfilled_heart').hide();
-	        }
-	        
-	        $('.sharebtn').click(function () {
-	            //   $ ('.show1').hide(); //클릭 시 첫 번째 요소 숨김
-	            $('.show2').show(); //클릭 시 두 번째 요소 표시
-	            return false;
-	        });
-	/*
-	        $('.unfilled_heart').click(function () {
-	            $('.unfilled_heart').hide();
-	            $('.full_heart').show();
-	        });
-	
-	        $('.full_heart').click(function () {
-	            $('.full_heart').hide();
-	            $('.unfilled_heart').show();
-	        });
-	        */
-	        $('.closer').click(function () {
-	            $('.show2').hide();
-	            return false;
-	        });
-	    	
-	    });
-	    
-	    //공유하기 
-	    $(document)
+       //탭이동
+       $(document).ready(function () {
+           //  $('.show1').show(); //페이지를 로드할 때 표시할 요소
+           $('.show2').hide(); //페이지를 로드할 때 숨길 요소
+           
+         console.log('${onInfo.l_state}')
+           if("${onInfo.l_state}" == '0'){
+              $('.full_heart').hide();
+           }
+           else{
+              $('.unfilled_heart').hide();
+           }
+           
+           $('.sharebtn').click(function () {
+               //   $ ('.show1').hide(); //클릭 시 첫 번째 요소 숨김
+               $('.show2').show(); //클릭 시 두 번째 요소 표시
+               return false;
+           });
+   /*
+           $('.unfilled_heart').click(function () {
+               $('.unfilled_heart').hide();
+               $('.full_heart').show();
+           });
+   
+           $('.full_heart').click(function () {
+               $('.full_heart').hide();
+               $('.unfilled_heart').show();
+           });
+           */
+           $('.closer').click(function () {
+               $('.show2').hide();
+               return false;
+           });
+          
+       });
+       
+       //공유하기 
+       $(document)
         .on(
               "click",
               "#sh-link",
@@ -180,15 +180,15 @@
         <jsp:include page="../header.jsp"></jsp:include>
     </header>
     <section>
-		<div class="imgContainer">
-			<c:set var="imgNum" value="0" />
-			<c:forEach var="spec" items="${onSpecList}" begin="0" end="2">
-				<c:set var="imgNum" value="${imgNum + 1}" />
-				<div class="img${imgNum}">
-					<img id="img${imgNum}"src="resources/upload/${spec.f_sysname}">
-				</div>
-			</c:forEach>
-		</div>
+      <div class="imgContainer">
+         <c:set var="imgNum" value="0" />
+         <c:forEach var="spec" items="${onSpecList}" begin="0" end="2">
+            <c:set var="imgNum" value="${imgNum + 1}" />
+            <div class="img${imgNum}">
+               <img id="img${imgNum}"src="resources/upload/${spec.f_sysname}">
+            </div>
+         </c:forEach>
+      </div>
         <div class="wrap">
             <div class="intro">
                 <div class="spec_title">
@@ -198,7 +198,7 @@
 				클래스룸</a> 
                 </div>
                 <div class="speci1 content"><img id="speci1 content" 
-                	src="resources/upload/${onInfo.f_content}"></div>
+                   src="resources/upload/${onInfo.f_content}"></div>
                 <div class="drWrap">
                 <div class="sinfo_ddate">
                     <div class="sp_title">배송 일정</div>
@@ -293,14 +293,15 @@
                             <span class="like_num">공유하기</span>
                         </button></div>
                 </div>
-                <button type="button" class="class_submitbtn" color="orange" fill="true"><span class="sc-fzoyTs jZUSDr">
-                        <span>클래스 신청하기</span></span></button>
+                <a href="apply?pay_pcode=${onInfo.onc_code}" 
+				class="class_submitbtn" color="orange" fill="true">클래스 신청하기</a>
+				<div>
                 <div>
                     <p class="refund_alert">키트 미개봉 시, <fmt:formatDate value="${onInfo.onc_sdate}" pattern="yyyy.MM.dd" />까지 전액 환불 보장</p>
                 </div>
             </div>
-			
-			<!-- 공유하기 모달 -->
+         
+         <!-- 공유하기 모달 -->
             <div class="sc-pDbHj jvrfBM sc-pZCuu fVtWky show2">
                 <div class="sc-oTaid fgxYOw" style="min-height: 0px;">
                     <div class="sc-paWVw gzcrzB">
@@ -370,13 +371,11 @@
                 </div>
             </div>
 
-
-
         </div>
     </section>
     <div class="footer_wrap" style="right: 0;">
         <footer class="footer">
-        	<jsp:include page="../footer.jsp"></jsp:include>
+           <jsp:include page="../footer.jsp"></jsp:include>
         </footer>
     </div>
 </body>

@@ -1,28 +1,32 @@
 package com.sinau.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.sinau.dao.MemberDao;
-import com.sinau.dto.MemberDto;
-import com.sinau.service.CommonService;
-import com.sinau.service.MemberService;
-import com.sinau.service.ServiceCenterService;
+import com.sinau.service.ClassService;
+import com.sinau.service.YoutubeClassService;
+
 
 @Controller
 public class HomeController {
+	ModelAndView mv;
+	
+	@Autowired
+	ClassService cServ;
+	
+	@Autowired
+	YoutubeClassService ycServ;
+	
 	@GetMapping("/")
-	public String home() {
+	public ModelAndView home() {
 		
-		return "home";
+		mv = cServ.onlineList();
+		
+		return mv;
 	}
-
-
 
 	@GetMapping("loginFrm")
 	public String loginFrm() {
@@ -35,8 +39,6 @@ public class HomeController {
 
 		return "joinFrm";
 	}
-
-
 	
 	@GetMapping("servicecenter_main")
 	public String servicecenter() {
@@ -54,5 +56,20 @@ public class HomeController {
 	public String pwd() {
 		
 		return "pwd";
+	}
+	
+	@GetMapping("classcontents")
+	public ModelAndView classcontents(String totalcode) {
+		mv = new ModelAndView();
+		
+		if(totalcode.contains("onc")) {
+			String onc_code = totalcode;
+			mv = cServ.getOnlineInfo(onc_code);
+		}else if (totalcode.contains("ofc")) {
+			String ofc_code = totalcode;
+			mv = cServ.getOffInfo(ofc_code);
+		}
+		
+		return mv;
 	}
 }

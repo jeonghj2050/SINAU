@@ -79,11 +79,11 @@ $(document).ready(function(){
             		 	  </c:if>
             		</div>
 					<div class="t-retitle">${total.onc_title}</div>
-					<div class="t-orddate"><fmt:formatDate pattern="yyyy-MM-dd" value="${offitem.ord_date}"/></div>
+					<div class="t-orddate"><fmt:formatDate pattern="yyyy-MM-dd" value="${total.ord_date}"/></div>
 					<div class="t-amount">${total.ord_amount}</div>
 					<div class="t-reason">${total.ref_reason}</div>
 					<div class="t-price">${total.ord_price}</div>
-					<div class="t-redate"><fmt:formatDate pattern="yyyy-MM-dd" value="${offitem.ref_date}"/></div>
+					<div class="t-redate"><fmt:formatDate pattern="yyyy-MM-dd" value="${total.ref_date}"/></div>
 					<div class="t-state">
 					<c:if test="${total.ref_state eq 0 }">
               				  환불 신청 중

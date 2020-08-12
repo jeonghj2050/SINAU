@@ -9,7 +9,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" media="screen"
-	href="../../../resources/css/offline/offline_main.css" />
+	href="resources/css/offline/offline_main.css" />
 
 <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"
@@ -33,7 +33,6 @@
 	src="../../../resources/javascript/jquery-1.7.2.min.js"></script>
 <script type="text/javascript"
 	src="../../../resources/javascript/jquery.alsEN-1.0.min.js"></script>
-	
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#lista1").als({
@@ -82,15 +81,13 @@
 											<div class="s_sumnail">
 												<div class="s_class_img">
 													<img
-														src="resources/images/offline/sum/${offList.f_oriname}">
+														src="resources/upload/${offList.f_sysname}">
 												</div>
 												<div class="s_sumnail-txt">
 													<div class="s_sumnail-txt-top">
 														<div id="s_sub-cate">${offList.cts_name}</div>
 														<div id="s_not">ㆍ&nbsp;</div>
 														<div id="s_creator-name">${offList.ofc_teacher}</div>
-														<%-- <div id="s_not">ㆍ&nbsp;</div>
-														<div id="s_creator-name">${off.ofc_place}</div> --%>
 													</div>
 													<div id="s_online-name">${offList.ofc_title}</div>
 													<div id="s_class_likes">
@@ -125,11 +122,11 @@
 					<h1>최근 업데이트 클래스</h1>
 					<h5>크리에이터가 최근 등록한 클래스예요.</h5>
 					<div id="new">
-						<c:forEach var="off" items="${offList}" begin="0" end="11" step="1">
+						<c:forEach var="off" items="${offList}" >
 							<div>
 						<a href="info?ofc_code=${off.ofc_code}">
 								<div class="class_img">
-									<img src="/resources/images/offline/sum/${off.f_oriname}"
+									<img src="resources/uplaod/${off.f_sysname}"
 										alt="">
 								</div>
 								<article class="on-info1">
