@@ -112,7 +112,7 @@ public class MemberService {
 		member.setM_email(multi.getParameter("m_email"));
 		member.setM_name(multi.getParameter("m_name"));
 		member.setM_pwd(encPwd);
-		member.setM_phone(Integer.parseInt(multi.getParameter("m_phone")));
+		member.setM_phone(multi.getParameter("m_phone"));
 		member.setM_birth(multi.getParameter("m_birth"));
 		if (!(multi.getParameter("m_license") == null)) {
 			member.setM_license(Integer.parseInt(multi.getParameter("m_license")));
@@ -125,7 +125,7 @@ public class MemberService {
 		try {
 
 			mDao.memberInsert(member);
-			rttr.addFlashAttribute("check", 1);
+			rttr.addFlashAttribute("check", 2);
 			view = "redirect:/";
 			
 			if (fcheck == 1) {
@@ -136,7 +136,7 @@ public class MemberService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			view = "redirect:joinFrm";
-			rttr.addFlashAttribute("check", 0);
+			rttr.addFlashAttribute("check", 1);
 		}
 
 		mv.setViewName(view);
@@ -205,21 +205,8 @@ public class MemberService {
 					//회원 구분이 admin일 경우 관리자 페이지로 전환
 					view = "redirect:adMApproval";
 				}
-				else if(member.getM_state() == 2) {
+				else {
 					//리다이렉트로 화면을 전환.
-					rttr.addFlashAttribute("check", 2);
-					view = "redirect:/";
-				}
-				else if(member.getM_state() == 1) {
-					//리다이렉트로 화면을 전환.
-					session.invalidate();
-					rttr.addFlashAttribute("check", 5);
-					view = "redirect:/";
-				}
-				else if(member.getM_state() == 3) {
-					//리다이렉트로 화면을 전환.
-					session.invalidate();
-					rttr.addFlashAttribute("check", 4);
 					view = "redirect:/";
 				}
 				
@@ -244,7 +231,7 @@ public class MemberService {
 		// 세션 정보 지우기
 		session.invalidate();
 
-		return "redirect:/";
+		return "home";
 	}
 
 
@@ -279,7 +266,7 @@ public class MemberService {
 	//로그인 회원의 아이디로 수강 신청한 오프라인 강의의 목록을 가져온다.
 	public ModelAndView getMyOfflineList() {
 		mv=new ModelAndView();
-		System.out.println("");
+
 		//email에 해당하는 회원의 오프라인 주문 내역을 가져온다.
 		List<OrderDto> orderList=cDao.getOrderList(loginMember.getM_email(),"ofc_");	
 
