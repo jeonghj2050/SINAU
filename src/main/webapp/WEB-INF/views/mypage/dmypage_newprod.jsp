@@ -9,6 +9,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SINAU 강의 등록</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"
+	rel="stylesheet">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/mypage.css">
