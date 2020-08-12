@@ -63,7 +63,7 @@ $(document).ready(function(){
 		<h1 class="join-header">SINAU</h1>
 			<h3 class="join-header1">회원 가입</h3>
 		<div class="reaiobutton">
-			<input type="radio" name="radio" id="r1" value="0"><label for="r1">일반</label>&nbsp;
+			<input type="radio" name="radio" id="r1" value="0" checked="checked"><label for="r1">일반</label>&nbsp;
 			<input type="radio" name="radio" id="r2" value="1"><label for="r2">크리에이터</label>&nbsp;
   			<input type="radio" name="radio" id="r3" value="2"><label for="r3">판매자</label>
 		</div><br>	
@@ -91,8 +91,8 @@ $(document).ready(function(){
 			<input type="password"	id="password2" class="login-input" title="비밀번호 재확인" placeholder="비밀번호확인"><br>
 				<span style="height: 25px;"></span>
 				<font id="chkNotice" size="2"></font><br>
-			<input type="text" name="m_group" class="group" value="" title="회원 체크">
-			<input type="text" name="m_state" class="state" value="">
+			<input type="text" name="m_group" class="group" value="nm" title="회원 체크">
+			<input type="text" name="m_state" class="state" value="2">
 			<input type="text" id="phone" name="m_phone" class="login-input" title="연락처"	placeholder="연락처 ex)01000000000"> 
 			<input type="text" id="birth" name="m_birth" class="login-input" title="생년월일" placeholder="생년월일  ex)00000000">
 			<input type="text" id="license" name="m_license" class="login-input" title="사업자번호"	placeholder="사업자번호"><br>

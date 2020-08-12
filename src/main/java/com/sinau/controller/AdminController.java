@@ -130,6 +130,7 @@ public class AdminController {
 	//유튜브 수정페이지 이동
 	@GetMapping("youtubeupdate")
 	public String youtubeupdate(String code) {
+		
 		return "admin/ad_youtube_list";
 	
 	}
