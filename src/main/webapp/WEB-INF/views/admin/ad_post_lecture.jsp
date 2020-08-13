@@ -4,7 +4,7 @@
 <%@ page session="false"%>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="resources/css/adstyle.css?ver=1.2">
+<link rel="stylesheet" href="resources/css/adstyle.css">
 
 <head>
 <meta charset="UTF-8">
@@ -308,7 +308,8 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
-		
+		</div>
+		</div>
 	</section>
 	<footer>
 		<jsp:include page="../footer.jsp"></jsp:include>

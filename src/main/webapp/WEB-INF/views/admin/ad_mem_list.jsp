@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="resources/css/adstyle.css?ver=1.3">
+<link rel="stylesheet" href="resources/css/adstyle.css?ver=1.4">
 
 <head>
 <meta charset="UTF-8">

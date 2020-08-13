@@ -233,7 +233,7 @@ div.mAprovalCate div :hover {
 }
 
 .tabs>#i2.on {
-	background-color: #d0ffff;
+	background-color: #d6edd661;
 }
 
 .tabs>#i3.on {
@@ -246,7 +246,7 @@ div.mAprovalCate div :hover {
 }
 
 .tabs>#i2:hover {
-	background-color: #b4e7f5;
+	background-color: #54775424;
 	color: white;
 }
 
@@ -324,6 +324,9 @@ div.mAprovalCate div :hover {
 	width: 1076px;
 	padding: 80px 25px;
 	background-color: #e8dcc6;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 .approval-2 {
@@ -332,6 +335,9 @@ div.mAprovalCate div :hover {
 	width: 1076px;
 	padding: 80px 25px;
 	background-color: #f4c7b9;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 .approval-3 {
@@ -340,6 +346,9 @@ div.mAprovalCate div :hover {
 	width: 1076px;
 	padding: 80px 25px;
 	background-color: #d9d9ff;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 
@@ -351,6 +360,9 @@ div.mAprovalCate div :hover {
 	width: 1076px;
 	padding: 80px 25px;
 	background-color: #d6edd6;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 .information-2 {
@@ -358,7 +370,10 @@ div.mAprovalCate div :hover {
 	float: left;
 	width: 1076px;
 	padding: 80px 25px;
-	background-color: #d0ffff;
+	background-color: #d6edd661;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 .information-3 {
@@ -367,6 +382,9 @@ div.mAprovalCate div :hover {
 	width: 1076px;
 	padding: 80px 25px;
 	background-color: #dceded;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 /* 게시글관리 - 강의*/
@@ -376,6 +394,9 @@ div.mAprovalCate div :hover {
 	width: 1076px;
 	padding: 50px 25px;
 	background-color: #e4dfee;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 .lecture-2 {
@@ -384,6 +405,9 @@ div.mAprovalCate div :hover {
 	width: 1076px;
 	padding: 50px 25px;
 	background-color: #e7e6f0;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 .lecture-3 {
@@ -392,6 +416,9 @@ div.mAprovalCate div :hover {
 	width: 1076px;
 	padding: 100px 25px;
 	background-color: #c5c7d8;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 /* 게시글 관리 - 판매 */
 
@@ -401,6 +428,9 @@ div.mAprovalCate div :hover {
 	width: 1076px;
 	padding: 80px 25px;
 	background-color: #e8dcc6;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 /* 게시글 관리 - 리뷰 */
 
@@ -412,6 +442,9 @@ div.mAprovalCate div :hover {
 	background-color: #fff;
 	border: 3px solid black;
 	border-radius: 0px 8px 8px 8px;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 .lOnline {
@@ -581,7 +614,9 @@ div#vieww {
 .listBorder{
 	float: left;
 	max-width: 1000px;
-	height: 800px;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 	background-color:#fef8cd;
 	border-radius: 0px 0px 8px 8px;
 }

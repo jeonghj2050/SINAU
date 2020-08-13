@@ -4,7 +4,7 @@
 <%@ page session="false"%>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="resources/css/adstyle.css?ver=1.1">
+<link rel="stylesheet" href="resources/css/adstyle.css?ver=1.3">
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지 고객센터(qna)</title>
