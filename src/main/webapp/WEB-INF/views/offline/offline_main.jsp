@@ -34,6 +34,17 @@
 <script type="text/javascript"
 	src="../../../resources/javascript/jquery.alsEN-1.0.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function() {
+	function gohome() {
+		var id = '${mb.m_email}';
+
+		if (id == '') {
+			location.href = './';
+		} else if (id != '') {
+			location.href = './list';
+		}
+	}
+
 	$(document).ready(function() {
 		$("#lista1").als({
 			visible_items : 3,
@@ -45,6 +56,7 @@
 			direction : "right"
 		});
 	});
+});
 </script>
 </head>
 <body>
@@ -101,10 +113,8 @@
 													<div id="s_class_likes">${offList.l_count}</div>
 													<div id="s_hr"></div>
 													<div id="s_online-price">
-														<fmt:setLocale value="ko_KR" />
-														<fmt:formatNumber type="currency"
-															value="${offList.ofc_sale}" />
-													</div>
+											 <fmt:formatNumber pattern="###,###,###"
+							value="${offList.ofc_sale}" />원</div>
 												</div>
 											</div>
 									</a></li>
@@ -146,8 +156,8 @@
 									<div id="class_likes">${off.l_count}</div>
 									<div id="hr"></div>
 									<div id="online-price">
-										<fmt:setLocale value="ko_KR" />
-										<fmt:formatNumber type="currency" value="${off.ofc_sale}" />
+											 <fmt:formatNumber pattern="###,###,###"
+							value="${off.ofc_sale}" />원
 									</div>
 								</article>
 							</a>

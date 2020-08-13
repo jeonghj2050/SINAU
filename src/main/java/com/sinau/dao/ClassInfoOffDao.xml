@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.sinau.dao.ClassInfoOffDao">
+   <!-- 좋아요 상태 확인하는 쿼리 -->
+   <update id="off_like_check" parameterType="String">
+         UPDATE l
+         SET l_state = 1 
+         WHERE (l_m_email = #{email}) AND (l_pcode = #{ofc_code})
+    </update>
+    
+    <update id="off_like_up" parameterType="String">
+         UPDATE l
+         SET l_count = l_count + 1 
+         WHERE l_pcode = #{ofc_code}
+    </update>
+    
+    <select id="off_getLikes" parameterType="String"  resultType="com.sinau.dto.LikesDto">
+          select * from l
+          WHERE (l_m_email = #{email}) AND (l_pcode = #{ofc_code}) 
+   </select>
+   
+   <update id="off_dislike_check" parameterType="String">
+         UPDATE l
+         SET l_state = 0 
+         WHERE (l_m_email = #{email}) AND (l_pcode = #{ofc_code})
+    </update>
+    
+    <update id="off_dislike_down" parameterType="String">
+         UPDATE l
+         SET l_count = l_count - 1 
+         WHERE l_pcode = #{ofc_code}
+    </update>
+    
+    <select id="off_searchLike" parameterType="String"  resultType="String">
+          select l_code from l
+          WHERE (l_m_email = #{email}) AND (l_pcode = #{ofc_code}) 
+   </select>
+   
+   <insert id="off_like_input"   parameterType="com.sinau.dto.LikesDto"   useGeneratedKeys="true"   keyProperty="l_count">
+      <selectKey keyProperty="l_count" resultType="int" order="BEFORE">
+         SELECT nvl( max(l_count),0) l_count from l
+         where l_pcode = #{l_pcode}
+      </selectKey>
+      INSERT INTO L VALUES('l_'||SEQ_L.NEXTVAL,#{l_count},1,#{l_m_email},#{l_pcode},#{l_cts_code})
+   </insert>
+      <select id="cInfoOff" parameterType="String"  resultType="com.sinau.dto.OffLInfoDto">
+          select distinct * from offinfoList
+          where ofc_code = #{ofc_code}
+   </select>
+</mapper>

@@ -13,6 +13,7 @@ import com.sinau.dao.ClassDao;
 import com.sinau.dao.MemberDao;
 import com.sinau.dao.PaymentDao;
 import com.sinau.dao.pInfoPaymentDao;
+import com.sinau.dto.CouponListDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.MyClassDto;
 import com.sinau.dto.OffInfoDto;
@@ -84,8 +85,8 @@ public class PaymentService {
 
 	// 결제완료시 주문내역, 마이클래스 Insert 메소드
 	@Transactional
-	public ModelAndView completionPay(OrderDto order, String sc_code) {
-		log.info(sc_code + "sc_code dfsdfsg"+order.toString());
+	public ModelAndView completionPay(OrderDto order, String sc_code, String cplcode) {
+		log.info(sc_code + cplcode);
 
 		mv = new ModelAndView();
 
@@ -95,9 +96,11 @@ public class PaymentService {
 		order.setOrd_phone(1012345678);
 		order.setOrd_m_email(member.getM_email());
 
-		String view = null;
-
 		try {
+			
+			if(cplcode != null) {
+				pDao.cpUseDelCheck(cplcode);
+			}
 			pDao.orderInsert(order);
 
 
@@ -142,6 +145,7 @@ public class PaymentService {
 				mv.setViewName("payment/payment_completion");
 			}
 			
+			
 		} catch (Exception e) {
 			log.info("payInsertERROR : " + e);
 			mv.setViewName("payment/payment?ofc_code=" + order.getOrd_pcode() + "&m_email=" + order.getOrd_m_email()
@@ -152,12 +156,11 @@ public class PaymentService {
 	}
 
 	// 쿠폰 Dto 정보 가져오는 메소드
-	public int getPayCoupon(String cpcode) {
-		String view = null;
-		log.info("cpcode : " + cpcode);
+	public int getPayCoupon(String cplcode) {
+		log.info("cplcode : " + cplcode);
 
 		
-		PayCouponDto payCoupList = pDao.getPayCoupon(cpcode);
+		PayCouponDto payCoupList = pDao.getPayCoupon(cplcode);
 
 		log.info(payCoupList.getCp_discount() +  "");
 
