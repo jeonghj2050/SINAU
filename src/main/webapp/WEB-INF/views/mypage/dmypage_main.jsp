@@ -64,7 +64,7 @@
 												<button class="my_default_btn" onclick="location.href='./dMyDelProd?p_code=${prod.p_code}'">삭제 요청</button>
 											</c:when>
 											
-											<c:when test="${prod.p_state eq 1 }">
+											<c:when test="${prod.p_state eq 2 }">
 												<div style="color:red; width:150px; text-align: center; font-weight: bold;">삭제 요청중</div>
 											</c:when>
 										</c:choose>
