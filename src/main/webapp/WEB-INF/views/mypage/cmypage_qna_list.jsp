@@ -99,7 +99,8 @@
 									<c:if test="${feed.v_code eq ccInfo.v_code }">
 										<input type="hidden" name="fb_code" value="${feed.fb_code }" />
 										<tr>
-											<td>${feed.fb_content}</td>
+											<td><a href="classroom?onc_code=${ccInfo.onc_code}&vf_code=${feed.vf_code}&fb_m_email=${feed.fb_m_email}"
+												onclick="window.open(this.href,'_blanck', 'width=1200, height=600'); return false">${feed.fb_content}</a></td>
 											<td>${feed.fb_date}</td>
 											<td>${feed.fb_m_email}</td>
 											<c:if test="${feed.fb_reply eq null }">
