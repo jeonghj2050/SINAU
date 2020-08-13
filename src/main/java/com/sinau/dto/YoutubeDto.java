@@ -8,5 +8,4 @@ public class YoutubeDto {
 	private String y_title;
 	private String cts_name;
 	private String f_sysname;
-	private String y_update;
 }

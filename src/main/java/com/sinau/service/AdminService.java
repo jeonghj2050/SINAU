@@ -359,14 +359,13 @@ public class AdminService {
 			rttr.addFlashAttribute("check", "2");
 			if(fcheck == 1) {
 				//업로드할 파일이 있음.
-				fileUp(multi, youtube);	
+			fileUp(multi, youtube);	
 			}
 		}catch (Exception e) {
 			//DB 삽입 오류 시 글쓰기폼으로 돌아감.
 			view = "redirect:youtubeinsert";
 			rttr.addFlashAttribute("check","1");
 		}
-		
 		
 		return view;
 	}

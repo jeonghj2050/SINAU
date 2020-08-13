@@ -11,7 +11,6 @@ public class MyOffInfoDto {
 	private String m_name;
 	private int mcl_state;
 	private String ofc_code;
-	private int ofc_state;
 	private String ofc_content;
 	private String ofc_title;
 	private String cts_name;
