@@ -94,10 +94,15 @@
 							<div>${ccInfo.onc_rstnum }명 / ${ccInfo.onc_stnum }명</div>
 						</div>
 						<div style="float:right;">
-							<c:if test="${ccInfo.onc_rstnum le 0 }">
-								<button class="my_default_btn2" onclick="location.href='./cMyClassDel?p_code=${ccInfo.onc_code}'">강의 삭제</button>
+							<c:if test="${ccInfo.onc_state!=2 }">
+								<c:if test="${ccInfo.onc_rstnum le 0 }">
+									<button class="my_default_btn" onclick="location.href='./cMyClassDel?p_code=${ccInfo.onc_code}'">강의 삭제</button>
+								</c:if>
+								<button class="my_default_btn" onclick="location.href='./cMyClassUp?up_p_code=${ccInfo.onc_code}'">강의 수정</button>
 							</c:if>
-							<button class="my_default_btn2" onclick="location.href='./cMyClassUp?up_p_code=${ccInfo.onc_code}'">강의 수정</button>
+							<c:if test="${ccInfo.onc_state==2 }">
+								<div>삭제 처리된 강의입니다.</div>
+							</c:if>
 						</div>
 						<p class="mypage_sub_title" style="clear:both;">수강생 정보</p>
 						<div class="c_myclass_stuList">
@@ -127,10 +132,15 @@
 							<div>${cofInfo.ofc_rstnum }명 / ${cofInfo.ofc_stnum }명</div>
 						</div>
 						<div style="float:right;">
-							<c:if test="${cofInfo.ofc_rstnum le 0 }">
-								<button class="my_default_btn2" onclick="location.href='./cMyClassDel?p_code=${cofInfo.ofc_code}'">강의 삭제</button>
+							<c:if test="${cofInfo.ofc_state !=2}">
+								<c:if test="${cofInfo.ofc_rstnum le 0 }">
+									<button class="my_default_btn" onclick="location.href='./cMyClassDel?p_code=${cofInfo.ofc_code}'">강의 삭제</button>
+								</c:if>
+								<button class="my_default_btn" onclick="location.href='./cMyClassUp?up_p_code=${cofInfo.ofc_code}'">강의 수정</button>
 							</c:if>
-							<button class="my_default_btn2" onclick="location.href='./cMyClassUp?up_p_code=${cofInfo.ofc_code}'">강의 수정</button>
+							<c:if test="${cofInfo.ofc_state==2 }">
+								<div>삭제 처리된 강의입니다.</div>
+							</c:if>
 						</div>
 						<p class="mypage_sub_title" style="clear:both;">수강생 정보</p>
 						<div class="c_myclass_stuList">
