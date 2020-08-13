@@ -9,11 +9,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SINAU 강의 등록</title>
-<link
-	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"
-	rel="stylesheet">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="resources/css/home.css">
+<link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/mypage.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -195,11 +192,11 @@
 							<p></p>
 							<span class="class_info_title">시작일</span> <input type="date"
 								name="onc_sdate" > <span
-								class="class_info_title" style="margin-left: 15px">종료일</span> <input type="date"
+								class="class_info_title">종료일</span> <input type="date"
 								name="onc_edate" >
 
 						</div>
-						<button class="my_default_btn2"
+						<button class="my_default_btn"
 							style="float: right; margin-top: 20px;" id="addClassVideoFile"
 							type="button">강의 추가</button>
 						<div class="class_video_list">
@@ -290,7 +287,7 @@
 						</div>
 					</div>
 				</div>
-				<input type="submit" class="my_default_btn2" style="float: right;"
+				<input type="submit" class="my_default_btn" style="float: right;"
 					name="강의 등록"></input>
 			</form>
 		</article>

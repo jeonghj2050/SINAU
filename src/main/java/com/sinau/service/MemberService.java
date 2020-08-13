@@ -112,7 +112,7 @@ public class MemberService {
 		member.setM_email(multi.getParameter("m_email"));
 		member.setM_name(multi.getParameter("m_name"));
 		member.setM_pwd(encPwd);
-		member.setM_phone(multi.getParameter("m_phone"));
+		member.setM_phone(Integer.parseInt(multi.getParameter("m_phone")));
 		member.setM_birth(multi.getParameter("m_birth"));
 		if (!(multi.getParameter("m_license") == null)) {
 			member.setM_license(Integer.parseInt(multi.getParameter("m_license")));
@@ -283,7 +283,7 @@ public class MemberService {
 	//로그인 회원의 아이디로 수강 신청한 오프라인 강의의 목록을 가져온다.
 	public ModelAndView getMyOfflineList() {
 		mv=new ModelAndView();
-
+		System.out.println("");
 		//email에 해당하는 회원의 오프라인 주문 내역을 가져온다.
 		List<OrderDto> orderList=cDao.getOrderList(loginMember.getM_email(),"ofc_");	
 

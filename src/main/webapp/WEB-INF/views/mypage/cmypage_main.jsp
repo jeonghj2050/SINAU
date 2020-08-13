@@ -9,9 +9,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SINAU 온라인 강의</title>
-<link
-	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"
-	rel="stylesheet">
+
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -25,7 +23,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="resources/css/home.css">
+<link rel="stylesheet" href="resources/css/style.css?a">
 <link rel="stylesheet" href="resources/css/mypage.css?a">
 <script>
         $(function(){
@@ -76,7 +74,7 @@
 				<ul class="nav nav-tabs" role="tablist" id="mytab">
 					<c:forEach var="ccInfo" items="${ccInfoList}">	
 					<li role="presentation" name="${ccInfo.onc_code}">
-						<a href="#${ccInfo.onc_code}" aria-controls="home" role="tab" data-toggle="tab">${ccInfo.onc_title}</a>
+											<a href="${ccInfo.onc_code}" aria-controls="home" role="tab" data-toggle="tab">${ccInfo.onc_title}</a>
 					</li>
 					</c:forEach>
 					<c:forEach var="cofInfo" items="${cofInfoList}">	
@@ -87,22 +85,17 @@
 				</ul>
 				<c:forEach var="ccInfo" items="${ccInfoList}">
 					<div class="c_myclass_info" id="${ccInfo.onc_code}">
-						<a href="classroom?onc_code=${ccInfo.onc_code}"><img src="resources/upload/${ccInfo.f_sysname} " alt=""></a>	
+						<a href="classroom?onc_code=${ccInfo.onc_code}&vf_code="><img src="resources/upload/${ccInfo.f_sysname} " alt=""></a>	
 						<div class="c_myclass_detail">
 							<div style="font-size: 13pt; font-weight: bold;">${ccInfo.cts_name } | ${ccInfo.onc_title }</div>
 							<div>${ccInfo.onc_content}</div>
 							<div>${ccInfo.onc_rstnum }명 / ${ccInfo.onc_stnum }명</div>
 						</div>
 						<div style="float:right;">
-							<c:if test="${ccInfo.onc_state!=2 }">
-								<c:if test="${ccInfo.onc_rstnum le 0 }">
-									<button class="my_default_btn" onclick="location.href='./cMyClassDel?p_code=${ccInfo.onc_code}'">강의 삭제</button>
-								</c:if>
-								<button class="my_default_btn" onclick="location.href='./cMyClassUp?up_p_code=${ccInfo.onc_code}'">강의 수정</button>
+							<c:if test="${ccInfo.onc_rstnum le 0 }">
+								<button class="my_default_btn" onclick="location.href='./cMyClassDel?p_code=${ccInfo.onc_code}'">강의 삭제</button>
 							</c:if>
-							<c:if test="${ccInfo.onc_state==2 }">
-								<div>삭제 처리된 강의입니다.</div>
-							</c:if>
+							<button class="my_default_btn" onclick="location.href='./cMyClassUp?up_p_code=${ccInfo.onc_code}'">강의 수정</button>
 						</div>
 						<p class="mypage_sub_title" style="clear:both;">수강생 정보</p>
 						<div class="c_myclass_stuList">
@@ -132,15 +125,10 @@
 							<div>${cofInfo.ofc_rstnum }명 / ${cofInfo.ofc_stnum }명</div>
 						</div>
 						<div style="float:right;">
-							<c:if test="${cofInfo.ofc_state !=2}">
-								<c:if test="${cofInfo.ofc_rstnum le 0 }">
-									<button class="my_default_btn" onclick="location.href='./cMyClassDel?p_code=${cofInfo.ofc_code}'">강의 삭제</button>
-								</c:if>
-								<button class="my_default_btn" onclick="location.href='./cMyClassUp?up_p_code=${cofInfo.ofc_code}'">강의 수정</button>
+							<c:if test="${cofInfo.ofc_rstnum le 0 }">
+								<button class="my_default_btn" onclick="location.href='./cMyClassDel?p_code=${cofInfo.ofc_code}'">강의 삭제</button>
 							</c:if>
-							<c:if test="${cofInfo.ofc_state==2 }">
-								<div>삭제 처리된 강의입니다.</div>
-							</c:if>
+							<button class="my_default_btn" onclick="location.href='./cMyClassUp?up_p_code=${cofInfo.ofc_code}'">강의 수정</button>
 						</div>
 						<p class="mypage_sub_title" style="clear:both;">수강생 정보</p>
 						<div class="c_myclass_stuList">

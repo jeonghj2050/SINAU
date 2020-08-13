@@ -7,7 +7,7 @@
 	<select id="getProductList" parameterType="int"
 		resultType="com.sinau.dto.ProductListDto">
 			<![CDATA[ 
-			SELECT DISTINCT * FROM PLIST_3 where rnum<=#{rnum}
+			SELECT DISTINCT * FROM PLIST2 where rnum<=#{rnum}
 			]]>
 	</select>
 
@@ -21,11 +21,7 @@
 	<select id="getpEleList" parameterType="String"
 		resultType="com.sinau.dto.ProductListDto">
 	<![CDATA[
-		SELECT DISTINCT* FROM PLIST_3 WHERE CTS_CODE=#{cts_code}
 	]]>
-	</select>
-	
-	<select id="getpHList" parameterType="String"
 		resultType="com.sinau.dto.ProductListDto">
 	<![CDATA[
 		SELECT DISTINCT* FROM PLIST_3 WHERE CTS_CODE=#{cts_code}
