@@ -2,6 +2,7 @@ package com.sinau.dao;
 
 import java.util.List;
 
+import com.sinau.dto.CouponListDto;
 import com.sinau.dto.MemberDto;
 import com.sinau.dto.MyClassDto;
 import com.sinau.dto.OffInfoDto;
@@ -23,7 +24,7 @@ public interface PaymentDao {
 	List<PayCouponDto> getPayCouponList(String email);
 	
 	//쿠폰 사용 모달에서 회원이 선택한 쿠폰 정보를 가져온다.
-	PayCouponDto getPayCoupon(String cpcode);
+	PayCouponDto getPayCoupon(String cplcode);
 	
 	// payment에서 회원 정보 가져오는 메소드
 	MemberDto getMemPayInfo(String m_email);
@@ -51,5 +52,8 @@ public interface PaymentDao {
 
 	//쿠폰 유무 확인하는 메소드
 	List<PayCouponDto> getCouponCheck(String m_email);
+
+	//쿠폰 사용시 삭제하는 메소드
+	void cpUseDelCheck(String cplcode);
 
 }

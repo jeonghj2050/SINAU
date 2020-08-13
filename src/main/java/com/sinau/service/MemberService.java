@@ -205,6 +205,23 @@ public class MemberService {
 					//회원 구분이 admin일 경우 관리자 페이지로 전환
 					view = "redirect:adMApproval";
 				}
+				else if(member.getM_state() == 1){
+					//회원 구분이 admin일 경우 관리자 페이지로 전환
+					session.invalidate();
+					rttr.addFlashAttribute("check", 3);
+					view = "redirect:/";
+				}
+				else if(member.getM_state() == 2){
+					//회원 구분이 admin일 경우 관리자 페이지로 전환
+					rttr.addFlashAttribute("check", 2);
+					view = "redirect:adMApproval";
+				}
+				else if(member.getM_state() == 3){
+					//회원 구분이 admin일 경우 관리자 페이지로 전환
+					session.invalidate();
+					rttr.addFlashAttribute("check", 4);					
+					view = "redirect:adMApproval";
+				}
 				else {
 					//리다이렉트로 화면을 전환.
 					view = "redirect:/";
@@ -231,7 +248,7 @@ public class MemberService {
 		// 세션 정보 지우기
 		session.invalidate();
 
-		return "home";
+		return "redirect:/";
 	}
 
 

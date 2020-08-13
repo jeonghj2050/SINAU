@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="resources/css/home.css?a">
 <style type="text/css">
 html {
-	background-color: #f1f1f1 
+   background-color: #f1f1f1 
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -24,38 +24,38 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
-	var sel_file;
-	$(document).ready(function() {
-		$("#member_profile").on("change", fileSelect);
-	});
+   var sel_file;
+   $(document).ready(function() {
+      $("#member_profile").on("change", fileSelect);
+   });
 
-	function fileSelect(e) {
-		if ($("#member_profile").val() == "") {
-			console.log("empty");
-			$("#filecheck").val(0);
-		} else {
-			console.log("not empty");
-			$("#filecheck").val(1);
-		}
+   function fileSelect(e) {
+      if ($("#member_profile").val() == "") {
+         console.log("empty");
+         $("#filecheck").val(0);
+      } else {
+         console.log("not empty");
+         $("#filecheck").val(1);
+      }
 
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
+      var files = e.target.files;
+      var filesArr = Array.prototype.slice.call(files);
 
-		filesArr.forEach(function(f) {
-			if (!f.type.match("image.*")) {
-				alert("이미지 파일만 등록해주세요!!");
-				return;
-			}
-			sel_file = f;
+      filesArr.forEach(function(f) {
+         if (!f.type.match("image.*")) {
+            alert("이미지 파일만 등록해주세요!!");
+            return;
+         }
+         sel_file = f;
 
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$("#profile_img").attr("src", e.target.result);
-			}
-			reader.readAsDataURL(f);
+         var reader = new FileReader();
+         reader.onload = function(e) {
+            $("#profile_img").attr("src", e.target.result);
+         }
+         reader.readAsDataURL(f);
 
-		});
-	}
+      });
+   }
 </script>
 </head>
 <body>
@@ -104,35 +104,35 @@ $(document).ready(function(){
 <script type="text/javascript">
 
 function idcheck() {
-	var id = $('#memail').val();
-	if (id == "") {
-		$('#memail').focus();
-		return;
-	}
-	var ckObj = {
-		"memail" : id
-	};
-	console.log(ckObj);
+   var id = $('#memail').val();
+   if (id == "") {
+      $('#memail').focus();
+      return;
+   }
+   var ckObj = {
+      "memail" : id
+   };
+   console.log(ckObj);
 
-		$.ajax({
-			url : "idCheck",
-			type : "get",
-			data : ckObj,
-			success : function(data) {
-				if (data == "success") {
-					$('#chkNotice1').html('사용가능한 이메일입니다');
-			        $('#chkNotice1').attr('color', '#199894b3');
-				} else {
-					$('#memail').val('');//입력 초기화
-					$('#memail').focus();//ID 부분에 포커스 주기
-					$('#chkNotice1').html('중복된 이메일입니다');
-			        $('#chkNotice1').attr('color', '#f82a2aa3');
-				}
-			},
-			error : function(error) {
-				console.log(error);
-			}
-		});
+      $.ajax({
+         url : "idCheck",
+         type : "get",
+         data : ckObj,
+         success : function(data) {
+            if (data == "success") {
+               $('#chkNotice1').html('사용가능한 이메일입니다');
+                 $('#chkNotice1').attr('color', '#199894b3');
+            } else {
+               $('#memail').val('');//입력 초기화
+               $('#memail').focus();//ID 부분에 포커스 주기
+               $('#chkNotice1').html('중복된 이메일입니다');
+                 $('#chkNotice1').attr('color', '#f82a2aa3');
+            }
+         },
+         error : function(error) {
+            console.log(error);
+         }
+      });
 }
 
 </script>
@@ -169,17 +169,48 @@ $(function(){
 	      $('#password2').val('');
 	    });
 
-	    $('#password2').keyup(function(){
-	        if($('#password1').val() != $('#password2').val()){
-	          $('#chkNotice').html('비밀번호 일치하지 않음');
-	          $('#chkNotice').attr('color', '#f82a2aa3');
-	        } else{
-	          $('#chkNotice').html('비밀번호 일치함');
-	          $('#chkNotice').attr('color', '#199894b3');
-	        }
-	    });
-	});
+       $('#password2').keyup(function(){
+           if($('#password1').val() != $('#password2').val()){
+             $('#chkNotice').html('비밀번호 일치하지 않음');
+             $('#chkNotice').attr('color', '#f82a2aa3');
+           } else{
+             $('#chkNotice').html('비밀번호 일치함');
+             $('#chkNotice').attr('color', '#199894b3');
+           }
+       });
+   });
 </script>
+
+<script  type="text/javascript">
+   function mgcheck(){
+   //form 태그의 내용을 전부 가져오기
+   var frm = document.joinFrm;
+   
+   //submit 버튼을 뺀 나머지 input태그의 개수
+   var length = frm.length - 1;
+   
+   //input 태그 중에 입력이 안된 요소를 확인
+   for(var i = 0; i < 11; i++){
+      if(frm[i].value == "" 
+            || frm[i].value == null){
+         alert(frm[i].title + " 입력!");
+         frm[i].focus();
+         return false;//action이 실행 안됨.
+      }
+   }
+   //모든 input에 입력이 다 되었을 경우.
+   return true;//action이 실행됨.
+}
+</script>
+<script  type="text/javascript">
+$(document).ready(function(){
+   $('#photo').change(function(event){
+      var tmppath=URL.createObjectURL(event.target.files[0]);
+      $('#m_photo').attr('src',tmppath);
+   });
+});
+</script>
+</html>
 <script type="text/javascript">
 function validate() {
 	
