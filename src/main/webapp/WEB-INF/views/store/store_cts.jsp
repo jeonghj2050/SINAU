@@ -36,7 +36,7 @@
 			<a href="store_info?p_code=${paitem.p_code }" >
 				<div class="product_div">
 					<div class=p_img>
-						<img src="resources/images/storeimg/sum/${paitem.f_oriname}"
+						<img src="resources/upload/${paitem.f_sysname}"
 							width="250px" height="300px">
 					</div>
 					<div class="product_text">
