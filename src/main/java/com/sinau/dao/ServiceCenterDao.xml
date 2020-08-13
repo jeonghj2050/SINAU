@@ -85,7 +85,7 @@
 		resultType="com.sinau.dto.RefundInfoDto">
 		<![CDATA[
 		select row_number() over (order by ref_state asc) AS
-     		 num, ord_kind, ord_date, ord_amount, ref_reason, ord_price,ref_date ,ref_state,onc_title
+     		 num, ord_date, ord_amount, ref_reason, ord_price,ref_date ,ref_state,onc_title
 		from totalinfo_0
 		where m_email = #{email}
 		]]>

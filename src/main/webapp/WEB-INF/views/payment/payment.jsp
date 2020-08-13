@@ -162,6 +162,7 @@
 									<div>${prodList.p_price}원</div>
 									<div>무료</div>
 									<div class="pay-list-discount">0원</div>
+									<input type="hidden" class="ord_price" name="ord_price" value="${prodList.p_price}">
 									<div class="pay-list-disprice">${prodList.p_price}원</div>
 								</div>
 								<input type="hidden" class="cplcode" name="cplcode">
@@ -171,7 +172,8 @@
 									<div>${onList.onc_sale}원</div>
 									<div>무료</div>
 									<div class="pay-list-discount">0원</div>
-									<div class="pay-list-disprice" name="ord_price">${onList.onc_sale}원</div>
+									<input type="hidden" class="ord_price" name="ord_price" value="${onList.onc_sale}">
+									<div class="pay-list-disprice">${onList.onc_sale}원</div>
 								</div>
 								<input type="hidden" class="cplcode" name="cplcode">
 							</c:if>
@@ -180,7 +182,8 @@
 									<div>${offList.ofc_sale}원</div>
 									<div>무료</div>
 									<div class="pay-list-discount">0원</div>
-									<div class="pay-list-disprice" name="ord_price">${offList.ofc_sale}원</div>
+									<input type="hidden" class="ord_price" name="ord_price" value="${offList.ofc_sale}">
+									<div class="pay-list-disprice">${offList.ofc_sale}원</div>
 								</div>
 								<input type="hidden" class="cplcode" name="cplcode">
 							</c:if>
