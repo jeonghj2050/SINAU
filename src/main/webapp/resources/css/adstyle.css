@@ -1,8 +1,13 @@
+@charset "UTF-8";
+
 * {
+	font-family: 'Nanum Gothic Coding', monospace;
 	box-sizing: border-box;
 	margin: 0px;
 	padding: 0px;
-}
+	list-style: none;
+	
+  }
 
 header {
 	width: 1300px;
@@ -114,10 +119,10 @@ li a:hover {
 /* 회원관리 카테고리 */
 div.mAprovalCate {
 	float: left;
-	background-color: #e4e4e4;
 	width: 200px;
 	height: 230px;
-	border-radius: 10px 10px 10px 10px;
+	border-radius: 10px;
+/* 	background-color: rgba(243, 134, 10, 0.253); */
 }
 
 #mManagement {
@@ -126,12 +131,27 @@ div.mAprovalCate {
 	margin: 15px 0px;
 }
 
-div.mAprovalCate div {
+div.mAprovalCate> div {
 	text-align: center;
 	font-size: 22px;
-	margin: 5px auto;
-	width: 100px;
+	margin: 10px auto;
+	width: 200px;
 	color: black;
+
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	cursor: pointer;
+	border-bottom: 1px solid rgb(237, 239, 240);
+	flex: 1 1 0%;
+	padding: 0px 16px;
+	color: rgb(71, 70, 70);
+	line-height: 50px;
+	box-sizing: border-box;
+
+	text-align: center;
+	
 }
 
 div.mAprovalCate div :first-child :hover {
@@ -141,17 +161,17 @@ div.mAprovalCate div :first-child :hover {
 
 div.mAprovalCate div :hover {
 	font-size: 24px;
-	color: white;
+	color: black;
 }
 
 
 /*게시글 관리 카테고리 */
 .menuCate {
-	float: left;
-	background-color: #e4e4e4;
+float: left;
 	width: 200px;
 	height: 230px;
-	border-radius: 10px 10px 10px 10px;
+	border-radius: 10px;
+/* 	background-color: rgba(243, 134, 10, 0.253); */
 }
 
 .menuCate h2 {
@@ -162,19 +182,29 @@ div.mAprovalCate div :hover {
 .menuCate div {
 	text-align: center;
 	font-size: 22px;
-	margin: 5px auto;
-	width: 100px;
-	color: black;
+	margin: 10px auto;
+	width: 200px;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	cursor: pointer;
+	border-bottom: 1px solid rgb(237, 239, 240);
+	flex: 1 1 0%;
+	padding: 0px 16px;
+	color: rgb(71, 70, 70);
+	line-height: 50px;
+	box-sizing: border-box;
 }
 
 .menuCate div :first-child :hover {
-	color: black;
+	color: rgb(71, 70, 70);
 	font-size: 22px;
 }
 
 .menuCate div :hover {
 	font-size: 24px;
-	color: white;
+	color: black;
 }
 /* 카테고리텝*/
 .tab-content.current {

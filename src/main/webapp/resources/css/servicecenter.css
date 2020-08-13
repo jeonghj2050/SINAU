@@ -5,6 +5,7 @@
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
+	font-family: 'Nanum Gothic Coding', monospace;
   }
 
 header {
@@ -15,7 +16,6 @@ header {
 
 .sectionover {
 	width: 1300px;
-	overflow: auto;
 	margin: 0 auto;
 	margin-bottom: 10%;
 }
@@ -170,8 +170,10 @@ li a:hover {
 }
 
 .cate_container {
-	width : 150px;
-	float:left;
+	float: left;
+	width: 150px;
+	letter-spacing: 0px;
+	margin-top: 30px;
 }
 
 
@@ -188,6 +190,12 @@ li a:hover {
 	flex: 1 1 0%;
 	padding: 0px 16px;
 	color: rgb(71, 70, 70);
+	line-height: 50px;
+	font-size: 15px;
+	box-sizing: border-box;
+	padding-left: 20px;
+	color: rgb(71, 70, 70);
+
 }
 .category:link{
 	text-decoration: none;
@@ -195,6 +203,117 @@ li a:hover {
 .category:hover{
 	background-color: rgb(248, 248, 249);
 }
+
+/* FAQ 목록 */
+.FAQ_box {
+	width: 1102px;
+ 	border: 0.5px solid rgba(90, 87, 87, 0.514);
+	float : right;
+	margin-bottom: 50px;
+}
+.FAQ_tab {
+	width: 1102px;
+	height: 70px;
+/* 	float : right; */
+	line-height:30px;
+	text-align: center;
+}
+.FAQ_tab>li {
+	float : left;
+	width: 220px;
+	height: 35px;
+ 	border : 0.5px solid rgba(90, 87, 87, 0.514);
+ 	border-top:none;
+	color : #ddd;
+}
+.FAQ_tab>li:nth-child(n){
+	border-left:none;
+}
+.FAQ_tab>li:nth-child(5n){
+	border-right:none;
+}
+
+.FAQ_title {
+	width: 1100px;
+	height: 40px;
+	text-align: center;
+	float : right;
+	line-height:30px;
+}
+
+.FAQ_title>.FAQ_num {
+	width: 220px;
+	height: 40px;
+	float : left;
+	border : 0.5px solid rgba(90, 87, 87, 0.514);
+	border-left:none;
+	border-top:none;
+	padding: 5px;
+	
+}
+
+.FAQ_title>.FAQ_content {
+	width: 880px;
+	height: 40px;
+	float : right;
+ 	border : 0.5px solid rgba(90, 87, 87, 0.514);
+ 	border-top:none;
+ 	border-right:none;
+	padding: 5px;
+	border-left: none;
+}
+
+.tab_container {
+	width: 1100px;
+	text-align: center;
+	float : right;
+}
+
+.tab_container>.tab_content>.contents>.num {
+	width: 220px;
+	height: 40px;
+	padding: 5px;
+	border-right: 0.5px solid rgba(90, 87, 87, 0.514);
+	float : left
+}
+
+.tab_container>.tab_content>.contents>.contentsre>.num {
+	width: 100px;
+	height: 40px;
+	/* border :0.5px solid rgba(90, 87, 87, 0.514); */
+	padding: 8px;
+	border-right: none;
+	float : left
+}
+
+.tab_container>.tab_content>.contents>button {
+	width: 880px;
+	height: 40px;
+	float : right;
+	/* border : 0.5px solid rgba(90, 87, 87, 0.514); */
+	padding-left: 20px;
+	text-align: left;
+	border-left: none;
+	background-color: white;
+	outline: none;
+	font-size: 16px;
+	border: none;
+
+}
+.tab_container>.tab_content>.contents>div {
+	width: 1100px;
+	float : right;
+	border : 0.5px solid rgba(90, 87, 87, 0.514); 
+	padding: 15px;
+	 padding-left:205px;
+	text-align: left;
+	border-left : none;
+	border-right : none;
+	background-color: white;
+	font-size: 15px;	
+}
+
+
 
 /* Q&A 글 목록 출력 */
 .data-area {
@@ -294,6 +413,72 @@ li a:hover {
 	background-color: black;
 }
 
+/* 문의 글 상세정보 */
+.question-form {
+	width: 1100px;
+	height: auto;
+	float : right;
+}
+.table123 {
+	width: 1000px;
+	height: auto;
+	margin : auto;
+}
+.q_titmenu {
+	width: 100px;
+	height: 40px;
+	background-color : #ddd;
+	border: 1px solid #ddd;
+}
+.q_ctsmenu, .q_datemenu{
+	width: 100px;
+	height: 40px;
+	background-color : #ddd;
+	border: 1px solid #ddd;
+}
+.q_cts {
+	width: 100px;
+	text-align: center;
+	border: 1px solid #ddd;
+}
+.q_date {
+	width: 200px;
+	text-align: center;
+	border: 1px solid #ddd;
+}
+
+.questioncon {
+	width: 150px;
+	height: 300px;
+	background-color: #ddd;
+	text-align: center;
+	border: 1px solid #ddd;
+}
+.q_andate{
+	height: 40px; 
+	background-color : #ddd;
+	border: 1px solid #ddd;
+}
+
+.q_anfield{
+	height: 200px;
+	background-color : #ddd;
+	border: 1px solid #ddd;
+	
+}
+
+.q_tit, .q_con, .q_file, .q_img, .q_date, .q_field{
+	border: 1px solid #ddd;
+}
+
+.btn-write, .btn-sub{
+	width: 50px;
+	height: 50px;
+	background-color: black;
+	color : white;
+	border: none;
+}
+
 
 
 /* Q&A 글 작성 */
@@ -365,167 +550,6 @@ li a:hover {
 	height: 35px;
 	float : left;
 	padding-left: 75px;
-}
-
-/* FAQ 목록 */
-.FAQ_box {
-	width: 1102px;
-	border: 1px solid #ddd;
-	float : right;
-	margin-bottom: 50px;
-}
-.FAQ_tab {
-	width: 1100px;
-	height: 70px;
-	float : right;
-	text-align: center;
-}
-
-.FAQ_tab>li {
-	float : left;
-	width: 220px;
-	height: 35px;
-	border : 1px solid #ddd;
-	padding: 4px;
-	color : #ddd;
-}
-
-.FAQ_title {
-	width: 1100px;
-	height: 40px;
-	text-align: center;
-	float : right;
-}
-
-.FAQ_title>.FAQ_num {
-	width: 100px;
-	height: 40px;
-	float : left;
-	border : 1px solid #ddd;
-	padding: 5px;
-	border-right: none;
-}
-
-.FAQ_title>.FAQ_content {
-	width: 1000px;
-	height: 40px;
-	float : right;
-	border : 1px solid #ddd;
-	padding: 5px;
-	border-left: none;
-}
-
-.tab_container {
-	width: 1100px;
-	text-align: center;
-	float : right;
-}
-
-.tab_container>.tab_content>.contents>.num {
-	width: 100px;
-	height: 40px;
-	border : 1px solid #ddd;
-	padding: 5px;
-	border-right: none;
-	float : left
-}
-
-.tab_container>.tab_content>.contents>.contentsre>.num {
-	width: 100px;
-	height: 40px;
-	border : 1px solid #ddd;
-	padding: 8px;
-	border-right: none;
-	float : left
-}
-
-.tab_container>.tab_content>.contents>button {
-	width: 1000px;
-	height: 40px;
-	float : right;
-	border : 1px solid #ddd;
-	padding: 5px;
-	text-align: left;
-	border-left: none;
-	background-color: white;
-	outline: none;
-	font-size: 16px;
-}
-.tab_container>.tab_content>.contents>div {
-	width: 1101px;
-	float : right;
-	border : 1px solid #ddd;
-	padding: 5px;
-	text-align: left;
-	border-left : 2px solid #ddd;
-	background-color: white;
-	font-size: 15px;	
-}
-
-/* 문의 글 상세정보 */
-.question-form {
-	width: 1100px;
-	height: auto;
-	float : right;
-}
-.table123 {
-	width: 1000px;
-	height: auto;
-	margin : auto;
-}
-.q_titmenu {
-	width: 100px;
-	height: 40px;
-	background-color : #ddd;
-	border: 1px solid #ddd;
-}
-.q_ctsmenu, .q_datemenu{
-	width: 100px;
-	height: 40px;
-	background-color : #ddd;
-	border: 1px solid #ddd;
-}
-.q_cts {
-	width: 100px;
-	text-align: center;
-	border: 1px solid #ddd;
-}
-.q_date {
-	width: 200px;
-	text-align: center;
-	border: 1px solid #ddd;
-}
-
-.questioncon {
-	width: 150px;
-	height: 300px;
-	background-color: #ddd;
-	text-align: center;
-	border: 1px solid #ddd;
-}
-.q_andate{
-	height: 40px; 
-	background-color : #ddd;
-	border: 1px solid #ddd;
-}
-
-.q_anfield{
-	height: 200px;
-	background-color : #ddd;
-	border: 1px solid #ddd;
-	
-}
-
-.q_tit, .q_con, .q_file, .q_img, .q_date, .q_field{
-	border: 1px solid #ddd;
-}
-
-.btn-write, .btn-sub{
-	width: 50px;
-	height: 50px;
-	background-color: black;
-	color : white;
-	border: none;
 }
 
 /* 글 수정 페이지 */
