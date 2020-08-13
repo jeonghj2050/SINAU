@@ -75,7 +75,6 @@ public class PaymentService {
 
 		mv.addObject("m_email", loginMember.getM_email());
 		mv.addObject("sc_code", sc_code);
-		mv.addObject("ord_kind", 3);
 
 		mv.setViewName("payment/payment");
 
@@ -93,7 +92,7 @@ public class PaymentService {
 		MemberDto member = ((MemberDto) session.getAttribute("mb"));
 
 		order.setOrd_name(member.getM_name());
-		order.setOrd_phone(1012345678);
+		order.setOrd_phone(member.getM_phone());
 		order.setOrd_m_email(member.getM_email());
 
 		try {
