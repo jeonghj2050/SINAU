@@ -588,8 +588,7 @@ public class ClassService {
 			return fMap; 
 
 		}
-	public LikesDto updatedisLikes(String onc_code,  String l_cts_code) {
-		log.info("updatedisLikes()"+onc_code+l_cts_code);
+
 	public LikesDto updatedisLikes(String onc_code, String l_cts_code) {
 		log.info("updatedisLikes()" + onc_code + l_cts_code);
 
