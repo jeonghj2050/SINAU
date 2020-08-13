@@ -70,10 +70,10 @@ $(function(){
 						<tr>
 							<td>${status.count}</td>
 							<td>${prod.p_title}</td>
-							<td>${prod.p_price}</td>
+							<td>${prod.ord_price}</td>
 							<td>${prod.ord_date}</td>
 							<td>${prod.ord_amount}</td>
-							<td>${prod.ord_amount * prod.p_price}</td>
+							<td>${prod.ord_amount * prod.ord_price}</td>
 							<td><c:choose>
 									<c:when test="${prod.ord_state == 1}">
 										<button class="table-btn" data-target="#cancleOrder"
@@ -160,7 +160,7 @@ $(function(){
 					<tr>
 						<th>번호</th>
 						<th>상품명</th>
-						<th>주문금액</th>
+						<th>상품금액</th>
 						<th>주문일자</th>
 						<th>수량</th>
 						<th>총금액</th>
@@ -170,11 +170,11 @@ $(function(){
 						<tr>
 							<td>${status.count}</td>
 							<td>${onclass.onc_title}</td>
-							<td>${onclass.onc_sale}</td>
+							<td>${onclass.ord_price}</td>
 							<td>${onclass.ord_date}</td>
 							<td>${onclass.ord_amount}</td>
 
-							<td>${onclass.ord_amount * onclass.onc_sale}</td>
+							<td>${onclass.ord_amount * onclass.ord_price}</td>
 							<td><c:choose>
 									<c:when test="${onclass.ord_state == 1}">
 									</c:when>
@@ -200,11 +200,11 @@ $(function(){
 						<tr>
 							<td>${status.count}</td>
 							<td>${offclass.ofc_title}</td>
-							<td>${offclass.ofc_sale}</td>
+							<td>${offclass.ord_price}</td>
 							<td>${offclass.ord_date}</td>
 							<td>${offclass.ord_amount}</td>
 
-							<td>${offclass.ord_amount * offclass.ofc_sale}</td>
+							<td>${offclass.ord_amount * offclass.ord_price}</td>
 							<td><c:choose>
 									<c:when test="${offclass.ord_state == 1}">
 

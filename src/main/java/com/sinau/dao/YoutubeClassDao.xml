@@ -16,6 +16,7 @@
 		<![CDATA[
 		select y_code, cts_name, y_title, f_sysname
 		from youtube
+		order by y_code desc
 		]]>
 	</select>
 	<update id="viewUpdate" parameterType="String">

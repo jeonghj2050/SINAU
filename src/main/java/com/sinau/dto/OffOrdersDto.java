@@ -10,7 +10,7 @@ public class OffOrdersDto {
 	private String ord_code;
 	private String ord_m_email;
 	private String ofc_title;
-	private int ofc_sale;
+	private int ord_price;
 	private Timestamp ord_date;
 	private int ord_amount;
 	private int ord_state;

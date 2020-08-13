@@ -383,7 +383,7 @@ GROUP BY   OFC_CODE
 		resultType="com.sinau.dto.OffListDto">
 		<![CDATA[ 
 			select * from of_INFO where ofc_cts_code=#{cts_code} order by ofc_view desc
-		]]>n 
+		]]>
 	</select>
 	<select id="getOffCateFilter2" parameterType="String"
 		resultType="com.sinau.dto.OffListDto">
