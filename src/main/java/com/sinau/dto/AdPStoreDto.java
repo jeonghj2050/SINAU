@@ -12,4 +12,5 @@ public class AdPStoreDto {
 	private Date p_date;
 	private String p_price;
 	private String p_code;
+	private String p_state;
 }

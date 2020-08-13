@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <!DOCTYPE html>
@@ -12,7 +12,12 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-	
+	function qnaCode(code) {
+
+		console.log(code);
+		location.href = './adQna?code=' + code;
+
+	}
 </script>
 </head>
 <body>
@@ -40,16 +45,18 @@
 					<div class="sv-title servQ2">제목</div>
 					<div class="sv-name servQ3">이름</div>
 					<div class="sv-date servQ4">작성일</div>
-					<div class="sv-count servQ5">조회수</div>
+					<!-- <div class="sv-count servQ5">조회수</div> -->
 				</div>
 				<div class="servBorder">
-					<div class="servList padding10">
-					<c:forEach var="bitem" items="${qna}">
-						<div class="sv-num servQ1">${bitem.q_num}</div>
-						<div class="sv-title servQ2">${bitem.title}</div>
-						<div class="sv-name servQ3">${bitem.name}</div>
-						<div class="sv-date servQ4">${bitem.dates}</div>
-						<div class="sv-count servQ5">1</div>
+					<div class="servList">
+						<c:forEach var="bitem" items="${qna}">
+							<div class="code lists" onclick="qnaCode('${bitem.code}')">
+								<div class="sv-num servQ1">${bitem.q_num}</div>
+								<div class="sv-title servQ2">${bitem.title}</div>
+								<div class="sv-name servQ3">${bitem.name}</div>
+								<div class="sv-date servQ4">${bitem.dates}</div>
+								<!-- <div class="sv-count servQ5">1</div> -->
+							</div>
 						</c:forEach>
 					</div>
 				</div>

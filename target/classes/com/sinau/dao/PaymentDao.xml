@@ -27,7 +27,7 @@
 	<select id="getPayCoupon" parameterType="String"
 		resultType="com.sinau.dto.PayCouponDto">
 		SELECT * FROM CPL_CP
-		WHERE CPL_CP_CODE = #{cpcode} and rownum = 1
+		WHERE CPL_CODE = #{cplcode}
 	</select>	
 	<select id="getMemPayInfo" parameterType="String"
 		resultType="com.sinau.dto.MemberDto">
@@ -71,5 +71,10 @@
 			where ord_code=#{ord_code}
 			]]>
 	</select>
-	
+	<delete id="cpUseDelCheck" parameterType="String" >
+		<![CDATA[
+			delete cpl
+			where cpl_code=#{cplcode}
+		]]>
+	</delete>
 </mapper>

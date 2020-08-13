@@ -6,66 +6,138 @@
 	<!-- 게시글 관리 -->
 	<select id="getOnline"
 		resultType="com.sinau.dto.AdOnlineClassDto">
-		select rownum AS onc_num, onc_title, onc_m_email,
-		onc_teacher, onc_code, onc_update 
+		select row_number() over (order by onc_update desc) AS
+		onc_num, onc_title, onc_m_email,
+		onc_teacher, onc_code, onc_update,
+		onc_cts_code
 		from onlineclass
+		where onc_state = 1
 	</select>
 	<select id="getOffline"
 		resultType="com.sinau.dto.AdOfflineClassDto">
-		select rownum AS ofc_num, ofc_title, ofc_m_email,
-		ofc_teacher, ofc_code, ofc_update 
+		select row_number() over (order by ofc_update desc) AS
+		ofc_num, ofc_title, ofc_m_email,
+		ofc_teacher, ofc_code, ofc_update,
+		ofc_cts_code
 		from offclass
+		where ofc_state = 1
 	</select>
+	<!-- <select id="getYoutube" resultType="com.sinau.dto.AdYouClassDto"> select 
+		row_number() over (order by y_update desc) AS y_num, y_title, y_m_email, 
+		y_profile , y_update, y_code from youtube_class </select> -->
 	<select id="getYoutube" resultType="com.sinau.dto.AdYouClassDto">
-		select rownum AS y_num,	y_title, y_profile, cts_name
-		, y_update, y_code 
+		select row_number() over
+		(order by y_update desc) AS y_num,
+		y_title, y_profile, cts_name
+		, y_update, y_code
 		from AdYouClassDto
+	</select>
+	<!-- 카테고리 -->
+	<select id="getcate" resultType="com.sinau.dto.AdPCtsDto">
+		select * from cts
+		where cts_code
+		like 'c%'
 	</select>
 	<!-- 게시글관리 판매 -->
 	<select id="getStore" resultType="com.sinau.dto.AdPStoreDto">
-		select rownum AS p_num,
+		select row_number() over (order
+		by p_date desc) AS p_num,
 		p_title, p_m_email, p_dealer
-		, p_date, p_price, p_code from product
+		, p_date,
+		p_price, p_code, p_state
+		from
+		product
+		where p_state = 1
 	</select>
 
 	<select id="getReview" resultType="com.sinau.dto.AdPReviewDto">
-		select rownum AS prv_num,
-		p.prv_date AS prv_date, 
+		select row_number() over
+		(order by prv_date desc) AS prv_num,
+		p.prv_date AS prv_date,
 		p.prv_code AS prv_code,
-		p.prv_content AS	prv_content,
-		p.prv_m_email AS	prv_m_email, 
-		m.m_name AS m_name
-		from productreview p, member m
+		p.prv_content AS prv_content,
+		p.prv_m_email AS prv_m_email,
+		m.m_name AS m_name,
+        w.w_state AS w_state
+		from productreview p, member m,warning w
 		where
-		p.prv_m_email = m.m_email
+		p.prv_m_email =	m.m_email 
+        and
+        p.prv_code = w.w_prv_code
+        and
+        w_state = '0'
 	</select>
 
 	<select id="getQna" resultType="com.sinau.dto.AdSQnaDto">
-		select rownum AS q_num,
+		select row_number() over (order
+		by q_date desc) AS q_num,
 		q.q_title AS title,
 		q.q_content AS content,
 		q.q_m_email AS email,
-		q.q_date AS	dates,
+		q.q_date AS dates,
 		q.q_code AS code,
-		m.m_name AS name
+		m.m_name AS	name
 		from question q, member m
 		where q_m_email =
 		m.m_email
 	</select>
 
 	<select id="getWarning" resultType="com.sinau.dto.AdSWDto">
-		select rownum AS w_num,
+		select row_number() over
+		(order by w_update desc, w_state) AS w_num,
 		w.w_content AS contents,
 		w.w_contentnum AS contentnum,
-		w.w_state AS states,
+		w_state AS states,
 		w.w_code AS code,
 		w.w_update AS dates,
-		m.m_name AS name
-		from warning w, member m
-		where w_m_email = m.m_email
+		m.m_name AS name,
+        p.prv_content AS prv_content
+		from warning w, member m,productreview p
+		where
+		w.w_m_email = m.m_email
+        and
+        p.prv_code = w.w_prv_code
+	</select>
+	<!-- 게시글 관리 카테고리 필터 -->
+	<select id="getCts" parameterType="String"
+		resultType="com.sinau.dto.AdOnlineClassDto">
+		select row_number() over (order by onc_update desc) AS
+		onc_num, onc_title, onc_m_email,
+		onc_teacher, onc_code, onc_update,
+		onc_cts_code
+		from
+		onlineclass
+		where onc_cts_code = #{cts}
 	</select>
 	
-
+	<!-- qna Dao -->
 	
+	<select id="getQnaInfo" parameterType="String" 
+	resultType="com.sinau.dto.AdSQnaDto">
+		select row_number() over (order
+		by q_date desc) AS q_num,
+		q.q_title AS title,
+		q.q_content AS content,
+		q.q_m_email AS email,
+		q.q_date AS dates,
+		q.q_code AS code,
+		m.m_name AS	name,
+		q.q_anfield,q.q_andate
+		from question q, member m
+		where q_m_email =
+		m.m_email and
+		q_code = #{code}
+	</select>
 	
+	<select id="getQnaFile" parameterType="String" 
+	resultType="com.sinau.dto.AdQFileDto">
+		select * from files
+		where f_pcode = #{code}
+	</select>
+	
+	<select id="getOriName" parameterType="String"
+      resultType="String">
+      SELECT f_oriname FROM files
+      WHERE f_sysname=#{sysFileName}
+   </select>
 </mapper>

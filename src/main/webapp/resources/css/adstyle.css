@@ -263,7 +263,7 @@ float: left;
 }
 
 .tabs>#i2.on {
-	background-color: #d0ffff;
+	background-color: #d6edd661;
 }
 
 .tabs>#i3.on {
@@ -276,7 +276,7 @@ float: left;
 }
 
 .tabs>#i2:hover {
-	background-color: #b4e7f5;
+	background-color: #54775424;
 	color: white;
 }
 
@@ -352,27 +352,33 @@ float: left;
 	margin: 0px 0px 0px 20px;
 	float: left;
 	width: 1076px;
-/* 	height: 1000px; */
 	padding: 80px 25px;
 	background-color: #e8dcc6;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 .approval-2 {
 	margin: 0px 0px 0px 20px;
 	float: left;
 	width: 1076px;
-	height: 1000px;
 	padding: 80px 25px;
 	background-color: #f4c7b9;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 .approval-3 {
 	margin: 0px 0px 0px 20px;
 	float: left;
 	width: 1076px;
-	height: 1000px;
 	padding: 80px 25px;
 	background-color: #d9d9ff;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 
@@ -382,27 +388,33 @@ float: left;
 	margin: 0px 0px 0px 20px;
 	float: left;
 	width: 1076px;
-	height: 1000px;
 	padding: 80px 25px;
 	background-color: #d6edd6;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 .information-2 {
 	margin: 0px 0px 0px 20px;
 	float: left;
 	width: 1076px;
-	height: 1000px;
 	padding: 80px 25px;
-	background-color: #d0ffff;
+	background-color: #d6edd661;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 .information-3 {
 	margin: 0px 0px 0px 20px;
 	float: left;
 	width: 1076px;
-	height: 1000px;
 	padding: 80px 25px;
 	background-color: #dceded;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 /* 게시글관리 - 강의*/
@@ -410,27 +422,33 @@ float: left;
 	margin: 0px 0px 0px 20px;
 	float: left;
 	width: 1076px;
-	height: 1000px;
 	padding: 50px 25px;
 	background-color: #e4dfee;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 .lecture-2 {
 	margin: 0px 0px 0px 20px;
 	float: left;
 	width: 1076px;
-	height: 1000px;
 	padding: 50px 25px;
 	background-color: #e7e6f0;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 .lecture-3 {
 	margin: 0px 0px 0px 20px;
 	float: left;
 	width: 1076px;
-	height: 1000px;
 	padding: 100px 25px;
 	background-color: #c5c7d8;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 /* 게시글 관리 - 판매 */
 
@@ -438,9 +456,11 @@ float: left;
 	margin: 0px 0px 0px 20px;
 	float: left;
 	width: 1076px;
-	height: 1000px;
 	padding: 80px 25px;
 	background-color: #e8dcc6;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 /* 게시글 관리 - 리뷰 */
 
@@ -448,11 +468,13 @@ float: left;
 	margin: 0px 0px 0px 20px;
 	float: left;
 	width: 1076px;
-	height: 1000px;
 	padding: 80px 40px;
 	background-color: #fff;
 	border: 3px solid black;
 	border-radius: 0px 8px 8px 8px;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 }
 
 .lOnline {
@@ -463,13 +485,24 @@ float: left;
 	margin: 50px 0px 0px 0px;
 }
 /* drop box */
-#on {
+.select {
 	float: right;
 	width: 150px;
 	height: 30px;
 	font-size: 16px;
-	background-color: #000000;
+	background-color: #5a5a5a;
 	color: white;
+	border-radius:2px;
+}
+#set{
+	float: right;
+	width: 50px;
+	height: 30px;
+	font-size: 16px;
+	background-color: #5a5a5a;
+	color:white;
+	margin: 0px 20px;
+	border-radius:2px;
 }
 /* 컬럼 일렬 */
 .approval>div>div>div>b>div {
@@ -499,7 +532,15 @@ float: left;
 	text-align: center;
 	padding: 10px;
 	border-right: 1px solid #fff;
+	
 }
+.lists div{
+	float: left;
+	text-align: center;
+	padding: 10px;
+	border-right: 1px solid #fff;
+}
+
 
 
 /*데이터 베이스 게시판 */
@@ -539,6 +580,9 @@ float: left;
 	width: 100px;
 	height: 40px;
 }
+#ok {
+	color:#75baff;
+}
 /*정보수정*/
 .information-1 .datelist {
 	float: left;
@@ -575,12 +619,16 @@ float: left;
 	max-width: 1000px;
 	border-bottom: 3px dotted #adb0c9;
 }
+div#vieww {
+    padding: 2px 0px !important;
+}
 
 .datelist div {
 	float: left;
 	text-align: center;
 	padding: 10px 0px;
 }
+
 /* 게시글 관리 - 리뷰 */
 .tool{
 	float:left;
@@ -596,7 +644,9 @@ float: left;
 .listBorder{
 	float: left;
 	max-width: 1000px;
-	height: 800px;
+	height: auto; 
+	min-height: 800px; 
+	overflow: auto;
 	background-color:#fef8cd;
 	border-radius: 0px 0px 8px 8px;
 }
@@ -610,12 +660,76 @@ float: left;
 }
 .line {
 	width:1000px;
-	height:750px;
-	border-bottom: 3px solid black;
 	background-color: #fafafa;
 }
-.servList{
+div.code{
+	float:left;
+}
+.code:hover{
+	cursor: pointer;
+	background-color: #f5f5f5;
+}
+/* 신고 페이지 */
+.lineW:hover{
+	background-color: #f5f5f5;
+}
+.lineW{
+	float: left;
+}
+/* 고객센터 - Q&A 상세*/
+.line>td{
+	background-color: #fafafa;
+}
+table.table123{
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+}
+.line1{
+	width:1000px;
+	height:40px;
+	float: left;
+	background: gray;
 	
+}
+.table123 th, td {
+	padding: 5px;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid white;
+}
+.table123 tr td:nth-child(odd){
+	background: #e5e5e5;
+}
+.table123 tr td:nth-child(even) { /*even 짝수*/
+	background-color: #f2f2f2;
+}
+#null{
+	background: #e5e5e5 !important;
+}
+.q_field{
+	height:340px;
+	background-color: #f2f2f2 !important;
+}
+TEXTAREA#content{
+	text-align: left;
+	float: left;
+	width:900px;
+	height:250px;
+	border: 2px solid black;
+	font-size: 20px;
+}
+#subm{
+	float:left;
+	height: 250px;
+	width: 99px;
+	border: outset;
+}
+#files{
+	margin:0px 20px;
+	
+}
+#files:hover{
+	color:#e4c5c6;
 }
 /*회원승인*/
 /*컬럼별 사이즈*/
@@ -718,6 +832,10 @@ float: left;
 	height: 40px;
 	text-align: left;
 }
+.lecture7 {
+	width: 1px;
+	height:40px;
+}
 /*게시글관리 - 판매*/
 /*컬럼별 사이즈*/
 .sale1 {
@@ -726,7 +844,7 @@ float: left;
 }
 
 .sale2 {
-	width: 150px;
+	width: 190px;
 	height: 40px;
 }
 
@@ -736,17 +854,17 @@ float: left;
 }
 
 .sale4 {
-	width: 200px;
+	width: 260px;
 	height: 40px;
 }
 
 .sale5 {
-	width: 150px;
+	width: 110px;
 	height: 40px;
 }
 
 .sale6 {
-	width: 200px;
+	width: 150px;
 	height: 40px;
 }
 .sale7 {
@@ -772,7 +890,7 @@ float: left;
 }
 
 .review4 {
-	width: 350px;
+	width: 370px;
 	height: 40px;
 }
 
@@ -794,13 +912,13 @@ float: left;
 }
 
 .servQ2 {
-	width: 630px;
+	width: 640px;
 	height: 40px;
 	border-bottom: 1px solid black;
 }
 
 .servQ3 {
-	width: 100px;
+	width: 160px;
 	height: 40px;
 }
 
@@ -820,15 +938,19 @@ float: left;
 	width: 70px;
 	height: 40px;
 }
+.servW11 {
+	width: 140px;
+	height: 40px;
+}
 
 .servW2 {
-	width: 580px;
+	width: 450px;
 	height: 40px;
 	border-bottom: 1px solid black;
 }
 
 .servW3 {
-	width: 100px;
+	width: 110px;
 	height: 40px;
 }
 
@@ -838,7 +960,7 @@ float: left;
 }
 
 .servW5 {
-	width: 120px;
+	width: 100px;
 	height: 40px;
 }
 /*

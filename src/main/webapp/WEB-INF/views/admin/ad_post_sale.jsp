@@ -28,7 +28,6 @@ var codetemp = '';
 		$('#py').click(function() {
 			console.log(codetemp);
 			$('.popupD').hide();
-			$('#del').hide();
 			
 			location.href='./delSale?code='+codetemp;
 			codetemp = '';

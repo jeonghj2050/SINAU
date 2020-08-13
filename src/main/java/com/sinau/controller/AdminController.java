@@ -1,8 +1,13 @@
 package com.sinau.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +25,8 @@ import com.sinau.service.MemberService;
 
 import lombok.extern.java.Log;
 
+
+
 @Controller
 @Log
 public class AdminController {
@@ -27,17 +34,15 @@ public class AdminController {
 
 	@Autowired
 	private AdminService aServ;
-
-	//이 메소드는 나중에 BoardController로 이전할 예정임.
-	@GetMapping("list")//list?pageNum=3
-	public ModelAndView AdmemberList(Integer pageNum) {
-		log.info("AdmemberList()"+pageNum);
-
-		mv = aServ.getAdminList(pageNum);		
-
+	
+	//회원 승인(가입)
+	@GetMapping("memApproval")
+	public ModelAndView memApproval(String email) {
+		mv = aServ.adMemApproval(email);
+		
 		return mv;
 	}
-
+	
 	//회원관리 (가입승인(메인))
 	@GetMapping("adMApproval")
 	public ModelAndView adMApproval(String tabId, Integer pageNum) {
@@ -83,15 +88,16 @@ public class AdminController {
 
 		return mv;
 	}
-	//고객센터 (
+	//고객센터 1:1문의
 	@GetMapping("adSQna")
 	public ModelAndView adSQna() {
 		//return "admin/ad_serv_qna";
 		mv = aServ.adSQna();
-
+		
+		
 		return mv;
 	}
-	//게시글관리 (댓글리뷰)
+	//고객센터 신고
 	@GetMapping("adSWarning")
 	public ModelAndView adSWarning() {
 		//return "admin/ad_serv_warning";
@@ -164,6 +170,50 @@ public class AdminController {
 		return "admin/ad_youtube_list";
 	}
 	
+	//신고처리 승인(신고완료 state=1)
+	/*
+	 * @GetMapping("wYes") public ModelAndView warYes(String code) { mv =
+	 * aServ.warYes(code);
+	 * 
+	 * return mv; }
+	 */
+	//신고처리 비승인
+	@GetMapping("wNo")
+	public ModelAndView warNo(String code) {
+		
+		mv = aServ.warNo(code);
+		
+		return mv;
+	}
+	//카테고리
+	@GetMapping("ctsOn")
+	public ModelAndView ctsOn(String cts) {
+		mv = aServ.ctscode(cts);
+		
+		return mv;
+	}
+	//ad qna 상세페이지 받아오는 메소드
+	@GetMapping("adQna")
+	public ModelAndView qnaInfo(String code) {
+		mv = aServ.qCode(code);
+		
+		return mv;
+	}
+	//qna 댓글 insert 메소드
+	@GetMapping("adQnaInsert")
+	public ModelAndView qnaInsert(String content,String code) {
+		mv = aServ.qInsert(content,code);
+		
+		return mv;
+	}
+	/*
+	 * @GetMapping("download") public void fileDownload(String sysFileName,
+	 * HttpServletRequest req, HttpServletResponse resp) {
+	 * System.out.println("download() - sysFileName : " + sysFileName);
+	 * 
+	 * aServ.fileDown(sysFileName, req, resp); }
+	 */
+	    
 	@PostMapping("youtubeWrite")
 	public String youtubeWrite(
 		MultipartHttpServletRequest multi, 
