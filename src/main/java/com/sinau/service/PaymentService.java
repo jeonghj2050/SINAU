@@ -93,7 +93,7 @@ public class PaymentService {
 		MemberDto member = ((MemberDto) session.getAttribute("mb"));
 
 		order.setOrd_name(member.getM_name());
-		order.setOrd_phone(1012345678);
+		order.setOrd_phone(member.getM_phone());
 		order.setOrd_m_email(member.getM_email());
 
 		try {
