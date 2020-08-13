@@ -290,8 +290,17 @@
                             <span class="like_num">공유하기</span>
                         </button></div>
                 </div>
-                <a href="apply?pay_pcode=${onInfo.onc_code}" 
-				class="class_submitbtn" color="orange" fill="true">클래스 신청하기</a>
+                
+                
+                <c:if test="${mb.m_email eq null}">
+	               <a href="./loginFrm" 
+					class="class_submitbtn" color="orange" fill="true">클래스 신청하기</a>
+				</c:if>
+				<c:if test="${mb.m_email ne null}">
+					 <a href="apply?pay_pcode=${onInfo.onc_code}" 
+					class="class_submitbtn" color="orange" fill="true">클래스 신청하기</a>
+				</c:if>
+				
 				<div>
                 <div>
                     <p class="refund_alert">키트 미개봉 시, <fmt:formatDate value="${onInfo.onc_sdate}" pattern="yyyy.MM.dd" />까지 전액 환불 보장</p>

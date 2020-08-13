@@ -56,7 +56,6 @@ $(document).ready(function(){
 			<c:set var="cnt" value="0"/>
 				<div class="title-row">
 					<div class="t-no">번호</div>
-					<div class="t-kind">카테고리</div>
 					<div class="t-retitle">제목</div>
 					<div class="t-orddate">주문날짜</div>
 					<div class="t-amount">수량</div>
@@ -67,18 +66,7 @@ $(document).ready(function(){
 				</div><br>
 				<c:forEach var="total" items="${totalList}">
 				<div class="data-row">
-				<div class="t-no">${total.num}</div>
-					<div class="t-kind">
-					<c:if test="${total.ord_kind eq 1 }">
-              				    상품
-            		 	  </c:if>
-            		<c:if test="${total.ord_kind eq 2 }">
-              				    온라인
-            		 	  </c:if>
-            		<c:if test="${total.ord_kind eq 3 }">
-              				    오프라인
-            		 	  </c:if>
-            		</div>
+					<div class="t-no">${total.num}</div>					
 					<div class="t-retitle">${total.onc_title}</div>
 					<div class="t-orddate"><fmt:formatDate pattern="yyyy-MM-dd" value="${total.ord_date}"/></div>
 					<div class="t-amount">${total.ord_amount}</div>
@@ -86,13 +74,13 @@ $(document).ready(function(){
 					<div class="t-price">${total.ord_price}</div>
 					<div class="t-redate"><fmt:formatDate pattern="yyyy-MM-dd" value="${total.ref_date}"/></div>
 					<div class="t-state">
-					<c:if test="${total.ref_state eq 0 }">
+					<c:if test="${total.ref_state eq 1 }">
               				  환불 신청 중
             		 	  </c:if>	
-            		<c:if test="${total.ref_state eq 1 }">
+            		<c:if test="${total.ref_state eq 2 }">
               				 환불 처리 중
             		 	  </c:if>
-            		<c:if test="${total.ref_state eq 2 }">
+            		<c:if test="${total.ref_state eq 3 }">
               				 환불 완료
             		 	  </c:if> 	  
 					</div>

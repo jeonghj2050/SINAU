@@ -18,6 +18,7 @@ public class MyOffInfoDto {
 	private String f_sysname;
 	private Timestamp sc_time;
 	private String sc_place;
+	private int ofc_state;
 }
 
 

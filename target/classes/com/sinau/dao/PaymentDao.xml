@@ -12,7 +12,7 @@
 			SELECT 'ord_'||SEQ_ORD.NEXTVAL FROM dual
 		</selectKey>
 		INSERT INTO ord
-		VALUES(#{ord_code}, #{ord_name}, #{ord_addr}, #{ord_phone}, #{ord_memo}, #{ord_price}, #{ord_diposit}, DEFAULT, 1,#{ord_pcode}, #{ord_kind}, 1, #{ord_m_email})
+		VALUES(#{ord_code}, #{ord_name}, #{ord_addr}, #{ord_phone}, #{ord_memo}, #{ord_price}, #{ord_diposit}, DEFAULT, 1,#{ord_pcode}, 1, #{ord_m_email})
 	</insert>
 	<insert id="mclInsert" parameterType="com.sinau.dto.MyClassDto">
 	

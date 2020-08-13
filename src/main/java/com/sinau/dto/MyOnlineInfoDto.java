@@ -17,6 +17,6 @@ public class MyOnlineInfoDto {
 	private Timestamp onc_sdate;
 	private Timestamp onc_edate;
 	private String f_sysname;
-	
+	private int onc_state;
 
 }

@@ -44,9 +44,11 @@
 	<![CDATA[
 		SELECT DISTINCT* FROM PLIST_3 WHERE CTS_CODE=#{cts_code}
 	]]>
+		
 	</select>
 	
-	<select id="getPspec" parameterType="String" resultType="String">
+		<select id="getPspec" parameterType="String" resultType="String">
+
 		SELECT f_SYSNAME FROM PINFO where p_code=#{p_code}
 		
 	</select>

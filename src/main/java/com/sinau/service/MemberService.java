@@ -112,7 +112,7 @@ public class MemberService {
 		member.setM_email(multi.getParameter("m_email"));
 		member.setM_name(multi.getParameter("m_name"));
 		member.setM_pwd(encPwd);
-		member.setM_phone(Integer.parseInt(multi.getParameter("m_phone")));
+		member.setM_phone(multi.getParameter("m_phone"));
 		member.setM_birth(multi.getParameter("m_birth"));
 		if (!(multi.getParameter("m_license") == null)) {
 			member.setM_license(Integer.parseInt(multi.getParameter("m_license")));
@@ -125,7 +125,7 @@ public class MemberService {
 		try {
 
 			mDao.memberInsert(member);
-			rttr.addFlashAttribute("check", 2);
+			rttr.addFlashAttribute("check", 1);
 			view = "redirect:/";
 			
 			if (fcheck == 1) {
@@ -136,9 +136,9 @@ public class MemberService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			view = "redirect:joinFrm";
-			rttr.addFlashAttribute("check", 1);
+			rttr.addFlashAttribute("check", 0);
 		}
-
+		
 		mv.setViewName(view);
 		return mv;
 	}
@@ -214,13 +214,13 @@ public class MemberService {
 				else if(member.getM_state() == 2){
 					//회원 구분이 admin일 경우 관리자 페이지로 전환
 					rttr.addFlashAttribute("check", 2);
-					view = "redirect:adMApproval";
+					view = "redirect:/";
 				}
 				else if(member.getM_state() == 3){
 					//회원 구분이 admin일 경우 관리자 페이지로 전환
 					session.invalidate();
 					rttr.addFlashAttribute("check", 4);					
-					view = "redirect:adMApproval";
+					view = "redirect:/";
 				}
 				else {
 					//리다이렉트로 화면을 전환.
@@ -265,7 +265,6 @@ public class MemberService {
 
 		//email에 해당하는 회원의 온라인 주문 내역을 가져온다.
 		List<OrderDto> orderList=cDao.getOrderList(loginMember.getM_email(),"onc_");	
-		System.out.println(orderList + "1111111111111111111111111111111111111111111111111111");
 		// 주문 객체에 저장된 강의 코드로 내 수강 강의정보 목록을 저장한다.
 		List<MyOnlineInfoDto> onlineList = new ArrayList<MyOnlineInfoDto>();
 		for (OrderDto order : orderList) {

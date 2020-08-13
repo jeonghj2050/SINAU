@@ -303,7 +303,7 @@ li a:hover {
 	float : right;
 	border : 0.5px solid rgba(90, 87, 87, 0.514); 
 	padding: 15px;
-	 padding-left:205px;
+	 padding-left:20px;
 	text-align: left;
 	border-left : none;
 	border-right : none;
@@ -647,7 +647,7 @@ width: 1100px;
 	padding: 8px;
 }
 .t-reason {
-	width : 100px;
+	width : 200px;
 	height: 40px;
 	padding: 8px;
 }
