@@ -58,7 +58,7 @@ var codetemp = '';
 		</div>
 		<div class="adRcate">
 			<ul class="tabs">
-				<li class="tab-1" id="r1">스토어</li>
+				<li class="tab-1" id="r2">스토어</li>
 			</ul>
 
 			<div class="adRpost listCss">

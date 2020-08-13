@@ -212,9 +212,9 @@
 								<tr>
 									<td><input type="text" name="v_title" ></td>
 									<td><input type="text" name="v_content" ></td>
-									<td><input type="file" name="video_files" >
+									<td><input type="file" name="video_files" class="files_ip">
 										<button type="button"
-											onclick="deleteClassForm(this)">삭제</button></td>
+											onclick="deleteClassForm(this)" class="del_btn">삭제</button></td>
 								</tr>
 							</table>
 						</div>
@@ -284,8 +284,7 @@
 								<tr>
 									<td><input type="datetime-local" name="sc_time" ></td>
 									<td><input type="text" name="sc_place">
-									<button type="button" class="glyphicon glyphicon-remove"
-											onclick="deleteClassForm(this)"></button></td>
+									<button type="button" onclick="deleteClassForm(this)"  class="del_btn">삭제</button></td>
 								</tr>
 							</table>
 						</div>
@@ -307,8 +306,8 @@
 								.append(
 										'<tr> <td><input type="text" name="v_title" >  </td>'
 												+ '<td>  <input type="text" name="v_content" > </td>'
-												+ '<td> <input type="file" name="video_files"  > '
-												+ '<button type="button" class="glyphicon glyphicon-remove" onclick="deleteClassForm(this)"></button></td> </tr>');
+												+ '<td> <input type="file" name="video_files"class="files_ip"> '
+												+ '<button type="button" onclick="deleteClassForm(this)" class="del_btn">삭제</button></td> </tr>');
 
 					});
 	$("#addClassSchedule").click(
@@ -317,7 +316,7 @@
 						.append(
 								'<tr> <td><input type="datetime-local" name="sc_time" >  </td>'
 										+ '<td>  <input type="text" name="sc_place" > '
-										+ '<button type="button" class="glyphicon glyphicon-remove" onclick="deleteClassForm(this)"></button></td> </tr>');
+										+ '<button type="button" onclick="deleteClassForm(this)" class="del_btn">삭제</button></td> </tr>');
 
 			});
 	function deleteClassForm(obj) {
