@@ -75,7 +75,6 @@ public class PaymentService {
 
 		mv.addObject("m_email", loginMember.getM_email());
 		mv.addObject("sc_code", sc_code);
-		mv.addObject("ord_kind", 3);
 
 		mv.setViewName("payment/payment");
 

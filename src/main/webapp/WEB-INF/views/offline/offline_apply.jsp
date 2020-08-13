@@ -59,7 +59,6 @@
 							</div>
 							<hr>
 						</c:forEach>
-						<input type="hidden" name="ord_kind" value=3> 
 						<input type="hidden" name="pay_pcode" value=${offList.ofc_code }>
 							<input type="submit" id="scFrmSubmit" value="결제하기">
 					</form>
