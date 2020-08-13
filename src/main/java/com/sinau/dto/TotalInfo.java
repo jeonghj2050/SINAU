@@ -11,6 +11,6 @@ public class TotalInfo {
 	private String totalview;
 	private String totalupdate;
 	private String totalctsname;
-	private String totalcount;
+	private String totalpcode;
 	private String totalimg;
 }

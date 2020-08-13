@@ -137,7 +137,6 @@ public class PaymentService {
 					mv.addObject("sort", "onc");
 
 				}
-				
 
 				mv.setViewName("payment/payment_completion");
 			}
