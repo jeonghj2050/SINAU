@@ -328,40 +328,33 @@ public class ClassService {
 			}
 
 		}
-		mv.setViewName("online/online_info");
-		
-		return mv;
-	}
-		public ModelAndView classroom(String onc_code, String vf_code, String fb_m_email) {
-			log.info("classroom()" + onc_code +"vf_code()" +  vf_code);
-			
+
+		public ModelAndView classroom(String onc_code, String vf_code) {
+			log.info("classroom()" + onc_code);
 			
 			String email = ((MemberDto)session.getAttribute("mb")).getM_email();
 			log.info("email()"+email);
 			
 			//크리에이터 이메일로 내 강의 검색해서 클래스룸 접속 권한 추가
 			OnlineClassDto c_m_check = cDao.checkOnClass(onc_code, email);
+			log.info("c_m_check()"+c_m_check.getOnc_m_email());
 			
-			//수강생인지 확인하기 주문 내역에서 내 이메일과 온라인 강의 코드에 해당하는 정보 있는지 확인
-			OrderDto orderCheck = null;
-			orderCheck = cDao.checkOrderList(onc_code, email);
-
-			if (!ObjectUtils.isEmpty(c_m_check)) {
-				mv.addObject("c_m_check", c_m_check);
-			}
-			else {
-				mv.addObject("orderCheck", orderCheck);
-			}
+//			//주문 내역에서 내 이메일과 온라인 강의 코드에 해당하는 정보 있는지 확인
+//			OrderDto orderCheck = null;
+//			orderCheck = cDao.checkOrderList(loginMember.getM_email(), onc_code);
+//			log.info("orderCheck()");
+//			
+//			//주문 내역 없는데 url타고 들어가는거 방지 -> 홈화면으로 이동
+//			if (c_m_check == null && orderCheck == null ) {
+//				mv.setViewName("/");
+//				log.info("비회원 홈으로 돌아가기");
+//				return mv;
+//			}
 			
-			System.out.println(orderCheck);
-			System.out.println(c_m_check);
-			
-			//수강생/크리에이터 아니면 홈화면으로 돌아가기
-			if (ObjectUtils.isEmpty(c_m_check) && ObjectUtils.isEmpty(orderCheck)) {
-				
+			if (ObjectUtils.isEmpty(c_m_check)) {
+				mv.setViewName("/");
 				log.info("내가 강의 아님 홈으로 돌아가기");
-				mv.setViewName("redirect:/");
-				//return mv;
+				return mv;
 			}
 						
 			//크리에이터 사진 및 강좌 프로필 저장
@@ -371,50 +364,20 @@ public class ClassService {
 
 			//비디오 리스트 가져오기
 			System.out.println("onc_code>>>>>>"+onc_code+email);
-			List<VideoListDto> videoLists = cDao.getVideoLists(onc_code);
+			List<VideoListDto> videoLists = cDao.getVideoLists(onc_code, email);
 			mv.addObject("videoLists", videoLists);
 			System.out.println("videoLists>>>>>>"+videoLists);
 			
 			//선택된 강좌 배열에서 검색 후 저장
-			VideoListDto  selVideoLists = null;
-			//강좌에 해당하는 댓글 목록/내용
-			List<FeedbackDto> feedbackList = null;
-			if (vf_code.equals("") && ObjectUtils.isEmpty(vf_code)) {
-				log.info("111111111 " + vf_code);
-				selVideoLists = videoLists.get(0);
-				if (ObjectUtils.isEmpty(fb_m_email)) {
-					feedbackList = cDao.getvfFeedback(selVideoLists.getVf_code(), email);
-				}
-				else {
-					feedbackList = cDao.getvfFeedback(selVideoLists.getVf_code(), fb_m_email);
-				}
-			}
-			else {
-				for(VideoListDto video : videoLists) {
-					if (video.getVf_code().equals(vf_code)) {
-						log.info("22222222 " + vf_code);
-						selVideoLists = video;
-						if (ObjectUtils.isEmpty(fb_m_email)) {
-							feedbackList = cDao.getvfFeedback(vf_code, email);
-						}
-						else {
-							feedbackList = cDao.getvfFeedback(vf_code, fb_m_email);
-						}
-						
-					}
-				}
-			}
-			
+			VideoListDto  selVideoLists = videoLists.get(0);
 			mv.addObject("selVideoLists", selVideoLists);
-			
-			//List<FeedbackDto> fList = cDao.getFeedbackList(fb_code);
-			System.out.println("feedbackList>>>>>>"+feedbackList);
-			mv.addObject("fList", feedbackList);
 			
 		  	mv.setViewName("online/online_classroom");
 		  		
 		  	return mv;
+		mv.setViewName("online/online_info");
 
+		return mv;
 	}
 
 	public LikesDto updateLikes(String onc_code,String l_cts_code) {
@@ -452,7 +415,7 @@ public class ClassService {
 				//2.새로 추가된 댓글 포함 전체 댓글 목록 가져오기
 				feedback = cDao.getFeedback(feedback.getFb_code());
 
-				//3. 전체 댓글 목록을 fMap에 추가하여 반환
+				//3. 전체 댓글 목록을 rMap에 추가하여 반환
 				fMap = new HashMap<String, FeedbackDto>();
 				fMap.put("feedback", feedback);
 
@@ -464,30 +427,6 @@ public class ClassService {
 			return fMap;
 		}
 
-		public Map<String, FeedbackDto> cfInsert(String fb_code, String fb_reply) {
-			Map<String, FeedbackDto> fMap = null;
-
-			
-			
-			try {
-				//1.넘어온 답글-> DB에 update 처리
-				cDao.feedbackUpdate(fb_code, fb_reply);
-
-				//2.새로 추가된 댓글 포함 전체 댓글 목록 가져오기
-				FeedbackDto feedback = cDao.getFeedback(fb_code);
-
-				//3. 전체 댓글 목록을 fMap에 추가하여 반환
-				fMap = new HashMap<String, FeedbackDto>();
-				fMap.put("feedback", feedback);
-
-			}catch (Exception e) {
-				e.printStackTrace();
-				fMap=null;
-			}
-
-			return fMap;
-		}
-		
 		public Map<String, List<FeedbackDto>> fbidCheck(String fb_code) {
 			Map<String, List<FeedbackDto>> fMap= new HashMap<String, List<FeedbackDto>>();
 			FeedbackDto feedback = new FeedbackDto();
@@ -522,24 +461,83 @@ public class ClassService {
 
 		return ldto;
 	}
-/*
-	public Map<String, Object> videoChange(String vf_code, String onc_code) {
+
+	public ModelAndView classroom(String onc_code) {
+		log.info("classroom()" + onc_code);
+
+		String email = ((MemberDto)session.getAttribute("mb")).getM_email();
+		log.info("email()"+email);
+
+		//크리에이터 이메일로 내 강의 검색해서 클래스룸 접속 권한 추가
+		OnlineClassDto c_m_check = cDao.checkOnClass(onc_code, email);
+		log.info("c_m_check()"+c_m_check.getOnc_m_email());
+
+		//			//주문 내역에서 내 이메일과 온라인 강의 코드에 해당하는 정보 있는지 확인
+		//			OrderDto orderCheck = null;
+		//			orderCheck = cDao.checkOrderList(loginMember.getM_email(), onc_code);
+		//			log.info("orderCheck()");
+		//			
+		//			//주문 내역 없는데 url타고 들어가는거 방지 -> 홈화면으로 이동
+		//			if (c_m_check == null && orderCheck == null ) {
+		//				mv.setViewName("/");
+		//				log.info("비회원 홈으로 돌아가기");
+		//				return mv;
+		//			}
+
+		if (ObjectUtils.isEmpty(c_m_check)) {
+			mv.setViewName("/");
+			log.info("내가 강의 아님 홈으로 돌아가기");
+			
+		}
+		return mv;
+	}
+
+		
+	/*
+	 * public ModelAndView gettotalList(String onc_code, String email) { mv = new
+	 * ModelAndView();
+	 * 
+	 * 
+	 * List<TotalInfo> allList = cDao.getoffontotalList();
+	 * //System.out.println(lmap); //System.out.println(qList.get(0).getQ_code());
+	 * 
+	 * mv.addObject("allList", allList);
+	 * 
+	 * // view name을 지정! mv.setViewName("home");
+	 * 
+	 * 
+	 * // //myonlineinfo에서 onc_code검색해서 내 강의 목록에 있으면 강의 비디오 정보 가져오기 //
+	 * List<ClassroomDto> classroom = cDao.getCR(onc_code); //
+	 * System.out.println("classroom>>>"+classroom); // // ClassroomDto
+	 * classroomSample = classroom.get(0); //
+	 * mv.addObject("classroomSample",classroomSample); //
+	 * System.out.println("classroomSample>>>"+classroomSample); // //
+	 * mv.addObject("classroom", classroom); // mv.addObject("videoList",
+	 * classroom);
+	 * 
+	 * //비디오 리스트 가져오기 List<VideoListDto> videoLists = cDao.getVideoLists(onc_code,
+	 * email); mv.addObject("videoLists", videoLists);
+	 * System.out.println("videoLists>>>>>>"+videoLists);
+	 * 
+	 * //선택된 강좌 배열에서 검색 후 저장 VideoListDto selVideoLists = videoLists.get(0);
+	 * mv.addObject("selVideoLists", selVideoLists);
+	 * 
+	 * mv.setViewName("online/online_classroom");
+	 * 
+	 * return mv; }
+	 */
+
+	/* 은경 파트 */
+	public VideoListDto videoChange(String vf_code, String onc_code) {
 		log.info("videoChange()" + vf_code + onc_code);
 
 		String email = ((MemberDto) session.getAttribute("mb")).getM_email();
-		Map<String, Object> fMap= new HashMap<String, Object>();
-		
-		//비디오 전환
-		VideoListDto videoChange = cDao.getvideoChange(vf_code, onc_code);
-		fMap.put("videoChange", videoChange);
-		//댓글 전환
-		FeedbackDto feedback = new FeedbackDto();
-		List<FeedbackDto> fList = cDao.getvfFeedback(vf_code);
-		fMap.put("fList", fList);
-		
-		return fMap;
+
+		VideoListDto videoChange = cDao.getvideoChange(vf_code, onc_code, email);
+
+		return videoChange;
 	}
-*/
+
 
 	public ModelAndView onlineList() {
 		mv = new ModelAndView();
@@ -554,6 +552,5 @@ public class ClassService {
 	}
 
 
-	/* 은경 파트 */
 	
 }

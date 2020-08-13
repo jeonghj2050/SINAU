@@ -15,14 +15,14 @@
             background-color: rgb(238, 236, 236);
             margin: 0 auto;
             width: 1300px;
-            height: 0;
+            height: 150px;
 
         }
 
         header>div {
             margin: 0 auto;
             width: 1300px;
-            height: 0;
+            height: 70px;
             background-color: rgb(226, 226, 226);
 
         }
@@ -39,7 +39,7 @@
             background-color: black;
             margin: 0 auto;
             width: 1300px;
-            height: 0;
+            height: 100px;
             display: inline-flex;
         }
 
@@ -61,18 +61,20 @@
 
         .playListSection {
             width: 405px;
-		    height: auto;
-		    margin-top: 10px;
-		    padding-bottom: 5px;
-		    box-shadow: rgba(41, 42, 43, 0.16) 0px 2px 6px -2px;
-		    border-radius: 3px;
-		    border-width: 1px;
-		    border-style: solid;
-		    border-color: rgb(255, 255, 255);
-		    border-image: initial;
-		    position: fixed;
-		    top: 70px;
-		    right: 5px;
+            height: auto;
+            margin-top: 10px;
+            padding-bottom: 5px;
+            box-shadow: rgba(41, 42, 43, 0.16) 0px 2px 6px -2px;
+            border-radius: 3px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: rgb(255, 255, 255);
+            border-image: initial;
+
+            position: sticky;
+            top: 0;
+            left: 0;
+            float: right;
         }
 
         .video_div {
@@ -183,7 +185,7 @@
         }
 
         .feedback-mid {
-    /*        height: 555px;*/
+            height: 555px;
             width: 100%;
             display: inline-block;
             position: relative;
@@ -880,11 +882,11 @@
 	margin: 0px 20px;
 }
 
-.input_area{
+.input_area {
 	margin: 10px 0;
 }
 
-#repCon, #crepCon {
+#repCon {
 	font-family: '맑은 고딕', verdana;
 	padding: 5px;
 	width: 880px;
@@ -902,7 +904,7 @@
 	font-size: 16px;
 }
 
-button#reply_btn, button#creply_btn {
+button#reply_btn {
 	padding: 5px 10px;
 	margin: 10px 0;
 	color: black;
@@ -920,12 +922,12 @@ button#reply_btn, button#creply_btn {
 	left: 840px;
 }
 
-button#reply_btn:hover, button#creply_btn:hover{
+button#reply_btn:hover {
 	background: #fff;
 	color: black;
 }
 
-button#reply_btn:before, button#reply_btn:after, button#creply_btn:before, button#creply_btn:after {
+button#reply_btn:before, button#reply_btn:after {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -936,14 +938,14 @@ button#reply_btn:before, button#reply_btn:after, button#creply_btn:before, butto
 	transition: 400ms ease all;
 }
 
-button#reply_btn:after, button#creply_btn:after {
+button#reply_btn:after {
 	right: inherit;
 	top: inherit;
 	left: 0;
 	bottom: 0;
 }
 
-button#reply_btn:before, button#reply_btn:after,button#creply_btn:before, button#creply_btn:after {
+button#reply_btn:before, button#reply_btn:after {
 	width: 100%;
 	transition: 800ms ease all;
 }
@@ -985,7 +987,7 @@ div.replyList div.userInfo .date {
 }
 
 
-.replyContent, .creplyContent {
+.replyContent {
 	padding: 10px;
 	margin: 20px 0px;
 	margin-left: 10px;

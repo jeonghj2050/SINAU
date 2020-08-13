@@ -193,6 +193,9 @@
             <div class="intro">
                 <div class="spec_title">
                     <h2>클래스 소개</h2>
+                    <!-- 나중에 삭제하기!!!-->
+				<a style="background: purple" href="./classroom?onc_code=${onInfo.onc_code}&vf_code=">
+				클래스룸</a> 
                 </div>
                 <div class="speci1 content"><img id="speci1 content" 
                    src="resources/upload/${onInfo.f_content}"></div>

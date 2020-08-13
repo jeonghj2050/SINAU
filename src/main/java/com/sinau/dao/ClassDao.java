@@ -169,25 +169,22 @@ public interface ClassDao {
 //   String getHerClass(String name);
    
    //내가 결제한 강의 유/무 확인하기
-   OrderDto checkOrderList(@Param("onc_code")String onc_code,@Param("email")String email);
+//   OrderDto checkOrderList(@Param("onc_code")String onc_code,@Param("email")String email);
    
    //로그인한 크리에이터의 강의인지 확인하기
    OnlineClassDto checkOnClass(@Param("onc_code")String onc_code,@Param("email")String email);
    
    //비디오 강의 별로 가져오기
-   List<VideoListDto> getVideoLists(String onc_code);
+   List<VideoListDto> getVideoLists(@Param("onc_code")String onc_code,@Param("email")String email);
    
    //해당 강의 정보 가져오기
-   VideoListDto getvideoChange(@Param("vf_code")String vf_code,@Param("onc_code")String onc_code);
+   VideoListDto getvideoChange(@Param("vf_code")String vf_code,@Param("onc_code")String onc_code,@Param("email")String email);
 
    //크리에이터 사진 및 강좌 프로필 가져오기
    ClsrCreatorDto getClsrCreator(String onc_code);
 
    //클래스룸 피드백 입력
    void feedbackInsert(FeedbackDto feedback);
-
-	//크리에이터 답변 입력
-	void feedbackUpdate(@Param("fb_code")String fb_code, @Param("fb_reply")String fb_reply);
    
    //클래스룸 피드백 목록 가져오기
    FeedbackDto getFeedback(String fb_code);
@@ -199,16 +196,15 @@ public interface ClassDao {
    void deleteFeedback(String fb_code);
    
    //클래스룸 피드백 리스트 가져오기
-   List<FeedbackDto> getFeedbackList(String fb_vf_code);
+   List<FeedbackDto> getFeedbackList(String fb_code);
 
-   //비디오에 해당하는 댓글
-   List<FeedbackDto> getvfFeedback(@Param("vf_code")String vf_code, @Param("email")String email);
+   //비디오에 해당하는 전체 댓글
+ //  FeedbackDto getvfFeedback(String vf_code);
 	
-   //크리에이터 댓글 가져오기
-   FeedbackDto cgetFeedback(String fb_code);
+	
+	
 /*은경 파트*/
-  
-	List<TotalInfo> gettotalList();
 
+	List<TotalInfo> gettotalList();
 
 }

@@ -74,13 +74,13 @@ public class ClassController {
 	}
 	
 	@GetMapping("classroom")
-	public ModelAndView classroom(String onc_code, String vf_code, String fb_m_email) {
+	public ModelAndView classroom(String onc_code, String vf_code) {
 		
-		mv = cServ.classroom(onc_code, vf_code, fb_m_email);
+		mv = cServ.classroom(onc_code, vf_code);
 		
 		return mv;
 	}
-	/*
+	
 	@PostMapping(value = "videoChange", produces = "application/json; charset = utf-8")
 	@ResponseBody
 	public VideoListDto videoChange(String vf_code, String onc_code){
@@ -89,7 +89,7 @@ public class ClassController {
 		VideoListDto videoChange = cServ.videoChange(vf_code, onc_code);
 			return videoChange;
 	}
-	*/
+	
 	@GetMapping("filter")
 	public ModelAndView offFilter(String cts_code, @Param("filter1") String filter1,@Param("filter2") String filter2,@Param("filter3") String filter3) {
 		log.info("offFilter() : " + cts_code +  filter1 + filter2 + filter3);
@@ -122,21 +122,6 @@ public class ClassController {
 
 		Map<String, FeedbackDto> fMap = 
 				cServ.fInsert(feedback);
-
-		return fMap;
-	}
-	
-	//크리에이터 댓글 입력 
-	@PostMapping(value = "cfeedbackInsert",
-			produces = "application/json; charset=utf-8")
-	@ResponseBody
-	public Map<String, FeedbackDto> 
-	cfeedbackInsert(String fb_code, String fb_reply){
-		log.info("cfeedbackInsert - getFb_vf_code : " 
-				+ fb_code + fb_reply);	
-
-		Map<String, FeedbackDto> fMap = 
-				cServ.cfInsert(fb_code,fb_reply);
 
 		return fMap;
 	}
