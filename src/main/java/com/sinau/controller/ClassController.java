@@ -13,8 +13,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.sinau.dto.OrderDto;
+import com.sinau.dto.PReviewDto;
+import com.sinau.dto.PayCouponDto;
+import com.sinau.dto.VideoListDto;
+
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sinau.dto.FeedbackDto;
 import com.sinau.dto.LikesDto;
 import com.sinau.dto.OffListDto;
 import com.sinau.dto.VideoListDto;
@@ -66,13 +76,13 @@ public class ClassController {
 	}
 	
 	@GetMapping("classroom")
-	public ModelAndView classroom(String onc_code) {
+	public ModelAndView classroom(String onc_code, String vf_code, String fb_m_email) {
 		
-		mv = cServ.classroom(onc_code);
+		mv = cServ.classroom(onc_code, vf_code, fb_m_email);
 		
 		return mv;
 	}
-	
+	/*
 	@PostMapping(value = "videoChange", produces = "application/json; charset = utf-8")
 	@ResponseBody
 	public VideoListDto videoChange(String vf_code, String onc_code){
@@ -81,7 +91,7 @@ public class ClassController {
 		VideoListDto videoChange = cServ.videoChange(vf_code, onc_code);
 			return videoChange;
 	}
-
+*/
 	@PostMapping(value = "getFilter", produces = "application/json; charset = utf-8")
 	@ResponseBody
 	public Map<String, List<OffListDto>> getOffCateFilterList(String cts_code, String filter){
@@ -104,6 +114,56 @@ public class ClassController {
 		return mv;
 	}
 	
+	
+	//댓글 추가 및 댓글 목록 처리 메소드
+	@PostMapping(value = "feedbackInsert",
+			produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Map<String, FeedbackDto> 
+	feedbackInsert(FeedbackDto feedback){
+		log.info("feedbackInsert - bnum : " 
+				+ feedback.getFb_vf_code());	
+
+		Map<String, FeedbackDto> fMap = 
+				cServ.fInsert(feedback);
+
+		return fMap;
+	}
+
+	//크리에이터 댓글 입력 
+	@PostMapping(value = "cfeedbackInsert",
+			produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Map<String, FeedbackDto> 
+	cfeedbackInsert(String fb_code, String fb_reply){
+		log.info("cfeedbackInsert - getFb_vf_code : " 
+				+ fb_code + fb_reply);	
+
+		Map<String, FeedbackDto> fMap = 
+				cServ.cfInsert(fb_code,fb_reply);
+
+		return fMap;
+	}
+	
+	//댓글 삭제 처리 메소드
+	@PostMapping(value = "feedbackDelete", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Map<String, List<FeedbackDto>> 
+	getFeedbackList(String fb_code){
+		log.info("post delete feedback");
+		int result =0;
+		FeedbackDto feedback = new FeedbackDto();
+
+		log.info(fb_code);
+
+		Map<String, List<FeedbackDto>> fMap = cServ.fbidCheck(fb_code);	
+
+
+		return fMap;
+
+	}
+	
+/*은경 파트*/
 	//카테고리 코드에 따라 강의 리스트를 가져오는 메소드
 		@GetMapping("cate")
 		public ModelAndView offCate(String cts_code) {
