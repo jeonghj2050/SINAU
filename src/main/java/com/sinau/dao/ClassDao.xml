@@ -137,6 +137,16 @@
       select * from creatoroffinfo where
       ofc_m_email=#{ofc_m_email}
    </select>
+   
+   <select id="getCreatorOnlineInfo" parameterType="String"
+      resultType="com.sinau.dto.CreatorOnInfoDto">
+      select * from creatoroninfo where onc_code=#{onc_code}
+   </select>
+   <select id="getCreatorOffInfo" parameterType="String"
+      resultType="com.sinau.dto.CreatorOffInfoDto">
+      select * from creatoroffinfo where ofc_code=#{ofc_code}
+   </select>
+   
    <!-- 효진 파트 -->
    
  
