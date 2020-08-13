@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>유튜브 등록 페이지</title>
-<link rel="stylesheet" href="resources/css/adstyle.css?ver=1.1">
+<link rel="stylesheet" href="resources/css/adstyle.css?ver=1.3">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 </head>
