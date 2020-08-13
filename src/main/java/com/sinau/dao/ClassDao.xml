@@ -59,7 +59,10 @@
    <delete id="deleteClass" parameterType="String">
       delete from onc where onc_code=#{onc_code}
    </delete>
-   
+     <delete id="deleteOffClass" parameterType="String">
+      delete from ofc where
+      ofc_code=#{p_code}
+   </delete>
    <select id="getFeedListAll" parameterType="String" resultType="com.sinau.dto.VideoFeedDto">
       select * from videofeed where m_email=#{m_email}
    </select>
@@ -359,10 +362,7 @@ GROUP BY   OFC_CODE
          where onc_code=#{pay_pcode}
          ]]>
    </select>
-   <delete id="deleteOffClass" parameterType="String">
-      delete from ofc where
-      ofc_code=#{p_code}
-   </delete>
+
    <select id="getOnInfoPay" parameterType="String"
       resultType="com.sinau.dto.OnListDto">
       <![CDATA[
@@ -397,6 +397,7 @@ GROUP BY   OFC_CODE
 			select * from of_INFO where ofc_cts_code=#{cts_code} order by l_count desc
 		]]>
 	</select>
+
    <!-- 지원 파트 -->
    
    <select id="gettotalList" resultType="com.sinau.dto.TotalInfo">

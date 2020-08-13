@@ -18,8 +18,5 @@ public class OrderDto {
 	private String ord_pcode;
 	private int ord_amount;
 	private String ord_m_email;
-	
-	
-	
-	
+
 }

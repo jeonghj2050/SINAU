@@ -7,16 +7,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>고객 센터</title>
 <style type="text/css">
 .t-code {
 	display :none;
 }
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="resources/css/servicecenter.css?a">
+<link rel="stylesheet" href="resources/css/servicecenter.css">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -66,7 +66,7 @@ $(document).ready(function(){
 				</div><br>
 				<c:forEach var="total" items="${totalList}">
 				<div class="data-row">
-				<div class="t-no">${total.num}</div>
+					<div class="t-no">${total.num}</div>					
 					<div class="t-retitle">${total.onc_title}</div>
 					<div class="t-orddate"><fmt:formatDate pattern="yyyy-MM-dd" value="${total.ord_date}"/></div>
 					<div class="t-amount">${total.ord_amount}</div>

@@ -37,7 +37,6 @@
 </head>
 
 <body>
-	<!-- 헤더 상민이꺼 jsp 불러오기 -->
 	<header>
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>

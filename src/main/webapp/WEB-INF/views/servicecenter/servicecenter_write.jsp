@@ -4,12 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>고객 센터</title>
-<link rel="stylesheet" href="resources/css/servicecenter.css?a">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
+<title>고객 센터</title>
+<link rel="stylesheet" href="resources/css/servicecenter.css">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script type="text/javascript">
 	var sel_file;
@@ -89,8 +88,8 @@ $("#file").on('change',function(){
 			method="post" enctype="multipart/form-data">
 			<h3>문의글 작성</h3>
 			<div class="write-top">
-			<a class="t">title : </a> <input type="text" class="write-input" name="q_title" autofocus placeholder="제목" required>
-			<a>meail : </a><input type="text" class="memail" name="q_m_email" value="${mb.m_email}" >
+			<a class="t">title: </a> <input type="text" class="write-input" name="q_title" autofocus placeholder="제목" required>
+			<a class="t">e_mail: </a><input type="text" class="memail" name="q_m_email" value="${mb.m_email}" >
 			</div>
 			<a style="margin-left:720px;">카테고리 :</a>
 			<select class="category" name="q_cts_code">
