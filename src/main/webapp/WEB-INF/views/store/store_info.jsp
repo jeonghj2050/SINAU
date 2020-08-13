@@ -121,7 +121,7 @@
 		<div class="s_warp">
 			<!-- 대표이미지 -->
 			<div class="sinfo_img">
-				<img src="resources/images/storeimg/spec/${pspec}">
+				<img src="resources/upload/${pspec}">
 			</div>
 			<!-- 결제부분 -->
 			<div class="paymentSection">
@@ -266,7 +266,7 @@
 			<!-- 상품소개 -->
 			<div class="sinfo_detail">
 				<div class="sp_title1">상품 소개</div>
-				<img src="resources/images/storeimg/content/${pcont}" width="950px">
+				<img src="resources/upload/${pcont}" width="950px">
 			</div>
 
 			<!-- 상품리뷰 -->

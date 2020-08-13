@@ -137,16 +137,6 @@
       select * from creatoroffinfo where
       ofc_m_email=#{ofc_m_email}
    </select>
-
-   <select id="getCreatorOnlineInfo" parameterType="String"
-      resultType="com.sinau.dto.CreatorOnInfoDto">
-      select * from creatoroninfo where onc_code=#{onc_code}
-   </select>
-   <select id="getCreatorOffInfo" parameterType="String"
-      resultType="com.sinau.dto.CreatorOffInfoDto">
-      select * from creatoroffinfo where ofc_code=#{ofc_code}
-   </select>
-   
    <!-- 효진 파트 -->
    
  
@@ -363,25 +353,6 @@ GROUP BY   OFC_CODE
       delete from ofc where
       ofc_code=#{p_code}
    </delete>
-
-   <select id="getFilter1List" parameterType="String"
-      resultType="com.sinau.dto.FilterCtsDto">
-      <![CDATA[
-         select * from filter1
-         ]]>
-   </select>
-   <select id="getFilter2List" parameterType="String"
-      resultType="com.sinau.dto.FilterCtsDto">
-      <![CDATA[
-         select * from filter2
-         ]]>
-   </select>
-   <select id="getFilter3List" parameterType="String"
-      resultType="com.sinau.dto.FilterCtsDto">
-      <![CDATA[
-         select * from filter3
-         ]]>
-   </select>
    <select id="getOnInfoPay" parameterType="String"
       resultType="com.sinau.dto.OnListDto">
       <![CDATA[
@@ -396,6 +367,26 @@ GROUP BY   OFC_CODE
          where sc_code=#{sc_code}
          ]]>
    </select>
+   
+   	<!-- 서브 카테고리에 해당하는 강좌 가져오는 쿼리문 -->
+	<select id="getOffCateFilter1" parameterType="String"
+		resultType="com.sinau.dto.OffListDto">
+		<![CDATA[ 
+			select * from of_INFO where ofc_cts_code=#{cts_code} order by ofc_view desc
+		]]>
+	</select>
+	<select id="getOffCateFilter2" parameterType="String"
+		resultType="com.sinau.dto.OffListDto">
+		<![CDATA[ 
+			select * from of_INFO where ofc_cts_code=#{cts_code} order by TO_NUMBER(SUBSTR(ofc_code,5)) desc
+		]]>
+	</select>
+	<select id="getOffCateFilter3" parameterType="String"
+		resultType="com.sinau.dto.OffListDto">
+		<![CDATA[ 
+			select * from of_INFO where ofc_cts_code=#{cts_code} order by l_count desc
+		]]>
+	</select>
    <!-- 지원 파트 -->
    
    <select id="gettotalList" resultType="com.sinau.dto.TotalInfo">

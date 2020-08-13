@@ -110,41 +110,37 @@ public interface ClassDao {
    List<OffScheduleDto> getOffScheduleSel(String sc_code);
 
 	OffScheduleDto getOffSchedultPay(String sc_code);
-   
-   //onc_code에 해당하는 강좌 정보를 가져온다.
-   CreatorOnInfoDto getClassInfo(String onc_code);
-   //각 코드에 해당하는 강좌 정보를 가져온다.
-   CreatorOnInfoDto getCreatorOnlineInfo(String onc_code);
-   CreatorOffInfoDto getCreatorOffInfo(String ofc_code);
-   
-   //v_code에 저장된 동영상 파일을 모두 가져온다.
-   List<VideoFileDto> getVideoList(String v_code);
-   
-   //onc_code의 강좌를 삭제한다.
-   void deleteClass(String onc_code);
-   
-   //크리에이터의 모든 강좌의 피드백 목록을 가져온다.
-   List<VideoFeedDto> getFeedListAll(String m_email);
-   
-   //apply.jsp 강좌 목록 가져오는 메소드 - off
-   OffListDto getOffApplyInfo(String ofc_code);
 
-   
-   //내 클래스룸 강좌 정보 가져오기
-   ClassroomDto getCR(HashMap<String, Object> hashMap);
-   
-   void deleteOffClass(String p_code);
 
-//필터 카테고리 불러오기
-	List<FilterCtsDto> getFilter1List();
-	List<FilterCtsDto> getFilter2List();
-	List<FilterCtsDto> getFilter3List();
+	// 오프라인 서브카테, 필터 적용 메소드 - off
+	List<OffListDto> getOffCateFilter1(String cts_code);
+	List<OffListDto> getOffCateFilter2(String cts_code);
+	List<OffListDto> getOffCateFilter3(String cts_code);
+	///////////////////////////////////////////////////////////////
+	//onc_code에 해당하는 강좌 정보를 가져온다.
+	CreatorOnInfoDto getClassInfo(String onc_code);
+	//각 코드에 해당하는 강좌 정보를 가져온다.
+	CreatorOnInfoDto getCreatorOnlineInfo(String onc_code);
+	CreatorOffInfoDto getCreatorOffInfo(String ofc_code);
 
-	//필터 값에 따라 정렬 값 불러오기
-	// List<OffListDto> getOffCateFilterList(String cts_code, String filter1, String filter2, String filter3);
+	//v_code에 저장된 동영상 파일을 모두 가져온다.
+	List<VideoFileDto> getVideoList(String v_code);
 
-	//	//
-	//	List<OffListDto> getOffCateFilterList(String cts_code);
+	//onc_code의 강좌를 삭제한다.
+	void deleteClass(String onc_code);
+
+	//크리에이터의 모든 강좌의 피드백 목록을 가져온다.
+	List<VideoFeedDto> getFeedListAll(String m_email);
+
+	//apply.jsp 강좌 목록 가져오는 메소드 - off
+	OffListDto getOffApplyInfo(String ofc_code);
+
+
+	//내 클래스룸 강좌 정보 가져오기
+	ClassroomDto getCR(HashMap<String, Object> hashMap);
+
+	void deleteOffClass(String p_code);
+
 
 	OnListDto getOnInfoPay(String onc_code);
 

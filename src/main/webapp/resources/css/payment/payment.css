@@ -415,3 +415,35 @@ hr {
 	background-color: rgb(207, 207, 207);
 	margin: 0px 6px;
 }
+#pay-submit, .couponbtn{
+		cursor: pointer;
+	width: 100%;
+	display: flex;
+	vertical-align: middle;
+	color: rgb(255, 255, 255);
+	background-color: rgb(255, 146, 43);
+	font-weight: 700;
+	font-size: 16px;
+	letter-spacing: -0.2px;
+	height: 48px;
+	text-decoration-line: none;
+	border-radius: 3px;
+	padding: 0px 20px;
+	transition: background-color 0.1s ease 0s;
+	box-sizing: border-box;
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	align-items: center;
+	flex-direction: row;
+	border-width: 0px;
+	border-style: initial;
+	border-color: initial;
+	border-image: initial;
+	outline: none;
+	margin: 0px;
+	padding: 0px;
+	flex: initial;
+	margin: 16px 0;
+}

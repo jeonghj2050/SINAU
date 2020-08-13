@@ -37,6 +37,9 @@
 			<exclude-mapping path="/logout"/>
 			<exclude-mapping path="/info"/>
 			<exclude-mapping path="/store"/>
+			<exclude-mapping path="/offline"/>
+			<exclude-mapping path="/info"/>
+			<exclude-mapping path="/cate"/>
 			<exclude-mapping path="/id"/>
 			<exclude-mapping path="/pwd"/>
 			<exclude-mapping path="/pwdreset"/>

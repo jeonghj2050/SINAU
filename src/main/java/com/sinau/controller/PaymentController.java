@@ -33,10 +33,10 @@ public class PaymentController {
 	}
 	
 	@PostMapping("completion_pay")
-	public ModelAndView completionPay(OrderDto order, String sc_code) {
-		log.info("completion_pay()" + order.getOrd_price());
+	public ModelAndView completionPay(OrderDto order, String sc_code, String cplcode) {
+		log.info("completion_pay()" + cplcode);
 		
-		mv = pServ.completionPay(order, sc_code);
+		mv = pServ.completionPay(order, sc_code, cplcode);
 		
 		return mv;
 	}
@@ -45,11 +45,11 @@ public class PaymentController {
 	@PostMapping(value = "getCoupon",
 			produces = "application/json; charset=utf-8;")
 	@ResponseBody
-	public int getPayCoupon(String cpcode) {
-		log.info("getPayCoupon - cpl_cp_code : " + cpcode);
+	public int getPayCoupon(String cplcode) {
+		log.info("getPayCoupon - cpl_code : " + cplcode);
 		
 		
-		int msg = pServ.getPayCoupon(cpcode);
+		int msg = pServ.getPayCoupon(cplcode);
 		
 		return msg;
 	}

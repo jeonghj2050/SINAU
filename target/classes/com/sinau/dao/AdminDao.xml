@@ -40,11 +40,6 @@
 		where m_state=#{state} and m_group='cm'
 	</select>
 
-	<!-- 전체멤버 -->
-	<select id="getAllMem" resultType="com.sinau.dto.AdminDto">
-		select * from member;
-	</select>
-
 	<!-- 메일체크 -->
 	<select id="memberCheck" parameterType="String"
 		resultType="String">
@@ -52,36 +47,99 @@
 		FROM MEMBER
 		WHERE M_EMAIL = #{m_email}
 	</select>
-	<!-- 회원 삭제 -->
-	<delete id="getMemDel" parameterType="String">
+	<!-- 회원 삭제 (state = 3)-->
+	<update id="getMemDel" parameterType="String">
+		update member set m_state =
+		3
+		where m_email = #{email}
+	</update>
+	<!-- <delete id="getMemDel" parameterType="String">
 		DELETE FROM member
 		WHERE
 		M_EMAIL=#{email}
-	</delete>
-	<!-- 강의 삭제 -->
-	<delete id="getLecDel" parameterType="String">
+	</delete> -->
+	
+	<!-- 회원 이미지 파일 검색 -->
+	<select id="getMImgSel" resultType="String" 
+	parameterType="String">
+		select * from memberimg
+        where mimg_m_email = #{email}
+	</select>
+	<!-- 회원 이미지파일 삭제 -->
+	<delete id="getMImgDel" parameterType="String">
+		DELETE from memberimg
+        where mimg_m_email = #{email}
+	 </delete>
+	<!-- 강의 삭제 (state = 2) -->
+	<update id="getLecDel" parameterType="String">
+		update ONLINECLASS set onc_state =
+		2
+		WHERE ONC_CODE = #{code}
+	</update>
+	<update id="getOfDel" parameterType="String">
+		update OFFCLASS set ofc_state =
+		2
+		WHERE OFC_CODE = #{code}
+	</update>
+	<!-- <update id="getYDel" parameterType="String">
+		update YOUTUBE_CLASS set state =
+		2
+		WHERE Y_CODE = #{code}
+	</update> -->
+	<!-- <delete id="getLecDel" parameterType="String">
 		DELETE FROM ONLINECLASS
 		WHERE ONC_CODE = #{code}
 	</delete>
 	<delete id="getOfDel" parameterType="String">
 		DELETE FROM OFFCLASS
 		WHERE OFC_CODE = #{code}
-	</delete>
+	</delete>-->
 	<delete id="getYDel" parameterType="String">
 		DELETE FROM YOUTUBE_CLASS
 		WHERE Y_CODE = #{code}
-	</delete>
+	</delete> 
 	<!-- 판매글 삭제 -->
-	<delete id="getSaleDel" parameterType="String">
+	<update id="getSaleDel" parameterType="String">
+		update product set p_state =
+		2
+		WHERE P_CODE = #{code}
+	</update>
+	<!-- <delete id="getSaleDel" parameterType="String">
 		DELETE FROM PRODUCT
 		WHERE
 		P_CODE = #{code}
-	</delete>
+	</delete> -->
 	<!-- 리뷰 글 삭제 -->
 	<delete id="getReDel" parameterType="String">
 		DELETE FROM productreview
 		WHERE PRV_CODE = #{code}
 	</delete>
+	<!-- 신고 삭제 (안씀)-->
+	<delete id="getWDel" parameterType="String">
+		DELETE FROM warning
+		WHERE
+		w_code = #{code}
+	</delete>
+	
+	<!-- 회원 승인 -->
+	<update id="getstate" parameterType="String">
+		update member set m_state =
+		2
+		where m_email = #{email}
+	</update>
+	<!-- 신고 비승인 -->
+	<update id="getWState" parameterType="String">
+		update warning set w_state
+		= 0
+		where w_code = #{code}
+	</update>
+	<!-- qna 답글 업데이트 -->
+	<update id="getQnaInsert" parameterType="String">
+		UPDATE QUESTION set 
+		q_anfield = #{content},
+		q_andate = sysdate
+		where q_code = #{code}
+	</update>
 		<insert id="youtubeWrite"
 		parameterType="com.sinau.dto.YoutubeClassDto"
 		useGeneratedKeys="true"

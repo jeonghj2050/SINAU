@@ -19,9 +19,11 @@ header {
 }
 
 .section-home {
-	width : 1300px;
+	width : 100%;
 	margin: auto;
+	overflow: auto;
 }
+
 
 footer {
 	width: 100%;
@@ -33,6 +35,7 @@ footer {
 	height : 300px;
 	background-color: black;
 	margin: auto;
+	background-color: black;
 }
 
 .bx-wrapper {
@@ -412,23 +415,21 @@ li a:hover {
 }
 
 .childart10>.swiper-slide5>.swiper-text5>.total_sale {
-	width: 150px;
+	width: 300px;
 	height : 16px;
 	float : left;
 	font-size: 12px;
+	margin-bottom: 10px;
 }
 
-.childart10>.swiper-slide5>.swiper-text5>.class_likes {
-	width: 150px;
-	height : 16px;
-	float : right;
-	text-align : right;
-	font-size: 12px;
-}
 .childart10>.swiper-slide5>.swiper-text5>.total_title>a {
 	width: 300px;
 	height : 50px;
 	font-size: 17px;
+}
+
+.childart10>.swiper-slide5>.swiper-text5>hr {
+	margin-bottom: 10px;
 }
 
 
