@@ -10,7 +10,6 @@ public class CreatorOnInfoDto {
 	private String onc_m_email;
 	private String onc_title;
 	private String onc_content;
-	private int onc_state;
 	private int onc_rstnum;
 	private int onc_stnum;
 	private int onc_sale;

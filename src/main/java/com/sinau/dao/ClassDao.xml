@@ -139,16 +139,20 @@
    </select>
    <!-- 효진 파트 -->
    
+ 
    <!-- 은경파트 -->
    <!-- 온라인 강의 섬네일용 정보를 가져옴  파라미터 없음 -->
    <select id="getOnList" resultType="com.sinau.dto.OnListDto">
-          select DISTINCT * from oninfolist2
+         select DISTINCT oninfolist2.*, onc.onc_state 
+		from oninfolist2,onc
+		where onc_state = 1
    </select>
    
    <!-- 온라인 강의 섬네일용 정보를 가져옴  파라미터 있음 -->
    <select id="getOnListCa" parameterType="String" resultType="com.sinau.dto.OnListDto">
-          select DISTINCT * from oninfolist2
-          where cts_code = #{cate}
+           select DISTINCT oninfolist2.*, onc.onc_state 
+			from oninfolist2,onc
+			where onc_state = 1 and cts_code = #{cate}
    </select>
    
    <!-- 온라인 강의  인기강좌 10개 가져오기 -->
@@ -159,12 +163,12 @@
       ]]>
    </select>
    
-   <!-- 클래스룸 정보 가져오기 -->
+   <!-- 클래스룸 정보 가져오기 
    <select id="getCR" parameterType="String" resultType="com.sinau.dto.ClassroomDto">
       select * from videoInfo
       where onc_code = #{onc_code} 
    </select>
-   
+   -->
    
    <!-- email에 해당하는 회원의 온라인 강의 주문 내역을 반환한다. -->
    <select id="checkOnClass" parameterType="String" resultType="com.sinau.dto.OnlineClassDto">
@@ -172,16 +176,83 @@
       where onc_m_email=#{email} and onc_code = #{onc_code}
    </select>
    
-   <!-- 해당 강의 정보 가져오기 -->
-   <select id="getvideoChange" parameterType="String" resultType="com.sinau.dto.VideoListDto">
-      select *
-      from videoRInfo
-      where m_email=#{email} and onc_code = #{onc_code} and vf_code = #{vf_code}
+   <!-- 클래스룸 정보 가져오기 -->
+   <select id="getVideoLists" parameterType="String" resultType="com.sinau.dto.VideoListDto">
+		select *
+		from videoLists
+		where onc_code = #{onc_code}
+		order by v_title
    </select>
    
-   <!-- 은경 파트 -->
+   <!-- 해당 강의 정보 가져오기
+   <select id="getvideoChange" parameterType="String" resultType="com.sinau.dto.VideoListDto">
+      select *
+      from videoLists
+      where onc_code = #{onc_code} and vf_code = #{vf_code}
+   </select> -->
+   
+   <!-- 크리에이터 사진 및 강좌 프로필 가져오기 -->
+   <select id="getClsrCreator" parameterType="String" resultType="com.sinau.dto.ClsrCreatorDto">
+		select mimg.mimg_sysname, onc.onc_title, onc.onc_content, 
+		TO_DATE(TO_CHAR(onc.onc_edate, 'YYYYMMDD')) - TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) as remaindate 
+		from mimg, onc
+		where onc.onc_m_email=mimg.mimg_m_email
+		and onc.onc_code=#{onc_code}
+   </select>
+   
+   	<insert id="feedbackInsert"
+		parameterType="com.sinau.dto.FeedbackDto" useGeneratedKeys="true" keyProperty="fb_code">
+		<selectKey keyProperty="fb_code" order="BEFORE" resultType="String">
+		SELECT 'fb_'||SEQ_fb.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into fb
+		VALUES(#{fb_code},#{fb_content},sysdate,null,#{fb_m_email},#{fb_vf_code})
+	</insert>
+	
+	<update id="feedbackUpdate"
+      parameterType="com.sinau.dto.FeedbackDto">
+         update fb set fb_reply=#{fb_reply} where fb_code=#{fb_code}
+   </update>
+	
+	<select id="getFeedback" parameterType="String" resultType="com.sinau.dto.FeedbackDto">
+		SELECT * FROM fb WHERE fb_CODE = #{fb_code}
+	</select>
+	
+	<select id="cgetFeedback" parameterType="String" resultType="com.sinau.dto.FeedbackDto">
+		SELECT * FROM fb WHERE fb_CODE = #{fb_code}
+	</select>
+	
+	<select id="getvfFeedback" parameterType="String" resultType="com.sinau.dto.FeedbackDto">
+		SELECT * FROM fb WHERE fb_vf_CODE = #{vf_code} and fb_m_email= #{email}
+	</select>
+	
+	<select id="feedbackUserIdCheck" parameterType="String" resultType="String">
+		SELECT fb_M_EMAIL
+		FROM fb
+		WHERE fb_CODE = #{fb_code}
+	</select>
+		
+	<delete id="deleteFeedback" parameterType="String">
+		DELETE FROM fb
+		WHERE fb_CODE = #{fb_CODE}
 
-   <!-- 지원 파트 -->
+	</delete>
+	
+	<select id="getFeedbackList" parameterType="String"
+		resultType="com.sinau.dto.FeedbackDto">
+		SELECT * FROM fb
+		WHERE fb_vf_CODE=#{fb_vf_code}
+	</select>
+	
+	<select id="checkOrderList" resultType="com.sinau.dto.OrderDto">
+		select *
+		from ord
+		where ord_pcode = #{onc_code} and ord_m_email= #{email}
+   </select>
+	
+<!-- /*은경 파트*/ -->
+
+<!-- 지원 파트 -->
    <select id="getOffList" parameterType="String"
       resultType="com.sinau.dto.OffListDto">
       <![CDATA[
@@ -323,4 +394,5 @@ GROUP BY   OFC_CODE
       from totalinfo
       order by Totalupdate desc
    </select>
+
 </mapper>
