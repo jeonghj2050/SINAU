@@ -81,7 +81,7 @@
 					<c:forEach var="pitem" items="${productList}">
 						<div class="swiper-slide">
 							<div class="swiper_img">
-								<img src="resources/images/storeimg/sum/${pitem.f_oriname}"
+								<img src="resources/upload/${pitem.f_sysname}"
 									width="250px" height="300px">
 							</div>
 							<div class="swiper-text">
@@ -115,7 +115,7 @@
 						<c:forEach var="paitem" items="${pArtList}">
 							<div class="swiper-slide">
 								<div class="swiper_img" style="margin-left: 0px;">
-									<img src="resources/images/storeimg/sum/${paitem.f_oriname}" width="250px"
+									<img src="resources/upload/${paitem.f_sysname}" width="250px"
 										height="300px">
 								</div>
 								<div class="swiper-text" style="padding-left: 0px;">
@@ -147,7 +147,7 @@
 						<c:forEach var="pbitem" items="${pEleList}">
 							<div class="swiper-slide">
 								<div class="swiper_img" style="margin-left: 0px;">
-									<img src="resources/images/storeimg/sum/${pbitem.f_oriname}" width="250px"
+									<img src="resources/upload/${pbitem.f_sysname}" width="250px"
 										height="300px">
 								</div>
 								<div class="swiper-text" style="padding-left: 0px;">
@@ -179,7 +179,7 @@
 						<c:forEach var="pcitem" items="${pHList}">
 							<div class="swiper-slide">
 								<div class="swiper_img" style="margin-left: 0px;">
-									<img src="resources/images/storeimg/sum/${pcitem.f_oriname}" width="250px"
+									<img src="resources/upload/${pcitem.f_sysname}" width="250px"
 										height="300px">
 								</div>
 								<div class="swiper-text" style="padding-left: 0px;">
@@ -211,7 +211,7 @@
 						<c:forEach var="pditem" items="${pMusicList}">
 						<div class="swiper-slide">
 								<div class="swiper_img" style="margin-left: 0px;">
-									<img src="resources/images/storeimg/sum/${pditem.f_oriname}" width="250px"
+									<img src="resources/upload/${pditem.f_sysname}" width="250px"
 										height="300px">
 								</div>
 								<div class="swiper-text" style="padding-left: 0px;">
@@ -242,7 +242,7 @@
 						<c:forEach var="peitem" items="${pFoodList}">
 							<div class="swiper-slide">
 								<div class="swiper_img" style="margin-left: 0px;">
-									<img src="resources/images/storeimg/sum/${peitem.f_oriname}" width="250px"
+									<img src="resources/upload/${peitem.f_sysname}" width="250px"
 										height="300px">
 								</div>
 								<div class="swiper-text" style="padding-left: 0px;">

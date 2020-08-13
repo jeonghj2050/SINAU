@@ -53,7 +53,11 @@ public class ServiceCenterService {
 		
 		mv = new ModelAndView();
 		MemberDto member = (MemberDto)session.getAttribute("mb");
-	
+		
+		if(member == null) {
+			mv.setViewName("loginFrm");
+		}
+		else {
 		String email = member.getM_email();
 		
 		List<QuestionDto> qList = scDao.getList(email);
@@ -64,7 +68,7 @@ public class ServiceCenterService {
 		
 		// view name을 지정!
 		mv.setViewName("servicecenter/servicecenter_question");
-		
+		}
 		return mv;
 	}
 
