@@ -9,7 +9,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" media="screen"
-	href="../../../resources/css/offline/offline_main.css" />
+	href="resources/css/offline/offline_main.css" />
 
 <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"

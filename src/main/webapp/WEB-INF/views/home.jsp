@@ -13,8 +13,6 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link rel="stylesheet" href="resources/css/home.css?a">
-<link rel="stylesheet" href="resources/css/youtube.css?a">
-<link rel="stylesheet" href="resources/css/online.css?a">
 </head>
 <body>
 	<header>
@@ -38,20 +36,20 @@
 				</div>
 			</div>
 		</div>
-		<article class="childart5">
-			<h1>전체 유투버</h1>
+		<article class="childart10">
+			<h1>전체 강좌</h1>
 			<!-- Swiper -->
-			<c:forEach var="total" items="${totalList}">
+			<c:forEach var="t" items="${totalList}">
 				<div class="swiper-slide5">
-					<a href="contents?totalcode=${total.totalcode}"> <img
-						src="resources/upload/${total.totalimg}" width="300px" height="300px"></a>
+					<a href="classcontents?totalcode=${t.totalcode}"> <img
+						src="resources/upload/${t.totalimg}" width="300px" height="300px"></a>
 					<div class="swiper-text5">
-						<div class="y_name">${total.totalctsname}</div>
-						<div class="y_name">${total.totalsale}</div>
-						<div class="y_name">${total.totallevel}</div>
-						<div class="y_name">${total.totalcount}</div>
-						<div class="y_title">
-							<a href="contents?totalcode=${total.totalcode}">${total.totaltitle}</a>
+						<div class="total_ctsname">${t.totalctsname}</div>
+						<div class="total_level">${t.totallevel}</div>
+						<div class="total_sale">${t.totalsale}원</div>						
+						<hr style="width : 300px">
+						<div class="total_title">
+							<a href="classcontents?totalcode=${t.totalcode}">${t.totaltitle}</a>
 						</div>
 					</div>
 				</div>
@@ -86,15 +84,30 @@
 	});
 </script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		var chk = "${check}";
+$(document).ready(function(){
+	var chk = "${check}";
+	
+	if(chk == "0"){
+		alert("회원가입  실패!");
+		location.reload(true);
+	}
+	if(chk == "1"){
+		alert("회원가입 성공!");
+		location.reload(true);
+	}
+	if(chk == "2"){
+		alert("환영합니다!");
+		location.reload(true);
+	}
+	if(chk == "3"){
+		alert("아직 승인되지 않은 회원입니다!");
+		location.reload(true);
+	}
+	if(chk == "4"){
+		alert("회원탈퇴한 이메일입니다!");
+		location.reload(true);
+	}
 
-		if (chk == "1") {
-			alert("회원가입 실패!");
-		} else if (chk == "2") {
-			alert("회원가입 성공!");
-		}
-	});
+});
 </script>
-
 </html>

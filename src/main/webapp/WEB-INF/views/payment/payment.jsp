@@ -162,7 +162,7 @@
 									<div>${prodList.p_price}원</div>
 									<div>무료</div>
 									<div class="pay-list-discount">0원</div>
-									<div class="pay-list-disprice" name="ord_price">${prodList.p_price}원</div>
+									<div class="pay-list-disprice">${prodList.p_price}원</div>
 								</div>
 								<input type="hidden" class="cplcode" name="cplcode">
 							</c:if>

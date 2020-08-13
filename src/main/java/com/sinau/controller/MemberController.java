@@ -278,6 +278,8 @@ public class MemberController {
 		return mv;
 	}
 	
+
+	
 	
 	@GetMapping("cMypageQnA")
 	public ModelAndView cMypageQnA() {

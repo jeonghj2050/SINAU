@@ -193,9 +193,7 @@
             <div class="intro">
                 <div class="spec_title">
                     <h2>클래스 소개</h2>
-                    <!-- 나중에 삭제하기!!!-->
-            <a style="background: purple" href="./classroom?onc_code=${onInfo.onc_code}">
-            클래스룸</a> 
+          
                 </div>
                 <div class="speci1 content"><img id="speci1 content" 
                    src="resources/upload/${onInfo.f_content}"></div>
@@ -293,8 +291,9 @@
                             <span class="like_num">공유하기</span>
                         </button></div>
                 </div>
-                <button type="button" class="class_submitbtn" color="orange" fill="true"><span class="sc-fzoyTs jZUSDr">
-                        <span>클래스 신청하기</span></span></button>
+                <a href="apply?pay_pcode=${onInfo.onc_code}" 
+				class="class_submitbtn" color="orange" fill="true">클래스 신청하기</a>
+				<div>
                 <div>
                     <p class="refund_alert">키트 미개봉 시, <fmt:formatDate value="${onInfo.onc_sdate}" pattern="yyyy.MM.dd" />까지 전액 환불 보장</p>
                 </div>
@@ -369,8 +368,6 @@
                     <div class="sc-pAYXY fmggLq"></div>
                 </div>
             </div>
-
-
 
         </div>
     </section>

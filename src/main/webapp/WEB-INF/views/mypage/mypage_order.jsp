@@ -11,7 +11,12 @@
 <title>SINAU 주문내역</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
@@ -21,8 +26,11 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="resources/css/style.css">
+
+<link rel="stylesheet" href="resources/css/home.css">
 <link rel="stylesheet" href="resources/css/mypage.css">
+
+
 
 <script>
 $(function(){
@@ -108,7 +116,7 @@ $(function(){
 											<!-- Footer -->
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default"
-													onclick="cancleOrder('prod')">주문취소</button>
+													onclick="cancleOrder()">주문취소</button>
 												<button type="button" class="btn btn-default"
 													data-dismiss="modal">닫기</button>
 											</div>
@@ -129,7 +137,7 @@ $(function(){
 											<!-- body -->
 											<div class="modal-body" style="text-align: left;">
 												<input type="hidden" name="sort" value="prod">
-												<input type="hidden" name="ref_ord_code" id="ref_ord_code"> 
+												<input type="hidden" name="ref_ord_code" class="ref_ord_code"> 
 												<input type="radio" name="ref_reson" value="더 이상 구매를 원하지 않습니다.">1.더
 												이상 구매를 원하지 않습니다.<br> <input type="radio" name="ref_reson" 
 													value="실수로 구매하였습니다.">2.실수로 구매하였습니다.<br> <input
@@ -228,15 +236,16 @@ $(function(){
 	var ord_code="";
 	var ref_ord_code="";
 	$(document).ready(function() {     
-	    $('#cancleOrder1').on('show.bs.modal', function(event) {          
+	    $('#cancleOrder').on('show.bs.modal', function(event) {          
 	    	ord_code = $(event.relatedTarget).data('notifyid');
+	    	
 	    });
 	    $('#refund').on('show.bs.modal', function(event) {          
 	    	ref_ord_code = $(event.relatedTarget).data('notifyid');
-	    	$('#ref_ord_code').val(ref_ord_code);
+	    	$('.ref_ord_code').val(ref_ord_code);
 	    });
 	});
-	function cancleOrder(sort){
+	function cancleOrder(){
 		var select;
 		var sort=sort;
 		for(var i=0;i<document.getElementsByName('reson').length;i++){
@@ -244,6 +253,7 @@ $(function(){
 				select=document.getElementsByName('reson')[i].value;
 			}
 		}
+		console.log(ord_code)
 		location.href='./cancleOrder?sort='+sort+"&ord_code="+ord_code;
 	}
 	

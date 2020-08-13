@@ -9,6 +9,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SINAU 오프라인 강의</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"
+	rel="stylesheet">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -65,7 +68,7 @@ $(document).ready(function(){
 	$(document).ready(function() {     
 	    $('#refund').on('show.bs.modal', function(event) {          
 	    	ref_ord_code = $(event.relatedTarget).data('notifyid');
-	    	$('#ref_ord_code').val(ref_ord_code);
+	    	$('.ref_ord_code').val(ref_ord_code);
 	    });
 	});
 });
@@ -106,7 +109,7 @@ $(document).ready(function(){
 								<!-- body -->
 								<div class="modal-body" style="text-align: left;">
 									<input type="hidden" name="sort" value="offline"> 
-									<input type="hidden" name="ref_ord_code" id="ref_ord_code"/>
+									<input type="hidden" name="ref_ord_code" class="ref_ord_code"/>
 									<input
 										type="radio" name="ref_reson" value="더 이상 구매를 원하지 않습니다.">1.더
 									이상 구매를 원하지 않습니다.<br> <input type="radio" name="ref_reson"
@@ -140,24 +143,29 @@ $(document).ready(function(){
 							<div>${offlineClass.ofc_content}</div>
 						</div>
 						<div>
-							<div>
+							<div style="line-height: 25px;">
 							 [ 장소 ] : ${offlineClass.sc_place }<br>
 								[ 수업일 ]
 								<fmt:formatDate pattern="yyyy-MM-dd HH"
 									value="${offlineClass.sc_time}" />시 
 							</div>
 							<div class="class_status">
-								<c:choose>
-									<c:when test="${offlineClass.mcl_state == 1}">
-										<button class="my_default_btn" data-target="#refund"
-											data-toggle="modal" data-notifyid="${offlineClass.mcl_ord_code }">환불</button>
-									</c:when>
-								</c:choose>
-								<c:if test="${offlineClass.mcl_state == 3}">
-									<div>환불진행중</div>
+								<c:if test="${offlineClass.ofc_state == 3}">
+									<div>삭제된 강의입니다.</div>
 								</c:if>
-								<c:if test="${offlineClass.mcl_state == 4}">
-									<div>환불완료</div>
+								<c:if test="${offlineClass.ofc_state != 3}">
+									<c:choose>
+										<c:when test="${offlineClass.mcl_state == 1}">
+											<button class="my_default_btn" data-target="#refund"
+												data-toggle="modal" data-notifyid="${offlineClass.mcl_ord_code }">환불</button>
+										</c:when>
+									</c:choose>
+									<c:if test="${offlineClass.mcl_state == 3}">
+										<div>환불진행중</div>
+									</c:if>
+									<c:if test="${onlineClass.mcl_state == 4}">
+										<div>환불완료</div>
+									</c:if>
 								</c:if>
 							</div>
 						</div>

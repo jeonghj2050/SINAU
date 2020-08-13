@@ -9,7 +9,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SINAU -판매자</title>
-
+<link
+	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"
+	rel="stylesheet">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -49,8 +51,8 @@
 			<div class="my_product_list">
 				<c:forEach var="prod" items="${myprodList}">
 					<div class="myproduct_info_box">
-						<img src="resources/upload/${prod.f_sysname }" width="300px" height="300px"
-							alt="" style="float: left;">
+						<a href="store_info?p_code=${prod.p_code }"><img src="resources/upload/${prod.f_sysname }" width="300px" height="300px"
+							alt="" style="float: left;"></a>
 						<div class="myproduct_info">
 							<div class="myproduct_content">${prod.p_title }</div>
 							<div class="myproduct_amt">재고 수량 : ${prod.p_amount }</div>
@@ -62,7 +64,7 @@
 												<button class="my_default_btn" onclick="location.href='./dMyDelProd?p_code=${prod.p_code}'">삭제 요청</button>
 											</c:when>
 											
-											<c:when test="${prod.p_state eq 1 }">
+											<c:when test="${prod.p_state eq 2 }">
 												<div style="color:red; width:150px; text-align: center; font-weight: bold;">삭제 요청중</div>
 											</c:when>
 										</c:choose>

@@ -125,8 +125,9 @@ public class MemberService {
 		try {
 
 			mDao.memberInsert(member);
-
+			rttr.addFlashAttribute("check", 2);
 			view = "redirect:/";
+			
 			if (fcheck == 1) {
 				// 업로드할 파일이 있음.
 				fileUp(multi, member.getM_email());
@@ -138,7 +139,6 @@ public class MemberService {
 			rttr.addFlashAttribute("check", 1);
 		}
 
-		rttr.addFlashAttribute("check", 2);
 		mv.setViewName(view);
 		return mv;
 	}
@@ -205,6 +205,23 @@ public class MemberService {
 					//회원 구분이 admin일 경우 관리자 페이지로 전환
 					view = "redirect:adMApproval";
 				}
+				else if(member.getM_state() == 1){
+					//회원 구분이 admin일 경우 관리자 페이지로 전환
+					session.invalidate();
+					rttr.addFlashAttribute("check", 3);
+					view = "redirect:/";
+				}
+				else if(member.getM_state() == 2){
+					//회원 구분이 admin일 경우 관리자 페이지로 전환
+					rttr.addFlashAttribute("check", 2);
+					view = "redirect:adMApproval";
+				}
+				else if(member.getM_state() == 3){
+					//회원 구분이 admin일 경우 관리자 페이지로 전환
+					session.invalidate();
+					rttr.addFlashAttribute("check", 4);					
+					view = "redirect:adMApproval";
+				}
 				else {
 					//리다이렉트로 화면을 전환.
 					view = "redirect:/";
@@ -231,7 +248,7 @@ public class MemberService {
 		// 세션 정보 지우기
 		session.invalidate();
 
-		return "home";
+		return "redirect:/";
 	}
 
 
@@ -248,7 +265,7 @@ public class MemberService {
 
 		//email에 해당하는 회원의 온라인 주문 내역을 가져온다.
 		List<OrderDto> orderList=cDao.getOrderList(loginMember.getM_email(),"onc_");	
-
+		System.out.println(orderList + "1111111111111111111111111111111111111111111111111111");
 		// 주문 객체에 저장된 강의 코드로 내 수강 강의정보 목록을 저장한다.
 		List<MyOnlineInfoDto> onlineList = new ArrayList<MyOnlineInfoDto>();
 		for (OrderDto order : orderList) {
@@ -1182,5 +1199,7 @@ public class MemberService {
 		return mv;
 
 	}
+
+
 
 }

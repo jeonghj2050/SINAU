@@ -1,40 +1,47 @@
-
+@charset "UTF-8";
 * {
+	font-family: 'Nanum Gothic', sans-serif;
 	box-sizing: border-box;
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
-  }
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
 
 header {
-	width: 1300px;
+	width: 100%;
 	height: 150px;
-	margin: auto;
 }
 
 .section-home {
-	width : 1300px;
-	overflow : auto;
+	width : 100%;
 	margin: auto;
+	overflow: auto;
 }
 
+
 footer {
-	width: 1300px;
-	height: 100px;
-	margin: auto;
-	margin-top: 30px;
+	width: 100%;
+	height: 15%;
+  	margin-top: 100px;
+
 }
 
 .content-home {
 	height : 300px;
-	background-color: black;
 	margin: auto;
+	background-color: black;
 }
 
 .bx-wrapper {
 	margin: 0px auto;
-	border : 5px black;
-	-webkit-box-shadow : none;
+	border: 5px black;
+	-webkit-box-shadow: none;
 }
 
 a {
@@ -55,21 +62,31 @@ li a:hover {
 	color: #8a8e8b;
 }
 
+
 /* header */
+
+.content {
+	width : 1300px;
+	height: 70%;
+	margin : auto;
+}
+
+
 .logo {
-	width: 150px;
-	height: 50px;
+	width: 15%;
+	height: 60%;
 	margin: 20px;
+	margin-bottom : 10px;
 	float: left;
 }
 
 .search {
-	width: 350px;
-	height: 30px;
-	margin: 30px;
-	padding-left : 15px;
-	padding-right : 15px;
-	border: 1px solid black;
+	width: 25%;
+	height: 35%;
+	margin: 35px;
+	padding : 5px;
+	padding-left: 20px;
+	border: 1px solid #ddd;
 	font-size: 15px;
 	border-radius: 50px;
 	outline: none;
@@ -86,34 +103,38 @@ li a:hover {
 	float: left;
 	margin: 15px;
 }
-
-.menu-bar {
-	width: 500px;
-	font-size: 20px;
+.allmenu {
+	width : 1300px;
+	height: 30%;
+	margin: auto;
 }
 
-.menu-bar>ul {
-	width: 500px;
-	float: left;
+.menu1 {
+	width: 1300px;
+	height: 45px;
+	margin : auto;
+}
+
+.menu-bar {
+	width : 70%;
+	height : 100%;
+	font-size: 20px;
+	float : left;
 }
 
 .menu-bar>ul>li {
-	float: left;
-	margin-bottom: 15px;
-	margin-right: 50px;
-	margin-left: 20px;
+	float : left;
+	margin: 5px;
+	margin-left: 40px;
+	margin-right: 40px;
 }
 
 .menu-bar1 {
 	width: 200px;
+	height : 100%;
 	float: right;
 	font-size: 20px;
-	margin-right : 20px;
-}
-
-.menu-bar1>ul {
-	width: 200px;
-	float: right;
+	margin-right: 20px;
 }
 
 .menu-bar1>ul>li {
@@ -138,8 +159,7 @@ li a:hover {
 }
 
 .bottom-sub {
-	width: 400px;
-	padding-top: 75px;
+	width: 300px;
 	float : left;
 }
 .bottom-sub>a {
@@ -151,43 +171,36 @@ li a:hover {
 	height: 100%;
 	float : right;
 	text-align: right;
-	float: right;
-	margin-right:10px
 }
-
-.hub {
-	width: 235px;
-	height: 36px;
-	margin-right:10px
+.intro>a {
+	font-size: 20px;
 }
-
-.bottom-sub>a {
-	text-align: left;
-	font-size: 10px;
+.intro>.hub {
+	width: 30%;
+	height: 25%;
 }
 
 
 /*join*/
 .content1 {
-    width: 500px;
-	height : 937px;
-    margin : auto;
+	width: 500px;
+	height: 100%;
+	margin: auto;
 	background-color: white;
 	text-align: center;
 }
 
 .img-circle {
-	border-radius: 70%; 
+	border-radius: 70%;
 }
 
 .join-form {
-	width : 400px;
-	height : 937px;
+	width: 400px;
 	text-align: center;
-	padding-left : 25px;
-	padding-right : 25px;
+	padding-left: 25px;
+	padding-right: 25px;
 	background-color: white;
-	margin :auto;
+	margin: auto;
 }
 
 .join-header {
@@ -201,16 +214,16 @@ li a:hover {
 
 .join-form>.login-input {
 	width: 350px;
-	height : 40px;
+	height: 40px;
 	padding: 10px;
-	margin : auto;
-	margin-top : 20px;
+	margin: auto;
+	margin-top: 20px;
 }
 
 .join-form>.idcheck-btn {
 	width: 100px;
-	height : 25px;
-	float : right;
+	height: 25px;
+	float: right;
 }
 
 .join-form>.login-btn {
@@ -219,11 +232,11 @@ li a:hover {
 	margin-top: 20px;
 }
 
-.join-form>.relgoin-btn{
+.join-form>.relgoin-btn {
 	width: 150px;
 	height: 25px;
 	margin-top: 20px;
-	margin-left : 50px;
+	margin-left: 50px;
 }
 
 .group {
@@ -235,56 +248,54 @@ li a:hover {
 }
 
 .img-box {
-	margin : 20px;
+	margin: 20px;
 }
 
 /* login */
 .login-form {
-	width : 500px;
-	height : 937px;
-	margin : auto;
+	width: 500px;
+	height: 937px;
+	margin: auto;
 	text-align: center;
 	background-color: white;
 }
 
 .loginsub>img {
-	width:  350px;
+	width: 350px;
 	height: 300px;
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
 
-
-
 .login-form>input {
 	width: 350px;
-	height : 50px;
+	height: 50px;
 	padding-left: 15px;
-	padding-right : 15px;
-	margin : auto;
+	padding-right: 15px;
+	margin: auto;
 	margin-bottom: 20px;
 }
 
 .login-form>hr {
-	margin : auto;
+	margin: auto;
 }
 
 .login-form>h4 {
 	text-align: left;
-	margin-left : 80px;
+	margin-left: 80px;
 }
 
 .login-form>.login-btn {
-	margin-top : 20px;
+	margin-top: 20px;
 }
 
 .login-form>a {
 	font-size: 10px;
-	color : gray;
+	color: gray;
 	padding-top: 10px;
 }
 
-.login-form>img{
+.login-form>img {
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
@@ -295,9 +306,9 @@ li a:hover {
 
 /* 이메일 / 비밀번호 찾기 */
 .ibbox {
-	width : 500px;
-	height : 937px;
-	margin : auto;
+	width: 500px;
+	height: 937px;
+	margin: auto;
 	background-color: white;
 	padding: 50px;
 	padding-top: 100px;
@@ -311,19 +322,19 @@ li a:hover {
 }
 
 .member_box>.member_tab {
-	width : 400px;
-	height : 50px;
+	width: 400px;
+	height: 50px;
 	text-align: center;
 }
 
 .member_box>.member_tab>a {
-	float : left;
+	float: left;
 	width: 200px;
 	height: 50px;
 	padding: 15px;
 	border: 1px solid #ddd;
 	border-bottom: none;
-	color : #aaaaaa;	
+	color: #aaaaaa;
 	text-decoration: none
 }
 
@@ -341,9 +352,9 @@ li a:hover {
 	width: 400px;
 	height: 50px;
 	margin: auto;
-	margin-bottom : 30px;
+	margin-bottom: 30px;
 	padding: 10px;
-	color : #aaaaaa;
+	color: #aaaaaa;
 	border: 1px solid #ddd;
 }
 
@@ -358,3 +369,76 @@ li a:hover {
 .section-home>.childart1>.homeh1{
 	margin-top: 40px;
 }
+
+.childart10 {
+	width: 1300px;
+	margin : auto;
+	margin-top: 50px;
+}
+
+
+.childart10>h1 {
+	width : 100%;
+	height: 25px;
+	float : left;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+.childart10>.swiper-slide5 {
+	width: 300px;
+	height: 400px;
+	float : left;
+	margin-left: 12.5px;
+	margin-right : 12.5px;
+	margin-bottom: 20px;
+}
+
+.childart10>.swiper-slide5>.swiper-text5 {
+	width: 300px;
+	height: 100px;
+}
+
+.childart10>.swiper-slide5>.swiper-text5>.total_ctsname {
+	width: 150px;
+	height : 16px;
+	float : left;
+	font-size: 12px;
+}
+
+.childart10>.swiper-slide5>.swiper-text5>.total_level {
+	width: 150px;
+	height : 16px;
+	float : right;
+	text-align : right;
+	font-size: 12px;
+}
+
+.childart10>.swiper-slide5>.swiper-text5>.total_sale {
+	width: 300px;
+	height : 16px;
+	float : left;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
+.childart10>.swiper-slide5>.swiper-text5>.total_title>a {
+	width: 300px;
+	height : 50px;
+	font-size: 17px;
+}
+
+.childart10>.swiper-slide5>.swiper-text5>hr {
+	margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+

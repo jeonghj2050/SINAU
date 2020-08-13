@@ -1,6 +1,7 @@
 package com.sinau.service;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,7 @@ import com.sinau.dto.OffScheduleDto;
 import com.sinau.dto.OrderDto;
 import com.sinau.dto.PPayInfoDto;
 import com.sinau.dto.PayCouponDto;
+import com.sinau.dto.QuestionDto;
 import com.sinau.dto.ScheduleDto;
 import com.sinau.dto.LikesDto;
 import com.sinau.dto.OnInfoDto;
@@ -467,34 +469,45 @@ public class ClassService {
 		if (ObjectUtils.isEmpty(c_m_check)) {
 			mv.setViewName("/");
 			log.info("내가 강의 아님 홈으로 돌아가기");
-			return mv;
+			
 		}
-
-		// //myonlineinfo에서 onc_code검색해서 내 강의 목록에 있으면 강의 비디오 정보 가져오기
-		// List<ClassroomDto> classroom = cDao.getCR(onc_code);
-		// System.out.println("classroom>>>"+classroom);
-		//
-		// ClassroomDto classroomSample = classroom.get(0);
-		// mv.addObject("classroomSample",classroomSample);
-		// System.out.println("classroomSample>>>"+classroomSample);
-		//
-		// mv.addObject("classroom", classroom);
-		// mv.addObject("videoList", classroom);
-
-		// 비디오 리스트 가져오기
-		System.out.println("onc_code>>>>>>" + onc_code + email);
-		List<VideoListDto> videoLists = cDao.getVideoLists(onc_code, email);
-		mv.addObject("videoLists", videoLists);
-		System.out.println("videoLists>>>>>>" + videoLists);
-
-		// 선택된 강좌 배열에서 검색 후 저장
-		VideoListDto selVideoLists = videoLists.get(0);
-		mv.addObject("selVideoLists", selVideoLists);
-
-		mv.setViewName("online/online_classroom");
-
 		return mv;
 	}
+
+		
+	/*
+	 * public ModelAndView gettotalList(String onc_code, String email) { mv = new
+	 * ModelAndView();
+	 * 
+	 * 
+	 * List<TotalInfo> allList = cDao.getoffontotalList();
+	 * //System.out.println(lmap); //System.out.println(qList.get(0).getQ_code());
+	 * 
+	 * mv.addObject("allList", allList);
+	 * 
+	 * // view name을 지정! mv.setViewName("home");
+	 * 
+	 * 
+	 * // //myonlineinfo에서 onc_code검색해서 내 강의 목록에 있으면 강의 비디오 정보 가져오기 //
+	 * List<ClassroomDto> classroom = cDao.getCR(onc_code); //
+	 * System.out.println("classroom>>>"+classroom); // // ClassroomDto
+	 * classroomSample = classroom.get(0); //
+	 * mv.addObject("classroomSample",classroomSample); //
+	 * System.out.println("classroomSample>>>"+classroomSample); // //
+	 * mv.addObject("classroom", classroom); // mv.addObject("videoList",
+	 * classroom);
+	 * 
+	 * //비디오 리스트 가져오기 List<VideoListDto> videoLists = cDao.getVideoLists(onc_code,
+	 * email); mv.addObject("videoLists", videoLists);
+	 * System.out.println("videoLists>>>>>>"+videoLists);
+	 * 
+	 * //선택된 강좌 배열에서 검색 후 저장 VideoListDto selVideoLists = videoLists.get(0);
+	 * mv.addObject("selVideoLists", selVideoLists);
+	 * 
+	 * mv.setViewName("online/online_classroom");
+	 * 
+	 * return mv; }
+	 */
 
 	/* 은경 파트 */
 	public VideoListDto videoChange(String vf_code, String onc_code) {
@@ -509,10 +522,10 @@ public class ClassService {
 
 	public ModelAndView onlineList() {
 		mv = new ModelAndView();
-//
-//		List<TotalInfo> totalList = cDao.gettotalList();
-//
-//		mv.addObject("totalList", totalList);
+
+		List<TotalInfo> totalList = cDao.gettotalList();
+		
+		mv.addObject("totalList", totalList);
 
 		mv.setViewName("home");
 

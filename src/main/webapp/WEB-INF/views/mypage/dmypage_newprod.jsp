@@ -9,6 +9,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SINAU 강의 등록</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"
+	rel="stylesheet">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/mypage.css">
@@ -152,12 +155,11 @@
 							<p></p>
 							<span class="class_info_title">카테고리</span> <select
 								name="p_cts_code">
-								<option value="ca">art</option>
-								<option value="cb">craft</option>
-								<option value="cc">digital drawing</option>
-								<option value="cd">exercise</option>
-								<option value="ce">programming</option>
-								<option value="cf">cooking</option>
+								<option value="sa">미술/공예</option>
+								<option value="sb">전자제품</option>
+								<option value="sc">건강/헬스/뷰티</option>
+								<option value="sd">음악/악기</option>
+								<option value="se">요리/주방</option>
 							</select><br>
 							<p></p>
 							<span class="class_info_title">가격</span> <input type="number"

@@ -20,10 +20,11 @@
 
 	 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy"></property>
- 		<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
-		<property name="username" value="sinau123"></property>
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@192.168.0.212:1521:xe"></property>
+<!-- 		<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property> -->
+		<property name="username" value="bbssinau"></property>
 		<property name="password" value="1234"></property>
-	</bean>	 	 
+	</bean>	
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>

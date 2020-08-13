@@ -10,6 +10,7 @@ public class CreatorOffInfoDto {
 	private String ofc_m_email;
 	private String ofc_title;
 	private String ofc_content;
+	private int ofc_state;
 	private int ofc_rstnum;
 	private int ofc_stnum;
 	private int ofc_sale;

@@ -13,15 +13,14 @@ html {
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
+$(document).ready(function(){
 	var msg = "${msg}";
 	console.log(msg);
-	if (msg != "") {
+	if(msg != ""){
 		alert(msg);
 		location.reload(true);
 	}
 });
-
 </script>
 
 <script type="text/javascript">
@@ -68,7 +67,7 @@ $(document).ready(function() {
 			<input type="radio" name="radio" id="r2" value="1"><label for="r2">크리에이터</label>&nbsp;
   			<input type="radio" name="radio" id="r3" value="2"><label for="r3">판매자</label>
 		</div><br>	
-		<form name="joinFrm" id="join" class="join-form" action="memberInsert" method="post" onsubmit="return check()"enctype="multipart/form-data">>
+		<form name="joinFrm" id="join" class="join-form" action="memberInsert" method="post" onsubmit="return validate()"enctype="multipart/form-data">
 		
 		<!-- <div class="img-box">
 				<img class="img" id=m_photo name="m_photo" src="resources/images/user.png" width="100" height="100"><br>
@@ -79,11 +78,11 @@ $(document).ready(function() {
 							class="img-circle" width="100px" height="100px" id="profile_img"><br>
 						<div>
 							<label for="file"></label> 
-							<input type="file" name="files" id="member_profile"> 
+							<input type="file" name="files" id="member_profile" title="프로필이미지"> 
 							<input type="hidden" id="filecheck" value="0" name="fileCheck">
 						</div>
 						</div>
-			<input type="text" class="login-input" id="memail" title="이메일"	name="m_email" placeholder="이메일  ex)example@ooooo.com">
+			<input type="text" class="login-input" id="memail" title="이메일"	name="m_email" placeholder="이메일 ">
 			<br>
 			<font id="chkNotice1" size="2"></font>
 			<input type="button" class="idcheck-btn" value="중복확인" onclick="idcheck()"><br>
@@ -92,16 +91,18 @@ $(document).ready(function() {
 			<input type="password"	id="password2" class="login-input" title="비밀번호 재확인" placeholder="비밀번호확인"><br>
 				<span style="height: 25px;"></span>
 				<font id="chkNotice" size="2"></font><br>
+			<input type="text" name="m_group" class="group" value="" title="회원 체크">
+			<input type="text" name="m_state" class="state" value="">
 			<input type="text" id="phone" name="m_phone" class="login-input" title="연락처"	placeholder="연락처 ex)01000000000"> 
 			<input type="text" id="birth" name="m_birth" class="login-input" title="생년월일" placeholder="생년월일  ex)00000000">
 			<input type="text" id="license" name="m_license" class="login-input" title="사업자번호"	placeholder="사업자번호"><br>
 			<input type="submit" class="login-btn" value="회원 가입"><input type="reset" class="relgoin-btn" value="다시 작성">
-			<input type="text" name="m_group" class="group" value="">
-			<input type="hidden" name="m_state" class="state" value="1">
+			
 		</form>
 	</div>
 </body>
 <script type="text/javascript">
+
 function idcheck() {
 	var id = $('#memail').val();
 	if (id == "") {
@@ -133,6 +134,7 @@ function idcheck() {
 			}
 		});
 }
+
 </script>
 <script  type="text/javascript">
 	$(document).ready(function(){
@@ -143,22 +145,25 @@ function idcheck() {
 	        if($("input[name=radio]:checked").val() == "2"){
 	            $("input:text[name=m_license]").attr("disabled",false);
 	              $("input:text[name=m_group]").attr("value", "dm");
+	              $("input:text[name=m_state]").attr("value", "1");
 	            // radio 버튼의 value 값이 1이라면 활성화
 	 
 	        }else if($("input[name=radio]:checked").val() == "1"){
 	              $("input:text[name=m_license]").attr("disabled",true);
 	              $("input:text[name=m_group]").attr("value", "cm");
+	              $("input:text[name=m_state]").attr("value", "1");
 	            // radio 버튼의 value 값이 0이라면 비활성화
 	        }else if($("input[name=radio]:checked").val() == "0"){
 	              $("input:text[name=m_license]").attr("disabled",true);
 	              $("input:text[name=m_group]").attr("value", "nm");
+	              $("input:text[name=m_state]").attr("value", "2");
 		            // radio 버튼의 value 값이 0이라면 비활성화
 		        }
 	    });
 	});
 </script>
 <script  type="text/javascript">
-	$(function(){
+$(function(){
 	    $('#password1').keyup(function(){
 	      $('#chkNotice').html('');
 	      $('#password2').val('');
@@ -254,34 +259,18 @@ function validate() {
         objLicense.focus();
         return false;
 	} 
-</script>
-<script  type="text/javascript">
-	function mgcheck(){
-	//form 태그의 내용을 전부 가져오기
-	var frm = document.joinFrm;
 	
-	//submit 버튼을 뺀 나머지 input태그의 개수
-	var length = frm.length - 1;
-	
-	//input 태그 중에 입력이 안된 요소를 확인
-	for(var i = 0; i < 11; i++){
-		if(frm[i].value == "" 
-				|| frm[i].value == null){
-			alert(frm[i].title + " 입력!");
-			frm[i].focus();
-			return false;//action이 실행 안됨.
-		}
-	}
-	//모든 input에 입력이 다 되었을 경우.
-	return true;//action이 실행됨.
+    alert("회원가입이 완료되었습니다.");
+}
+
+function check(re, what, message) {
+    if(re.test(what.value)) {
+        return true;
+    }
+    alert(message);
+    what.value = "";
+    what.focus();
 }
 </script>
-<script  type="text/javascript">
-$(document).ready(function(){
-	$('#photo').change(function(event){
-		var tmppath=URL.createObjectURL(event.target.files[0]);
-		$('#m_photo').attr('src',tmppath);
-	});
-});
-</script>
+
 </html>
