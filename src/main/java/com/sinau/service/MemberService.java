@@ -214,13 +214,13 @@ public class MemberService {
 				else if(member.getM_state() == 2){
 					//회원 구분이 admin일 경우 관리자 페이지로 전환
 					rttr.addFlashAttribute("check", 2);
-					view = "redirect:adMApproval";
+					view = "redirect:/";
 				}
 				else if(member.getM_state() == 3){
 					//회원 구분이 admin일 경우 관리자 페이지로 전환
 					session.invalidate();
 					rttr.addFlashAttribute("check", 4);					
-					view = "redirect:adMApproval";
+					view = "redirect:/";
 				}
 				else {
 					//리다이렉트로 화면을 전환.
