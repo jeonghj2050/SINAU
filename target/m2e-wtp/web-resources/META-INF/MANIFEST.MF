@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: tkdal
-Build-Jdk: 1.8.0_261
+Built-By: ￬ﾝﾴ￬ﾱﾄ￬ﾚﾴ￬ﾊﾬ
+Build-Jdk: 1.8.0_251
 Created-By: Maven Integration for Eclipse
 
