@@ -19,7 +19,7 @@
 		<jsp:include page="header.jsp"></jsp:include>
 	</header>
 
-	<section class="section-home">
+	<section class="section-home1">
 		<div class="content-home">
 			<div class="slider">
 				<div>
@@ -54,7 +54,6 @@
 												fill="#bdc2c6"></path>
 										</svg>${t.totalcount}
 									</div>
-						
 						<div class="total_title">
 							<a href="classcontents?totalcode=${t.totalcode}">${t.totaltitle}</a>
 						</div>
