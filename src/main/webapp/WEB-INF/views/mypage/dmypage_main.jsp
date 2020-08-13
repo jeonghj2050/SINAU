@@ -51,7 +51,7 @@
 			<div class="my_product_list">
 				<c:forEach var="prod" items="${myprodList}">
 					<div class="myproduct_info_box">
-						<a href="store_info?p_code=${prod.p_code }"><img src="resources/upload/${prod.f_sysname }" width="300px" height="300px"
+						<a href="./store_info?p_code=${prod.p_code}"><img src="resources/upload/${prod.f_sysname }" width="300px" height="300px"
 							alt="" style="float: left;"></a>
 						<div class="myproduct_info">
 							<div class="myproduct_content">${prod.p_title }</div>
