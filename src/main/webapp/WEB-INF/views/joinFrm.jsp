@@ -6,11 +6,14 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <link rel="stylesheet" href="resources/css/home.css?a">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
+	
 <style type="text/css">
 html {
    background-color: #f1f1f1 
 }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -93,14 +96,14 @@ $(document).ready(function(){
 				<font id="chkNotice" size="2"></font><br>
 			<input type="text" name="m_group" class="group" value="nm" title="회원 체크">
 			<input type="text" name="m_state" class="state" value="2">
-			<input type="text" id="phone" name="m_phone" class="login-input" title="연락처"	placeholder="연락처 ex)01000000000"> 
-			<input type="text" id="birth" name="m_birth" class="login-input" title="생년월일" placeholder="생년월일  ex)00000000">
+			<input type="text" id="phone" name="m_phone" class="login-input" title="연락처"	placeholder="연락처"> 
+			<input type="text" id="birth" name="m_birth" class="login-input" title="생년월일" placeholder="생년월일">
 			<input type="text" id="license" name="m_license" class="login-input" title="사업자번호"	placeholder="사업자번호" disabled><br>
 			<input type="submit" class="login-btn" value="회원 가입"><input type="reset" class="relgoin-btn" value="다시 작성">
 			
 		</form>
 	</div>
-</body>
+</body>	 
 <script type="text/javascript">
 
 function idcheck() {
@@ -210,7 +213,6 @@ $(document).ready(function(){
    });
 });
 </script>
-</html>
 <script type="text/javascript">
 function validate() {
 	

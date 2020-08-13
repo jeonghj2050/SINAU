@@ -11,8 +11,9 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<link rel="stylesheet" href="resources/css/youtube.css?a">
-<link rel="stylesheet" href="resources/css/home.css?a">
+<link rel="stylesheet" href="resources/css/youtube.css?b">
+<link rel="stylesheet" href="resources/css/home.css?b">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 	<header>

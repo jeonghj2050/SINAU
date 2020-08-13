@@ -75,10 +75,10 @@ $(document).ready(function(){
 					<div class="t-redate"><fmt:formatDate pattern="yyyy-MM-dd" value="${total.ref_date}"/></div>
 					<div class="t-state">
 					<c:if test="${total.ref_state eq 1 }">
-              				  환불 신청 중
+              				 환불 신청
             		 	  </c:if>	
             		<c:if test="${total.ref_state eq 2 }">
-              				 환불 처리 중
+              				 환불 처리
             		 	  </c:if>
             		<c:if test="${total.ref_state eq 3 }">
               				 환불 완료

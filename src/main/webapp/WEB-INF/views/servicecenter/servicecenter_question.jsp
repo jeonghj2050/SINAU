@@ -17,6 +17,9 @@
 <link rel="stylesheet" href="resources/css/servicecenter.css">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <script type="text/javascript">
 $(document).ready(function(){
 	var chk = "${check}";
