@@ -176,8 +176,6 @@ li a:hover {
 	margin-top: 30px;
 }
 
-
-
 .category {
 	display: flex;
 	-webkit-box-align: center;
@@ -314,7 +312,6 @@ li a:hover {
 }
 
 
-
 /* Q&A 글 목록 출력 */
 .data-area {
 	height : 700px;
@@ -335,15 +332,16 @@ li a:hover {
 	clear: both;
 }
 .data-row {
-	border-bottom: 1px solid black;
+	border-bottom: 0.5px solid rgba(90, 87, 87, 0.514);
 }
 .title-row {
 	width: 1100px;
 	height: 42px;	
 	float: right;
 	text-align: center;
-	border-bottom: 1px solid black;
-	border-top : 1px solid black;
+	border-radius: 4px;
+	/* border-bottom: 0.5px solid rgba(90, 87, 87, 0.514);
+	border-top :  0.5px solid rgba(90, 87, 87, 0.514); */
 }
 .t-no {
 	width : 50px;
@@ -382,14 +380,14 @@ li a:hover {
 	float: left;
 	font-size: 16px;
 	text-align: center;
-	background-color : #ddd;
+	background-color : rgba(243, 134, 10, 0.253);
 }
 
 .data-row>div {
 	display: block;
 	float: left;
 	font-size: 14px;
-	line-height: 2.5;
+	line-height: 7px;
 	text-align: center;
     overflow: hidden;
     padding: 2px;
@@ -409,8 +407,11 @@ li a:hover {
 	height: 25px;
 	float : right;
 	display: none;
-	color : white;
-	background-color: black;
+color : black;
+	background-color:  rgba(243, 134, 10, 0.253);
+	font-size: 15px;
+	border: none;
+	border-radius: 4px;
 }
 
 /* 문의 글 상세정보 */
@@ -474,11 +475,11 @@ li a:hover {
 .btn-write, .btn-sub{
 	width: 50px;
 	height: 50px;
-	background-color: black;
-	color : white;
+	color : black;
+	background-color:  rgba(243, 134, 10, 0.253);
 	border: none;
+	border-radius: 4px;
 }
-
 
 
 /* Q&A 글 작성 */
@@ -487,7 +488,7 @@ li a:hover {
 	height: 1000px;
 	float: right;
 	padding : 20px;
-	border: 3px solid #ddd;
+	border: 1px solid rgb(191, 191, 191);
 	border-radius:  50px;
 	text-align: center;
 	margin-bottom: 50px;
@@ -497,14 +498,17 @@ li a:hover {
 	margin-top: 10px;
 	margin-bottom: 30px;
 }
-
+.t{
+	font-size: 15pt;
+}
 .write-top>input {
-	width: 400px;
+	width: 350px;
 	height: 30px;
 	margin-right: 10px;
 	border : none;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid rgb(191, 191, 191);
 	margin-bottom: 15px;
+	font-size: 15pt;
 }
 
 .write-form>.category {
@@ -516,14 +520,12 @@ li a:hover {
 	margin-right: 77px;
 }
 
-
-
 .write-form>.contents {
 	width: 900px;
 	height: 500px;
 	margin : auto;
 	margin-bottom: 25px;
-	font-size: 15px;	
+	font-size: 15pt;	
 }
 
 .write-form>.btn-btn{
@@ -539,10 +541,11 @@ li a:hover {
 	margin : auto;
 	float : right;
 	margin-left: 25px;
-	color : white;
-	background-color: black;
+	color : black;
+	background-color:  rgba(243, 134, 10, 0.253);
 	font-size: 15px;
 	border: none;
+	border-radius: 4px;
 }
 
 .write-form>.filebox {
