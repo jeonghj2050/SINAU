@@ -9,7 +9,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SINAU 온라인 강의</title>
-
+<link
+	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"
+	rel="stylesheet">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -23,7 +25,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="resources/css/home.css">
 <link rel="stylesheet" href="resources/css/mypage.css">
 <script>
         $(function(){
@@ -99,8 +101,7 @@
 									<c:if test="${feed.v_code eq ccInfo.v_code }">
 										<input type="hidden" name="fb_code" value="${feed.fb_code }" />
 										<tr>
-											<td><a href="classroom?onc_code=${ccInfo.onc_code}&vf_code=${feed.vf_code}&fb_m_email=${feed.fb_m_email}"
-												onclick="window.open(this.href,'_blanck', 'width=1200, height=600'); return false">${feed.fb_content}</a></td>
+											<td>${feed.fb_content}</td>
 											<td>${feed.fb_date}</td>
 											<td>${feed.fb_m_email}</td>
 											<c:if test="${feed.fb_reply eq null }">

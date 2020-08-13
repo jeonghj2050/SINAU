@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>문의글 수정</title>
-<link rel="stylesheet" href="resources/css/servicecenter.css?a">
+<link rel="stylesheet" href="resources/css/servicecenter.css">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
