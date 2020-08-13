@@ -140,6 +140,16 @@
       select * from creatoroffinfo where
       ofc_m_email=#{ofc_m_email}
    </select>
+   
+   <select id="getCreatorOnlineInfo" parameterType="String"
+      resultType="com.sinau.dto.CreatorOnInfoDto">
+      select * from creatoroninfo where onc_code=#{onc_code}
+   </select>
+   <select id="getCreatorOffInfo" parameterType="String"
+      resultType="com.sinau.dto.CreatorOffInfoDto">
+      select * from creatoroffinfo where ofc_code=#{ofc_code}
+   </select>
+   
    <!-- 효진 파트 -->
    
  
@@ -352,6 +362,7 @@ GROUP BY   OFC_CODE
          where onc_code=#{pay_pcode}
          ]]>
    </select>
+
    <select id="getOnInfoPay" parameterType="String"
       resultType="com.sinau.dto.OnListDto">
       <![CDATA[
@@ -386,6 +397,7 @@ GROUP BY   OFC_CODE
 			select * from of_INFO where ofc_cts_code=#{cts_code} order by l_count desc
 		]]>
 	</select>
+
    <!-- 지원 파트 -->
    
    <select id="gettotalList" resultType="com.sinau.dto.TotalInfo">
