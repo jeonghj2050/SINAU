@@ -35,7 +35,7 @@
 		</nav>
 		<nav class="menu-bar1">
 			<ul class="sub">
-				<li class="menusub"><a href="./youtuber">유투버</a></li>
+				<li class="menusub"><a href="./youtuber">유튜브</a></li>
 			</ul>
 		</nav>
 	</div>
