@@ -17,7 +17,7 @@
 		<div>
 			<button class="my_default_btn"
 				onclick="location.href='./mypageCoupon'">쿠폰</button>
-			<span>경고누적횟수 : 0</span>
+		<!-- 	<span>경고누적횟수 : 0</span> -->
 		</div>
 	</div>
 	<ul class="list-group">
@@ -26,7 +26,7 @@
 				<li class="list-group-item"><a href="./cMypage">내 클래스</a></li>
 				<li class="list-group-item"><a href="./cMypageQnA">질문게시판</a></li>
 				<li class="list-group-item"><a href="./cMyNewClass">내 강의 등록</a></li>
-				<hr>
+				<hr style="background-color: rgba(243, 134, 10, 0.253)">
 			</c:when>
 		</c:choose>
 		<c:if test="${mb.m_group eq 'dm'}">
