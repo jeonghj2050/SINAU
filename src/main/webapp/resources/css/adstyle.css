@@ -1396,6 +1396,7 @@ TEXTAREA#content{
 	height: 100px;
 	margin-left: 50px;
 	margin-bottom: 50px;
+	margin-top: 20px;
 }
 
 .insert-form>.filebox>a {
@@ -1422,4 +1423,11 @@ TEXTAREA#content{
 	margin: auto;
 	background-color: black;
 	color : white;
+}
+
+.insert-form>.videosource {
+	width: 370px;
+	height: 30px;
+	float : left;
+	
 }

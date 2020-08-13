@@ -1,11 +1,13 @@
 @charset "UTF-8";
 
 * {
+	font-family: 'Nanum Gothic Coding', monospace;
 	box-sizing: border-box;
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
-}
+	
+  }
 
 html, body {
 	height: 100%;
@@ -151,6 +153,7 @@ article.childart1>div {
       -webkit-align-items: center;
       align-items: center;
     }
+    
     .swiper-text{
       display: block;
       box-sizing: border-box;
@@ -209,6 +212,17 @@ article.childart1>div {
     .swc2{
     padding-left: 0px;
     }
+    .swiper-text {
+    	width: 300px;
+    	height: 100px;
+    	margin-left : 20px;
+    }
+    
+    .swiper-text > .y_title {
+    width: 300px;
+    height: 25px;
+    font-size: 20px;
+}
     
 /* 유튜브 상세페이지 */
 .question-content>.question-form>.y_videosoure{

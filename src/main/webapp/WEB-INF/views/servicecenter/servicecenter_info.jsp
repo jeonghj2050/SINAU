@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="resources/css/servicecenter.css?a">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
 <script src="resources/js/jquery.serializeObject.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">

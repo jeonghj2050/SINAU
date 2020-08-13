@@ -51,11 +51,13 @@
 			</div>
 			<div class="write-top3">
 			<a>동영상 링크 : </a><input type="text" class="y_url" name="y_url" autofocus placeholder="메인동영상링크">
-			<a>유투버 채널 링크 : </a><input type="text" class="y_userurl" name="y_userurl" autofocus placeholder="메인 페이지링크">
+			<a>채널 링크 : </a><input type="text" class="y_userurl" name="y_userurl" autofocus placeholder="메인 페이지링크">
 			</div>
 			<textarea name="y_content" class="y_contents"
 				autofocus placeholder="강좌 소개글  (100자 이내)"></textarea>
-			<a>동영상 soure : </a><input type="text" class="y_videosoure" name="y_videosoure" autofocus placeholder="동영상 소스">
+			<div class="videosource">
+				<a>동영상 soure : </a><input type="text" class="y_videosoure" name="y_videosoure" autofocus placeholder="동영상 소스">
+			</div>
 			<div class="filebox">
 				<img src="resources/images/user.png" alt=""
 				class="img-circle" width="100px" height="100px" id="profile_img"><br>

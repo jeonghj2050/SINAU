@@ -13,8 +13,8 @@ html {
 	background-color: #ddd;
 }
 </style>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <link rel="stylesheet" href="resources/css/home.css?a">
 <style>
 </style>

@@ -8,6 +8,7 @@
 <title>문의글 수정</title>
 <link rel="stylesheet" href="resources/css/servicecenter.css?a">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 	<header>

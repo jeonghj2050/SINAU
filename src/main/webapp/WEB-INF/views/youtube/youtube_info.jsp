@@ -7,8 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>유튜브 상세페이지</title>
-<link rel="stylesheet" href="resources/css/home.css?a">
-<link rel="stylesheet" href="resources/css/youtube.css?a">
+<link rel="stylesheet" href="resources/css/home.css?b">
+<link rel="stylesheet" href="resources/css/youtube.css?b">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 	<header>
