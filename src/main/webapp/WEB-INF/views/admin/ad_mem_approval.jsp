@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="resources/css/adstyle.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지 (가입승인)</title>
@@ -60,6 +60,11 @@ var ti='tab-1';
 		ti = '${tabId}';
 	})
 </script>
+<style type="text/css">
+*{
+font-family: 'Nanum Gothic Coding', monospace;
+}
+</style>
 </head>
 <body>
 	<!-- 나중에 헤더는 따로 뺄것 -->

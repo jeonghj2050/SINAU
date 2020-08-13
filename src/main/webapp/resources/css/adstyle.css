@@ -1,8 +1,13 @@
+@charset "UTF-8";
+
 * {
+	font-family: 'Nanum Gothic Coding', monospace;
 	box-sizing: border-box;
 	margin: 0px;
 	padding: 0px;
-}
+	list-style: none;
+	
+  }
 
 header {
 	width: 1300px;
@@ -114,10 +119,10 @@ li a:hover {
 /* 회원관리 카테고리 */
 div.mAprovalCate {
 	float: left;
-	background-color: #e4e4e4;
 	width: 200px;
 	height: 230px;
-	border-radius: 10px 10px 10px 10px;
+	border-radius: 10px;
+/* 	background-color: rgba(243, 134, 10, 0.253); */
 }
 
 #mManagement {
@@ -126,12 +131,27 @@ div.mAprovalCate {
 	margin: 15px 0px;
 }
 
-div.mAprovalCate div {
+div.mAprovalCate> div {
 	text-align: center;
 	font-size: 22px;
-	margin: 5px auto;
-	width: 100px;
+	margin: 10px auto;
+	width: 200px;
 	color: black;
+
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	cursor: pointer;
+	border-bottom: 1px solid rgb(237, 239, 240);
+	flex: 1 1 0%;
+	padding: 0px 16px;
+	color: rgb(71, 70, 70);
+	line-height: 50px;
+	box-sizing: border-box;
+
+	text-align: center;
+	
 }
 
 div.mAprovalCate div :first-child :hover {
@@ -141,17 +161,17 @@ div.mAprovalCate div :first-child :hover {
 
 div.mAprovalCate div :hover {
 	font-size: 24px;
-	color: white;
+	color: black;
 }
 
 
 /*게시글 관리 카테고리 */
 .menuCate {
-	float: left;
-	background-color: #e4e4e4;
+float: left;
 	width: 200px;
 	height: 230px;
-	border-radius: 10px 10px 10px 10px;
+	border-radius: 10px;
+/* 	background-color: rgba(243, 134, 10, 0.253); */
 }
 
 .menuCate h2 {
@@ -162,19 +182,29 @@ div.mAprovalCate div :hover {
 .menuCate div {
 	text-align: center;
 	font-size: 22px;
-	margin: 5px auto;
-	width: 100px;
-	color: black;
+	margin: 10px auto;
+	width: 200px;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	cursor: pointer;
+	border-bottom: 1px solid rgb(237, 239, 240);
+	flex: 1 1 0%;
+	padding: 0px 16px;
+	color: rgb(71, 70, 70);
+	line-height: 50px;
+	box-sizing: border-box;
 }
 
 .menuCate div :first-child :hover {
-	color: black;
+	color: rgb(71, 70, 70);
 	font-size: 22px;
 }
 
 .menuCate div :hover {
 	font-size: 24px;
-	color: white;
+	color: black;
 }
 /* 카테고리텝*/
 .tab-content.current {
@@ -202,99 +232,84 @@ div.mAprovalCate div :hover {
 
 /* 가입승인 탭 */
 .tabs>#t1.on {
-	background-color: #e8dcc6;
+	border: 1px solid rgb(191, 191, 191);
 }
 
 .tabs>#t2.on {
-	background-color: #f4c7b9;
-}
-
-.tabs>#t3.on {
-	background-color: #d9d9ff;
+	border: 1px solid rgb(191, 191, 191);
 }
 
 .tabs>#t1:hover {
-	background-color: #e8dcc6;
-	color: white;
+	background-color: rgba(243, 134, 10, 0.253);
+	color: #414141;
 }
 
 .tabs>#t2:hover {
-	background-color: #f4c7b9;
-	color: white;
+	background-color: rgba(243, 134, 10, 0.253);
+	color: #414141;
 }
 
-.tabs>#t3:hover {
-	background-color: #d9d9ff;
-	color: white;
-}
 /* 정보수정 탭 */
 .tabs>#i1.on {
-	background-color: #d6edd6;
+	border: 1px solid rgb(191, 191, 191);
 }
 
 .tabs>#i2.on {
-	background-color: #d6edd661;
+border: 1px solid rgb(191, 191, 191);
 }
 
 .tabs>#i3.on {
-	background-color: #dceded;
+	border: 1px solid rgb(191, 191, 191);
 }
 
 .tabs>#i1:hover {
-	background-color: #c1e3c1;
-	color: white;
+	background-color: rgba(243, 134, 10, 0.253);
+	color: #414141;
 }
 
 .tabs>#i2:hover {
-	background-color: #54775424;
-	color: white;
+	background-color: rgba(243, 134, 10, 0.253);
+	color: #414141;
 }
 
 .tabs>#i3:hover {
-	background-color: #cfe7e7;
-	color: white;
+	background-color: rgba(243, 134, 10, 0.253);
+	color: #414141;
 }
 /* 게시글관리 - 강의탭*/
 .tabs>#l1.on {
-	background-color: #e4dfee;
+	border: 1px solid rgb(191, 191, 191);
 }
 
 .tabs>#l2.on {
-	background-color: #e7e6f0;
+	border: 1px solid rgb(191, 191, 191);
 }
 
 .tabs>#l3.on {
-	background-color: #c5c7d8;
+	border: 1px solid rgb(191, 191, 191);
 }
 .tabs>#l1:hover {
-	background-color: #e4dfee;
-	color: white;
+	background-color: rgba(243, 134, 10, 0.253);
+	color: #414141;
 }
 
 .tabs>#l2:hover {
-	background-color: #e7e6f0;
-	color: white;
+	background-color: rgba(243, 134, 10, 0.253);
+	color: #414141;
 }
 .tabs>#s1 {
-	background-color: blue;
-	color:red;
+	background-color: rgba(243, 134, 10, 0.253);
+	color: #414141;
 }
 /* 게시글관리 - 리뷰*/
 #r1 {
-	border-top:3px solid black;
-	border-left:3px solid black;
-	border-right:3px solid black;
-	border-bottom:3px solid white;
-	background-color: fff;
-}
-#r1 :hover {
-	color: gray;
-	font-size: 20px
+	
+	border: 1px solid rgb(191, 191, 191);
 }
 
 .tabs>#l3:hover {
-	background-color: #c5c7d8;
-	color: white;
+	background-color: rgba(243, 134, 10, 0.253);
+	color: #414141;
 }
 
 .tabs :first-child {
@@ -315,136 +330,125 @@ div.mAprovalCate div :hover {
 	transition-duration: 0.5s;
 }
 
+#r2 {
+	
+	border: 1px solid rgb(191, 191, 191);
+}
 
 
 /* 회원승인 게시판 */
 .approval-1 {
-	margin: 0px 0px 0px 20px;
+	margin: 0px 0px 20px 20px;
 	float: left;
 	width: 1076px;
-	padding: 80px 25px;
-	background-color: #e8dcc6;
+	padding: 20px 25px;
 	height: auto; 
 	min-height: 800px; 
 	overflow: auto;
+	border: 1px solid rgb(191, 191, 191);
 }
 
 .approval-2 {
 	margin: 0px 0px 0px 20px;
 	float: left;
 	width: 1076px;
-	padding: 80px 25px;
-	background-color: #f4c7b9;
+	padding: 20px 25px;
 	height: auto; 
 	min-height: 800px; 
 	overflow: auto;
+	border: 1px solid rgb(191, 191, 191);
 }
-
-.approval-3 {
-	margin: 0px 0px 0px 20px;
-	float: left;
-	width: 1076px;
-	padding: 80px 25px;
-	background-color: #d9d9ff;
-	height: auto; 
-	min-height: 800px; 
-	overflow: auto;
-}
-
-
 
 /* 정보승인 게시판 */
 .information-1 {
-	margin: 0px 0px 0px 20px;
+	margin: 0px 0px 20px 20px;
 	float: left;
 	width: 1076px;
-	padding: 80px 25px;
-	background-color: #d6edd6;
+	padding: 20px 25px;
 	height: auto; 
 	min-height: 800px; 
 	overflow: auto;
+	border: 1px solid rgb(191, 191, 191);
 }
 
 .information-2 {
-	margin: 0px 0px 0px 20px;
+	margin: 0px 0px 20px 20px;
 	float: left;
 	width: 1076px;
-	padding: 80px 25px;
-	background-color: #d6edd661;
+	padding: 20px 25px;
 	height: auto; 
 	min-height: 800px; 
 	overflow: auto;
+	border: 1px solid rgb(191, 191, 191);
 }
 
 .information-3 {
-	margin: 0px 0px 0px 20px;
+	margin: 0px 0px 20px 20px;
 	float: left;
 	width: 1076px;
-	padding: 80px 25px;
-	background-color: #dceded;
+	padding: 20px 25px;
 	height: auto; 
 	min-height: 800px; 
 	overflow: auto;
+	border: 1px solid rgb(191, 191, 191);
 }
 
 /* 게시글관리 - 강의*/
 .lecture-1 {
-	margin: 0px 0px 0px 20px;
+	margin: 0px 0px 20px 20px;
 	float: left;
 	width: 1076px;
-	padding: 50px 25px;
-	background-color: #e4dfee;
+	padding: 20px 25px;
 	height: auto; 
 	min-height: 800px; 
 	overflow: auto;
+	border: 1px solid rgb(191, 191, 191);
 }
 
 .lecture-2 {
-	margin: 0px 0px 0px 20px;
+	margin: 0px 0px 20px 20px;
 	float: left;
 	width: 1076px;
-	padding: 50px 25px;
-	background-color: #e7e6f0;
+	padding: 20px 25px;
 	height: auto; 
 	min-height: 800px; 
 	overflow: auto;
+	border: 1px solid rgb(191, 191, 191);
 }
 
 .lecture-3 {
-	margin: 0px 0px 0px 20px;
+	margin: 0px 0px 20px 20px;
 	float: left;
 	width: 1076px;
-	padding: 100px 25px;
-	background-color: #c5c7d8;
+	padding: 20px 25px;
 	height: auto; 
 	min-height: 800px; 
 	overflow: auto;
+	border: 1px solid rgb(191, 191, 191);
 }
 /* 게시글 관리 - 판매 */
 
 .adPStore-1 {
-	margin: 0px 0px 0px 20px;
+	margin: 0px 0px 20px 20px;
 	float: left;
 	width: 1076px;
-	padding: 80px 25px;
-	background-color: #e8dcc6;
+	padding: 20px 25px;
 	height: auto; 
 	min-height: 800px; 
 	overflow: auto;
+	border: 1px solid rgb(191, 191, 191);
 }
 /* 게시글 관리 - 리뷰 */
 
 .listCss {
-	margin: 0px 0px 0px 20px;
+	margin: 0px 0px 20px 20px;
 	float: left;
 	width: 1076px;
-	padding: 80px 40px;
-	background-color: #fff;
-	border: 3px solid black;
-	border-radius: 0px 8px 8px 8px;
+	padding: 20px 25px;
 	height: auto; 
 	min-height: 800px; 
 	overflow: auto;
+	border: 1px solid rgb(191, 191, 191);
 }
 
 .lOnline {
@@ -460,55 +464,69 @@ div.mAprovalCate div :hover {
 	width: 150px;
 	height: 30px;
 	font-size: 16px;
-	background-color: #5a5a5a;
-	color: white;
+	background-color: rgba(243, 134, 10, 0.253);
+	color: #414141;
 	border-radius:2px;
+	border:none;
 }
 #set{
 	float: right;
 	width: 50px;
 	height: 30px;
 	font-size: 16px;
-	background-color: #5a5a5a;
-	color:white;
+	background-color: rgba(243, 134, 10, 0.253);
+	color:#414141;
 	margin: 0px 20px;
 	border-radius:2px;
+	border:none;
 }
 /* 컬럼 일렬 */
 .approval>div>div>div>b>div {
 	float: left;
 	text-align: center;
-	padding: 10px
+	padding: 10px;
+	border-bottom: 4px double rgb(191, 191, 191);
+	
 }
 
 .information>div>div>div>b>div {
 	float: left;
 	text-align: center;
-	padding: 10px
+	padding: 10px;
+	border-bottom: 4px double rgb(191, 191, 191);
 }
 
 .lecture>div>div>div>b>div {
 	float: left;
 	text-align: center;
-	padding: 10px
+	padding: 10px;
+	border-bottom: 4px double rgb(191, 191, 191);
 }
 .pStore>div>div>div>b>div {
 	float: left;
 	text-align: center;
-	padding: 10px
+	padding: 10px;
+	border-bottom: 4px double rgb(191, 191, 191);
 }
 .padding10 div{
 	float: left;
 	text-align: center;
 	padding: 10px;
-	border-right: 1px solid #fff;
+	border-right: 1px solid  rgb(191, 191, 191);
+	
+}
+.padding10 div:last-child{
+	float: left;
+	text-align: center;
+	padding: 10px;
+	border:none;
 	
 }
 .lists div{
 	float: left;
 	text-align: center;
 	padding: 10px;
-	border-right: 1px solid #fff;
+	border-right: 1px solid  rgb(191, 191, 191);
 }
 
 
@@ -601,10 +619,10 @@ div#vieww {
 
 /* 게시글 관리 - 리뷰 */
 .tool{
-	float:left;
-	max-width: 1000px;
-	background-color:#eaeaea;
-	border-radius: 8px 8px 0px 0px;
+	float: left;
+	text-align: center;
+	padding: 10px;
+	border-bottom: 4px double rgb(191, 191, 191);
 }
 .listBorder .datelist {
 	float: left;
@@ -626,11 +644,12 @@ div#vieww {
 .tline{
 	width: 1000px;
 	height: 40px;
-	border-bottom: 3px solid black;
+	border-bottom: 4px double  rgb(191, 191, 191);
 }
 .line {
 	width:1000px;
-	background-color: #fafafa;
+	background-color: rgba(243, 134, 10, 0.253);
+	border-radius: 4px;
 }
 div.code{
 	float:left;
@@ -648,7 +667,7 @@ div.code{
 }
 /* 고객센터 - Q&A 상세*/
 .line>td{
-	background-color: #fafafa;
+	background-color: rgba(243, 134, 10, 0.253);
 }
 table.table123{
 	width: 100%;
@@ -884,7 +903,7 @@ TEXTAREA#content{
 .servQ2 {
 	width: 640px;
 	height: 40px;
-	border-bottom: 1px solid black;
+	
 }
 
 .servQ3 {
@@ -916,7 +935,7 @@ TEXTAREA#content{
 .servW2 {
 	width: 450px;
 	height: 40px;
-	border-bottom: 1px solid black;
+
 }
 
 .servW3 {
@@ -1001,14 +1020,15 @@ TEXTAREA#content{
 #del button {
 	width: 50px;
 	height: 25px;
-	background-color: #eaeaea;
-	border: 3px solid #c0c0c0;
+	background-color: rgba(243, 134, 10, 0.253);
+/* 	border: 3px solid #c0c0c0; */
 	border-radius: 5px;
 	color: #black;
 	display: block;
 	font-weight: bold;
 	text-transform: uppercase;
 	margin:0px auto;
+	border:none;
 }
 .lecture-3>.btn-insert {
 	float : right;
