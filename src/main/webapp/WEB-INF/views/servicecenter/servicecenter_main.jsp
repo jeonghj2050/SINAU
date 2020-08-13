@@ -1,14 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>고객센터</title>
-<link rel="stylesheet" href="resources/css/servicecenter.css?a">
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" href="resources/css/servicecenter.css">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 <script type="text/javascript">
+
 	$(document).ready(function() {
 
 		//When page loads...
@@ -29,9 +34,9 @@
 		});
 
 	});
-	
 
 </script>
+
 </head>
 <body>
 	<header>
@@ -67,8 +72,11 @@
 					
 					<div class="contents">
 						<a class="num">1</a><button onclick="fn_spread('hiddenContent01');">강좌 수강 도중 환불할수있나요?</button>
-						<div id="hiddenContent01" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
-						강좌 수강도중 환불 가능합니다.</div>
+<!-- 					<div class=null></div> -->
+						<div id="hiddenContent01" class="contentsre" style="display: none;">
+						&emsp;&emsp;답변&emsp;&emsp;
+						강좌 수강도중 환불 가능합니다.
+						</div>
 						<a class="num">2</a><button onclick="fn_spread('hiddenContent02');">강좌 담당강사에서 물어보고싶은건 어디서 물어보나요?</button>
 						<div id="hiddenContent02" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
 						강좌 페이지에서 1대1로 물어보실수있습니다.</div>
@@ -99,6 +107,7 @@
 				<div id="tab2" class="tab_content">
 					<div class="contents">
 						<a class="num">1</a><button onclick="fn_spread('hiddenContent10');">재고가 없어요. 언제쯤 구입할 수 있을까요?</button>
+					
 						<div id="hiddenContent10" class="contentsre" style="display: none;">&emsp;&emsp;답변&emsp;&emsp;
 						일반적으로 입점 업체의 품절 상품 재입고 여부 및 일정은 무신사 스토어에서는 <br>
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;정확히 알기 어렵습니다. 재입고 여부는 상품 상세 페이지의 상품문의 게시판을<br>
