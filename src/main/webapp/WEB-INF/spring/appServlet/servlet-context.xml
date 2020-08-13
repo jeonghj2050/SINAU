@@ -35,6 +35,9 @@
 <!-- 			가로채기에서 제외할 uri를 지정 -->
 			<exclude-mapping path="/"/>
 			<exclude-mapping path="/store"/>
+			<exclude-mapping path="/offline"/>
+			<exclude-mapping path="/info"/>
+			<exclude-mapping path="/cate"/>
 			<exclude-mapping path="/id"/>
 			<exclude-mapping path="/pwd"/>
 			<exclude-mapping path="/pwdreset"/>

@@ -25,19 +25,20 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.show2').hide(); //페이지를 로드할 때 숨길 요소
-		$('.full_heart').hide();
+		
+        console.log('${onInfo.l_state}')
+        if("${onInfo.l_state}" == '0'){
+           $('.full_heart').hide();
+        }
+        else{
+           $('.unfilled_heart').hide();
+        }
+		
 		$('.sharebtn').click(function() {
 			$('.show2').show(); //클릭 시 두 번째 요소 표시
 			return false;
 		});
-		$('.unfilled_heart').click(function() {
-			$('.unfilled_heart').hide();
-			$('.full_heart').show();
-		});
-		$('.full_heart').click(function() {
-			$('.full_heart').hide();
-			$('.unfilled_heart').show();
-		});
+
 		$('.closer').click(function() {
 			$('.show2').hide();
 			return false;
@@ -45,6 +46,69 @@
 		console.log("${m_email}");
 		
 	});
+	
+    /* 좋아요 */
+    function like_func(){
+      var objdata = {ofc_code: "${offInfo.ofc_code}",l_cts_code:"${offInfo.ofc_cts_code}"};
+      
+      $.ajax({
+        url: "offlikes",
+        type: "POST",
+        cache: false,
+        dataType: "json",
+        data: objdata,
+        success: function(data) {
+         $('.unfilled_heart').hide();
+         $('.full_heart').hide();
+         $('#btn_div').append('<button type="button" class="likebtn full_heart" color="default" fill="false" onclick="like_cancle()">'+
+               '<div class="sc-fzqARJ eozcfK">'+
+               '<svg width="18" height="18" fill="none" viewBox="0 0 24 24">'+
+               '<path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#1b1c1d">'+
+               '</path>'+
+               '</svg></div>'+
+               '<span class="like_num">'+
+               '<span id="like_prt">'+
+               data.l_count+
+               '</span></span></button>')
+        },
+        error: function(request, status, error){
+          alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+         // location.href="<c:url value='/loginFrm'/>"
+        }
+      });
+    }       
+   
+    /* 좋아요 취소*/
+    function like_cancle(){
+    console.log("${offInfo.ofc_code}");
+      var objdata = {ofc_code: "${offInfo.ofc_code}", l_cts_code: "${offInfo.ofc_cts_code}"};
+      
+      $.ajax({
+        url: "offdislikes",
+        type: "POST",
+        cache: false,
+        dataType: "json",
+        data: objdata,
+        success: function(data) {
+           $('.unfilled_heart').hide();
+         $('.full_heart').hide();
+         $('#btn_div').append('<button type="button" class="likebtn unfilled_heart" color="default" fill="false" data-test-id="wishlist-button" data-test-group="sales-product-info-table-row" onclick="like_func()" id="like_img">'+
+               '<div class="sc-fzqARJ eozcfK">'+
+               '<svg width="18" height="18" fill="none" viewBox="0 0 24 24">'+
+               '<path fill-rule="evenodd" clip-rule="evenodd" d="M20.5 9c0-2-1.5-3.9-3.7-3.9-2.3 0-3.8 1.63-4.8 3.33-1-1.7-2.5-3.33-4.8-3.33C5 5.1 3.5 6.867 3.5 9c0 4.62 4.949 7.667 8.5 9.623 3.551-1.956 8.5-5.003 8.5-9.623zm-19-.176C1.5 5.607 3.962 3 7 3c2.7 0 4 1 5 2.2C13 4 14.3 3 17 3c3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#1b1c1d">'+
+               '</path>'+
+               '</svg></div>'+
+               '<span class="like_num">'+
+               '<span id="nlike_prt">'+
+               data.l_count+
+               '</span></span></button>'
+         )
+        },
+        error: function(request, status, error){
+          alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
+      });
+    } 
 </script>
 <body>
 	<header>
@@ -165,20 +229,20 @@
 						</div>
 						<div class="hr"></div>
 						<div class="like_container">
-							<div class="btn_div">
+							<div class="btn_div" id="btn_div">
 								<c:choose>
-                 <c:when test="${mb.m_email eq null}">
+                 <c:when test="${m_email eq null}">
                     <!-- 비 로그인 상태일 시 <a href='javascript: login_need();'> -->
                    <button type="button" class="likebtn unfilled_heart" color="default" fill="false"
                                data-test-id="wishlist-button" data-test-group="sales-product-info-table-row"  
                                onclick="location.href='./loginFrm'" id="like_img">
-                               <div class="sc-fzqARJ eozcfK">
+                               <div class="sc-fzqARJ eozzcfK">
                                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
                                        <path fill-rule="evenodd" clip-rule="evenodd"
                                            d="M20.5 9c0-2-1.5-3.9-3.7-3.9-2.3 0-3.8 1.63-4.8 3.33-1-1.7-2.5-3.33-4.8-3.33C5 5.1 3.5 6.867 3.5 9c0 4.62 4.949 7.667 8.5 9.623 3.551-1.956 8.5-5.003 8.5-9.623zm-19-.176C1.5 5.607 3.962 3 7 3c2.7 0 4 1 5 2.2C13 4 14.3 3 17 3c3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
                                            fill="#1b1c1d"></path>
                                    </svg></div>
-                               <span class="like_num"><span id="nlike_prt">${onInfo.l_count}</span></span>
+                               <span class="like_num"><span id="nlike_prt">${offInfo.l_count}</span></span>
                            </button>
                  
                  </c:when>
@@ -193,7 +257,7 @@
                                            d="M20.5 9c0-2-1.5-3.9-3.7-3.9-2.3 0-3.8 1.63-4.8 3.33-1-1.7-2.5-3.33-4.8-3.33C5 5.1 3.5 6.867 3.5 9c0 4.62 4.949 7.667 8.5 9.623 3.551-1.956 8.5-5.003 8.5-9.623zm-19-.176C1.5 5.607 3.962 3 7 3c2.7 0 4 1 5 2.2C13 4 14.3 3 17 3c3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
                                            fill="#1b1c1d"></path>
                                    </svg></div>
-                               <span class="like_num"><span id="nlike_prt">${onInfo.l_count}</span></span>
+                               <span class="like_num"><span id="nlike_prt">${offInfo.l_count}</span></span>
                            </button>
                            
                             <button type="button" class="likebtn full_heart" color="default" fill="false"
@@ -204,7 +268,7 @@
                                               d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z"
                                               fill="#1b1c1d"></path>
                                       </svg></div>
-                                  <span class="like_num"><span id="like_prt">${onInfo.l_count}</span></span>
+                                  <span class="like_num"><span id="like_prt">${offInfo.l_count}</span></span>
                               </button>
                          
                  </c:otherwise>
@@ -225,14 +289,14 @@
 								</button>
 							</div>
 						</div>
-						<c:if test="${m_email == ''}">
+						<c:if test="${m_email eq null}">
 							<button type="button" class="class_submitbtn" color="red"
-								id="apply" fill="true">
-								<a onclic="alret();"> <span class="sc-fzoyTs jZUSDr"
+								id="apply" fill="true" onclick="location.href='./loginFrm'">
+								 <span class="sc-fzoyTs jZUSDr"
 									id="apply"><span>클래스 신청하기</span> </span></a>
 							</button>
 						</c:if>
-						<c:if test="${m_email != ''}">
+						<c:if test="${m_email ne null}">
 							<form name="ofcFrm" id="ofcFrm" action="apply" method="get">
 								<input type="hidden" name="m_email" value="${m_email}">
 								<input type="hidden" name="ofc_code" value="${offInfo.ofc_code}">
@@ -326,13 +390,6 @@
 		<jsp:include page="../footer.jsp"></jsp:include>
 	</footer>
 </body>
-
-<script>
-	function alret() {
-		alret("로그인이 필요합니다.");
-		href = ('/loginFrm');
-	};
-</script>
 <script type=text/javascript>
 	$(document)
 			.on(

@@ -145,10 +145,22 @@
 			select * from of_INFO where ofc_cts_code=#{cts_code}
 		]]>
 	</select>
-	<select id="getOffCateFilterList" parameterType="String"
+	<select id="getOffCateFilter1" parameterType="String"
 		resultType="com.sinau.dto.OffListDto">
 		<![CDATA[ 
-			select * from of_INFO where ofc_cts_code=#{cts_code} order by cts_code = #{filter1} and #{filter2} and #{filter3}
+			select * from of_INFO where ofc_cts_code=#{cts_code} order by ofc_view desc
+		]]>
+	</select>
+	<select id="getOffCateFilter2" parameterType="String"
+		resultType="com.sinau.dto.OffListDto">
+		<![CDATA[ 
+			select * from of_INFO where ofc_cts_code=#{cts_code} order by TO_NUMBER(SUBSTR(ofc_code,5)) desc
+		]]>
+	</select>
+	<select id="getOffCateFilter3" parameterType="String"
+		resultType="com.sinau.dto.OffListDto">
+		<![CDATA[ 
+			select * from of_INFO where ofc_cts_code=#{cts_code} order by l_count desc
 		]]>
 	</select>
 	<!-- 서브 카테고리 가져오는 쿼리문(nav영역 사용) -->

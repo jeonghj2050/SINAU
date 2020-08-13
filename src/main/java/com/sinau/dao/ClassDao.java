@@ -107,6 +107,10 @@ public interface ClassDao {
 	OffScheduleDto getOffSchedultPay(String sc_code);
 
 
+	// 오프라인 서브카테, 필터 적용 메소드 - off
+	List<OffListDto> getOffCateFilter1(String cts_code);
+	List<OffListDto> getOffCateFilter2(String cts_code);
+	List<OffListDto> getOffCateFilter3(String cts_code);
 	///////////////////////////////////////////////////////////////
 	//onc_code에 해당하는 강좌 정보를 가져온다.
 	CreatorOnInfoDto getClassInfo(String onc_code);
@@ -132,16 +136,6 @@ public interface ClassDao {
 
 	void deleteOffClass(String p_code);
 
-	//필터 카테고리 불러오기
-	List<FilterCtsDto> getFilter1List();
-	List<FilterCtsDto> getFilter2List();
-	List<FilterCtsDto> getFilter3List();
-
-	//필터 값에 따라 정렬 값 불러오기
-	// List<OffListDto> getOffCateFilterList(String cts_code, String filter1, String filter2, String filter3);
-
-	//	//
-	//	List<OffListDto> getOffCateFilterList(String cts_code);
 
 	OnListDto getOnInfoPay(String onc_code);
 
@@ -176,7 +170,7 @@ public interface ClassDao {
 	//해당 강의 정보 가져오기
 	VideoListDto getvideoChange(@Param("vf_code")String vf_code,@Param("onc_code")String onc_code,@Param("email")String email);
 	/*은경 파트*/
-
+	
 }
 
 

@@ -38,13 +38,15 @@
 		}
 
 		$("#res-submit").click(function() {
-			var cpcode = $('input:radio[name=cpl_cp_code]:checked').val();
-			console.log(cpcode);
+			var cplcode = $('input:radio[name=cpl_code]:checked').val();
+			console.log(cplcode);
 			alert("쿠폰이 적용되었습니다!");
 
 			var data = {
-				"cpcode" : cpcode
+				"cplcode" : cplcode
 			}
+
+			$(".cplcode").val(cplcode);
 
 			$.ajax({
 				url : "getCoupon",
@@ -162,8 +164,7 @@
 									<div class="pay-list-discount">0원</div>
 									<div class="pay-list-disprice" name="ord_price">${prodList.p_price}원</div>
 								</div>
-								<input type="hidden" class="ord_price" name="ord_price"
-									value="${prodList.p_price}">
+								<input type="hidden" class="cplcode" name="cplcode">
 							</c:if>
 							<c:if test='${sort eq "onc"}'>
 								<div class="pay-list_r">
@@ -172,8 +173,7 @@
 									<div class="pay-list-discount">0원</div>
 									<div class="pay-list-disprice" name="ord_price">${onList.onc_sale}원</div>
 								</div>
-								<input type="hidden" class="ord_price" name="ord_price"
-									value="${onList.onc_sale}">
+								<input type="hidden" class="cplcode" name="cplcode">
 							</c:if>
 							<c:if test='${sort eq "ofc"}'>
 								<div class="pay-list_r">
@@ -182,8 +182,7 @@
 									<div class="pay-list-discount">0원</div>
 									<div class="pay-list-disprice" name="ord_price">${offList.ofc_sale}원</div>
 								</div>
-								<input type="hidden" class="ord_price" name="ord_price"
-									value="${offList.ofc_sale}">
+								<input type="hidden" class="cplcode" name="cplcode">
 							</c:if>
 						</div>
 						<div class="coupon">
@@ -201,10 +200,7 @@
 								<div class="how-txt">무통장 입금</div>
 							</div>
 						</div>
-
-						<div class="pay-submit">
-							<input type="submit" value="결제하기">
-						</div>
+							<input type="submit" id="pay-submit" value="결제하기">
 					</div>
 				</div>
 			</form>
@@ -244,8 +240,8 @@
 									<c:forEach var="payCoupon" items="${payCoupon}"
 										varStatus="status">
 										<div class="coupon-list-bottom">
-											<input type="radio" class="coupon-sel" name="cpl_cp_code"
-												value="${payCoupon.cpl_cp_code}">
+											<input type="radio" class="coupon-sel" name="cpl_code"
+												value="${payCoupon.cpl_code}">
 											<div class="coupon-title">${payCoupon.cp_title}</div>
 											<div class="disper">${payCoupon.cp_discount}</div>
 										</div>

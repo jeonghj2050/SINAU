@@ -1,5 +1,8 @@
 package com.sinau.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinau.dto.LikesDto;
+import com.sinau.dto.OffListDto;
 import com.sinau.dto.VideoListDto;
 import com.sinau.service.ClassService;
 
@@ -84,16 +89,18 @@ public class ClassController {
 		VideoListDto videoChange = cServ.videoChange(vf_code, onc_code);
 			return videoChange;
 	}
-	
-	@GetMapping("filter")
-	public ModelAndView offFilter(String cts_code, @Param("filter1") String filter1,@Param("filter2") String filter2,@Param("filter3") String filter3) {
-		log.info("offFilter() : " + cts_code +  filter1 + filter2 + filter3);
-		mv = cServ.getOffFilter(cts_code, filter1, filter2, filter3);
+
+	@PostMapping(value = "getFilter", produces = "application/json; charset = utf-8")
+	@ResponseBody
+	public Map<String, List<OffListDto>> getOffCateFilterList(String cts_code, String filter){
+		OffListDto offCateFilter = new OffListDto();
 		
-		return mv;
+		Map<String, List<OffListDto>> fMap = cServ.getOffCateFilter(cts_code, filter);
+		
+		return fMap;
 	}
 	
-		//코드에 따라 강의 정보를 가져오는 메소드
+	//코드에 따라 강의 정보를 가져오는 메소드
 	@GetMapping("info")
 	public ModelAndView offClass(String ofc_code) {
 		log.info("ofc_code : " + ofc_code);
@@ -138,7 +145,25 @@ public class ClassController {
 		return mv;
 	}
 	
+	@PostMapping(value = "offlikes", produces = "application/json; charset = utf-8")
+	@ResponseBody
+	public LikesDto offlikeAjax(String ofc_code,String l_cts_code){
+		log.info(ofc_code + l_cts_code);
+
+		LikesDto likes = cServ.offupdateLikes(ofc_code,l_cts_code);
 	
+		return likes;
+	}
+	     
+	@PostMapping(value = "offdislikes", produces = "application/json; charset = utf-8")
+	@ResponseBody
+	public LikesDto offdislikeAjax(String ofc_code, String l_cts_code){
+		log.info(ofc_code+ l_cts_code);
+
+		LikesDto dislikes = cServ.offupdatedisLikes(ofc_code, l_cts_code);
+	
+		return dislikes;
+	}
 }
 
 
